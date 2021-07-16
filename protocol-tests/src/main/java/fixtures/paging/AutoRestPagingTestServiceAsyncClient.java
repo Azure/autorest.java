@@ -3,7 +3,6 @@ package fixtures.paging;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
@@ -26,11 +25,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -40,11 +49,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -54,11 +73,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -69,11 +98,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -83,11 +122,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -98,11 +147,30 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
@@ -112,11 +180,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -126,12 +204,23 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
+     *
      * @param offset Offset of return value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -142,11 +231,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -157,11 +256,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -171,11 +280,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -185,11 +304,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -199,11 +328,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -213,12 +352,31 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
@@ -228,12 +386,31 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
@@ -244,11 +421,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
@@ -258,11 +445,21 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {

@@ -220,8 +220,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponseAsync(RequestOptions requestOptions) {
@@ -240,8 +238,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -260,8 +256,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getIntAsync(RequestOptions requestOptions) {
@@ -287,8 +281,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getIntAsync(RequestOptions requestOptions, Context context) {
@@ -314,8 +306,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getInt(RequestOptions requestOptions) {
@@ -333,8 +323,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions, Context context) {
@@ -352,8 +340,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -373,8 +359,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(
@@ -394,8 +378,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -413,8 +395,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -433,8 +413,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putInt(BinaryData complexBody, RequestOptions requestOptions) {
@@ -452,8 +430,6 @@ public final class PrimitivesImpl {
      *     field2: Integer
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -471,8 +447,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponseAsync(RequestOptions requestOptions) {
@@ -491,8 +465,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -511,8 +483,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getLongAsync(RequestOptions requestOptions) {
@@ -538,8 +508,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getLongAsync(RequestOptions requestOptions, Context context) {
@@ -565,8 +533,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getLong(RequestOptions requestOptions) {
@@ -584,8 +550,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions, Context context) {
@@ -603,8 +567,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -624,8 +586,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(
@@ -645,8 +605,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -664,8 +622,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -684,8 +640,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLong(BinaryData complexBody, RequestOptions requestOptions) {
@@ -703,8 +657,6 @@ public final class PrimitivesImpl {
      *     field2: Long
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -722,8 +674,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponseAsync(RequestOptions requestOptions) {
@@ -743,8 +693,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -763,8 +711,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getFloatAsync(RequestOptions requestOptions) {
@@ -790,8 +736,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getFloatAsync(RequestOptions requestOptions, Context context) {
@@ -817,8 +761,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getFloat(RequestOptions requestOptions) {
@@ -836,8 +778,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions, Context context) {
@@ -855,8 +795,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -876,8 +814,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(
@@ -897,8 +833,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -916,8 +850,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -936,8 +868,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloat(BinaryData complexBody, RequestOptions requestOptions) {
@@ -955,8 +885,6 @@ public final class PrimitivesImpl {
      *     field2: Float
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -974,8 +902,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponseAsync(RequestOptions requestOptions) {
@@ -995,8 +921,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1015,8 +939,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDoubleAsync(RequestOptions requestOptions) {
@@ -1042,8 +964,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDoubleAsync(RequestOptions requestOptions, Context context) {
@@ -1069,8 +989,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDouble(RequestOptions requestOptions) {
@@ -1088,8 +1006,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions, Context context) {
@@ -1107,8 +1023,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1128,8 +1042,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(
@@ -1149,8 +1061,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1168,8 +1078,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1188,8 +1096,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDouble(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1207,8 +1113,6 @@ public final class PrimitivesImpl {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(
@@ -1227,8 +1131,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponseAsync(RequestOptions requestOptions) {
@@ -1247,8 +1149,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1267,8 +1167,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBoolAsync(RequestOptions requestOptions) {
@@ -1294,8 +1192,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBoolAsync(RequestOptions requestOptions, Context context) {
@@ -1321,8 +1217,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBool(RequestOptions requestOptions) {
@@ -1340,8 +1234,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions, Context context) {
@@ -1359,8 +1251,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1380,8 +1270,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(
@@ -1401,8 +1289,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBoolAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1420,8 +1306,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBoolAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1440,8 +1324,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBool(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1459,8 +1341,6 @@ public final class PrimitivesImpl {
      *     fieldFalse: Boolean
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1479,8 +1359,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponseAsync(RequestOptions requestOptions) {
@@ -1501,8 +1379,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1522,8 +1398,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getStringAsync(RequestOptions requestOptions) {
@@ -1550,8 +1424,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getStringAsync(RequestOptions requestOptions, Context context) {
@@ -1578,8 +1450,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getString(RequestOptions requestOptions) {
@@ -1598,8 +1468,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions, Context context) {
@@ -1618,8 +1486,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1640,8 +1506,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(
@@ -1662,8 +1526,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1682,8 +1544,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1703,8 +1563,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putString(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1723,8 +1581,6 @@ public final class PrimitivesImpl {
      *     nullProperty: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(
@@ -1743,8 +1599,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponseAsync(RequestOptions requestOptions) {
@@ -1763,8 +1617,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1783,8 +1635,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateAsync(RequestOptions requestOptions) {
@@ -1810,8 +1660,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateAsync(RequestOptions requestOptions, Context context) {
@@ -1837,8 +1685,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDate(RequestOptions requestOptions) {
@@ -1856,8 +1702,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions, Context context) {
@@ -1875,8 +1719,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1896,8 +1738,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(
@@ -1917,8 +1757,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1936,8 +1774,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1956,8 +1792,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDate(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1975,8 +1809,6 @@ public final class PrimitivesImpl {
      *     leap: LocalDate
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -1994,8 +1826,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponseAsync(RequestOptions requestOptions) {
@@ -2015,8 +1845,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -2035,8 +1863,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateTimeAsync(RequestOptions requestOptions) {
@@ -2062,8 +1888,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateTimeAsync(RequestOptions requestOptions, Context context) {
@@ -2089,8 +1913,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDateTime(RequestOptions requestOptions) {
@@ -2108,8 +1930,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions, Context context) {
@@ -2127,8 +1947,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2148,8 +1966,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(
@@ -2169,8 +1985,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2188,8 +2002,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -2208,8 +2020,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTime(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2227,8 +2037,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(
@@ -2247,8 +2055,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
@@ -2268,8 +2074,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponseAsync(
@@ -2289,8 +2093,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateTimeRfc1123Async(RequestOptions requestOptions) {
@@ -2316,8 +2118,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDateTimeRfc1123Async(RequestOptions requestOptions, Context context) {
@@ -2343,8 +2143,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDateTimeRfc1123(RequestOptions requestOptions) {
@@ -2362,8 +2160,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
@@ -2381,8 +2177,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
@@ -2405,8 +2199,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
@@ -2426,8 +2218,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123Async(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2446,8 +2236,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123Async(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -2466,8 +2254,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2485,8 +2271,6 @@ public final class PrimitivesImpl {
      *     now: OffsetDateTime
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(
@@ -2504,8 +2288,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponseAsync(RequestOptions requestOptions) {
@@ -2524,8 +2306,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -2543,8 +2323,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDurationAsync(RequestOptions requestOptions) {
@@ -2569,8 +2347,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDurationAsync(RequestOptions requestOptions, Context context) {
@@ -2595,8 +2371,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDuration(RequestOptions requestOptions) {
@@ -2613,8 +2387,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions, Context context) {
@@ -2631,8 +2403,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2651,8 +2421,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(
@@ -2671,8 +2439,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2689,8 +2455,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -2708,8 +2472,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDuration(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2726,8 +2488,6 @@ public final class PrimitivesImpl {
      *     field: Duration
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(
@@ -2745,8 +2505,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponseAsync(RequestOptions requestOptions) {
@@ -2764,8 +2522,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -2783,8 +2539,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getByteAsync(RequestOptions requestOptions) {
@@ -2809,8 +2563,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getByteAsync(RequestOptions requestOptions, Context context) {
@@ -2835,8 +2587,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getByte(RequestOptions requestOptions) {
@@ -2853,8 +2603,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions, Context context) {
@@ -2871,8 +2619,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2891,8 +2637,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(
@@ -2911,8 +2655,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2929,8 +2671,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -2948,8 +2688,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(BinaryData complexBody, RequestOptions requestOptions) {
@@ -2966,8 +2704,6 @@ public final class PrimitivesImpl {
      *     field: byte[]
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

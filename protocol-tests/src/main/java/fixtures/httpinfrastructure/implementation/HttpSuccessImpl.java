@@ -188,63 +188,39 @@ public final class HttpSuccessImpl {
                 Context context);
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head200(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.head200(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async(RequestOptions requestOptions) {
         return head200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async(RequestOptions requestOptions, Context context) {
         return head200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head200(RequestOptions requestOptions) {
         head200Async(requestOptions).block();
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions, Context context) {
         return head200WithResponseAsync(requestOptions, context).block();
@@ -258,8 +234,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions) {
@@ -275,8 +249,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -292,8 +264,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> get200Async(RequestOptions requestOptions) {
@@ -316,8 +286,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> get200Async(RequestOptions requestOptions, Context context) {
@@ -340,8 +308,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200(RequestOptions requestOptions) {
@@ -361,19 +327,13 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> get200WithResponse(RequestOptions requestOptions, Context context) {
         return get200WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -382,11 +342,7 @@ public final class HttpSuccessImpl {
                 context -> service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -394,51 +350,31 @@ public final class HttpSuccessImpl {
         return service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put200Async(RequestOptions requestOptions) {
         return put200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put200Async(RequestOptions requestOptions, Context context) {
         return put200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put200(RequestOptions requestOptions) {
         put200Async(requestOptions).block();
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put200WithResponse(RequestOptions requestOptions, Context context) {
         return put200WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -447,11 +383,7 @@ public final class HttpSuccessImpl {
                 context -> service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -459,51 +391,31 @@ public final class HttpSuccessImpl {
         return service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch200Async(RequestOptions requestOptions) {
         return patch200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch200Async(RequestOptions requestOptions, Context context) {
         return patch200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch200(RequestOptions requestOptions) {
         patch200Async(requestOptions).block();
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch200WithResponse(RequestOptions requestOptions, Context context) {
         return patch200WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -512,11 +424,7 @@ public final class HttpSuccessImpl {
                 context -> service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -524,51 +432,31 @@ public final class HttpSuccessImpl {
         return service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post200Async(RequestOptions requestOptions) {
         return post200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post200Async(RequestOptions requestOptions, Context context) {
         return post200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post200(RequestOptions requestOptions) {
         post200Async(requestOptions).block();
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post200WithResponse(RequestOptions requestOptions, Context context) {
         return post200WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -577,11 +465,7 @@ public final class HttpSuccessImpl {
                 context -> service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -589,51 +473,31 @@ public final class HttpSuccessImpl {
         return service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete200Async(RequestOptions requestOptions) {
         return delete200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete200Async(RequestOptions requestOptions, Context context) {
         return delete200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete200(RequestOptions requestOptions) {
         delete200Async(requestOptions).block();
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete200WithResponse(RequestOptions requestOptions, Context context) {
         return delete200WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -642,11 +506,7 @@ public final class HttpSuccessImpl {
                 context -> service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -654,51 +514,31 @@ public final class HttpSuccessImpl {
         return service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put201Async(RequestOptions requestOptions) {
         return put201WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put201Async(RequestOptions requestOptions, Context context) {
         return put201WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put201(RequestOptions requestOptions) {
         put201Async(requestOptions).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put201WithResponse(RequestOptions requestOptions, Context context) {
         return put201WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -707,11 +547,7 @@ public final class HttpSuccessImpl {
                 context -> service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -719,51 +555,31 @@ public final class HttpSuccessImpl {
         return service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post201Async(RequestOptions requestOptions) {
         return post201WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post201Async(RequestOptions requestOptions, Context context) {
         return post201WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post201(RequestOptions requestOptions) {
         post201Async(requestOptions).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post201WithResponse(RequestOptions requestOptions, Context context) {
         return post201WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -772,11 +588,7 @@ public final class HttpSuccessImpl {
                 context -> service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -784,51 +596,31 @@ public final class HttpSuccessImpl {
         return service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put202Async(RequestOptions requestOptions) {
         return put202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put202Async(RequestOptions requestOptions, Context context) {
         return put202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put202(RequestOptions requestOptions) {
         put202Async(requestOptions).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put202WithResponse(RequestOptions requestOptions, Context context) {
         return put202WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -837,11 +629,7 @@ public final class HttpSuccessImpl {
                 context -> service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -849,51 +637,31 @@ public final class HttpSuccessImpl {
         return service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch202Async(RequestOptions requestOptions) {
         return patch202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch202Async(RequestOptions requestOptions, Context context) {
         return patch202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch202(RequestOptions requestOptions) {
         patch202Async(requestOptions).block();
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch202WithResponse(RequestOptions requestOptions, Context context) {
         return patch202WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -902,11 +670,7 @@ public final class HttpSuccessImpl {
                 context -> service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -914,51 +678,31 @@ public final class HttpSuccessImpl {
         return service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post202Async(RequestOptions requestOptions) {
         return post202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post202Async(RequestOptions requestOptions, Context context) {
         return post202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post202(RequestOptions requestOptions) {
         post202Async(requestOptions).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post202WithResponse(RequestOptions requestOptions, Context context) {
         return post202WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -967,11 +711,7 @@ public final class HttpSuccessImpl {
                 context -> service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -979,113 +719,69 @@ public final class HttpSuccessImpl {
         return service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete202Async(RequestOptions requestOptions) {
         return delete202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete202Async(RequestOptions requestOptions, Context context) {
         return delete202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete202(RequestOptions requestOptions) {
         delete202Async(requestOptions).block();
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete202WithResponse(RequestOptions requestOptions, Context context) {
         return delete202WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head204(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.head204(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async(RequestOptions requestOptions) {
         return head204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async(RequestOptions requestOptions, Context context) {
         return head204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head204(RequestOptions requestOptions) {
         head204Async(requestOptions).block();
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions, Context context) {
         return head204WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1094,11 +790,7 @@ public final class HttpSuccessImpl {
                 context -> service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1106,51 +798,31 @@ public final class HttpSuccessImpl {
         return service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put204Async(RequestOptions requestOptions) {
         return put204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put204Async(RequestOptions requestOptions, Context context) {
         return put204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put204(RequestOptions requestOptions) {
         put204Async(requestOptions).block();
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put204WithResponse(RequestOptions requestOptions, Context context) {
         return put204WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1159,11 +831,7 @@ public final class HttpSuccessImpl {
                 context -> service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1171,51 +839,31 @@ public final class HttpSuccessImpl {
         return service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch204Async(RequestOptions requestOptions) {
         return patch204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch204Async(RequestOptions requestOptions, Context context) {
         return patch204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch204(RequestOptions requestOptions) {
         patch204Async(requestOptions).block();
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch204WithResponse(RequestOptions requestOptions, Context context) {
         return patch204WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1224,11 +872,7 @@ public final class HttpSuccessImpl {
                 context -> service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1236,51 +880,31 @@ public final class HttpSuccessImpl {
         return service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post204Async(RequestOptions requestOptions) {
         return post204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post204Async(RequestOptions requestOptions, Context context) {
         return post204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post204(RequestOptions requestOptions) {
         post204Async(requestOptions).block();
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post204WithResponse(RequestOptions requestOptions, Context context) {
         return post204WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1289,11 +913,7 @@ public final class HttpSuccessImpl {
                 context -> service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -1301,41 +921,25 @@ public final class HttpSuccessImpl {
         return service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete204Async(RequestOptions requestOptions) {
         return delete204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete204Async(RequestOptions requestOptions, Context context) {
         return delete204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete204(RequestOptions requestOptions) {
         delete204Async(requestOptions).block();
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete204WithResponse(RequestOptions requestOptions, Context context) {
         return delete204WithResponseAsync(requestOptions, context).block();
@@ -1349,8 +953,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions) {
@@ -1366,8 +968,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1383,8 +983,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async(RequestOptions requestOptions) {
@@ -1407,8 +1005,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async(RequestOptions requestOptions, Context context) {
@@ -1431,8 +1027,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404(RequestOptions requestOptions) {
@@ -1452,8 +1046,6 @@ public final class HttpSuccessImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head404WithResponse(RequestOptions requestOptions, Context context) {

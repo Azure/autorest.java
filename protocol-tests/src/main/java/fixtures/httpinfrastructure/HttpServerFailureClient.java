@@ -3,7 +3,6 @@ package fixtures.httpinfrastructure;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
@@ -23,113 +22,49 @@ public final class HttpServerFailureClient {
         this.serviceClient = serviceClient;
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head501(RequestOptions requestOptions) {
         this.serviceClient.head501(requestOptions);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head501WithResponse(requestOptions, context);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get501(RequestOptions requestOptions) {
         this.serviceClient.get501(requestOptions);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get501WithResponse(requestOptions, context);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post505(RequestOptions requestOptions) {
         this.serviceClient.post505(requestOptions);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post505WithResponse(requestOptions, context);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete505(RequestOptions requestOptions) {
         this.serviceClient.delete505(requestOptions);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete505WithResponse(requestOptions, context);

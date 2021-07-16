@@ -96,8 +96,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
@@ -114,8 +112,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -131,8 +127,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions) {
@@ -155,8 +149,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions, Context context) {
@@ -179,8 +171,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotExpandable(RequestOptions requestOptions) {
@@ -195,8 +185,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
@@ -211,8 +199,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
@@ -231,8 +217,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
@@ -249,8 +233,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions) {
@@ -266,8 +248,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -283,8 +263,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(BinaryData stringBody, RequestOptions requestOptions) {
@@ -299,8 +277,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(
@@ -316,8 +292,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
@@ -334,8 +308,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -351,8 +323,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions) {
@@ -375,8 +345,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions, Context context) {
@@ -399,8 +367,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getReferenced(RequestOptions requestOptions) {
@@ -415,8 +381,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
@@ -431,8 +395,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
@@ -451,8 +413,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
@@ -469,8 +429,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -486,8 +444,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
@@ -503,8 +459,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -519,8 +473,6 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(
@@ -539,8 +491,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(RequestOptions requestOptions) {
@@ -560,8 +510,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(
@@ -581,8 +529,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions) {
@@ -608,8 +554,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions, Context context) {
@@ -635,8 +579,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getReferencedConstant(RequestOptions requestOptions) {
@@ -654,8 +596,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
@@ -673,8 +613,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
@@ -697,8 +635,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
@@ -718,8 +654,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -738,8 +672,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(
@@ -759,8 +691,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -778,8 +708,6 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(

@@ -70,8 +70,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
@@ -88,8 +86,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -105,8 +101,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions) {
@@ -129,8 +123,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions, Context context) {
@@ -153,8 +145,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError(RequestOptions requestOptions) {
@@ -174,8 +164,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -190,8 +178,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
@@ -208,8 +194,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -225,8 +209,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions) {
@@ -249,8 +231,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions, Context context) {
@@ -273,8 +253,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError(RequestOptions requestOptions) {
@@ -294,8 +272,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -310,8 +286,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
@@ -328,8 +302,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -345,8 +317,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions) {
@@ -369,8 +339,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -393,8 +361,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty(RequestOptions requestOptions) {
@@ -414,8 +380,6 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions, Context context) {

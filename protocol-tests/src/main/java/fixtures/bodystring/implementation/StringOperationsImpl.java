@@ -148,8 +148,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
@@ -165,8 +163,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -182,8 +178,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions) {
@@ -206,8 +200,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions, Context context) {
@@ -230,8 +222,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNull(RequestOptions requestOptions) {
@@ -246,71 +236,45 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions, Context context) {
         return getNullWithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.putNull(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(RequestOptions requestOptions) {
         return putNullWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(RequestOptions requestOptions, Context context) {
         return putNullWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNull(RequestOptions requestOptions) {
         putNullAsync(requestOptions).block();
     }
 
-    /**
-     * Set string value null.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, Context context) {
         return putNullWithResponseAsync(requestOptions, context).block();
@@ -324,8 +288,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
@@ -342,8 +304,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -359,8 +319,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions) {
@@ -383,8 +341,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -407,8 +363,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getEmpty(RequestOptions requestOptions) {
@@ -423,19 +377,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return getEmptyWithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody = BinaryData.fromObject("");
@@ -444,11 +392,7 @@ public final class StringOperationsImpl {
                 context -> service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody = BinaryData.fromObject("");
@@ -456,41 +400,25 @@ public final class StringOperationsImpl {
         return service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(RequestOptions requestOptions) {
         return putEmptyWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(RequestOptions requestOptions, Context context) {
         return putEmptyWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(RequestOptions requestOptions) {
         putEmptyAsync(requestOptions).block();
     }
 
-    /**
-     * Set string value empty ''.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value empty ''. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return putEmptyWithResponseAsync(requestOptions, context).block();
@@ -504,8 +432,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions) {
@@ -521,8 +447,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -538,8 +462,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions) {
@@ -562,8 +484,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions, Context context) {
@@ -586,8 +506,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getMbcs(RequestOptions requestOptions) {
@@ -602,19 +520,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions, Context context) {
         return getMbcsWithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody =
@@ -624,11 +536,7 @@ public final class StringOperationsImpl {
                 context -> service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody =
@@ -637,41 +545,25 @@ public final class StringOperationsImpl {
         return service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync(RequestOptions requestOptions) {
         return putMbcsWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync(RequestOptions requestOptions, Context context) {
         return putMbcsWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMbcs(RequestOptions requestOptions) {
         putMbcsAsync(requestOptions).block();
     }
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions, Context context) {
         return putMbcsWithResponseAsync(requestOptions, context).block();
@@ -686,8 +578,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions) {
@@ -705,8 +595,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -723,8 +611,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions) {
@@ -748,8 +634,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions, Context context) {
@@ -773,8 +657,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getWhitespace(RequestOptions requestOptions) {
@@ -790,8 +672,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions, Context context) {
@@ -801,8 +681,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions) {
@@ -816,8 +694,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -830,8 +706,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions) {
@@ -841,8 +715,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions, Context context) {
@@ -852,8 +724,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWhitespace(RequestOptions requestOptions) {
@@ -863,8 +733,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions, Context context) {
@@ -879,8 +747,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
@@ -897,8 +763,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -914,8 +778,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions) {
@@ -938,8 +800,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions, Context context) {
@@ -962,8 +822,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNotProvided(RequestOptions requestOptions) {
@@ -978,8 +836,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {
@@ -994,8 +850,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions) {
@@ -1012,8 +866,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -1029,8 +881,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions) {
@@ -1053,8 +903,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions, Context context) {
@@ -1077,8 +925,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64Encoded(RequestOptions requestOptions) {
@@ -1093,8 +939,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions, Context context) {
@@ -1109,8 +953,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
@@ -1127,8 +969,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(
@@ -1145,8 +985,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions) {
@@ -1169,8 +1007,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
@@ -1193,8 +1029,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBase64UrlEncoded(RequestOptions requestOptions) {
@@ -1209,8 +1043,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions, Context context) {
@@ -1225,8 +1057,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
@@ -1246,8 +1076,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
@@ -1264,8 +1092,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions) {
@@ -1281,8 +1107,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -1298,8 +1122,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBase64UrlEncoded(BinaryData stringBody, RequestOptions requestOptions) {
@@ -1314,8 +1136,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(
@@ -1331,8 +1151,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
@@ -1349,8 +1167,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(
@@ -1367,8 +1183,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions) {
@@ -1391,8 +1205,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
@@ -1415,8 +1227,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNullBase64UrlEncoded(RequestOptions requestOptions) {
@@ -1431,8 +1241,6 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions, Context context) {

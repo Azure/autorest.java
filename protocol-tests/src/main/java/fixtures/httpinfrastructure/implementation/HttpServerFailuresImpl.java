@@ -77,135 +77,83 @@ public final class HttpServerFailuresImpl {
                 Context context);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head501(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.head501(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head501Async(RequestOptions requestOptions) {
         return head501WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head501Async(RequestOptions requestOptions, Context context) {
         return head501WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head501(RequestOptions requestOptions) {
         head501Async(requestOptions).block();
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions, Context context) {
         return head501WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get501(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.get501(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get501Async(RequestOptions requestOptions) {
         return get501WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get501Async(RequestOptions requestOptions, Context context) {
         return get501WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get501(RequestOptions requestOptions) {
         get501Async(requestOptions).block();
     }
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions, Context context) {
         return get501WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -214,11 +162,7 @@ public final class HttpServerFailuresImpl {
                 context -> service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -226,51 +170,31 @@ public final class HttpServerFailuresImpl {
         return service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post505Async(RequestOptions requestOptions) {
         return post505WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post505Async(RequestOptions requestOptions, Context context) {
         return post505WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post505(RequestOptions requestOptions) {
         post505Async(requestOptions).block();
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions, Context context) {
         return post505WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -279,11 +203,7 @@ public final class HttpServerFailuresImpl {
                 context -> service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -291,41 +211,25 @@ public final class HttpServerFailuresImpl {
         return service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete505Async(RequestOptions requestOptions) {
         return delete505WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete505Async(RequestOptions requestOptions, Context context) {
         return delete505WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete505(RequestOptions requestOptions) {
         delete505Async(requestOptions).block();
     }
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions, Context context) {
         return delete505WithResponseAsync(requestOptions, context).block();

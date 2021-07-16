@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * {@link ClientMethodTemplate}.
  *
  */
-public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
+public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static final WrapperClientMethodTemplate instance = new WrapperClientMethodTemplate();
 
@@ -36,7 +36,8 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
         if (settings.isLowLevelClient()) {
-            generateProtocolJavadoc(clientMethod, typeBlock, restAPIMethod);
+            typeBlock.javadocComment(comment -> generateProtocolMethodJavadoc(clientMethod, comment));
+//            generateProtocolJavadoc(clientMethod, typeBlock, restAPIMethod);
         } else {
             generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         }

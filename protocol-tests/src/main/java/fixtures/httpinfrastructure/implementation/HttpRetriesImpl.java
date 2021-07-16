@@ -110,73 +110,45 @@ public final class HttpRetriesImpl {
                 Context context);
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head408(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.head408(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async(RequestOptions requestOptions) {
         return head408WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async(RequestOptions requestOptions, Context context) {
         return head408WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head408(RequestOptions requestOptions) {
         head408Async(requestOptions).block();
     }
 
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 408 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head408WithResponse(RequestOptions requestOptions, Context context) {
         return head408WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -185,11 +157,7 @@ public final class HttpRetriesImpl {
                 context -> service.put500(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -197,51 +165,31 @@ public final class HttpRetriesImpl {
         return service.put500(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async(RequestOptions requestOptions) {
         return put500WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async(RequestOptions requestOptions, Context context) {
         return put500WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put500(RequestOptions requestOptions) {
         put500Async(requestOptions).block();
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put500WithResponse(RequestOptions requestOptions, Context context) {
         return put500WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -250,11 +198,7 @@ public final class HttpRetriesImpl {
                 context -> service.patch500(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -262,113 +206,69 @@ public final class HttpRetriesImpl {
         return service.patch500(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async(RequestOptions requestOptions) {
         return patch500WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async(RequestOptions requestOptions, Context context) {
         return patch500WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch500(RequestOptions requestOptions) {
         patch500Async(requestOptions).block();
     }
 
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 500 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch500WithResponse(RequestOptions requestOptions, Context context) {
         return patch500WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get502(this.client.getHost(), accept, requestOptions, context));
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.get502(this.client.getHost(), accept, requestOptions, context);
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async(RequestOptions requestOptions) {
         return get502WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async(RequestOptions requestOptions, Context context) {
         return get502WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get502(RequestOptions requestOptions) {
         get502Async(requestOptions).block();
     }
 
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 502 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get502WithResponse(RequestOptions requestOptions, Context context) {
         return get502WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -377,11 +277,7 @@ public final class HttpRetriesImpl {
                 context -> service.post503(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -389,51 +285,31 @@ public final class HttpRetriesImpl {
         return service.post503(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async(RequestOptions requestOptions) {
         return post503WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async(RequestOptions requestOptions, Context context) {
         return post503WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post503(RequestOptions requestOptions) {
         post503Async(requestOptions).block();
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post503WithResponse(RequestOptions requestOptions, Context context) {
         return post503WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -442,11 +318,7 @@ public final class HttpRetriesImpl {
                 context -> service.delete503(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -454,51 +326,31 @@ public final class HttpRetriesImpl {
         return service.delete503(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async(RequestOptions requestOptions) {
         return delete503WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async(RequestOptions requestOptions, Context context) {
         return delete503WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete503(RequestOptions requestOptions) {
         delete503Async(requestOptions).block();
     }
 
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 503 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete503WithResponse(RequestOptions requestOptions, Context context) {
         return delete503WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -507,11 +359,7 @@ public final class HttpRetriesImpl {
                 context -> service.put504(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -519,51 +367,31 @@ public final class HttpRetriesImpl {
         return service.put504(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async(RequestOptions requestOptions) {
         return put504WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async(RequestOptions requestOptions, Context context) {
         return put504WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put504(RequestOptions requestOptions) {
         put504Async(requestOptions).block();
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put504WithResponse(RequestOptions requestOptions, Context context) {
         return put504WithResponseAsync(requestOptions, context).block();
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync(RequestOptions requestOptions) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -572,11 +400,7 @@ public final class HttpRetriesImpl {
                 context -> service.patch504(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData booleanValue = BinaryData.fromObject("true");
@@ -584,41 +408,25 @@ public final class HttpRetriesImpl {
         return service.patch504(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async(RequestOptions requestOptions) {
         return patch504WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async(RequestOptions requestOptions, Context context) {
         return patch504WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch504(RequestOptions requestOptions) {
         patch504Async(requestOptions).block();
     }
 
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
+    /** Return 504 status code, then 200 after retry. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch504WithResponse(RequestOptions requestOptions, Context context) {
         return patch504WithResponseAsync(requestOptions, context).block();

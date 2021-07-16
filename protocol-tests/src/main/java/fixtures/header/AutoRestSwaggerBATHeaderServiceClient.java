@@ -3,7 +3,6 @@ package fixtures.header;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
@@ -23,113 +22,49 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
         this.serviceClient = serviceClient;
     }
 
-    /**
-     * Send a post request with header value "User-Agent": "overwrite".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Send a post request with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramExistingKey(RequestOptions requestOptions) {
         this.serviceClient.paramExistingKey(requestOptions);
     }
 
-    /**
-     * Send a post request with header value "User-Agent": "overwrite".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Send a post request with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramExistingKeyWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "User-Agent": "overwrite".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseExistingKey(RequestOptions requestOptions) {
         this.serviceClient.responseExistingKey(requestOptions);
     }
 
-    /**
-     * Get a response with header value "User-Agent": "overwrite".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "User-Agent": "overwrite".
-     */
+    /** Get a response with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseExistingKeyWithResponse(requestOptions, context);
     }
 
-    /**
-     * Send a post request with header value "Content-Type": "text/html".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Send a post request with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramProtectedKey(RequestOptions requestOptions) {
         this.serviceClient.paramProtectedKey(requestOptions);
     }
 
-    /**
-     * Send a post request with header value "Content-Type": "text/html".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Send a post request with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramProtectedKeyWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "Content-Type": "text/html".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseProtectedKey(RequestOptions requestOptions) {
         this.serviceClient.responseProtectedKey(requestOptions);
     }
 
-    /**
-     * Get a response with header value "Content-Type": "text/html".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "Content-Type": "text/html".
-     */
+    /** Get a response with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseProtectedKeyWithResponse(requestOptions, context);
@@ -137,11 +72,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramInteger(RequestOptions requestOptions) {
@@ -150,42 +80,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramIntegerWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "value": 1 or -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "value": 1 or -2. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseInteger(RequestOptions requestOptions) {
         this.serviceClient.responseInteger(requestOptions);
     }
 
-    /**
-     * Get a response with header value "value": 1 or -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 1 or -2.
-     */
+    /** Get a response with header value "value": 1 or -2. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseIntegerWithResponse(requestOptions, context);
@@ -194,11 +101,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramLong(RequestOptions requestOptions) {
@@ -208,42 +110,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramLongWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramLongWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "value": 105 or -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "value": 105 or -2. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseLong(RequestOptions requestOptions) {
         this.serviceClient.responseLong(requestOptions);
     }
 
-    /**
-     * Get a response with header value "value": 105 or -2.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 105 or -2.
-     */
+    /** Get a response with header value "value": 105 or -2. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseLongWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseLongWithResponse(requestOptions, context);
@@ -252,11 +131,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramFloat(RequestOptions requestOptions) {
@@ -266,42 +140,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramFloatWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramFloatWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "value": 0.07 or -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "value": 0.07 or -3.0. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseFloat(RequestOptions requestOptions) {
         this.serviceClient.responseFloat(requestOptions);
     }
 
-    /**
-     * Get a response with header value "value": 0.07 or -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
-     */
+    /** Get a response with header value "value": 0.07 or -3.0. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseFloatWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseFloatWithResponse(requestOptions, context);
@@ -310,11 +161,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDouble(RequestOptions requestOptions) {
@@ -324,42 +170,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramDoubleWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "value": 7e120 or -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "value": 7e120 or -3.0. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDouble(RequestOptions requestOptions) {
         this.serviceClient.responseDouble(requestOptions);
     }
 
-    /**
-     * Get a response with header value "value": 7e120 or -3.0.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
-     */
+    /** Get a response with header value "value": 7e120 or -3.0. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseDoubleWithResponse(requestOptions, context);
@@ -367,11 +190,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramBool(RequestOptions requestOptions) {
@@ -380,42 +198,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramBoolWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramBoolWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header value "value": true or false.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header value "value": true or false. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseBool(RequestOptions requestOptions) {
         this.serviceClient.responseBool(requestOptions);
     }
 
-    /**
-     * Get a response with header value "value": true or false.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": true or false.
-     */
+    /** Get a response with header value "value": true or false. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseBoolWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseBoolWithResponse(requestOptions, context);
@@ -424,11 +219,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramString(RequestOptions requestOptions) {
@@ -438,42 +228,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramStringWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramStringWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseString(RequestOptions requestOptions) {
         this.serviceClient.responseString(requestOptions);
     }
 
-    /**
-     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     */
+    /** Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseStringWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseStringWithResponse(requestOptions, context);
@@ -482,11 +249,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDate(RequestOptions requestOptions) {
@@ -496,42 +258,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDateWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramDateWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "2010-01-01" or "0001-01-01". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDate(RequestOptions requestOptions) {
         this.serviceClient.responseDate(requestOptions);
     }
 
-    /**
-     * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01" or "0001-01-01".
-     */
+    /** Get a response with header values "2010-01-01" or "0001-01-01". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDateWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseDateWithResponse(requestOptions, context);
@@ -540,11 +279,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDatetime(RequestOptions requestOptions) {
@@ -554,42 +288,19 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramDatetimeWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDatetime(RequestOptions requestOptions) {
         this.serviceClient.responseDatetime(requestOptions);
     }
 
-    /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     */
+    /** Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseDatetimeWithResponse(requestOptions, context);
@@ -598,11 +309,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDatetimeRfc1123(RequestOptions requestOptions) {
@@ -612,154 +318,67 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramDatetimeRfc1123WithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDatetimeRfc1123(RequestOptions requestOptions) {
         this.serviceClient.responseDatetimeRfc1123(requestOptions);
     }
 
-    /**
-     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     */
+    /** Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseDatetimeRfc1123WithResponse(requestOptions, context);
     }
 
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDuration(RequestOptions requestOptions) {
         this.serviceClient.paramDuration(requestOptions);
     }
 
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDurationWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramDurationWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "P123DT22H14M12.011S".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "P123DT22H14M12.011S". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDuration(RequestOptions requestOptions) {
         this.serviceClient.responseDuration(requestOptions);
     }
 
-    /**
-     * Get a response with header values "P123DT22H14M12.011S".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
-     */
+    /** Get a response with header values "P123DT22H14M12.011S". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDurationWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseDurationWithResponse(requestOptions, context);
     }
 
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramByte(RequestOptions requestOptions) {
         this.serviceClient.paramByte(requestOptions);
     }
 
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramByteWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramByteWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseByte(RequestOptions requestOptions) {
         this.serviceClient.responseByte(requestOptions);
     }
 
-    /**
-     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     */
+    /** Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseByteWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseByteWithResponse(requestOptions, context);
@@ -767,11 +386,6 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramEnum(RequestOptions requestOptions) {
@@ -780,70 +394,31 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramEnumWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.paramEnumWithResponse(requestOptions, context);
     }
 
-    /**
-     * Get a response with header values "GREY" or null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Get a response with header values "GREY" or null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseEnum(RequestOptions requestOptions) {
         this.serviceClient.responseEnum(requestOptions);
     }
 
-    /**
-     * Get a response with header values "GREY" or null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "GREY" or null.
-     */
+    /** Get a response with header values "GREY" or null. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseEnumWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.responseEnumWithResponse(requestOptions, context);
     }
 
-    /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
+    /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void customRequestId(RequestOptions requestOptions) {
         this.serviceClient.customRequestId(requestOptions);
     }
 
-    /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.customRequestIdWithResponse(requestOptions, context);
