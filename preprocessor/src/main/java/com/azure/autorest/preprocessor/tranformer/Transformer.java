@@ -26,7 +26,6 @@ import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -387,6 +386,7 @@ public class Transformer {
       Parameter parameter = iter.next();
       if (parameter.getOriginalParameter() == null // skip the parameters resulted from parameter-flattening as they are not in proxy method
               && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
+        /*
         // use a new Parameter, in case the original one is referenced by multiple requests
         Parameter newParameter = new Parameter();
         shallowCopy(parameter, newParameter, Parameter.class);
@@ -397,14 +397,17 @@ public class Transformer {
         newParameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
 
         iter.set(newParameter);
-
         parameter = newParameter;
+        */
+
+        parameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
       }
 
       parameterNames.add(parameter.getLanguage().getJava().getName());
     }
   }
 
+  /*
   private static <T> void shallowCopy(T obj, T newObj, Class clazz) {
     while (clazz != Object.class) {
       Field[] fields = clazz.getDeclaredFields();
@@ -427,4 +430,5 @@ public class Transformer {
       clazz = clazz.getSuperclass();
     }
   }
+  */
 }
