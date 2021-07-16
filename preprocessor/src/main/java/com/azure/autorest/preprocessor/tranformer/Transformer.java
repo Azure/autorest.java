@@ -385,7 +385,8 @@ public class Transformer {
     ListIterator<Parameter> iter = parameters.listIterator();
     while (iter.hasNext()) {
       Parameter parameter = iter.next();
-      if (parameterNames.contains(parameter.getLanguage().getJava().getName())) {
+      if (parameter.getOriginalParameter() == null // skip the parameters resulted from parameter-flattening as they are not in proxy method
+              && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
         // use a new Parameter, in case the original one is referenced by multiple requests
         Parameter newParameter = new Parameter();
         shallowCopy(parameter, newParameter, Parameter.class);
