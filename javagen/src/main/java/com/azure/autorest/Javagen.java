@@ -52,6 +52,8 @@ public class Javagen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> allFiles = listInputs();
         List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
@@ -90,7 +92,7 @@ public class Javagen extends NewPlugin {
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            if (settings.shouldGenerateClientInterfaces()) {
                 javaPackage
                     .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
@@ -101,7 +103,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceClientBuilder(builderPackage,
                 client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
                 List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
@@ -119,7 +121,7 @@ public class Javagen extends NewPlugin {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
                     methodGroupClient);
-                if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                if (settings.shouldGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
@@ -159,13 +161,16 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                try {
-                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                    writeFile(javaFile.getFilePath(), formattedSource, null);
-                } catch (Exception e) {
-                    logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                    return false;
+                String content = javaFile.getContents().toString();
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        content = formatter.formatSourceAndFixImports(content);
+                    } catch (Exception e) {
+                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        return false;
+                    }
                 }
+                writeFile(javaFile.getFilePath(), content, null);
             }
             String artifactId = JavaSettings.getInstance().getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {

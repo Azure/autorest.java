@@ -51,6 +51,8 @@ public class Androidgen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> allFiles = listInputs();
         List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
@@ -160,13 +162,16 @@ public class Androidgen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                try {
-                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                    writeFile(javaFile.getFilePath(), formattedSource, null);
-                } catch (Exception e) {
-                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
-                    return false;
+                String content = javaFile.getContents().toString();
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        content = formatter.formatSourceAndFixImports(content);
+                    } catch (Exception e) {
+                        LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        return false;
+                    }
                 }
+                writeFile(javaFile.getFilePath(), content, null);
             }
             String artifactId = JavaSettings.getInstance().getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {

@@ -121,15 +121,18 @@ public class Postprocessor extends NewPlugin {
   }
 
   private void writeToFiles(Map<String, String> fileContents) throws FormatterException {
+    JavaSettings settings = JavaSettings.getInstance();
     Formatter formatter = new Formatter();
     for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
       String formattedSource = javaFile.getValue();
       if (javaFile.getKey().endsWith(".java")) {
-        try {
-          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-        } catch (Exception e) {
-          logger.error("Unable to format output file " + javaFile.getKey(), e);
-          throw e;
+        if (!settings.isSkipFormatting()) {
+          try {
+            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+          } catch (Exception e) {
+            logger.error("Unable to format output file " + javaFile.getKey(), e);
+            throw e;
+          }
         }
       }
       writeFile(javaFile.getKey(), formattedSource, null);
