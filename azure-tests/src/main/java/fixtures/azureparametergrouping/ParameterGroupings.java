@@ -21,6 +21,7 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostReservedWordsParameters;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in ParameterGroupings. */
@@ -70,6 +71,16 @@ public final class ParameterGroupings {
                 @HeaderParam("customHeader") String customHeader,
                 @QueryParam("query") Integer query,
                 @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/parameterGrouping/postReservedWords")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> postReservedWords(
+                @HostParam("$host") String host,
+                @QueryParam("from") String from,
+                @QueryParam("accept") String accept,
+                @HeaderParam("Accept") String acceptParam,
                 Context context);
 
         @Post("/parameterGrouping/postMultipleParameterGroups")
@@ -244,6 +255,96 @@ public final class ParameterGroupings {
     public void postOptional() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         postOptionalAsync(parameterGroupingPostOptionalParameters).block();
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postReservedWordsWithResponseAsync(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            parameterGroupingPostReservedWordsParameters.validate();
+        }
+        final String acceptParam = "application/json";
+        String fromInternal = null;
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            fromInternal = parameterGroupingPostReservedWordsParameters.getFrom();
+        }
+        String from = fromInternal;
+        String acceptInternal = null;
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            acceptInternal = parameterGroupingPostReservedWordsParameters.getAccept();
+        }
+        String accept = acceptInternal;
+        return FluxUtil.withContext(
+                context -> service.postReservedWords(this.client.getHost(), from, accept, acceptParam, context));
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postReservedWordsAsync(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
+        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postReservedWordsAsync() {
+        final ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null;
+        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postReservedWords(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
+        postReservedWordsAsync(parameterGroupingPostReservedWordsParameters).block();
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postReservedWords() {
+        final ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null;
+        postReservedWordsAsync(parameterGroupingPostReservedWordsParameters).block();
     }
 
     /**

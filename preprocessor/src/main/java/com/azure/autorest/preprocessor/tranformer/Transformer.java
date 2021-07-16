@@ -28,10 +28,13 @@ import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -109,6 +112,7 @@ public class Transformer {
               contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
             }
           }
+          deduplicateParameterNames(request.getParameters());
         }
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -373,5 +377,33 @@ public class Transformer {
     contentType.getLanguage().setDefault(language);
     contentType.getLanguage().setJava(language);
     return contentType;
+  }
+
+  private static void deduplicateParameterNames(List<Parameter> parameters) {
+    Set<String> parameterNames = new HashSet<>();
+    ListIterator<Parameter> iter = parameters.listIterator();
+    while (iter.hasNext()) {
+      Parameter parameter = iter.next();
+      if (parameter.getOriginalParameter() == null // skip the parameters resulted from parameter-flattening as they are not in proxy method
+              && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
+        /*
+        // use a new Parameter, in case the original one is referenced by multiple requests
+        Parameter newParameter = new Parameter();
+        shallowCopy(parameter, newParameter, Parameter.class);
+        newParameter.setLanguage(new Languages());
+        shallowCopy(parameter.getLanguage(), newParameter.getLanguage(), Languages.class);
+        newParameter.getLanguage().setJava(new Language());
+        shallowCopy(parameter.getLanguage().getJava(), newParameter.getLanguage().getJava(), Language.class);
+        newParameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
+
+        iter.set(newParameter);
+        parameter = newParameter;
+        */
+
+        parameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
+      }
+
+      parameterNames.add(parameter.getLanguage().getJava().getName());
+    }
   }
 }
