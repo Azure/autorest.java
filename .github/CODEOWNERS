@@ -2,7 +2,10 @@
 *                           @jianghaolu @srnagar
 
 # fluentgen
-/fluentnamer                @ChenTanyi @weidongxu-microsoft @yungezz
-/fluentgen                  @ChenTanyi @weidongxu-microsoft @yungezz
-/fluent-tests               @ChenTanyi @weidongxu-microsoft @yungezz
-/azure-tests                @ChenTanyi @weidongxu-microsoft @yungezz
+/fluentnamer                @ChenTanyi @weidongxu-microsoft @yungezz @haolingdong-msft
+/fluentgen                  @ChenTanyi @weidongxu-microsoft @yungezz @haolingdong-msft
+/fluent-tests               @ChenTanyi @weidongxu-microsoft @yungezz @haolingdong-msft
+/azure-tests                @ChenTanyi @weidongxu-microsoft @yungezz @haolingdong-msft
+
+# androidgen
+/androidgen                 @JianpingChen @anuchandy
