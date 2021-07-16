@@ -14,21 +14,33 @@ public class ClientModelPropertyReference {
      */
 
     private final ClientModelProperty referenceProperty;
+    private final ClientModel targetModel;
     private final ClientModelProperty targetProperty;
 
     private ClientModelPropertyReference(ClientModelProperty targetProperty,
+                                         ClientModel targetModel,
                                          ClientModelProperty referenceProperty) {
         this.targetProperty = targetProperty;
+        this.targetModel = targetModel;
         this.referenceProperty = referenceProperty;
     }
 
     public static ClientModelPropertyReference referenceParentProperty(ClientModelProperty referenceProperty) {
-        return new ClientModelPropertyReference(null, referenceProperty);
+        return new ClientModelPropertyReference(null, null, referenceProperty);
     }
 
     public static ClientModelPropertyReference referenceFlattenProperty(ClientModelProperty targetProperty,
+                                                                        ClientModel targetModel,
                                                                         ClientModelProperty referenceProperty) {
-        return new ClientModelPropertyReference(targetProperty, referenceProperty);
+        return new ClientModelPropertyReference(targetProperty, targetModel, referenceProperty);
+    }
+
+    public boolean isFromFlattenedProperty() {
+        return this.targetProperty != null;
+    }
+
+    public boolean isFromParentModel() {
+        return this.targetProperty == null;
     }
 
     public ClientModelProperty getReferenceProperty() {
@@ -37,5 +49,9 @@ public class ClientModelPropertyReference {
 
     public ClientModelProperty getTargetProperty() {
         return targetProperty;
+    }
+
+    public ClientModel getTargetModel() {
+        return targetModel;
     }
 }

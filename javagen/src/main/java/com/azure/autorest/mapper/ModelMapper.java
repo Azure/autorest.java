@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
@@ -209,8 +210,17 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.needsFlatten(needsFlatten);
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
+            List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
-                properties.add(Mappers.getModelPropertyMapper().map(property));
+                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
+                properties.add(modelProperty);
+
+                if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
+                    ClientModel targetModel = this.map((ObjectSchema) property.getSchema());
+                    for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
+                        propertyReferences.add(ClientModelPropertyReference.referenceFlattenProperty(modelProperty, targetModel, referenceProperty));
+                    }
+                }
             }
 
             if (hasAdditionalProperties) {
@@ -230,6 +240,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
             }
             builder.properties(properties);
+            builder.propertyReferences(propertyReferences);
 
             result = builder.build();
             serviceModels.addModel(result);

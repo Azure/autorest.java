@@ -70,6 +70,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
             propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
         }
+        if (model.getPropertyReferences() != null) {
+            if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                model.getPropertyReferences().forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
+            }
+            propertyReferences.addAll(model.getPropertyReferences());
+        }
 
         model.addImportsTo(imports, settings);
 
@@ -209,11 +215,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 IType propertyType = property.getWireType();
                 IType propertyClientType = propertyType.getClientType();
 
-                classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                {
-                    comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
-                    comment.methodReturns(String.format("the %1$s value", property.getName()));
-                });
+                generateGetterJavadoc(classBlock, model, property);
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
@@ -253,16 +255,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 });
 
                 if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())) {
-                    classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
-                        if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
-                            comment.description(String.format("Set the %s property", property.getName()));
-                        } else {
-                            comment.description(String
-                                .format("Set the %s property: %s", property.getName(), property.getDescription()));
-                        }
-                        comment.param(property.getName(), String.format("the %s value to set", property.getName()));
-                        comment.methodReturns(String.format("the %s object itself.", model.getName()));
-                    });
+                    generateSetterJavadoc(classBlock, model, property);
 
                     classBlock.publicMethod(String.format("%s %s(%s %s)",
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
@@ -305,7 +298,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
-                for (ClientModelPropertyReference propertyReference : propertyReferences) {
+                // reference to properties from parent model
+                for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromParentModel).collect(Collectors.toList())) {
                     ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
                     if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
                         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
@@ -319,6 +313,42 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                     methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
                                     methodBlock.methodReturn("this");
                                 });
+                    }
+                }
+            }
+
+            if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                // reference to properties from flattened property
+                for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
+                    ClientModelProperty property = propertyReference.getReferenceProperty();
+                    ClientModelProperty targetProperty = propertyReference.getTargetProperty();
+                    ClientModel targetModel = propertyReference.getTargetModel();
+
+                    IType propertyType = property.getWireType();
+                    IType propertyClientType = propertyType.getClientType();
+
+                    // getter
+                    generateGetterJavadoc(classBlock, model, property);
+
+                    classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), methodBlock -> {
+                        methodBlock.ifBlock(String.format("this.%1$s == null", targetProperty.getName()), ifBlock -> {
+                            methodBlock.methodReturn("null");
+                        }).elseBlock(elseBlock -> {
+                            methodBlock.methodReturn(String.format("this.%1$s.%2$s()", targetProperty.getName(), property.getGetterName()));
+                        });
+                    });
+
+                    // setter
+                    if (!property.getIsReadOnly()) {
+                        generateSetterJavadoc(classBlock, model, property);
+
+                        classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
+                            methodBlock.ifBlock(String.format("this.%1$s == null", targetProperty.getName()), ifBlock -> {
+                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), targetModel.getType().toString()));
+                            });
+                            methodBlock.line(String.format("this.%1$s.%2$s(%3$s);", targetProperty.getName(), property.getSetterName(), property.getName()));
+                            methodBlock.methodReturn("this");
+                        });
                     }
                 }
             }
@@ -512,5 +542,25 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
         return propertyReferences;
+    }
+
+    protected void generateGetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+        classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment -> {
+            comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
+            comment.methodReturns(String.format("the %1$s value", property.getName()));
+        });
+    }
+
+    protected void generateSetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+        classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), (comment) -> {
+            if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
+                comment.description(String.format("Set the %s property", property.getName()));
+            } else {
+                comment.description(String
+                        .format("Set the %s property: %s", property.getName(), property.getDescription()));
+            }
+            comment.param(property.getName(), String.format("the %s value to set", property.getName()));
+            comment.methodReturns(String.format("the %s object itself.", model.getName()));
+        });
     }
 }

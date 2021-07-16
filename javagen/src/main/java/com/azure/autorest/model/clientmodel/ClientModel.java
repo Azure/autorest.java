@@ -172,9 +172,9 @@ public class ClientModel {
         return modelType;
     }
 
-//    public List<ClientModelPropertyReference> getPropertyReferences() {
-//        return propertyReferences;
-//    }
+    public List<ClientModelPropertyReference> getPropertyReferences() {
+        return propertyReferences;
+    }
 
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.
