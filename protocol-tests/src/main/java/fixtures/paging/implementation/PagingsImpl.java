@@ -88,7 +88,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/getWithQueryParams")
         Mono<Response<BinaryData>> getWithQueryParams(
                 @HostParam("$host") String host,
-                @QueryParam("requiredQueryParameter") int requiredQueryParameter,
                 @QueryParam("queryConstant") boolean queryConstant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -155,7 +154,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -164,7 +162,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -180,7 +177,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HeaderParam("Accept") String accept,
@@ -190,7 +186,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HeaderParam("Accept") String accept,
@@ -315,10 +310,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -342,10 +345,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(
@@ -369,16 +380,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -387,16 +406,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -405,10 +432,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -421,10 +456,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
@@ -437,10 +480,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -466,10 +517,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(
@@ -493,10 +552,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePagesAsync(RequestOptions requestOptions) {
@@ -509,10 +576,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePagesAsync(RequestOptions requestOptions, Context context) {
@@ -525,10 +600,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -541,10 +624,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
@@ -557,10 +648,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -584,10 +683,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(
@@ -611,16 +718,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -629,16 +744,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -647,10 +770,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -663,10 +794,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
@@ -680,10 +819,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(RequestOptions requestOptions) {
@@ -708,10 +855,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(
@@ -736,16 +891,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -755,16 +918,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions, context),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -774,10 +945,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -791,10 +970,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
@@ -804,13 +991,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -831,13 +1036,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(
@@ -858,49 +1081,103 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -910,13 +1187,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
@@ -927,29 +1222,39 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
-            int requiredQueryParameter, RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
         final boolean queryConstant = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getWithQueryParams(
-                                        this.client.getHost(),
-                                        requiredQueryParameter,
-                                        queryConstant,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -965,22 +1270,37 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
+            RequestOptions requestOptions, Context context) {
         final boolean queryConstant = true;
         final String accept = "application/json";
-        return service.getWithQueryParams(
-                        this.client.getHost(), requiredQueryParameter, queryConstant, accept, requestOptions, context)
+        return service.getWithQueryParams(this.client.getHost(), queryConstant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -996,90 +1316,168 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(int requiredQueryParameter, RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions));
+                () -> getWithQueryParamsSinglePageAsync(requestOptions),
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null));
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions, context),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions, context));
+                () -> getWithQueryParamsSinglePageAsync(requestOptions, context),
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null, context));
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter, requestOptions));
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions));
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter, requestOptions, context));
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions, context));
     }
 
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
@@ -1103,13 +1501,29 @@ public final class PagingsImpl {
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
@@ -1132,13 +1546,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1160,13 +1592,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(
@@ -1187,49 +1637,103 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -1239,13 +1743,31 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
@@ -1255,14 +1777,33 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -1286,14 +1827,33 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -1314,53 +1874,110 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(
             int offset, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions, context),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -1370,14 +1987,33 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(
@@ -1392,10 +2028,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(RequestOptions requestOptions) {
@@ -1422,10 +2066,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(
@@ -1450,16 +2102,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1469,16 +2129,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1488,10 +2156,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -1505,10 +2181,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
@@ -1522,10 +2206,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(RequestOptions requestOptions) {
@@ -1552,10 +2244,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(
@@ -1580,16 +2280,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1599,16 +2307,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1618,10 +2334,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -1635,10 +2359,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
@@ -1651,10 +2383,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -1679,10 +2419,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(
@@ -1706,16 +2454,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1724,16 +2480,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1742,10 +2506,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -1758,10 +2530,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
@@ -1774,10 +2554,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -1802,10 +2590,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(
@@ -1829,16 +2625,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1847,16 +2651,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1865,10 +2677,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -1881,10 +2701,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
@@ -1897,10 +2725,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(RequestOptions requestOptions) {
@@ -1926,10 +2762,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(
@@ -1953,16 +2797,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1971,16 +2823,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1989,10 +2849,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -2005,10 +2873,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
@@ -2018,24 +2894,40 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
+                                        this.client.getHost(), tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2050,22 +2942,37 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.getMultiplePagesFragmentNextLink(
-                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
+        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2080,104 +2987,182 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
+        return new PagedFlux<>(
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions),
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
+     * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
-                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions));
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions, context),
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null, context));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions, context),
-                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions));
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions, context));
+            String tenant, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions, context));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
+                                        this.client.getHost(), tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2192,22 +3177,38 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.getMultiplePagesFragmentWithGroupingNextLink(
-                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
+                        this.client.getHost(), tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2222,98 +3223,175 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions),
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () ->
-                        getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-                                apiVersion, tenant, requestOptions, context),
-                nextLink ->
-                        nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions, context));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions, context),
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null, context));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(
-                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions));
+            String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(
-                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions, context));
+            String tenant, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions, context));
     }
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(RequestOptions requestOptions) {
@@ -2334,13 +3412,31 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(
@@ -2361,49 +3457,103 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesLROSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null));
     }
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesLROSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null, context));
     }
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
@@ -2413,13 +3563,31 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
@@ -2429,31 +3597,41 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+            String tenant, String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragment(
-                                        this.client.getHost(),
-                                        apiVersion,
-                                        tenant,
-                                        nextLink,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2468,23 +3646,38 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.nextFragment(
-                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
+        return service.nextFragment(this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2499,31 +3692,41 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+            String tenant, String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(),
-                                        apiVersion,
-                                        tenant,
-                                        nextLink,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2538,23 +3741,39 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.nextFragmentWithGrouping(
-                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
+                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2572,10 +3791,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
@@ -2602,10 +3829,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
@@ -2630,16 +3865,24 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions),
-                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -2648,19 +3891,25 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(
             RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions, context),
-                nextLink ->
-                        getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
-                                nextLink, requestOptions, context));
+                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -2669,10 +3918,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
@@ -2685,10 +3942,18 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(
@@ -2702,11 +3967,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
@@ -2733,11 +4007,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
@@ -2761,11 +4044,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
@@ -2792,11 +4084,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
@@ -2820,11 +4121,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
@@ -2851,11 +4161,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
@@ -2876,14 +4195,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
@@ -2907,14 +4245,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
@@ -2935,14 +4292,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
@@ -2966,14 +4342,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
@@ -2994,14 +4389,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
@@ -3025,14 +4439,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
@@ -3056,11 +4489,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
@@ -3087,11 +4529,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
@@ -3115,11 +4566,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
@@ -3146,11 +4606,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
@@ -3174,11 +4643,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
@@ -3205,11 +4683,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
@@ -3233,11 +4720,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
@@ -3264,11 +4760,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
@@ -3292,11 +4797,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
@@ -3323,11 +4837,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
@@ -3348,14 +4871,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
@@ -3379,14 +4921,33 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
@@ -3410,11 +4971,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
@@ -3441,11 +5011,20 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(

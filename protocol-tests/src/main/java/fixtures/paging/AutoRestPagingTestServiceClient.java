@@ -3,7 +3,6 @@ package fixtures.paging;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
@@ -27,11 +26,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -41,12 +50,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
@@ -56,11 +74,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -70,12 +98,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
@@ -85,11 +122,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -99,12 +146,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
@@ -115,11 +171,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -130,12 +196,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
@@ -145,11 +220,31 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -159,12 +254,31 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
@@ -175,44 +289,98 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
-        return this.serviceClient.getWithQueryParams(requiredQueryParameter, requestOptions);
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParams(requestOptions);
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getWithQueryParams(requiredQueryParameter, requestOptions, context);
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getWithQueryParams(requestOptions, context);
     }
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -222,12 +390,31 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
@@ -237,12 +424,33 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
+     *
      * @param offset Offset of return value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -252,13 +460,33 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
+     *
      * @param offset Offset of return value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(
@@ -270,11 +498,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -285,12 +523,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
@@ -301,11 +548,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -316,12 +573,21 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
@@ -331,11 +597,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -345,12 +621,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
@@ -360,11 +645,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -374,12 +669,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
@@ -389,11 +693,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -403,12 +717,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
@@ -418,82 +741,170 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentNextLink(apiVersion, tenant, requestOptions);
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLink(tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentNextLink(apiVersion, tenant, requestOptions, context);
+            String tenant, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFragmentNextLink(tenant, requestOptions, context);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-     * @param apiVersion Sets the api version to use.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, requestOptions);
+            String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-     * @param apiVersion Sets the api version to use.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(
-                apiVersion, tenant, requestOptions, context);
+            String tenant, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions, context);
     }
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
@@ -503,12 +914,31 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
@@ -518,11 +948,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
@@ -532,12 +972,21 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
+     * }</pre>
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(

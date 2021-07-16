@@ -66,10 +66,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -84,10 +88,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -101,10 +109,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -125,10 +137,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -149,10 +165,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -165,10 +185,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -181,10 +205,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -199,10 +227,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
@@ -217,10 +249,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -233,10 +269,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -250,10 +290,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -266,10 +310,14 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

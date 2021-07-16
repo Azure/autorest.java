@@ -117,10 +117,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -135,10 +139,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -152,10 +160,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -176,10 +188,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -200,10 +216,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -216,10 +236,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -232,10 +256,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -250,10 +278,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
@@ -268,10 +300,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -284,10 +320,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -301,10 +341,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -317,10 +361,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -333,10 +381,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDotSyntaxWithResponseAsync(RequestOptions requestOptions) {
@@ -351,10 +399,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDotSyntaxWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -368,10 +416,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDotSyntaxAsync(RequestOptions requestOptions) {
@@ -392,10 +440,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getDotSyntaxAsync(RequestOptions requestOptions, Context context) {
@@ -416,10 +464,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDotSyntax(RequestOptions requestOptions) {
@@ -432,10 +480,10 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions, Context context) {
@@ -449,10 +497,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -469,10 +530,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithDiscriminatorWithResponseAsync(
@@ -488,10 +562,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComposedWithDiscriminatorAsync(RequestOptions requestOptions) {
@@ -513,10 +600,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComposedWithDiscriminatorAsync(RequestOptions requestOptions, Context context) {
@@ -538,10 +638,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getComposedWithDiscriminator(RequestOptions requestOptions) {
@@ -555,10 +668,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithDiscriminatorWithResponse(
@@ -573,10 +699,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithoutDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -594,10 +733,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithoutDiscriminatorWithResponseAsync(
@@ -613,10 +765,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComposedWithoutDiscriminatorAsync(RequestOptions requestOptions) {
@@ -638,10 +803,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComposedWithoutDiscriminatorAsync(RequestOptions requestOptions, Context context) {
@@ -663,10 +841,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getComposedWithoutDiscriminator(RequestOptions requestOptions) {
@@ -680,10 +871,23 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(
@@ -697,10 +901,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComplicatedWithResponseAsync(RequestOptions requestOptions) {
@@ -715,10 +931,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComplicatedWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -732,10 +960,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComplicatedAsync(RequestOptions requestOptions) {
@@ -756,10 +996,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getComplicatedAsync(RequestOptions requestOptions, Context context) {
@@ -780,10 +1032,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getComplicated(RequestOptions requestOptions) {
@@ -796,10 +1060,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions, Context context) {
@@ -812,10 +1088,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -830,10 +1118,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(
@@ -848,10 +1148,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplicatedAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -865,10 +1177,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplicatedAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -882,10 +1206,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplicated(BinaryData complexBody, RequestOptions requestOptions) {
@@ -898,10 +1234,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putComplicatedWithResponse(
@@ -915,16 +1263,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putMissingDiscriminatorWithResponseAsync(
@@ -942,16 +1302,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putMissingDiscriminatorWithResponseAsync(
@@ -966,16 +1338,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> putMissingDiscriminatorAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -996,16 +1380,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> putMissingDiscriminatorAsync(
@@ -1027,16 +1423,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData putMissingDiscriminator(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1049,16 +1457,28 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * (recursive schema, see above)
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
@@ -1073,10 +1493,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(
@@ -1095,10 +1519,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(
@@ -1114,10 +1542,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidMissingRequiredAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1132,10 +1564,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidMissingRequiredAsync(
@@ -1151,10 +1587,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidMissingRequired(BinaryData complexBody, RequestOptions requestOptions) {
@@ -1168,10 +1608,14 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidMissingRequiredWithResponse(

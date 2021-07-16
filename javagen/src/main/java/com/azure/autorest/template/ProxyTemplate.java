@@ -92,16 +92,17 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
                         StringBuilder parameterDeclarationBuilder = new StringBuilder();
+                        RequestParameterLocation location = parameter.getRequestParameterLocation();
 
-                        switch (parameter.getRequestParameterLocation()) {
+                        switch (location) {
                             case Uri:
                             case Path:
                             case Query:
                             case Header:
-                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
-                                if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
+                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(location.toString())));
+                                if ((location == RequestParameterLocation.Path || location == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
-                                } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
+                                } else if (location == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
                                 } else {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getRequestParameterName()));
@@ -128,7 +129,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                             default:
                                 if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
-                                    throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());
+                                    throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + location);
                                 }
 
                                 break;
@@ -141,7 +142,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         }
                         usedParameterNames.add(parameterName);
 
-                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameterName);
+                        parameterDeclarationBuilder.append(parameter.getWireType()).append(" ").append(parameterName);
                         parameterDeclarationList.add(parameterDeclarationBuilder.toString());
                     }
 

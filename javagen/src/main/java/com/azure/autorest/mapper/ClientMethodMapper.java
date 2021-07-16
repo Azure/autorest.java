@@ -132,11 +132,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             List<Parameter> codeModelParameters;
             if (settings.isLowLevelClient()) {
-                codeModelParameters = request.getParameters().stream().filter(p ->
-                        p.isRequired() && !(p.getSchema().getType() == Schema.AllSchemaTypes.GROUP)).collect(Collectors.toList());
-//                Only path param is allowed
-//                codeModelParameters = request.getParameters().stream().filter(
-//                        p -> p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path).collect(Collectors.toList());
+                // Required path and body parameters are allowed
+                codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
+                        (p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path ||
+                        p.getProtocol().getHttp().getIn() == RequestParameterLocation.Body))
+                        .collect(Collectors.toList());
             } else {
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
             }

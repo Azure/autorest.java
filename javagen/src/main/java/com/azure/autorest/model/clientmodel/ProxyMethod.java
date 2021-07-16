@@ -61,6 +61,10 @@ public class ProxyMethod {
      */
     protected List<ProxyMethodParameter> parameters;
     /**
+     * Get all parameters defined in swagger to this method.
+     */
+    protected List<ProxyMethodParameter> allParameters;
+    /**
      * Get the description of this method.
      */
     private String description;
@@ -72,6 +76,10 @@ public class ProxyMethod {
      * The response body type.
      */
     private IType responseBodyType;
+    /**
+     * The raw response body type. responseBodyType is set to BinaryData in low-level mode. We need raw type.
+     */
+    private IType rawResponseBodyType;
     /**
      * Get whether or not this method resumes polling of an LRO.
      */
@@ -101,9 +109,10 @@ public class ProxyMethod {
                         String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
                         ClassType unexpectedResponseExceptionType,
                         Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
-                        String name, List<ProxyMethodParameter> parameters, String description,
-                        IType returnValueWireType, IType responseBodyType, boolean isResumable,
-                        Set<String> responseContentTypes) {
+                        String name, List<ProxyMethodParameter> parameters,
+                        List<ProxyMethodParameter> allParameters, String description,
+                        IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
+                        boolean isResumable, Set<String> responseContentTypes) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -114,9 +123,11 @@ public class ProxyMethod {
         this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
         this.name = name;
         this.parameters = parameters;
+        this.allParameters = allParameters;
         this.description = description;
         this.returnValueWireType = returnValueWireType;
         this.responseBodyType = responseBodyType;
+        this.rawResponseBodyType = rawResponseBodyType;
         this.isResumable = isResumable;
         this.responseContentTypes = responseContentTypes;
     }
@@ -161,6 +172,10 @@ public class ProxyMethod {
         return parameters;
     }
 
+    public final List<ProxyMethodParameter> getAllParameters() {
+        return allParameters;
+    }
+
     public final String getDescription() {
         return description;
     }
@@ -171,6 +186,10 @@ public class ProxyMethod {
 
     public IType getResponseBodyType() {
         return responseBodyType;
+    }
+
+    public IType getRawResponseBodyType() {
+        return rawResponseBodyType;
     }
 
     public final boolean isResumable() {
@@ -301,9 +320,11 @@ public class ProxyMethod {
         protected Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
         protected String name;
         protected List<ProxyMethodParameter> parameters;
+        protected List<ProxyMethodParameter> allParameters;
         protected String description;
         protected IType returnValueWireType;
         protected IType responseBodyType;
+        protected IType rawResponseBodyType;
         protected boolean isResumable;
         protected Set<String> responseContentTypes;
 
@@ -407,6 +428,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets all parameters defined in swagger to this method.
+         * @param allParameters the parameters that are provided to this method
+         * @return the Builder itself
+         */
+        public Builder allParameters(List<ProxyMethodParameter> allParameters) {
+            this.allParameters = allParameters;
+            return this;
+        }
+
+        /**
          * Sets the description of this method.
          * @param description the description of this method
          * @return the Builder itself
@@ -433,6 +464,16 @@ public class ProxyMethod {
          */
         public Builder responseBodyType(IType responseBodyType) {
             this.responseBodyType = responseBodyType;
+            return this;
+        }
+
+        /**
+         * Sets the raw response body type.
+         * @param rawResponseBodyType the response body type
+         * @return the Builder itself
+         */
+        public Builder rawResponseBodyType(IType rawResponseBodyType) {
+            this.rawResponseBodyType = rawResponseBodyType;
             return this;
         }
 
@@ -470,9 +511,11 @@ public class ProxyMethod {
                     unexpectedResponseExceptionTypes,
                     name,
                     parameters,
+                    allParameters,
                     description,
                     returnValueWireType,
                     responseBodyType,
+                    rawResponseBodyType,
                     isResumable,
                     responseContentTypes);
         }

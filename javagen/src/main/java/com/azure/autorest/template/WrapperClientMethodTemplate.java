@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaType;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * {@link ClientMethodTemplate}.
  *
  */
-public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
+public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static final WrapperClientMethodTemplate instance = new WrapperClientMethodTemplate();
 
@@ -31,16 +32,19 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
     public void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
+        if (clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage) return;
+
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+        if (settings.isLowLevelClient()) {
+            typeBlock.javadocComment(comment -> generateProtocolMethodJavadoc(clientMethod, comment));
+        } else {
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+        }
 
         switch (clientMethod.getType()) {
             case PagingSync:
             case PagingAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                break;
-            case PagingAsyncSinglePage:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 break;
             default:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");

@@ -27,7 +27,7 @@ public class StringOperationsTests {
     @Test
     public void getNull() throws Exception {
         String result = client.getNull(null).toObject(String.class);
-        Assertions.assertEquals(null, result);
+        Assertions.assertNull(result);
     }
 
     @Test
