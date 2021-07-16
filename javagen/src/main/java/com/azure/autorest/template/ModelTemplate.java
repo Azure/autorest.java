@@ -503,7 +503,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (parentModel.getProperties() != null) {
                     propertyReferences.addAll(parentModel.getProperties().stream()
                             .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
-                            .map(ClientModelPropertyReference::new)
+                            .map(ClientModelPropertyReference::referenceParentProperty)
                             .collect(Collectors.toList()));
                 }
             }

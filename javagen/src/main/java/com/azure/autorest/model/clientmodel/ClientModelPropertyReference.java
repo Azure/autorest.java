@@ -7,13 +7,35 @@ package com.azure.autorest.model.clientmodel;
 
 public class ClientModelPropertyReference {
 
-    private final ClientModelProperty referenceProperty;
+    /*
+    Usage of the ClientModelPropertyReference
+    1. reference to property from superclass, which has non-null referenceProperty, i.e., super.referenceProperty
+    2. reference to property from a flattened property, which has non-null referenceProperty and targetProperty, i.e., targetProperty.referenceProperty
+     */
 
-    public ClientModelPropertyReference(ClientModelProperty referenceProperty) {
+    private final ClientModelProperty referenceProperty;
+    private final ClientModelProperty targetProperty;
+
+    private ClientModelPropertyReference(ClientModelProperty targetProperty,
+                                         ClientModelProperty referenceProperty) {
+        this.targetProperty = targetProperty;
         this.referenceProperty = referenceProperty;
+    }
+
+    public static ClientModelPropertyReference referenceParentProperty(ClientModelProperty referenceProperty) {
+        return new ClientModelPropertyReference(null, referenceProperty);
+    }
+
+    public static ClientModelPropertyReference referenceFlattenProperty(ClientModelProperty targetProperty,
+                                                                        ClientModelProperty referenceProperty) {
+        return new ClientModelPropertyReference(targetProperty, referenceProperty);
     }
 
     public ClientModelProperty getReferenceProperty() {
         return referenceProperty;
+    }
+
+    public ClientModelProperty getTargetProperty() {
+        return targetProperty;
     }
 }
