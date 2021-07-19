@@ -10,7 +10,7 @@ public class ClientModelPropertyReference {
     /*
     Usage of the ClientModelPropertyReference
     1. reference to property from superclass, which has non-null referenceProperty, i.e., super.referenceProperty
-    2. reference to property from a flattened property, which has non-null referenceProperty and targetProperty, i.e., targetProperty.referenceProperty
+    2. reference to property from a flattened client model (targetModel), which has non-null referenceProperty and targetProperty, i.e., targetProperty.referenceProperty
      */
 
     private final ClientModelProperty referenceProperty;

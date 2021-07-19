@@ -330,12 +330,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     IType propertyType = property.getWireType();
                     IType propertyClientType = propertyType.getClientType();
 
+                    if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
+                        // since the property to flattened client model is optional, the flattened property should be optional
+                        propertyClientType = propertyClientType.asNullable();
+                    }
+                    final IType propertyClientTypeFinal = propertyClientType;
+
                     // getter
                     generateGetterJavadoc(classBlock, model, property);
 
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), methodBlock -> {
                         methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
-                            methodBlock.methodReturn("null");
+                            if (propertyClientTypeFinal instanceof PrimitiveType) {
+                                methodBlock.methodReturn(((PrimitiveType) propertyClientTypeFinal).defaultValueExpression());
+                            } else {
+                                methodBlock.methodReturn("null");
+                            }
                         }).elseBlock(elseBlock -> {
                             methodBlock.methodReturn(String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName()));
                         });
