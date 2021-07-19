@@ -29,6 +29,10 @@ public class ClientModelPropertyReference {
         return new ClientModelPropertyReference(null, null, referenceProperty);
     }
 
+    public static ClientModelPropertyReference referenceParentProperty(ClientModelPropertyReference referenceProperty) {
+        return new ClientModelPropertyReference(null, null, referenceProperty.getReferenceProperty());
+    }
+
     public static ClientModelPropertyReference referenceFlattenProperty(ClientModelProperty targetProperty,
                                                                         ClientModel targetModel,
                                                                         ClientModelProperty referenceProperty) {
