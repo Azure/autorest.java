@@ -321,7 +321,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                // reference to properties from flattened property
+                // reference to properties from flattened client model
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
                     ClientModelProperty property = propertyReference.getReferenceProperty();
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();

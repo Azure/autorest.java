@@ -57,6 +57,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         builder.needsFlatten(flattened);
 
         if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                // avoid non-object schema or a plain object schema without any properties
                 && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             builder.clientFlatten(true);
