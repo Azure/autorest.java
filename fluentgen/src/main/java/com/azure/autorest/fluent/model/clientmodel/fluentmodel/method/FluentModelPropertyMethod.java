@@ -7,11 +7,11 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -21,12 +21,12 @@ import java.util.Set;
 public class FluentModelPropertyMethod extends FluentMethod {
 
     private final ClientModel clientModel;
-    protected final ClientModelProperty modelProperty;
+    protected final ModelProperty modelProperty;
     private final LocalVariable localVariable;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
                                      FluentInterfaceStage stage, ClientModel clientModel,
-                                     ClientModelProperty modelProperty,
+                                     ModelProperty modelProperty,
                                      LocalVariable localVariable) {
         this(model, type, stage, clientModel, modelProperty, localVariable,
                 modelProperty.getSetterName(),
@@ -35,7 +35,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
                                      FluentInterfaceStage stage, ClientModel clientModel,
-                                     ClientModelProperty modelProperty,
+                                     ModelProperty modelProperty,
                                      LocalVariable localVariable,
                                      String name, String description) {
         super(model, type);
@@ -83,7 +83,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        modelProperty.addImportsTo(imports, false);
+        modelProperty.addImportsTo(imports);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
         }
     }
 
-    public ClientModelProperty getModelProperty() {
+    public ModelProperty getModelProperty() {
         return modelProperty;
     }
 }

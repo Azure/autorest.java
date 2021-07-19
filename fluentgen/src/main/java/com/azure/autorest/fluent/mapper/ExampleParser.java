@@ -14,6 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
@@ -42,7 +43,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -231,9 +232,9 @@ public class ExampleParser {
                                     exampleNodes.add(node);
                                 }
                             } else {
-                                ClientModelProperty clientModelProperty = stage.getModelProperty();
-                                if (clientModelProperty != null) {
-                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, clientModelProperty);
+                                ModelProperty modelProperty = stage.getModelProperty();
+                                if (modelProperty != null) {
+                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, modelProperty);
 
                                     if (stage.isMandatoryStage() || !node.isNull()) {
                                         exampleNodes.add(node);
@@ -321,9 +322,9 @@ public class ExampleParser {
                                     exampleNodes.add(node);
                                 }
                             } else {
-                                ClientModelProperty clientModelProperty = stage.getModelProperty();
-                                if (clientModelProperty != null) {
-                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, clientModelProperty);
+                                ModelProperty modelProperty = stage.getModelProperty();
+                                if (modelProperty != null) {
+                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, modelProperty);
 
                                     if (!node.isNull()) {
                                         exampleNodes.add(node);
@@ -378,24 +379,21 @@ public class ExampleParser {
     }
 
     private static ExampleNode parseNodeFromModelProperty(ProxyMethodExample example, MethodParameter methodParameter,
-                                                          ClientModel clientModel, ClientModelProperty clientModelProperty) {
+                                                          ClientModel clientModel, ModelProperty modelProperty) {
         String serializedName = methodParameter.getProxyMethodParameter().getName();
 
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
         ExampleNode node;
         if (parameterValue == null) {
-            node = new LiteralNode(clientModelProperty.getClientType(), null);
+            node = new LiteralNode(modelProperty.getClientType(), null);
         } else {
-            List<String> jsonPropertyNames = Collections.singletonList(clientModelProperty.getSerializedName());
-            if (clientModel.getNeedsFlatten()) {
-                jsonPropertyNames = flattenedNames(clientModelProperty.getSerializedName());
-            }
+            List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
             Object childObjectValue = getChildObjectValue(jsonPropertyNames, parameterValue.getObjectValue());
             if (childObjectValue != null) {
-                node = parseNode(clientModelProperty.getClientType(), childObjectValue);
+                node = parseNode(modelProperty.getClientType(), childObjectValue);
             } else {
-                node = new LiteralNode(clientModelProperty.getClientType(), null);
+                node = new LiteralNode(modelProperty.getClientType(), null);
             }
         }
         return node;
@@ -460,13 +458,8 @@ public class ExampleParser {
 
                 clientModelNode.setClientModel(model);
 
-                for (ClientModelProperty modelProperty : getPropertiesIncludeSuperclass(model)) {
-                    String serializedName = modelProperty.getSerializedName();
-
-                    List<String> jsonPropertyNames = Collections.singletonList(serializedName);
-                    if (model.getNeedsFlatten() || modelProperty.getNeedsFlatten()) {
-                        jsonPropertyNames = flattenedNames(serializedName);
-                    }
+                for (ModelProperty modelProperty : getPropertiesIncludeSuperclass(model)) {
+                    List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
                     if (childObjectValue != null) {
@@ -485,11 +478,6 @@ public class ExampleParser {
             literalNode.setLiteralsValue(objectValue.toString());
         }
         return node;
-    }
-
-    private static List<String> flattenedNames(String serializedName) {
-        // TODO escaped .
-        return Arrays.asList(serializedName.split(Pattern.quote(".")));
     }
 
     private static Object getChildObjectValue(List<String> jsonPropertyNames, Object objectValue) {
@@ -520,9 +508,9 @@ public class ExampleParser {
                 .collect(Collectors.toList());
     }
 
-    private static List<ClientModelProperty> getPropertiesIncludeSuperclass(ClientModel model) {
-        Map<String, ClientModelProperty> propertiesMap = new LinkedHashMap<>();
-        List<ClientModelProperty> properties = new ArrayList<>();
+    private static List<ModelProperty> getPropertiesIncludeSuperclass(ClientModel model) {
+        Map<String, ModelProperty> propertiesMap = new LinkedHashMap<>();
+        List<ModelProperty> properties = new ArrayList<>();
 
         List<ClientModel> parentModels = new ArrayList<>();
         String parentModelName = model.getParentModelName();
@@ -531,29 +519,43 @@ public class ExampleParser {
             if (parentModel != null) {
                 parentModels.add(parentModel);
             }
-            parentModelName = parentModel == null ? null :parentModel.getParentModelName();
+            parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
 
-        List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+        List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
-        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly()).forEach(p -> {
-            if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
-                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getNeedsFlatten()).forEach(p -> {
+            ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
+            if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
+                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
+            }
+        });
+        model.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
+            ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+            if (propertiesMap.putIfAbsent(p.getReferenceProperty().getName(), property) == null) {
+                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
             }
         });
 
         for (ClientModel parent : parentModels) {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
-            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly()).forEach(p -> {
-                if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
-                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getNeedsFlatten()).forEach(p -> {
+                ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
+                if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
+                }
+            });
+            parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
+                ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+                if (propertiesMap.putIfAbsent(p.getReferenceProperty().getName(), property) == null) {
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
             });
         }
 
         Collections.reverse(propertiesFromTypeAndParents);
-        for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
+        for (List<ModelProperty> properties1 : propertiesFromTypeAndParents) {
             properties.addAll(properties1);
         }
 
@@ -579,5 +581,10 @@ public class ExampleParser {
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {
         return resourceModel.getResourceCreate() != null && resourceModel.getResourceUpdate() != null
                 && Objects.equals(resourceModel.getResourceCreate().getMethodReferences().iterator().next().getMethodName(), resourceModel.getResourceUpdate().getMethodReferences().iterator().next().getMethodName());
+    }
+
+    private static List<String> flattenedNames(String serializedName) {
+        // TODO escaped .
+        return Arrays.asList(serializedName.split(Pattern.quote(".")));
     }
 }

@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
@@ -21,7 +22,6 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
@@ -292,7 +292,7 @@ public class FluentExampleTemplate {
                 StringBuilder builder = new StringBuilder();
                 builder.append("new ").append(model.getName()).append("()");
                 for (ExampleNode childNode : node.getChildNodes()) {
-                    ClientModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
+                    ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
                     // .withProperty(...)
                     builder.append(".").append(modelProperty.getSetterName())
                             .append("(").append(this.accept(childNode)).append(")");

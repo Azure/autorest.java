@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTypeCo
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -22,6 +23,7 @@ import java.util.Set;
 public class FluentModelProperty {
 
     private final ClientModelProperty modelProperty;
+    private ClientModelPropertyReference modelPropertyReference;
 
     private final IType fluentType;
 
@@ -33,6 +35,11 @@ public class FluentModelProperty {
         this.immutableMethod = this.fluentType == property.getClientType()
                 ? new PropertyTemplate(this, this.modelProperty)
                 : new PropertyTypeConversionTemplate(this, this.modelProperty);
+    }
+
+    public FluentModelProperty(ClientModelPropertyReference property) {
+        this(property.getReferenceProperty());
+        modelPropertyReference = property;
     }
 
     public String getName() {
@@ -93,5 +100,11 @@ public class FluentModelProperty {
 
     public ClientModelProperty getInnerProperty() {
         return modelProperty;
+    }
+
+    public ModelProperty getModelProperty() {
+        return modelPropertyReference == null
+                ? ModelProperty.ofClientModelProperty(modelProperty)
+                : ModelProperty.ofClientModelPropertyReference(modelPropertyReference);
     }
 }
