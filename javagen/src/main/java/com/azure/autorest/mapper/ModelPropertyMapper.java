@@ -55,6 +55,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
         builder.needsFlatten(flattened);
 
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            builder.clientFlatten(true);
+        }
+
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {
             for (String flattenedName : property.getFlattenedNames()) {

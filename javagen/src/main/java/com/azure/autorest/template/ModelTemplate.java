@@ -20,6 +20,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -215,11 +216,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 IType propertyType = property.getWireType();
                 IType propertyClientType = propertyType.getClientType();
 
+                JavaVisibility methodVisibility = property.getClientFlatten() ? JavaVisibility.Private : JavaVisibility.Public;
+
                 generateGetterJavadoc(classBlock, model, property);
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
-                classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
+                classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
                 {
                     String sourceTypeName = propertyType.toString();
                     String targetTypeName = propertyClientType.toString();
@@ -257,7 +260,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())) {
                     generateSetterJavadoc(classBlock, model, property);
 
-                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                    classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
                             String expression;
