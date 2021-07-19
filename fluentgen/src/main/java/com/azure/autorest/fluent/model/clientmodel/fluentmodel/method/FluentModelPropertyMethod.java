@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class FluentModelPropertyMethod extends FluentMethod {
@@ -90,7 +91,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
     public boolean equals(Object obj) {
         if (obj instanceof FluentModelPropertyMethod) {
             FluentModelPropertyMethod other = (FluentModelPropertyMethod) obj;
-            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty && this.localVariable == other.localVariable;
+            return this.clientModel == other.clientModel && Objects.equals(this.modelProperty, other.modelProperty) && this.localVariable == other.localVariable;
         } else {
             return false;
         }

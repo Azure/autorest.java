@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -104,5 +105,18 @@ public class ModelProperty {
         } else {
             return Collections.singletonList(property.getSerializedName());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ModelProperty that = (ModelProperty) o;
+        return Objects.equals(property, that.property) && Objects.equals(propertyReference, that.propertyReference);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(property, propertyReference);
     }
 }
