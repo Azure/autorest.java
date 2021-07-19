@@ -456,8 +456,6 @@ public class ExampleParser {
                 ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
                 node = clientModelNode;
 
-                clientModelNode.setClientModel(model);
-
                 for (ModelProperty modelProperty : getPropertiesIncludeSuperclass(model)) {
                     List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
@@ -524,7 +522,7 @@ public class ExampleParser {
 
         List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
-        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getNeedsFlatten()).forEach(p -> {
+        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getClientFlatten()).forEach(p -> {
             ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
             if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
                 propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
@@ -540,7 +538,7 @@ public class ExampleParser {
         for (ClientModel parent : parentModels) {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
-            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getNeedsFlatten()).forEach(p -> {
+            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getClientFlatten()).forEach(p -> {
                 ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
                 if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);

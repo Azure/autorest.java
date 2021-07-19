@@ -67,6 +67,10 @@ public class FluentModelPropertyMethod extends FluentMethod {
         return clientModel;
     }
 
+    public ModelProperty getModelProperty() {
+        return modelProperty;
+    }
+
     @Override
     protected String getBaseMethodSignature() {
         return String.format("%1$s(%2$s %3$s)",
@@ -97,7 +101,8 @@ public class FluentModelPropertyMethod extends FluentMethod {
         }
     }
 
-    public ModelProperty getModelProperty() {
-        return modelProperty;
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientModel, modelProperty, localVariable);
     }
 }

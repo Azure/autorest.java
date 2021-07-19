@@ -71,7 +71,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
             propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
         }
-        if (CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
+        if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 model.getPropertyReferences().forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
             }
