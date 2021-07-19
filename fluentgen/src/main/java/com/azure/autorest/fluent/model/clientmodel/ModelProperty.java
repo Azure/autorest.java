@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
@@ -14,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class ModelProperty {
 
@@ -67,7 +67,11 @@ public class ModelProperty {
     }
 
     public boolean isRequired() {
-        return property.isRequired();
+        if (propertyReference != null) {
+            return propertyReference.getTargetProperty().isRequired() && propertyReference.getReferenceProperty().isRequired();
+        } else {
+            return property.isRequired();
+        }
     }
 
     public boolean isConstant() {
@@ -75,7 +79,11 @@ public class ModelProperty {
     }
 
     public boolean isReadOnly() {
-        return property.getIsReadOnly();
+        if (propertyReference != null) {
+            return propertyReference.getTargetProperty().getIsReadOnly() || propertyReference.getReferenceProperty().getIsReadOnly();
+        } else {
+            return property.getIsReadOnly();
+        }
     }
 
     public boolean isReadOnlyForCreate() {
@@ -100,8 +108,7 @@ public class ModelProperty {
         if (propertyReference != null) {
             return Arrays.asList(propertyReference.getTargetProperty().getSerializedName(), propertyReference.getReferenceProperty().getSerializedName());
         } else if (!property.getNeedsFlatten()) {
-            // TODO
-            return Arrays.asList(property.getSerializedName().split(Pattern.quote(".")));
+            return FluentUtils.splitFlattenedSerializedName(property.getSerializedName());
         } else {
             return Collections.singletonList(property.getSerializedName());
         }

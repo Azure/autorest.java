@@ -432,7 +432,7 @@ public class ExampleParser {
                     String serializedName = model.getPolymorphicDiscriminator();
                     List<String> jsonPropertyNames = Collections.singletonList(serializedName);
                     if (model.getNeedsFlatten()) {
-                        jsonPropertyNames = flattenedNames(serializedName);
+                        jsonPropertyNames = FluentUtils.splitFlattenedSerializedName(serializedName);
                     }
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
@@ -456,7 +456,7 @@ public class ExampleParser {
                 ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
                 node = clientModelNode;
 
-                for (ModelProperty modelProperty : getPropertiesIncludeSuperclass(model)) {
+                for (ModelProperty modelProperty : getWritablePropertiesIncludeSuperclass(model)) {
                     List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
@@ -506,7 +506,7 @@ public class ExampleParser {
                 .collect(Collectors.toList());
     }
 
-    private static List<ModelProperty> getPropertiesIncludeSuperclass(ClientModel model) {
+    private static List<ModelProperty> getWritablePropertiesIncludeSuperclass(ClientModel model) {
         Map<String, ModelProperty> propertiesMap = new LinkedHashMap<>();
         List<ModelProperty> properties = new ArrayList<>();
 
@@ -522,7 +522,7 @@ public class ExampleParser {
 
         List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
-        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getClientFlatten()).forEach(p -> {
+        model.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
             ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
             if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
                 propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
@@ -538,7 +538,7 @@ public class ExampleParser {
         for (ClientModel parent : parentModels) {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
-            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly() && !p.getClientFlatten()).forEach(p -> {
+            parent.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
                 ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
                 if (propertiesMap.putIfAbsent(p.getName(), modelProperty) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
@@ -557,7 +557,9 @@ public class ExampleParser {
             properties.addAll(properties1);
         }
 
-        return properties;
+        return properties.stream()
+                .filter(p -> !p.isReadOnly() && !p.isConstant())
+                .collect(Collectors.toList());
     }
 
     private static boolean requiresExample(ClientMethod clientMethod) {
@@ -579,10 +581,5 @@ public class ExampleParser {
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {
         return resourceModel.getResourceCreate() != null && resourceModel.getResourceUpdate() != null
                 && Objects.equals(resourceModel.getResourceCreate().getMethodReferences().iterator().next().getMethodName(), resourceModel.getResourceUpdate().getMethodReferences().iterator().next().getMethodName());
-    }
-
-    private static List<String> flattenedNames(String serializedName) {
-        // TODO escaped .
-        return Arrays.asList(serializedName.split(Pattern.quote(".")));
     }
 }

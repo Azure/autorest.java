@@ -215,7 +215,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
                 properties.add(modelProperty);
 
-                if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
+                if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                        && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())) {
                     ClientModel targetModel = this.map((ObjectSchema) property.getSchema());
                     for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
                         propertyReferences.add(ClientModelPropertyReference.referenceFlattenProperty(modelProperty, targetModel, referenceProperty));

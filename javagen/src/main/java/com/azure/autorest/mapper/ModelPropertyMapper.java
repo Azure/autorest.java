@@ -2,6 +2,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
@@ -56,6 +57,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         builder.needsFlatten(flattened);
 
         if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             builder.clientFlatten(true);
         }
