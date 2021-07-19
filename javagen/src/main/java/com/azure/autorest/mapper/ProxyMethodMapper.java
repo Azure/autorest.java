@@ -19,6 +19,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -123,6 +124,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             responseContentTypes.add("application/json;q=0.9");
         }
         builder.responseContentTypes(responseContentTypes);
+
+        // Low-level client only requires one request per operation
+        if (settings.isLowLevelClient()) {
+            List<Request> list = operation.getRequests();
+            if (!list.isEmpty()) {
+                operation.setRequests(Collections.singletonList(list.get(0)));
+            }
+        }
 
         for (Request request : operation.getRequests()) {
             if (parsed.containsKey(request)) {
