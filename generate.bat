@@ -57,6 +57,7 @@ call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
+call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/media_types.json --namespace=fixtures.mediatypes
 
 call autorest --use:. customization-tests/swagger
 
