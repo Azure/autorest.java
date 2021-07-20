@@ -27,7 +27,7 @@ public class Property extends Value {
      */
     private boolean isDiscriminator;
 
-    // internal use
+    // internal use, not from modelerfour
     private ObjectSchema parentSchema;
 
     /**

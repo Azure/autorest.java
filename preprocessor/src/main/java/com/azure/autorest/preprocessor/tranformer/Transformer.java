@@ -45,7 +45,7 @@ public class Transformer {
     renameCodeModel(codeModel);
     transformSchemas(codeModel.getSchemas());
     if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-      disambiguatePropertyNameOfFlattenedModel(codeModel);
+      disambiguatePropertyNameOfFlattenedSchema(codeModel);
     }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
     return codeModel;
@@ -133,7 +133,7 @@ public class Transformer {
     }
   }
 
-  private static void disambiguatePropertyNameOfFlattenedModel(CodeModel codeModel) {
+  private static void disambiguatePropertyNameOfFlattenedSchema(CodeModel codeModel) {
     for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
       Map<String, ObjectSchema> flattenedSchemas = null;
       for (Property property : objectSchema.getProperties()) {
@@ -143,6 +143,9 @@ public class Transformer {
             flattenedSchemas = new HashMap<>();
           }
           flattenedSchemas.put(property.getLanguage().getJava().getName(), flattenedSchema);
+
+          // mark as flattened schema
+          flattenedSchema.setFlattenedSchema(true);
         }
       }
 
