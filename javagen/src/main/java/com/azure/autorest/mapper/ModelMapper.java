@@ -218,7 +218,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 if (modelProperty.getClientFlatten()) {
                     ClientModel targetModel = this.map((ObjectSchema) property.getSchema());
                     for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
-                        propertyReferences.add(ClientModelPropertyReference.referenceFlattenProperty(modelProperty, targetModel, referenceProperty));
+                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty));
                     }
                 }
             }

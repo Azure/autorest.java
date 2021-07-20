@@ -70,7 +70,7 @@ public class FluentModelTemplate extends ModelTemplate {
                     if (parentModel.getProperties() != null) {
                         propertyReferences.addAll(parentModel.getProperties().stream()
                                 .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
-                                .map(ClientModelPropertyReference::referenceParentProperty)
+                                .map(ClientModelPropertyReference::ofParentProperty)
                                 .collect(Collectors.toList()));
                     }
                 }

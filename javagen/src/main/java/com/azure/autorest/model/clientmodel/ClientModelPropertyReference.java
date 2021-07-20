@@ -25,17 +25,17 @@ public class ClientModelPropertyReference {
         this.referenceProperty = referenceProperty;
     }
 
-    public static ClientModelPropertyReference referenceParentProperty(ClientModelProperty referenceProperty) {
+    public static ClientModelPropertyReference ofParentProperty(ClientModelProperty referenceProperty) {
         return new ClientModelPropertyReference(null, null, referenceProperty);
     }
 
-    public static ClientModelPropertyReference referenceParentProperty(ClientModelPropertyReference referenceProperty) {
+    public static ClientModelPropertyReference ofParentProperty(ClientModelPropertyReference referenceProperty) {
         return new ClientModelPropertyReference(null, null, referenceProperty.getReferenceProperty());
     }
 
-    public static ClientModelPropertyReference referenceFlattenProperty(ClientModelProperty targetProperty,
-                                                                        ClientModel targetModel,
-                                                                        ClientModelProperty referenceProperty) {
+    public static ClientModelPropertyReference ofFlattenProperty(ClientModelProperty targetProperty,
+                                                                 ClientModel targetModel,
+                                                                 ClientModelProperty referenceProperty) {
         return new ClientModelPropertyReference(targetProperty, targetModel, referenceProperty);
     }
 

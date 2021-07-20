@@ -547,14 +547,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     propertyReferences.addAll(parentModel.getProperties().stream()
                             .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
                             .filter(p -> !p.isAdditionalProperties())
-                            .map(ClientModelPropertyReference::referenceParentProperty)
+                            .map(ClientModelPropertyReference::ofParentProperty)
                             .collect(Collectors.toList()));
                 }
 
                 if (parentModel.getPropertyReferences() != null) {
                     propertyReferences.addAll(parentModel.getPropertyReferences().stream()
                             .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                            .map(ClientModelPropertyReference::referenceParentProperty)
+                            .map(ClientModelPropertyReference::ofParentProperty)
                             .collect(Collectors.toList()));
                 }
             }
