@@ -126,14 +126,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         builder.responseContentTypes(responseContentTypes);
 
         // Low-level client only requires one request per operation
+        List<Request> requests = operation.getRequests();
         if (settings.isLowLevelClient()) {
-            List<Request> list = operation.getRequests();
-            if (!list.isEmpty()) {
-                operation.setRequests(Collections.singletonList(list.get(0)));
-            }
+            requests = Collections.singletonList(requests.get(0));
         }
 
-        for (Request request : operation.getRequests()) {
+        for (Request request : requests) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
             }

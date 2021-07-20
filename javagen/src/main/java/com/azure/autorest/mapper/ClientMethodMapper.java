@@ -121,7 +121,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
-        for (Request request : operation.getRequests()) {
+        // Low-level client only requires one request per operation
+        List<Request> requests = operation.getRequests();
+        if (settings.isLowLevelClient()) {
+            requests = Collections.singletonList(requests.get(0));
+        }
+
+        for (Request request : requests) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
             builder.proxyMethod(proxyMethod);
 
