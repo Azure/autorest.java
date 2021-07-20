@@ -20,7 +20,7 @@ public class ProxyMethodParameter {
      */
     private String description;
     /**
-     * Get the raw type of this parameter.
+     * Get the raw type of this parameter. Result of SchemaMapper.
      */
     private IType rawType;
     /**
@@ -83,7 +83,7 @@ public class ProxyMethodParameter {
     /**
      * Create a new RestAPIParameter based on the provided properties.
      * @param description The description of this parameter.
-     * @param rawType The raw type of this parameter.
+     * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param wireType The type of this parameter.
      * @param clientType The type of this parameter users interact with.
      * @param name The name of this parameter when it is used as a variable.
@@ -266,7 +266,7 @@ public class ProxyMethodParameter {
         }
 
         /**
-         * Sets the raw type of this parameter.
+         * Sets the raw type of this parameter. Result of SchemaMapper.
          * @param rawType the raw type of this parameter
          * @return the Builder itself
          */

@@ -27,7 +27,7 @@ public class ClientMethodParameter {
      */
     private IType wireType;
     /**
-     * The raw type of this parameter. In low-level mode, wireType might be BinaryData.
+     * The raw type of this parameter. In low-level mode, wireType might be BinaryData. Result of SchemaMapper.
      */
     private IType rawType;
     /**
@@ -62,6 +62,7 @@ public class ClientMethodParameter {
      * @param description The description of this parameter.
      * @param isFinal Whether or not this parameter is final.
      * @param wireType The type of this parameter.
+     * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param name The name of this parameter.
      * @param isRequired Whether or not this parameter is required.
      * @param isConstant Whether or not this parameter has a constant value.
@@ -196,7 +197,7 @@ public class ClientMethodParameter {
         }
 
         /**
-         * Sets the raw type of this parameter.
+         * Sets the raw type of this parameter. Result of SchemaMapper.
          * @param rawType the raw type of this parameter
          * @return the Builder itself
          */
