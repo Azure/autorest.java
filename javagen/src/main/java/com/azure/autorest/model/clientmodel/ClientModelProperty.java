@@ -237,6 +237,11 @@ public class ClientModelProperty {
             addJsonFlattenAnnotationImport(imports);
         }
 
+        if (!isAdditionalProperties && getClientType() instanceof MapType) {
+            // required for "@JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)"
+            imports.add("com.fasterxml.jackson.annotation.JsonInclude");
+        }
+
         if (getWireType() != null) {
             getWireType().addImportsTo(imports, false);
         }

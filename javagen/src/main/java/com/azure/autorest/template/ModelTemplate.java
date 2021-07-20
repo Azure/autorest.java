@@ -193,6 +193,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
                     }
                 } else {
+                    if (!property.isAdditionalProperties() && property.getClientType() instanceof MapType && settings.isFluent()) {
+                        classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
+                    }
                     classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
                 }
             }
