@@ -33,13 +33,22 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
         }
 
+        // Request body
         Set<IType> typesInJavadoc = new HashSet<>();
+
+//        clientMethod.getProxyMethod().getAllParameters().stream()
+//                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body && !p.getIsRequired())
+//                .map(ProxyMethodParameter::getRawType)
+//                .findFirst()
+//                .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
+
         clientMethod.getMethodInputParameters()
                 .stream().filter(p -> RequestParameterLocation.Body.equals(p.getLocation()))
                 .map(ClientMethodParameter::getRawType)
                 .findFirst()
                 .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
 
+        // Response body
         IType responseBodyType;
         if (JavaSettings.getInstance().isLowLevelClient()) {
             responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
