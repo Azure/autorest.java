@@ -81,6 +81,7 @@ public class ClientModelProperty {
     private List<Mutability> mutabilities;
 
     private boolean needsFlatten;
+    private boolean clientFlatten;
 
     /**
      * Create a new ClientModelProperty with the provided properties.
@@ -104,7 +105,8 @@ public class ClientModelProperty {
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
             String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
             IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities,
-            boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties, boolean needsFlatten) {
+            boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties,
+            boolean needsFlatten, boolean clientFlatten) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -124,6 +126,7 @@ public class ClientModelProperty {
         this.headerCollectionPrefix = headerCollectionPrefix;
         this.isAdditionalProperties = isAdditionalProperties;
         this.needsFlatten = needsFlatten;
+        this.clientFlatten = clientFlatten;
     }
 
     public final String getName() {
@@ -217,6 +220,13 @@ public class ClientModelProperty {
     }
 
     /**
+     * @return whether the property is required to be flattened.
+     */
+    public final boolean getClientFlatten() {
+        return clientFlatten;
+    }
+
+    /**
      * Add this ServiceModelProperty's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
      */
@@ -296,6 +306,7 @@ public class ClientModelProperty {
         private String xmlNamespace;
         private List<Mutability> mutabilities;
         private boolean needsFlatten = false;
+        private boolean clientFlatten = false;
 
         /**
          * Sets the name of this property.
@@ -479,11 +490,27 @@ public class ClientModelProperty {
 
         /**
          * Sets whether or not this property needs serialization flattening.
-         * @param needsFlatten whether or not this model needs serialization flattening
+         *
+         * Code will add <code>@JsonFlatten</code> annotation, and escape the <code>@JsonValue</code>.
+         *
+         * @param needsFlatten whether or not this property needs serialization flattening
          * @return the Builder itself
          */
         public Builder needsFlatten(boolean needsFlatten) {
             this.needsFlatten = needsFlatten;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property is required to be flattened.
+         *
+         * Code will make the accessors to the property <code>private</code> to hide them from user.
+         *
+         * @param clientFlatten whether or not this property is required to be flattened
+         * @return the Builder itself
+         */
+        public Builder clientFlatten(boolean clientFlatten) {
+            this.clientFlatten = clientFlatten;
             return this;
         }
 
@@ -506,7 +533,8 @@ public class ClientModelProperty {
                     isRequired,
                     headerCollectionPrefix,
                     isAdditionalProperties,
-                    needsFlatten);
+                    needsFlatten,
+                    clientFlatten);
         }
     }
 }

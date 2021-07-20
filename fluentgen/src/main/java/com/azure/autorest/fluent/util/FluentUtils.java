@@ -14,13 +14,13 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -46,7 +46,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -150,7 +149,7 @@ public class FluentUtils {
         String artifactId;
         if (packageName.startsWith("com.azure.resourcemanager")) {
             // if namespace looks good, convert it to artifactId directly
-            artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
+            artifactId = packageName.substring("com.".length()).replace(".", "-");
         } else {
             String packageLastName = getPackageLastName(packageName).toLowerCase(Locale.ROOT);
             artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
@@ -257,7 +256,7 @@ public class FluentUtils {
                     for (int i = 0; i < replacements.length; i += 2) {
                         String key = replacements[i];
                         String value = replacements[i+1];
-                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), Matcher.quoteReplacement(value));
+                        text = text.replace("{{" + key + "}}", value);
                     }
                 } else {
                     logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
@@ -323,7 +322,7 @@ public class FluentUtils {
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 
-    public static boolean modelHasLocationProperty(List<ClientModelProperty> properties) {
+    public static boolean modelHasLocationProperty(List<ModelProperty> properties) {
         return properties.stream()
                 .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
     }
@@ -364,5 +363,19 @@ public class FluentUtils {
             };
         }
         return bodyType;
+    }
+
+    private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
+
+    public static List<String> splitFlattenedSerializedName(String serializedName) {
+        if (serializedName == null) {
+            return Collections.emptyList();
+        }
+
+        String[] values = SPLIT_FLATTEN_PROPERTY_PATTERN.split(serializedName);
+        for (int i = 0; i < values.length; ++i) {
+            values[i] = values[i].replace("\\\\.", ".");
+        }
+        return Arrays.asList(values);
     }
 }

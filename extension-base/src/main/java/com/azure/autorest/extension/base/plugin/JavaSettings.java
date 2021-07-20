@@ -301,7 +301,7 @@ public class JavaSettings
     }
 
     public enum ClientFlattenAnnotationTarget {
-        TYPE, FIELD
+        TYPE, FIELD, NONE
     }
     // target for @JsonFlatten annotation for x-ms-client-flatten
     private final ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;

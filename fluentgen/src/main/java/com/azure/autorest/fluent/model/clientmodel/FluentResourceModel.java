@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUp
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
@@ -68,6 +69,14 @@ public class FluentResourceModel {
         List<List<FluentModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
         this.innerModel.getProperties().stream()
+                .filter(p -> !p.getClientFlatten())
+                .map(FluentModelProperty::new)
+                .forEach(p -> {
+                    propertiesMap.putIfAbsent(p.getName(), p);
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                });
+        this.innerModel.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
                 .map(FluentModelProperty::new)
                 .forEach(p -> {
                     propertiesMap.putIfAbsent(p.getName(), p);
@@ -78,11 +87,19 @@ public class FluentResourceModel {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
             parent.getProperties().stream()
+                    .filter(p -> !p.getClientFlatten())
                     .map(FluentModelProperty::new)
                     .forEach(p -> {
                         if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
                             propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
                         }
+                    });
+            parent.getPropertyReferences().stream()
+                    .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                    .map(FluentModelProperty::new)
+                    .forEach(p -> {
+                        propertiesMap.putIfAbsent(p.getName(), p);
+                        propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
                     });
         }
 

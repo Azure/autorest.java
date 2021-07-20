@@ -5,8 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.update;
 
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
 public class UpdateStage extends FluentInterfaceStage {
 
@@ -14,7 +14,7 @@ public class UpdateStage extends FluentInterfaceStage {
         super(name);
     }
 
-    protected UpdateStage(String name, ClientModelProperty property) {
+    protected UpdateStage(String name, ModelProperty property) {
         super(name, property);
     }
 
@@ -24,7 +24,7 @@ public class UpdateStage extends FluentInterfaceStage {
                 : String.format("The stage of the %1$s update allowing to specify %2$s.", modelName, property.getName());
     }
 
-    public ClientModelProperty getModelProperty() {
+    public ModelProperty getModelProperty() {
         return this.property;
     }
 }

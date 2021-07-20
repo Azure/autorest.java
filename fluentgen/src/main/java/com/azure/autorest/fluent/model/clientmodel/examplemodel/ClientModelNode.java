@@ -5,8 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class ClientModelNode extends ExampleNode {
     private ClientModel model;
 
     // modelProperties can contain more properties than in the model, as it includes those properties from the superclass of the model
-    private final Map<ExampleNode, ClientModelProperty> modelProperties = new HashMap<>();
+    private final Map<ExampleNode, ModelProperty> modelProperties = new HashMap<>();
 
     public ClientModelNode(IType clientType, Object objectValue) {
         super(clientType, objectValue);
@@ -32,7 +32,7 @@ public class ClientModelNode extends ExampleNode {
         return this;
     }
 
-    public Map<ExampleNode, ClientModelProperty> getClientModelProperties() {
+    public Map<ExampleNode, ModelProperty> getClientModelProperties() {
         return modelProperties;
     }
 }

@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class FluentUtilsTests {
 
     @BeforeAll
@@ -34,5 +38,14 @@ public class FluentUtilsTests {
         Assertions.assertEquals("azure-resourcemanager-appservice-generated", FluentUtils.getArtifactIdFromPackageName("com.azure.resourcemanager.appservice.generated"));
 
         Assertions.assertEquals("azure-resourcemanager-appservice", FluentUtils.getArtifactIdFromPackageName("com.azure.resourcemanager.appservice"));
+    }
+
+    @Test
+    public void testSplitFlattenedSerializedName() {
+        Assertions.assertEquals(Collections.singletonList("odata.properties"), FluentUtils.splitFlattenedSerializedName("odata.properties".replace(".", "\\\\.")));
+
+        Assertions.assertEquals(Arrays.asList("properties", "virtualNetworkSubnetId"), FluentUtils.splitFlattenedSerializedName("properties.virtualNetworkSubnetId"));
+
+        Assertions.assertEquals(Arrays.asList("odata.properties", "virtualNetworkSubnetId"), FluentUtils.splitFlattenedSerializedName("odata.properties".replace(".", "\\\\.") + ".virtualNetworkSubnetId"));
     }
 }

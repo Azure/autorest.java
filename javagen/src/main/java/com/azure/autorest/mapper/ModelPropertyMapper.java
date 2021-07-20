@@ -2,6 +2,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
@@ -54,6 +55,13 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
         }
         builder.needsFlatten(flattened);
+
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                // avoid non-object schema or a plain object schema without any properties
+                && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
+                && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            builder.clientFlatten(true);
+        }
 
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {

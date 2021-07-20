@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -26,7 +27,7 @@ public class FluentModelPropertyRegion {
 
         public FluentModelPropertyRegionMethod(FluentResourceModel model, FluentMethodType type,
                                                FluentInterfaceStage stage, ClientModel clientModel,
-                                               ClientModelProperty modelProperty,
+                                               ModelProperty modelProperty,
                                                LocalVariable localVariable, String baseName) {
             super(model, type, stage, clientModel, modelProperty, localVariable,
                     CodeNamer.getModelNamer().modelPropertySetterName(baseName),
@@ -63,9 +64,9 @@ public class FluentModelPropertyRegion {
     public static class FluentModelPropertyRegionNameMethod extends FluentModelPropertyMethod {
 
         public FluentModelPropertyRegionNameMethod(FluentResourceModel model, FluentMethodType type,
-                                               FluentInterfaceStage stage, ClientModel clientModel,
-                                               ClientModelProperty modelProperty,
-                                               LocalVariable localVariable, String baseName) {
+                                                   FluentInterfaceStage stage, ClientModel clientModel,
+                                                   ModelProperty modelProperty,
+                                                   LocalVariable localVariable, String baseName) {
             super(model, type, stage, clientModel, modelProperty, localVariable,
                     CodeNamer.getModelNamer().modelPropertySetterName(baseName),
                     "Specifies the region for the resource.");

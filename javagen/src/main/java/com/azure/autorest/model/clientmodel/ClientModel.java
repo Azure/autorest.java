@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -172,9 +173,9 @@ public class ClientModel {
         return modelType;
     }
 
-//    public List<ClientModelPropertyReference> getPropertyReferences() {
-//        return propertyReferences;
-//    }
+    public List<ClientModelPropertyReference> getPropertyReferences() {
+        return propertyReferences == null ? Collections.emptyList() : propertyReferences;
+    }
 
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.

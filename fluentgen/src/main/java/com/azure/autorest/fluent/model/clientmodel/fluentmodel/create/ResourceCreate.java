@@ -16,6 +16,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
@@ -29,7 +30,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentPare
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -92,11 +92,11 @@ public class ResourceCreate extends ResourceOperation {
         definitionStages.add(definitionStageBlank);
 
         // required properties
-        List<ClientModelProperty> requiredProperties = this.getRequiredProperties();
+        List<ModelProperty> requiredProperties = this.getRequiredProperties();
 
         DefinitionStage lastStage = null;
         if (!requiredProperties.isEmpty()) {
-            for (ClientModelProperty property : requiredProperties) {
+            for (ModelProperty property : requiredProperties) {
                 DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
                 if (lastStage == null) {
                     // first property
@@ -161,8 +161,8 @@ public class ResourceCreate extends ResourceOperation {
 
         List<DefinitionStage> optionalDefinitionStages = new ArrayList<>();
         // non-required properties
-        List<ClientModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
-        for (ClientModelProperty property : nonRequiredProperties) {
+        List<ModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
+        for (ModelProperty property : nonRequiredProperties) {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
@@ -209,22 +209,22 @@ public class ResourceCreate extends ResourceOperation {
         return stageName;
     }
 
-    private List<ClientModelProperty> getRequiredProperties() {
+    private List<ModelProperty> getRequiredProperties() {
         return this.getProperties().stream()
                 .filter(p -> p.isRequired())
                 .collect(Collectors.toList());
     }
 
-    private List<ClientModelProperty> getNonRequiredProperties() {
+    private List<ModelProperty> getNonRequiredProperties() {
         return this.getProperties().stream()
                 .filter(p -> !p.isRequired())
                 .collect(Collectors.toList());
     }
 
     @Override
-    protected List<ClientModelProperty> getProperties() {
+    protected List<ModelProperty> getProperties() {
         return super.getProperties().stream()
-                .filter(p -> !p.getIsReadOnlyForCreate())
+                .filter(p -> !p.isReadOnlyForCreate())
                 .filter(p -> !isIdProperty(p))           // create should not be able to set id
                 .collect(Collectors.toList());
     }
@@ -339,7 +339,7 @@ public class ResourceCreate extends ResourceOperation {
         }
     }
 
-    private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
+    private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ModelProperty property) {
         if (FluentUtils.modelHasLocationProperty(getProperties()) && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
             String baseName = "region";
             if (getProperties().stream().anyMatch(p -> "region".equals(p.getName()))) {
@@ -360,7 +360,7 @@ public class ResourceCreate extends ResourceOperation {
         }
     }
 
-    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
+    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
                 stage, model, property,
                 this.getLocalVariableByMethodParameter(this.getBodyParameter()));
