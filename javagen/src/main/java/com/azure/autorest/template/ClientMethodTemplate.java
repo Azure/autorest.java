@@ -30,8 +30,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -126,6 +124,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
         for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails()) {
+            if (transformation.getParameterMappings().isEmpty()) {
+                // the case that this flattened parameter is not original parameter from any other parameters
+                function.line("%s %s = null;",
+                        transformation.getOutParameter().getClientType(),
+                        transformation.getOutParameter().getName());
+                break;
+            }
+
             String nullCheck = transformation.getParameterMappings().stream().filter(m -> !m.getInputParameter().getIsRequired())
                     .map((ParameterMapping m) -> {
                         ClientMethodParameter parameter = m.getInputParameter();
@@ -139,7 +145,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                         return parameterName + " != null";
                     }).collect(Collectors.joining(" || "));
-            boolean conditionalAssignment = nullCheck != null && !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
+            boolean conditionalAssignment = !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
             // Use a mutable internal variable, leave the original name for effectively final variable
             String outParameterName = conditionalAssignment
                     ? transformation.getOutParameter().getName() + "Internal"
@@ -159,9 +165,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelType.toString();
-//                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelType.getIsInnerModelType()) {
-//                    transformationOutputParameterModelCompositeTypeName += "Inner";
-//                }
 
                 function.line("%s%s = new %s();",
                         !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
