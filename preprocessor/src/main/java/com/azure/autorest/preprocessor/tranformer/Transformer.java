@@ -24,6 +24,7 @@ import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class Transformer {
   public CodeModel transform(CodeModel codeModel) {
     renameCodeModel(codeModel);
     transformSchemas(codeModel.getSchemas());
+    if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+      disambiguatePropertyNameOfFlattenedModel(codeModel);
+    }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
     return codeModel;
   }
@@ -129,7 +133,49 @@ public class Transformer {
     }
   }
 
-  public static boolean nonNullNextLink(Operation operation) {
+  private static void disambiguatePropertyNameOfFlattenedModel(CodeModel codeModel) {
+    for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
+      Map<String, ObjectSchema> flattenedSchemas = null;
+      for (Property property : objectSchema.getProperties()) {
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
+          ObjectSchema flattenedSchema = (ObjectSchema) property.getSchema();
+          if (flattenedSchemas == null) {
+            flattenedSchemas = new HashMap<>();
+          }
+          flattenedSchemas.put(property.getLanguage().getJava().getName(), flattenedSchema);
+        }
+      }
+
+      if (flattenedSchemas != null) {
+        List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
+        objectSchemaAndParents.add(objectSchema);
+        if (objectSchema.getParents() != null && objectSchema.getParents().getAll() != null) {
+          objectSchemaAndParents.addAll(
+                  objectSchema.getParents().getAll().stream()
+                          .filter(p -> p instanceof ObjectSchema)
+                          .map(p -> (ObjectSchema) p)
+                          .collect(Collectors.toList()));
+        }
+        Set<String> propertyNames = objectSchemaAndParents.stream()
+                .flatMap(o -> o.getProperties().stream())
+                .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
+                .map(p -> p.getLanguage().getJava().getName())
+                .collect(Collectors.toSet());
+        for (Map.Entry<String, ObjectSchema> entry : flattenedSchemas.entrySet()) {
+          String propertyName = entry.getKey();
+          for (Property property : entry.getValue().getProperties()) {
+            String name = property.getLanguage().getJava().getName();
+            if (propertyNames.contains(name)) {
+              // follow pattern from m4
+              property.getLanguage().getJava().setName(name + CodeNamer.toPascalCase(propertyName) + CodeNamer.toPascalCase(name));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private static boolean nonNullNextLink(Operation operation) {
     return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 

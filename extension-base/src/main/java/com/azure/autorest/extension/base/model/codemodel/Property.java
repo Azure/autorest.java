@@ -27,6 +27,7 @@ public class Property extends Value {
      */
     private boolean isDiscriminator;
 
+    // internal use
     private ObjectSchema parentSchema;
 
     /**

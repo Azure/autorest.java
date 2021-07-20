@@ -565,14 +565,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         return propertyReferences;
     }
 
-    protected void generateGetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+    // Javadoc for getter method
+    private void generateGetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
         classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment -> {
             comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
             comment.methodReturns(String.format("the %1$s value", property.getName()));
         });
     }
 
-    protected void generateSetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+    // Javadoc for setter method
+    private void generateSetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
         classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), (comment) -> {
             if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
                 comment.description(String.format("Set the %s property", property.getName()));
