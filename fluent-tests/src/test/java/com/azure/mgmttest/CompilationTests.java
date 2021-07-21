@@ -6,6 +6,7 @@ package com.azure.mgmttest;
 import com.azure.core.management.Resource;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
@@ -23,6 +24,7 @@ import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 
@@ -83,6 +85,11 @@ public class CompilationTests {
         SqlDatabaseGetPropertiesResource sqlDatabaseGetPropertiesResource = new SqlDatabaseGetPropertiesResource();
         sqlDatabaseGetPropertiesResource.rid();
         sqlDatabaseGetPropertiesResource.colls();
+    }
+
+    public void testFlattenedParameter() {
+        CloudServicesUpdateDomainsClient cloudServicesUpdateDomainsClient = mock(CloudServicesUpdateDomainsClient.class);
+        cloudServicesUpdateDomainsClient.walkUpdateDomainWithResponseAsync(anyString(), anyString(), anyInt());
     }
 
 //    public void testIntEnum() {
