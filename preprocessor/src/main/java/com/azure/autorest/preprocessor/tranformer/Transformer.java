@@ -150,6 +150,7 @@ public class Transformer {
       }
 
       if (flattenedSchemas != null) {
+        // gather object and parents
         List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
         objectSchemaAndParents.add(objectSchema);
         if (objectSchema.getParents() != null && objectSchema.getParents().getAll() != null) {
@@ -159,11 +160,13 @@ public class Transformer {
                           .map(p -> (ObjectSchema) p)
                           .collect(Collectors.toList()));
         }
+        // gather property names
         Set<String> propertyNames = objectSchemaAndParents.stream()
                 .flatMap(o -> o.getProperties().stream())
                 .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
                 .map(p -> p.getLanguage().getJava().getName())
                 .collect(Collectors.toSet());
+        // disambiguate
         for (Map.Entry<String, ObjectSchema> entry : flattenedSchemas.entrySet()) {
           String propertyName = entry.getKey();
           for (Property property : entry.getValue().getProperties()) {

@@ -7,6 +7,7 @@ import com.azure.core.management.Resource;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
+import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
@@ -90,6 +91,13 @@ public class CompilationTests {
     public void testFlattenedParameter() {
         CloudServicesUpdateDomainsClient cloudServicesUpdateDomainsClient = mock(CloudServicesUpdateDomainsClient.class);
         cloudServicesUpdateDomainsClient.walkUpdateDomainWithResponseAsync(anyString(), anyString(), anyInt());
+    }
+
+    public void testFlattenedModel() {
+        SharedGalleryInner sharedGallery = mock(SharedGalleryInner.class);
+        sharedGallery.withUniqueId(anyString());
+        sharedGallery.name();
+        sharedGallery.location();
     }
 
 //    public void testIntEnum() {

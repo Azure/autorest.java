@@ -119,7 +119,7 @@ public class Preprocessor extends NewPlugin {
     return codeModel;
   }
 
-  private CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
+  public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
     Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
     if (!constantSchemas.isEmpty()) {
       Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();

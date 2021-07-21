@@ -69,7 +69,14 @@ public class FluentModelTemplate extends ModelTemplate {
                 if (parentModel != null) {
                     if (parentModel.getProperties() != null) {
                         propertyReferences.addAll(parentModel.getProperties().stream()
-                                .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
+                                .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
+                                .map(ClientModelPropertyReference::ofParentProperty)
+                                .collect(Collectors.toList()));
+                    }
+
+                    if (parentModel.getPropertyReferences() != null) {
+                        propertyReferences.addAll(parentModel.getPropertyReferences().stream()
+                                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
                                 .map(ClientModelPropertyReference::ofParentProperty)
                                 .collect(Collectors.toList()));
                     }
