@@ -260,7 +260,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     }
                 });
 
-                if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())) {
+                if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
 
                     classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
@@ -343,15 +343,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     generateGetterJavadoc(classBlock, model, property);
 
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), methodBlock -> {
-                        methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
-                            if (propertyClientTypeFinal instanceof PrimitiveType) {
-                                methodBlock.methodReturn(((PrimitiveType) propertyClientTypeFinal).defaultValueExpression());
-                            } else {
-                                methodBlock.methodReturn("null");
-                            }
-                        }).elseBlock(elseBlock -> {
-                            methodBlock.methodReturn(String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName()));
-                        });
+                        // use ternary operator to avoid directly
+                        String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
+                        String nullClause = (propertyClientTypeFinal instanceof PrimitiveType)
+                                ? ((PrimitiveType) propertyClientTypeFinal).defaultValueExpression()
+                                : "null";
+                        String valueClause = String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName());
+
+                        methodBlock.methodReturn(String.format("%1$s ? %2$s : %3$s", ifClause, nullClause, valueClause));
                     });
 
                     // setter
@@ -360,7 +359,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
-                                methodBlock.line(String.format("this.%1$s(new %2$s());", targetProperty.getSetterName(), targetModel.getType().toString()));
+                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), targetModel.getType().toString()));
                             });
                             methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
