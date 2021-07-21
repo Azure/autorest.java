@@ -13,7 +13,7 @@ RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 SET AUTOREST_CORE_VERSION=3.4.5
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
-SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
+SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent --pipeline.modelerfour.flatten-payloads=true
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite
 
 REM fluent premium
@@ -30,7 +30,7 @@ REM multiple inheritance
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos
 
 REM flatten payload
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --pipeline.modelerfour.flatten-payloads=true --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute
 
 REM error response that not conform to ARM
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization
