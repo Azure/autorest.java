@@ -5,9 +5,9 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import fixtures.httpinfrastructure.implementation.HttpRedirectsImpl;
-import java.util.List;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
@@ -47,7 +47,7 @@ public final class HttpRedirectsClient {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public List<String> get300(RequestOptions requestOptions) {
+    public BinaryData get300(RequestOptions requestOptions) {
         return this.serviceClient.get300(requestOptions);
     }
 
@@ -63,7 +63,7 @@ public final class HttpRedirectsClient {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<String>> get300WithResponse(RequestOptions requestOptions, Context context) {
+    public Response<BinaryData> get300WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get300WithResponse(requestOptions, context);
     }
 

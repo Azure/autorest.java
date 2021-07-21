@@ -19,7 +19,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in HttpRedirects. */
@@ -56,7 +55,7 @@ public final class HttpRedirectsImpl {
                 Context context);
 
         @Get("/http/redirect/300")
-        Mono<Response<List<String>>> get300(
+        Mono<Response<BinaryData>> get300(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -211,7 +210,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<List<String>>> get300WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> get300WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get300(this.client.getHost(), accept, requestOptions, context));
     }
@@ -228,7 +227,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<List<String>>> get300WithResponseAsync(RequestOptions requestOptions, Context context) {
+    public Mono<Response<BinaryData>> get300WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.get300(this.client.getHost(), accept, requestOptions, context);
     }
@@ -245,10 +244,10 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<String>> get300Async(RequestOptions requestOptions) {
+    public Mono<BinaryData> get300Async(RequestOptions requestOptions) {
         return get300WithResponseAsync(requestOptions)
                 .flatMap(
-                        (Response<List<String>> res) -> {
+                        (Response<BinaryData> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -269,10 +268,10 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<String>> get300Async(RequestOptions requestOptions, Context context) {
+    public Mono<BinaryData> get300Async(RequestOptions requestOptions, Context context) {
         return get300WithResponseAsync(requestOptions, context)
                 .flatMap(
-                        (Response<List<String>> res) -> {
+                        (Response<BinaryData> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -293,7 +292,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public List<String> get300(RequestOptions requestOptions) {
+    public BinaryData get300(RequestOptions requestOptions) {
         return get300Async(requestOptions).block();
     }
 
@@ -309,7 +308,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<String>> get300WithResponse(RequestOptions requestOptions, Context context) {
+    public Response<BinaryData> get300WithResponse(RequestOptions requestOptions, Context context) {
         return get300WithResponseAsync(requestOptions, context).block();
     }
 

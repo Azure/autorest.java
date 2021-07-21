@@ -5,8 +5,8 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpRedirectsImpl;
-import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
@@ -47,7 +47,7 @@ public final class HttpRedirectsAsyncClient {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<List<String>>> get300WithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> get300WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get300WithResponseAsync(requestOptions);
     }
 
@@ -63,7 +63,7 @@ public final class HttpRedirectsAsyncClient {
      * }</pre>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<String>> get300(RequestOptions requestOptions) {
+    public Mono<BinaryData> get300(RequestOptions requestOptions) {
         return this.serviceClient.get300Async(requestOptions);
     }
 
