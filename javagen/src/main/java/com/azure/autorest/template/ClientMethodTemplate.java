@@ -126,9 +126,16 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails()) {
             if (transformation.getParameterMappings().isEmpty()) {
                 // the case that this flattened parameter is not original parameter from any other parameters
-                function.line("%s %s = null;",
-                        transformation.getOutParameter().getClientType(),
-                        transformation.getOutParameter().getName());
+                ClientMethodParameter outParameter = transformation.getOutParameter();
+                if (outParameter.getIsRequired() && outParameter.getClientType() instanceof ClassType) {
+                    function.line("%1$s %2$s = new %1$s();",
+                            outParameter.getClientType(),
+                            outParameter.getName());
+                } else {
+                    function.line("%1$s %2$s = null;",
+                            outParameter.getClientType(),
+                            outParameter.getName());
+                }
                 break;
             }
 

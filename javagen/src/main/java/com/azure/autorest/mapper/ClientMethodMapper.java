@@ -202,7 +202,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     detail.getParameterMappings().add(mapping);
                 }
             }
-            // handle the case that the flattened parameter is non-required, and all its property is read-only
+            // handle the case that the flattened parameter is model with all its properties read-only
             // in this case, it is not original parameter from any other parameters
             for (Parameter parameter : request.getParameters().stream()
                     .filter(p -> p.isFlattened() && p.getProtocol() != null && p.getProtocol().getHttp() != null)   // flattened proxy parameter
