@@ -22,27 +22,12 @@ public final class VirtualMachineScaleSet {
     }
 
     /**
-     * Set the properties property: Describes the properties of a Virtual Machine Scale Set.
-     *
-     * @param properties the properties value to set.
-     * @return the VirtualMachineScaleSet object itself.
-     */
-    private VirtualMachineScaleSet setProperties(VirtualMachineScaleSetProperties properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Get the virtualMachineProfile property: The virtual machine profile.
      *
      * @return the virtualMachineProfile value.
      */
     public VirtualMachineScaleSetVMProfile getVirtualMachineProfile() {
-        if (this.getProperties() == null) {
-            return null;
-        } else {
-            return this.getProperties().getVirtualMachineProfile();
-        }
+        return this.getProperties() == null ? null : this.getProperties().getVirtualMachineProfile();
     }
 
     /**
@@ -52,8 +37,10 @@ public final class VirtualMachineScaleSet {
      * @return the VirtualMachineScaleSet object itself.
      */
     public VirtualMachineScaleSet setVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile) {
-        if (this.getProperties() == null) {
-            this.setProperties(new VirtualMachineScaleSetProperties());
+        synchronized (this) {
+            if (this.getProperties() == null) {
+                this.properties = new VirtualMachineScaleSetProperties();
+            }
         }
         this.getProperties().setVirtualMachineProfile(virtualMachineProfile);
         return this;

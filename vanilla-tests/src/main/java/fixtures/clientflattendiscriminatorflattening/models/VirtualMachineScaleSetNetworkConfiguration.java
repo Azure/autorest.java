@@ -49,29 +49,13 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     }
 
     /**
-     * Set the properties property: Describes a virtual machine scale set network profile's IP configuration.
-     *
-     * @param properties the properties value to set.
-     * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
-     */
-    private VirtualMachineScaleSetNetworkConfiguration setProperties(
-            VirtualMachineScaleSetNetworkConfigurationProperties properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
      * network interface.
      *
      * @return the primary value.
      */
     public Boolean isPrimary() {
-        if (this.getProperties() == null) {
-            return null;
-        } else {
-            return this.getProperties().isPrimary();
-        }
+        return this.getProperties() == null ? null : this.getProperties().isPrimary();
     }
 
     /**
@@ -82,8 +66,10 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
     public VirtualMachineScaleSetNetworkConfiguration setPrimary(Boolean primary) {
-        if (this.getProperties() == null) {
-            this.setProperties(new VirtualMachineScaleSetNetworkConfigurationProperties());
+        synchronized (this) {
+            if (this.getProperties() == null) {
+                this.properties = new VirtualMachineScaleSetNetworkConfigurationProperties();
+            }
         }
         this.getProperties().setPrimary(primary);
         return this;

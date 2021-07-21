@@ -23,27 +23,12 @@ public final class LoadBalancer {
     }
 
     /**
-     * Set the properties property: Properties of load balancer.
-     *
-     * @param properties the properties value to set.
-     * @return the LoadBalancer object itself.
-     */
-    private LoadBalancer setProperties(LoadBalancerPropertiesFormat properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Get the backendAddressPools property: Collection of backend address pools used by a load balancer.
      *
      * @return the backendAddressPools value.
      */
     public List<BackendAddressPool> getBackendAddressPools() {
-        if (this.getProperties() == null) {
-            return null;
-        } else {
-            return this.getProperties().getBackendAddressPools();
-        }
+        return this.getProperties() == null ? null : this.getProperties().getBackendAddressPools();
     }
 
     /**
@@ -53,8 +38,10 @@ public final class LoadBalancer {
      * @return the LoadBalancer object itself.
      */
     public LoadBalancer setBackendAddressPools(List<BackendAddressPool> backendAddressPools) {
-        if (this.getProperties() == null) {
-            this.setProperties(new LoadBalancerPropertiesFormat());
+        synchronized (this) {
+            if (this.getProperties() == null) {
+                this.properties = new LoadBalancerPropertiesFormat();
+            }
         }
         this.getProperties().setBackendAddressPools(backendAddressPools);
         return this;

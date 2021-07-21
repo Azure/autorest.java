@@ -22,27 +22,12 @@ public final class MetricAlertResource {
     }
 
     /**
-     * Set the properties property: The alert rule properties of the resource.
-     *
-     * @param properties the properties value to set.
-     * @return the MetricAlertResource object itself.
-     */
-    private MetricAlertResource setProperties(MetricAlertProperties properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Get the criteria property: defines the specific alert criteria information.
      *
      * @return the criteria value.
      */
     public MetricAlertCriteria getCriteria() {
-        if (this.getProperties() == null) {
-            return null;
-        } else {
-            return this.getProperties().getCriteria();
-        }
+        return this.getProperties() == null ? null : this.getProperties().getCriteria();
     }
 
     /**
@@ -52,8 +37,10 @@ public final class MetricAlertResource {
      * @return the MetricAlertResource object itself.
      */
     public MetricAlertResource setCriteria(MetricAlertCriteria criteria) {
-        if (this.getProperties() == null) {
-            this.setProperties(new MetricAlertProperties());
+        synchronized (this) {
+            if (this.getProperties() == null) {
+                this.properties = new MetricAlertProperties();
+            }
         }
         this.getProperties().setCriteria(criteria);
         return this;

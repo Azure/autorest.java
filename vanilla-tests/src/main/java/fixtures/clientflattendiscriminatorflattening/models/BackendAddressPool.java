@@ -22,27 +22,12 @@ public final class BackendAddressPool {
     }
 
     /**
-     * Set the properties property: Properties of load balancer backend address pool.
-     *
-     * @param properties the properties value to set.
-     * @return the BackendAddressPool object itself.
-     */
-    private BackendAddressPool setProperties(BackendAddressPoolPropertiesFormat properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Get the location property: The location of the backend address pool.
      *
      * @return the location value.
      */
     public String getLocation() {
-        if (this.getProperties() == null) {
-            return null;
-        } else {
-            return this.getProperties().getLocation();
-        }
+        return this.getProperties() == null ? null : this.getProperties().getLocation();
     }
 
     /**
@@ -52,8 +37,10 @@ public final class BackendAddressPool {
      * @return the BackendAddressPool object itself.
      */
     public BackendAddressPool setLocation(String location) {
-        if (this.getProperties() == null) {
-            this.setProperties(new BackendAddressPoolPropertiesFormat());
+        synchronized (this) {
+            if (this.getProperties() == null) {
+                this.properties = new BackendAddressPoolPropertiesFormat();
+            }
         }
         this.getProperties().setLocation(location);
         return this;

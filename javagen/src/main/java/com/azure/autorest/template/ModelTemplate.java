@@ -358,9 +358,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
 
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
+                            // synchronized block
+                            methodBlock.line("synchronized (this) {");
+                            methodBlock.increaseIndent();
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
                                 methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), targetModel.getType().toString()));
                             });
+                            methodBlock.decreaseIndent();
+                            methodBlock.line("}");
+
                             methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
                         });
