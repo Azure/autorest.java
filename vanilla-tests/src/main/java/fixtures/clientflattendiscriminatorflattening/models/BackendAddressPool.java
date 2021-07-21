@@ -37,10 +37,8 @@ public final class BackendAddressPool {
      * @return the BackendAddressPool object itself.
      */
     public BackendAddressPool setLocation(String location) {
-        synchronized (this) {
-            if (this.getProperties() == null) {
-                this.properties = new BackendAddressPoolPropertiesFormat();
-            }
+        if (this.getProperties() == null) {
+            this.properties = new BackendAddressPoolPropertiesFormat();
         }
         this.getProperties().setLocation(location);
         return this;

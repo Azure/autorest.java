@@ -66,10 +66,8 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
     public VirtualMachineScaleSetNetworkConfiguration setPrimary(Boolean primary) {
-        synchronized (this) {
-            if (this.getProperties() == null) {
-                this.properties = new VirtualMachineScaleSetNetworkConfigurationProperties();
-            }
+        if (this.getProperties() == null) {
+            this.properties = new VirtualMachineScaleSetNetworkConfigurationProperties();
         }
         this.getProperties().setPrimary(primary);
         return this;

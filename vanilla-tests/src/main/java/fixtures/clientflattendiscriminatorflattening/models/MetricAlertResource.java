@@ -37,10 +37,8 @@ public final class MetricAlertResource {
      * @return the MetricAlertResource object itself.
      */
     public MetricAlertResource setCriteria(MetricAlertCriteria criteria) {
-        synchronized (this) {
-            if (this.getProperties() == null) {
-                this.properties = new MetricAlertProperties();
-            }
+        if (this.getProperties() == null) {
+            this.properties = new MetricAlertProperties();
         }
         this.getProperties().setCriteria(criteria);
         return this;

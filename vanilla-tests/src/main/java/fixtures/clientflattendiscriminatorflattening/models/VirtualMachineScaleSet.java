@@ -37,10 +37,8 @@ public final class VirtualMachineScaleSet {
      * @return the VirtualMachineScaleSet object itself.
      */
     public VirtualMachineScaleSet setVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile) {
-        synchronized (this) {
-            if (this.getProperties() == null) {
-                this.properties = new VirtualMachineScaleSetProperties();
-            }
+        if (this.getProperties() == null) {
+            this.properties = new VirtualMachineScaleSetProperties();
         }
         this.getProperties().setVirtualMachineProfile(virtualMachineProfile);
         return this;

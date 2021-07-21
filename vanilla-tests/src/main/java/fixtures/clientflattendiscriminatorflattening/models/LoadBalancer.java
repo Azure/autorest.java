@@ -38,10 +38,8 @@ public final class LoadBalancer {
      * @return the LoadBalancer object itself.
      */
     public LoadBalancer setBackendAddressPools(List<BackendAddressPool> backendAddressPools) {
-        synchronized (this) {
-            if (this.getProperties() == null) {
-                this.properties = new LoadBalancerPropertiesFormat();
-            }
+        if (this.getProperties() == null) {
+            this.properties = new LoadBalancerPropertiesFormat();
         }
         this.getProperties().setBackendAddressPools(backendAddressPools);
         return this;
