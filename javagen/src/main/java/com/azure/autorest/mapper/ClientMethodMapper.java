@@ -34,10 +34,12 @@ import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
@@ -125,6 +127,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             Map<String, String> validateExpressions = new HashMap<>();
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
+            Set<Parameter> originalParameters = new HashSet<>();
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
 
@@ -170,6 +173,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         && !(parameter.getSchema() instanceof ConstantSchema)) {
                     ClientMethodParameter outParameter;
                     if (parameter.getOriginalParameter() != null) {
+                        originalParameters.add(parameter.getOriginalParameter());
                         outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
                     } else {
                         outParameter = clientMethodParameter;
@@ -197,6 +201,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                     detail.getParameterMappings().add(mapping);
                 }
+            }
+            // handle the case that the flattened parameter is model with all its properties read-only
+            // in this case, it is not original parameter from any other parameters
+            for (Parameter parameter : request.getParameters().stream()
+                    .filter(p -> p.isFlattened() && p.getProtocol() != null && p.getProtocol().getHttp() != null)   // flattened proxy parameter
+                    .filter(p -> !originalParameters.contains(p))                                                   // but not original parameter from any other parameters
+                    .collect(Collectors.toList())) {
+                ClientMethodParameter outParameter = Mappers.getClientParameterMapper().map(parameter);
+                methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
             }
 
             final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
