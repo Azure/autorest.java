@@ -49,7 +49,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                     classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
                 } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
                     // put class of flattened type to implementation package
-                    classPackage = settings.getPackage(settings.getImplementationSubpackage());
+                    classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
                 } else {
                     classPackage = settings.getPackage(settings.getModelsSubpackage());
                 }

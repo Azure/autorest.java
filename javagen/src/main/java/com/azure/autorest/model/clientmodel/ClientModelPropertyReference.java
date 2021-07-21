@@ -25,8 +25,8 @@ public class ClientModelPropertyReference {
         this.referenceProperty = referenceProperty;
     }
 
-    public static ClientModelPropertyReference ofParentProperty(ClientModelProperty referenceProperty) {
-        return new ClientModelPropertyReference(null, null, referenceProperty);
+    public static ClientModelPropertyReference ofParentProperty(ClientModelProperty property) {
+        return new ClientModelPropertyReference(null, null, property);
     }
 
     public static ClientModelPropertyReference ofParentProperty(ClientModelPropertyReference referenceProperty) {
