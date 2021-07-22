@@ -10,7 +10,7 @@ public final class MetricAlertResource {
      * The alert rule properties of the resource.
      */
     @JsonProperty(value = "properties", required = true)
-    private MetricAlertProperties properties;
+    private MetricAlertProperties properties = new MetricAlertProperties();
 
     /**
      * Get the properties property: The alert rule properties of the resource.
