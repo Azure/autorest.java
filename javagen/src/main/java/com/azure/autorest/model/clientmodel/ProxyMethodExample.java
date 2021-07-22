@@ -68,7 +68,9 @@ public class ProxyMethodExample {
         }
 
         public Builder parameter(String parameterName, Object parameterValue) {
-            this.parameters.put(parameterName, new ParameterValue(parameterValue));
+            if (parameterValue != null) {
+                this.parameters.put(parameterName, new ParameterValue(parameterValue));
+            }
             return this;
         }
 
