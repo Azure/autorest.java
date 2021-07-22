@@ -23,6 +23,7 @@ public class ResourceClientModel {
 
     private static final ClientModel MODEL_SUB_RESOURCE = new ClientModel.Builder()
             .name(ResourceTypeName.SUB_RESOURCE)
+            .packageName("com.azure.core.management")
             .properties(Collections.singletonList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
@@ -34,6 +35,7 @@ public class ResourceClientModel {
             .build();
     private static final ClientModel MODEL_PROXY_RESOURCE = new ClientModel.Builder()
             .name(ResourceTypeName.PROXY_RESOURCE)
+            .packageName("com.azure.core.management")
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
@@ -64,6 +66,7 @@ public class ResourceClientModel {
 
     private static final ClientModel MODEL_RESOURCE = new ClientModel.Builder()
             .name(ResourceTypeName.RESOURCE)
+            .packageName("com.azure.core.management")
             .parentModelName(ResourceTypeName.PROXY_RESOURCE)
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
