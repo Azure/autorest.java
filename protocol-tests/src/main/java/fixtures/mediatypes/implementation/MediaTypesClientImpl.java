@@ -1,6 +1,5 @@
 package fixtures.mediatypes.implementation;
 
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -110,17 +109,11 @@ public final class MediaTypesClientImpl {
     private interface MediaTypesClientService {
         @Post("/mediatypes/analyze")
         Mono<Response<BinaryData>> analyzeBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/contentTypeWithEncoding")
         Mono<Response<BinaryData>> contentTypeWithEncoding(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -143,8 +136,7 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> analyzeBodyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), requestOptions, context));
     }
 
     /**
@@ -167,8 +159,7 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> analyzeBodyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.analyzeBody(this.getHost(), accept, requestOptions, context);
+        return service.analyzeBody(this.getHost(), requestOptions, context);
     }
 
     /**
@@ -290,9 +281,8 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> contentTypeWithEncodingWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.contentTypeWithEncoding(this.getHost(), accept, requestOptions, context));
+                context -> service.contentTypeWithEncoding(this.getHost(), requestOptions, context));
     }
 
     /**
@@ -307,8 +297,7 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> contentTypeWithEncodingWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.contentTypeWithEncoding(this.getHost(), accept, requestOptions, context);
+        return service.contentTypeWithEncoding(this.getHost(), requestOptions, context);
     }
 
     /**

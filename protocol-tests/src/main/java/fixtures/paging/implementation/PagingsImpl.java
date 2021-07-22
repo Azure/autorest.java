@@ -1,7 +1,6 @@
 package fixtures.paging.implementation;
 
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -52,158 +51,109 @@ public final class PagingsImpl {
     private interface PagingsService {
         @Get("/paging/noitemname")
         Mono<Response<BinaryData>> getNoItemNamePages(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/nullnextlink")
         Mono<Response<BinaryData>> getNullNextLinkNamePages(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/single")
         Mono<Response<BinaryData>> getSinglePages(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/firstResponseEmpty/1")
         Mono<Response<BinaryData>> firstResponseEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple")
         Mono<Response<BinaryData>> getMultiplePages(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/getWithQueryParams")
         Mono<Response<BinaryData>> getWithQueryParams(
-                @HostParam("$host") String host,
-                @QueryParam("queryConstant") boolean queryConstant,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/nextOperationWithQueryParams")
         Mono<Response<BinaryData>> nextOperationWithQueryParams(
-                @HostParam("$host") String host,
-                @QueryParam("queryConstant") boolean queryConstant,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/odata")
         Mono<Response<BinaryData>> getOdataMultiplePages(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/withpath/{offset}")
         Mono<Response<BinaryData>> getMultiplePagesWithOffset(
                 @HostParam("$host") String host,
                 @PathParam("offset") int offset,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/paging/multiple/retryfirst")
         Mono<Response<BinaryData>> getMultiplePagesRetryFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/retrysecond")
         Mono<Response<BinaryData>> getMultiplePagesRetrySecond(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/single/failure")
         Mono<Response<BinaryData>> getSinglePagesFailure(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/failure")
         Mono<Response<BinaryData>> getMultiplePagesFailure(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/failureuri")
         Mono<Response<BinaryData>> getMultiplePagesFailureUri(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Post("/paging/multiple/lro")
         Mono<Response<BinaryData>> getMultiplePagesLRO(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/paging/itemNameWithXMSClientName")
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXMSClientName(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         Mono<Response<BinaryData>> getNoItemNamePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -211,7 +161,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getSinglePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -219,7 +168,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> firstResponseEmptyNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -227,7 +175,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -235,7 +182,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getOdataMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -243,7 +189,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesWithOffsetNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -251,7 +196,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesRetryFirstNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -259,7 +203,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesRetrySecondNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -267,7 +210,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getSinglePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -275,7 +217,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -283,7 +224,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesFailureUriNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -291,7 +231,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesLRONext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -299,7 +238,6 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -325,9 +263,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getNoItemNamePages(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getNoItemNamePages(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -361,8 +298,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoItemNamePages(this.client.getHost(), accept, requestOptions, context)
+        return service.getNoItemNamePages(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -495,11 +431,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getNullNextLinkNamePages(
-                                        this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getNullNextLinkNamePages(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -533,8 +466,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNullNextLinkNamePages(this.client.getHost(), accept, requestOptions, context)
+        return service.getNullNextLinkNamePages(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -663,9 +595,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getSinglePages(this.client.getHost(), accept, requestOptions, context))
+        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -699,8 +629,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getSinglePages(this.client.getHost(), accept, requestOptions, context)
+        return service.getSinglePages(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -834,9 +763,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.firstResponseEmpty(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.firstResponseEmpty(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -871,8 +799,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.firstResponseEmpty(this.client.getHost(), accept, requestOptions, context)
+        return service.firstResponseEmpty(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1019,9 +946,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getMultiplePages(this.client.getHost(), accept, requestOptions, context))
+        return FluxUtil.withContext(context -> service.getMultiplePages(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1065,8 +990,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePages(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePages(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1249,12 +1173,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
-        final boolean queryConstant = true;
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getWithQueryParams(
-                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
+                        context -> service.getWithQueryParams(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1298,9 +1218,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final boolean queryConstant = true;
-        final String accept = "application/json";
-        return service.getWithQueryParams(this.client.getHost(), queryConstant, accept, requestOptions, context)
+        return service.getWithQueryParams(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1481,12 +1399,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
-        final boolean queryConstant = true;
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.nextOperationWithQueryParams(
-                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
+                        context -> service.nextOperationWithQueryParams(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1528,10 +1442,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final boolean queryConstant = true;
-        final String accept = "application/json";
-        return service.nextOperationWithQueryParams(
-                        this.client.getHost(), queryConstant, accept, requestOptions, context)
+        return service.nextOperationWithQueryParams(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1574,10 +1485,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getOdataMultiplePages(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getOdataMultiplePages(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1621,8 +1530,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getOdataMultiplePages(this.client.getHost(), accept, requestOptions, context)
+        return service.getOdataMultiplePages(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1808,11 +1716,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
             int offset, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffset(
-                                        this.client.getHost(), offset, accept, requestOptions, context))
+                                        this.client.getHost(), offset, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1858,8 +1765,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
             int offset, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesWithOffset(this.client.getHost(), offset, accept, requestOptions, context)
+        return service.getMultiplePagesWithOffset(this.client.getHost(), offset, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2043,11 +1949,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getMultiplePagesRetryFirst(
-                                        this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getMultiplePagesRetryFirst(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2082,8 +1985,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesRetryFirst(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesRetryFirst(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2221,11 +2123,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getMultiplePagesRetrySecond(
-                                        this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getMultiplePagesRetrySecond(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2260,8 +2159,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesRetrySecond(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesRetrySecond(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2398,10 +2296,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getSinglePagesFailure(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getSinglePagesFailure(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2435,8 +2331,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getSinglePagesFailure(this.client.getHost(), accept, requestOptions, context)
+        return service.getSinglePagesFailure(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2569,10 +2464,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getMultiplePagesFailure(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getMultiplePagesFailure(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2606,8 +2499,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesFailure(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesFailure(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2740,11 +2632,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getMultiplePagesFailureUri(
-                                        this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getMultiplePagesFailureUri(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2778,8 +2667,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesFailureUri(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesFailureUri(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2918,16 +2806,16 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), tenant, accept, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2966,13 +2854,14 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), tenant, accept, requestOptions, context)
+        return service.getMultiplePagesFragmentNextLink(
+                        this.client.getHost(), apiVersion, tenant, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3011,6 +2900,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3047,6 +2937,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3084,6 +2975,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3118,6 +3010,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3153,16 +3046,16 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), tenant, accept, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3201,14 +3094,14 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
         return service.getMultiplePagesFragmentWithGroupingNextLink(
-                        this.client.getHost(), tenant, accept, requestOptions, context)
+                        this.client.getHost(), apiVersion, tenant, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3247,6 +3140,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3284,6 +3178,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3321,6 +3216,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3356,6 +3252,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3395,9 +3292,8 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesLRO(this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getMultiplePagesLRO(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3441,8 +3337,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesLRO(this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesLRO(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3621,17 +3516,17 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragment(
-                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3670,14 +3565,14 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.nextFragment(this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
+        return service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3716,17 +3611,17 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3765,15 +3660,15 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
         return service.nextFragmentWithGrouping(
-                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
+                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3807,11 +3702,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
             RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getPagingModelWithItemNameWithXMSClientName(
-                                        this.client.getHost(), accept, requestOptions, context))
+                                        this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3845,9 +3739,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getPagingModelWithItemNameWithXMSClientName(
-                        this.client.getHost(), accept, requestOptions, context)
+        return service.getPagingModelWithItemNameWithXMSClientName(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3985,11 +3877,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getNoItemNamePagesNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4025,8 +3916,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoItemNamePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getNoItemNamePagesNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4062,11 +3952,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getSinglePagesNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                        context -> service.getSinglePagesNext(nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4102,8 +3989,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getSinglePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getSinglePagesNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4139,11 +4025,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.firstResponseEmptyNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4179,8 +4064,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.firstResponseEmptyNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.firstResponseEmptyNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4226,11 +4110,9 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
-                                service.getMultiplePagesNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                service.getMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4276,8 +4158,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4323,11 +4204,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getOdataMultiplePagesNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4373,8 +4253,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getOdataMultiplePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getOdataMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4420,11 +4299,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffsetNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4470,8 +4348,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesWithOffsetNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesWithOffsetNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4507,11 +4384,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesRetryFirstNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4547,8 +4423,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesRetryFirstNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesRetryFirstNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4584,11 +4459,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesRetrySecondNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4624,8 +4498,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesRetrySecondNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesRetrySecondNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4661,11 +4534,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getSinglePagesFailureNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4701,8 +4573,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getSinglePagesFailureNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getSinglePagesFailureNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4738,11 +4609,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFailureNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4778,8 +4648,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4815,11 +4684,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFailureUriNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4855,8 +4723,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesFailureUriNext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesFailureUriNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4902,11 +4769,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesLRONext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4952,8 +4818,7 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMultiplePagesLRONext(nextLink, this.client.getHost(), accept, requestOptions, context)
+        return service.getMultiplePagesLRONext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4989,11 +4854,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getPagingModelWithItemNameWithXMSClientNameNext(
-                                        nextLink, this.client.getHost(), accept, requestOptions, context))
+                                        nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5029,9 +4893,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
         return service.getPagingModelWithItemNameWithXMSClientNameNext(
-                        nextLink, this.client.getHost(), accept, requestOptions, context)
+                        nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(

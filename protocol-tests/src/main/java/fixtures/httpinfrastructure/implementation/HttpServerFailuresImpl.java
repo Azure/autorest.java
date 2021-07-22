@@ -1,10 +1,8 @@
 package fixtures.httpinfrastructure.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -14,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -47,48 +44,28 @@ public final class HttpServerFailuresImpl {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
-        Mono<Response<Void>> head501(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head501(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/server/501")
-        Mono<Response<Void>> get501(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get501(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/failure/server/505")
-        Mono<Response<Void>> post505(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post505(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/failure/server/505")
-        Mono<Response<Void>> delete505(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete505(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head501(this.client.getHost(), accept, requestOptions, context);
+        return service.head501(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 501 status code - should be represented in the client as an error. */
@@ -118,15 +95,13 @@ public final class HttpServerFailuresImpl {
     /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 501 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get501(this.client.getHost(), accept, requestOptions, context);
+        return service.get501(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 501 status code - should be represented in the client as an error. */
@@ -156,18 +131,13 @@ public final class HttpServerFailuresImpl {
     /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post505(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 505 status code - should be represented in the client as an error. */
@@ -197,18 +167,13 @@ public final class HttpServerFailuresImpl {
     /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete505(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 505 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete505(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 505 status code - should be represented in the client as an error. */

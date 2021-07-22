@@ -1,10 +1,8 @@
 package fixtures.httpinfrastructure.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -16,7 +14,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -48,158 +45,71 @@ public final class HttpSuccessImpl {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpSuccessService {
         @Head("/http/success/200")
-        Mono<Response<Void>> head200(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/success/200")
-        Mono<Response<Boolean>> get200(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Boolean>> get200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/success/200")
-        Mono<Response<Void>> put200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/success/200")
-        Mono<Response<Void>> patch200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/success/200")
-        Mono<Response<Void>> post200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/success/200")
-        Mono<Response<Void>> delete200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/success/201")
-        Mono<Response<Void>> put201(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put201(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/success/201")
-        Mono<Response<Void>> post201(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post201(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/success/202")
-        Mono<Response<Void>> put202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/success/202")
-        Mono<Response<Void>> patch202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/success/202")
-        Mono<Response<Void>> post202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/success/202")
-        Mono<Response<Void>> delete202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/success/204")
-        Mono<Response<Void>> head204(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/success/204")
-        Mono<Response<Void>> put204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/success/204")
-        Mono<Response<Void>> patch204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/success/204")
-        Mono<Response<Void>> post204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/success/204")
-        Mono<Response<Void>> delete204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/success/404")
         Mono<Response<Boolean>> head404(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 200 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head200(this.client.getHost(), accept, requestOptions, context);
+        return service.head200(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 200 status code if successful. */
@@ -237,8 +147,7 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get200(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get200(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -252,8 +161,7 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200(this.client.getHost(), accept, requestOptions, context);
+        return service.get200(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -336,18 +244,13 @@ public final class HttpSuccessImpl {
     /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put200(this.client.getHost(), requestOptions, context));
     }
 
     /** Put boolean value true returning 200 success. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put200(this.client.getHost(), requestOptions, context);
     }
 
     /** Put boolean value true returning 200 success. */
@@ -377,18 +280,13 @@ public final class HttpSuccessImpl {
     /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch200(this.client.getHost(), requestOptions, context));
     }
 
     /** Patch true Boolean value in request returning 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch200(this.client.getHost(), requestOptions, context);
     }
 
     /** Patch true Boolean value in request returning 200. */
@@ -418,18 +316,13 @@ public final class HttpSuccessImpl {
     /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post200(this.client.getHost(), requestOptions, context));
     }
 
     /** Post bollean value true in request that returns a 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post200(this.client.getHost(), requestOptions, context);
     }
 
     /** Post bollean value true in request that returns a 200. */
@@ -459,18 +352,13 @@ public final class HttpSuccessImpl {
     /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete200(this.client.getHost(), requestOptions, context));
     }
 
     /** Delete simple boolean value true returns 200. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete200(this.client.getHost(), requestOptions, context);
     }
 
     /** Delete simple boolean value true returns 200. */
@@ -500,18 +388,13 @@ public final class HttpSuccessImpl {
     /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put201(this.client.getHost(), requestOptions, context));
     }
 
     /** Put true Boolean value in request returns 201. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put201(this.client.getHost(), requestOptions, context);
     }
 
     /** Put true Boolean value in request returns 201. */
@@ -541,18 +424,13 @@ public final class HttpSuccessImpl {
     /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post201(this.client.getHost(), requestOptions, context));
     }
 
     /** Post true Boolean value in request returns 201 (Created). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post201(this.client.getHost(), requestOptions, context);
     }
 
     /** Post true Boolean value in request returns 201 (Created). */
@@ -582,18 +460,13 @@ public final class HttpSuccessImpl {
     /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put202(this.client.getHost(), requestOptions, context));
     }
 
     /** Put true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put202(this.client.getHost(), requestOptions, context);
     }
 
     /** Put true Boolean value in request returns 202 (Accepted). */
@@ -623,18 +496,13 @@ public final class HttpSuccessImpl {
     /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch202(this.client.getHost(), requestOptions, context));
     }
 
     /** Patch true Boolean value in request returns 202. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch202(this.client.getHost(), requestOptions, context);
     }
 
     /** Patch true Boolean value in request returns 202. */
@@ -664,18 +532,13 @@ public final class HttpSuccessImpl {
     /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post202(this.client.getHost(), requestOptions, context));
     }
 
     /** Post true Boolean value in request returns 202 (Accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post202(this.client.getHost(), requestOptions, context);
     }
 
     /** Post true Boolean value in request returns 202 (Accepted). */
@@ -705,18 +568,13 @@ public final class HttpSuccessImpl {
     /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete202(this.client.getHost(), requestOptions, context));
     }
 
     /** Delete true Boolean value in request returns 202 (accepted). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete202(this.client.getHost(), requestOptions, context);
     }
 
     /** Delete true Boolean value in request returns 202 (accepted). */
@@ -746,15 +604,13 @@ public final class HttpSuccessImpl {
     /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 204 status code if successful. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head204(this.client.getHost(), accept, requestOptions, context);
+        return service.head204(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 204 status code if successful. */
@@ -784,18 +640,13 @@ public final class HttpSuccessImpl {
     /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put204(this.client.getHost(), requestOptions, context));
     }
 
     /** Put true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put204(this.client.getHost(), requestOptions, context);
     }
 
     /** Put true Boolean value in request returns 204 (no content). */
@@ -825,18 +676,13 @@ public final class HttpSuccessImpl {
     /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch204(this.client.getHost(), requestOptions, context));
     }
 
     /** Patch true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch204(this.client.getHost(), requestOptions, context);
     }
 
     /** Patch true Boolean value in request returns 204 (no content). */
@@ -866,18 +712,13 @@ public final class HttpSuccessImpl {
     /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post204(this.client.getHost(), requestOptions, context));
     }
 
     /** Post true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post204(this.client.getHost(), requestOptions, context);
     }
 
     /** Post true Boolean value in request returns 204 (no content). */
@@ -907,18 +748,13 @@ public final class HttpSuccessImpl {
     /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete204(this.client.getHost(), requestOptions, context));
     }
 
     /** Delete true Boolean value in request returns 204 (no content). */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete204(this.client.getHost(), requestOptions, context);
     }
 
     /** Delete true Boolean value in request returns 204 (no content). */
@@ -956,8 +792,7 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -971,8 +806,7 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head404(this.client.getHost(), accept, requestOptions, context);
+        return service.head404(this.client.getHost(), requestOptions, context);
     }
 
     /**

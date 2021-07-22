@@ -1,7 +1,6 @@
 package fixtures.httpinfrastructure.implementation;
 
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -42,24 +41,15 @@ public final class HttpFailuresImpl {
     private interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
         Mono<Response<Boolean>> getEmptyError(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/nomodel/error")
         Mono<Response<Boolean>> getNoModelError(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/nomodel/empty")
         Mono<Response<Boolean>> getNoModelEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -73,9 +63,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getEmptyError(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getEmptyError(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -89,8 +77,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEmptyError(this.client.getHost(), accept, requestOptions, context);
+        return service.getEmptyError(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -181,9 +168,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNoModelError(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNoModelError(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -197,8 +182,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoModelError(this.client.getHost(), accept, requestOptions, context);
+        return service.getNoModelError(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -289,9 +273,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNoModelEmpty(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNoModelEmpty(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -305,8 +287,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoModelEmpty(this.client.getHost(), accept, requestOptions, context);
+        return service.getNoModelEmpty(this.client.getHost(), requestOptions, context);
     }
 
     /**

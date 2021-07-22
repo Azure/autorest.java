@@ -1,10 +1,8 @@
 package fixtures.httpinfrastructure.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -16,7 +14,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -49,192 +46,85 @@ public final class HttpClientFailuresImpl {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpClientFailuresService {
         @Head("/http/failure/client/400")
-        Mono<Response<Void>> head400(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/400")
-        Mono<Response<Void>> get400(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/failure/client/400")
-        Mono<Response<Void>> put400(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/failure/client/400")
-        Mono<Response<Void>> patch400(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/failure/client/400")
-        Mono<Response<Void>> post400(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/failure/client/400")
-        Mono<Response<Void>> delete400(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/failure/client/401")
-        Mono<Response<Void>> head401(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head401(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/402")
-        Mono<Response<Void>> get402(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get402(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/403")
-        Mono<Response<Void>> get403(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get403(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/failure/client/404")
-        Mono<Response<Void>> put404(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put404(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/failure/client/405")
-        Mono<Response<Void>> patch405(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch405(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/failure/client/406")
-        Mono<Response<Void>> post406(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post406(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/failure/client/407")
-        Mono<Response<Void>> delete407(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete407(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/failure/client/409")
-        Mono<Response<Void>> put409(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put409(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/failure/client/410")
-        Mono<Response<Void>> head410(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head410(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/411")
-        Mono<Response<Void>> get411(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get411(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/412")
-        Mono<Response<Void>> get412(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get412(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/failure/client/413")
-        Mono<Response<Void>> put413(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> put413(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/failure/client/414")
-        Mono<Response<Void>> patch414(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patch414(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/failure/client/415")
-        Mono<Response<Void>> post415(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> post415(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/client/416")
-        Mono<Response<Void>> get416(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> get416(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/failure/client/417")
-        Mono<Response<Void>> delete417(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData booleanValue,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete417(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/failure/client/429")
-        Mono<Response<Void>> head429(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> head429(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head400WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head400(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head400(this.client.getHost(), accept, requestOptions, context);
+        return service.head400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -264,15 +154,13 @@ public final class HttpClientFailuresImpl {
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get400WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get400(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get400(this.client.getHost(), accept, requestOptions, context);
+        return service.get400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -302,18 +190,13 @@ public final class HttpClientFailuresImpl {
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put400(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put400(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -343,18 +226,13 @@ public final class HttpClientFailuresImpl {
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch400(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch400(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -384,18 +262,13 @@ public final class HttpClientFailuresImpl {
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post400(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post400(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -425,18 +298,13 @@ public final class HttpClientFailuresImpl {
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete400(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete400(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete400(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete400(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 400 status code - should be represented in the client as an error. */
@@ -466,15 +334,13 @@ public final class HttpClientFailuresImpl {
     /** Return 401 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head401WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head401(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head401(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 401 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head401WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head401(this.client.getHost(), accept, requestOptions, context);
+        return service.head401(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 401 status code - should be represented in the client as an error. */
@@ -504,15 +370,13 @@ public final class HttpClientFailuresImpl {
     /** Return 402 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get402(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get402(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 402 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get402(this.client.getHost(), accept, requestOptions, context);
+        return service.get402(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 402 status code - should be represented in the client as an error. */
@@ -542,15 +406,13 @@ public final class HttpClientFailuresImpl {
     /** Return 403 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get403WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get403(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get403(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 403 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get403WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get403(this.client.getHost(), accept, requestOptions, context);
+        return service.get403(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 403 status code - should be represented in the client as an error. */
@@ -580,18 +442,13 @@ public final class HttpClientFailuresImpl {
     /** Return 404 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put404(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put404(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 404 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put404(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put404(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 404 status code - should be represented in the client as an error. */
@@ -621,18 +478,13 @@ public final class HttpClientFailuresImpl {
     /** Return 405 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch405(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch405(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 405 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch405(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch405(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 405 status code - should be represented in the client as an error. */
@@ -662,18 +514,13 @@ public final class HttpClientFailuresImpl {
     /** Return 406 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post406(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post406(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 406 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post406(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post406(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 406 status code - should be represented in the client as an error. */
@@ -703,18 +550,13 @@ public final class HttpClientFailuresImpl {
     /** Return 407 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete407(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete407(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 407 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete407(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete407(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 407 status code - should be represented in the client as an error. */
@@ -744,18 +586,13 @@ public final class HttpClientFailuresImpl {
     /** Return 409 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put409(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put409(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 409 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put409(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put409(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 409 status code - should be represented in the client as an error. */
@@ -785,15 +622,13 @@ public final class HttpClientFailuresImpl {
     /** Return 410 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head410WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head410(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head410(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 410 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head410WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head410(this.client.getHost(), accept, requestOptions, context);
+        return service.head410(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 410 status code - should be represented in the client as an error. */
@@ -823,15 +658,13 @@ public final class HttpClientFailuresImpl {
     /** Return 411 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get411(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get411(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 411 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get411(this.client.getHost(), accept, requestOptions, context);
+        return service.get411(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 411 status code - should be represented in the client as an error. */
@@ -861,15 +694,13 @@ public final class HttpClientFailuresImpl {
     /** Return 412 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get412WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get412(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get412(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 412 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get412WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get412(this.client.getHost(), accept, requestOptions, context);
+        return service.get412(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 412 status code - should be represented in the client as an error. */
@@ -899,18 +730,13 @@ public final class HttpClientFailuresImpl {
     /** Return 413 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.put413(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put413(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 413 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put413(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.put413(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 413 status code - should be represented in the client as an error. */
@@ -940,18 +766,13 @@ public final class HttpClientFailuresImpl {
     /** Return 414 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patch414(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patch414(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 414 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch414(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.patch414(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 414 status code - should be represented in the client as an error. */
@@ -981,18 +802,13 @@ public final class HttpClientFailuresImpl {
     /** Return 415 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post415(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post415(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 415 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post415(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.post415(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 415 status code - should be represented in the client as an error. */
@@ -1022,15 +838,13 @@ public final class HttpClientFailuresImpl {
     /** Return 416 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get416WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get416(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get416(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 416 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get416WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get416(this.client.getHost(), accept, requestOptions, context);
+        return service.get416(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 416 status code - should be represented in the client as an error. */
@@ -1060,18 +874,13 @@ public final class HttpClientFailuresImpl {
     /** Return 417 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync(RequestOptions requestOptions) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.delete417(this.client.getHost(), booleanValue, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete417(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 417 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete417(this.client.getHost(), booleanValue, accept, requestOptions, context);
+        return service.delete417(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 417 status code - should be represented in the client as an error. */
@@ -1101,15 +910,13 @@ public final class HttpClientFailuresImpl {
     /** Return 429 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head429WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head429(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.head429(this.client.getHost(), requestOptions, context));
     }
 
     /** Return 429 status code - should be represented in the client as an error. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head429WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head429(this.client.getHost(), accept, requestOptions, context);
+        return service.head429(this.client.getHost(), requestOptions, context);
     }
 
     /** Return 429 status code - should be represented in the client as an error. */

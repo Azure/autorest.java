@@ -2,7 +2,6 @@ package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -46,16 +45,12 @@ public final class PolymorphicrecursivesImpl {
     private interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -77,9 +72,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -99,8 +92,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
+        return service.getValid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -216,9 +208,8 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
+                context -> service.putValid(this.client.getHost(), complexBody, requestOptions, context));
     }
 
     /**
@@ -239,8 +230,7 @@ public final class PolymorphicrecursivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
+        return service.putValid(this.client.getHost(), complexBody, requestOptions, context);
     }
 
     /**

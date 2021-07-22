@@ -1,6 +1,5 @@
 package fixtures.header.implementation;
 
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -41,206 +40,114 @@ public final class HeadersImpl {
     private interface HeadersService {
         @Post("/header/param/existingkey")
         Mono<Response<Void>> paramExistingKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/existingkey")
         Mono<Response<Void>> responseExistingKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/protectedkey")
         Mono<Response<Void>> paramProtectedKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/protectedkey")
         Mono<Response<Void>> responseProtectedKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/integer")
         Mono<Response<Void>> paramInteger(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/integer")
         Mono<Response<Void>> responseInteger(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/long")
-        Mono<Response<Void>> paramLong(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramLong(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/long")
         Mono<Response<Void>> responseLong(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/float")
         Mono<Response<Void>> paramFloat(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/float")
         Mono<Response<Void>> responseFloat(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/double")
         Mono<Response<Void>> paramDouble(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/double")
         Mono<Response<Void>> responseDouble(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/bool")
-        Mono<Response<Void>> paramBool(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramBool(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/bool")
         Mono<Response<Void>> responseBool(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/string")
         Mono<Response<Void>> paramString(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/string")
         Mono<Response<Void>> responseString(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/date")
-        Mono<Response<Void>> paramDate(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDate(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/date")
         Mono<Response<Void>> responseDate(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetime")
         Mono<Response<Void>> paramDatetime(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetime")
         Mono<Response<Void>> responseDatetime(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
         Mono<Response<Void>> paramDatetimeRfc1123(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
         Mono<Response<Void>> responseDatetimeRfc1123(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/duration")
         Mono<Response<Void>> paramDuration(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/duration")
         Mono<Response<Void>> responseDuration(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/byte")
-        Mono<Response<Void>> paramByte(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramByte(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/byte")
         Mono<Response<Void>> responseByte(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/enum")
-        Mono<Response<Void>> paramEnum(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/enum")
         Mono<Response<Void>> responseEnum(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         Mono<Response<Void>> customRequestId(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -256,9 +163,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramExistingKeyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramExistingKey(this.client.getHost(), accept, requestOptions, context));
+                context -> service.paramExistingKey(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -274,8 +180,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramExistingKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramExistingKey(this.client.getHost(), accept, requestOptions, context);
+        return service.paramExistingKey(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -345,16 +250,14 @@ public final class HeadersImpl {
     /** Get a response with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseExistingKey(this.client.getHost(), accept, requestOptions, context));
+                context -> service.responseExistingKey(this.client.getHost(), requestOptions, context));
     }
 
     /** Get a response with header value "User-Agent": "overwrite". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseExistingKey(this.client.getHost(), accept, requestOptions, context);
+        return service.responseExistingKey(this.client.getHost(), requestOptions, context);
     }
 
     /** Get a response with header value "User-Agent": "overwrite". */
@@ -395,9 +298,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramProtectedKey(this.client.getHost(), accept, requestOptions, context));
+                context -> service.paramProtectedKey(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -413,8 +315,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramProtectedKey(this.client.getHost(), accept, requestOptions, context);
+        return service.paramProtectedKey(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -485,16 +386,14 @@ public final class HeadersImpl {
     /** Get a response with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context));
+                context -> service.responseProtectedKey(this.client.getHost(), requestOptions, context));
     }
 
     /** Get a response with header value "Content-Type": "text/html". */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context);
+        return service.responseProtectedKey(this.client.getHost(), requestOptions, context);
     }
 
     /** Get a response with header value "Content-Type": "text/html". */
@@ -536,9 +435,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramIntegerWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramInteger(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramInteger(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -555,8 +452,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramIntegerWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramInteger(this.client.getHost(), accept, requestOptions, context);
+        return service.paramInteger(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -640,9 +536,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseIntegerWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseInteger(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseInteger(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -658,8 +552,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseIntegerWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseInteger(this.client.getHost(), accept, requestOptions, context);
+        return service.responseInteger(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -741,9 +634,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramLongWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramLong(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramLong(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -761,8 +652,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramLongWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramLong(this.client.getHost(), accept, requestOptions, context);
+        return service.paramLong(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -850,9 +740,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseLongWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseLong(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseLong(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -868,8 +756,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseLongWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseLong(this.client.getHost(), accept, requestOptions, context);
+        return service.responseLong(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -951,9 +838,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramFloatWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramFloat(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramFloat(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -971,8 +856,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramFloat(this.client.getHost(), accept, requestOptions, context);
+        return service.paramFloat(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1060,9 +944,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseFloat(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseFloat(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1078,8 +960,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseFloat(this.client.getHost(), accept, requestOptions, context);
+        return service.responseFloat(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1161,9 +1042,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDoubleWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramDouble(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramDouble(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1181,8 +1060,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDouble(this.client.getHost(), accept, requestOptions, context);
+        return service.paramDouble(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1270,9 +1148,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseDouble(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseDouble(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1288,8 +1164,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDouble(this.client.getHost(), accept, requestOptions, context);
+        return service.responseDouble(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1370,9 +1245,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramBoolWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramBool(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramBool(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1389,8 +1262,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramBool(this.client.getHost(), accept, requestOptions, context);
+        return service.paramBool(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1474,9 +1346,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseBoolWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseBool(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseBool(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1492,8 +1362,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseBool(this.client.getHost(), accept, requestOptions, context);
+        return service.responseBool(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1575,9 +1444,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramStringWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramString(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramString(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1595,8 +1462,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramStringWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramString(this.client.getHost(), accept, requestOptions, context);
+        return service.paramString(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1684,9 +1550,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseStringWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseString(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseString(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1702,8 +1566,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseStringWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseString(this.client.getHost(), accept, requestOptions, context);
+        return service.responseString(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1785,9 +1648,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDateWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramDate(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramDate(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1805,8 +1666,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDateWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDate(this.client.getHost(), accept, requestOptions, context);
+        return service.paramDate(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1894,9 +1754,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDateWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseDate(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseDate(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1912,8 +1770,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDateWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDate(this.client.getHost(), accept, requestOptions, context);
+        return service.responseDate(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1995,9 +1852,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramDatetime(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramDatetime(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2015,8 +1870,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDatetime(this.client.getHost(), accept, requestOptions, context);
+        return service.paramDatetime(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2104,9 +1958,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDatetime(this.client.getHost(), accept, requestOptions, context));
+                context -> service.responseDatetime(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2122,8 +1975,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDatetime(this.client.getHost(), accept, requestOptions, context);
+        return service.responseDatetime(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2205,9 +2057,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramDatetimeRfc1123(this.client.getHost(), accept, requestOptions, context));
+                context -> service.paramDatetimeRfc1123(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2225,8 +2076,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDatetimeRfc1123(this.client.getHost(), accept, requestOptions, context);
+        return service.paramDatetimeRfc1123(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2315,9 +2165,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDatetimeRfc1123(this.client.getHost(), accept, requestOptions, context));
+                context -> service.responseDatetimeRfc1123(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2334,8 +2183,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDatetimeRfc1123(this.client.getHost(), accept, requestOptions, context);
+        return service.responseDatetimeRfc1123(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2417,9 +2265,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramDuration(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramDuration(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2436,8 +2282,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDuration(this.client.getHost(), accept, requestOptions, context);
+        return service.paramDuration(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2521,9 +2366,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDuration(this.client.getHost(), accept, requestOptions, context));
+                context -> service.responseDuration(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2539,8 +2383,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDuration(this.client.getHost(), accept, requestOptions, context);
+        return service.responseDuration(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2621,9 +2464,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramByte(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramByte(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2640,8 +2481,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramByte(this.client.getHost(), accept, requestOptions, context);
+        return service.paramByte(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2725,9 +2565,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseByteWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseByte(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseByte(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2743,8 +2581,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseByte(this.client.getHost(), accept, requestOptions, context);
+        return service.responseByte(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2825,9 +2662,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramEnumWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.paramEnum(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramEnum(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2844,8 +2679,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramEnumWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramEnum(this.client.getHost(), accept, requestOptions, context);
+        return service.paramEnum(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2929,9 +2763,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseEnumWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.responseEnum(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseEnum(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -2947,8 +2779,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseEnumWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseEnum(this.client.getHost(), accept, requestOptions, context);
+        return service.responseEnum(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -3018,16 +2849,13 @@ public final class HeadersImpl {
     /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.customRequestId(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.customRequestId(this.client.getHost(), requestOptions, context));
     }
 
     /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.customRequestId(this.client.getHost(), accept, requestOptions, context);
+        return service.customRequestId(this.client.getHost(), requestOptions, context);
     }
 
     /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
