@@ -51,6 +51,10 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,6 +88,7 @@ public class FluentGen extends NewPlugin {
         try {
             logger.info("Read YAML");
             String fileContent = readFile(files.get(0));
+            createInputCodeModelFile(fileContent);
 
             // Parse yaml to code model
             CodeModel codeModel = this.handleYaml(fileContent);
@@ -122,9 +127,17 @@ public class FluentGen extends NewPlugin {
             return true;
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentgen plugin " + e, e);
-            connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
-            throw e;
+            //connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
+            return false;
         }
+    }
+
+    private void createInputCodeModelFile(String file) throws IOException {
+        File tempFile = new File("code-model.yaml");
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
+        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
     }
 
     CodeModel handleYaml(String yamlContent) {
