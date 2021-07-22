@@ -217,22 +217,32 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten()) {
-                    ObjectSchema parentSchema = (ObjectSchema) property.getSchema();
-                    ClientModel targetModel = this.map(parentSchema);
+                    ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
+                    ClientModel targetModel = this.map(targetModelSchema);
                     for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
                         propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty));
                     }
                     // properties from its parents
-                    if (parentSchema.getParents() != null && !CoreUtils.isNullOrEmpty(parentSchema.getParents().getAll())) {
-                        parentSchema.getParents().getAll().stream()
+                    if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
+                        // take 1st immediate parent of the target model, as rest parents (if any) is already flattened into the target model
+                        targetModelSchema.getParents().getImmediate().stream()
                                 .filter(o -> o instanceof ObjectSchema)
                                 .map(o -> (ObjectSchema) o)
-                                .forEach(parentObjectSchema -> {
-                                    for (Property property1 : parentObjectSchema.getProperties()) {
-                                        ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
-                                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1));
-                                    }
-                                });
+                                .findFirst()
+                                // then that parent, and all of its parents
+                                .ifPresent(parentSchema -> Stream.concat(
+                                        Stream.of(parentSchema),
+                                        parentSchema.getParents() != null && parentSchema.getParents().getAll() != null
+                                                ? parentSchema.getParents().getAll().stream()
+                                                : Stream.empty())
+                                        .filter(o -> o instanceof ObjectSchema)
+                                        .map(o -> (ObjectSchema) o)
+                                        .forEach(parentObjectSchema -> {
+                                            for (Property property1 : parentObjectSchema.getProperties()) {
+                                                ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
+                                                propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1));
+                                            }
+                                        }));
                     }
                 }
             }
