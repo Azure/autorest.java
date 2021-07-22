@@ -469,6 +469,8 @@ public class ExampleParser {
             } else {
                 throw new IllegalStateException("model type not found for type " + type + " and value " + objectValue);
             }
+        } else if (objectValue == null) {
+            node = null;
         } else {
             LiteralNode literalNode = new LiteralNode(type, objectValue);
             node = literalNode;
