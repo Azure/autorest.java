@@ -55,7 +55,7 @@ public class ClientModelPropertyReference {
         return targetProperty;
     }
 
-    public ClientModel getTargetModel() {
-        return targetModel;
+    public IType getTargetModelType() {
+        return targetModel.getType();
     }
 }

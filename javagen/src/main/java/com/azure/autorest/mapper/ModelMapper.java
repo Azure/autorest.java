@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -216,9 +217,22 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten()) {
-                    ClientModel targetModel = this.map((ObjectSchema) property.getSchema());
+                    ObjectSchema parentSchema = (ObjectSchema) property.getSchema();
+                    ClientModel targetModel = this.map(parentSchema);
                     for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
                         propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty));
+                    }
+                    // properties from its parents
+                    if (parentSchema.getParents() != null && !CoreUtils.isNullOrEmpty(parentSchema.getParents().getAll())) {
+                        parentSchema.getParents().getAll().stream()
+                                .filter(o -> o instanceof ObjectSchema)
+                                .map(o -> (ObjectSchema) o)
+                                .forEach(parentObjectSchema -> {
+                                    for (Property property1 : parentObjectSchema.getProperties()) {
+                                        ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
+                                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1));
+                                    }
+                                });
                     }
                 }
             }

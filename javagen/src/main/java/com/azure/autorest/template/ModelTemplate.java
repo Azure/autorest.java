@@ -203,7 +203,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (!property.isAdditionalProperties() && property.getClientType() instanceof MapType && settings.isFluent()) {
                         classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
                     }
-                    classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                    if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
+                        // if the property of flattened model is required, initialize it
+                        classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
+                    } else {
+                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                    }
                 }
             }
 
@@ -328,7 +333,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
                     ClientModelProperty property = propertyReference.getReferenceProperty();
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
-                    ClientModel targetModel = propertyReference.getTargetModel();
 
                     IType propertyType = property.getWireType();
                     IType propertyClientType = propertyType.getClientType();
@@ -358,14 +362,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
 
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
-//                            // synchronized block
-//                            methodBlock.line("synchronized (this) {");
-//                            methodBlock.increaseIndent();
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
-                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), targetModel.getType().toString()));
+                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType()));
                             });
-//                            methodBlock.decreaseIndent();
-//                            methodBlock.line("}");
 
                             methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");

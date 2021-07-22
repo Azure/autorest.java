@@ -8,6 +8,7 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
+import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
@@ -96,8 +97,13 @@ public class CompilationTests {
     public void testFlattenedModel() {
         SharedGalleryInner sharedGallery = mock(SharedGalleryInner.class);
         sharedGallery.withUniqueId(anyString());
+        sharedGallery.uniqueId();
         sharedGallery.name();
         sharedGallery.location();
+
+        PacketCaptureResultInner packetCaptureResult = mock(PacketCaptureResultInner.class);
+        packetCaptureResult.withTarget(anyString());
+        packetCaptureResult.target();
     }
 
 //    public void testIntEnum() {
