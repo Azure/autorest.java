@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.Set;
 import java.util.function.Function;
 
@@ -95,6 +97,9 @@ public class PrimitiveType implements IType {
     }
 
     public final IType getClientType() {
+        if (JavaSettings.getInstance().isLowLevelClient())  {
+            return this;
+        }
         IType clientType = this;
         if (this == PrimitiveType.UnixTimeLong) {
             clientType = ClassType.UnixTimeDateTime;
