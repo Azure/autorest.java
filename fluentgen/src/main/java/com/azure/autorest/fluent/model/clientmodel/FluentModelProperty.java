@@ -37,8 +37,8 @@ public class FluentModelProperty {
 
     public FluentModelProperty(ClientModelPropertyReference property) {
         this.modelProperty = ModelProperty.ofClientModelPropertyReference(property);
-        this.fluentType = getWrapperType(property.getReferenceProperty().getClientType());
-        this.immutableMethod = this.fluentType == property.getReferenceProperty().getClientType()
+        this.fluentType = getWrapperType(property.getClientType());
+        this.immutableMethod = this.fluentType == property.getClientType()
                 ? new PropertyTemplate(this, this.modelProperty)
                 : new PropertyTypeConversionTemplate(this, this.modelProperty);
     }

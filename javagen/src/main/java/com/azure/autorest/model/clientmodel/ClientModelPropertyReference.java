@@ -76,4 +76,8 @@ public class ClientModelPropertyReference {
     public String getSetterName() {
         return CodeNamer.getModelNamer().modelPropertySetterName(this.getName());
     }
+
+    public IType getClientType() {
+        return referenceProperty.getClientType();
+    }
 }

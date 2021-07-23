@@ -54,7 +54,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      *
      * @return the primary value.
      */
-    public Boolean getPrimary() {
+    public Boolean isPrimary() {
         return this.getInnerProperties() == null ? null : this.getInnerProperties().isPrimary();
     }
 

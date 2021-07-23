@@ -229,13 +229,13 @@ public abstract class ResourceOperation {
             propertiesFromTypeAndParents.add(new ArrayList<>());
             requestBodyParameterModel.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
                 ModelProperty property = ModelProperty.ofClientModelProperty(p);
-                if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), property) == null) {
+                if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
             });
             requestBodyParameterModel.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
                 ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
-                if (requestBodyModelPropertiesMap.putIfAbsent(p.getReferenceProperty().getName(), property) == null) {
+                if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
             });
@@ -245,13 +245,13 @@ public abstract class ResourceOperation {
 
                 parent.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
                     ModelProperty property = ModelProperty.ofClientModelProperty(p);
-                    if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), property) == null) {
+                    if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                         propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                     }
                 });
                 parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
                     ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
-                    if (requestBodyModelPropertiesMap.putIfAbsent(p.getReferenceProperty().getName(), property) == null) {
+                    if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                         propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                     }
                 });
