@@ -10,15 +10,15 @@ public final class VirtualMachineScaleSet {
      * Describes the properties of a Virtual Machine Scale Set.
      */
     @JsonProperty(value = "properties")
-    private VirtualMachineScaleSetProperties properties;
+    private VirtualMachineScaleSetProperties innerProperties;
 
     /**
-     * Get the properties property: Describes the properties of a Virtual Machine Scale Set.
+     * Get the innerProperties property: Describes the properties of a Virtual Machine Scale Set.
      *
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    private VirtualMachineScaleSetProperties getProperties() {
-        return this.properties;
+    private VirtualMachineScaleSetProperties getInnerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -27,7 +27,7 @@ public final class VirtualMachineScaleSet {
      * @return the virtualMachineProfile value.
      */
     public VirtualMachineScaleSetVMProfile getVirtualMachineProfile() {
-        return this.getProperties() == null ? null : this.getProperties().getVirtualMachineProfile();
+        return this.getInnerProperties() == null ? null : this.getInnerProperties().getVirtualMachineProfile();
     }
 
     /**
@@ -37,10 +37,10 @@ public final class VirtualMachineScaleSet {
      * @return the VirtualMachineScaleSet object itself.
      */
     public VirtualMachineScaleSet setVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile) {
-        if (this.getProperties() == null) {
-            this.properties = new VirtualMachineScaleSetProperties();
+        if (this.getInnerProperties() == null) {
+            this.innerProperties = new VirtualMachineScaleSetProperties();
         }
-        this.getProperties().setVirtualMachineProfile(virtualMachineProfile);
+        this.getInnerProperties().setVirtualMachineProfile(virtualMachineProfile);
         return this;
     }
 
@@ -50,8 +50,8 @@ public final class VirtualMachineScaleSet {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (getProperties() != null) {
-            getProperties().validate();
+        if (getInnerProperties() != null) {
+            getInnerProperties().validate();
         }
     }
 }

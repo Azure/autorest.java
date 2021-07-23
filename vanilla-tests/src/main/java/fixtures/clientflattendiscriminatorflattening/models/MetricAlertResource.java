@@ -10,15 +10,15 @@ public final class MetricAlertResource {
      * The alert rule properties of the resource.
      */
     @JsonProperty(value = "properties", required = true)
-    private MetricAlertProperties properties = new MetricAlertProperties();
+    private MetricAlertProperties innerProperties = new MetricAlertProperties();
 
     /**
-     * Get the properties property: The alert rule properties of the resource.
+     * Get the innerProperties property: The alert rule properties of the resource.
      *
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    private MetricAlertProperties getProperties() {
-        return this.properties;
+    private MetricAlertProperties getInnerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -27,7 +27,7 @@ public final class MetricAlertResource {
      * @return the criteria value.
      */
     public MetricAlertCriteria getCriteria() {
-        return this.getProperties() == null ? null : this.getProperties().getCriteria();
+        return this.getInnerProperties() == null ? null : this.getInnerProperties().getCriteria();
     }
 
     /**
@@ -37,10 +37,10 @@ public final class MetricAlertResource {
      * @return the MetricAlertResource object itself.
      */
     public MetricAlertResource setCriteria(MetricAlertCriteria criteria) {
-        if (this.getProperties() == null) {
-            this.properties = new MetricAlertProperties();
+        if (this.getInnerProperties() == null) {
+            this.innerProperties = new MetricAlertProperties();
         }
-        this.getProperties().setCriteria(criteria);
+        this.getInnerProperties().setCriteria(criteria);
         return this;
     }
 
@@ -50,10 +50,11 @@ public final class MetricAlertResource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (getProperties() == null) {
-            throw new IllegalArgumentException("Missing required property properties in model MetricAlertResource");
+        if (getInnerProperties() == null) {
+            throw new IllegalArgumentException(
+                    "Missing required property innerProperties in model MetricAlertResource");
         } else {
-            getProperties().validate();
+            getInnerProperties().validate();
         }
     }
 }

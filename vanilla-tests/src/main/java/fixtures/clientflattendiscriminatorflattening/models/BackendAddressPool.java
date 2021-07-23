@@ -10,15 +10,15 @@ public final class BackendAddressPool {
      * Properties of load balancer backend address pool.
      */
     @JsonProperty(value = "properties")
-    private BackendAddressPoolPropertiesFormat properties;
+    private BackendAddressPoolPropertiesFormat innerProperties;
 
     /**
-     * Get the properties property: Properties of load balancer backend address pool.
+     * Get the innerProperties property: Properties of load balancer backend address pool.
      *
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    private BackendAddressPoolPropertiesFormat getProperties() {
-        return this.properties;
+    private BackendAddressPoolPropertiesFormat getInnerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -27,7 +27,7 @@ public final class BackendAddressPool {
      * @return the location value.
      */
     public String getLocation() {
-        return this.getProperties() == null ? null : this.getProperties().getLocation();
+        return this.getInnerProperties() == null ? null : this.getInnerProperties().getLocation();
     }
 
     /**
@@ -37,10 +37,10 @@ public final class BackendAddressPool {
      * @return the BackendAddressPool object itself.
      */
     public BackendAddressPool setLocation(String location) {
-        if (this.getProperties() == null) {
-            this.properties = new BackendAddressPoolPropertiesFormat();
+        if (this.getInnerProperties() == null) {
+            this.innerProperties = new BackendAddressPoolPropertiesFormat();
         }
-        this.getProperties().setLocation(location);
+        this.getInnerProperties().setLocation(location);
         return this;
     }
 
@@ -50,8 +50,8 @@ public final class BackendAddressPool {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (getProperties() != null) {
-            getProperties().validate();
+        if (getInnerProperties() != null) {
+            getInnerProperties().validate();
         }
     }
 }

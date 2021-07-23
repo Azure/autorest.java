@@ -17,7 +17,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * configuration.
      */
     @JsonProperty(value = "properties")
-    private VirtualMachineScaleSetNetworkConfigurationProperties properties;
+    private VirtualMachineScaleSetNetworkConfigurationProperties innerProperties;
 
     /**
      * Get the name property: The network configuration name.
@@ -40,12 +40,12 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     }
 
     /**
-     * Get the properties property: Describes a virtual machine scale set network profile's IP configuration.
+     * Get the innerProperties property: Describes a virtual machine scale set network profile's IP configuration.
      *
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    private VirtualMachineScaleSetNetworkConfigurationProperties getProperties() {
-        return this.properties;
+    private VirtualMachineScaleSetNetworkConfigurationProperties getInnerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -54,8 +54,8 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      *
      * @return the primary value.
      */
-    public Boolean isPrimary() {
-        return this.getProperties() == null ? null : this.getProperties().isPrimary();
+    public Boolean getPrimary() {
+        return this.getInnerProperties() == null ? null : this.getInnerProperties().isPrimary();
     }
 
     /**
@@ -66,10 +66,10 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
     public VirtualMachineScaleSetNetworkConfiguration setPrimary(Boolean primary) {
-        if (this.getProperties() == null) {
-            this.properties = new VirtualMachineScaleSetNetworkConfigurationProperties();
+        if (this.getInnerProperties() == null) {
+            this.innerProperties = new VirtualMachineScaleSetNetworkConfigurationProperties();
         }
-        this.getProperties().setPrimary(primary);
+        this.getInnerProperties().setPrimary(primary);
         return this;
     }
 
@@ -79,8 +79,8 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (getProperties() != null) {
-            getProperties().validate();
+        if (getInnerProperties() != null) {
+            getInnerProperties().validate();
         }
     }
 }
