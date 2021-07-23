@@ -1970,8 +1970,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -1988,8 +1988,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2006,8 +2006,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2031,8 +2031,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2056,8 +2056,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2073,8 +2073,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2090,8 +2090,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2109,8 +2109,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2127,8 +2127,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2145,8 +2145,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2163,8 +2163,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -2180,8 +2180,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */

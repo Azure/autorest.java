@@ -5,7 +5,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -111,7 +110,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 RequestOptions requestOptions,
                 Context context);
@@ -119,7 +117,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 RequestOptions requestOptions,
                 Context context);
@@ -131,7 +128,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 RequestOptions requestOptions,
@@ -140,7 +136,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 RequestOptions requestOptions,
@@ -2806,7 +2801,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2815,7 +2809,7 @@ public final class PagingsImpl {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), apiVersion, tenant, requestOptions, context))
+                                        this.client.getHost(), tenant, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2854,14 +2848,12 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFragmentNextLink(
-                        this.client.getHost(), apiVersion, tenant, requestOptions, context)
+        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), tenant, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2900,7 +2892,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2937,7 +2928,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2975,7 +2965,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3010,7 +2999,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3046,7 +3034,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3055,7 +3042,7 @@ public final class PagingsImpl {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), apiVersion, tenant, requestOptions, context))
+                                        this.client.getHost(), tenant, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3094,14 +3081,13 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
             String tenant, RequestOptions requestOptions, Context context) {
         return service.getMultiplePagesFragmentWithGroupingNextLink(
-                        this.client.getHost(), apiVersion, tenant, requestOptions, context)
+                        this.client.getHost(), tenant, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3140,7 +3126,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3178,7 +3163,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3216,7 +3200,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3252,7 +3235,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3516,7 +3498,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
@@ -3525,8 +3506,7 @@ public final class PagingsImpl {
             String tenant, String nextLink, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                         context ->
-                                service.nextFragment(
-                                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context))
+                                service.nextFragment(this.client.getHost(), tenant, nextLink, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3565,14 +3545,13 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        return service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context)
+        return service.nextFragment(this.client.getHost(), tenant, nextLink, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3611,7 +3590,6 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
@@ -3621,7 +3599,7 @@ public final class PagingsImpl {
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context))
+                                        this.client.getHost(), tenant, nextLink, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3660,15 +3638,13 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
             String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        return service.nextFragmentWithGrouping(
-                        this.client.getHost(), apiVersion, tenant, nextLink, requestOptions, context)
+        return service.nextFragmentWithGrouping(this.client.getHost(), tenant, nextLink, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(

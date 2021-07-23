@@ -581,8 +581,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -598,8 +598,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -615,8 +615,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */
@@ -632,8 +632,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: DateTimeRfc1123
+     *     now: DateTimeRfc1123
      * }
      * }</pre>
      */

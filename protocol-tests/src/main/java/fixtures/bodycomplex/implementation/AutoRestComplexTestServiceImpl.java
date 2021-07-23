@@ -31,6 +31,7 @@ public final class AutoRestComplexTestServiceImpl {
      * @return the apiVersion value.
      */
     public String getApiVersion() {
+        System.err.println(apiVersion);
         return this.apiVersion;
     }
 

@@ -765,7 +765,6 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -800,7 +799,6 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -836,7 +834,6 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -872,7 +869,6 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
