@@ -16,21 +16,19 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.autorest.util.CodeNamer;
 
 import java.util.Set;
 
 public class FluentModelProperty {
 
-    private final ClientModelProperty modelProperty;
-    private ClientModelPropertyReference modelPropertyReference;
+    private final ModelProperty modelProperty;
 
     private final IType fluentType;
 
     private final ImmutableMethod immutableMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
-        this.modelProperty = property;
+        this.modelProperty = ModelProperty.ofClientModelProperty(property);
         this.fluentType = getWrapperType(property.getClientType());
         this.immutableMethod = this.fluentType == property.getClientType()
                 ? new PropertyTemplate(this, this.modelProperty)
@@ -38,8 +36,11 @@ public class FluentModelProperty {
     }
 
     public FluentModelProperty(ClientModelPropertyReference property) {
-        this(property.getReferenceProperty());
-        modelPropertyReference = property;
+        this.modelProperty = ModelProperty.ofClientModelPropertyReference(property);
+        this.fluentType = getWrapperType(property.getReferenceProperty().getClientType());
+        this.immutableMethod = this.fluentType == property.getReferenceProperty().getClientType()
+                ? new PropertyTemplate(this, this.modelProperty)
+                : new PropertyTypeConversionTemplate(this, this.modelProperty);
     }
 
     public String getName() {
@@ -76,7 +77,7 @@ public class FluentModelProperty {
     }
 
     private String getGetterName() {
-        return CodeNamer.getModelNamer().modelPropertyGetterName(modelProperty);
+        return modelProperty.getGetterName();
     }
 
     private static IType getWrapperType(IType clientType) {
@@ -98,13 +99,7 @@ public class FluentModelProperty {
         return wrapperType;
     }
 
-    public ClientModelProperty getInnerProperty() {
-        return modelProperty;
-    }
-
     public ModelProperty getModelProperty() {
-        return modelPropertyReference == null
-                ? ModelProperty.ofClientModelProperty(modelProperty)
-                : ModelProperty.ofClientModelPropertyReference(modelPropertyReference);
+        return modelProperty;
     }
 }

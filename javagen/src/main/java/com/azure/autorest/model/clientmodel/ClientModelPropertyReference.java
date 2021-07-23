@@ -5,6 +5,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 public class ClientModelPropertyReference {
 
     /*
@@ -13,30 +15,34 @@ public class ClientModelPropertyReference {
     2. reference to property from a flattened client model (targetModel), which has non-null referenceProperty and targetProperty, i.e., targetProperty.referenceProperty
      */
 
+    private final String name;
     private final ClientModelProperty referenceProperty;
     private final ClientModel targetModel;
     private final ClientModelProperty targetProperty;
 
     private ClientModelPropertyReference(ClientModelProperty targetProperty,
                                          ClientModel targetModel,
-                                         ClientModelProperty referenceProperty) {
+                                         ClientModelProperty referenceProperty,
+                                         String name) {
         this.targetProperty = targetProperty;
         this.targetModel = targetModel;
         this.referenceProperty = referenceProperty;
+        this.name = name;
     }
 
     public static ClientModelPropertyReference ofParentProperty(ClientModelProperty property) {
-        return new ClientModelPropertyReference(null, null, property);
+        return new ClientModelPropertyReference(null, null, property, null);
     }
 
     public static ClientModelPropertyReference ofParentProperty(ClientModelPropertyReference referenceProperty) {
-        return new ClientModelPropertyReference(null, null, referenceProperty.getReferenceProperty());
+        return new ClientModelPropertyReference(null, null, referenceProperty.getReferenceProperty(), null);
     }
 
     public static ClientModelPropertyReference ofFlattenProperty(ClientModelProperty targetProperty,
                                                                  ClientModel targetModel,
-                                                                 ClientModelProperty referenceProperty) {
-        return new ClientModelPropertyReference(targetProperty, targetModel, referenceProperty);
+                                                                 ClientModelProperty referenceProperty,
+                                                                 String name) {
+        return new ClientModelPropertyReference(targetProperty, targetModel, referenceProperty, name);
     }
 
     public boolean isFromFlattenedProperty() {
@@ -57,5 +63,17 @@ public class ClientModelPropertyReference {
 
     public IType getTargetModelType() {
         return targetModel.getType();
+    }
+
+    public String getName() {
+        return this.name == null ? this.referenceProperty.getName() : this.name;
+    }
+
+    public String getGetterName() {
+        return CodeNamer.getModelNamer().modelPropertyGetterName(this.referenceProperty.getClientType(), this.getName());
+    }
+
+    public String getSetterName() {
+        return CodeNamer.getModelNamer().modelPropertySetterName(this.getName());
     }
 }

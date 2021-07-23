@@ -18,7 +18,6 @@ import java.util.Set;
 
 public class ModelProperty {
 
-    private final String name;
     private final String description;
     private final IType clientType;
 
@@ -26,7 +25,6 @@ public class ModelProperty {
     private final ClientModelPropertyReference propertyReference;
 
     private ModelProperty(ClientModelProperty property, ClientModelPropertyReference propertyReference) {
-        this.name = property.getName();
         this.description = property.getDescription();
         this.clientType = property.getClientType();
 
@@ -43,11 +41,11 @@ public class ModelProperty {
     }
 
     public String getGetterName() {
-        return property.getGetterName();
+        return propertyReference == null ? property.getGetterName() : propertyReference.getGetterName();
     }
 
     public String getSetterName() {
-        return property.getSetterName();
+        return propertyReference == null ? property.getSetterName() : propertyReference.getSetterName();
     }
 
     public void addImportsTo(Set<String> imports) {
@@ -55,7 +53,7 @@ public class ModelProperty {
     }
 
     public String getName() {
-        return name;
+        return propertyReference == null ? property.getName() : propertyReference.getName();
     }
 
     public String getDescription() {

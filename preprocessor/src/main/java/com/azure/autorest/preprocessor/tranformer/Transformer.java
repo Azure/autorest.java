@@ -45,7 +45,7 @@ public class Transformer {
     renameCodeModel(codeModel);
     transformSchemas(codeModel.getSchemas());
     if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-      disambiguatePropertyNameOfFlattenedSchema(codeModel);
+      markFlattenedSchemas(codeModel);
     }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
     return codeModel;
@@ -133,7 +133,7 @@ public class Transformer {
     }
   }
 
-  private static void disambiguatePropertyNameOfFlattenedSchema(CodeModel codeModel) {
+  private static void markFlattenedSchemas(CodeModel codeModel) {
     for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
       Map<String, ObjectSchema> flattenedSchemas = null;
       for (Property property : objectSchema.getProperties()) {
@@ -146,36 +146,6 @@ public class Transformer {
 
           // mark as flattened schema
           flattenedSchema.setFlattenedSchema(true);
-        }
-      }
-
-      if (flattenedSchemas != null) {
-        // gather object and parents
-        List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
-        objectSchemaAndParents.add(objectSchema);
-        if (objectSchema.getParents() != null && objectSchema.getParents().getAll() != null) {
-          objectSchemaAndParents.addAll(
-                  objectSchema.getParents().getAll().stream()
-                          .filter(p -> p instanceof ObjectSchema)
-                          .map(p -> (ObjectSchema) p)
-                          .collect(Collectors.toList()));
-        }
-        // gather property names
-        Set<String> propertyNames = objectSchemaAndParents.stream()
-                .flatMap(o -> o.getProperties().stream())
-                .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
-                .map(p -> p.getLanguage().getJava().getName())
-                .collect(Collectors.toSet());
-        // disambiguate
-        for (Map.Entry<String, ObjectSchema> entry : flattenedSchemas.entrySet()) {
-          String propertyName = entry.getKey();
-          for (Property property : entry.getValue().getProperties()) {
-            String name = property.getLanguage().getJava().getName();
-            if (propertyNames.contains(name)) {
-              // follow pattern from m4
-              property.getLanguage().getJava().setName(name + CodeNamer.toPascalCase(propertyName) + CodeNamer.toPascalCase(name));
-            }
-          }
         }
       }
     }

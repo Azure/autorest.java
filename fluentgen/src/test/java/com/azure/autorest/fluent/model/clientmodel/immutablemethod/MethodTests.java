@@ -34,11 +34,11 @@ public class MethodTests {
         FluentResourceCollection lockCollection = content.getLockCollection();
 
         // model property, without type conversion
-        PropertyTemplate propertyTemplate = new PropertyTemplate(lockModel.getProperty("owners"), lockModel.getProperty("owners").getInnerProperty());
+        PropertyTemplate propertyTemplate = new PropertyTemplate(lockModel.getProperty("owners"), lockModel.getProperty("owners").getModelProperty());
         String methodContent = TestUtils.getMethodTemplateContent(propertyTemplate.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("List<ManagementLockOwner> inner = this.innerModel().owners()"));
 
-        propertyTemplate = new PropertyTemplate(lockModel.getProperty("notes"), lockModel.getProperty("notes").getInnerProperty());
+        propertyTemplate = new PropertyTemplate(lockModel.getProperty("notes"), lockModel.getProperty("notes").getModelProperty());
         methodContent = TestUtils.getMethodTemplateContent(propertyTemplate.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("return this.innerModel().notes()"));
 

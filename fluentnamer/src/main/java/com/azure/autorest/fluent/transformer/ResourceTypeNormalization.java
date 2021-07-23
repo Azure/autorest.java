@@ -80,7 +80,38 @@ class ResourceTypeNormalization {
         schema.getLanguage().getJava().setName(javaName);
         schema.setExtensions(new XmsExtensions());
         schema.getExtensions().setXmsAzureResource(true);
+        schema.setProperties(new ArrayList<>());
+
+        switch (javaName) {
+            case ResourceTypeName.SUB_RESOURCE:
+                addProperty(schema, ResourceTypeName.FIELD_ID, false);
+                break;
+
+            case ResourceTypeName.PROXY_RESOURCE:
+                addProperty(schema, ResourceTypeName.FIELD_ID, true);
+                addProperty(schema, ResourceTypeName.FIELD_NAME, true);
+                addProperty(schema, ResourceTypeName.FIELD_TYPE, true);
+                break;
+
+            case ResourceTypeName.RESOURCE:
+                addProperty(schema, ResourceTypeName.FIELD_ID, true);
+                addProperty(schema, ResourceTypeName.FIELD_NAME, true);
+                addProperty(schema, ResourceTypeName.FIELD_TYPE, true);
+                addProperty(schema, ResourceTypeName.FIELD_LOCATION, false);
+                addProperty(schema, ResourceTypeName.FIELD_TAGS, false);
+                break;
+        }
+
         return schema;
+    }
+
+    private static void addProperty(ObjectSchema schema, String propertyName, boolean readOnly) {
+        Property property = new Property();
+        property.setReadOnly(readOnly);
+        property.setLanguage(new Languages());
+        property.getLanguage().setJava(new Language());
+        property.getLanguage().getJava().setName(propertyName);
+        schema.getProperties().add(property);
     }
 
     private static Optional<ObjectSchema> getObjectParent(ObjectSchema compositeType) {

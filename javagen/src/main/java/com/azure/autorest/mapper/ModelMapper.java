@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
@@ -26,6 +27,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -218,10 +220,29 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 if (modelProperty.getClientFlatten()) {
                     ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
+                    String originalFlattenedPropertyName = property.getLanguage().getJava().getName();  // not modelProperty.getName()
                     ClientModel targetModel = this.map(targetModelSchema);
                     if (targetModel != null && !CoreUtils.isNullOrEmpty(targetModel.getProperties())) {
+                        // gather object and parents
+                        List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
+                        objectSchemaAndParents.add(compositeType);
+                        if (compositeType.getParents() != null && compositeType.getParents().getAll() != null) {
+                            objectSchemaAndParents.addAll(
+                                    compositeType.getParents().getAll().stream()
+                                            .filter(p -> p instanceof ObjectSchema)
+                                            .map(p -> (ObjectSchema) p)
+                                            .collect(Collectors.toList()));
+                        }
+                        // gather property names
+                        Set<String> propertyNames = objectSchemaAndParents.stream()
+                                .flatMap(o -> o.getProperties().stream())
+                                .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
+                                .map(p -> p.getLanguage().getJava().getName())
+                                .collect(Collectors.toSet());
+
                         for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
-                            propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty));
+                            String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty.getName());
+                            propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty, name));
                         }
                         // properties from its parents
                         if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
@@ -242,7 +263,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                                 if (parentObjectSchema.getProperties() != null) {
                                                     for (Property property1 : parentObjectSchema.getProperties()) {
                                                         ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
-                                                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1));
+                                                        String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty1.getName());
+                                                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1, name));
                                                     }
                                                 }
                                             }));
@@ -303,5 +325,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      */
     protected boolean isPredefinedModel(ClassType compositeType) {
         return false;
+    }
+
+    private static String disambiguatePropertyNameOfFlattenedSchema(Set<String> propertyNames, String originalFlattenedPropertyName, String propertyName) {
+        String ret = propertyName;
+        if (propertyNames.contains(propertyName)) {
+            // follow pattern from m4
+            ret = propertyName + CodeNamer.toPascalCase(originalFlattenedPropertyName) + CodeNamer.toPascalCase(propertyName);
+        }
+        return ret;
     }
 }

@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 // avoid non-object schema or a plain object schema without any properties
                 && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            // avoid naming conflict
+            builder.name("inner" + CodeNamer.toPascalCase(property.getLanguage().getJava().getName()));
             builder.clientFlatten(true);
         }
 

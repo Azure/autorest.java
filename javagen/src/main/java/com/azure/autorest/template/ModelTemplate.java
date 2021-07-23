@@ -21,6 +21,7 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -346,7 +347,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // getter
                     generateGetterJavadoc(classBlock, model, property);
 
-                    classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), methodBlock -> {
+                    classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
                         // use ternary operator to avoid directly
                         String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
                         String nullClause = (propertyClientTypeFinal instanceof PrimitiveType)
@@ -361,7 +362,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (!property.getIsReadOnly()) {
                         generateSetterJavadoc(classBlock, model, property);
 
-                        classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
+                        classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
                                 methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType()));
                             });
