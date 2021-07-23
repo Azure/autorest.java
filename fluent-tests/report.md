@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-07-22T19:46:46.520417
+Generated at 2021-07-23T19:16:11.362825
 ## Success
 <details>
-<summary>RP count: 175</summary>
+<summary>RP count: 176</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -137,6 +137,7 @@ Generated at 2021-07-22T19:46:46.520417
 - quota
 - recoveryservices
 - recoveryservicesbackup
+- recoveryservicessiterecovery
 - redhatopenshift
 - redis
 - redisenterprise
@@ -247,8 +248,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  6.994 s
-[INFO] Finished at: 2021-07-22T18:15:07Z
+[INFO] Total time:  5.016 s
+[INFO] Finished at: 2021-07-23T18:11:38Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/com/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.automation.fluent.DscConfigurationsClient
@@ -539,7 +540,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Location, OperationResult, AndroidMamPolicy, FlaggedUser, GroupItem, Application, WipeDeviceOperationResult, Device, IOsmamPolicy, FlaggedEnrolledApp]
+INFORMATION (FluentMapper): Add Inner to response types: [FlaggedUser, GroupItem, Device, Location, WipeDeviceOperationResult, IOsmamPolicy, Application, AndroidMamPolicy, OperationResult, FlaggedEnrolledApp]
 
 ```
 **stderr**
@@ -596,8 +597,8 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.553 s
-[INFO] Finished at: 2021-07-22T18:50:43Z
+[INFO] Total time:  1.586 s
+[INFO] Finished at: 2021-07-23T18:36:10Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -792,178 +793,6 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > SolutionSummary)
   discriminator: { propertyName: [32m'instanceType'[39m }
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1915:3
-  Error: Semantic validation failed. There was some errors
-
-```
-</details>
-
-<details>
-<summary>recoveryservicessiterecovery</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.3]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
-INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
-WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:11:2
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrationItemProperties > properties > currentJob)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24054:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ReplicationEligibilityResults > properties > properties)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26757:5
-
-```
-**stderr**
-```
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > AddDisksProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:16320:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ConfigurationSettings)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:16881:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > CreateProtectionIntentProviderSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17070:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > DisableProtectionProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17244:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EnableProtectionProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17502:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EventProviderSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17620:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EventSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17674:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificCreateNetworkMappingInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17960:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificCreationInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17973:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17986:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificUpdateNetworkMappingInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:18000:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > GroupTaskDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:18114:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > HyperVReplicaPolicyInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:19397:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > HyperVVirtualMachineDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:19522:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > JobDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:23363:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > JobTaskDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:23590:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > MigrationProviderSpecificSettings)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24088:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > NetworkMappingFabricSpecificSettings)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24242:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PlannedFailoverProviderSpecificFailoverInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24520:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PolicyProviderSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24579:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PolicyProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24593:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProtectionContainerMappingProviderSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25267:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProtectionProfileCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25316:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProviderSpecificRecoveryPointDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25356:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryAvailabilitySetCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25500:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanActionDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25675:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanGroupTaskDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25784:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26165:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificFailoverInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26179:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26192:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryProximityPlacementGroupCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26434:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryResourceGroupCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26447:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryVirtualNetworkCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26587:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RemoveDisksProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26620:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProtectionIntentProviderSpecificSettings)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27059:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificContainerCreationInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27083:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificContainerMappingInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27096:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificSettings)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27109:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificUpdateContainerMappingInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27123:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReverseReplicationProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27396:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > StorageAccountCustomDetails)
-  discriminator: { propertyName: [32m'resourceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27603:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > SwitchProtectionProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27847:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > TaskTypeDetails)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27957:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > TestFailoverProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28068:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UnplannedFailoverProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28178:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UpdateMigrationItemProviderSpecificInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28214:3
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UpdateReplicationProtectedItemProviderInput)
-  discriminator: { propertyName: [32m'instanceType'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28406:3
   Error: Semantic validation failed. There was some errors
 
 ```
@@ -1340,7 +1169,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Connection, Process, ClientGroupMembersCount, MapResponse, Port, ClientGroup, Machine, ClientGroupMember, Liveness, MachineGroup, MachinesSummary]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMembersCount, MapResponse, Process, ClientGroupMember, Machine, MachineGroup, Connection, Liveness, Port, ClientGroup, MachinesSummary]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1483,8 +1312,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.415 s
-[INFO] Finished at: 2021-07-22T19:26:29Z
+[INFO] Total time:  2.356 s
+[INFO] Finished at: 2021-07-23T19:01:42Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-softwareplan: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsImpl.java:[72,49] method list(java.lang.String) is already defined in class com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsImpl
@@ -1639,8 +1468,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.365 s
-[INFO] Finished at: 2021-07-22T19:35:21Z
+[INFO] Total time:  3.948 s
+[INFO] Finished at: 2021-07-23T19:08:06Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -1717,8 +1546,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.143 s
-[INFO] Finished at: 2021-07-22T19:39:45Z
+[INFO] Total time:  1.401 s
+[INFO] Finished at: 2021-07-23T19:11:07Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-visualstudio: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
