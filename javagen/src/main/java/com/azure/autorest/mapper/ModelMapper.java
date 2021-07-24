@@ -240,9 +240,15 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                 .map(p -> p.getLanguage().getJava().getName())
                                 .collect(Collectors.toSet());
 
-                        for (ClientModelProperty referenceProperty : targetModel.getProperties()) {
-                            String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty.getName());
-                            propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty, name));
+                        Set<String> referencePropertyNames = new HashSet<>();
+                        for (ClientModelProperty property1 : targetModel.getProperties()) {
+                            if (!property1.getClientFlatten()) {
+                                String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property1.getName());
+                                if (!referencePropertyNames.contains(name)) {
+                                    propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property1, name));
+                                    referencePropertyNames.add(name);
+                                }
+                            }
                         }
                         // properties from its parents
                         if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
@@ -258,14 +264,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                                     ? parentSchema.getParents().getAll().stream()
                                                     : Stream.empty())
                                             .filter(o -> o instanceof ObjectSchema)
-                                            .map(o -> (ObjectSchema) o)
-                                            .forEach(parentObjectSchema -> {
-                                                if (parentObjectSchema.getProperties() != null) {
-                                                    for (Property property1 : parentObjectSchema.getProperties()) {
-                                                        ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
-                                                        String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty1.getName());
-                                                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1, name));
-                                                    }
+                                            .flatMap(o -> ((ObjectSchema) o).getProperties().stream())
+                                            .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
+                                            .forEach(property1 -> {
+                                                ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
+                                                String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty1.getName());
+                                                if (!referencePropertyNames.contains(name)) {
+                                                    propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1, name));
+                                                    referencePropertyNames.add(name);
                                                 }
                                             }));
                         }
