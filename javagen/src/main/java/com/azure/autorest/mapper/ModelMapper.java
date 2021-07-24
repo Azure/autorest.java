@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -193,7 +192,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             boolean needsFlatten = false;
-            if (settings.isModelerfourFlattenModel()    // enabled by modelerfour
+            if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
                     && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
                 if (isPolymorphic) {

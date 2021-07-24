@@ -43,7 +43,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         boolean flattened = false;
-        if (settings.isModelerfourFlattenModel()) { // enabled by modelerfour
+        if (settings.getModelerSettings().isFlattenModel()) {   // enabled by modelerfour
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 if (property.getParentSchema() != null) {
                     flattened = property.getParentSchema().getProperties().stream()
