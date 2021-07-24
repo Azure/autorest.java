@@ -21,7 +21,6 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
@@ -227,13 +226,7 @@ public abstract class ResourceOperation {
 
             List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
             propertiesFromTypeAndParents.add(new ArrayList<>());
-            requestBodyParameterModel.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
-                ModelProperty property = ModelProperty.ofClientModelProperty(p);
-                if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
-                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
-                }
-            });
-            requestBodyParameterModel.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
+            requestBodyParameterModel.getAccessibleProperties().forEach(p -> {
                 ModelProperty property = ModelProperty.ofClientModelProperty(p);
                 if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
@@ -243,13 +236,7 @@ public abstract class ResourceOperation {
             for (ClientModel parent : parentModels) {
                 propertiesFromTypeAndParents.add(new ArrayList<>());
 
-                parent.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
-                    ModelProperty property = ModelProperty.ofClientModelProperty(p);
-                    if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
-                        propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
-                    }
-                });
-                parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
+                parent.getAccessibleProperties().forEach(p -> {
                     ModelProperty property = ModelProperty.ofClientModelProperty(p);
                     if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                         propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);

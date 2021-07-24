@@ -43,7 +43,6 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -522,32 +521,20 @@ public class ExampleParser {
 
         List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
-        model.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
+        model.getAccessibleProperties().forEach(p -> {
             ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
             if (propertiesMap.putIfAbsent(modelProperty.getName(), modelProperty) == null) {
                 propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
-            }
-        });
-        model.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-            ModelProperty property = ModelProperty.ofClientModelProperty(p);
-            if (propertiesMap.putIfAbsent(property.getName(), property) == null) {
-                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
             }
         });
 
         for (ClientModel parent : parentModels) {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
-            parent.getProperties().stream().filter(p -> !p.getClientFlatten()).forEach(p -> {
+            parent.getAccessibleProperties().forEach(p -> {
                 ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
                 if (propertiesMap.putIfAbsent(modelProperty.getName(), modelProperty) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
-                }
-            });
-            parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-                ModelProperty property = ModelProperty.ofClientModelProperty(p);
-                if (propertiesMap.putIfAbsent(property.getName(), property) == null) {
-                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
             });
         }
