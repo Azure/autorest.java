@@ -10,7 +10,7 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "odata.type")
 @JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
 @Fluent
-public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
+public final class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
      * The list of metric criteria for this 'all of' operation.
      */

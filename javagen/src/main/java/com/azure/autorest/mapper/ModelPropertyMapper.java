@@ -43,17 +43,19 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         boolean flattened = false;
-        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
-            if (property.getParentSchema() != null) {
-                flattened = property.getParentSchema().getProperties().stream()
-                        .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
-                if (!flattened) {
-                    String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
-                    flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+        if (settings.isModelerfourFlattenModel()) { // enabled by modelerfour
+            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+                if (property.getParentSchema() != null) {
+                    flattened = property.getParentSchema().getProperties().stream()
+                            .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+                    if (!flattened) {
+                        String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
+                        flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+                    }
                 }
+            } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
+                flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
             }
-        } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
-            flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
         }
         builder.needsFlatten(flattened);
 

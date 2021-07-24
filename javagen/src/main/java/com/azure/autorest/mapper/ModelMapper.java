@@ -193,7 +193,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             boolean needsFlatten = false;
-            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+            if (settings.isModelerfourFlattenModel()    // enabled by modelerfour
+                    && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
                 if (isPolymorphic) {
                     String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);

@@ -128,6 +128,7 @@ public class JavaSettings
                     host.getBooleanValue("use-iterable", false),
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
+                    host.getBooleanValue("pipeline.modelerfour.flatten-models", false),
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("skip-formatting", false));
         }
@@ -189,6 +190,7 @@ public class JavaSettings
                          boolean useIterable,
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
+                         boolean modelerfourFlattenModel,
                          String keyCredentialHeaderName,
                          boolean skipFormatting)
     {
@@ -226,6 +228,7 @@ public class JavaSettings
         this.clientFlattenAnnotationTarget = (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
                 ? ClientFlattenAnnotationTarget.TYPE
                 : ClientFlattenAnnotationTarget.valueOf(clientFlattenAnnotationTarget.toUpperCase(Locale.ROOT));
+        this.modelerfourFlattenModel = modelerfourFlattenModel;
 
         if (credentialType != null) {
             String[] splits = credentialType.split(",");
@@ -305,8 +308,29 @@ public class JavaSettings
     }
     // target for @JsonFlatten annotation for x-ms-client-flatten
     private final ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;
+
+    /**
+     * @return When flatten client mode, where to put the <code>@JsonFlatten</code> annotation. If NONE, flatten at getter/setter methods via codegen.
+     */
     public ClientFlattenAnnotationTarget getClientFlattenAnnotationTarget() {
         return this.clientFlattenAnnotationTarget;
+    }
+
+    private final boolean modelerfourFlattenModel;
+
+    /**
+     * If false, use client-flattened-annotation-target = TYPE for no flatten;
+     * client-flattened-annotation-target = NONE for flatten at getter/setter methods via codegen.
+     *
+     * If true, use client-flattened-annotation-target = TYPE for <code>@JsonFlatten</code> on type (i.e. on class);
+     * client-flattened-annotation-target = FIELD for <code>@JsonFlatten</code> on field.
+     *
+     * modelerfour.flatten-models = false and client-flattened-annotation-target = NONE would require modelerfour.flatten-payloads = false.
+     *
+     * @return value of modelerfour.flatten-models
+     */
+    public boolean isModelerfourFlattenModel() {
+        return modelerfourFlattenModel;
     }
 
     private boolean regeneratePom;
