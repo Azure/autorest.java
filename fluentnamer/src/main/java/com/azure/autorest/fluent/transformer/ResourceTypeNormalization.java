@@ -276,6 +276,13 @@ class ResourceTypeNormalization {
         }
         compositeType.getParents().getImmediate().add(0, parentType);
         compositeType.getParents().getAll().add(0, parentType);
+
+        // add parent to children of this type as well
+        if (compositeType.getChildren() != null && !CoreUtils.isNullOrEmpty(compositeType.getChildren().getAll())) {
+            compositeType.getChildren().getAll().stream()
+                    .filter(o -> o instanceof ObjectSchema)
+                    .forEach(o -> ((ObjectSchema) o).getParents().getAll().add(parentType));
+        }
     }
 
     private static void replaceDummyParentType(ObjectSchema compositeType, ObjectSchema parentType) {

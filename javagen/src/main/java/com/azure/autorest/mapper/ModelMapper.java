@@ -212,18 +212,18 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             builder.needsFlatten(needsFlatten);
 
-            List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
+            List<ClientModelProperty> properties = new ArrayList<>();
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
                 properties.add(modelProperty);
 
-                if (modelProperty.getClientFlatten()) {
+                if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                     ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
                     String originalFlattenedPropertyName = property.getLanguage().getJava().getName();  // not modelProperty.getName()
                     ClientModel targetModel = this.map(targetModelSchema);
                     if (targetModel != null && !CoreUtils.isNullOrEmpty(targetModel.getProperties())) {
-                        // gather object and parents
+                        // gather this type and its parents
                         List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
                         objectSchemaAndParents.add(compositeType);
                         if (compositeType.getParents() != null && compositeType.getParents().getAll() != null) {
