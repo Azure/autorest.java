@@ -242,7 +242,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                         Set<String> referencePropertyNames = new HashSet<>();
                         for (ClientModelProperty property1 : targetModel.getProperties()) {
-                            if (!property1.getClientFlatten()) {
+                            if (!property1.getClientFlatten() && !property1.isAdditionalProperties()) {
                                 String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property1.getName());
                                 if (!referencePropertyNames.contains(name)) {
                                     propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property1, name));
@@ -265,6 +265,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                                     : Stream.empty())
                                             .filter(o -> o instanceof ObjectSchema)
                                             .flatMap(o -> ((ObjectSchema) o).getProperties().stream())
+                                            .filter(p -> !p.isIsDiscriminator())
                                             .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
                                             .forEach(property1 -> {
                                                 ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
