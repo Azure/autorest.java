@@ -7,45 +7,34 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyBase;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ModelProperty {
 
-    private final String description;
-    private final IType clientType;
+    private final ClientModelPropertyBase property;
 
-    private final ClientModelProperty property;
-    private final ClientModelPropertyReference propertyReference;
-
-    private ModelProperty(ClientModelProperty property, ClientModelPropertyReference propertyReference) {
-        this.description = property.getDescription();
-        this.clientType = property.getClientType();
-
+    private ModelProperty(ClientModelPropertyBase property) {
         this.property = property;
-        this.propertyReference = propertyReference;
     }
 
-    public static ModelProperty ofClientModelProperty(ClientModelProperty property) {
-        return new ModelProperty(property, null);
-    }
-
-    public static ModelProperty ofClientModelPropertyReference(ClientModelPropertyReference propertyReference) {
-        return new ModelProperty(propertyReference.getReferenceProperty(), propertyReference);
+    public static ModelProperty ofClientModelProperty(ClientModelPropertyBase property) {
+        return new ModelProperty(property);
     }
 
     public String getGetterName() {
-        return propertyReference == null ? property.getGetterName() : propertyReference.getGetterName();
+        return property.getGetterName();
     }
 
     public String getSetterName() {
-        return propertyReference == null ? property.getSetterName() : propertyReference.getSetterName();
+        return property.getSetterName();
     }
 
     public void addImportsTo(Set<String> imports) {
@@ -53,23 +42,19 @@ public class ModelProperty {
     }
 
     public String getName() {
-        return propertyReference == null ? property.getName() : propertyReference.getName();
+        return property.getName();
     }
 
     public String getDescription() {
-        return description;
+        return property.getDescription();
     }
 
     public IType getClientType() {
-        return clientType;
+        return property.getClientType();
     }
 
     public boolean isRequired() {
-        if (propertyReference != null) {
-            return propertyReference.getTargetProperty().isRequired() && propertyReference.getReferenceProperty().isRequired();
-        } else {
-            return property.isRequired();
-        }
+        return property.isRequired();
     }
 
     public boolean isConstant() {
@@ -77,11 +62,7 @@ public class ModelProperty {
     }
 
     public boolean isReadOnly() {
-        if (propertyReference != null) {
-            return propertyReference.getTargetProperty().getIsReadOnly() || propertyReference.getReferenceProperty().getIsReadOnly();
-        } else {
-            return property.getIsReadOnly();
-        }
+        return property.getIsReadOnly();
     }
 
     public boolean isReadOnlyForCreate() {
@@ -93,22 +74,32 @@ public class ModelProperty {
     }
 
     public String getSerializedName() {
-        if (propertyReference == null) {
-            return property.getSerializedName();
+        if (property instanceof ClientModelProperty) {
+            return ((ClientModelProperty) property).getSerializedName();
+        } else if (property instanceof ClientModelPropertyReference) {
+            return ((ClientModelPropertyReference) property).getAllProperties().stream()
+                    .map(ClientModelProperty::getSerializedName)
+                    .map(s -> s.replace(".", "\\\\."))
+                    .collect(Collectors.joining("."));
         } else {
-            return String.format("%1$s.%2$s",
-                    propertyReference.getTargetProperty().getSerializedName().replace(".", "\\\\."),
-                    propertyReference.getReferenceProperty().getSerializedName()).replace(".", "\\\\.");
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
         }
     }
 
     public List<String> getSerializedNames() {
-        if (propertyReference != null) {
-            return Arrays.asList(propertyReference.getTargetProperty().getSerializedName(), propertyReference.getReferenceProperty().getSerializedName());
-        } else if (!property.getNeedsFlatten()) {
-            return FluentUtils.splitFlattenedSerializedName(property.getSerializedName());
+        if (property instanceof ClientModelProperty) {
+            ClientModelProperty clientModelProperty = (ClientModelProperty) property;
+            if (!clientModelProperty.getNeedsFlatten()) {
+                return FluentUtils.splitFlattenedSerializedName(clientModelProperty.getSerializedName());
+            } else {
+                return Collections.singletonList(clientModelProperty.getSerializedName());
+            }
+        } else if (property instanceof ClientModelPropertyReference) {
+            return ((ClientModelPropertyReference) property).getAllProperties().stream()
+                    .map(ClientModelProperty::getSerializedName)
+                    .collect(Collectors.toList());
         } else {
-            return Collections.singletonList(property.getSerializedName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
         }
     }
 
@@ -117,11 +108,11 @@ public class ModelProperty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ModelProperty that = (ModelProperty) o;
-        return Objects.equals(property, that.property) && Objects.equals(propertyReference, that.propertyReference);
+        return Objects.equals(property, that.property);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(property, propertyReference);
+        return Objects.hash(property);
     }
 }

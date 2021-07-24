@@ -234,7 +234,7 @@ public abstract class ResourceOperation {
                 }
             });
             requestBodyParameterModel.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-                ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+                ModelProperty property = ModelProperty.ofClientModelProperty(p);
                 if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
@@ -250,7 +250,7 @@ public abstract class ResourceOperation {
                     }
                 });
                 parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-                    ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+                    ModelProperty property = ModelProperty.ofClientModelProperty(p);
                     if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
                         propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                     }

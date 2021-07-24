@@ -219,64 +219,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                    ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
-                    String originalFlattenedPropertyName = property.getLanguage().getJava().getName();  // not modelProperty.getName()
-                    ClientModel targetModel = this.map(targetModelSchema);
-                    if (targetModel != null && !CoreUtils.isNullOrEmpty(targetModel.getProperties())) {
-                        // gather this type and its parents
-                        List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
-                        objectSchemaAndParents.add(compositeType);
-                        if (compositeType.getParents() != null && compositeType.getParents().getAll() != null) {
-                            objectSchemaAndParents.addAll(
-                                    compositeType.getParents().getAll().stream()
-                                            .filter(p -> p instanceof ObjectSchema)
-                                            .map(p -> (ObjectSchema) p)
-                                            .collect(Collectors.toList()));
-                        }
-                        // gather property names
-                        Set<String> propertyNames = objectSchemaAndParents.stream()
-                                .flatMap(o -> o.getProperties().stream())
-                                .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
-                                .map(p -> p.getLanguage().getJava().getName())
-                                .collect(Collectors.toSet());
-
-                        Set<String> referencePropertyNames = new HashSet<>();
-                        for (ClientModelProperty property1 : targetModel.getProperties()) {
-                            if (!property1.getClientFlatten() && !property1.isAdditionalProperties()) {
-                                String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property1.getName());
-                                if (!referencePropertyNames.contains(name)) {
-                                    propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property1, name));
-                                    referencePropertyNames.add(name);
-                                }
-                            }
-                        }
-                        // properties from its parents
-                        if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
-                            // take 1st immediate parent of the target model, as rest parents (if any) is already flattened into the target model
-                            targetModelSchema.getParents().getImmediate().stream()
-                                    .filter(o -> o instanceof ObjectSchema)
-                                    .map(o -> (ObjectSchema) o)
-                                    .findFirst()
-                                    // then that parent, and all of its parents
-                                    .ifPresent(parentSchema -> Stream.concat(
-                                            Stream.of(parentSchema),
-                                            parentSchema.getParents() != null && parentSchema.getParents().getAll() != null
-                                                    ? parentSchema.getParents().getAll().stream()
-                                                    : Stream.empty())
-                                            .filter(o -> o instanceof ObjectSchema)
-                                            .flatMap(o -> ((ObjectSchema) o).getProperties().stream())
-                                            .filter(p -> !p.isIsDiscriminator())
-                                            .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
-                                            .forEach(property1 -> {
-                                                ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
-                                                String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty1.getName());
-                                                if (!referencePropertyNames.contains(name)) {
-                                                    propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1, name));
-                                                    referencePropertyNames.add(name);
-                                                }
-                                            }));
-                        }
-                    }
+                    propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty));
                 }
             }
 
@@ -308,6 +251,97 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
     protected ClientModel.Builder createModelBuilder() {
         return new ClientModel.Builder();
+    }
+
+    private List<ClientModelPropertyReference> collectPropertiesFromFlattenedModel(
+            ObjectSchema compositeType, Property property, ClientModelProperty modelProperty) {
+
+        List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
+        ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
+        String originalFlattenedPropertyName = property.getLanguage().getJava().getName();  // not modelProperty.getName()
+        ClientModel targetModel = this.map(targetModelSchema);
+        if (targetModel != null && !CoreUtils.isNullOrEmpty(targetModel.getProperties())) {
+            // gather this type and its parents
+            List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
+            objectSchemaAndParents.add(compositeType);
+            if (compositeType.getParents() != null && compositeType.getParents().getAll() != null) {
+                objectSchemaAndParents.addAll(
+                        compositeType.getParents().getAll().stream()
+                                .filter(p -> p instanceof ObjectSchema)
+                                .map(p -> (ObjectSchema) p)
+                                .collect(Collectors.toList()));
+            }
+            // gather property names
+            Set<String> propertyNames = objectSchemaAndParents.stream()
+                    .flatMap(o -> o.getProperties().stream())
+                    .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
+                    .map(p -> p.getLanguage().getJava().getName())
+                    .collect(Collectors.toSet());
+
+            Set<String> referencePropertyNames = new HashSet<>();
+            // properties from the target model
+            for (ClientModelProperty property1 : targetModel.getProperties()) {
+                if (!property1.getClientFlatten() && !property1.isAdditionalProperties()) {
+                    String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property1.getName());
+                    if (!referencePropertyNames.contains(name)) {
+                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property1, name));
+                        referencePropertyNames.add(name);
+                    }
+                }
+            }
+            for (ClientModelPropertyReference property1 : targetModel.getPropertyReferences()) {
+                if (property1.isFromFlattenedProperty()) {
+                    String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property1.getName());
+                    if (!referencePropertyNames.contains(name)) {
+                        propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property1, name));
+                        referencePropertyNames.add(name);
+                    }
+                }
+            }
+            // properties from the parents of the target model
+            if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
+                // take 1st immediate parent of the target model, as rest parents (if any) is already flattened into the target model
+                targetModelSchema.getParents().getImmediate().stream()
+                        .filter(o -> o instanceof ObjectSchema)
+                        .map(o -> (ObjectSchema) o)
+                        .findFirst()
+                        // then that parent, and all of its parents
+                        .ifPresent(parentSchema -> Stream.concat(
+                                Stream.of(parentSchema),
+                                parentSchema.getParents() != null && parentSchema.getParents().getAll() != null
+                                        ? parentSchema.getParents().getAll().stream()
+                                        : Stream.empty())
+                                .filter(o -> o instanceof ObjectSchema)
+                                .map(o -> (ObjectSchema) o)
+                                .forEach(objectSchema1 -> objectSchema1.getProperties().stream()
+                                        .filter(p -> !p.isIsDiscriminator())
+                                        .forEach(property1 -> {
+                                            if (property1.getExtensions() == null || !property1.getExtensions().isXmsClientFlatten()) {
+                                                ClientModelProperty referenceProperty1 = Mappers.getModelPropertyMapper().map(property1);
+                                                String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, referenceProperty1.getName());
+                                                if (!referencePropertyNames.contains(name)) {
+                                                    propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, referenceProperty1, name));
+                                                    referencePropertyNames.add(name);
+                                                }
+                                            } else {
+                                                // nested flattened model
+                                                if (property1.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())) {
+                                                    ClientModelProperty modelProperty1 = Mappers.getModelPropertyMapper().map(property1);
+                                                    List<ClientModelPropertyReference> nestedReferences = collectPropertiesFromFlattenedModel(
+                                                            objectSchema1, property1, modelProperty1);
+                                                    nestedReferences.forEach(property2 -> {
+                                                        String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property2.getName());
+                                                        if (!referencePropertyNames.contains(name)) {
+                                                            propertyReferences.add(ClientModelPropertyReference.ofFlattenProperty(modelProperty, targetModel, property2, name));
+                                                            referencePropertyNames.add(name);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        })));
+            }
+        }
+        return propertyReferences;
     }
 
     private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {

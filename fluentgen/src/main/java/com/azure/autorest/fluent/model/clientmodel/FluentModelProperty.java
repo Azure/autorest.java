@@ -10,8 +10,7 @@ import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTempla
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTypeConversionTemplate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyBase;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -27,16 +26,8 @@ public class FluentModelProperty {
 
     private final ImmutableMethod immutableMethod;
 
-    public FluentModelProperty(ClientModelProperty property) {
+    public FluentModelProperty(ClientModelPropertyBase property) {
         this.modelProperty = ModelProperty.ofClientModelProperty(property);
-        this.fluentType = getWrapperType(property.getClientType());
-        this.immutableMethod = this.fluentType == property.getClientType()
-                ? new PropertyTemplate(this, this.modelProperty)
-                : new PropertyTypeConversionTemplate(this, this.modelProperty);
-    }
-
-    public FluentModelProperty(ClientModelPropertyReference property) {
-        this.modelProperty = ModelProperty.ofClientModelPropertyReference(property);
         this.fluentType = getWrapperType(property.getClientType());
         this.immutableMethod = this.fluentType == property.getClientType()
                 ? new PropertyTemplate(this, this.modelProperty)

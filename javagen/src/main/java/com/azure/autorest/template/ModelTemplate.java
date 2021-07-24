@@ -8,6 +8,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyBase;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
@@ -21,7 +22,6 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -70,11 +70,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
         if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
-            propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
+            propertyReferences.forEach(p -> p.addImportsTo(imports, false));
         }
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                model.getPropertyReferences().forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
+                model.getPropertyReferences().forEach(p -> p.addImportsTo(imports, false));
             }
             propertyReferences.addAll(model.getPropertyReferences());
         }
@@ -133,7 +133,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
         }
         if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-                || propertyReferences.stream().anyMatch(p -> !p.getReferenceProperty().getIsReadOnly())) {
+                || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
             javaFile.annotation("Fluent");
         } else {
             javaFile.annotation("Immutable");
@@ -312,7 +312,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
                 // reference to properties from parent model
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromParentModel).collect(Collectors.toList())) {
-                    ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
+                    ClientModelPropertyBase parentProperty = propertyReference.getReferenceProperty();
                     if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
                         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                         classBlock.annotation("Override");
@@ -332,7 +332,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 // reference to properties from flattened client model
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
-                    ClientModelProperty property = propertyReference.getReferenceProperty();
+                    ClientModelPropertyBase property = propertyReference.getReferenceProperty();
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyType = property.getWireType();
@@ -573,7 +573,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     // Javadoc for getter method
-    private void generateGetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+    private void generateGetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelPropertyBase property) {
         classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment -> {
             comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
             comment.methodReturns(String.format("the %1$s value", property.getName()));
@@ -581,7 +581,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     // Javadoc for setter method
-    private void generateSetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelProperty property) {
+    private void generateSetterJavadoc(JavaClass classBlock, ClientModel model, ClientModelPropertyBase property) {
         classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), (comment) -> {
             if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
                 comment.description(String.format("Set the %s property", property.getName()));

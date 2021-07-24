@@ -6,6 +6,7 @@ package com.azure.mgmttest;
 import com.azure.core.management.Resource;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
@@ -104,6 +105,9 @@ public class CompilationTests {
         PacketCaptureResultInner packetCaptureResult = mock(PacketCaptureResultInner.class);
         packetCaptureResult.withTarget(anyString());
         packetCaptureResult.target();
+
+        ExtendedProductInner extendedProduct = mock(ExtendedProductInner.class);
+        extendedProduct.uri();
     }
 
 //    public void testIntEnum() {

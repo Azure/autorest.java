@@ -50,6 +50,8 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("generate-client-interfaces", true);
             DEFAULT_SETTINGS.put("required-parameter-client-methods", true);
             DEFAULT_SETTINGS.put("generate-samples", true);
+
+            //DEFAULT_SETTINGS.put("client-flattened-annotation-target", "NONE");
         }
 
         private Javagen javagen;

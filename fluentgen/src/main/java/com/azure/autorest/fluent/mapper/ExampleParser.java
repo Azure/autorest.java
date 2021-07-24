@@ -529,7 +529,7 @@ public class ExampleParser {
             }
         });
         model.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-            ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+            ModelProperty property = ModelProperty.ofClientModelProperty(p);
             if (propertiesMap.putIfAbsent(property.getName(), property) == null) {
                 propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
             }
@@ -545,7 +545,7 @@ public class ExampleParser {
                 }
             });
             parent.getPropertyReferences().stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).forEach(p -> {
-                ModelProperty property = ModelProperty.ofClientModelPropertyReference(p);
+                ModelProperty property = ModelProperty.ofClientModelProperty(p);
                 if (propertiesMap.putIfAbsent(property.getName(), property) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
