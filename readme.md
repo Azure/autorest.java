@@ -8,10 +8,10 @@ You need to have the following installed on your machine:
 - Java 8+
 - Maven 3.x
 
-You need to have [autorest-beta](https://www.npmjs.com/package/@autorest/autorest) installed through NPM:
+You need to have [autorest](https://www.npmjs.com/package/autorest) installed through NPM:
 
 ```bash
-npm i -g autorest
+npm install -g autorest
 ```
 
 # Usage
@@ -28,7 +28,7 @@ The first time running it will take a little longer to download and install all 
 To build from source code, clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
 
 ```bash
-mvn package -Dlocal
+mvn package -P local
 ```
 
 This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer--jar-with-dependencies.jar` under `fluentnamer` module.
@@ -48,7 +48,7 @@ Java files will be generated under `where/to/generate/java/files/src/main/java/s
 To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shutdown the JVM and leave it orphaned. (which can be killed in the Task Manager)**
 
 # Settings
-Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/master/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
+Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/main/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
 
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
