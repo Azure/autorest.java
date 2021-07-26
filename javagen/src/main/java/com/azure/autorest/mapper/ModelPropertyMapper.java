@@ -124,16 +124,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         builder.headerCollectionPrefix(headerCollectionPrefix);
 
         IType propertyWireType = Mappers.getSchemaMapper().map(property.getSchema());
-        if (propertyWireType != null && property.isNullable()) {
+        if (property.isNullable() || !property.isRequired()) {
             propertyWireType = propertyWireType.asNullable();
         }
-
-        IType propertyClientType = Mappers.getSchemaMapper().map((property.getSchema())).getClientType();
-
-        if (!property.isRequired()) {
-            propertyClientType = propertyClientType.asNullable();
-            propertyWireType = propertyWireType.asNullable();
-        }
+        // Invariant: clientType == wireType.getClientType()
+        IType propertyClientType = propertyWireType.getClientType();
         builder.wireType(propertyWireType).clientType(propertyClientType);
 
         Schema autoRestPropertyModelType = property.getSchema();

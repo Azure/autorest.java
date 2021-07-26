@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * A property that exists within a model defined by the client.
  */
-public class ClientModelProperty implements ClientModelPropertyBase {
+public class ClientModelProperty implements ClientModelPropertyAccess {
     /**
      * Get the name of this property.
      */

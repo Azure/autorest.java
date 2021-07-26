@@ -7,7 +7,10 @@ package com.azure.autorest.model.clientmodel;
 
 import java.util.Set;
 
-public interface ClientModelPropertyBase {
+/**
+ * Access to the client model property.
+ */
+public interface ClientModelPropertyAccess {
 
     String getName();
 
@@ -16,8 +19,6 @@ public interface ClientModelPropertyBase {
     String getGetterName();
 
     String getSetterName();
-
-    IType getWireType();
 
     IType getClientType();
 

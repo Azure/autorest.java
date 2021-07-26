@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ClientModelPropertyReference implements ClientModelPropertyBase {
+public class ClientModelPropertyReference implements ClientModelPropertyAccess {
 
     /*
     Usage of the ClientModelPropertyReference
@@ -22,13 +22,13 @@ public class ClientModelPropertyReference implements ClientModelPropertyBase {
      */
 
     private final String name;
-    private final ClientModelPropertyBase referenceProperty;
+    private final ClientModelPropertyAccess referenceProperty;
     private final ClientModel targetModel;
     private final ClientModelProperty targetProperty;
 
     private ClientModelPropertyReference(ClientModelProperty targetProperty,
                                          ClientModel targetModel,
-                                         ClientModelPropertyBase referenceProperty,
+                                         ClientModelPropertyAccess referenceProperty,
                                          String name) {
         this.targetProperty = targetProperty;
         this.targetModel = targetModel;
@@ -72,7 +72,7 @@ public class ClientModelPropertyReference implements ClientModelPropertyBase {
         return this.targetProperty == null;
     }
 
-    public ClientModelPropertyBase getReferenceProperty() {
+    public ClientModelPropertyAccess getReferenceProperty() {
         return referenceProperty;
     }
 
@@ -117,11 +117,6 @@ public class ClientModelPropertyReference implements ClientModelPropertyBase {
     @Override
     public String getSetterName() {
         return CodeNamer.getModelNamer().modelPropertySetterName(this.getName());
-    }
-
-    @Override
-    public IType getWireType() {
-        return referenceProperty.getWireType();
     }
 
     public IType getClientType() {

@@ -7,7 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyBase;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 
@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 
 public class ModelProperty {
 
-    private final ClientModelPropertyBase property;
+    private final ClientModelPropertyAccess property;
 
-    private ModelProperty(ClientModelPropertyBase property) {
+    private ModelProperty(ClientModelPropertyAccess property) {
         this.property = property;
     }
 
-    public static ModelProperty ofClientModelProperty(ClientModelPropertyBase property) {
+    public static ModelProperty ofClientModelProperty(ClientModelPropertyAccess property) {
         return new ModelProperty(property);
     }
 

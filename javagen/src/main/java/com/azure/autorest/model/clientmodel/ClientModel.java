@@ -187,9 +187,9 @@ public class ClientModel {
      *
      * @return The properties that have access (getter or setter) methods.
      */
-    public List<ClientModelPropertyBase> getAccessibleProperties() {
+    public List<ClientModelPropertyAccess> getAccessibleProperties() {
         List<ClientModelProperty> properties1 = this.getProperties() == null ? Collections.emptyList() : this.getProperties();
-        List<ClientModelPropertyBase> properties = properties1.stream()
+        List<ClientModelPropertyAccess> properties = properties1.stream()
                 .filter(p -> !p.getClientFlatten())
                 .collect(Collectors.toList());
         properties.addAll(this.getPropertyReferences().stream()
