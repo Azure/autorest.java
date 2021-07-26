@@ -45,6 +45,6 @@ public class PathItemsTests {
     public void getLocalPathItemQueryNull() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("globalStringQuery", "globalStringQuery");
-        client.getGlobalAndLocalQueryNull("pathItemStringPath", "localStringPath", requestOptions);
+        client.getLocalPathItemQueryNull("pathItemStringPath", "localStringPath", requestOptions);
     }
 }
