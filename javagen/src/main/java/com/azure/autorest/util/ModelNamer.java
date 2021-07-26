@@ -15,12 +15,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 public class ModelNamer {
 
     public String modelPropertyGetterName(ServiceClientProperty property) {
-        return modelPropertyGetterName(
-                new ClientModelProperty.Builder()
-                        .name(property.getName())
-                        .isReadOnly(property.isReadOnly())
-                        .clientType(property.getType())
-                        .build());
+        return modelPropertyGetterName(property.getType(), property.getName());
     }
 
     public String modelPropertyGetterName(ClientModelProperty property) {
