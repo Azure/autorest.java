@@ -29,6 +29,6 @@ These documents are Java-specific, see [our main docs][main_docs] for more gener
 [main_migrate]: https://github.com/Azure/autorest/tree/master/docs/migrate/readme.md
 [java_migrate]: ./migrate/readme.md
 [java_dev]: ./developer/readme.md
-[main_dev]: https://github.com/Azure/autorest/tree/master/docs/dev/readme.md
+[main_dev]: https://github.com/Azure/autorest/tree/master/docs/developer/readme.md
 [sample]: ./samples/readme.md
 [faq]: ./faq.md
