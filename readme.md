@@ -8,10 +8,10 @@ You need to have the following installed on your machine:
 - Java 8+
 - Maven 3.x
 
-You need to have [autorest-beta](https://www.npmjs.com/package/@autorest/autorest) installed through NPM:
+You need to have [autorest](https://www.npmjs.com/package/autorest) installed through NPM:
 
 ```bash
-npm i -g autorest
+npm install -g autorest
 ```
 
 # Usage
@@ -28,7 +28,7 @@ The first time running it will take a little longer to download and install all 
 To build from source code, clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
 
 ```bash
-mvn package -Dlocal
+mvn package -P local
 ```
 
 This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer--jar-with-dependencies.jar` under `fluentnamer` module.
