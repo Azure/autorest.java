@@ -39,7 +39,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+        String serviceClientBuilderName = ClientModelUtil.getBuilderClassName(serviceClient.getInterfaceName());
 
         ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings);
 

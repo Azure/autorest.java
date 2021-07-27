@@ -33,7 +33,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
     final boolean wrapServiceClient = methodGroupClient == null;
     final String builderPackageName = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
-    final String builderClassName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+    final String builderClassName = ClientModelUtil.getBuilderClassName(serviceClient.getInterfaceName());
     final boolean samePackageAsBuilder = builderPackageName.equals(syncClient.getPackageName());
     final JavaVisibility constructorVisibility = samePackageAsBuilder ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
 

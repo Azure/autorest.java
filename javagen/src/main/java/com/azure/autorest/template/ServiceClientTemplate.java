@@ -69,7 +69,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             addServiceClientAnnotationImport(imports);
             imports.add(String.format("%1$s.%2$s",
                 ClientModelUtil.getServiceClientBuilderPackageName(serviceClient),
-                serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+                    ClientModelUtil.getBuilderClassName(serviceClient.getInterfaceName())));
         } else {
             addSerializerImport(imports);
         }
@@ -90,7 +90,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         });
         if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients()) {
             javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
-                serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+                    ClientModelUtil.getBuilderClassName(serviceClient.getInterfaceName())));
         }
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
         {
