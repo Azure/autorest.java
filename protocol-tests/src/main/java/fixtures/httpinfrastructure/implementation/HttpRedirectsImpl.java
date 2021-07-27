@@ -92,37 +92,69 @@ public final class HttpRedirectsImpl {
         Mono<Response<Void>> delete307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head300WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.head300(this.client.getHost(), requestOptions, context));
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head300WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head300(this.client.getHost(), requestOptions, context);
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async(RequestOptions requestOptions) {
         return head300WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async(RequestOptions requestOptions, Context context) {
         return head300WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head300(RequestOptions requestOptions) {
         head300Async(requestOptions).block();
     }
 
-    /** Return 300 status code and redirect to /http/success/200. */
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head300WithResponse(RequestOptions requestOptions, Context context) {
         return head300WithResponseAsync(requestOptions, context).block();
@@ -138,6 +170,9 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get300WithResponseAsync(RequestOptions requestOptions) {
@@ -154,6 +189,10 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get300WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -170,6 +209,9 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> get300Async(RequestOptions requestOptions) {
@@ -194,6 +236,10 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> get300Async(RequestOptions requestOptions, Context context) {
@@ -218,6 +264,9 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData get300(RequestOptions requestOptions) {
@@ -234,79 +283,147 @@ public final class HttpRedirectsImpl {
      *     String
      * ]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get300WithResponse(RequestOptions requestOptions, Context context) {
         return get300WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head301WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.head301(this.client.getHost(), requestOptions, context));
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head301WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head301(this.client.getHost(), requestOptions, context);
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async(RequestOptions requestOptions) {
         return head301WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async(RequestOptions requestOptions, Context context) {
         return head301WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head301(RequestOptions requestOptions) {
         head301Async(requestOptions).block();
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head301WithResponse(RequestOptions requestOptions, Context context) {
         return head301WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get301WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.get301(this.client.getHost(), requestOptions, context));
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get301WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.get301(this.client.getHost(), requestOptions, context);
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async(RequestOptions requestOptions) {
         return get301WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async(RequestOptions requestOptions, Context context) {
         return get301WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get301(RequestOptions requestOptions) {
         get301Async(requestOptions).block();
     }
 
-    /** Return 301 status code and redirect to /http/success/200. */
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get301WithResponse(RequestOptions requestOptions, Context context) {
         return get301WithResponseAsync(requestOptions, context).block();
@@ -315,6 +432,9 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301WithResponseAsync(RequestOptions requestOptions) {
@@ -324,6 +444,10 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -333,6 +457,9 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async(RequestOptions requestOptions) {
@@ -342,6 +469,10 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async(RequestOptions requestOptions, Context context) {
@@ -351,6 +482,8 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put301(RequestOptions requestOptions) {
@@ -360,79 +493,147 @@ public final class HttpRedirectsImpl {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put301WithResponse(RequestOptions requestOptions, Context context) {
         return put301WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head302WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.head302(this.client.getHost(), requestOptions, context));
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head302WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head302(this.client.getHost(), requestOptions, context);
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async(RequestOptions requestOptions) {
         return head302WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async(RequestOptions requestOptions, Context context) {
         return head302WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head302(RequestOptions requestOptions) {
         head302Async(requestOptions).block();
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head302WithResponse(RequestOptions requestOptions, Context context) {
         return head302WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get302WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.get302(this.client.getHost(), requestOptions, context));
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get302WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.get302(this.client.getHost(), requestOptions, context);
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async(RequestOptions requestOptions) {
         return get302WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async(RequestOptions requestOptions, Context context) {
         return get302WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get302(RequestOptions requestOptions) {
         get302Async(requestOptions).block();
     }
 
-    /** Return 302 status code and redirect to /http/success/200. */
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get302WithResponse(RequestOptions requestOptions, Context context) {
         return get302WithResponseAsync(requestOptions, context).block();
@@ -441,6 +642,9 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302WithResponseAsync(RequestOptions requestOptions) {
@@ -450,6 +654,10 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -459,6 +667,9 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async(RequestOptions requestOptions) {
@@ -468,6 +679,10 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async(RequestOptions requestOptions, Context context) {
@@ -477,6 +692,8 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch302(RequestOptions requestOptions) {
@@ -486,6 +703,10 @@ public final class HttpRedirectsImpl {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch302WithResponse(RequestOptions requestOptions, Context context) {
@@ -495,6 +716,9 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303WithResponseAsync(RequestOptions requestOptions) {
@@ -504,6 +728,10 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303WithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -513,6 +741,9 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async(RequestOptions requestOptions) {
@@ -522,6 +753,10 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async(RequestOptions requestOptions, Context context) {
@@ -531,6 +766,8 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post303(RequestOptions requestOptions) {
@@ -540,223 +777,419 @@ public final class HttpRedirectsImpl {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post303WithResponse(RequestOptions requestOptions, Context context) {
         return post303WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.head307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async(RequestOptions requestOptions) {
         return head307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async(RequestOptions requestOptions, Context context) {
         return head307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head307(RequestOptions requestOptions) {
         head307Async(requestOptions).block();
     }
 
-    /** Redirect with 307, resulting in a 200 success. */
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head307WithResponse(RequestOptions requestOptions, Context context) {
         return head307WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.get307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.get307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async(RequestOptions requestOptions) {
         return get307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async(RequestOptions requestOptions, Context context) {
         return get307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get307(RequestOptions requestOptions) {
         get307Async(requestOptions).block();
     }
 
-    /** Redirect get with 307, resulting in a 200 success. */
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get307WithResponse(RequestOptions requestOptions, Context context) {
         return get307WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.put307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.put307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async(RequestOptions requestOptions) {
         return put307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async(RequestOptions requestOptions, Context context) {
         return put307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put307(RequestOptions requestOptions) {
         put307Async(requestOptions).block();
     }
 
-    /** Put redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put307WithResponse(RequestOptions requestOptions, Context context) {
         return put307WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.patch307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.patch307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async(RequestOptions requestOptions) {
         return patch307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async(RequestOptions requestOptions, Context context) {
         return patch307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch307(RequestOptions requestOptions) {
         patch307Async(requestOptions).block();
     }
 
-    /** Patch redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch307WithResponse(RequestOptions requestOptions, Context context) {
         return patch307WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.post307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.post307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async(RequestOptions requestOptions) {
         return post307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async(RequestOptions requestOptions, Context context) {
         return post307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post307(RequestOptions requestOptions) {
         post307Async(requestOptions).block();
     }
 
-    /** Post redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post307WithResponse(RequestOptions requestOptions, Context context) {
         return post307WithResponseAsync(requestOptions, context).block();
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307WithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(context -> service.delete307(this.client.getHost(), requestOptions, context));
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.delete307(this.client.getHost(), requestOptions, context);
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async(RequestOptions requestOptions) {
         return delete307WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async(RequestOptions requestOptions, Context context) {
         return delete307WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete307(RequestOptions requestOptions) {
         delete307Async(requestOptions).block();
     }
 
-    /** Delete redirected with 307, resulting in a 200 after redirect. */
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete307WithResponse(RequestOptions requestOptions, Context context) {
         return delete307WithResponseAsync(requestOptions, context).block();

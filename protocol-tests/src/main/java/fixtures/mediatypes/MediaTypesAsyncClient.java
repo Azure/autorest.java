@@ -40,6 +40,9 @@ public final class MediaTypesAsyncClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> analyzeBodyWithResponse(RequestOptions requestOptions) {
@@ -63,6 +66,9 @@ public final class MediaTypesAsyncClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> analyzeBody(RequestOptions requestOptions) {
@@ -77,6 +83,9 @@ public final class MediaTypesAsyncClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
@@ -91,6 +100,9 @@ public final class MediaTypesAsyncClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> contentTypeWithEncoding(RequestOptions requestOptions) {

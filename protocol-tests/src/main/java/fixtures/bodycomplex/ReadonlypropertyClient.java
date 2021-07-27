@@ -34,6 +34,9 @@ public final class ReadonlypropertyClient {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -51,6 +54,10 @@ public final class ReadonlypropertyClient {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -68,6 +75,9 @@ public final class ReadonlypropertyClient {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -85,6 +95,11 @@ public final class ReadonlypropertyClient {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

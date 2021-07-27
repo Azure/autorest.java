@@ -32,6 +32,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>userAgent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramExistingKeyWithResponse(RequestOptions requestOptions) {
@@ -48,19 +51,32 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>userAgent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramExistingKey(RequestOptions requestOptions) {
         return this.serviceClient.paramExistingKeyAsync(requestOptions);
     }
 
-    /** Get a response with header value "User-Agent": "overwrite". */
+    /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "User-Agent": "overwrite".
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseExistingKeyWithResponseAsync(requestOptions);
     }
 
-    /** Get a response with header value "User-Agent": "overwrite". */
+    /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "User-Agent": "overwrite".
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseExistingKey(RequestOptions requestOptions) {
         return this.serviceClient.responseExistingKeyAsync(requestOptions);
@@ -76,6 +92,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
@@ -92,19 +111,32 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramProtectedKey(RequestOptions requestOptions) {
         return this.serviceClient.paramProtectedKeyAsync(requestOptions);
     }
 
-    /** Get a response with header value "Content-Type": "text/html". */
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "Content-Type": "text/html".
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseProtectedKeyWithResponseAsync(requestOptions);
     }
 
-    /** Get a response with header value "Content-Type": "text/html". */
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "Content-Type": "text/html".
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseProtectedKey(RequestOptions requestOptions) {
         return this.serviceClient.responseProtectedKeyAsync(requestOptions);
@@ -121,6 +153,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramIntegerWithResponse(RequestOptions requestOptions) {
@@ -138,6 +173,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramInteger(RequestOptions requestOptions) {
@@ -154,6 +192,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 1 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseIntegerWithResponse(RequestOptions requestOptions) {
@@ -170,6 +211,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 1 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseInteger(RequestOptions requestOptions) {
@@ -188,6 +232,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramLongWithResponse(RequestOptions requestOptions) {
@@ -206,6 +253,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramLong(RequestOptions requestOptions) {
@@ -222,6 +272,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 105 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseLongWithResponse(RequestOptions requestOptions) {
@@ -238,6 +291,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 105 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseLong(RequestOptions requestOptions) {
@@ -256,6 +312,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramFloatWithResponse(RequestOptions requestOptions) {
@@ -274,6 +333,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramFloat(RequestOptions requestOptions) {
@@ -290,6 +352,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponse(RequestOptions requestOptions) {
@@ -306,6 +371,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloat(RequestOptions requestOptions) {
@@ -324,6 +392,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDoubleWithResponse(RequestOptions requestOptions) {
@@ -342,6 +413,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDouble(RequestOptions requestOptions) {
@@ -358,6 +432,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 7e120 or -3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponse(RequestOptions requestOptions) {
@@ -374,6 +451,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": 7e120 or -3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDouble(RequestOptions requestOptions) {
@@ -391,6 +471,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
      *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramBoolWithResponse(RequestOptions requestOptions) {
@@ -408,6 +491,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
      *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramBool(RequestOptions requestOptions) {
@@ -424,6 +510,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": true or false.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseBoolWithResponse(RequestOptions requestOptions) {
@@ -440,6 +529,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header value "value": true or false.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseBool(RequestOptions requestOptions) {
@@ -458,6 +550,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramStringWithResponse(RequestOptions requestOptions) {
@@ -476,6 +571,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramString(RequestOptions requestOptions) {
@@ -492,6 +590,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseStringWithResponse(RequestOptions requestOptions) {
@@ -508,6 +609,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseString(RequestOptions requestOptions) {
@@ -526,6 +630,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDateWithResponse(RequestOptions requestOptions) {
@@ -544,6 +651,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDate(RequestOptions requestOptions) {
@@ -560,6 +670,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "2010-01-01" or "0001-01-01".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDateWithResponse(RequestOptions requestOptions) {
@@ -576,6 +689,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "2010-01-01" or "0001-01-01".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDate(RequestOptions requestOptions) {
@@ -594,6 +710,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponse(RequestOptions requestOptions) {
@@ -612,6 +731,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetime(RequestOptions requestOptions) {
@@ -628,6 +750,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeWithResponse(RequestOptions requestOptions) {
@@ -644,6 +769,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetime(RequestOptions requestOptions) {
@@ -662,6 +790,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
@@ -680,6 +811,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeRfc1123(RequestOptions requestOptions) {
@@ -696,6 +830,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
@@ -712,6 +849,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeRfc1123(RequestOptions requestOptions) {
@@ -729,6 +869,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponse(RequestOptions requestOptions) {
@@ -746,6 +889,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDuration(RequestOptions requestOptions) {
@@ -762,6 +908,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponse(RequestOptions requestOptions) {
@@ -778,6 +927,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDuration(RequestOptions requestOptions) {
@@ -795,6 +947,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponse(RequestOptions requestOptions) {
@@ -812,6 +967,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramByte(RequestOptions requestOptions) {
@@ -828,6 +986,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseByteWithResponse(RequestOptions requestOptions) {
@@ -844,6 +1005,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseByte(RequestOptions requestOptions) {
@@ -861,6 +1025,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramEnumWithResponse(RequestOptions requestOptions) {
@@ -878,6 +1045,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramEnum(RequestOptions requestOptions) {
@@ -894,6 +1064,9 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "GREY" or null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseEnumWithResponse(RequestOptions requestOptions) {
@@ -910,19 +1083,32 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a response with header values "GREY" or null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseEnum(RequestOptions requestOptions) {
         return this.serviceClient.responseEnumAsync(requestOptions);
     }
 
-    /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
+    /**
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.customRequestIdWithResponseAsync(requestOptions);
     }
 
-    /** Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. */
+    /**
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customRequestId(RequestOptions requestOptions) {
         return this.serviceClient.customRequestIdAsync(requestOptions);

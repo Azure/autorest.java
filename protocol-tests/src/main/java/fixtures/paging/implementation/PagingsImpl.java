@@ -255,6 +255,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -289,6 +292,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(
@@ -323,6 +330,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions) {
@@ -349,6 +359,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions, Context context) {
@@ -375,6 +389,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -399,6 +416,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
@@ -423,6 +444,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -457,6 +481,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(
@@ -491,6 +519,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePagesAsync(RequestOptions requestOptions) {
@@ -515,6 +546,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePagesAsync(RequestOptions requestOptions, Context context) {
@@ -539,6 +574,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -563,6 +601,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
@@ -587,6 +629,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -620,6 +665,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(
@@ -654,6 +703,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions) {
@@ -680,6 +732,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions, Context context) {
@@ -706,6 +762,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -730,6 +789,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
@@ -755,6 +818,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(RequestOptions requestOptions) {
@@ -790,6 +856,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(
@@ -825,6 +895,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions) {
@@ -852,6 +925,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -879,6 +956,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -904,6 +984,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
@@ -938,6 +1022,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -981,6 +1068,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(
@@ -1025,6 +1116,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions) {
@@ -1061,6 +1155,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions, Context context) {
@@ -1097,6 +1195,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -1131,6 +1232,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
@@ -1165,6 +1270,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
@@ -1209,6 +1317,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
@@ -1253,6 +1365,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
@@ -1289,6 +1404,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
@@ -1325,6 +1444,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
@@ -1359,6 +1481,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
@@ -1391,6 +1517,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
@@ -1433,6 +1562,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
@@ -1477,6 +1610,9 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1521,6 +1657,10 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(
@@ -1565,6 +1705,9 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions) {
@@ -1601,6 +1744,10 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions, Context context) {
@@ -1637,6 +1784,9 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -1671,6 +1821,10 @@ public final class PagingsImpl {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
@@ -1707,6 +1861,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -1756,6 +1912,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -1802,6 +1961,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
@@ -1840,6 +2001,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(
@@ -1879,6 +2043,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -1915,6 +2081,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(
@@ -1941,6 +2110,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(RequestOptions requestOptions) {
@@ -1976,6 +2148,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(
@@ -2011,6 +2187,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions) {
@@ -2038,6 +2217,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions, Context context) {
@@ -2065,6 +2248,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -2090,6 +2276,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
@@ -2115,6 +2305,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(RequestOptions requestOptions) {
@@ -2150,6 +2343,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(
@@ -2185,6 +2382,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions) {
@@ -2212,6 +2412,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions, Context context) {
@@ -2239,6 +2443,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -2264,6 +2471,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
@@ -2288,6 +2499,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -2322,6 +2536,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(
@@ -2356,6 +2574,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions) {
@@ -2382,6 +2603,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions, Context context) {
@@ -2408,6 +2633,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -2432,6 +2660,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
@@ -2456,6 +2688,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -2490,6 +2725,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(
@@ -2524,6 +2763,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions) {
@@ -2550,6 +2792,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions, Context context) {
@@ -2576,6 +2822,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -2600,6 +2849,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
@@ -2624,6 +2877,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(RequestOptions requestOptions) {
@@ -2658,6 +2914,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(
@@ -2692,6 +2952,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions) {
@@ -2718,6 +2981,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions, Context context) {
@@ -2744,6 +3011,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -2768,6 +3038,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
@@ -2802,6 +3076,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
@@ -2849,6 +3125,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
@@ -2893,6 +3172,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
@@ -2929,6 +3210,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
@@ -2966,6 +3250,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
@@ -3000,6 +3286,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
@@ -3035,6 +3324,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
@@ -3082,6 +3373,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
@@ -3127,6 +3421,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
@@ -3164,6 +3460,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
@@ -3201,6 +3500,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
@@ -3236,6 +3537,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
@@ -3271,6 +3575,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(RequestOptions requestOptions) {
@@ -3315,6 +3622,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(
@@ -3359,6 +3670,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions) {
@@ -3395,6 +3709,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions, Context context) {
@@ -3431,6 +3749,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
@@ -3465,6 +3786,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
@@ -3500,6 +3825,8 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
@@ -3547,6 +3874,9 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
@@ -3592,6 +3922,8 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
@@ -3640,6 +3972,9 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
@@ -3674,6 +4009,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
@@ -3711,6 +4049,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
@@ -3745,6 +4087,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions requestOptions) {
@@ -3771,6 +4116,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(
@@ -3798,6 +4147,9 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
@@ -3822,6 +4174,10 @@ public final class PagingsImpl {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(
@@ -3849,6 +4205,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
@@ -3888,6 +4246,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
@@ -3924,6 +4285,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
@@ -3961,6 +4324,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
@@ -3997,6 +4363,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
@@ -4036,6 +4404,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
@@ -4082,6 +4453,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
@@ -4130,6 +4503,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
@@ -4176,6 +4552,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
@@ -4225,6 +4603,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
@@ -4271,6 +4652,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
@@ -4320,6 +4703,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
@@ -4356,6 +4742,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
@@ -4395,6 +4783,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
@@ -4431,6 +4822,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
@@ -4470,6 +4863,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
@@ -4506,6 +4902,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
@@ -4545,6 +4943,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
@@ -4581,6 +4982,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
@@ -4620,6 +5023,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
@@ -4656,6 +5062,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
@@ -4695,6 +5103,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
@@ -4741,6 +5152,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
@@ -4790,6 +5203,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
@@ -4826,6 +5242,8 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
@@ -4865,6 +5283,9 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(

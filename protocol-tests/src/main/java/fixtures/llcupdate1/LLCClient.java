@@ -41,6 +41,9 @@ public final class LLCClient {
      * <pre>{@code
      * Object
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getRequired(RequestOptions requestOptions) {
@@ -65,6 +68,10 @@ public final class LLCClient {
      * <pre>{@code
      * Object
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {

@@ -34,6 +34,9 @@ public final class PrimitiveClient {
      *     field2: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getInt(RequestOptions requestOptions) {
@@ -51,6 +54,10 @@ public final class PrimitiveClient {
      *     field2: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions, Context context) {
@@ -68,6 +75,9 @@ public final class PrimitiveClient {
      *     field2: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody Please put -1 and 2.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putInt(BinaryData complexBody, RequestOptions requestOptions) {
@@ -85,6 +95,11 @@ public final class PrimitiveClient {
      *     field2: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody Please put -1 and 2.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -102,6 +117,9 @@ public final class PrimitiveClient {
      *     field2: Long
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getLong(RequestOptions requestOptions) {
@@ -119,6 +137,10 @@ public final class PrimitiveClient {
      *     field2: Long
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions, Context context) {
@@ -136,6 +158,9 @@ public final class PrimitiveClient {
      *     field2: Long
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLong(BinaryData complexBody, RequestOptions requestOptions) {
@@ -153,6 +178,11 @@ public final class PrimitiveClient {
      *     field2: Long
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -170,6 +200,9 @@ public final class PrimitiveClient {
      *     field2: Float
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getFloat(RequestOptions requestOptions) {
@@ -187,6 +220,10 @@ public final class PrimitiveClient {
      *     field2: Float
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions, Context context) {
@@ -204,6 +241,9 @@ public final class PrimitiveClient {
      *     field2: Float
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloat(BinaryData complexBody, RequestOptions requestOptions) {
@@ -221,6 +261,11 @@ public final class PrimitiveClient {
      *     field2: Float
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -238,6 +283,9 @@ public final class PrimitiveClient {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDouble(RequestOptions requestOptions) {
@@ -255,6 +303,10 @@ public final class PrimitiveClient {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions, Context context) {
@@ -272,6 +324,9 @@ public final class PrimitiveClient {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDouble(BinaryData complexBody, RequestOptions requestOptions) {
@@ -289,6 +344,11 @@ public final class PrimitiveClient {
      *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(
@@ -307,6 +367,9 @@ public final class PrimitiveClient {
      *     fieldFalse: Boolean
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBool(RequestOptions requestOptions) {
@@ -324,6 +387,10 @@ public final class PrimitiveClient {
      *     fieldFalse: Boolean
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions, Context context) {
@@ -341,6 +408,9 @@ public final class PrimitiveClient {
      *     fieldFalse: Boolean
      * }
      * }</pre>
+     *
+     * @param complexBody Please put true and false.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBool(BinaryData complexBody, RequestOptions requestOptions) {
@@ -358,6 +428,11 @@ public final class PrimitiveClient {
      *     fieldFalse: Boolean
      * }
      * }</pre>
+     *
+     * @param complexBody Please put true and false.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -376,6 +451,9 @@ public final class PrimitiveClient {
      *     nullProperty: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getString(RequestOptions requestOptions) {
@@ -394,6 +472,10 @@ public final class PrimitiveClient {
      *     nullProperty: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions, Context context) {
@@ -412,6 +494,9 @@ public final class PrimitiveClient {
      *     nullProperty: String
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putString(BinaryData complexBody, RequestOptions requestOptions) {
@@ -430,6 +515,11 @@ public final class PrimitiveClient {
      *     nullProperty: String
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(
@@ -448,6 +538,9 @@ public final class PrimitiveClient {
      *     leap: LocalDate
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDate(RequestOptions requestOptions) {
@@ -465,6 +558,10 @@ public final class PrimitiveClient {
      *     leap: LocalDate
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions, Context context) {
@@ -482,6 +579,9 @@ public final class PrimitiveClient {
      *     leap: LocalDate
      * }
      * }</pre>
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDate(BinaryData complexBody, RequestOptions requestOptions) {
@@ -499,6 +599,11 @@ public final class PrimitiveClient {
      *     leap: LocalDate
      * }
      * }</pre>
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -516,6 +621,9 @@ public final class PrimitiveClient {
      *     now: OffsetDateTime
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDateTime(RequestOptions requestOptions) {
@@ -533,6 +641,10 @@ public final class PrimitiveClient {
      *     now: OffsetDateTime
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions, Context context) {
@@ -550,6 +662,9 @@ public final class PrimitiveClient {
      *     now: OffsetDateTime
      * }
      * }</pre>
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTime(BinaryData complexBody, RequestOptions requestOptions) {
@@ -567,6 +682,11 @@ public final class PrimitiveClient {
      *     now: OffsetDateTime
      * }
      * }</pre>
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(
@@ -585,6 +705,9 @@ public final class PrimitiveClient {
      *     now: DateTimeRfc1123
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDateTimeRfc1123(RequestOptions requestOptions) {
@@ -602,6 +725,10 @@ public final class PrimitiveClient {
      *     now: DateTimeRfc1123
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
@@ -619,6 +746,9 @@ public final class PrimitiveClient {
      *     now: DateTimeRfc1123
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123(BinaryData complexBody, RequestOptions requestOptions) {
@@ -636,6 +766,11 @@ public final class PrimitiveClient {
      *     now: DateTimeRfc1123
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(
@@ -653,6 +788,9 @@ public final class PrimitiveClient {
      *     field: Duration
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getDuration(RequestOptions requestOptions) {
@@ -669,6 +807,10 @@ public final class PrimitiveClient {
      *     field: Duration
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions, Context context) {
@@ -685,6 +827,9 @@ public final class PrimitiveClient {
      *     field: Duration
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDuration(BinaryData complexBody, RequestOptions requestOptions) {
@@ -701,6 +846,11 @@ public final class PrimitiveClient {
      *     field: Duration
      * }
      * }</pre>
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(
@@ -718,6 +868,9 @@ public final class PrimitiveClient {
      *     field: byte[]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getByte(RequestOptions requestOptions) {
@@ -734,6 +887,10 @@ public final class PrimitiveClient {
      *     field: byte[]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions, Context context) {
@@ -750,6 +907,9 @@ public final class PrimitiveClient {
      *     field: byte[]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(BinaryData complexBody, RequestOptions requestOptions) {
@@ -766,6 +926,11 @@ public final class PrimitiveClient {
      *     field: byte[]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

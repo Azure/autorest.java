@@ -41,6 +41,9 @@ public final class LLCAsyncClient {
      * <pre>{@code
      * Object
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponse(RequestOptions requestOptions) {
@@ -65,6 +68,9 @@ public final class LLCAsyncClient {
      * <pre>{@code
      * Object
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getRequired(RequestOptions requestOptions) {

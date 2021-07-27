@@ -40,6 +40,9 @@ public final class MediaTypesClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData analyzeBody(RequestOptions requestOptions) {
@@ -63,6 +66,10 @@ public final class MediaTypesClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions, Context context) {
@@ -77,6 +84,9 @@ public final class MediaTypesClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData contentTypeWithEncoding(RequestOptions requestOptions) {
@@ -91,6 +101,10 @@ public final class MediaTypesClient {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions, Context context) {

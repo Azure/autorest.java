@@ -60,6 +60,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
@@ -74,6 +77,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -88,6 +95,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions) {
@@ -110,6 +120,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions, Context context) {
@@ -132,6 +146,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError(RequestOptions requestOptions) {
@@ -151,6 +168,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -165,6 +186,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
@@ -179,6 +203,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -193,6 +221,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions) {
@@ -215,6 +246,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions, Context context) {
@@ -237,6 +272,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError(RequestOptions requestOptions) {
@@ -256,6 +294,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -270,6 +312,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
@@ -284,6 +329,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -298,6 +347,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions) {
@@ -320,6 +372,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -342,6 +398,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty(RequestOptions requestOptions) {
@@ -361,6 +420,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions, Context context) {

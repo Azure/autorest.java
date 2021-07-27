@@ -35,6 +35,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
@@ -53,6 +56,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValid(RequestOptions requestOptions) {
@@ -71,6 +77,11 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
@@ -89,6 +100,11 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -107,6 +123,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
@@ -125,6 +144,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmpty(RequestOptions requestOptions) {
@@ -143,6 +165,10 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
@@ -161,6 +187,10 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmpty(BinaryData complexBody, RequestOptions requestOptions) {
@@ -179,6 +209,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
@@ -197,6 +230,9 @@ public final class ArrayAsyncClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvided(RequestOptions requestOptions) {

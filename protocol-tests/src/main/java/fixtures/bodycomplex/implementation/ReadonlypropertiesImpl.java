@@ -66,6 +66,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -83,6 +86,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -100,6 +107,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -125,6 +135,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -150,6 +164,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -167,6 +184,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -184,6 +205,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -202,6 +227,11 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
@@ -220,6 +250,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -237,6 +271,11 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -255,6 +294,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -272,6 +314,11 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

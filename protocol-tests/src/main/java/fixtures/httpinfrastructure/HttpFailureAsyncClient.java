@@ -30,6 +30,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponse(RequestOptions requestOptions) {
@@ -44,6 +47,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyError(RequestOptions requestOptions) {
@@ -58,6 +64,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponse(RequestOptions requestOptions) {
@@ -72,6 +81,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelError(RequestOptions requestOptions) {
@@ -86,6 +98,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
@@ -100,6 +115,9 @@ public final class HttpFailureAsyncClient {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmpty(RequestOptions requestOptions) {

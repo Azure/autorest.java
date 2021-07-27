@@ -35,6 +35,9 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -53,6 +56,10 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -71,6 +78,10 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -89,6 +100,12 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -107,6 +124,9 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getEmpty(RequestOptions requestOptions) {
@@ -125,6 +145,10 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
@@ -143,6 +167,9 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(BinaryData complexBody, RequestOptions requestOptions) {
@@ -161,6 +188,11 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -179,6 +211,9 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNotProvided(RequestOptions requestOptions) {
@@ -197,6 +232,10 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {
