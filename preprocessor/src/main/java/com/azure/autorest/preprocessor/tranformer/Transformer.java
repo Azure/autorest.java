@@ -24,6 +24,7 @@ import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class Transformer {
   public CodeModel transform(CodeModel codeModel) {
     renameCodeModel(codeModel);
     transformSchemas(codeModel.getSchemas());
+    if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+      markFlattenedSchemas(codeModel);
+    }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
     return codeModel;
   }
@@ -129,7 +133,25 @@ public class Transformer {
     }
   }
 
-  public static boolean nonNullNextLink(Operation operation) {
+  private static void markFlattenedSchemas(CodeModel codeModel) {
+    for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
+      Map<String, ObjectSchema> flattenedSchemas = null;
+      for (Property property : objectSchema.getProperties()) {
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
+          ObjectSchema flattenedSchema = (ObjectSchema) property.getSchema();
+          if (flattenedSchemas == null) {
+            flattenedSchemas = new HashMap<>();
+          }
+          flattenedSchemas.put(property.getLanguage().getJava().getName(), flattenedSchema);
+
+          // mark as flattened schema
+          flattenedSchema.setFlattenedSchema(true);
+        }
+      }
+    }
+  }
+
+  private static boolean nonNullNextLink(Operation operation) {
     return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 

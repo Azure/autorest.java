@@ -29,6 +29,7 @@ public class ResourceClientModel {
                             .name(ResourceTypeName.FIELD_ID)
                             .serializedName(ResourceTypeName.FIELD_ID)
                             .description("Fully qualified resource Id for the resource.")
+                            .wireType(ClassType.String)
                             .clientType(ClassType.String)
                             .build()
             ))
@@ -43,6 +44,7 @@ public class ResourceClientModel {
                             .description("Fully qualified resource Id for the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
+                            .wireType(ClassType.String)
                             .clientType(ClassType.String)
                             .build(),
                     new ClientModelProperty.Builder()
@@ -51,6 +53,7 @@ public class ResourceClientModel {
                             .description("The name of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
+                            .wireType(ClassType.String)
                             .clientType(ClassType.String)
                             .build(),
                     new ClientModelProperty.Builder()
@@ -59,6 +62,7 @@ public class ResourceClientModel {
                             .description("The type of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
+                            .wireType(ClassType.String)
                             .clientType(ClassType.String)
                             .build()
             ))
@@ -75,6 +79,7 @@ public class ResourceClientModel {
                             .description("The geo-location where the resource lives.")
                             .isRequired(true)
                             .isReadOnly(false)
+                            .wireType(ClassType.String)
                             .clientType(ClassType.String)
                             .mutabilities(Arrays.asList(ClientModelProperty.Mutability.CREATE, ClientModelProperty.Mutability.READ))
                             .build(),
@@ -84,6 +89,7 @@ public class ResourceClientModel {
                             .description("Resource tags.")
                             .isRequired(false)
                             .isReadOnly(false)
+                            .wireType(ClassType.String)
                             .clientType(new MapType(ClassType.String))
                             .build()
             ))

@@ -35,6 +35,12 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-fla
 REM error response that not conform to ARM
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization
 
+REM client model flatten at autorest.java
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack
+
 REM fluent lite
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/readme.md --tag=package-resources-2020-10 --java.namespace=com.azure.mgmtlitetest.resources
 

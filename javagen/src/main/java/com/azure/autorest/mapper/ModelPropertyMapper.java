@@ -2,12 +2,14 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
@@ -41,19 +43,30 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         boolean flattened = false;
-        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
-            if (property.getParentSchema() != null) {
-                flattened = property.getParentSchema().getProperties().stream()
-                        .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
-                if (!flattened) {
-                    String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
-                    flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+        if (settings.getModelerSettings().isFlattenModel()) {   // enabled by modelerfour
+            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+                if (property.getParentSchema() != null) {
+                    flattened = property.getParentSchema().getProperties().stream()
+                            .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+                    if (!flattened) {
+                        String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
+                        flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+                    }
                 }
+            } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
+                flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
             }
-        } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
-            flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
         }
         builder.needsFlatten(flattened);
+
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
+                // avoid non-object schema or a plain object schema without any properties
+                && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
+                && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            // avoid naming conflict
+            builder.name("inner" + CodeNamer.toPascalCase(property.getLanguage().getJava().getName()));
+            builder.clientFlatten(true);
+        }
 
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {
@@ -111,16 +124,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         builder.headerCollectionPrefix(headerCollectionPrefix);
 
         IType propertyWireType = Mappers.getSchemaMapper().map(property.getSchema());
-        if (propertyWireType != null && property.isNullable()) {
+        if (property.isNullable() || !property.isRequired()) {
             propertyWireType = propertyWireType.asNullable();
         }
-
-        IType propertyClientType = Mappers.getSchemaMapper().map((property.getSchema())).getClientType();
-
-        if (!property.isRequired()) {
-            propertyClientType = propertyClientType.asNullable();
-            propertyWireType = propertyWireType.asNullable();
-        }
+        // Invariant: clientType == wireType.getClientType()
+        IType propertyClientType = propertyWireType.getClientType();
         builder.wireType(propertyWireType).clientType(propertyClientType);
 
         Schema autoRestPropertyModelType = property.getSchema();

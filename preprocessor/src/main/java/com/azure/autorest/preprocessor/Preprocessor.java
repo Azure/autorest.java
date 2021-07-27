@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -119,7 +120,7 @@ public class Preprocessor extends NewPlugin {
     return codeModel;
   }
 
-  private CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
+  public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
     Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
     if (!constantSchemas.isEmpty()) {
       Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();
@@ -161,6 +162,21 @@ public class Preprocessor extends NewPlugin {
                         Preprocessor::convertToChoiceSchema);
                 p.setSchema(sealedChoiceSchema);
               });
+
+      if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+        codeModel.getSchemas().getObjects().stream()
+                .flatMap(s -> s.getProperties().stream())
+                .filter(p -> !p.isRequired() && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten())
+                .filter(p -> p.getSchema() instanceof ObjectSchema)
+                .forEach(p -> ((ObjectSchema) p.getSchema()).getProperties().stream()
+                        .filter(p1 -> p1.getSchema() instanceof ConstantSchema)
+                        .forEach(p1 -> {
+                          ConstantSchema constantSchema = (ConstantSchema) p1.getSchema();
+                          SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                                  Preprocessor::convertToChoiceSchema);
+                          p1.setSchema(sealedChoiceSchema);
+                        }));
+      }
 
       codeModel.getSchemas().getSealedChoices().addAll(convertedChoiceSchemas.values());
     }

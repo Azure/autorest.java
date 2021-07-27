@@ -67,7 +67,7 @@ public class FluentResourceModel {
 
         List<List<FluentModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
         propertiesFromTypeAndParents.add(new ArrayList<>());
-        this.innerModel.getProperties().stream()
+        this.innerModel.getAccessibleProperties().stream()
                 .map(FluentModelProperty::new)
                 .forEach(p -> {
                     propertiesMap.putIfAbsent(p.getName(), p);
@@ -77,7 +77,7 @@ public class FluentResourceModel {
         for (ClientModel parent : parentModels) {
             propertiesFromTypeAndParents.add(new ArrayList<>());
 
-            parent.getProperties().stream()
+            parent.getAccessibleProperties().stream()
                     .map(FluentModelProperty::new)
                     .forEach(p -> {
                         if (propertiesMap.putIfAbsent(p.getName(), p) == null) {

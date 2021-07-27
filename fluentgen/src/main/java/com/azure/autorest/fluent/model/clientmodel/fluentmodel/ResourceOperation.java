@@ -15,12 +15,12 @@ import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
@@ -92,8 +92,8 @@ public abstract class ResourceOperation {
     abstract public String getLocalVariablePrefix();
 
     // properties on model inner object, or request body model
-    protected List<ClientModelProperty> getProperties() {
-        List<ClientModelProperty> properties = new ArrayList<>();
+    protected List<ModelProperty> getProperties() {
+        List<ModelProperty> properties = new ArrayList<>();
 
         List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
 
@@ -101,23 +101,23 @@ public abstract class ResourceOperation {
             for (String commonPropertyName : commonPropertyNames) {
                 if (resourceModel.hasProperty(commonPropertyName)) {
                     FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
-                    properties.add(property.getInnerProperty());
+                    properties.add(property.getModelProperty());
                 }
             }
             for (FluentModelProperty property : resourceModel.getProperties()) {
                 if (!commonPropertyNames.contains(property.getName())) {
-                    properties.add(property.getInnerProperty());
+                    properties.add(property.getModelProperty());
                 }
             }
         } else {
-            Map<String, ClientModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
+            Map<String, ModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
             for (String commonPropertyName : commonPropertyNames) {
                 if (propertyMap.containsKey(commonPropertyName)) {
-                    ClientModelProperty property = propertyMap.get(commonPropertyName);
+                    ModelProperty property = propertyMap.get(commonPropertyName);
                     properties.add(property);
                 }
             }
-            for (ClientModelProperty property : this.getRequestBodyModelProperties()) {
+            for (ModelProperty property : this.getRequestBodyModelProperties()) {
                 if (!commonPropertyNames.contains(property.getName())) {
                     properties.add(property);
                 }
@@ -125,7 +125,7 @@ public abstract class ResourceOperation {
         }
 
         return properties.stream()
-                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
+                .filter(p -> !p.isReadOnly() && !p.isConstant())
                 .collect(Collectors.toList());
     }
 
@@ -202,8 +202,8 @@ public abstract class ResourceOperation {
     }
 
     // request body model and properties, used when request body is not fluent model inner object
-    private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
-    private List<ClientModelProperty> requestBodyModelProperties;
+    private Map<String, ModelProperty> requestBodyModelPropertiesMap;
+    private List<ModelProperty> requestBodyModelProperties;
 
     protected boolean isBodyParameterSameAsFluentModel() {
         return requestBodyParameterModel == resourceModel.getInnerModel();
@@ -224,47 +224,48 @@ public abstract class ResourceOperation {
                 parentModelName = parentModel == null ? null :parentModel.getParentModelName();
             }
 
-            List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+            List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
             propertiesFromTypeAndParents.add(new ArrayList<>());
-            requestBodyParameterModel.getProperties().forEach(p -> {
-                if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
-                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+            requestBodyParameterModel.getAccessibleProperties().forEach(p -> {
+                ModelProperty property = ModelProperty.ofClientModelProperty(p);
+                if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                 }
             });
-
 
             for (ClientModel parent : parentModels) {
                 propertiesFromTypeAndParents.add(new ArrayList<>());
 
-                parent.getProperties().forEach(p -> {
-                    if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
-                        propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                parent.getAccessibleProperties().forEach(p -> {
+                    ModelProperty property = ModelProperty.ofClientModelProperty(p);
+                    if (requestBodyModelPropertiesMap.putIfAbsent(property.getName(), property) == null) {
+                        propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(property);
                     }
                 });
             }
 
             Collections.reverse(propertiesFromTypeAndParents);
-            for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
+            for (List<ModelProperty> properties1 : propertiesFromTypeAndParents) {
                 requestBodyModelProperties.addAll(properties1);
             }
         }
     }
 
-    private List<ClientModelProperty> getRequestBodyModelProperties() {
+    private List<ModelProperty> getRequestBodyModelProperties() {
         initRequestBodyClientModel();
         return this.requestBodyModelProperties;
     }
 
-    private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
+    private Map<String, ModelProperty> getRequestBodyModelPropertiesMap() {
         initRequestBodyClientModel();
         return this.requestBodyModelPropertiesMap;
     }
 
-    protected boolean isIdProperty(ClientModelProperty property) {
+    protected boolean isIdProperty(ModelProperty property) {
         return property.getName().equals(ResourceTypeName.FIELD_ID);
     }
 
-    protected boolean isLocationProperty(ClientModelProperty property) {
+    protected boolean isLocationProperty(ModelProperty property) {
         return FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION);
     }
 

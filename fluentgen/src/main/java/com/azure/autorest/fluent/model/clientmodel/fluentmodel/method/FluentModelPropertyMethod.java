@@ -7,26 +7,27 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class FluentModelPropertyMethod extends FluentMethod {
 
     private final ClientModel clientModel;
-    protected final ClientModelProperty modelProperty;
+    protected final ModelProperty modelProperty;
     private final LocalVariable localVariable;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
                                      FluentInterfaceStage stage, ClientModel clientModel,
-                                     ClientModelProperty modelProperty,
+                                     ModelProperty modelProperty,
                                      LocalVariable localVariable) {
         this(model, type, stage, clientModel, modelProperty, localVariable,
                 modelProperty.getSetterName(),
@@ -35,7 +36,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
                                      FluentInterfaceStage stage, ClientModel clientModel,
-                                     ClientModelProperty modelProperty,
+                                     ModelProperty modelProperty,
                                      LocalVariable localVariable,
                                      String name, String description) {
         super(model, type);
@@ -66,6 +67,10 @@ public class FluentModelPropertyMethod extends FluentMethod {
         return clientModel;
     }
 
+    public ModelProperty getModelProperty() {
+        return modelProperty;
+    }
+
     @Override
     protected String getBaseMethodSignature() {
         return String.format("%1$s(%2$s %3$s)",
@@ -83,20 +88,21 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        modelProperty.addImportsTo(imports, false);
+        modelProperty.addImportsTo(imports);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof FluentModelPropertyMethod) {
             FluentModelPropertyMethod other = (FluentModelPropertyMethod) obj;
-            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty && this.localVariable == other.localVariable;
+            return this.clientModel == other.clientModel && Objects.equals(this.modelProperty, other.modelProperty) && this.localVariable == other.localVariable;
         } else {
             return false;
         }
     }
 
-    public ClientModelProperty getModelProperty() {
-        return modelProperty;
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientModel, modelProperty, localVariable);
     }
 }

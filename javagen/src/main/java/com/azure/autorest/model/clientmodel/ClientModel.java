@@ -5,8 +5,10 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A model that is defined by the client.
@@ -172,9 +174,29 @@ public class ClientModel {
         return modelType;
     }
 
-//    public List<ClientModelPropertyReference> getPropertyReferences() {
-//        return propertyReferences;
-//    }
+    public List<ClientModelPropertyReference> getPropertyReferences() {
+        return propertyReferences == null ? Collections.emptyList() : propertyReferences;
+    }
+
+    /**
+     * List the properties that have access (getter or setter) methods.
+     *
+     * It does not include properties from superclass (even though they can be accessed via inheritance).
+     * It does not include properties that only have private access (e.g. property of a flattened model).
+     * It includes properties that can be accessed from the model but not declared in this model (e.g. properties from a flattened model).
+     *
+     * @return The properties that have access (getter or setter) methods.
+     */
+    public List<ClientModelPropertyAccess> getAccessibleProperties() {
+        List<ClientModelProperty> properties1 = this.getProperties() == null ? Collections.emptyList() : this.getProperties();
+        List<ClientModelPropertyAccess> properties = properties1.stream()
+                .filter(p -> !p.getClientFlatten())
+                .collect(Collectors.toList());
+        properties.addAll(this.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .collect(Collectors.toList()));
+        return properties;
+    }
 
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.

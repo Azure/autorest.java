@@ -7,8 +7,8 @@ package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.util.TypeConversionUtils;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -23,7 +23,7 @@ public class PropertyTemplate implements ImmutableMethod {
 
     private final MethodTemplate implementationMethodTemplate;
 
-    public PropertyTemplate(FluentModelProperty fluentProperty, ClientModelProperty property) {
+    public PropertyTemplate(FluentModelProperty fluentProperty, ModelProperty property) {
         Set<String> imports = new HashSet<>();
         fluentProperty.getFluentType().addImportsTo(imports, false);
         if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {

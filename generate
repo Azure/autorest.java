@@ -39,9 +39,12 @@ autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
+
 # local swagger
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
-autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.requirexmsflatteneddiscriminatorflattening --require-x-ms-flattened-to-flatten=true
+autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.requirexmsflattened --require-x-ms-flattened-to-flatten=true
+autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.noflatten --pipeline.modelerfour.flatten-models=false
+autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.clientflatten --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE
 
 # Azure
 autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
@@ -52,4 +55,4 @@ autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/a
 autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
 
 # customization
-autorest --version=3.1.3 --use:. customization-tests/swagger
+autorest --version=3.4.5 --use:. customization-tests/swagger

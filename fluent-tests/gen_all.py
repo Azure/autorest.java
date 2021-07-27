@@ -60,6 +60,8 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str) -
         '--use=' + autorest_java,
         '--pipeline.modelerfour.additional-checks=false',
         '--pipeline.modelerfour.lenient-model-deduplication=true',
+        '--pipeline.modelerfour.flatten-models=false',
+        '--client-flattened-annotation-target=NONE',
         '--azure-arm',
         '--fluent=lite',
         '--java.fluent=lite',
