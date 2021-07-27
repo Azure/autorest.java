@@ -36,12 +36,6 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         // Request body
         Set<IType> typesInJavadoc = new HashSet<>();
 
-//        clientMethod.getProxyMethod().getAllParameters().stream()
-//                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body && !p.getIsRequired())
-//                .map(ProxyMethodParameter::getRawType)
-//                .findFirst()
-//                .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
-
         clientMethod.getMethodInputParameters()
                 .stream().filter(p -> RequestParameterLocation.Body.equals(p.getLocation()))
                 .map(ClientMethodParameter::getRawType)
@@ -59,13 +53,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
         }
 
-        clientMethod.getProxyMethod().getParameters()
-                .stream().filter(p -> p.getIsRequired() && !p.getFromClient() && !p.getIsConstant()
-                && p.getRequestParameterLocation() != RequestParameterLocation.Body)
-                .forEach(parameter ->
-                        commentBlock.param(parameter.getName(), parameterDescriptionOrDefault(parameter)));
-
-//        commentBlock.methodReturns("a DynamicRequest where customizations can be made before sent to the service");
+        clientMethod.getParameters().forEach(p -> commentBlock.param(p.getName(), methodParameterDescriptionOrDefault(p)));
+        commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
@@ -175,5 +164,13 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
         return CodeNamer.escapeXmlComment(paramJavadoc);
+    }
+
+    private static String methodParameterDescriptionOrDefault(ClientMethodParameter p) {
+        String doc = p.getDescription();
+        if (CoreUtils.isNullOrEmpty(doc)) {
+            doc = String.format("The %1$s parameter", p.getName());
+        }
+        return CodeNamer.escapeXmlComment(doc);
     }
 }
