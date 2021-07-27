@@ -103,13 +103,13 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
             block.line("List<?> values = (List<?>) obj.get(path);");
             block.line("return values.stream().map(BinaryData::fromObject).collect(Collectors.toList());");
-            block.line("} catch (Exception e) { return null; }");
+            block.line("} catch (RuntimeException e) { return null; }");
         });
         classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
             block.line("try {");
             block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
             block.line("return (String) obj.get(path);");
-            block.line("} catch (Exception e) { return null; }");
+            block.line("} catch (RuntimeException e) { return null; }");
         });
     }
 
