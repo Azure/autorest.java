@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +37,33 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 .isRequired(property.isRequired())
                 .isReadOnly(property.isReadOnly());
 
-        if (property.getLanguage().getJava().getDescription() == null || property.getLanguage().getJava().getDescription().isEmpty()) {
-            builder.description(String.format("The %s property.", property.getSerializedName()));
-        } else {
-            builder.description(property.getLanguage().getJava().getDescription());
+
+        StringBuilder descriptionSb = new StringBuilder();
+        String summaryInProperty = "";
+        String descriptionInProperty = "";
+        if(property.getSchema() != null && !CoreUtils.isNullOrEmpty(property.getSchema().getSummary())) {
+            summaryInProperty = property.getSchema().getSummary();
         }
+        if (property.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(property.getLanguage().getJava().getDescription())) {
+            descriptionInProperty = property.getLanguage().getJava().getDescription();
+        }
+
+        if (descriptionInProperty.isEmpty() && summaryInProperty.isEmpty()) {
+            descriptionSb.append(String.format("The %s property.", property.getSerializedName()));
+        } else if(summaryInProperty.isEmpty()) {
+            descriptionSb.append(descriptionInProperty);
+        } else if(descriptionInProperty.isEmpty()) {
+            descriptionSb.append(summaryInProperty);
+        } else {
+            if(summaryInProperty.equals(descriptionInProperty)) {
+                descriptionSb.append(descriptionInProperty);
+            } else {
+                descriptionSb.append(summaryInProperty).append(" ").append(descriptionInProperty);
+            }
+        }
+
+        builder.description(descriptionSb.toString());
+
 
         boolean flattened = false;
         if (settings.getModelerSettings().isFlattenModel()) {   // enabled by modelerfour
