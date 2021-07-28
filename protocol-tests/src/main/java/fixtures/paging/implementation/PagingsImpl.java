@@ -5308,7 +5308,7 @@ public final class PagingsImpl {
             Map<?, ?> obj = binaryData.toObject(Map.class);
             List<?> values = (List<?>) obj.get(path);
             return values.stream().map(BinaryData::fromObject).collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return null;
         }
     }
@@ -5317,7 +5317,7 @@ public final class PagingsImpl {
         try {
             Map<?, ?> obj = binaryData.toObject(Map.class);
             return (String) obj.get(path);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return null;
         }
     }

@@ -534,8 +534,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: LocalDate
-     *     leap: LocalDate
+     *     field: String
+     *     leap: String
      * }
      * }</pre>
      *
@@ -554,8 +554,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: LocalDate
-     *     leap: LocalDate
+     *     field: String
+     *     leap: String
      * }
      * }</pre>
      *
@@ -575,8 +575,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: LocalDate
-     *     leap: LocalDate
+     *     field: String
+     *     leap: String
      * }
      * }</pre>
      *
@@ -595,8 +595,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: LocalDate
-     *     leap: LocalDate
+     *     field: String
+     *     leap: String
      * }
      * }</pre>
      *
@@ -617,8 +617,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -637,8 +637,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -658,8 +658,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -678,8 +678,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -701,8 +701,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123
-     *     now: DateTimeRfc1123
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -721,8 +721,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123
-     *     now: DateTimeRfc1123
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -742,8 +742,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123
-     *     now: DateTimeRfc1123
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -762,8 +762,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123
-     *     now: DateTimeRfc1123
+     *     field: String
+     *     now: String
      * }
      * }</pre>
      *
@@ -785,7 +785,7 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: String
      * }
      * }</pre>
      *
@@ -804,7 +804,7 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: String
      * }
      * }</pre>
      *
@@ -824,7 +824,7 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: String
      * }
      * }</pre>
      *
@@ -843,7 +843,7 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: String
      * }
      * }</pre>
      *
