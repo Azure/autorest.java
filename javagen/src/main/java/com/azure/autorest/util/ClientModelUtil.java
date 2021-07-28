@@ -102,17 +102,6 @@ public class ClientModelUtil {
         return builderSuffix.toString();
     }
 
-    public static String getBuilderClassName(String name) {
-        JavaSettings settings = JavaSettings.getInstance();
-        if (!settings.isFluent()
-                && settings.shouldGenerateClientAsImpl()
-                && !settings.shouldGenerateSyncAsyncClients()
-                && !settings.isLowLevelClient()) {
-            return name + "Impl";
-        }
-        return name + (name.endsWith("Client") ? "Builder" : "ClientBuilder");
-    }
-
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
