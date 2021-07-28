@@ -179,9 +179,6 @@ public class ClassType implements IType {
     }
 
     public final IType getClientType() {
-        if (JavaSettings.getInstance().isLowLevelClient())  {
-            return this;
-        }
         IType clientType = this;
         if (this == ClassType.DateTimeRfc1123) {
             clientType = ClassType.DateTime;
