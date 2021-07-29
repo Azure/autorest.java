@@ -19,6 +19,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
+    public ServiceVersionTemplate getServiceVersionTemplate() {
+        return ServiceVersionTemplate.getInstance();
+    }
+
+    @Override
     public ManagerTemplate getManagerTemplate() {
         return ManagerTemplate.getInstance();
     }

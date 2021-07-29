@@ -115,19 +115,14 @@ public class Javagen extends NewPlugin {
                 }
             }
 
-//            if (JavaSettings.getInstance().isLowLevelClient()) {
-//                List<AsyncSyncClient> asyncClients = new ArrayList<>();
-//                List<AsyncSyncClient> syncClients = new ArrayList<>();
-//                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-//
-//                for (AsyncSyncClient asyncClient : asyncClients) {
-//                    javaPackage.addLowLevelAsyncClient(asyncClient.getPackageName(), asyncClient);
-//                }
-//
-//                for (AsyncSyncClient syncClient : syncClients) {
-//                    javaPackage.addLowLevelSyncClient(syncClient.getPackageName(), syncClient);
-//                }
-//            }
+            // Service version
+            if (JavaSettings.getInstance().isLowLevelClient()) {
+                JavaSettings settings = JavaSettings.getInstance();
+                String packageName = settings.getPackage();
+                String serviceName = settings.getServiceName();
+                String fileName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+                javaPackage.addServiceVersion(packageName, fileName, client.getServiceClient());
+            }
 
             if (!JavaSettings.getInstance().isLowLevelClient()) {
                 // Response

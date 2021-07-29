@@ -10,6 +10,8 @@ public interface TemplateFactory {
 
     ServiceClientBuilderTemplate getServiceClientBuilderTemplate();
 
+    ServiceVersionTemplate getServiceVersionTemplate();
+
     ManagerTemplate getManagerTemplate();
 
     MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate();
