@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-07-26T19:30:16.749531
+Generated at 2021-07-28T19:14:05.950953
 ## Success
 <details>
-<summary>RP count: 175</summary>
+<summary>RP count: 177</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -54,6 +54,7 @@ Generated at 2021-07-26T19:30:16.749531
 - databricks
 - datacatalog
 - datadog
+- datafactory
 - datalake-analytics
 - datalake-store
 - dataprotection
@@ -146,6 +147,7 @@ Generated at 2021-07-26T19:30:16.749531
 - resourcehealth
 - resourcemover
 - saas
+- scheduler
 - search
 - security
 - securityandcompliance
@@ -235,7 +237,7 @@ FATAL: Error: Name is empty!
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-automation ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 480 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/target/classes
+[INFO] Compiling 545 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/target/classes
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
@@ -247,8 +249,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.825 s
-[INFO] Finished at: 2021-07-26T18:13:05Z
+[INFO] Total time:  4.794 s
+[INFO] Finished at: 2021-07-28T18:11:16Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/com/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.automation.fluent.DscConfigurationsClient
@@ -265,35 +267,6 @@ FATAL: Error: Name is empty!
 ```
 **stderr**
 ```
-
-```
-</details>
-
-<details>
-<summary>datafactory</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.3]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
-INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PipelineRun > properties > invokedBy)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json:1438:5
-
-```
-**stderr**
-```
-ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > DataFlow)
-  discriminator: { propertyName: [32m'type'[39m }
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json:24:3
-  Error: Semantic validation failed. There was some errors
 
 ```
 </details>
@@ -539,7 +512,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Location, OperationResult, AndroidMamPolicy, FlaggedUser, GroupItem, Application, WipeDeviceOperationResult, Device, IOsmamPolicy, FlaggedEnrolledApp]
+INFORMATION (FluentMapper): Add Inner to response types: [FlaggedUser, OperationResult, Device, FlaggedEnrolledApp, IOsmamPolicy, AndroidMamPolicy, WipeDeviceOperationResult, Application, GroupItem, Location]
 
 ```
 **stderr**
@@ -596,8 +569,8 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.986 s
-[INFO] Finished at: 2021-07-26T18:42:17Z
+[INFO] Total time:  1.910 s
+[INFO] Finished at: 2021-07-28T18:36:15Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -874,7 +847,9 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [OperationResponse, ReservationOrderResponse, AvailableScopeProperties, ReservationResponse, ExchangeOperationResultResponse, QuotaRequestSubmitResponse201, QuotaRequestDetails, AppliedReservations, QuotaRequestOneResourceSubmitResponse, CalculateExchangeOperationResultResponse, CalculatePriceResponse, Catalog, CurrentQuotaLimitBase]
+INFORMATION (FluentMapper): Add Inner to response types: [AppliedReservations, Catalog, AvailableScopeProperties, ExchangeOperationResultResponse, CalculatePriceResponse, QuotaRequestDetails, OperationResponse, ReservationResponse, ReservationOrderResponse, CalculateExchangeOperationResultResponse, CurrentQuotaLimitBase, QuotaRequestOneResourceSubmitResponse, QuotaRequestSubmitResponse201]
+INFORMATION (FluentMapper): Add Inner for type 'CurrentQuotaLimitBase': [QuotaRequestOneResourceProperties, CurrentQuotaLimit]
+INFORMATION (FluentMapper): Add Inner for type 'QuotaRequestOneResourceProperties': []
 
 ```
 **stderr**
@@ -932,29 +907,6 @@ Use --help to get help information.
 ```
 **stderr**
 ```
-
-```
-</details>
-
-<details>
-<summary>scheduler</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.3]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-Failure:
-
-```
-**stderr**
-```
-Error: Unable to acquire shared lock on '/home/runner/.autorest' before timeout 20000 msec.
-Error: Unable to acquire shared lock on '/home/runner/.autorest' before timeout 20000 msec.
-    at SharedLock.acquire (/opt/hostedtoolcache/node/14.17.3/x64/lib/node_modules/autorest/dist/vendors-common_temp_node_modules_pnpm_azure-tools_eventing_3_0_252_node_modules_azure-tools_e-67ffa1.js:1503:19)
-    at Function.Create (/opt/hostedtoolcache/node/14.17.3/x64/lib/node_modules/autorest/dist/src_autorest-as-a-service_ts.js:8949:61)
-    at Object.loadConfig (/opt/hostedtoolcache/node/14.17.3/x64/lib/node_modules/autorest/dist/src_autorest-as-a-service_ts.js:606:27)
-    at main (/opt/hostedtoolcache/node/14.17.3/x64/lib/node_modules/autorest/dist/app.js:90:24)
 
 ```
 </details>
@@ -1171,8 +1123,6 @@ INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentNamer): Transform code model
 INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
-INFORMATION (SchemaNameNormalization): Create sealed choice 'HostingConfigurationProvider'
-INFORMATION (SchemaNameNormalization): Create sealed choice 'ProcessHostingConfigurationProvider'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'CoreResource'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Relationship'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ClientGroupMember'
@@ -1191,7 +1141,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Liveness, Process, Machine, ClientGroupMember, Port, MapResponse, MachinesSummary, ClientGroup, ClientGroupMembersCount, Connection, MachineGroup]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMembersCount, MachinesSummary, Machine, Liveness, MachineGroup, Process, MapResponse, Connection, ClientGroupMember, ClientGroup, Port]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1235,7 +1185,7 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-softwareplan ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 38 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/target/classes
+[INFO] Compiling 39 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/target/classes
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
@@ -1334,8 +1284,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.115 s
-[INFO] Finished at: 2021-07-26T19:12:52Z
+[INFO] Total time:  2.516 s
+[INFO] Finished at: 2021-07-28T19:01:07Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-softwareplan: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsImpl.java:[72,49] method list(java.lang.String) is already defined in class com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsImpl
@@ -1460,7 +1410,7 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-streamanalytics ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 254 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/target/classes
+[INFO] Compiling 279 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/target/classes
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
@@ -1490,8 +1440,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.571 s
-[INFO] Finished at: 2021-07-26T19:20:33Z
+[INFO] Total time:  3.772 s
+[INFO] Finished at: 2021-07-28T19:07:11Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -1568,8 +1518,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.707 s
-[INFO] Finished at: 2021-07-26T19:24:13Z
+[INFO] Total time:  1.524 s
+[INFO] Finished at: 2021-07-28T19:10:09Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-visualstudio: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
