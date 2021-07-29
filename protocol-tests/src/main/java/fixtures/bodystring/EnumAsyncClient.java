@@ -31,6 +31,9 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponse(RequestOptions requestOptions) {
@@ -45,6 +48,9 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandable(RequestOptions requestOptions) {
@@ -59,6 +65,10 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
@@ -73,6 +83,10 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandable(BinaryData stringBody, RequestOptions requestOptions) {
@@ -87,6 +101,9 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponse(RequestOptions requestOptions) {
@@ -101,6 +118,9 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferenced(RequestOptions requestOptions) {
@@ -115,6 +135,10 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -129,6 +153,10 @@ public final class EnumAsyncClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferenced(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -146,6 +174,9 @@ public final class EnumAsyncClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponse(RequestOptions requestOptions) {
@@ -163,6 +194,9 @@ public final class EnumAsyncClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstant(RequestOptions requestOptions) {
@@ -180,6 +214,10 @@ public final class EnumAsyncClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponse(
@@ -198,6 +236,10 @@ public final class EnumAsyncClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstant(BinaryData enumStringBody, RequestOptions requestOptions) {

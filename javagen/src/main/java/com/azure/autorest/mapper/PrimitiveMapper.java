@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.codemodel.DateTimeSchema;
 import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.model.codemodel.TimeSchema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -31,6 +32,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
         if (parsed.containsKey(primaryType)) {
             return parsed.get(primaryType);
         }
+        boolean isLowLevelClient = JavaSettings.getInstance().isLowLevelClient();
         IType iType;
         switch (primaryType.getType()) {
 //            case null:
@@ -51,14 +53,18 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = PrimitiveType.Char;
                 break;
             case DATE:
-                iType = ClassType.LocalDate;
+                iType = isLowLevelClient ? ClassType.String : ClassType.LocalDate;
                 break;
             case DATE_TIME:
-                DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
-                if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
-                    iType = ClassType.DateTimeRfc1123;
+                if (isLowLevelClient) {
+                    iType = ClassType.String;
                 } else {
-                    iType = ClassType.DateTime;
+                    DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
+                    if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
+                        iType = ClassType.DateTimeRfc1123;
+                    } else {
+                        iType = ClassType.DateTime;
+                    }
                 }
                 break;
             case TIME:
@@ -96,16 +102,16 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = ClassType.String;
                 break;
             case URI:
-                iType = ClassType.URL;
+                iType = isLowLevelClient ? ClassType.String : ClassType.URL;
                 break;
             case DURATION:
-                iType = ClassType.Duration;
+                iType = isLowLevelClient ? ClassType.String : ClassType.Duration;
                 break;
             case UNIXTIME:
-                iType = PrimitiveType.UnixTimeLong;
+                iType = isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
                 break;
             case UUID:
-                iType = ClassType.UUID;
+                iType = isLowLevelClient ? ClassType.String : ClassType.UUID;
                 break;
             case OBJECT:
                 iType = ClassType.Object;

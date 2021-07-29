@@ -1,7 +1,6 @@
 package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -44,10 +43,7 @@ public final class FlattencomplexesImpl {
     private interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -61,12 +57,13 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -80,11 +77,14 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
+        return service.getValid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -98,6 +98,9 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -123,6 +126,10 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -148,6 +155,9 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -165,6 +175,10 @@ public final class FlattencomplexesImpl {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {

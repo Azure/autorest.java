@@ -2,7 +2,6 @@ package fixtures.bodystring.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -46,98 +45,66 @@ public final class StringOperationsImpl {
     private interface StringOperationsService {
         @Get("/string/null")
         Mono<Response<BinaryData>> getNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/null")
-        Mono<Response<Void>> putNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/empty")
         Mono<Response<BinaryData>> getEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/empty")
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/mbcs")
         Mono<Response<BinaryData>> getMbcs(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/mbcs")
         Mono<Response<Void>> putMbcs(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/whitespace")
         Mono<Response<BinaryData>> getWhitespace(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/whitespace")
         Mono<Response<Void>> putWhitespace(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/notProvided")
         Mono<Response<BinaryData>> getNotProvided(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/base64Encoding")
         Mono<Response<byte[]>> getBase64Encoded(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/base64UrlEncoding")
         Mono<Response<BinaryData>> getBase64UrlEncoded(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/base64UrlEncoding")
         Mono<Response<Void>> putBase64UrlEncoded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/nullBase64UrlEncoding")
         Mono<Response<BinaryData>> getNullBase64UrlEncoded(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -148,11 +115,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -163,11 +132,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNull(this.client.getHost(), accept, requestOptions, context);
+        return service.getNull(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -178,6 +150,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions) {
@@ -200,6 +175,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions, Context context) {
@@ -222,6 +201,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNull(RequestOptions requestOptions) {
@@ -236,45 +218,79 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions, Context context) {
         return getNullWithResponseAsync(requestOptions, context).block();
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), requestOptions, context));
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putNull(this.client.getHost(), accept, requestOptions, context);
+        return service.putNull(this.client.getHost(), requestOptions, context);
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(RequestOptions requestOptions) {
         return putNullWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(RequestOptions requestOptions, Context context) {
         return putNullWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNull(RequestOptions requestOptions) {
         putNullAsync(requestOptions).block();
     }
 
-    /** Set string value null. */
+    /**
+     * Set string value null.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, Context context) {
         return putNullWithResponseAsync(requestOptions, context).block();
@@ -288,12 +304,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getEmpty(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -304,11 +321,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEmpty(this.client.getHost(), accept, requestOptions, context);
+        return service.getEmpty(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -319,6 +339,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions) {
@@ -341,6 +364,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -363,6 +390,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getEmpty(RequestOptions requestOptions) {
@@ -377,48 +407,82 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return getEmptyWithResponseAsync(requestOptions, context).block();
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody = BinaryData.fromObject("");
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context));
+                context -> service.putEmpty(this.client.getHost(), stringBody, requestOptions, context));
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody = BinaryData.fromObject("");
-        final String accept = "application/json";
-        return service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context);
+        return service.putEmpty(this.client.getHost(), stringBody, requestOptions, context);
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(RequestOptions requestOptions) {
         return putEmptyWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(RequestOptions requestOptions, Context context) {
         return putEmptyWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(RequestOptions requestOptions) {
         putEmptyAsync(requestOptions).block();
     }
 
-    /** Set string value empty ''. */
+    /**
+     * Set string value empty ''.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return putEmptyWithResponseAsync(requestOptions, context).block();
@@ -432,11 +496,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -447,11 +513,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getMbcs(this.client.getHost(), accept, requestOptions, context);
+        return service.getMbcs(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -462,6 +531,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions) {
@@ -484,6 +556,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions, Context context) {
@@ -506,6 +582,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getMbcs(RequestOptions requestOptions) {
@@ -520,50 +599,84 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions, Context context) {
         return getMbcsWithResponseAsync(requestOptions, context).block();
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody =
                 BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context));
+                context -> service.putMbcs(this.client.getHost(), stringBody, requestOptions, context));
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody =
                 BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-        final String accept = "application/json";
-        return service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context);
+        return service.putMbcs(this.client.getHost(), stringBody, requestOptions, context);
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync(RequestOptions requestOptions) {
         return putMbcsWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync(RequestOptions requestOptions, Context context) {
         return putMbcsWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMbcs(RequestOptions requestOptions) {
         putMbcsAsync(requestOptions).block();
     }
 
-    /** Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'. */
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions, Context context) {
         return putMbcsWithResponseAsync(requestOptions, context).block();
@@ -578,12 +691,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getWhitespace(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -595,11 +710,15 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getWhitespace(this.client.getHost(), accept, requestOptions, context);
+        return service.getWhitespace(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -611,6 +730,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions) {
@@ -634,6 +757,11 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions, Context context) {
@@ -657,6 +785,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getWhitespace(RequestOptions requestOptions) {
@@ -672,6 +804,11 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions, Context context) {
@@ -681,31 +818,39 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody =
                 BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context));
+                context -> service.putWhitespace(this.client.getHost(), stringBody, requestOptions, context));
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody =
                 BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
-        final String accept = "application/json";
-        return service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context);
+        return service.putWhitespace(this.client.getHost(), stringBody, requestOptions, context);
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions) {
@@ -715,6 +860,10 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions, Context context) {
@@ -724,6 +873,8 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWhitespace(RequestOptions requestOptions) {
@@ -733,6 +884,10 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions, Context context) {
@@ -747,12 +902,13 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNotProvided(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -763,11 +919,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNotProvided(this.client.getHost(), accept, requestOptions, context);
+        return service.getNotProvided(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -778,6 +937,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions) {
@@ -800,6 +962,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions, Context context) {
@@ -822,6 +988,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNotProvided(RequestOptions requestOptions) {
@@ -836,6 +1005,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * String
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {
@@ -850,12 +1023,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBase64Encoded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.getBase64Encoded(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -866,11 +1041,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getBase64Encoded(this.client.getHost(), accept, requestOptions, context);
+        return service.getBase64Encoded(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -881,6 +1059,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions) {
@@ -903,6 +1084,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions, Context context) {
@@ -925,6 +1110,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64Encoded(RequestOptions requestOptions) {
@@ -939,6 +1127,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * byte[]
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions, Context context) {
@@ -953,12 +1145,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.getBase64UrlEncoded(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -969,12 +1163,15 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context);
+        return service.getBase64UrlEncoded(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -985,6 +1182,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions) {
@@ -1007,6 +1207,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
@@ -1029,6 +1233,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBase64UrlEncoded(RequestOptions requestOptions) {
@@ -1043,6 +1250,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions, Context context) {
@@ -1057,15 +1268,16 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.putBase64UrlEncoded(
-                                this.client.getHost(), stringBody, accept, requestOptions, context));
+                context -> service.putBase64UrlEncoded(this.client.getHost(), stringBody, requestOptions, context));
     }
 
     /**
@@ -1076,12 +1288,16 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putBase64UrlEncoded(this.client.getHost(), stringBody, accept, requestOptions, context);
+        return service.putBase64UrlEncoded(this.client.getHost(), stringBody, requestOptions, context);
     }
 
     /**
@@ -1092,6 +1308,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions) {
@@ -1107,6 +1327,11 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -1122,6 +1347,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBase64UrlEncoded(BinaryData stringBody, RequestOptions requestOptions) {
@@ -1136,6 +1364,11 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(
@@ -1151,12 +1384,14 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNullBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.getNullBase64UrlEncoded(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -1167,12 +1402,15 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNullBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context);
+        return service.getNullBase64UrlEncoded(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1183,6 +1421,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions) {
@@ -1205,6 +1446,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
@@ -1227,6 +1472,9 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNullBase64UrlEncoded(RequestOptions requestOptions) {
@@ -1241,6 +1489,10 @@ public final class StringOperationsImpl {
      * <pre>{@code
      * Base64Url
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions, Context context) {

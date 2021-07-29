@@ -2,7 +2,6 @@ package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -45,47 +44,31 @@ public final class BasicsImpl {
     private interface BasicsService {
         @Get("/complex/basic/valid")
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/basic/valid")
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @QueryParam("api-version") String apiVersion,
                 @BodyParam("application/json") BinaryData complexBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/complex/basic/invalid")
         Mono<Response<BinaryData>> getInvalid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/complex/basic/empty")
         Mono<Response<BinaryData>> getEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/complex/basic/null")
         Mono<Response<BinaryData>> getNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/complex/basic/notprovided")
         Mono<Response<BinaryData>> getNotProvided(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -100,12 +83,13 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -120,11 +104,14 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
+        return service.getValid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -139,6 +126,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -165,6 +155,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -191,6 +185,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -209,6 +206,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -235,17 +236,19 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.putValid(
                                 this.client.getHost(),
                                 this.client.getApiVersion(),
                                 complexBody,
-                                accept,
                                 requestOptions,
                                 context));
     }
@@ -270,13 +273,17 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
         return service.putValid(
-                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, requestOptions, context);
+                this.client.getHost(), this.client.getApiVersion(), complexBody, requestOptions, context);
     }
 
     /**
@@ -299,6 +306,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -325,6 +336,11 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -352,6 +368,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -378,6 +397,11 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -396,12 +420,13 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getInvalidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getInvalid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -416,11 +441,14 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getInvalidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getInvalid(this.client.getHost(), accept, requestOptions, context);
+        return service.getInvalid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -435,6 +463,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getInvalidAsync(RequestOptions requestOptions) {
@@ -461,6 +492,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getInvalidAsync(RequestOptions requestOptions, Context context) {
@@ -487,6 +522,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getInvalid(RequestOptions requestOptions) {
@@ -505,6 +543,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInvalidWithResponse(RequestOptions requestOptions, Context context) {
@@ -523,12 +565,13 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getEmpty(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -543,11 +586,14 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEmpty(this.client.getHost(), accept, requestOptions, context);
+        return service.getEmpty(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -562,6 +608,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions) {
@@ -588,6 +637,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -614,6 +667,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getEmpty(RequestOptions requestOptions) {
@@ -632,6 +688,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
@@ -650,11 +710,13 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -669,11 +731,14 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNull(this.client.getHost(), accept, requestOptions, context);
+        return service.getNull(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -688,6 +753,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions) {
@@ -714,6 +782,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNullAsync(RequestOptions requestOptions, Context context) {
@@ -740,6 +812,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNull(RequestOptions requestOptions) {
@@ -758,6 +833,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions, Context context) {
@@ -776,12 +855,13 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNotProvided(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -796,11 +876,14 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNotProvided(this.client.getHost(), accept, requestOptions, context);
+        return service.getNotProvided(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -815,6 +898,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions) {
@@ -841,6 +927,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions, Context context) {
@@ -867,6 +957,9 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNotProvided(RequestOptions requestOptions) {
@@ -885,6 +978,10 @@ public final class BasicsImpl {
      *     color: String(cyan/Magenta/YELLOW/blacK)
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {

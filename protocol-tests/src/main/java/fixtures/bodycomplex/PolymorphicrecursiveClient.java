@@ -37,6 +37,9 @@ public final class PolymorphicrecursiveClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -57,6 +60,10 @@ public final class PolymorphicrecursiveClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -77,6 +84,15 @@ public final class PolymorphicrecursiveClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
+     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
+     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
+     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
+     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
+     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
+     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -97,6 +113,17 @@ public final class PolymorphicrecursiveClient {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
+     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
+     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
+     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
+     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
+     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
+     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

@@ -43,6 +43,9 @@ public final class InheritanceClient {
      *     breed: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -69,6 +72,10 @@ public final class InheritanceClient {
      *     breed: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -95,6 +102,11 @@ public final class InheritanceClient {
      *     breed: String
      * }
      * }</pre>
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     *     food="french fries".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -121,6 +133,13 @@ public final class InheritanceClient {
      *     breed: String
      * }
      * }</pre>
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     *     food="french fries".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {

@@ -34,6 +34,9 @@ public final class FlattencomplexAsyncClient {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
@@ -51,6 +54,9 @@ public final class FlattencomplexAsyncClient {
      *     }
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValid(RequestOptions requestOptions) {

@@ -2,7 +2,6 @@ package fixtures.bodystring.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -44,46 +43,34 @@ public final class EnumsImpl {
     private interface EnumsService {
         @Get("/string/enum/notExpandable")
         Mono<Response<String>> getNotExpandable(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/notExpandable")
         Mono<Response<Void>> putNotExpandable(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/enum/Referenced")
         Mono<Response<String>> getReferenced(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/Referenced")
         Mono<Response<Void>> putReferenced(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/string/enum/ReferencedConstant")
         Mono<Response<BinaryData>> getReferencedConstant(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/ReferencedConstant")
         Mono<Response<Void>> putReferencedConstant(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -96,12 +83,14 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNotExpandable(this.client.getHost(), accept, requestOptions, context));
+                context -> service.getNotExpandable(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -112,11 +101,14 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNotExpandable(this.client.getHost(), accept, requestOptions, context);
+        return service.getNotExpandable(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -127,6 +119,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions) {
@@ -149,6 +144,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions, Context context) {
@@ -171,6 +170,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotExpandable(RequestOptions requestOptions) {
@@ -185,6 +187,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
@@ -199,14 +205,16 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context));
+                context -> service.putNotExpandable(this.client.getHost(), stringBody, requestOptions, context));
     }
 
     /**
@@ -217,12 +225,16 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context);
+        return service.putNotExpandable(this.client.getHost(), stringBody, requestOptions, context);
     }
 
     /**
@@ -233,6 +245,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions) {
@@ -248,6 +264,11 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -263,6 +284,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(BinaryData stringBody, RequestOptions requestOptions) {
@@ -277,6 +301,11 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(
@@ -292,12 +321,13 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getReferenced(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -308,11 +338,14 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getReferenced(this.client.getHost(), accept, requestOptions, context);
+        return service.getReferenced(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -323,6 +356,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions) {
@@ -345,6 +381,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions, Context context) {
@@ -367,6 +407,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getReferenced(RequestOptions requestOptions) {
@@ -381,6 +424,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
@@ -395,14 +442,16 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
+                context -> service.putReferenced(this.client.getHost(), enumStringBody, requestOptions, context));
     }
 
     /**
@@ -413,12 +462,16 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context);
+        return service.putReferenced(this.client.getHost(), enumStringBody, requestOptions, context);
     }
 
     /**
@@ -429,6 +482,10 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -444,6 +501,11 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
@@ -459,6 +521,9 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -473,6 +538,11 @@ public final class EnumsImpl {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(
@@ -491,12 +561,14 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getReferencedConstant(this.client.getHost(), accept, requestOptions, context));
+                context -> service.getReferencedConstant(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -510,12 +582,15 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getReferencedConstant(this.client.getHost(), accept, requestOptions, context);
+        return service.getReferencedConstant(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -529,6 +604,9 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions) {
@@ -554,6 +632,10 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions, Context context) {
@@ -579,6 +661,9 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getReferencedConstant(RequestOptions requestOptions) {
@@ -596,6 +681,10 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
@@ -613,15 +702,17 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.putReferencedConstant(
-                                this.client.getHost(), enumStringBody, accept, requestOptions, context));
+                        service.putReferencedConstant(this.client.getHost(), enumStringBody, requestOptions, context));
     }
 
     /**
@@ -635,12 +726,16 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, requestOptions, context);
+        return service.putReferencedConstant(this.client.getHost(), enumStringBody, requestOptions, context);
     }
 
     /**
@@ -654,6 +749,10 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -672,6 +771,11 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(
@@ -691,6 +795,9 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -708,6 +815,11 @@ public final class EnumsImpl {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(

@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -92,7 +93,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
             if (settings.isLowLevelClient()) {
-                if (responseBodyType instanceof ClassType) {
+                if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
                     responseBodyType = ClassType.String;
@@ -121,7 +122,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
-        for (Request request : operation.getRequests()) {
+        // Low-level client only requires one request per operation
+        List<Request> requests = operation.getRequests();
+        if (settings.isLowLevelClient()) {
+            requests = Collections.singletonList(requests.get(0));
+        }
+
+        for (Request request : requests) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
             builder.proxyMethod(proxyMethod);
 

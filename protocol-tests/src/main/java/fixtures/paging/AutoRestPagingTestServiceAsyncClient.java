@@ -40,6 +40,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -64,6 +67,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -88,6 +94,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -113,6 +122,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -147,6 +159,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -181,6 +196,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
@@ -215,6 +233,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     odataNextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -251,6 +272,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }</pre>
      *
      * @param offset Offset of return value.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -276,6 +299,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -301,6 +327,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -325,6 +354,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -349,6 +381,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -373,6 +408,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -407,6 +445,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
@@ -441,6 +481,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
@@ -476,6 +518,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
@@ -500,6 +545,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     nextLink: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {

@@ -54,6 +54,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
+        builder.rawType(wireType);
+
         IType clientType = wireType.getClientType();
         if (settings.isLowLevelClient() && !(clientType instanceof PrimitiveType)) {
             if (parameterRequestLocation == RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {

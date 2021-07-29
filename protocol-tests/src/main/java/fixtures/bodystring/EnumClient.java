@@ -31,6 +31,9 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotExpandable(RequestOptions requestOptions) {
@@ -45,6 +48,10 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
@@ -59,6 +66,9 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(BinaryData stringBody, RequestOptions requestOptions) {
@@ -73,6 +83,11 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param stringBody string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(
@@ -88,6 +103,9 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getReferenced(RequestOptions requestOptions) {
@@ -102,6 +120,10 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
@@ -116,6 +138,9 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -130,6 +155,11 @@ public final class EnumClient {
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(
@@ -148,6 +178,9 @@ public final class EnumClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getReferencedConstant(RequestOptions requestOptions) {
@@ -165,6 +198,10 @@ public final class EnumClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
@@ -182,6 +219,9 @@ public final class EnumClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -199,6 +239,11 @@ public final class EnumClient {
      *     field1: String
      * }
      * }</pre>
+     *
+     * @param enumStringBody enum string body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(

@@ -2,7 +2,6 @@ package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -44,40 +43,29 @@ public final class ArraysImpl {
     private interface ArraysService {
         @Get("/complex/array/valid")
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/array/valid")
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/complex/array/empty")
         Mono<Response<BinaryData>> getEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/array/empty")
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("/complex/array/notprovided")
         Mono<Response<BinaryData>> getNotProvided(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -92,12 +80,13 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -112,11 +101,14 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
+        return service.getValid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -131,6 +123,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -157,6 +152,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -183,6 +182,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -201,6 +203,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -219,12 +225,16 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
+                context -> service.putValid(this.client.getHost(), complexBody, requestOptions, context));
     }
 
     /**
@@ -239,12 +249,17 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
+        return service.putValid(this.client.getHost(), complexBody, requestOptions, context);
     }
 
     /**
@@ -259,6 +274,11 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -277,6 +297,12 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -296,6 +322,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -314,6 +344,12 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
+     *     fox jumps over the lazy dog".
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -332,12 +368,13 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getEmpty(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -352,11 +389,14 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEmpty(this.client.getHost(), accept, requestOptions, context);
+        return service.getEmpty(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -371,6 +411,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions) {
@@ -397,6 +440,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -423,6 +470,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getEmpty(RequestOptions requestOptions) {
@@ -441,6 +491,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
@@ -459,12 +513,15 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putEmpty(this.client.getHost(), complexBody, accept, requestOptions, context));
+                context -> service.putEmpty(this.client.getHost(), complexBody, requestOptions, context));
     }
 
     /**
@@ -479,12 +536,16 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putEmpty(this.client.getHost(), complexBody, accept, requestOptions, context);
+        return service.putEmpty(this.client.getHost(), complexBody, requestOptions, context);
     }
 
     /**
@@ -499,6 +560,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -517,6 +582,11 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -536,6 +606,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(BinaryData complexBody, RequestOptions requestOptions) {
@@ -554,6 +627,11 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param complexBody Please put an empty array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -572,12 +650,13 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNotProvided(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -592,11 +671,14 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNotProvided(this.client.getHost(), accept, requestOptions, context);
+        return service.getNotProvided(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -611,6 +693,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions) {
@@ -637,6 +722,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions, Context context) {
@@ -663,6 +752,9 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getNotProvided(RequestOptions requestOptions) {
@@ -681,6 +773,10 @@ public final class ArraysImpl {
      *     ]
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {

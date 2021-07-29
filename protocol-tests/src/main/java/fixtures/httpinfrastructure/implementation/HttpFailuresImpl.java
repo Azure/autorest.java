@@ -1,7 +1,6 @@
 package fixtures.httpinfrastructure.implementation;
 
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -42,24 +41,15 @@ public final class HttpFailuresImpl {
     private interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
         Mono<Response<Boolean>> getEmptyError(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/nomodel/error")
         Mono<Response<Boolean>> getNoModelError(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/failure/nomodel/empty")
         Mono<Response<Boolean>> getNoModelEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -70,12 +60,13 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getEmptyError(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getEmptyError(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -86,11 +77,14 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEmptyError(this.client.getHost(), accept, requestOptions, context);
+        return service.getEmptyError(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -101,6 +95,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions) {
@@ -123,6 +120,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync(RequestOptions requestOptions, Context context) {
@@ -145,6 +146,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError(RequestOptions requestOptions) {
@@ -164,6 +168,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -178,12 +186,13 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNoModelError(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNoModelError(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -194,11 +203,14 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoModelError(this.client.getHost(), accept, requestOptions, context);
+        return service.getNoModelError(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -209,6 +221,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions) {
@@ -231,6 +246,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync(RequestOptions requestOptions, Context context) {
@@ -253,6 +272,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError(RequestOptions requestOptions) {
@@ -272,6 +294,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions, Context context) {
@@ -286,12 +312,13 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNoModelEmpty(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNoModelEmpty(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -302,11 +329,14 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNoModelEmpty(this.client.getHost(), accept, requestOptions, context);
+        return service.getNoModelEmpty(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -317,6 +347,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions) {
@@ -339,6 +372,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync(RequestOptions requestOptions, Context context) {
@@ -361,6 +398,9 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty(RequestOptions requestOptions) {
@@ -380,6 +420,10 @@ public final class HttpFailuresImpl {
      * <pre>{@code
      * boolean
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions, Context context) {

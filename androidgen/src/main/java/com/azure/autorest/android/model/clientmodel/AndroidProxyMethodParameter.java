@@ -46,6 +46,7 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                                           CollectionFormat collectionFormat) {
         super(description,
                 wireType,
+                wireType,
                 clientType,
                 name,
                 requestParameterLocation,

@@ -10,6 +10,8 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -19,6 +21,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -64,7 +67,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
         if (settings.isLowLevelClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            if (responseBodyType instanceof ClassType) {
+            if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {
                 responseBodyType = ClassType.String;
@@ -124,7 +127,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
         builder.responseContentTypes(responseContentTypes);
 
-        for (Request request : operation.getRequests()) {
+        // Low-level client only requires one request per operation
+        List<Request> requests = operation.getRequests();
+        if (settings.isLowLevelClient()) {
+            requests = Collections.singletonList(requests.get(0));
+        }
+
+        for (Request request : requests) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
             }
@@ -158,7 +167,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 if (!settings.isLowLevelClient() || (parameter.isRequired() &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query ||
-                        parameter.getClientDefaultValue() != null)) {
+                        parameter.getClientDefaultValue() != null &&
+                        parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion"))) {
                     parameters.add(proxyMethodParameter);
                 }
             }

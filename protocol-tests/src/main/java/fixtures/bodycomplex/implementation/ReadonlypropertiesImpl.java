@@ -2,7 +2,6 @@ package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -46,16 +45,12 @@ public final class ReadonlypropertiesImpl {
     private interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/readonlyproperty/valid")
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
-                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -71,12 +66,13 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
     }
 
     /**
@@ -90,11 +86,14 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
+        return service.getValid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -108,6 +107,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions) {
@@ -133,6 +135,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getValidAsync(RequestOptions requestOptions, Context context) {
@@ -158,6 +164,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getValid(RequestOptions requestOptions) {
@@ -175,6 +184,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
@@ -192,12 +205,15 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
+                context -> service.putValid(this.client.getHost(), complexBody, requestOptions, context));
     }
 
     /**
@@ -211,12 +227,16 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
+        return service.putValid(this.client.getHost(), complexBody, requestOptions, context);
     }
 
     /**
@@ -230,6 +250,10 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions) {
@@ -247,6 +271,11 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
@@ -265,6 +294,9 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
@@ -282,6 +314,11 @@ public final class ReadonlypropertiesImpl {
      *     size: Integer
      * }
      * }</pre>
+     *
+     * @param complexBody The complexBody parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
