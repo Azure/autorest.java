@@ -102,7 +102,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = ClassType.String;
                 break;
             case URI:
-                iType = ClassType.URL;
+                iType = isLowLevelClient ? ClassType.String : ClassType.URL;
                 break;
             case DURATION:
                 iType = isLowLevelClient ? ClassType.String : ClassType.Duration;
