@@ -121,7 +121,8 @@ public class Javagen extends NewPlugin {
                 String packageName = settings.getPackage();
                 String serviceName = settings.getServiceName();
                 String fileName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
-                javaPackage.addServiceVersion(packageName, fileName, client.getServiceClient());
+                List<String> serviceVersions = settings.getServiceVersions();
+                javaPackage.addServiceVersion(packageName, fileName, serviceVersions, client.getServiceClient());
             }
 
             if (!JavaSettings.getInstance().isLowLevelClient()) {
@@ -172,6 +173,7 @@ public class Javagen extends NewPlugin {
                     writeFile(javaFile.getFilePath(), formattedSource, null);
                 } catch (Exception e) {
                     LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                    LOGGER.error(javaFile.getContents().toString());
                     return false;
                 }
             }

@@ -80,6 +80,10 @@ public abstract class NewPlugin {
         }
     }
 
+    public List<String> getListValue(String key) {
+        return getValue(List.class, key);
+    }
+
     public List<String> listInputs() {
         return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, null);
     }
