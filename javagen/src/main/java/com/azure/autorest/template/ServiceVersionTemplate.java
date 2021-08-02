@@ -30,7 +30,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
         });
 
         javaFile.publicEnum(className + " implements ServiceVersion", classBlock -> {
-            serviceVersions.forEach(v -> classBlock.value(v, v));
+            serviceVersions.forEach(v -> classBlock.value(getVersionIdentifier(v), v));
 
             classBlock.privateFinalMemberVariable("String", "version");
 
@@ -51,7 +51,8 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
             });
             classBlock.PublicStaticMethod(
                     className + " getLatest()",
-                    javaBlock -> javaBlock.methodReturn("TODO")
+                    javaBlock -> javaBlock.methodReturn(
+                            getVersionIdentifier(serviceVersions.get(serviceVersions.size() - 1)))
             );
         });
     }
@@ -64,5 +65,9 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
     public ServiceVersionTemplate serviceVersions(List<String> serviceVersions) {
         this.serviceVersions = serviceVersions;
         return this;
+    }
+
+    private String getVersionIdentifier(String version) {
+        return "V" + version.replaceAll("[-.]", "_");
     }
 }
