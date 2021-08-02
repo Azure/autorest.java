@@ -48,3 +48,5 @@ The generated code is not checked-in. Instead, code is generated on-the-fly duri
 ## Logging
 
 **DO NOT** log to stdout. AutoRest uses stdin and stdout as pipeline for plugins.
+
+For formal logging, use `PluginLogger` in pattern `Logger logger = new PluginLogger(<PluginEntry>.getPluginInstance(), <Class>.class)`.
