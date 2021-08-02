@@ -4,7 +4,7 @@
 
 AutoRest Java is the Java language generator for AutoRest.
 
-As npm package, it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/v4/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`, `androidgen`.
+As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/v4/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`, `androidgen`.
 
 As AutoRest plugin, it is defined by the [YAML section in `readme.md`](https://github.com/Azure/autorest.java/blob/v4/javagen/readme.md), located in the same folders of `package.json`.
 
@@ -47,6 +47,6 @@ The generated code is not checked-in. Instead, code is generated on-the-fly duri
 
 ## Logging
 
-**DO NOT** log to stdout. AutoRest uses stdin and stdout as pipeline for plugins.
+**DO NOT** log to stdout. AutoRest uses stdin and stdout as [PRC channel for plugins](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md#rpc-channel).
 
 For formal logging, use `PluginLogger` in pattern `Logger logger = new PluginLogger(<PluginEntry>.getPluginInstance(), <Class>.class)`.
