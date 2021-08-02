@@ -50,3 +50,29 @@ The generated code is not checked-in. Instead, code is generated on-the-fly duri
 **DO NOT** log to stdout. AutoRest uses stdin and stdout as [PRC channel for plugins](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md#rpc-channel).
 
 For formal logging, use `PluginLogger` in pattern `Logger logger = new PluginLogger(<PluginEntry>.getPluginInstance(), <Class>.class)`.
+
+## AutoRest
+
+- [AutoRest in the narrow sense](https://www.npmjs.com/package/autorest) is the command line tool (CLI) for the pipeline.
+- [AutoRest Core](https://www.npmjs.com/package/@autorest/core) is the core functionality of the AutoRest pipeline. Its code is at [core](https://github.com/Azure/autorest/tree/main/packages/extensions/core). 
+- [AutoRest Modeler Four](https://www.npmjs.com/package/@autorest/modelerfour) is the modeler extension. Its code is at [modelerfour](https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour). AutoRest Java connects to the output of the modeler.
+
+It is easy to get confused about AutoRest and AutoRest Core.
+If one run `autorest --info`, one might see below:
+```
+AutoRest code generation utility [cli version: 3.3.2; node: v12.16.1]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+
+Showing All Installed Extensions
+
+ Type       Extension Name                           Version      Location
+ core       @autorest/core                           3.4.5        C:\Users\<user>\.autorest\@autorest_core@3.4.5
+ core       @autorest/core                           3.5.1        C:\Users\<user>\.autorest\@autorest_core@3.5.1
+ extension  @autorest/java                           4.0.30       C:\Users\<user>\.autorest\@autorest_java@4.0.30
+ extension  @autorest/modelerfour                    4.18.1       C:\Users\<user>\.autorest\@autorest_modelerfour@4.18.1
+ extension  @autorest/modelerfour                    4.19.3       C:\Users\<user>\.autorest\@autorest_modelerfour@4.19.3
+```
+
+The current installed AutoRest version is 3.3.2, while downloaded AutoRest Core version is 3.4.5 and 3.5.1.
+And downloaded Modeler Four version is 4.18.1 and 4.19.3, AutoRest Java version is 4.0.30.
