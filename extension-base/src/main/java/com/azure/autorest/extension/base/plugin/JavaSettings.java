@@ -127,7 +127,7 @@ public class JavaSettings
                     host.getBooleanValue("optional-constant-as-enum", false),
                     host.getBooleanValue("low-level-client", false),
                     host.getBooleanValue("use-iterable", false),
-                    host.getListValue("service-versions"));
+                    host.getValue(List.class, "service-versions"));
         }
         return _instance;
     }
@@ -548,6 +548,10 @@ public class JavaSettings
         return useIterable;
     }
 
+    /**
+     * Service version list. It maps to api-version parameter in swagger.
+     * Last one is the latest version, also default version
+     */
     private final List<String> serviceVersions;
 
     public List<String> getServiceVersions() {
