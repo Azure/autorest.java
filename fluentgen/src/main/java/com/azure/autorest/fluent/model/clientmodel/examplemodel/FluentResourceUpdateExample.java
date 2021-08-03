@@ -9,6 +9,9 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 
+/**
+ * Model of example for ResourceUpdate.
+ */
 public class FluentResourceUpdateExample extends FluentBaseExample {
 
     private final ResourceUpdate resourceUpdate;

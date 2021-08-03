@@ -9,6 +9,9 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 
+/**
+ * Model of example for FluentCollectionMethod.
+ */
 public class FluentCollectionMethodExample extends FluentBaseExample {
 
     private final FluentCollectionMethod collectionMethod;

@@ -269,6 +269,21 @@ public class FluentUtils {
         }
     }
 
+    /**
+     * Get the name of the argument for the method call.
+     *
+     * If the parameter is provided by the caller, the name is unchanged and directly passed to the method call.
+     * If the parameter is provided by class variable or local variable, the name is unchanged, or might need simple conversion as the type might not align exactly.
+     * If the parameter is same as innerModel of the resource model, use innerModel.
+     * If the parameter is Context, use Context.NONE.
+     *
+     * @param parameter the client method parameter that requires the argument
+     * @param inputParametersSet the parameters that provided by the caller
+     * @param localVariables the local variables that defined in the class
+     * @param resourceModel the resource model, usually its innerModel
+     * @param collectionMethod the method
+     * @return the name of the argument
+     */
     public static String getLocalMethodArgument(ClientMethodParameter parameter,
                                                 Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
                                                 FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod) {

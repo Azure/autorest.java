@@ -7,6 +7,9 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.model.clientmodel.IType;
 
+/**
+ * Example node for Object class.
+ */
 public class ObjectNode extends ExampleNode {
 
     public ObjectNode(IType clientType, Object objectValue) {

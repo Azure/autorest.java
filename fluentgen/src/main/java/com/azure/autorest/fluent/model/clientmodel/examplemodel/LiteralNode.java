@@ -7,6 +7,9 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.model.clientmodel.IType;
 
+/**
+ * Example node of an external node, which is primitive type, or can be converted from a primitive type.
+ */
 public class LiteralNode extends ExampleNode {
 
     private String literalsValue;

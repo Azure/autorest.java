@@ -38,27 +38,27 @@ public class TypeConversionUtilsTests {
                 .build();
 
         IType mapType = new MapType(innerType);
-        String convertedExpression = TypeConversionUtils.conversionExpression(mapType, TypeConversionUtils.tempPropertyName());
+        String convertedExpression = TypeConversionUtils.conversionExpression(mapType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("inner.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, inner1 -> new MockResourceImpl(inner1.getValue(), this.manager())))", convertedExpression);
 
         IType listType = new ListType(innerType);
-        convertedExpression = TypeConversionUtils.conversionExpression(listType, TypeConversionUtils.tempPropertyName());
+        convertedExpression = TypeConversionUtils.conversionExpression(listType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("inner.stream().map(inner1 -> new MockResourceImpl(inner1, this.manager())).collect(Collectors.toList())", convertedExpression);
 
         IType pagedIterableType = GenericType.PagedIterable(innerType);
-        convertedExpression = TypeConversionUtils.conversionExpression(pagedIterableType, TypeConversionUtils.tempPropertyName());
+        convertedExpression = TypeConversionUtils.conversionExpression(pagedIterableType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("Utils.mapPage(inner, inner1 -> new MockResourceImpl(inner1, this.manager()))", convertedExpression);
 
         IType responseType = GenericType.Response(innerType);
-        convertedExpression = TypeConversionUtils.conversionExpression(responseType, TypeConversionUtils.tempPropertyName());
+        convertedExpression = TypeConversionUtils.conversionExpression(responseType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(), new MockResourceImpl(inner.getValue(), this.manager()))", convertedExpression);
 
         IType nestedMapType = new MapType(mapType);
-        convertedExpression = TypeConversionUtils.conversionExpression(nestedMapType, TypeConversionUtils.tempPropertyName());
+        convertedExpression = TypeConversionUtils.conversionExpression(nestedMapType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("inner.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, inner1 -> inner1.getValue().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, inner2 -> new MockResourceImpl(inner2.getValue(), this.manager())))))", convertedExpression);
 
         IType nestedListType = new ListType(listType);
-        convertedExpression = TypeConversionUtils.conversionExpression(nestedListType, TypeConversionUtils.tempPropertyName());
+        convertedExpression = TypeConversionUtils.conversionExpression(nestedListType, TypeConversionUtils.tempVariableName());
         Assertions.assertEquals("inner.stream().map(inner1 -> inner1.stream().map(inner2 -> new MockResourceImpl(inner2, this.manager())).collect(Collectors.toList())).collect(Collectors.toList())", convertedExpression);
     }
 

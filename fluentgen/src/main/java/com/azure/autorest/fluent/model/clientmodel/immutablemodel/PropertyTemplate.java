@@ -39,9 +39,9 @@ public class PropertyTemplate implements ImmutableMethod {
                 .methodSignature(fluentProperty.getMethodSignature())
                 .method(block -> {
                     if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {
-                        block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER_MODEL, property.getGetterName()));
-                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
-                            block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(property.getClientType(), TypeConversionUtils.tempPropertyName()));
+                        block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempVariableName(), ModelNaming.METHOD_INNER_MODEL, property.getGetterName()));
+                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempVariableName()), ifBlock -> {
+                            block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(property.getClientType(), TypeConversionUtils.tempVariableName()));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(property.getClientType()));
                         });
