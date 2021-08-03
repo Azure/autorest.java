@@ -34,13 +34,6 @@ public class BasicTests {
     }
 
     @Test
-    public void putValidWithApiVersion() throws Exception {
-        BinaryData binaryData = BinaryData.fromString("{\"id\": 2, \"name\": \"abc\", \"color\": \"Magenta\"}");
-        BasicClient tmpClient = new AutoRestComplexTestServiceBuilder().apiVersion("2020-01-01").buildBasicClient();
-        tmpClient.putValid(binaryData, null);
-    }
-
-    @Test
     public void getEmpty() throws Exception {
         BinaryData binaryData = client.getEmpty(null);
         Map map = binaryData.toObject(Map.class);
