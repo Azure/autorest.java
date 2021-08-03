@@ -39,6 +39,12 @@ The generated code is not checked-in. Instead, code is generated on-the-fly duri
 
 `CompilationTests` relies on Java compiler to pin-down certain features of the generated code, while `RuntimeTests` executes the generated code and verify the result.
 
+## Use local AutoRest Java
+
+Use `--use` option of the AutoRest to load the local AutoRest Java build (instead of the one downloaded from pre-release).
+
+The `name` of `@autorest/java` in `package.json` makes sure that it is loaded when `--java` option is provided.
+
 ## Pre-release
 
 1. Update `version` in root `package.json`.
@@ -76,3 +82,7 @@ Showing All Installed Extensions
 
 The current installed AutoRest version is 3.3.2, while downloaded AutoRest Core version is 3.4.5 and 3.5.1.
 And downloaded Modeler Four version is 4.18.1 and 4.19.3, AutoRest Java version is 4.0.30.
+
+## Design on AutoRest Java
+
+See [Design](./design.md).
