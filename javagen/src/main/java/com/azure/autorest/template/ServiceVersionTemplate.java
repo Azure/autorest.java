@@ -10,6 +10,8 @@ import java.util.Set;
 public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static final ServiceVersionTemplate _instance = new ServiceVersionTemplate();
 
+    private String serviceName;
+
     private String className;
 
     private List<String> serviceVersions;
@@ -26,7 +28,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
-            comment.description("Service version");
+            comment.description("Service version of " + serviceName);
         });
 
         javaFile.publicEnum(className + " implements ServiceVersion", classBlock -> {
@@ -55,6 +57,11 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
                             getVersionIdentifier(serviceVersions.get(serviceVersions.size() - 1)))
             );
         });
+    }
+
+    public ServiceVersionTemplate serviceName(String serviceName) {
+        this.serviceName = serviceName;
+        return this;
     }
 
     public ServiceVersionTemplate className(String className) {

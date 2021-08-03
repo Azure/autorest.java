@@ -120,9 +120,9 @@ public class Javagen extends NewPlugin {
             if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
                 String packageName = settings.getPackage();
                 String serviceName = settings.getServiceName();
-                String fileName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+                String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 List<String> serviceVersions = settings.getServiceVersions();
-                javaPackage.addServiceVersion(packageName, fileName, serviceVersions, client.getServiceClient());
+                javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
             }
 
             if (!JavaSettings.getInstance().isLowLevelClient()) {
