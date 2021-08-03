@@ -65,7 +65,7 @@ In addition to what is done in `preprocessor` module, its `Transformer` handles 
 
 It also handles naming conflict between operation groups and models (e.g. `FooClient` from operation group client and `FooClient` from model, maybe another `FooClient` of the service client), naming of anonymous model (e.g. property of anonymous schema, anonymous superclass), rename from options, cleaning up of unused schemas (which is necessary because of the normalization).
 
-`FluentJavaSettings` provides additional configuration on Fluent.
+`FluentJavaSettings` provides additional configuration on fluentnamer and fluentgen.
 
 ### `javagen` Module
 
@@ -168,7 +168,7 @@ On the other side, this blurs the separation of client model and template.
 `FluentJavaPackage` contains more items, including `pom.xml`, `readme.md`, `changelog.md`, utility classes, classes for sample codes, etc.
 
 One important option is `--sdk-integration`.
-When the option is set, fluentgen will try to generate package that conform to the requirement of [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java).
+When this option is set, fluentgen will try to generate package that conform to the requirement of [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java).
 - It reads the dependency package version from `eng/versioning/version_client.txt`.
 - It generates `pom.xml` that refers to parent pom.
 - It tries a few hack to "update" the `pom.xml` and `changelog.md`.
