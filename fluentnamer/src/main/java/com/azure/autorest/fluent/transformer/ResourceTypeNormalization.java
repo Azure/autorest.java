@@ -7,12 +7,14 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
@@ -75,6 +77,8 @@ class ResourceTypeNormalization {
     private static final ObjectSchema DUMMY_RESOURCE = dummyResourceSchema(ResourceTypeName.RESOURCE);
 
     private static ObjectSchema dummyResourceSchema(String javaName) {
+        // follow https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json
+
         ObjectSchema schema = new ObjectSchema();
         schema.setLanguage(new Languages());
         schema.getLanguage().setJava(new Language());
@@ -109,9 +113,48 @@ class ResourceTypeNormalization {
     private static void addProperty(ObjectSchema schema, String propertyName, boolean readOnly) {
         Property property = new Property();
         property.setReadOnly(readOnly);
+        property.setSerializedName(propertyName);
+
         property.setLanguage(new Languages());
         property.getLanguage().setJava(new Language());
         property.getLanguage().getJava().setName(propertyName);
+
+        // description
+        String description = "";
+        switch (propertyName) {
+            case ResourceTypeName.FIELD_ID:
+                description = "the fully qualified resource ID for the resource";
+                break;
+            case ResourceTypeName.FIELD_NAME:
+                description = "the name of the resource";
+                break;
+            case ResourceTypeName.FIELD_TYPE:
+                description = "the type of the resource";
+                break;
+            case ResourceTypeName.FIELD_LOCATION:
+                description = "the geo-location where the resource live";
+                break;
+            case ResourceTypeName.FIELD_TAGS:
+                description = "the tags of the resource";
+                break;
+        }
+        property.getLanguage().getJava().setDescription(description);
+
+        // schema
+        if (ResourceTypeName.FIELD_TAGS.equals(propertyName)) {
+            DictionarySchema propertySchema = new DictionarySchema();
+            propertySchema.setElementType(new StringSchema());
+            property.setSchema(propertySchema);
+        } else {
+            property.setSchema(new StringSchema());
+        }
+
+        // x-ms-mutability
+        if (ResourceTypeName.FIELD_LOCATION.equals(propertyName)) {
+            property.setExtensions(new XmsExtensions());
+            property.getExtensions().setXmsMutability(Arrays.asList("read", "create"));
+        }
+
         schema.getProperties().add(property);
     }
 
