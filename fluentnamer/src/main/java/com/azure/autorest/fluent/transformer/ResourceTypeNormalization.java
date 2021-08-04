@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -277,11 +278,42 @@ class ResourceTypeNormalization {
         compositeType.getParents().getImmediate().add(0, parentType);
         compositeType.getParents().getAll().add(0, parentType);
 
-        // add parent to children of this type as well
         if (compositeType.getChildren() != null && !CoreUtils.isNullOrEmpty(compositeType.getChildren().getAll())) {
+            // add parent to children of this type as well
             compositeType.getChildren().getAll().stream()
                     .filter(o -> o instanceof ObjectSchema)
-                    .forEach(o -> ((ObjectSchema) o).getParents().getAll().add(parentType));
+                    .map(o -> (ObjectSchema) o)
+                    .forEach(o -> o.getParents().getAll().add(parentType));
+
+            // try to make the Resource/ProxyResource as the first parent, for multiple inheritance (as only first parent is kept)
+            compositeType.getChildren().getAll().stream()
+                    .filter(o -> o instanceof ObjectSchema)
+                    .map(o -> (ObjectSchema) o)
+                    .filter(o -> o.getParents().getImmediate().stream().filter(o1 -> o1 instanceof ObjectSchema).count() >= 2)
+                    .forEach(child -> {
+                        int indexFirstParent = -1;
+                        int index;
+                        for (index = 0; index < child.getParents().getImmediate().size(); ++index) {
+                            Schema parent = child.getParents().getImmediate().get(index);
+                            if (parent instanceof ObjectSchema) {
+                                if (indexFirstParent == -1) {
+                                    indexFirstParent = index;
+                                }
+                                if (((ObjectSchema) parent).getParents() != null && ((ObjectSchema) parent).getParents().getAll().contains(compositeType)) {
+                                    break;
+                                }
+                            }
+                        }
+                        if (indexFirstParent >= 0
+                                && index < child.getParents().getImmediate().size()
+                                && index > indexFirstParent) {
+                            logger.info("Change parent order between '{}' and '{}', for '{}'",
+                                    Utils.getJavaName(child.getParents().getImmediate().get(indexFirstParent)),
+                                    Utils.getJavaName(child.getParents().getImmediate().get(index)),
+                                    Utils.getJavaName(child));
+                            Collections.swap(child.getParents().getImmediate(), indexFirstParent, index);
+                        }
+                    });
         }
     }
 
