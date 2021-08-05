@@ -10,7 +10,10 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleNode {
+/**
+ * Tree of example nodes.
+ */
+public abstract class ExampleNode {
 
     // the full Object at and below this node
     private final Object objectValue;

@@ -86,6 +86,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             });
 
             // methods for fluent interfaces
+            // class variables
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
                 ResourceImplementation resourceImplementation = model.getResourceImplementation();
                 List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();

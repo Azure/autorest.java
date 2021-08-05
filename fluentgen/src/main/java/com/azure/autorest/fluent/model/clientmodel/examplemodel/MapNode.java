@@ -10,6 +10,9 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Example node for a Map.
+ */
 public class MapNode extends ExampleNode {
 
     private final List<String> keys = new ArrayList<>();

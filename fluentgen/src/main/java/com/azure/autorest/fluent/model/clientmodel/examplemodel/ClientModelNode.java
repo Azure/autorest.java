@@ -12,6 +12,9 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Example node for a client model (a generated Java class).
+ */
 public class ClientModelNode extends ExampleNode {
 
     private ClientModel model;
