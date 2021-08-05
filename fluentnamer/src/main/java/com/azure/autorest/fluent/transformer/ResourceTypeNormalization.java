@@ -7,12 +7,14 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
@@ -25,6 +27,7 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -74,6 +77,8 @@ class ResourceTypeNormalization {
     private static final ObjectSchema DUMMY_RESOURCE = dummyResourceSchema(ResourceTypeName.RESOURCE);
 
     private static ObjectSchema dummyResourceSchema(String javaName) {
+        // follow https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json
+
         ObjectSchema schema = new ObjectSchema();
         schema.setLanguage(new Languages());
         schema.getLanguage().setJava(new Language());
@@ -108,9 +113,48 @@ class ResourceTypeNormalization {
     private static void addProperty(ObjectSchema schema, String propertyName, boolean readOnly) {
         Property property = new Property();
         property.setReadOnly(readOnly);
+        property.setSerializedName(propertyName);
+
         property.setLanguage(new Languages());
         property.getLanguage().setJava(new Language());
         property.getLanguage().getJava().setName(propertyName);
+
+        // description
+        String description = "";
+        switch (propertyName) {
+            case ResourceTypeName.FIELD_ID:
+                description = "the fully qualified resource ID for the resource";
+                break;
+            case ResourceTypeName.FIELD_NAME:
+                description = "the name of the resource";
+                break;
+            case ResourceTypeName.FIELD_TYPE:
+                description = "the type of the resource";
+                break;
+            case ResourceTypeName.FIELD_LOCATION:
+                description = "the geo-location where the resource live";
+                break;
+            case ResourceTypeName.FIELD_TAGS:
+                description = "the tags of the resource";
+                break;
+        }
+        property.getLanguage().getJava().setDescription(description);
+
+        // schema
+        if (ResourceTypeName.FIELD_TAGS.equals(propertyName)) {
+            DictionarySchema propertySchema = new DictionarySchema();
+            propertySchema.setElementType(new StringSchema());
+            property.setSchema(propertySchema);
+        } else {
+            property.setSchema(new StringSchema());
+        }
+
+        // x-ms-mutability
+        if (ResourceTypeName.FIELD_LOCATION.equals(propertyName)) {
+            property.setExtensions(new XmsExtensions());
+            property.getExtensions().setXmsMutability(Arrays.asList("read", "create"));
+        }
+
         schema.getProperties().add(property);
     }
 
@@ -277,11 +321,42 @@ class ResourceTypeNormalization {
         compositeType.getParents().getImmediate().add(0, parentType);
         compositeType.getParents().getAll().add(0, parentType);
 
-        // add parent to children of this type as well
         if (compositeType.getChildren() != null && !CoreUtils.isNullOrEmpty(compositeType.getChildren().getAll())) {
+            // add parent to children of this type as well
             compositeType.getChildren().getAll().stream()
                     .filter(o -> o instanceof ObjectSchema)
-                    .forEach(o -> ((ObjectSchema) o).getParents().getAll().add(parentType));
+                    .map(o -> (ObjectSchema) o)
+                    .forEach(o -> o.getParents().getAll().add(parentType));
+
+            // try to make the Resource/ProxyResource as the first parent, for multiple inheritance (as only first parent is kept)
+            compositeType.getChildren().getAll().stream()
+                    .filter(o -> o instanceof ObjectSchema)
+                    .map(o -> (ObjectSchema) o)
+                    .filter(o -> o.getParents().getImmediate().stream().filter(o1 -> o1 instanceof ObjectSchema).count() >= 2)
+                    .forEach(child -> {
+                        int indexFirstParent = -1;
+                        int index;
+                        for (index = 0; index < child.getParents().getImmediate().size(); ++index) {
+                            Schema parent = child.getParents().getImmediate().get(index);
+                            if (parent instanceof ObjectSchema) {
+                                if (indexFirstParent == -1) {
+                                    indexFirstParent = index;
+                                }
+                                if (((ObjectSchema) parent).getParents() != null && ((ObjectSchema) parent).getParents().getAll().contains(compositeType)) {
+                                    break;
+                                }
+                            }
+                        }
+                        if (indexFirstParent >= 0
+                                && index < child.getParents().getImmediate().size()
+                                && index > indexFirstParent) {
+                            logger.info("Change parent order between '{}' and '{}', for '{}'",
+                                    Utils.getJavaName(child.getParents().getImmediate().get(indexFirstParent)),
+                                    Utils.getJavaName(child.getParents().getImmediate().get(index)),
+                                    Utils.getJavaName(child));
+                            Collections.swap(child.getParents().getImmediate(), indexFirstParent, index);
+                        }
+                    });
         }
     }
 
