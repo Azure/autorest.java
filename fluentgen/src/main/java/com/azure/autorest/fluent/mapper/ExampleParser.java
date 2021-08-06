@@ -50,9 +50,11 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -61,6 +63,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ExampleParser {
@@ -370,7 +373,7 @@ public class ExampleParser {
                 node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }
         } else {
-            node = parseNode(methodParameter.getClientMethodParameter().getClientType(), parameterValue.getObjectValue());
+            node = parseNodeFromMethodParameter(methodParameter, parameterValue.getObjectValue());
         }
         return node;
     }
@@ -394,6 +397,45 @@ public class ExampleParser {
             }
         }
         return node;
+    }
+
+    private static ExampleNode parseNodeFromMethodParameter(MethodParameter methodParameter, Object objectValue) {
+        IType type = methodParameter.getClientMethodParameter().getClientType();
+        if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null && type instanceof ListType && objectValue instanceof String) {
+            // handle parameter style
+
+            IType elementType = ((ListType) type).getElementType();
+            ListNode listNode = new ListNode(elementType, objectValue);
+            String value = (String) objectValue;
+
+            CollectionFormat collectionFormat = methodParameter.getProxyMethodParameter().getCollectionFormat();
+            List<String> elements;
+            switch (collectionFormat) {
+                case CSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(",")));
+                    break;
+                case SSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(" ")));
+                    break;
+                case PIPES:
+                    elements = Arrays.asList(value.split(Pattern.quote("|")));
+                    break;
+                case TSV:
+                    elements = Arrays.asList(value.split(Pattern.quote("\t")));
+                    break;
+                default:
+                    // TODO CollectionFormat.MULTI
+                    elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
+                    logger.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+            }
+            for (String childObjectValue : elements) {
+                ExampleNode childNode = parseNode(elementType, childObjectValue);
+                listNode.getChildNodes().add(childNode);
+            }
+            return listNode;
+        } else {
+            return parseNode(type, objectValue);
+        }
     }
 
     private static ExampleNode parseNode(IType type, Object objectValue) {
