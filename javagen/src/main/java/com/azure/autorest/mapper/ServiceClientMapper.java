@@ -123,6 +123,19 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
+            if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
+                String serviceName = settings.getServiceName();
+                String enumTypeName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+                serviceClientPropertyDescription = "Service version";
+                serviceClientPropertyClientType = new ClassType.Builder()
+                        .name(enumTypeName)
+                        .packageName(settings.getPackage())
+                        .build();
+                serviceClientPropertyName = "serviceVersion";
+                serviceClientPropertyIsReadOnly = false;
+                serviceClientPropertyDefaultValueExpression = enumTypeName + ".getLatest()";
+            }
+
             if (serviceClientPropertyClientType == ClassType.TokenCredential) {
                 usesCredentials = true;
             } else {

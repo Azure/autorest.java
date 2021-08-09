@@ -247,7 +247,7 @@ public final class BasicsImpl {
                 context ->
                         service.putValid(
                                 this.client.getHost(),
-                                this.client.getApiVersion(),
+                                this.client.getServiceVersion().getVersion(),
                                 complexBody,
                                 requestOptions,
                                 context));
@@ -283,7 +283,11 @@ public final class BasicsImpl {
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
         return service.putValid(
-                this.client.getHost(), this.client.getApiVersion(), complexBody, requestOptions, context);
+                this.client.getHost(),
+                this.client.getServiceVersion().getVersion(),
+                complexBody,
+                requestOptions,
+                context);
     }
 
     /**

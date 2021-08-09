@@ -219,7 +219,7 @@ public final class AutoRestComplexTestServiceBuilder {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
         AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(pipeline, serializerAdapter, host, serviceVersion.getVersion());
+                new AutoRestComplexTestServiceImpl(pipeline, serializerAdapter, host, serviceVersion);
         return client;
     }
 

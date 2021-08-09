@@ -111,6 +111,10 @@ public final class MediaTypesClientImpl {
         Mono<Response<BinaryData>> analyzeBody(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Post("/mediatypes/analyzeNoAccept")
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Post("/mediatypes/contentTypeWithEncoding")
         Mono<Response<BinaryData>> contentTypeWithEncoding(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
@@ -289,6 +293,131 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions, Context context) {
         return analyzeBodyWithResponseAsync(requestOptions, context).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.analyzeBodyNoAcceptHeader(this.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        return service.analyzeBodyNoAcceptHeader(this.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(RequestOptions requestOptions) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(RequestOptions requestOptions, Context context) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader(RequestOptions requestOptions) {
+        analyzeBodyNoAcceptHeaderAsync(requestOptions).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions, Context context) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions, context).block();
     }
 
     /**

@@ -144,7 +144,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
-                    .concat(serviceClientProperties.stream().filter(p -> !p.isReadOnly()),
+                    .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
                             commonProperties.stream()).collect(Collectors.toList());
 
             for (ServiceClientProperty serviceClientProperty : clientProperties) {
@@ -211,10 +211,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
 
                 // additional service client properties in constructor arguments
-                String constructorArgs = serviceClientProperties.stream()
+                String constructorArgs = serviceClient.getProperties().stream()
                         .filter(p -> !p.isReadOnly())
                         .map(ServiceClientProperty::getName)
-                        .map(name -> name.equals("serviceVersion") ? name + ".getVersion()" : name)
                         .collect(Collectors.joining(", "));
                 if (!constructorArgs.isEmpty()) {
                     constructorArgs = ", " + constructorArgs;

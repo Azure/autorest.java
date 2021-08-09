@@ -76,6 +76,46 @@ public final class MediaTypesAsyncClient {
     }
 
     /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeader(RequestOptions requestOptions) {
+        return this.serviceClient.analyzeBodyNoAcceptHeaderAsync(requestOptions);
+    }
+
+    /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
      *
      * <p><strong>Response Body Schema</strong>
