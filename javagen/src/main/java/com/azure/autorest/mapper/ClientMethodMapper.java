@@ -703,7 +703,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
                 Schema responseSchema = operation.getResponses().get(0).getSchema();
-                if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
+                if (responseSchema != null && !CoreUtils.isNullOrEmpty(responseSchema.getSummary())) {
+                    description = formatReturnTypeDescription(responseSchema.getSummary());
+                } else if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
                     String responseSchemaDescription = responseSchema.getLanguage().getDefault().getDescription();
                     if (!CoreUtils.isNullOrEmpty(responseSchemaDescription)) {
                         description = formatReturnTypeDescription(responseSchemaDescription);
@@ -735,7 +737,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static String formatReturnTypeDescription(String description) {
         description = description.trim();
-        int endIndex = description.indexOf(".");
+        int endIndex = description.indexOf(". ");   // Get 1st sentence.
+        if (endIndex == -1 && description.length() > 0 && description.charAt(description.length() - 1) == '.') {
+            // Remove last period.
+            endIndex = description.length() - 1;
+        }
         if (endIndex != -1) {
             description = description.substring(0, endIndex);
         }

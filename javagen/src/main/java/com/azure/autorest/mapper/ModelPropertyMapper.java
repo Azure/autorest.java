@@ -38,32 +38,15 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 .isReadOnly(property.isReadOnly());
 
 
-        StringBuilder descriptionSb = new StringBuilder();
-        String summaryInProperty = "";
-        String descriptionInProperty = "";
-        if(property.getSchema() != null && !CoreUtils.isNullOrEmpty(property.getSchema().getSummary())) {
-            summaryInProperty = property.getSchema().getSummary();
-        }
-        if (property.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(property.getLanguage().getJava().getDescription())) {
-            descriptionInProperty = property.getLanguage().getJava().getDescription();
-        }
-
-        if (descriptionInProperty.isEmpty() && summaryInProperty.isEmpty()) {
-            descriptionSb.append(String.format("The %s property.", property.getSerializedName()));
-        } else if(summaryInProperty.isEmpty()) {
-            descriptionSb.append(descriptionInProperty);
-        } else if(descriptionInProperty.isEmpty()) {
-            descriptionSb.append(summaryInProperty);
+        String description;
+        String summaryInProperty = property.getSchema() == null ? null : property.getSchema().getSummary();
+        String descriptionInProperty = property.getLanguage().getJava() == null ? null : property.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summaryInProperty) && CoreUtils.isNullOrEmpty(descriptionInProperty)) {
+            description = String.format("The %s property.", property.getSerializedName());
         } else {
-            if(summaryInProperty.equals(descriptionInProperty)) {
-                descriptionSb.append(descriptionInProperty);
-            } else {
-                descriptionSb.append(summaryInProperty).append(" ").append(descriptionInProperty);
-            }
+            description = SchemaUtil.mergeDescription(summaryInProperty, descriptionInProperty);
         }
-
-        builder.description(descriptionSb.toString());
-
+        builder.description(description);
 
         boolean flattened = false;
         if (settings.getModelerSettings().isFlattenModel()) {   // enabled by modelerfour
