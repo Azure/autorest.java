@@ -42,6 +42,8 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForRemoveModel = new HashSet<>();
 
+    private final Set<String> javaNamesForPreserveModel = new HashSet<>();
+
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
 //     */
@@ -107,12 +109,16 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
-    public Map<String, String> getRenameModel() {
+    public Map<String, String> getJavaNamesForRenameModel() {
         return renameModel;
     }
 
     public Set<String> getJavaNamesForRemoveModel() {
         return javaNamesForRemoveModel;
+    }
+
+    public Set<String> getJavaNamesForPreserveModel() {
+        return javaNamesForPreserveModel;
     }
 
     public String getPomFilename() {
@@ -191,6 +197,16 @@ public class FluentJavaSettings {
         loadStringSetting("remove-model", s -> {
             if (!CoreUtils.isNullOrEmpty(s)) {
                 javaNamesForRemoveModel.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
+
+        loadStringSetting("preserve-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForPreserveModel.addAll(
                         Arrays.stream(s.split(Pattern.quote(",")))
                                 .map(String::trim)
                                 .filter(s1 -> !s1.isEmpty())

@@ -91,6 +91,7 @@ Following settings only works when `fluent` option is specified.
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
 | `--remove-model` | CSV. Remove classes. |
+| `--preserve-model` | CSV. Preserve classes from clean-up. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.
@@ -857,6 +858,9 @@ help-content:
       - key: remove-model
         type: string
         description: CSV. Remove classes.
+      - key: preserve-model
+        type: string
+        description: CSV. Preserve classes from clean-up.
       - key: name-for-ungrouped-operations
         type: string
         description: String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite.

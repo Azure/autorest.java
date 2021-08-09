@@ -47,7 +47,7 @@ public class FluentTransformer {
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
-        codeModel = new SchemaRenamer(fluentJavaSettings.getRenameModel()).process(codeModel);
+        codeModel = new SchemaRenamer(fluentJavaSettings.getJavaNamesForRenameModel()).process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
         codeModel = new ErrorTypeNormalization().process(codeModel);
@@ -55,7 +55,7 @@ public class FluentTransformer {
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
-        codeModel = new SchemaCleanup().process(codeModel);
+        codeModel = new SchemaCleanup(fluentJavaSettings.getJavaNamesForPreserveModel()).process(codeModel);
         return codeModel;
     }
 
