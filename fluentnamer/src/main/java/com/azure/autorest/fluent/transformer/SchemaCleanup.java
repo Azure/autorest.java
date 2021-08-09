@@ -58,12 +58,12 @@ public class SchemaCleanup {
                         || schema.getChildren().getImmediate().isEmpty())   // no children
                 .filter(schema -> schema.getParents() == null || schema.getParents().getImmediate() == null
                         || schema.getParents().getImmediate().stream().allMatch(s -> {
-                    if (s instanceof ObjectSchema) {
-                        return !FluentType.nonResourceType((ObjectSchema) s);
-                    } else {
-                        return false;
-                    }
-                }))
+                            if (s instanceof ObjectSchema) {
+                                return !FluentType.nonResourceType((ObjectSchema) s);
+                            } else {
+                                return false;
+                            }
+                        }))
                 .collect(Collectors.toSet());
 
         Set<Schema> choicesSchemasNotInUse = new HashSet<>(codeModel.getSchemas().getSealedChoices());
