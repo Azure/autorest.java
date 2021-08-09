@@ -157,11 +157,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
-            if (compositeType.getLanguage().getDefault() == null
-                    || CoreUtils.isNullOrEmpty(compositeType.getLanguage().getDefault().getDescription())) {
+            String summary = compositeType.getSummary();
+            String description = compositeType.getLanguage().getJava() == null ? null : compositeType.getLanguage().getJava().getDescription();
+            if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
-                builder.description(compositeType.getLanguage().getDefault().getDescription());
+                builder.description(SchemaUtil.mergeDescription(summary, description));
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();

@@ -517,7 +517,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31t23:59:59.
+     * @return max datetime value 9999-12-31t23:59:59.999z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
@@ -535,7 +535,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31t23:59:59.
+     * @return max datetime value 9999-12-31t23:59:59.999z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
@@ -555,7 +555,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31t23:59:59.
+     * @return max datetime value 9999-12-31t23:59:59.999z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
@@ -567,7 +567,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return max datetime value 9999-12-31T23:59:59.999Z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
@@ -585,7 +585,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return max datetime value 9999-12-31T23:59:59.999Z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
@@ -605,7 +605,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return max datetime value 9999-12-31T23:59:59.999Z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
@@ -720,7 +720,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync() {
@@ -738,7 +738,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
@@ -758,7 +758,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
@@ -770,7 +770,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync() {
@@ -788,7 +788,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
@@ -808,7 +808,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
@@ -873,7 +873,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync() {
@@ -891,7 +891,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
@@ -911,7 +911,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
@@ -923,7 +923,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync() {
@@ -941,7 +941,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
@@ -961,7 +961,7 @@ public final class DatetimeOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
