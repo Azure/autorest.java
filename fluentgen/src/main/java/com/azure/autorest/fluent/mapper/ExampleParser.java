@@ -17,7 +17,6 @@ import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
@@ -25,6 +24,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
@@ -158,7 +158,7 @@ public class ExampleParser {
                 }
             }
 
-            FluentCollectionMethodExample.ParameterExample parameterExample = new FluentBaseExample.ParameterExample(node);
+            ParameterExample parameterExample = new ParameterExample(node);
             collectionMethodExample.getParameters().add(parameterExample);
         }
 
@@ -206,7 +206,7 @@ public class ExampleParser {
                             logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
                         }
                     }
-                    resourceCreateExample.getParameters().add(new FluentBaseExample.ParameterExample(defineMethod, defineNode));
+                    resourceCreateExample.getParameters().add(new ParameterExample(defineMethod, defineNode));
 
                     for (DefinitionStage stage : resourceCreate.getDefinitionStages()) {
                         List<FluentMethod> fluentMethods = stage.getMethods();
@@ -249,7 +249,7 @@ public class ExampleParser {
                             }
 
                             if (!exampleNodes.isEmpty()) {
-                                resourceCreateExample.getParameters().add(new FluentBaseExample.ParameterExample(fluentMethod, exampleNodes));
+                                resourceCreateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
                             }
                         }
                     }
@@ -333,7 +333,7 @@ public class ExampleParser {
                             }
 
                             if (!exampleNodes.isEmpty()) {
-                                resourceUpdateExample.getParameters().add(new FluentBaseExample.ParameterExample(fluentMethod, exampleNodes));
+                                resourceUpdateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
                             }
                         }
                     }
