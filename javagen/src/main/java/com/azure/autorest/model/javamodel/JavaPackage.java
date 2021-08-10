@@ -67,18 +67,6 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addLowLevelSyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
-        Templates.getLowLevelSyncClientTemplate().write(syncClient, javaFile);
-        addJavaFile(javaFile);
-    }
-
-    public final void addLowLevelAsyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
-        Templates.getLowLevelAsyncClientTemplate().write(syncClient, javaFile);
-        addJavaFile(javaFile);
-    }
-
     public final void addServiceClientInterface(String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
         Templates.getServiceClientInterfaceTemplate().write(model, javaFile);
@@ -174,12 +162,6 @@ public class JavaPackage {
     public final void addModuleInfo(ModuleInfo moduleInfo) {
         JavaFile javaFile = javaFileFactory.createEmptySourceFile("", "module-info");
         Templates.getModuleInfoTemplate().write(moduleInfo, javaFile);
-        addJavaFile(javaFile);
-    }
-
-    public final void addRestProxy(String package_Keyword, String name, Proxy model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
-        Templates.getProtocolRestProxyTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
