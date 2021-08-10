@@ -29,6 +29,10 @@ public class Templates {
         return factory.getServiceClientBuilderTemplate();
     }
 
+    public static ServiceVersionTemplate getServiceVersionTemplate() {
+        return factory.getServiceVersionTemplate();
+    }
+
     public static ManagerTemplate getManagerTemplate() {
         return factory.getManagerTemplate();
     }

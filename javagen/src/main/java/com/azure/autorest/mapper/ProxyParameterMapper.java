@@ -123,6 +123,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String operationGroupName = parameter.getOperation().getOperationGroup().getLanguage().getJava().getName();
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
+            boolean isServiceVersion = false;
+            if (settings.isLowLevelClient() && clientPropertyName.equals("apiVersion")) {
+                isServiceVersion = true;
+                clientPropertyName = "serviceVersion";
+            }
             if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
                 clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
             }
@@ -135,6 +140,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 }
             }
             parameterReference = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
+            if (isServiceVersion) {
+                parameterReference += ".getVersion()";
+            }
         }
         builder.parameterReference(parameterReference);
 

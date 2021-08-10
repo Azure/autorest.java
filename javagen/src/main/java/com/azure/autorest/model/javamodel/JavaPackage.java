@@ -103,6 +103,14 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
+    public final void addServiceVersion(String package_Keyword, String serviceName, String className,
+                                        List<String> serviceVersions, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, className);
+        Templates.getServiceVersionTemplate().serviceName(serviceName).className(className)
+                .serviceVersions(serviceVersions).write(model, javaFile);
+        addJavaFile(javaFile);
+    }
+
     public final void addMethodGroup(String package_Keyword, String name, MethodGroupClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getMethodGroupTemplate().write(model, javaFile);

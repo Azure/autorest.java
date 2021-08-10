@@ -122,6 +122,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                 });
             }
+
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),

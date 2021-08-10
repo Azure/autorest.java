@@ -7,6 +7,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.bodycomplex.BodyComplexServiceVersion;
 
 /** Initializes a new instance of the AutoRestComplexTestService type. */
 public final class AutoRestComplexTestServiceImpl {
@@ -22,16 +23,16 @@ public final class AutoRestComplexTestServiceImpl {
         return this.host;
     }
 
-    /** Api Version. */
-    private final String apiVersion;
+    /** Service version. */
+    private final BodyComplexServiceVersion serviceVersion;
 
     /**
-     * Gets Api Version.
+     * Gets Service version.
      *
-     * @return the apiVersion value.
+     * @return the serviceVersion value.
      */
-    public String getApiVersion() {
-        return this.apiVersion;
+    public BodyComplexServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -170,16 +171,16 @@ public final class AutoRestComplexTestServiceImpl {
      * Initializes an instance of AutoRestComplexTestService client.
      *
      * @param host server parameter.
-     * @param apiVersion Api Version.
+     * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(String host, String apiVersion) {
+    public AutoRestComplexTestServiceImpl(String host, BodyComplexServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 host,
-                apiVersion);
+                serviceVersion);
     }
 
     /**
@@ -187,10 +188,11 @@ public final class AutoRestComplexTestServiceImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
-     * @param apiVersion Api Version.
+     * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline, String host, String apiVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, apiVersion);
+    public AutoRestComplexTestServiceImpl(
+            HttpPipeline httpPipeline, String host, BodyComplexServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -199,14 +201,17 @@ public final class AutoRestComplexTestServiceImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
-     * @param apiVersion Api Version.
+     * @param serviceVersion Service version.
      */
     public AutoRestComplexTestServiceImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host, String apiVersion) {
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String host,
+            BodyComplexServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.apiVersion = apiVersion;
+        this.serviceVersion = serviceVersion;
         this.basics = new BasicsImpl(this);
         this.primitives = new PrimitivesImpl(this);
         this.arrays = new ArraysImpl(this);
