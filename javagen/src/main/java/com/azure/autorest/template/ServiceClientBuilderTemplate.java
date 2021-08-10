@@ -123,25 +123,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 });
             }
 
-            // ServiceVersion in builder
-            List<ServiceClientProperty> serviceClientProperties = new ArrayList<>(serviceClient.getProperties());
-            if (settings.isLowLevelClient()) {
-                for (int i = 0; i < serviceClientProperties.size(); i++) {
-                    if (serviceClientProperties.get(i).getName().equals("apiVersion")) {
-                        String serviceName = settings.getServiceName();
-                        String enumTypeName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
-                        ServiceClientProperty serviceVersion = new ServiceClientProperty(
-                                "Service version",
-                                new ClassType.Builder().name(enumTypeName).build(),
-                                "serviceVersion",
-                                false,
-                                enumTypeName + ".getLatest()"
-                        );
-                        serviceClientProperties.set(i, serviceVersion);
-                    }
-                }
-            }
-
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
