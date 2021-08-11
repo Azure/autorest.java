@@ -144,10 +144,22 @@ public class ExampleParser {
         String name = CodeNamer.toPascalCase(groupName) + CodeNamer.toPascalCase(methodName);
         FluentExample example = examples.get(name);
         if (example == null) {
-            example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName));
+            example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName), getApiVersion(clientMethod));
             examples.put(name, example);
         }
         return example;
+    }
+
+    private static String getApiVersion(ClientMethod clientMethod) {
+        String apiVersion = clientMethod.getProxyMethod().getParameters().stream()
+                .filter(p -> "api-version".equals(p.getRequestParameterName()))
+                .map(ProxyMethodParameter::getDefaultValue)
+                .findFirst()
+                .orElse(null);
+        if (apiVersion == null) {
+            logger.warn("Failed to find api-version in method '{}'", clientMethod.getName());
+        }
+        return apiVersion;
     }
 
     private static List<FluentCollectionMethodExample> parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {

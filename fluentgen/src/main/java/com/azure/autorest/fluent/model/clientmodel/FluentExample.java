@@ -17,6 +17,7 @@ public class FluentExample implements Comparable<FluentExample> {
 
     private final String groupName;
     private final String methodName;
+    private final String apiVersion;
 
     private final List<FluentCollectionMethodExample> collectionMethodExamples = new ArrayList<>();
     private final List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
@@ -24,9 +25,10 @@ public class FluentExample implements Comparable<FluentExample> {
 
     private final List<FluentClientMethodExample> clientMethodExamples = new ArrayList<>();
 
-    public FluentExample(String groupName, String methodName) {
+    public FluentExample(String groupName, String methodName, String apiVersion) {
         this.groupName = groupName;
         this.methodName = methodName;
+        this.apiVersion = apiVersion;
     }
 
     public List<FluentCollectionMethodExample> getCollectionMethodExamples() {
@@ -51,6 +53,10 @@ public class FluentExample implements Comparable<FluentExample> {
 
     public String getMethodName() {
         return methodName;
+    }
+
+    public String getApiVersion() {
+        return apiVersion;
     }
 
     public String getClassName() {
