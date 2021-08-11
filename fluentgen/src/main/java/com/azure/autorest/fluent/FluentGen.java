@@ -174,7 +174,7 @@ public class FluentGen extends NewPlugin {
         Client client = Mappers.getClientMapper().map(codeModel);
 
         // samples for Fluent Premium
-        if (fluentJavaSettings.isGenerateSamples() && !settings.isFluentLite()) {
+        if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
             FluentStatic.setClient(client);
             FluentStatic.setFluentJavaSettings(fluentJavaSettings);
             fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
