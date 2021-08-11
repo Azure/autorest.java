@@ -177,7 +177,7 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : clientMethod.getProxyMethod().getExamples().entrySet()) {
-                logger.info("Parse collection method example '{}'", entry.getKey());
+                logger.info("Parse client method example '{}'", entry.getKey());
 
                 FluentClientMethodExample collectionMethodExample =
                         parseMethodForExample(methodGroup, clientMethod, methodParameters, entry.getKey(), entry.getValue());

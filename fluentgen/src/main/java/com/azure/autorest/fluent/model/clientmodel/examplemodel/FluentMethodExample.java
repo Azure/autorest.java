@@ -5,6 +5,9 @@
 
 package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
+/**
+ * Basic info for Fluent samples with method call.
+ */
 public interface FluentMethodExample extends FluentExample {
 
     /**
@@ -19,5 +22,8 @@ public interface FluentMethodExample extends FluentExample {
      */
     String getMethodReference();
 
+    /**
+     * @return the method name (of the resource collection method, or the client method).
+     */
     String getMethodName();
 }

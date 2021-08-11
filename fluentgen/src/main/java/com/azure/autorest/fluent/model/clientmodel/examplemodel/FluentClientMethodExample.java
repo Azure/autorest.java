@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -21,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * Model of example for service client method (usually for Fluent Premium).
+ */
 public class FluentClientMethodExample implements FluentMethodExample {
 
     private final String name;
@@ -127,10 +129,5 @@ public class FluentClientMethodExample implements FluentMethodExample {
         MANAGER_REFERENCE.put("sql", "sqlServers()");
         MANAGER_REFERENCE.put("storage", "storageAccounts()");
         MANAGER_REFERENCE.put("trafficmanager", "trafficManagerProfiles()");
-    }
-
-    private final static Map<String, String> SERVICE_CLIENT_REFERENCE = new HashMap<>();
-    static {
-        SERVICE_CLIENT_REFERENCE.put("authorization", "roleServiceClient()");
     }
 }
