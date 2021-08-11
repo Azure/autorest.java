@@ -7,7 +7,9 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -32,9 +34,17 @@ public class FluentClientMethodExample implements FluentMethodExample {
         this.clientMethod = clientMethod;
     }
 
+    public MethodGroupClient getMethodGroup() {
+        return methodGroup;
+    }
+
+    public ClientMethod getClientMethod() {
+        return clientMethod;
+    }
+
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
@@ -67,8 +77,23 @@ public class FluentClientMethodExample implements FluentMethodExample {
             throw new IllegalStateException("Package '" + namespace + "' is not supported by Fluent Premium");
         }
 
-        String managerReference = MANAGER_REFERENCE.get(lastIdentifier) + "()";
-        String serviceClientReference = ModelNaming.METHOD_SERVICE_CLIENT + "()";   // TODO resources contains multiple service client reference
+        String managerReference = MANAGER_REFERENCE.get(lastIdentifier) + "." + ModelNaming.METHOD_MANAGER + "()";
+        String serviceClientReference = ModelNaming.METHOD_SERVICE_CLIENT + "()";
+        if ("authorization".equals(lastIdentifier)) {
+            serviceClientReference = "roleServiceClient()";
+        } else if ("resources".equals(lastIdentifier)) {
+            String tag = FluentStatic.getFluentJavaSettings().getAutorestSettings().getTag();
+            if (tag.contains("feature")) {
+                serviceClientReference = "featureClient()";
+            } else if (tag.contains("policy")) {
+                serviceClientReference = "policyClient()";
+            } else if (tag.contains("subscriptions")) {
+                serviceClientReference = "subscriptionClient()";
+            } else if (tag.contains("locks")) {
+                serviceClientReference = "managementLockClient()";
+            }
+        }
+
         String methodGroupReference =  "get" + CodeNamer.toPascalCase(methodGroup.getVariableName()) + "()";
         return managerReference + "." + serviceClientReference + "." + methodGroupReference;
     }
@@ -80,6 +105,32 @@ public class FluentClientMethodExample implements FluentMethodExample {
 
     private final static Map<String, String> MANAGER_REFERENCE = new HashMap<>();
     static {
-        MANAGER_REFERENCE.put("containerservice", "kubernetesClusters");
+        MANAGER_REFERENCE.put("appplatform", "springServices()");
+        MANAGER_REFERENCE.put("appservice", "webApps()");
+        MANAGER_REFERENCE.put("authorization", "accessManagement().roleAssignments()");
+        MANAGER_REFERENCE.put("cdn", "cdnProfiles()");
+        MANAGER_REFERENCE.put("compute", "virtualMachines()");
+        MANAGER_REFERENCE.put("containerregistry", "containerRegistries()");
+        MANAGER_REFERENCE.put("containerinstance", "containerGroups()");
+        MANAGER_REFERENCE.put("cosmos", "cosmosDBAccounts()");
+        MANAGER_REFERENCE.put("dns", "dnsZones()");
+        MANAGER_REFERENCE.put("eventhubs", "eventHubs()");
+        MANAGER_REFERENCE.put("keyvault", "vaults()");
+        MANAGER_REFERENCE.put("monitor", "diagnosticSettings()");
+        MANAGER_REFERENCE.put("msi", "identities()");
+        MANAGER_REFERENCE.put("network", "networks()");
+        MANAGER_REFERENCE.put("privatedns", "privateDnsZones()");
+        MANAGER_REFERENCE.put("redis", "redisCaches()");
+        MANAGER_REFERENCE.put("resources", "genericResources()");
+        MANAGER_REFERENCE.put("search", "searchServices()");
+        MANAGER_REFERENCE.put("servicebus", "serviceBusNamespaces()");
+        MANAGER_REFERENCE.put("sql", "sqlServers()");
+        MANAGER_REFERENCE.put("storage", "storageAccounts()");
+        MANAGER_REFERENCE.put("trafficmanager", "trafficManagerProfiles()");
+    }
+
+    private final static Map<String, String> SERVICE_CLIENT_REFERENCE = new HashMap<>();
+    static {
+        SERVICE_CLIENT_REFERENCE.put("authorization", "roleServiceClient()");
     }
 }

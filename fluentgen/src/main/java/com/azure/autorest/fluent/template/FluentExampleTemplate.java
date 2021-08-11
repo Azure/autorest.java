@@ -67,6 +67,10 @@ public class FluentExampleTemplate {
                 example.getCollectionMethodExamples().stream()
                         .map(this::generateExampleMethod)
                         .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getClientMethodExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
 
         Set<String> imports = exampleMethods.stream().flatMap(em -> em.getImports().stream()).collect(Collectors.toSet());
         javaFile.declareImport(imports);
@@ -109,25 +113,25 @@ public class FluentExampleTemplate {
         });
     }
 
-    private ExampleMethod generateExampleMethod(FluentMethodExample collectionMethodExample) {
-        String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(collectionMethodExample.getName()));
-        String managerName = collectionMethodExample.getEntryName();
+    private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
+        String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(methodExample.getName()));
+        String managerName = methodExample.getEntryName();
 
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
-        String parameterInvocations = collectionMethodExample.getParameters().stream()
+        String parameterInvocations = methodExample.getParameters().stream()
                 .map(p -> visitor.accept(p.getExampleNode()))
                 .collect(Collectors.joining(", "));
 
         String snippet = String.format("%1$s.%2$s.%3$s(%4$s);",
                 managerName,
-                collectionMethodExample.getMethodReference(),
-                collectionMethodExample.getMethodName(),
+                methodExample.getMethodReference(),
+                methodExample.getMethodName(),
                 parameterInvocations);
 
         ExampleMethod exampleMethod = new ExampleMethod()
-                .setExample(collectionMethodExample)
+                .setExample(methodExample)
                 .setImports(visitor.imports)
-                .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
+                .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, methodExample.getEntryType().getFullName(), managerName))
                 .setMethodContent(snippet)
                 .setHelperFeatures(visitor.helperFeatures);
         return exampleMethod;

@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
@@ -21,6 +22,8 @@ public class FluentExample implements Comparable<FluentExample> {
     private final List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
     private final List<FluentResourceUpdateExample> resourceUpdateExamples = new ArrayList<>();
 
+    private final List<FluentClientMethodExample> clientMethodExamples = new ArrayList<>();
+
     public FluentExample(String groupName, String methodName) {
         this.groupName = groupName;
         this.methodName = methodName;
@@ -36,6 +39,10 @@ public class FluentExample implements Comparable<FluentExample> {
 
     public List<FluentResourceUpdateExample> getResourceUpdateExamples() {
         return resourceUpdateExamples;
+    }
+
+    public List<FluentClientMethodExample> getClientMethodExamples() {
+        return clientMethodExamples;
     }
 
     public String getGroupName() {
