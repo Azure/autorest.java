@@ -307,7 +307,7 @@ public class FluentUtils {
             // local variables
             LocalVariable localVariable = localVariables.getLocalVariableByMethodParameter(parameter);
             if (localVariable == null) {
-                throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
+                throw new IllegalStateException(String.format("Local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
                         collectionMethod.getMethodName(),
                         resourceModel.getName(),
                         parameter.getName(),

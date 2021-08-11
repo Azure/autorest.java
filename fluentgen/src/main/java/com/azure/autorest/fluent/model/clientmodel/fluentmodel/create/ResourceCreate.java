@@ -318,7 +318,7 @@ public class ResourceCreate extends ResourceOperation {
         if (resourceNamePathParameter.isPresent()) {
             return resourceNamePathParameter.get().getIsConstant() || resourceNamePathParameter.get().getFromClient();
         } else {
-            throw new IllegalStateException(String.format("resource name parameter not found in proxy method %1$s, name segment %2$s",
+            throw new IllegalStateException(String.format("Resource name parameter not found in proxy method %1$s, name segment %2$s",
                     proxyMethod.getName(), parameterName));
         }
     }
@@ -334,7 +334,7 @@ public class ResourceCreate extends ResourceOperation {
             return pathParameter.get();
         } else {
             FluentCollectionMethod method = this.getMethodReferencesOfFullParameters().iterator().next();
-            throw new IllegalStateException(String.format("resource name parameter not found in client method %1$s, name segment %2$s",
+            throw new IllegalStateException(String.format("Resource name parameter not found in client method %1$s, name segment %2$s",
                     method.getInnerClientMethod().getName(), parameterName));
         }
     }
@@ -395,7 +395,7 @@ public class ResourceCreate extends ResourceOperation {
             }
         }
         if (resourceNameOfImmediateParent == null) {
-            throw new IllegalStateException(String.format("resource name of immediate parent not found for url %1$s, model %2$s, candidate parameter names %3$s",
+            throw new IllegalStateException(String.format("Resource name of immediate parent not found for url %1$s, model %2$s, candidate parameter names %3$s",
                     urlPathSegments.getPath(), resourceModel.getName(), serializedParameterNames));
         }
         // if parent is resourceGroup, just set it as such
@@ -420,7 +420,7 @@ public class ResourceCreate extends ResourceOperation {
                     parameters, this.getResourceLocalVariables(),
                     resourceCollection, methodOpt.get());
         } else {
-            throw new IllegalStateException("create method not found on model " + resourceModel.getName());
+            throw new IllegalStateException("Create method not found on model " + resourceModel.getName());
         }
     }
 
