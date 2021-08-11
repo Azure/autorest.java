@@ -3,12 +3,14 @@ trigger:
     include:
     - v4
     - main
+    - llc
 
 pr:
   branches:
     include:
     - v4
     - main
+    - llc
 
 jobs:
   - job: Build
