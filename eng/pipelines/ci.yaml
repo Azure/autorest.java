@@ -57,6 +57,17 @@ jobs:
         displayName: 'Check no diff in generated files'
 
       - task: Maven@3
+        displayName: 'Run protocol tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'test'
+          options: '-DtestProtocol -pl protocol-tests'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: Maven@3
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
