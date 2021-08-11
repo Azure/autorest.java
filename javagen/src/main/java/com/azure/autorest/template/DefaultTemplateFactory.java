@@ -1,7 +1,5 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.protocol.*;
-
 public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate() {
@@ -96,31 +94,6 @@ public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return WrapperClientMethodTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate() {
-        return ProtocolAsyncMethodTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate() {
-        return ProtocolSyncMethodTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
-        return ProtocolSyncClientTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate() {
-        return ProtocolAsyncClientTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolRestProxyTemplate getProtocolRestProxyTemplate() {
-        return ProtocolRestProxyTemplate.getInstance();
     }
 
     @Override

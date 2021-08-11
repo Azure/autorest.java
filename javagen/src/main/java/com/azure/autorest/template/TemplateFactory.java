@@ -1,7 +1,5 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.protocol.*;
-
 public interface TemplateFactory {
 
     ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate();
@@ -41,16 +39,6 @@ public interface TemplateFactory {
     ServiceSyncClientTemplate getServiceSynClientTemplate();
 
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
-
-    ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate();
-
-    ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate();
-
-    ProtocolSyncClientTemplate getLowLevelSyncClientTemplate();
-
-    ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate();
-
-    ProtocolRestProxyTemplate getProtocolRestProxyTemplate();
 
     PomTemplate getPomTemplate();
 

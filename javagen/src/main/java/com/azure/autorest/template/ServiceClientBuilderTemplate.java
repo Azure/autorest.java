@@ -262,52 +262,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                             });
                 }
             }
-
-//            if (settings.isLowLevelClient()) {
-//                for (AsyncSyncClient asyncClient : asyncClients) {
-//                    classBlock.javadocComment(comment ->
-//                    {
-//                        comment.description(String
-//                                .format("Builds an instance of %1$s low level client", asyncClient.getClassName()));
-//                        comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
-//                    });
-//                    classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
-//                            function -> {
-//                                for (ServiceClientProperty serviceClientProperty : clientProperties) {
-//                                    if (serviceClientProperty.getDefaultValueExpression() != null) {
-//                                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
-//                                        {
-//                                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
-//                                        });
-//                                    }
-//                                }
-//
-//                                // additional service client properties in constructor arguments
-//                                String constructorArgs = serviceClient.getProperties().stream()
-//                                        .filter(p -> !p.isReadOnly())
-//                                        .map(ServiceClientProperty::getName)
-//                                        .collect(Collectors.joining(", "));
-//                                function.line(String.format("%1$s client = new %2$s(%3$s, pipeline);",
-//                                        asyncClient.getClassName(), asyncClient.getClassName(), constructorArgs));
-//                                function.line("return client;");
-//                            });
-//                }
-//
-//                for (AsyncSyncClient syncClient : syncClients) {
-//                    classBlock.javadocComment(comment ->
-//                    {
-//                        comment.description(String
-//                                .format("Builds an instance of %1$s low level client", syncClient.getClassName()));
-//                        comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
-//                    });
-//                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
-//                            function -> {
-//                                String asyncClientName = syncClient.getClassName().replace("Client", "AsyncClient");
-//                                function.methodReturn(String.format("new %s(build%s())",
-//                                        syncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClientName));
-//                            });
-//                }
-//            }
         });
     }
 
