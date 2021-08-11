@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.checker.JavaFormatter;
+import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
@@ -66,6 +67,8 @@ public class FluentGen extends NewPlugin {
 
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
+
+    private List<FluentExample> fluentPremiumExamples;
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -161,12 +164,25 @@ public class FluentGen extends NewPlugin {
     }
 
     Client handleMap(CodeModel codeModel) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         FluentMapper fluentMapper = this.getFluentMapper();
 
         logger.info("Map code model to client model");
         fluentMapper.preModelMap(codeModel);
 
         Client client = Mappers.getClientMapper().map(codeModel);
+
+        // samples for Fluent Premium
+        if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
+            FluentStatic.setClient(client);
+            FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+            fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
+                    .flatMap(rc -> ExampleParser.parserMethodGroup(rc).stream())
+                    .sorted()
+                    .collect(Collectors.toList());
+        }
+
         return client;
     }
 
@@ -246,6 +262,13 @@ public class FluentGen extends NewPlugin {
         // Package-info
         for (PackageInfo packageInfo : client.getPackageInfos()) {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+        }
+
+        // Samples
+        if (fluentPremiumExamples != null) {
+            for (FluentExample example : fluentPremiumExamples) {
+                javaPackage.addSample(example);
+            }
         }
 
         return javaPackage;

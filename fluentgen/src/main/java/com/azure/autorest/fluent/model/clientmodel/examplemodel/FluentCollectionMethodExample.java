@@ -8,11 +8,12 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.util.CodeNamer;
 
 /**
  * Model of example for FluentCollectionMethod.
  */
-public class FluentCollectionMethodExample extends FluentBaseExample {
+public class FluentCollectionMethodExample extends FluentBaseExample implements FluentMethodExample {
 
     private final FluentCollectionMethod collectionMethod;
 
@@ -24,5 +25,15 @@ public class FluentCollectionMethodExample extends FluentBaseExample {
 
     public FluentCollectionMethod getCollectionMethod() {
         return collectionMethod;
+    }
+
+    @Override
+    public String getMethodReference() {
+        return CodeNamer.toCamelCase(this.getResourceCollection().getInterfaceType().getName()) + "()";
+    }
+
+    @Override
+    public String getMethodName() {
+        return collectionMethod.getMethodName();
     }
 }

@@ -7,19 +7,20 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
-import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -50,7 +51,7 @@ public class FluentExampleTemplate {
         return INSTANCE;
     }
 
-    public final void write(FluentExample example, JavaFile javaFile) {
+    public final void write(com.azure.autorest.fluent.model.clientmodel.FluentExample example, JavaFile javaFile) {
         String className = example.getClassName();
 
         List<ExampleMethod> exampleMethods = new ArrayList<>();
@@ -66,6 +67,10 @@ public class FluentExampleTemplate {
                 example.getCollectionMethodExamples().stream()
                         .map(this::generateExampleMethod)
                         .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getClientMethodExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
 
         Set<String> imports = exampleMethods.stream().flatMap(em -> em.getImports().stream()).collect(Collectors.toSet());
         javaFile.declareImport(imports);
@@ -79,8 +84,8 @@ public class FluentExampleTemplate {
             for (ExampleMethod exampleMethod : exampleMethods) {
                 classBlock.javadocComment(commentBlock -> {
                     commentBlock.description(String.format("Sample code: %1$s", exampleMethod.getExample().getName()));
-                    commentBlock.param(CodeNamer.toCamelCase(exampleMethod.getExample().getManager().getType().getName()),
-                            exampleMethod.getExample().getManager().getDescription());
+                    commentBlock.param(exampleMethod.getExample().getEntryName(),
+                            exampleMethod.getExample().getEntryDescription());
                 });
                 String methodSignature = exampleMethod.getMethodSignature();
                 if (exampleMethod.getHelperFeatures().contains(HelperFeature.ThrowsIOException)) {
@@ -108,25 +113,25 @@ public class FluentExampleTemplate {
         });
     }
 
-    private ExampleMethod generateExampleMethod(FluentCollectionMethodExample collectionMethodExample) {
-        String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(collectionMethodExample.getName()));
-        String managerName = CodeNamer.toCamelCase(collectionMethodExample.getManager().getType().getName());
+    private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
+        String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(methodExample.getName()));
+        String managerName = methodExample.getEntryName();
 
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
-        String parameterInvocations = collectionMethodExample.getParameters().stream()
+        String parameterInvocations = methodExample.getParameters().stream()
                 .map(p -> visitor.accept(p.getExampleNode()))
                 .collect(Collectors.joining(", "));
 
-        String snippet = String.format("%1$s.%2$s().%3$s(%4$s);",
+        String snippet = String.format("%1$s.%2$s.%3$s(%4$s);",
                 managerName,
-                CodeNamer.toCamelCase(collectionMethodExample.getResourceCollection().getInterfaceType().getName()),
-                collectionMethodExample.getCollectionMethod().getMethodName(),
+                methodExample.getMethodReference(),
+                methodExample.getMethodName(),
                 parameterInvocations);
 
         ExampleMethod exampleMethod = new ExampleMethod()
-                .setExample(collectionMethodExample)
+                .setExample(methodExample)
                 .setImports(visitor.imports)
-                .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
+                .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, methodExample.getEntryType().getFullName(), managerName))
                 .setMethodContent(snippet)
                 .setHelperFeatures(visitor.helperFeatures);
         return exampleMethod;
@@ -134,12 +139,12 @@ public class FluentExampleTemplate {
 
     private ExampleMethod generateExampleMethod(FluentResourceCreateExample resourceCreateExample) {
         String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(resourceCreateExample.getName()));
-        String managerName = CodeNamer.toCamelCase(resourceCreateExample.getManager().getType().getName());
+        String managerName = resourceCreateExample.getEntryName();
 
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
         StringBuilder sb = new StringBuilder(managerName)
                 .append(".").append(CodeNamer.toCamelCase(resourceCreateExample.getResourceCollection().getInterfaceType().getName())).append("()");
-        for (FluentResourceCreateExample.ParameterExample parameter : resourceCreateExample.getParameters()) {
+        for (ParameterExample parameter : resourceCreateExample.getParameters()) {
             String parameterInvocations = parameter.getExampleNodes().stream()
                     .map(visitor::accept)
                     .collect(Collectors.joining(", "));
@@ -165,7 +170,7 @@ public class FluentExampleTemplate {
 
     private ExampleMethod generateExampleMethod(FluentResourceUpdateExample resourceUpdateExample) {
         String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(resourceUpdateExample.getName()));
-        String managerName = CodeNamer.toCamelCase(resourceUpdateExample.getManager().getType().getName());
+        String managerName = resourceUpdateExample.getEntryName();
 
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
 
@@ -184,7 +189,7 @@ public class FluentExampleTemplate {
 
         StringBuilder sb = new StringBuilder(resourceGetSnippet);
         sb.append("resource").append(".update()");
-        for (FluentResourceCreateExample.ParameterExample parameter : resourceUpdateExample.getParameters()) {
+        for (ParameterExample parameter : resourceUpdateExample.getParameters()) {
             parameterInvocations = parameter.getExampleNodes().stream()
                     .map(visitor::accept)
                     .collect(Collectors.joining(", "));
@@ -312,17 +317,17 @@ public class FluentExampleTemplate {
     }
 
     private static class ExampleMethod {
-        private FluentBaseExample example;
+        private FluentExample example;
         private Set<String> imports;
         private String methodSignature;
         private String methodContent;
         private Set<HelperFeature> helperFeatures;
 
-        public FluentBaseExample getExample() {
+        public FluentExample getExample() {
             return example;
         }
 
-        public ExampleMethod setExample(FluentBaseExample example) {
+        public ExampleMethod setExample(FluentExample example) {
             this.example = example;
             return this;
         }

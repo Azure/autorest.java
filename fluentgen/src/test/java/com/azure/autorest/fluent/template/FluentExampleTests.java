@@ -89,7 +89,7 @@ public class FluentExampleTests {
             FluentExampleTemplate.getInstance().write(example, javaFile);
             String content = javaFile.getContents().toString();
             // get
-            Assertions.assertTrue(content.contains("storageManager.storageAccounts().getByResourceGroup"));
+            Assertions.assertTrue(content.contains("manager.storageAccounts().getByResourceGroup"));
             // update
             Assertions.assertTrue(content.contains("resource.update()"));
             // apply

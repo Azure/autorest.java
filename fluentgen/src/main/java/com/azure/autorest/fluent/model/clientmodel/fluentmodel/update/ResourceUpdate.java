@@ -225,7 +225,7 @@ public class ResourceUpdate extends ResourceOperation {
                     resourceCollection, methodOpt.get(),
                     resourceModel.getResourceCreate().getResourceLocalVariables());
         } else {
-            throw new IllegalStateException("update method not found on model " + resourceModel.getName());
+            throw new IllegalStateException("Update method not found on model " + resourceModel.getName());
         }
     }
 
