@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * BANANA
+ */
 public class ArrayTests {
     private static ArrayAsyncClient asyncClient;
 
