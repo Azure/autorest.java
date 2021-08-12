@@ -54,7 +54,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
-                .name(operation.getLanguage().getJava().getName())
+                .name(normalizeMethodName(operation))
                 .isResumable(false);
 
         List<HttpResponseStatus> expectedStatusCodes = operation.getResponses().stream()
@@ -368,5 +368,17 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     protected ClassType getHttpResponseExceptionType() {
         return ClassType.HttpResponseException;
+    }
+
+    private String normalizeMethodName(Operation operation) {
+        // https://azure.github.io/azure-sdk/java_introduction.html#service-methods
+        String name = operation.getLanguage().getJava().getName();
+        if (JavaSettings.getInstance().isLowLevelClient() &&
+                operation.getExtensions() != null &&
+                operation.getExtensions().getXmsPageable() != null &&
+                name.startsWith("get")) {
+            name = "list" + name.substring(3);
+        }
+        return name;
     }
 }
