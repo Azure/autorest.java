@@ -8,10 +8,10 @@ You need to have the following installed on your machine:
 - Java 8+
 - Maven 3.x
 
-You need to have [autorest-beta](https://www.npmjs.com/package/@autorest/autorest) installed through NPM:
+You need to have [autorest](https://www.npmjs.com/package/autorest) installed through NPM:
 
 ```bash
-npm i -g autorest
+npm install -g autorest
 ```
 
 # Usage
@@ -28,10 +28,10 @@ The first time running it will take a little longer to download and install all 
 To build from source code, clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
 
 ```bash
-mvn package -Dlocal
+mvn package -P local
 ```
 
-This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer--jar-with-dependencies.jar` under `fluentnamer` module.
+This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer-jar-with-dependencies.jar` under `fluentnamer` module.
 
 And then run AutoRest
 
@@ -48,7 +48,7 @@ Java files will be generated under `where/to/generate/java/files/src/main/java/s
 To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shutdown the JVM and leave it orphaned. (which can be killed in the Task Manager)**
 
 # Settings
-Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/master/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
+Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/main/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
 
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
@@ -67,6 +67,10 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
 |`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
+|`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
+|`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
+|`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
+|`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
 
 ## Additional settings for Fluent
 
@@ -82,10 +86,12 @@ Following settings only works when `fluent` option is specified.
 | `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
 | `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 | `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance. |
+| `--generate-samples` | Boolean. Generate samples from `x-ms-examples` in swagger. Default is `false`. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
 | `--remove-model` | CSV. Remove classes. |
+| `--preserve-model` | CSV. Preserve classes from clean-up. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.
@@ -840,6 +846,12 @@ help-content:
       - key: low-level-client
         type: bool
         description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.
+      - key: client-flattened-annotation-target
+        type: string
+        description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
+      - key: skip-formatting
+        type: bool
+        description: Indicates whether to skip formatting Java file. Default is false.
 
   javafluent:
     activationScope: fluent
@@ -863,6 +875,9 @@ help-content:
       - key: sdk-integration
         type: bool
         description: Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance.
+      - key: generate-samples
+        type: bool
+        description: Boolean. Generate samples from `x-ms-examples` in swagger. Default is `false`.
       - key: add-inner
         type: string
         description: CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name).
@@ -875,6 +890,9 @@ help-content:
       - key: remove-model
         type: string
         description: CSV. Remove classes.
+      - key: preserve-model
+        type: string
+        description: CSV. Preserve classes from clean-up.
       - key: name-for-ungrouped-operations
         type: string
         description: String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite.

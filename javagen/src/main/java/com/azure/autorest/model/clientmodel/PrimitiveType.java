@@ -14,37 +14,39 @@ import java.util.function.Function;
  */
 public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
-    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase);
-    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity());
-    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity());
-    public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L');
-    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> defaultValueExpression + "f");
-    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)));
-    public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character, (String defaultValueExpression) -> java.lang.Double.toString(defaultValueExpression.charAt(0)));
+    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase, "false");
+    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0");
+    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0");
+    public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L', "0");
+    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> defaultValueExpression + "f", "0.0");
+    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)), "0.0");
+    public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character, (String defaultValueExpression) -> java.lang.Integer.toString(defaultValueExpression.charAt(0)), "\u0000");
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong);
     /**
      * The name of this type.
      */
-    private String name;
+    private final String name;
     /**
      * The nullable version of this primitive type.
      */
-    private ClassType nullableType;
-    private java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final ClassType nullableType;
+    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final String defaultValue;
 
     /**
      * Create a new PrimitiveType from the provided properties.
      * @param name The name of this type.
      */
     private PrimitiveType(String name, ClassType nullableType) {
-        this(name, nullableType, null);
+        this(name, nullableType, null, null);
     }
 
-    private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+    private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String, String> defaultValueExpressionConverter, String defaultValue) {
         this.name = name;
         this.nullableType = nullableType;
         this.defaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+        this.defaultValue = defaultValue;
     }
 
     public static PrimitiveType fromNullableType(ClassType nullableType) {
@@ -92,6 +94,14 @@ public class PrimitiveType implements IType {
         String result = sourceExpression;
         if (result != null && getDefaultValueExpressionConverter() != null) {
             result = defaultValueExpressionConverter.apply(sourceExpression);
+        }
+        return result;
+    }
+
+    public final String defaultValueExpression() {
+        String result = defaultValue;
+        if (result != null && getDefaultValueExpressionConverter() != null) {
+            result = defaultValueExpressionConverter.apply(defaultValue);
         }
         return result;
     }

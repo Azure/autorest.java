@@ -56,6 +56,10 @@ public class Mappers {
         return factory.getProxyMethodMapper();
     }
 
+    public static ProxyMethodExampleMapper getProxyMethodExampleMapper() {
+        return factory.getProxyMethodExampleMapper();
+    }
+
     public static MethodGroupMapper getMethodGroupMapper() {
         return factory.getMethodGroupMapper();
     }

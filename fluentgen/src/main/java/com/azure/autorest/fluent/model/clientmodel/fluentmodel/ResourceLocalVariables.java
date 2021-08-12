@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * Collection of parameters that need to be provided during create/update flow, and hence need to be provided as class variable or local variable.
  *
- * E.g. resourceGroupName, resourceName, createParameters, etc.
+ * E.g. resourceGroupName, resourceName, createParameters from ResourceCreate; resourceGroupName, resourceName, updateParameters from ResourceUpdate.
  */
 public class ResourceLocalVariables {
 

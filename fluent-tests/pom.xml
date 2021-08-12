@@ -131,13 +131,13 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.9.0</version>
+      <version>${azure-core-http-netty.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
-      <version>1.2.1</version>
+      <version>${azure-identity.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

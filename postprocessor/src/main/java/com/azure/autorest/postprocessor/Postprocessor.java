@@ -5,11 +5,7 @@ import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.BuildWorkspaceStatus;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeAction;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -32,7 +28,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -126,15 +121,18 @@ public class Postprocessor extends NewPlugin {
   }
 
   private void writeToFiles(Map<String, String> fileContents) throws FormatterException {
+    JavaSettings settings = JavaSettings.getInstance();
     Formatter formatter = new Formatter();
     for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
       String formattedSource = javaFile.getValue();
       if (javaFile.getKey().endsWith(".java")) {
-        try {
-          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-        } catch (Exception e) {
-          logger.error("Unable to format output file " + javaFile.getKey(), e);
-          throw e;
+        if (!settings.isSkipFormatting()) {
+          try {
+            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+          } catch (Exception e) {
+            logger.error("Unable to format output file " + javaFile.getKey(), e);
+            throw e;
+          }
         }
       }
       writeFile(javaFile.getKey(), formattedSource, null);
@@ -217,18 +215,7 @@ public class Postprocessor extends NewPlugin {
               .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
               .findFirst().get();
       URI fileUri = classSymbol.getLocation().getUri();
-      Optional<CodeAction> organizeImports = languageClient.listCodeActions(fileUri, classSymbol.getLocation().getRange())
-              .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-              .findFirst();
-      if (organizeImports.isPresent()) {
-        WorkspaceEditCommand command;
-        if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
-          command = (WorkspaceEditCommand) organizeImports.get().getCommand();
-          for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-          }
-        }
-      }
+      Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
       BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
       if (status == BuildWorkspaceStatus.SUCCEED) {
         URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();

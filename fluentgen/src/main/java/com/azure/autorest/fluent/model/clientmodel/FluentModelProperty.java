@@ -10,25 +10,24 @@ import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTempla
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTypeConversionTemplate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.autorest.util.CodeNamer;
 
 import java.util.Set;
 
 public class FluentModelProperty {
 
-    private final ClientModelProperty modelProperty;
+    private final ModelProperty modelProperty;
 
     private final IType fluentType;
 
     private final ImmutableMethod immutableMethod;
 
-    public FluentModelProperty(ClientModelProperty property) {
-        this.modelProperty = property;
+    public FluentModelProperty(ClientModelPropertyAccess property) {
+        this.modelProperty = ModelProperty.ofClientModelProperty(property);
         this.fluentType = getWrapperType(property.getClientType());
         this.immutableMethod = this.fluentType == property.getClientType()
                 ? new PropertyTemplate(this, this.modelProperty)
@@ -69,7 +68,7 @@ public class FluentModelProperty {
     }
 
     private String getGetterName() {
-        return CodeNamer.getModelNamer().modelPropertyGetterName(modelProperty);
+        return modelProperty.getGetterName();
     }
 
     private static IType getWrapperType(IType clientType) {
@@ -91,7 +90,7 @@ public class FluentModelProperty {
         return wrapperType;
     }
 
-    public ClientModelProperty getInnerProperty() {
+    public ModelProperty getModelProperty() {
         return modelProperty;
     }
 }

@@ -1,5 +1,7 @@
 package fixtures.bodyarray;
 
+import com.azure.core.exception.HttpResponseException;
+import com.fasterxml.jackson.core.JsonParseException;
 import fixtures.bodyarray.models.Enum0;
 import fixtures.bodyarray.models.Enum1;
 import fixtures.bodyarray.models.ErrorException;
@@ -40,9 +42,9 @@ public class ArrayTests {
         try {
             List<Integer> result = client.getArrays().getInvalid();
             Assert.assertTrue(false);
-        } catch (RuntimeException exception) {
+        } catch (HttpResponseException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
+            Assert.assertTrue(exception.getCause() instanceof JsonParseException);
         }
     }
 

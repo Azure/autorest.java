@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
@@ -23,7 +24,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMode
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentUpdateMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -64,8 +64,8 @@ public class ResourceUpdate extends ResourceOperation {
         UpdateStage updateStageApply = new UpdateStageApply();
         // updateStageApply does not belong to updateStages
 
-        List<ClientModelProperty> properties = this.getProperties();
-        for (ClientModelProperty property : properties) {
+        List<ModelProperty> properties = this.getProperties();
+        for (ModelProperty property : properties) {
             UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(updateStageApply);
 
@@ -107,9 +107,9 @@ public class ResourceUpdate extends ResourceOperation {
     }
 
     @Override
-    protected List<ClientModelProperty> getProperties() {
+    protected List<ModelProperty> getProperties() {
         return super.getProperties().stream()
-                .filter(p -> !p.getIsReadOnlyForUpdate())
+                .filter(p -> !p.isReadOnlyForUpdate())
                 .filter(p -> !isIdProperty(p) && !isLocationProperty(p))    // update should not be able to change id or location
                 .collect(Collectors.toList());
     }
@@ -131,7 +131,7 @@ public class ResourceUpdate extends ResourceOperation {
         return parameterName;
     }
 
-    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property) {
+    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ModelProperty property) {
         if (hasDuplicateWithCreateMethodOnErasure(property)) {
             return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
                     stage, model, property,
@@ -145,7 +145,7 @@ public class ResourceUpdate extends ResourceOperation {
         }
     }
 
-    private boolean hasDuplicateWithCreateMethodOnErasure(ClientModelProperty property) {
+    private boolean hasDuplicateWithCreateMethodOnErasure(ModelProperty property) {
         // find duplicate on generic type with erasure, e.g. same property of different generic type List<CreateParameter> with List<UpdateParameter>, but the generic type would be same under erasure.
         boolean hasDuplicate = false;
         String methodName = property.getSetterName();
@@ -225,7 +225,7 @@ public class ResourceUpdate extends ResourceOperation {
                     resourceCollection, methodOpt.get(),
                     resourceModel.getResourceCreate().getResourceLocalVariables());
         } else {
-            throw new IllegalStateException("update method not found on model " + resourceModel.getName());
+            throw new IllegalStateException("Update method not found on model " + resourceModel.getName());
         }
     }
 

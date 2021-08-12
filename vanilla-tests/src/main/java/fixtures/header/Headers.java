@@ -1262,7 +1262,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseFloatResponse> responseFloatWithResponseAsync(String scenario) {
@@ -1285,7 +1285,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseFloatResponse> responseFloatWithResponseAsync(String scenario, Context context) {
@@ -1307,7 +1307,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloatAsync(String scenario) {
@@ -1322,7 +1322,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloatAsync(String scenario, Context context) {
@@ -1351,7 +1351,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public HeadersResponseFloatResponse responseFloatWithResponse(String scenario, Context context) {
@@ -1480,7 +1480,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDoubleResponse> responseDoubleWithResponseAsync(String scenario) {
@@ -1504,7 +1504,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDoubleResponse> responseDoubleWithResponseAsync(String scenario, Context context) {
@@ -1526,7 +1526,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDoubleAsync(String scenario) {
@@ -1541,7 +1541,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDoubleAsync(String scenario, Context context) {
@@ -1570,7 +1570,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public HeadersResponseDoubleResponse responseDoubleWithResponse(String scenario, Context context) {
@@ -2875,7 +2875,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDurationResponse> responseDurationWithResponseAsync(String scenario) {
@@ -2899,7 +2899,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDurationResponse> responseDurationWithResponseAsync(String scenario, Context context) {
@@ -2921,7 +2921,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDurationAsync(String scenario) {
@@ -2937,7 +2937,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDurationAsync(String scenario, Context context) {
@@ -2966,7 +2966,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public HeadersResponseDurationResponse responseDurationWithResponse(String scenario, Context context) {

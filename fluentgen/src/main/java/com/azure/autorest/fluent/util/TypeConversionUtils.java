@@ -19,48 +19,58 @@ import java.util.Objects;
 public class TypeConversionUtils {
 
     private TypeConversionUtils() {
-
     }
 
-    public static String conversionExpression(IType clientType, String propertyName) {
+    /**
+     * Get expression that converts the response of client method to the response of the collection method.
+     *
+     * It converts innerModel to implementation of resource model.
+     * It transfers the conversion along chain of generic types.
+     * It converts list and map to immutable.
+     *
+     * @param clientType the type of the response of client method
+     * @param variableName the variable name of the response of client method
+     * @return the expression that converts the response of client method to the response of the collection method
+     */
+    public static String conversionExpression(IType clientType, String variableName) {
         String expression = null;
         if (clientType instanceof ClassType) {
             ClassType type = (ClassType) clientType;
             if (FluentUtils.isInnerClassType(type)) {
-                expression = String.format("new %1$s(%2$s, this.%3$s())", getModelImplName(type), propertyName, ModelNaming.METHOD_MANAGER);
+                expression = String.format("new %1$s(%2$s, this.%3$s())", getModelImplName(type), variableName, ModelNaming.METHOD_MANAGER);
             } else if (FluentUtils.isResponseType(type)) {
                 IType valueType = FluentUtils.getValueTypeFromResponseType(type);
                 if (valueType instanceof ClassType || valueType instanceof GenericType) {
-                    String valuePropertyName = propertyName + ".getValue()";
-                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", propertyName, conversionExpression(valueType, valuePropertyName));
+                    String valuePropertyName = variableName + ".getValue()";
+                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", variableName, conversionExpression(valueType, valuePropertyName));
                 } else {
-                    expression = propertyName;
+                    expression = variableName;
                 }
             }
         } else if (clientType instanceof ListType) {
             ListType type = (ListType) clientType;
-            String nestedPropertyName = nextPropertyName(propertyName);
-            expression = String.format("%1$s.stream().map(%2$s -> %3$s).collect(Collectors.toList())", propertyName, nestedPropertyName, conversionExpression(type.getElementType(), nestedPropertyName));
+            String nestedPropertyName = nextPropertyName(variableName);
+            expression = String.format("%1$s.stream().map(%2$s -> %3$s).collect(Collectors.toList())", variableName, nestedPropertyName, conversionExpression(type.getElementType(), nestedPropertyName));
         } else if (clientType instanceof MapType) {
             MapType type = (MapType) clientType;
-            String nestedPropertyName = nextPropertyName(propertyName);
+            String nestedPropertyName = nextPropertyName(variableName);
             String valuePropertyName = nestedPropertyName + ".getValue()";
-            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, %2$s -> %3$s))", propertyName, nestedPropertyName, conversionExpression(type.getValueType(), valuePropertyName));
+            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, %2$s -> %3$s))", variableName, nestedPropertyName, conversionExpression(type.getValueType(), valuePropertyName));
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType) {
-                    String nestedPropertyName = nextPropertyName(propertyName);
-                    expression = String.format("Utils.mapPage(%1$s, %2$s -> new %3$s(%4$s, this.%5$s()))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
+                    String nestedPropertyName = nextPropertyName(variableName);
+                    expression = String.format("Utils.mapPage(%1$s, %2$s -> new %3$s(%4$s, this.%5$s()))", variableName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
                 }
             } else if (Response.class.getSimpleName().equals(type.getName())) {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType || valueType instanceof GenericType) {
-                    String valuePropertyName = propertyName + ".getValue()";
-                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", propertyName, conversionExpression(valueType, valuePropertyName));
+                    String valuePropertyName = variableName + ".getValue()";
+                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", variableName, conversionExpression(valueType, valuePropertyName));
                 } else {
-                    expression = propertyName;
+                    expression = variableName;
                 }
             }
         }
@@ -101,7 +111,7 @@ public class TypeConversionUtils {
         return ret;
     }
 
-    public static String tempPropertyName() {
+    public static String tempVariableName() {
         return "inner";
     }
 
@@ -109,10 +119,10 @@ public class TypeConversionUtils {
         if (propertyName.indexOf('.') > 0) {
             propertyName = propertyName.substring(0, propertyName.indexOf('.'));
         }
-        if (propertyName.equals(tempPropertyName())) {
-            return tempPropertyName() + "1";
+        if (propertyName.equals(tempVariableName())) {
+            return tempVariableName() + "1";
         } else {
-            return tempPropertyName() + (Integer.parseInt(propertyName.substring(tempPropertyName().length())) + 1);
+            return tempVariableName() + (Integer.parseInt(propertyName.substring(tempVariableName().length())) + 1);
         }
     }
 

@@ -48,12 +48,12 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
                 .imports(imports)
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
-                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s;", innerType, TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
+                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s;", innerType, TypeConversionUtils.tempVariableName(), ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     if (TypeConversionUtils.isPagedIterable(innerType)) {
-                        block.methodReturn(TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName()));
+                        block.methodReturn(TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempVariableName()));
                     } else {
-                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
-                            String expression = TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName());
+                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempVariableName()), ifBlock -> {
+                            String expression = TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempVariableName());
                             block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(innerType));

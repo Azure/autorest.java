@@ -52,7 +52,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                 responseBodyType,
                 responseBodyType,
                 isResumable,
-                responseContentTypes);
+                responseContentTypes,
+                null);
     }
 
     @Override

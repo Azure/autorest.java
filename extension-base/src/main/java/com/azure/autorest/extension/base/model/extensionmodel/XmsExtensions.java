@@ -16,6 +16,8 @@ public class XmsExtensions {
 
     private boolean xmsLongRunningOperation;
 
+    private XmsLongRunningOperationOptions xmsLongRunningOperationOptions;
+
     private boolean xmsFlattened;
 
     private boolean xmsAzureResource;
@@ -25,6 +27,8 @@ public class XmsExtensions {
     private String xmsHeaderCollectionPrefix;
 
     private XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema;
+
+    private XmsExamples xmsExamples;
 
     public XmsEnum getXmsEnum() {
         return xmsEnum;
@@ -112,5 +116,21 @@ public class XmsExtensions {
 
     public void setXmsInternalAutorestAnonymousSchema(XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema) {
         this.xmsInternalAutorestAnonymousSchema = xmsInternalAutorestAnonymousSchema;
+    }
+
+    public XmsLongRunningOperationOptions getXmsLongRunningOperationOptions() {
+        return xmsLongRunningOperationOptions;
+    }
+
+    public void setXmsLongRunningOperationOptions(XmsLongRunningOperationOptions xmsLongRunningOperationOptions) {
+        this.xmsLongRunningOperationOptions = xmsLongRunningOperationOptions;
+    }
+
+    public XmsExamples getXmsExamples() {
+        return xmsExamples;
+    }
+
+    public void setXmsExamples(XmsExamples xmsExamples) {
+        this.xmsExamples = xmsExamples;
     }
 }

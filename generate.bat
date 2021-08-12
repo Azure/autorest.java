@@ -1,7 +1,7 @@
-set VANILLA_ARGUMENTS=--version=3.1.3 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set AZURE_ARGUMENTS=--version=3.1.3 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set ARM_ARGUMENTS=--version=3.1.3 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.1.3 --java --use=./ --output-folder=protocol-tests --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --pipeline.modelerfour.flatten-models=false --pipeline.modelerfour.flatten-payloads=false --pipeline.modelerfour.group-parameters=false --low-level-client
+set VANILLA_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set AZURE_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set ARM_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
+set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=./ --output-folder=protocol-tests --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --pipeline.modelerfour.flatten-models=false --pipeline.modelerfour.flatten-payloads=false --pipeline.modelerfour.group-parameters=false --low-level-client
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
@@ -39,8 +39,12 @@ call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
 
 rem local swagger
-call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening
+call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
+call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.requirexmsflattened --require-x-ms-flattened-to-flatten=true
+call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.noflatten --pipeline.modelerfour.flatten-models=false
+call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.clientflatten --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE
 
+rem Azure
 call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
 call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/custom-baseUrl-paging.json --namespace=fixtures.custombaseuri.paging --payload-flattening-threshold=1
 call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-special-properties.json --namespace=fixtures.azurespecials --payload-flattening-threshold=1 --context-client-method-parameter
@@ -52,6 +56,7 @@ rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
+<<<<<<< HEAD
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
@@ -60,6 +65,9 @@ call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/media_types.json --namespace=fixtures.mediatypes
 
 call autorest --use:. customization-tests/swagger
+=======
+call autorest --version=3.4.5 --use:. customization-tests/swagger
+>>>>>>> 7e8b56547770c3baf2d4374545bbe00a049dda96
 
 call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
 call autorest --use:. docs/samples/specification/basic/readme.md

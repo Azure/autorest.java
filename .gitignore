@@ -58,9 +58,11 @@ Thumbs.db
 
 # reduced pom files should not be included
 dependency-reduced-pom.xml
+
 package-lock.json
 preprocessor/*.yaml
 fluentnamer/*.yaml
+fluentgen/*.yaml
 /*.yaml
 *.log
 *.log.gz
@@ -68,6 +70,7 @@ fluentnamer/*.yaml
 # Generated code for tests #
 fluent-tests/src/main/java/com/azure/mgmttest/**
 fluent-tests/src/main/java/com/azure/mgmtlitetest/**
+fluent-tests/src/samples/**
 fluent-tests/pom_generated_*.xml
 
 # Coverage report

@@ -1,7 +1,6 @@
 package fixtures.discriminatorflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +14,7 @@ import java.util.Map;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "odata\\.type",
+        property = "odata.type",
         defaultImpl = MetricAlertCriteria.class)
 @JsonTypeName("MetricAlertCriteria")
 @JsonSubTypes({
@@ -23,7 +22,6 @@ import java.util.Map;
             name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
             value = MetricAlertSingleResourceMultipleMetricCriteria.class)
 })
-@JsonFlatten
 @Fluent
 public class MetricAlertCriteria {
     /*
@@ -57,7 +55,7 @@ public class MetricAlertCriteria {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
-        additionalProperties.put(key.replace("\\.", "."), value);
+        additionalProperties.put(key, value);
     }
 
     /**
