@@ -321,18 +321,19 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 
+            // Samples
+            List<JavaFile> sampleJavaFiles = new ArrayList<>();
+            for (FluentExample example : fluentClient.getExamples()) {
+                sampleJavaFiles.add(javaPackage.addSample(example));
+            }
+
             // Readme and Changelog
             if (isSdkIntegration) {
                 javaPackage.addReadmeMarkdown(project);
                 javaPackage.addChangelogMarkdown(project.getChangelog());
                 if (fluentJavaSettings.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
-                    javaPackage.addSampleMarkdown(project, fluentClient.getExamples());
+                    javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
                 }
-            }
-
-            // Samples
-            for (FluentExample example : fluentClient.getExamples()) {
-                javaPackage.addSample(example);
             }
         }
 
