@@ -233,7 +233,7 @@ public class FluentJavaSettings {
         loadStringSetting("package-version", s -> artifactVersion = s);
 
         loadStringSetting("generate-samples", s -> {
-            if (s.equalsIgnoreCase("specs")) {
+            if (s.equalsIgnoreCase("SPECS")) {
                 generateSamples = SampleGeneration.REST_API_SPECS;
             } else {
                 generateSamples = SampleGeneration.AGGREGATED;
