@@ -10,10 +10,10 @@ REM re-generate code
 RMDIR /S /Q "src\main\java\com\azure\mgmttest"
 RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 
-SET AUTOREST_CORE_VERSION=3.1.3
+SET AUTOREST_CORE_VERSION=3.4.5
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
-SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
+SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent --pipeline.modelerfour.flatten-payloads=true
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite
 
 REM fluent premium
@@ -23,13 +23,23 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-fla
 
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 ./swagger/readme.network.md --namespace=com.azure.mgmttest.network
 
+REM error response that is subclass of ManagementException
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice
 
+REM multiple inheritance
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos
 
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 ./swagger/readme.containerservice.md --namespace=com.azure.mgmttest.conainterservice
+REM flatten payload
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute
 
+REM error response that not conform to ARM
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization
+
+REM client model flatten at autorest.java
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --payload-flattening-threshold=0 --pipeline.modelerfour.flatten-models=false --client-flattened-annotation-target=NONE --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack
 
 REM fluent lite
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/readme.md --tag=package-resources-2020-10 --java.namespace=com.azure.mgmtlitetest.resources
@@ -42,6 +52,8 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regener
 
 REM CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network
 REM CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute
+
+REM CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/readme.md --tag=package-policy-2020-09 --java.namespace=com.azure.mgmtlitetest.policy --generate-samples
 
 REM delete module-info as fluent-test is on java8
 DEL "src\main\java\module-info.java"

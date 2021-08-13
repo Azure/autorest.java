@@ -2,8 +2,11 @@ package fixtures.bodynumber;
 
 import static org.junit.Assert.fail;
 
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.implementation.serializer.MalformedValueException;
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.core.JsonParseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,9 +34,9 @@ public class NumberOperationsTests {
     try {
       client.getNumbers().getInvalidFloat();
       Assert.assertTrue(false);
-    } catch (Exception exception) {
+    } catch (HttpResponseException exception) {
       // expected
-      Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 
@@ -42,9 +45,9 @@ public class NumberOperationsTests {
     try {
       client.getNumbers().getInvalidDouble();
       Assert.assertTrue(false);
-    } catch (Exception exception) {
+    } catch (HttpResponseException exception) {
       // expected
-      Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 

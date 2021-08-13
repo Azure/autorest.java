@@ -354,7 +354,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponse(RequestOptions requestOptions) {
@@ -373,7 +373,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloat(RequestOptions requestOptions) {
@@ -434,7 +434,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponse(RequestOptions requestOptions) {
@@ -453,7 +453,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDouble(RequestOptions requestOptions) {
@@ -910,7 +910,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponse(RequestOptions requestOptions) {
@@ -929,7 +929,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDuration(RequestOptions requestOptions) {

@@ -373,7 +373,7 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return a response with header value "value": 0.
+     * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseFloatWithResponse(RequestOptions requestOptions, Context context) {
@@ -453,7 +453,7 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return a response with header value "value": 7e120 or -3.
+     * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions, Context context) {
@@ -929,7 +929,7 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return a response with header values "P123DT22H14M12.
+     * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDurationWithResponse(RequestOptions requestOptions, Context context) {

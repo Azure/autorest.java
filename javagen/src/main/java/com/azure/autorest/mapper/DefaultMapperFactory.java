@@ -62,6 +62,11 @@ public class DefaultMapperFactory implements MapperFactory {
     }
 
     @Override
+    public ProxyMethodExampleMapper getProxyMethodExampleMapper() {
+        return ProxyMethodExampleMapper.getInstance();
+    }
+
+    @Override
     public MethodGroupMapper getMethodGroupMapper() {
         return MethodGroupMapper.getInstance();
     }

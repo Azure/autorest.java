@@ -1,5 +1,5 @@
 ECHO OFF
-set AZURE_ARGUMENTS=--version=3.1.3 --android --v4 --java --use:. --output-folder=android-tests\app --sync-methods=all --generate-client-as-impl=true --generate-sync-async-clients=true
+set AZURE_ARGUMENTS=--version=3.4.5 --android --v4 --java --use:. --output-folder=android-tests\app --sync-methods=all --generate-client-as-impl=true --generate-sync-async-clients=true
 set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger
 set NAMESPACE=com.azure.androidtest
 ECHO =======================

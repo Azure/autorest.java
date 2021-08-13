@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -18,6 +19,7 @@ import java.util.Set;
 public class FluentDefineMethod extends FluentMethod {
 
     private final boolean constantResourceName; // resource name is constant, "name" is not needed
+    private final ClientMethodParameter methodParameter;
     private final IType resourceNameType;
 
     public static FluentDefineMethod defineMethodWithConstantResourceName(
@@ -26,11 +28,12 @@ public class FluentDefineMethod extends FluentMethod {
     }
 
     public FluentDefineMethod(FluentResourceModel model, FluentMethodType type,
-                              String resourceName, IType resourceNameType) {
+                              String resourceName, ClientMethodParameter methodParameter) {
         super(model, type);
 
-        this.constantResourceName = resourceNameType == null;
-        this.resourceNameType = resourceNameType;
+        this.constantResourceName = methodParameter == null;
+        this.methodParameter = methodParameter;
+        this.resourceNameType = constantResourceName ? null : methodParameter.getClientType();
 
         this.name = "define" + resourceName;
         String interfaceTypeName = model.getInterfaceType().getName();
@@ -41,6 +44,10 @@ public class FluentDefineMethod extends FluentMethod {
                         .name(String.format("%1$s.%2$s.Blank", interfaceTypeName, ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES))
                         .build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
+
+        if (methodParameter != null) {
+            this.parameters.add(methodParameter);
+        }
     }
 
     public void setName(String name) {
@@ -96,5 +103,9 @@ public class FluentDefineMethod extends FluentMethod {
         if (resourceNameType != null) {
             resourceNameType.addImportsTo(imports, false);
         }
+    }
+
+    public ClientMethodParameter getMethodParameter() {
+        return methodParameter;
     }
 }

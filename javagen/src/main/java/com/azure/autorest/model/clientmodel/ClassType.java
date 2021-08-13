@@ -21,10 +21,10 @@ public class ClassType implements IType {
     public static final ClassType Byte = new ClassType.Builder().knownClass(java.lang.Byte.class).build();
     public static final ClassType Integer = new ClassType.Builder().knownClass(java.lang.Integer.class).defaultValueExpressionConverter((String defaultValueExpression) -> defaultValueExpression).build();
     public static final ClassType Long = new ClassType.Builder().knownClass(java.lang.Long.class).defaultValueExpressionConverter((String defaultValueExpression) -> defaultValueExpression + 'L').build();
-    public static final ClassType Float = new ClassType.Builder().knownClass(java.lang.Float.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression))).build();
+    public static final ClassType Float = new ClassType.Builder().knownClass(java.lang.Float.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'f').build();
     public static final ClassType Double = new ClassType.Builder().knownClass(java.lang.Double.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression))).build();
     public static final ClassType Character = new ClassType.Builder().knownClass(java.lang.Character.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0)))).build();
-    public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + defaultValueExpression + "\"").build();
+    public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + escapeString(defaultValueExpression) + "\"").build();
     public static final ClassType Base64Url = new ClassType.Builder().knownClass(com.azure.core.util.Base64Url.class).build();
     public static final ClassType AndroidBase64Url = new ClassType.Builder().packageName("com.azure.android.core.util").name("Base64Url").build();
     public static final ClassType LocalDate = new ClassType.Builder().knownClass(java.time.LocalDate.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
@@ -35,7 +35,7 @@ public class ClassType implements IType {
     public static final ClassType DateTimeRfc1123 = new ClassType.Builder().knownClass(com.azure.core.util.DateTimeRfc1123.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").build();
     public static final ClassType BigDecimal = new ClassType.Builder().knownClass(java.math.BigDecimal.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression)).build();
-    public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).build();
+    public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
     public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
@@ -56,7 +56,7 @@ public class ClassType implements IType {
     public static final ClassType NonNull = new ClassType.Builder().knownClass(reactor.util.annotation.NonNull.class).build();
     public static final ClassType StreamResponse = new ClassType.Builder().knownClass(com.azure.core.http.rest.StreamResponse.class).build();
     public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
-    public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
+    public static final ClassType Context = new Builder().knownClass(com.azure.core.util.Context.class).defaultValueExpressionConverter(epr -> "Context.NONE").build();
     public static final ClassType AndroidContext = new ClassType.Builder().packageName("com.azure.android.core.util").name("Context").build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
@@ -262,5 +262,15 @@ public class ClassType implements IType {
         public ClassType build() {
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter);
         }
+    }
+
+    private static String escapeString(String str) {
+        return str.replace("\\", "\\\\")
+                .replace("\t", "\\t")
+                .replace("\b", "\\b")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\f", "\\f")
+                .replace("\"", "\\\"");
     }
 }

@@ -5,12 +5,11 @@
 
 package fixtures.lro;
 
+import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import fixtures.lro.fluent.AutoRestLongRunningOperationTestService;
@@ -28,16 +27,13 @@ public class LroCustomHeaderTests {
 
     @BeforeAll
     public static void setup() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+
         HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
+                new AddHeadersPolicy(headers),
                 new RetryPolicy(),
-                new CookiePolicy(),
-                (context, next) -> {
-                    String requestId = context.getHttpRequest().getHeaders().getValue("x-ms-client-request-id");
-                    if (requestId == null) {
-                        context.getHttpRequest().getHeaders().put("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-                    }
-                    return next.process();
-                }
+                new CookiePolicy()
                 //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
         ).build();
 

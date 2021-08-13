@@ -4,7 +4,6 @@ import com.azure.autorest.extension.base.model.codemodel.AndSchema;
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -24,14 +23,19 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,6 +44,9 @@ public class Transformer {
   public CodeModel transform(CodeModel codeModel) {
     renameCodeModel(codeModel);
     transformSchemas(codeModel.getSchemas());
+    if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+      markFlattenedSchemas(codeModel);
+    }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
     return codeModel;
   }
@@ -109,6 +116,7 @@ public class Transformer {
               contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
             }
           }
+          deduplicateParameterNames(request.getParameters());
         }
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -125,7 +133,25 @@ public class Transformer {
     }
   }
 
-  public static boolean nonNullNextLink(Operation operation) {
+  private static void markFlattenedSchemas(CodeModel codeModel) {
+    for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
+      Map<String, ObjectSchema> flattenedSchemas = null;
+      for (Property property : objectSchema.getProperties()) {
+        if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
+          ObjectSchema flattenedSchema = (ObjectSchema) property.getSchema();
+          if (flattenedSchemas == null) {
+            flattenedSchemas = new HashMap<>();
+          }
+          flattenedSchemas.put(property.getLanguage().getJava().getName(), flattenedSchema);
+
+          // mark as flattened schema
+          flattenedSchema.setFlattenedSchema(true);
+        }
+      }
+    }
+  }
+
+  private static boolean nonNullNextLink(Operation operation) {
     return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 
@@ -289,6 +315,12 @@ public class Transformer {
       Operation nextOperation = operationGroup.getOperations().stream()
           .filter(o -> o.getLanguage().getJava().getName().equals(operationName))
           .findFirst().get();
+      if (nextOperation.getExtensions() == null) {
+        nextOperation.setExtensions(new XmsExtensions());
+      }
+      if (nextOperation.getExtensions().getXmsPageable() == null) {
+        nextOperation.getExtensions().setXmsPageable(new XmsPageable());
+      }
       operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
     }
@@ -367,5 +399,33 @@ public class Transformer {
     contentType.getLanguage().setDefault(language);
     contentType.getLanguage().setJava(language);
     return contentType;
+  }
+
+  private static void deduplicateParameterNames(List<Parameter> parameters) {
+    Set<String> parameterNames = new HashSet<>();
+    ListIterator<Parameter> iter = parameters.listIterator();
+    while (iter.hasNext()) {
+      Parameter parameter = iter.next();
+      if (parameter.getOriginalParameter() == null // skip the parameters resulted from parameter-flattening as they are not in proxy method
+              && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
+        /*
+        // use a new Parameter, in case the original one is referenced by multiple requests
+        Parameter newParameter = new Parameter();
+        shallowCopy(parameter, newParameter, Parameter.class);
+        newParameter.setLanguage(new Languages());
+        shallowCopy(parameter.getLanguage(), newParameter.getLanguage(), Languages.class);
+        newParameter.getLanguage().setJava(new Language());
+        shallowCopy(parameter.getLanguage().getJava(), newParameter.getLanguage().getJava(), Language.class);
+        newParameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
+
+        iter.set(newParameter);
+        parameter = newParameter;
+        */
+
+        parameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
+      }
+
+      parameterNames.add(parameter.getLanguage().getJava().getName());
+    }
   }
 }

@@ -33,7 +33,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'install package'
-          options: '-Dlocal'
+          options: '-Dlocal -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -71,27 +71,41 @@ jobs:
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'test'
-          options: '-DtestVanilla -pl vanilla-tests'
+          goals: 'clean test'
+          options: '-DtestVanilla -pl vanilla-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
+
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'vanilla-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
         displayName: 'Run azure tests'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'test'
-          options: '-DtestAzure -pl azure-tests'
+          goals: 'clean test'
+          options: '-DtestAzure -pl azure-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - script: |
-          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
-        displayName: 'Copy coverage report'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'azure-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
+
+#      - script: |
+#          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
+#        displayName: 'Copy coverage report'
 
       - script: |
           npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)

@@ -1432,7 +1432,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Float>>> getFloatValidWithResponseAsync() {
@@ -1449,7 +1449,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatValidAsync() {
@@ -1469,7 +1469,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
@@ -1531,7 +1531,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
@@ -1548,7 +1548,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
@@ -1568,7 +1568,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
@@ -1580,7 +1580,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
@@ -1597,7 +1597,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
@@ -1617,7 +1617,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
@@ -1629,7 +1629,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Double>>> getDoubleValidWithResponseAsync() {
@@ -1646,7 +1646,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleValidAsync() {
@@ -1666,7 +1666,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
@@ -1728,7 +1728,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
@@ -1745,7 +1745,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
@@ -1765,7 +1765,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
@@ -1777,7 +1777,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
@@ -1794,7 +1794,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
@@ -1814,7 +1814,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
@@ -2544,7 +2544,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration dictionary value {"0": "P123DT22H14M12.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Duration>>> getDurationValidWithResponseAsync() {
@@ -2561,7 +2561,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration dictionary value {"0": "P123DT22H14M12.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Duration>> getDurationValidAsync() {
@@ -2581,7 +2581,7 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration dictionary value {"0": "P123DT22H14M12.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {

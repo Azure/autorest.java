@@ -248,7 +248,7 @@ public class ClientMethod {
             }
 
             String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer
-                .toCamelCase(parameterName)) : parameterName;
+                .toCamelCase(CodeNamer.removeInvalidCharacters(parameterName))) : parameterName;
 
             String result;
             if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1"))) {

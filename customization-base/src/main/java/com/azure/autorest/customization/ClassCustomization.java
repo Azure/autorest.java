@@ -3,14 +3,12 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
@@ -189,6 +187,18 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The constructor level customization for the added constructor.
      */
     public ConstructorCustomization addConstructor(String constructor) {
+        return addConstructor(constructor, null);
+    }
+
+    /**
+     * Adds a constructor to this class.
+     *
+     * @param constructor The entire constructor as a literal string.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The constructor level customization for the added constructor.
+     */
+    public ConstructorCustomization addConstructor(String constructor, List<String> importsToAdd) {
         // Get the signature of the constructor.
         Matcher constructorSignatureMatcher = CONSTRUCTOR_SIGNATURE_PATTERN.matcher(constructor);
         String constructorSignature = null;
@@ -233,16 +243,12 @@ public final class ClassCustomization extends CodeCustomization {
 
         editor.replaceWithIndentedContent(fileName, constructorPosition, constructorPosition, constructor,
             constructorPosition.getCharacter());
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
 
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+        final String ctorSignature = (constructorSignature == null)
+            ? editor.getFileLine(fileName, constructorStartLine)
+            : constructorSignature;
 
-        if (constructorSignature == null) {
-            constructorSignature = editor.getFileLine(fileName, constructorStartLine);
-        }
-        return getConstructor(constructorSignature);
+        return Utils.addImports(importsToAdd, this, () -> getConstructor(ctorSignature));
     }
 
     /**
@@ -252,6 +258,18 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The method level customization for the added method.
      */
     public MethodCustomization addMethod(String method) {
+        return addMethod(method, null);
+    }
+
+    /**
+     * Adds a method to this class.
+     *
+     * @param method The entire method as a literal string.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The method level customization for the added method.
+     */
+    public MethodCustomization addMethod(String method, List<String> importsToAdd) {
         // Get the signature of the method.
         Matcher methodSignatureMatcher = METHOD_SIGNATURE_PATTERN.matcher(method);
         String methodSignature = null;
@@ -274,15 +292,10 @@ public final class ClassCustomization extends CodeCustomization {
 
         // replace
         editor.replaceWithIndentedContent(fileName, newMethod, newMethod, method, newMethod.getCharacter());
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-        if (methodSignature == null) {
-            methodSignature = editor.getFileLine(fileName, lineNum);
-        }
-        return getMethod(methodSignature);
+        final String mSig = (methodSignature == null) ? editor.getFileLine(fileName, lineNum) : methodSignature;
+
+        return Utils.addImports(importsToAdd, this, () -> getMethod(mSig));
     }
 
     /**
@@ -290,8 +303,8 @@ public final class ClassCustomization extends CodeCustomization {
      * <p>
      * If there exists multiple methods with the same name or signature only the first one found will be removed.
      * <p>
-     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages
-     * will have to be updated or removed in another customization, or customizations.
+     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages will
+     * have to be updated or removed in another customization, or customizations.
      * <p>
      * If this removes the only method contained in the class this will result in a class with no methods.
      *
@@ -433,15 +446,7 @@ public final class ClassCustomization extends CodeCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange()).stream()
-                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
+                Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.get().getLocation().getRange());
             }
         }
 
@@ -471,15 +476,7 @@ public final class ClassCustomization extends CodeCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                languageClient.listCodeActions(fileUri, range).stream()
-                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
+                Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.getLocation().getRange());
             }
         }
 

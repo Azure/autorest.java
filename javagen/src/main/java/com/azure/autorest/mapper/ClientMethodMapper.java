@@ -28,7 +28,15 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
@@ -148,6 +156,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
             }
 
+            Set<Parameter> originalParameters = new HashSet<>();
             for (Parameter parameter : codeModelParameters) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
 
@@ -193,6 +202,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isLowLevelClient()) {
                     ClientMethodParameter outParameter;
                     if (parameter.getOriginalParameter() != null) {
+                        originalParameters.add(parameter.getOriginalParameter());
                         outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
                     } else {
                         outParameter = clientMethodParameter;
@@ -220,6 +230,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                     detail.getParameterMappings().add(mapping);
                 }
+            }
+            // handle the case that the flattened parameter is model with all its properties read-only
+            // in this case, it is not original parameter from any other parameters
+            for (Parameter parameter : request.getParameters().stream()
+                    .filter(p -> p.isFlattened() && p.getProtocol() != null && p.getProtocol().getHttp() != null)   // flattened proxy parameter
+                    .filter(p -> !originalParameters.contains(p))                                                   // but not original parameter from any other parameters
+                    .collect(Collectors.toList())) {
+                ClientMethodParameter outParameter = Mappers.getClientParameterMapper().map(parameter);
+                methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
             }
 
             if (settings.isLowLevelClient()) {
@@ -748,7 +767,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
                 Schema responseSchema = operation.getResponses().get(0).getSchema();
-                if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
+                if (responseSchema != null && !CoreUtils.isNullOrEmpty(responseSchema.getSummary())) {
+                    description = formatReturnTypeDescription(responseSchema.getSummary());
+                } else if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
                     String responseSchemaDescription = responseSchema.getLanguage().getDefault().getDescription();
                     if (!CoreUtils.isNullOrEmpty(responseSchemaDescription)) {
                         description = formatReturnTypeDescription(responseSchemaDescription);
@@ -780,7 +801,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static String formatReturnTypeDescription(String description) {
         description = description.trim();
-        int endIndex = description.indexOf(".");
+        int endIndex = description.indexOf(". ");   // Get 1st sentence.
+        if (endIndex == -1 && description.length() > 0 && description.charAt(description.length() - 1) == '.') {
+            // Remove last period.
+            endIndex = description.length() - 1;
+        }
         if (endIndex != -1) {
             description = description.substring(0, endIndex);
         }

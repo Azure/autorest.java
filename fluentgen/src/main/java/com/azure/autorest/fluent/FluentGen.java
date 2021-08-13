@@ -11,10 +11,12 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.checker.JavaFormatter;
+import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -41,12 +43,19 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,6 +68,8 @@ public class FluentGen extends NewPlugin {
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
 
+    private List<FluentExample> fluentPremiumExamples;
+
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
         instance = this;
@@ -70,6 +81,8 @@ public class FluentGen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
@@ -78,6 +91,7 @@ public class FluentGen extends NewPlugin {
         try {
             logger.info("Read YAML");
             String fileContent = readFile(files.get(0));
+            createInputCodeModelFile(fileContent);
 
             // Parse yaml to code model
             CodeModel codeModel = this.handleYaml(fileContent);
@@ -97,10 +111,13 @@ public class FluentGen extends NewPlugin {
                 String content = javaFile.getContents().toString();
                 String path = javaFile.getFilePath();
 
-                // formatter
-                String formattedContent = new JavaFormatter(content, path).format();
+                if (!settings.isSkipFormatting()) {
+                    // formatter
+                    boolean isSampleJavaFile = path.contains("src/samples/java/");
+                    content = new JavaFormatter(content, path).format(!isSampleJavaFile);
+                }
 
-                writeFile(path, formattedContent, null);
+                writeFile(path, content, null);
             }
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
@@ -113,9 +130,17 @@ public class FluentGen extends NewPlugin {
             return true;
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentgen plugin " + e, e);
-            connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
-            throw e;
+            //connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
+            return false;
         }
+    }
+
+    private void createInputCodeModelFile(String file) throws IOException {
+        File tempFile = new File("code-model.yaml");
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
+        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
     }
 
     CodeModel handleYaml(String yamlContent) {
@@ -131,18 +156,33 @@ public class FluentGen extends NewPlugin {
                 }
             }
         };
-        Yaml newYaml = new Yaml(representer);
+        LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
         CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
         return codeModel;
     }
 
     Client handleMap(CodeModel codeModel) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         FluentMapper fluentMapper = this.getFluentMapper();
 
         logger.info("Map code model to client model");
         fluentMapper.preModelMap(codeModel);
 
         Client client = Mappers.getClientMapper().map(codeModel);
+
+        // samples for Fluent Premium
+        if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
+            FluentStatic.setClient(client);
+            FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+            fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
+                    .flatMap(rc -> ExampleParser.parserMethodGroup(rc).stream())
+                    .sorted()
+                    .collect(Collectors.toList());
+        }
+
         return client;
     }
 
@@ -224,6 +264,13 @@ public class FluentGen extends NewPlugin {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
         }
 
+        // Samples
+        if (fluentPremiumExamples != null) {
+            for (FluentExample example : fluentPremiumExamples) {
+                javaPackage.addSample(example);
+            }
+        }
+
         return javaPackage;
     }
 
@@ -274,9 +321,19 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 
+            // Samples
+            List<JavaFile> sampleJavaFiles = new ArrayList<>();
+            for (FluentExample example : fluentClient.getExamples()) {
+                sampleJavaFiles.add(javaPackage.addSample(example));
+            }
+
+            // Readme and Changelog
             if (isSdkIntegration) {
-                javaPackage.addReadme(project);
-                javaPackage.addChangelog(project.getChangelog());
+                javaPackage.addReadmeMarkdown(project);
+                javaPackage.addChangelogMarkdown(project.getChangelog());
+                if (fluentJavaSettings.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
+                    javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
+                }
             }
         }
 

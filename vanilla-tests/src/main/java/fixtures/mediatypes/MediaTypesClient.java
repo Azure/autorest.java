@@ -134,6 +134,22 @@ public final class MediaTypesClient {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/mediatypes/analyzeNoAccept")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") ContentType contentType,
+                @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
+                @HeaderParam("Content-Length") Long contentLength,
+                Context context);
+
+        @Post("/mediatypes/analyzeNoAccept")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
+                @HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+
         @Post("/mediatypes/contentTypeWithEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -341,6 +357,171 @@ public final class MediaTypesClient {
     public String analyzeBody() {
         final String source = null;
         return analyzeBodyAsync(source).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
+            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (contentType == null) {
+            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
+        }
+        return FluxUtil.withContext(
+                context ->
+                        service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(
+            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType) {
+        final Flux<ByteBuffer> input = null;
+        final Long contentLength = null;
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+        analyzeBodyNoAcceptHeaderAsync(contentType, input, contentLength).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader(ContentType contentType) {
+        final Flux<ByteBuffer> input = null;
+        final Long contentLength = null;
+        analyzeBodyNoAcceptHeaderAsync(contentType, input, contentLength).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param source File source path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(String source) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        SourcePath inputInternal = null;
+        if (source != null) {
+            inputInternal = new SourcePath();
+            inputInternal.setSource(source);
+        }
+        SourcePath input = inputInternal;
+        return FluxUtil.withContext(context -> service.analyzeBodyNoAcceptHeader(this.getHost(), input, context));
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param source File source path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(String source) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync() {
+        final String source = null;
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @param source File source path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader(String source) {
+        analyzeBodyNoAcceptHeaderAsync(source).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader() {
+        final String source = null;
+        analyzeBodyNoAcceptHeaderAsync(source).block();
     }
 
     /**

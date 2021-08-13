@@ -17,6 +17,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -57,6 +58,15 @@ public class FluentMapper {
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
         ResourceParser.processAdditionalMethods(fluentClient);
+
+        // samples
+        if (fluentJavaSettings.isGenerateSamples()) {
+            List<FluentExample> examples = fluentClient.getResourceCollections().stream()
+                    .flatMap(rc -> ExampleParser.parseResourceCollection(rc).stream())
+                    .sorted()
+                    .collect(Collectors.toList());
+            fluentClient.getExamples().addAll(examples);
+        }
 
         return fluentClient;
     }

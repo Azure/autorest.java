@@ -42,6 +42,8 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForRemoveModel = new HashSet<>();
 
+    private final Set<String> javaNamesForPreserveModel = new HashSet<>();
+
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
 //     */
@@ -67,6 +69,8 @@ public class FluentJavaSettings {
     private String pomFilename = "pom.xml";
 
     private String artifactVersion;
+
+    private boolean generateSamples = false;
 
     private boolean sdkIntegration = false;
 
@@ -105,12 +109,16 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
-    public Map<String, String> getRenameModel() {
+    public Map<String, String> getJavaNamesForRenameModel() {
         return renameModel;
     }
 
     public Set<String> getJavaNamesForRemoveModel() {
         return javaNamesForRemoveModel;
+    }
+
+    public Set<String> getJavaNamesForPreserveModel() {
+        return javaNamesForPreserveModel;
     }
 
     public String getPomFilename() {
@@ -119,6 +127,10 @@ public class FluentJavaSettings {
 
     public Optional<String> getArtifactVersion() {
         return Optional.ofNullable(artifactVersion);
+    }
+
+    public boolean isGenerateSamples() {
+        return generateSamples;
     }
 
     public boolean isSdkIntegration() {
@@ -192,6 +204,16 @@ public class FluentJavaSettings {
             }
         });
 
+        loadStringSetting("preserve-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForPreserveModel.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
+
 //        loadBooleanSetting("track1-naming", b -> track1Naming = b);
 //        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
@@ -199,6 +221,8 @@ public class FluentJavaSettings {
 
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
+
+        loadBooleanSetting("generate-samples", b -> generateSamples = b);
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 

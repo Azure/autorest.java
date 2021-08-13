@@ -42,6 +42,8 @@ import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
+import com.azure.mgmttest.networkwatcher.models.PacketCapture;
+import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
@@ -69,6 +71,22 @@ import java.util.stream.Collectors;
 public class RuntimeTests {
 
     private static final String MOCK_SUBSCRIPTION_ID = "00000000-0000-0000-0000-000000000000";
+
+    @Test
+    public void testFlattenedModel() throws IOException {
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+
+        PacketCapture packetCapture = new PacketCapture();
+        String jsonStr = serializerAdapter.serialize(packetCapture, SerializerEncoding.JSON);
+        Assertions.assertTrue(jsonStr.contains("\"properties\":"));
+
+        packetCapture.withTarget("target");
+        packetCapture.withStorageLocation(new PacketCaptureStorageLocation().withStorageId("id"));
+        jsonStr = serializerAdapter.serialize(packetCapture, SerializerEncoding.JSON);
+        PacketCapture packetCaptureFromJson = serializerAdapter.deserialize(jsonStr, PacketCapture.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("target", packetCaptureFromJson.target());
+        Assertions.assertEquals("id", packetCaptureFromJson.storageLocation().storageId());
+    }
 
     @Test
     public void testManagementClient() {

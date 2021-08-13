@@ -4,8 +4,11 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A model that is defined by the client.
@@ -68,6 +71,8 @@ public class ClientModel {
 
     private List<ClientModelPropertyReference> propertyReferences;
 
+    private IType modelType;
+
     /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
@@ -81,11 +86,14 @@ public class ClientModel {
      * @param derivedModels The models that derive from this model.
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
+     * @param propertyReferences
+     * @param modelType the type of the model.
      */
     protected ClientModel(String package_Keyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
-            List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences) {
+            List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
+            IType modelType) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -100,6 +108,7 @@ public class ClientModel {
         this.xmlNamespace = xmlNamespace;
         this.properties = properties;
         this.propertyReferences = propertyReferences;
+        this.modelType = modelType;
     }
 
     public final String getPackage() {
@@ -161,9 +170,33 @@ public class ClientModel {
         return properties;
     }
 
-//    public List<ClientModelPropertyReference> getPropertyReferences() {
-//        return propertyReferences;
-//    }
+    public IType getType() {
+        return modelType;
+    }
+
+    public List<ClientModelPropertyReference> getPropertyReferences() {
+        return propertyReferences == null ? Collections.emptyList() : propertyReferences;
+    }
+
+    /**
+     * List the properties that have access (getter or setter) methods.
+     *
+     * It does not include properties from superclass (even though they can be accessed via inheritance).
+     * It does not include properties that only have private access (e.g. property of a flattened model).
+     * It includes properties that can be accessed from the model but not declared in this model (e.g. properties from a flattened model).
+     *
+     * @return The properties that have access (getter or setter) methods.
+     */
+    public List<ClientModelPropertyAccess> getAccessibleProperties() {
+        List<ClientModelProperty> properties1 = this.getProperties() == null ? Collections.emptyList() : this.getProperties();
+        List<ClientModelPropertyAccess> properties = properties1.stream()
+                .filter(p -> !p.getClientFlatten())
+                .collect(Collectors.toList());
+        properties.addAll(this.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .collect(Collectors.toList()));
+        return properties;
+    }
 
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.
@@ -171,19 +204,15 @@ public class ClientModel {
      * @param settings The settings for this Java generator session.
      */
     public void addImportsTo(Set<String> imports, JavaSettings settings) {
-        if (properties.stream().anyMatch(p -> !p.getIsReadOnly())) {
-            addFluentAnnotationImport(imports);
-        } else {
-            addImmutableAnnotationImport(imports);
-        }
+        // whether annotated as Immutable or Fluent is also determined by its superclass
+        addFluentAnnotationImport(imports);
+        addImmutableAnnotationImport(imports);
 
-        if (needsFlatten) {
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && needsFlatten) {
             addJsonFlattenAnnotationImport(imports);
         }
 
-        for (String import_Keyword : getImports()) {
-            imports.add(import_Keyword);
-        }
+        imports.addAll(getImports());
 
         if (getIsPolymorphic()) {
             imports.add("com.fasterxml.jackson.annotation.JsonTypeInfo");
@@ -227,6 +256,7 @@ public class ClientModel {
         protected List<ClientModelProperty> properties;
         protected String xmlNamespace;
         protected List<ClientModelPropertyReference> propertyReferences;
+        protected IType modelType;
 
         /**
          * Sets the package that this model class belongs to.
@@ -369,6 +399,16 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets the model type.
+         * @param modelType the model type.
+         * @return the Builder itself
+         */
+        public Builder type(IType modelType) {
+            this.modelType = modelType;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -383,7 +423,8 @@ public class ClientModel {
                     xmlName,
                     xmlNamespace,
                     properties,
-                    propertyReferences);
+                    propertyReferences,
+                    modelType);
         }
     }
 }

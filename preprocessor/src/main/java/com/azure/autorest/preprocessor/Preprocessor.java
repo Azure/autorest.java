@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -11,7 +12,10 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -84,7 +88,9 @@ public class Preprocessor extends NewPlugin {
         }
       }
     };
-    Yaml newYaml  = new Yaml(representer);
+    LoaderOptions loaderOptions = new LoaderOptions();
+    loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+    Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     String output = newYaml.dump(codeModel);
     try {
       File tempFile = new File("code-model-processed-no-tags.yaml");
@@ -114,7 +120,7 @@ public class Preprocessor extends NewPlugin {
     return codeModel;
   }
 
-  private CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
+  public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
     Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
     if (!constantSchemas.isEmpty()) {
       Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();
@@ -156,6 +162,21 @@ public class Preprocessor extends NewPlugin {
                         Preprocessor::convertToChoiceSchema);
                 p.setSchema(sealedChoiceSchema);
               });
+
+      if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+        codeModel.getSchemas().getObjects().stream()
+                .flatMap(s -> s.getProperties().stream())
+                .filter(p -> !p.isRequired() && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten())
+                .filter(p -> p.getSchema() instanceof ObjectSchema)
+                .forEach(p -> ((ObjectSchema) p.getSchema()).getProperties().stream()
+                        .filter(p1 -> p1.getSchema() instanceof ConstantSchema)
+                        .forEach(p1 -> {
+                          ConstantSchema constantSchema = (ConstantSchema) p1.getSchema();
+                          SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                                  Preprocessor::convertToChoiceSchema);
+                          p1.setSchema(sealedChoiceSchema);
+                        }));
+      }
 
       codeModel.getSchemas().getSealedChoices().addAll(convertedChoiceSchemas.values());
     }

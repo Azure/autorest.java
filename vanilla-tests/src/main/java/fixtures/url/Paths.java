@@ -551,7 +551,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '1.
+     * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
@@ -570,7 +570,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '1.
+     * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositiveAsync() {
@@ -593,7 +593,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-1.
+     * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
@@ -612,7 +612,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-1.
+     * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegativeAsync() {
@@ -635,7 +635,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '9999999.
+     * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
@@ -654,7 +654,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '9999999.
+     * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositiveAsync() {
@@ -677,7 +677,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-9999999.
+     * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
@@ -696,7 +696,7 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-9999999.
+     * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegativeAsync() {

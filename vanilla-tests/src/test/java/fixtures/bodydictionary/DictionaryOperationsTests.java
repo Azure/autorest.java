@@ -1,5 +1,7 @@
 package fixtures.bodydictionary;
 
+import com.azure.core.exception.HttpResponseException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import fixtures.bodydictionary.models.Widget;
@@ -35,8 +37,9 @@ public class DictionaryOperationsTests {
     try {
       client.getInvalid();
       fail();
-    } catch (RuntimeException exception) {
-      assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
+    } catch (HttpResponseException exception) {
+      // expected
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 
@@ -62,8 +65,9 @@ public class DictionaryOperationsTests {
     try {
       client.getNullKey();
       fail();
-    } catch (RuntimeException exception) {
-      assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
+    } catch (HttpResponseException exception) {
+      // expected
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 

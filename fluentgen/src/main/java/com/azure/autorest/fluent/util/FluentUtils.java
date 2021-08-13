@@ -14,13 +14,13 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -46,7 +46,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -150,7 +149,7 @@ public class FluentUtils {
         String artifactId;
         if (packageName.startsWith("com.azure.resourcemanager")) {
             // if namespace looks good, convert it to artifactId directly
-            artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
+            artifactId = packageName.substring("com.".length()).replace(".", "-");
         } else {
             String packageLastName = getPackageLastName(packageName).toLowerCase(Locale.ROOT);
             artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
@@ -257,7 +256,7 @@ public class FluentUtils {
                     for (int i = 0; i < replacements.length; i += 2) {
                         String key = replacements[i];
                         String value = replacements[i+1];
-                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), Matcher.quoteReplacement(value));
+                        text = text.replace("{{" + key + "}}", value);
                     }
                 } else {
                     logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
@@ -265,11 +264,26 @@ public class FluentUtils {
             }
             return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file '{}'", filename);
+            logger.error("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }
 
+    /**
+     * Get the name of the argument for the method call.
+     *
+     * If the parameter is provided by the caller, the name is unchanged and directly passed to the method call.
+     * If the parameter is provided by class variable or local variable, the name is unchanged, or might need simple conversion as the type might not align exactly.
+     * If the parameter is same as innerModel of the resource model, use innerModel.
+     * If the parameter is Context, use Context.NONE.
+     *
+     * @param parameter the client method parameter that requires the argument
+     * @param inputParametersSet the parameters that provided by the caller
+     * @param localVariables the local variables that defined in the class
+     * @param resourceModel the resource model, usually its innerModel
+     * @param collectionMethod the method
+     * @return the name of the argument
+     */
     public static String getLocalMethodArgument(ClientMethodParameter parameter,
                                                 Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
                                                 FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod) {
@@ -293,7 +307,7 @@ public class FluentUtils {
             // local variables
             LocalVariable localVariable = localVariables.getLocalVariableByMethodParameter(parameter);
             if (localVariable == null) {
-                throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
+                throw new IllegalStateException(String.format("Local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
                         collectionMethod.getMethodName(),
                         resourceModel.getName(),
                         parameter.getName(),
@@ -323,7 +337,7 @@ public class FluentUtils {
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 
-    public static boolean modelHasLocationProperty(List<ClientModelProperty> properties) {
+    public static boolean modelHasLocationProperty(List<ModelProperty> properties) {
         return properties.stream()
                 .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
     }
@@ -364,5 +378,19 @@ public class FluentUtils {
             };
         }
         return bodyType;
+    }
+
+    private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
+
+    public static List<String> splitFlattenedSerializedName(String serializedName) {
+        if (serializedName == null) {
+            return Collections.emptyList();
+        }
+
+        String[] values = SPLIT_FLATTEN_PROPERTY_PATTERN.split(serializedName);
+        for (int i = 0; i < values.length; ++i) {
+            values[i] = values[i].replace("\\\\.", ".");
+        }
+        return Arrays.asList(values);
     }
 }
