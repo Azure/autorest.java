@@ -72,7 +72,17 @@ public class ExampleParser {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
 
-    public static List<FluentExample> parseMethodGroup(MethodGroupClient methodGroup) {
+    private final boolean aggregateExamples;
+
+    public ExampleParser() {
+        this(true);
+    }
+
+    public ExampleParser(boolean aggregateExamples) {
+        this.aggregateExamples = aggregateExamples;
+    }
+
+    public List<FluentExample> parseMethodGroup(MethodGroupClient methodGroup) {
         List<FluentClientMethodExample> methodExamples = new ArrayList<>();
 
         methodGroup.getClientMethods().forEach(m -> {
@@ -84,14 +94,14 @@ public class ExampleParser {
 
         Map<String, FluentExample> examples = new HashMap<>();
         methodExamples.forEach(e -> {
-            FluentExample example = getExample(examples, e.getMethodGroup(), e.getClientMethod());
+            FluentExample example = getExample(examples, e.getMethodGroup(), e.getClientMethod(), e.getName());
             example.getClientMethodExamples().add(e);
         });
 
         return new ArrayList<>(examples.values());
     }
 
-    public static List<FluentExample> parseResourceCollection(FluentResourceCollection resourceCollection) {
+    public List<FluentExample> parseResourceCollection(FluentResourceCollection resourceCollection) {
         List<FluentCollectionMethodExample> methodExamples = new ArrayList<>();
         List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
         List<FluentResourceUpdateExample> resourceUpdateExamples = new ArrayList<>();
@@ -117,34 +127,39 @@ public class ExampleParser {
 
         Map<String, FluentExample> examples = new HashMap<>();
         methodExamples.forEach(e -> {
-            FluentExample example = getExample(examples, e.getResourceCollection(), e.getCollectionMethod());
+            FluentExample example = getExample(examples, e.getResourceCollection(), e.getCollectionMethod(), e.getName());
             example.getCollectionMethodExamples().add(e);
         });
         resourceCreateExamples.forEach(e -> {
-            FluentExample example = getExample(examples, e.getResourceCollection(), e.getResourceCreate().getMethodReferences().iterator().next());
+            FluentExample example = getExample(examples, e.getResourceCollection(), e.getResourceCreate().getMethodReferences().iterator().next(), e.getName());
             example.getResourceCreateExamples().add(e);
         });
         resourceUpdateExamples.forEach(e -> {
-            FluentExample example = getExample(examples, e.getResourceCollection(), e.getResourceUpdate().getMethodReferences().iterator().next());
+            FluentExample example = getExample(examples, e.getResourceCollection(), e.getResourceUpdate().getMethodReferences().iterator().next(), e.getName());
             example.getResourceUpdateExamples().add(e);
         });
 
         return new ArrayList<>(examples.values());
     }
 
-    private static FluentExample getExample(Map<String, FluentExample> examples,
-                                            FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod) {
-        return getExample(examples, resourceCollection.getInnerGroupClient(), collectionMethod.getInnerClientMethod());
+    private FluentExample getExample(Map<String, FluentExample> examples,
+                                            FluentResourceCollection resourceCollection,
+                                            FluentCollectionMethod collectionMethod,
+                                            String exampleName) {
+        return getExample(examples, resourceCollection.getInnerGroupClient(), collectionMethod.getInnerClientMethod(), exampleName);
     }
 
-    private static FluentExample getExample(Map<String, FluentExample> examples,
-                                            MethodGroupClient methodGroup, ClientMethod clientMethod) {
+    private FluentExample getExample(Map<String, FluentExample> examples,
+                                            MethodGroupClient methodGroup, ClientMethod clientMethod,
+                                            String exampleName) {
         String groupName = methodGroup.getClassBaseName();
         String methodName = clientMethod.getProxyMethod().getName();
         String name = CodeNamer.toPascalCase(groupName) + CodeNamer.toPascalCase(methodName);
         FluentExample example = examples.get(name);
         if (example == null) {
-            example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName), getApiVersion(clientMethod));
+            example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName),
+                    this.aggregateExamples ? null : exampleName,
+                    getApiVersion(clientMethod));
             examples.put(name, example);
         }
         return example;
