@@ -56,18 +56,15 @@ rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
-<<<<<<< HEAD
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
+call autorest bodycomplex.md $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/media_types.json --namespace=fixtures.mediatypes
+call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/url.json --namespace=fixtures.url
 
-call autorest --use:. customization-tests/swagger
-=======
 call autorest --version=3.4.5 --use:. customization-tests/swagger
->>>>>>> 7e8b56547770c3baf2d4374545bbe00a049dda96
 
 call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
 call autorest --use:. docs/samples/specification/basic/readme.md
