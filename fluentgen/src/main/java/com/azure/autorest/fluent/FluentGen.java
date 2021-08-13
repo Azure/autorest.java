@@ -178,7 +178,7 @@ public class FluentGen extends NewPlugin {
             FluentStatic.setClient(client);
             FluentStatic.setFluentJavaSettings(fluentJavaSettings);
             fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
-                    .flatMap(rc -> ExampleParser.parserMethodGroup(rc).stream())
+                    .flatMap(rc -> ExampleParser.parseMethodGroup(rc).stream())
                     .sorted()
                     .collect(Collectors.toList());
         }

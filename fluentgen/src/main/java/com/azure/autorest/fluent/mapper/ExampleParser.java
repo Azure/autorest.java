@@ -72,7 +72,7 @@ public class ExampleParser {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
 
-    public static List<FluentExample> parserMethodGroup(MethodGroupClient methodGroup) {
+    public static List<FluentExample> parseMethodGroup(MethodGroupClient methodGroup) {
         List<FluentClientMethodExample> methodExamples = new ArrayList<>();
 
         methodGroup.getClientMethods().forEach(m -> {
