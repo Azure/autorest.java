@@ -7,6 +7,7 @@
 package com.azure.autorest.fluent.namer;
 
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelNamer;
 
@@ -15,6 +16,11 @@ public class FluentModelNamer extends ModelNamer {
     @Override
     public String modelPropertyGetterName(ClientModelProperty property) {
         String propertyName = property.getName();
+        return this.modelPropertyGetterName(propertyName);
+    }
+
+    @Override
+    public String modelPropertyGetterName(IType clientType, String propertyName) {
         return this.modelPropertyGetterName(propertyName);
     }
 

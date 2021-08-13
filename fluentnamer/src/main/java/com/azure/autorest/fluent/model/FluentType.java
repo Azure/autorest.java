@@ -27,6 +27,8 @@ public class FluentType {
 
     public static final ClassType SystemData = new ClassType.Builder().knownClass(com.azure.core.management.SystemData.class).build();
 
+    public static final ClassType AzureResourceManager = new ClassType.Builder().packageName("com.azure.resourcemanager").name("AzureResourceManager").build();
+
     private FluentType() {
     }
 

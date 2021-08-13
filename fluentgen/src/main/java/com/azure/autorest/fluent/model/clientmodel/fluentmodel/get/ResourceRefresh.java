@@ -73,7 +73,7 @@ public class ResourceRefresh extends ResourceOperation {
                     resourceCollection, methodOpt.get(),
                     resourceModel.getResourceCreate().getResourceLocalVariables());
         } else {
-            throw new IllegalStateException("refresh method not found on model " + resourceModel.getName());
+            throw new IllegalStateException("Refresh method not found on model " + resourceModel.getName());
         }
     }
 

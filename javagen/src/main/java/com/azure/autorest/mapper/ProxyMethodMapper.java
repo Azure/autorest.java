@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
@@ -214,6 +215,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             appendCallbackParameter(parameters, responseBodyType);
             builder.allParameters(allParameters);
             builder.parameters(parameters);
+
+            if (operation.getExtensions() != null && operation.getExtensions().getXmsExamples() != null
+                    && operation.getExtensions().getXmsExamples().getExamples() != null
+                    && !operation.getExtensions().getXmsExamples().getExamples().isEmpty()) {
+                Map<String, ProxyMethodExample> examples = operation.getExtensions().getXmsExamples().getExamples().entrySet().stream()
+                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(e.getValue())));
+                builder.examples(examples);
+            }
 
             ProxyMethod proxyMethod = builder.build();
 

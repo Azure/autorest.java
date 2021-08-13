@@ -1,5 +1,7 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExamples;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
@@ -9,11 +11,19 @@ import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.SequenceNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CodeModelCustomConstructor extends Constructor {
     public CodeModelCustomConstructor() {
         super();
+        yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
+        yamlClassConstructors.put(NodeId.mapping, new TypeMapConstruct());
+    }
+
+    public CodeModelCustomConstructor(LoaderOptions loaderOptions) {
+        super(loaderOptions);
         yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
         yamlClassConstructors.put(NodeId.mapping, new TypeMapConstruct());
     }
@@ -272,6 +282,40 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-long-running-operation-options".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsLongRunningOperationOptions",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-examples".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsExamples",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            }
+                        }
+                        value.setValue(actualValues);
+                        break;
+                    }
+                    case "xmsLongRunningOperationOptions": {
+                        MappingNode value = (MappingNode) tuple.getValueNode();
+                        List<NodeTuple> actualValues = new ArrayList<>();
+                        for (NodeTuple extension : value.getValue()) {
+                            ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
+                            if ("final-state-via".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "finalStateVia",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);
@@ -280,6 +324,24 @@ public class CodeModelCustomConstructor extends Constructor {
                 }
             }
             return super.construct(mappingNode);
+        }
+
+        @Override
+        protected Object constructJavaBean2ndStep(MappingNode node, Object object) {
+            if (node.getType().equals(XmsExamples.class)) {
+                // deserialize to Map<String, Object>, while Object would be LinkedHashMap
+                Map<String, Object> examples = new HashMap<>();
+                for (NodeTuple tuple : node.getValue()) {
+                    examples.put(
+                            ((ScalarNode) tuple.getKeyNode()).getValue(),
+                            constructObject(tuple.getValueNode()));
+                }
+                XmsExamples xmsExamples = new XmsExamples();
+                xmsExamples.setExamples(examples);
+                return xmsExamples;
+            } else {
+                return super.constructJavaBean2ndStep(node, object);
+            }
         }
     }
 

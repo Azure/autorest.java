@@ -38,6 +38,9 @@ public class ObjectSchema extends ComplexSchema {
 
     private String discriminatorValue;
 
+    // internal use, not from modelerfour
+    private boolean flattenedSchema;
+
     /**
      * a property is a child value in an object
      * 
@@ -124,5 +127,13 @@ public class ObjectSchema extends ComplexSchema {
 
     public void setDiscriminatorValue(String discriminatorValue) {
         this.discriminatorValue = discriminatorValue;
+    }
+
+    public boolean isFlattenedSchema() {
+        return flattenedSchema;
+    }
+
+    public void setFlattenedSchema(boolean flattenedSchema) {
+        this.flattenedSchema = flattenedSchema;
     }
 }

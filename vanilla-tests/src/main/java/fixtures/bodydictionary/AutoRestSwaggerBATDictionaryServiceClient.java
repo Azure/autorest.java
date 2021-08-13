@@ -263,7 +263,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
@@ -288,7 +288,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
@@ -300,7 +300,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
@@ -312,7 +312,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0, "1": -0.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
@@ -337,7 +337,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float dictionary value {"0": 0.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
@@ -349,7 +349,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value {"0": 1.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
@@ -541,7 +541,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration dictionary value {"0": "P123DT22H14M12.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {

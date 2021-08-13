@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 import java.util.List;
 import java.util.Set;
 
@@ -80,7 +82,21 @@ public class EnumType implements IType {
         if (sourceExpression == null) {
             return null;
         }
-        return String.format("%1$s.%2$s", getName(), sourceExpression.toUpperCase());
+        if (this.getExpandable()) {
+            for (ClientEnumValue enumValue : this.getValues()) {
+                if (sourceExpression.equals(enumValue.getValue())) {
+                    return String.format("%1$s.%2$s", getName(), enumValue.getName());
+                }
+            }
+            return String.format("%1$s.from%2$s(%3$s)", getName(), CodeNamer.toPascalCase(this.getElementType().toString()), this.getElementType().defaultValueExpression(sourceExpression));
+        } else {
+            for (ClientEnumValue enumValue : this.getValues()) {
+                if (sourceExpression.equals(enumValue.getValue())) {
+                    return String.format("%1$s.%2$s", getName(), enumValue.getName());
+                }
+            }
+            return null;
+        }
     }
 
     public final IType getClientType() {

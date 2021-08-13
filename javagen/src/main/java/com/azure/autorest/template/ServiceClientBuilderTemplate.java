@@ -1,9 +1,9 @@
-package com.azure.autorest.template;
-
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+package com.azure.autorest.template;
+
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
@@ -279,6 +279,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
     protected void addHttpPolicyImports(Set<String> imports) {
         imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
+        imports.add("com.azure.core.http.policy.AzureKeyCredentialPolicy");
         imports.add("com.azure.core.http.policy.HttpPolicyProviders");
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
@@ -299,16 +300,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
-            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
-                function.ifBlock("azureKeyCredential != null", action -> {
-                    function.line("policies.add(new AzureKeyCredentialPolicy(\"api-key\", azureKeyCredential));");
-                });
-            }
-            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
-                function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
-                });
-            }
 
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
@@ -319,6 +310,26 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
             function.line("policies.add(new CookiePolicy());");
+
+            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
+                if (JavaSettings.getInstance().getKeyCredentialHeaderName() == null
+                    || JavaSettings.getInstance().getKeyCredentialHeaderName().isEmpty()) {
+                    Javagen.getPluginInstance().getLogger().error("key-credential-header-name is required for " +
+                            "azurekeycredential credential type");
+                    throw new IllegalStateException("key-credential-header-name is required for " +
+                            "azurekeycredential credential type");
+                }
+                function.ifBlock("azureKeyCredential != null", action -> {
+                    function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                            + JavaSettings.getInstance().getKeyCredentialHeaderName()
+                            + "\", azureKeyCredential));");
+                });
+            }
+            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
+                function.ifBlock("tokenCredential != null", action -> {
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
+                });
+            }
             function.line("policies.addAll(this.pipelinePolicies);");
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
 

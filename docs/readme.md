@@ -21,14 +21,14 @@ These documents are Java-specific, see [our main docs][main_docs] for more gener
 6. [FAQ][faq]
 
 <!-- LINKS -->
-[main_docs]: https://github.com/Azure/autorest/tree/master/docs
-[main_generate]: https://github.com/Azure/autorest/tree/master/docs/generate/readme.md
+[main_docs]: https://github.com/Azure/autorest/tree/main/docs
+[main_generate]: https://github.com/Azure/autorest/tree/main/docs/generate/readme.md
 [java_generate]: ./generate/readme.md
 [java_client]: ./client/readme.md
-[main_client]: https://github.com/Azure/autorest/tree/master/docs/generate/client.md
-[main_migrate]: https://github.com/Azure/autorest/tree/master/docs/migrate/readme.md
+[main_client]: https://github.com/Azure/autorest/tree/main/docs/generate/client.md
+[main_migrate]: https://github.com/Azure/autorest/tree/main/docs/migrate/readme.md
 [java_migrate]: ./migrate/readme.md
 [java_dev]: ./developer/readme.md
-[main_dev]: https://github.com/Azure/autorest/tree/master/docs/dev/readme.md
+[main_dev]: https://github.com/Azure/autorest/tree/main/docs/developer/readme.md
 [sample]: ./samples/readme.md
 [faq]: ./faq.md

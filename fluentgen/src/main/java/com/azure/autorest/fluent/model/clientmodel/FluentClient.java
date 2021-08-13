@@ -26,6 +26,8 @@ public class FluentClient {
 
     private final List<FluentResourceCollection> resourceCollections = new ArrayList<>();
 
+    private final List<FluentExample> examples = new ArrayList<>();
+
     public FluentClient(Client client) {
         this.client = client;
     }
@@ -56,5 +58,9 @@ public class FluentClient {
 
     public void setModuleInfo(ModuleInfo moduleInfo) {
         this.moduleInfo = moduleInfo;
+    }
+
+    public List<FluentExample> getExamples() {
+        return examples;
     }
 }

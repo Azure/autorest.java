@@ -376,7 +376,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '1.
+     * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
@@ -395,7 +395,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '1.
+     * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositive(RequestOptions requestOptions) {
@@ -414,7 +414,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-1.
+     * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
@@ -433,7 +433,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-1.
+     * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegative(RequestOptions requestOptions) {
@@ -490,7 +490,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '9999999.
+     * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
@@ -509,7 +509,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '9999999.
+     * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositive(RequestOptions requestOptions) {
@@ -528,7 +528,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-9999999.
+     * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
@@ -547,7 +547,7 @@ public final class QueriesAsyncClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-9999999.
+     * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegative(RequestOptions requestOptions) {

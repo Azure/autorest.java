@@ -8,7 +8,7 @@ After [generating][generate] your client, this section tells you how to actually
 * [Troubleshooting][troubleshooting]
 
 <!-- LINKS -->
-[generate]: https://github.com/Azure/autorest/tree/master/docs/generate/readme.md
+[generate]: https://github.com/Azure/autorest/tree/main/docs/generate/readme.md
 [initializing]: ./initializing.md
 [operations]: ./operations.md
 [models]: ./models.md

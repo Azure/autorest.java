@@ -16,7 +16,10 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -109,7 +112,9 @@ public class FluentNamer extends NewPlugin {
                 }
             }
         };
-        return new Yaml(representer);
+        LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        return new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     }
 
     private CodeModel transform(CodeModel codeModel) {

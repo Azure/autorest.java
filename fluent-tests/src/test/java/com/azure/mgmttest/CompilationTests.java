@@ -6,14 +6,16 @@ package com.azure.mgmttest;
 import com.azure.core.management.Resource;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
+import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
+import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
+import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.authorization.models.GraphError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
-import com.azure.mgmttest.conainterservice.models.ContainerServiceMasterProfile;
-import com.azure.mgmttest.conainterservice.models.Count;
 import com.azure.mgmttest.cosmos.models.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
@@ -25,6 +27,7 @@ import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 
@@ -87,11 +90,31 @@ public class CompilationTests {
         sqlDatabaseGetPropertiesResource.colls();
     }
 
-    public void testIntEnum() {
-        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
-        containerServiceMasterProfile.withCount(Count.THREE);
-        int countInt = containerServiceMasterProfile.count().toInt();
+    public void testFlattenedParameter() {
+        CloudServicesUpdateDomainsClient cloudServicesUpdateDomainsClient = mock(CloudServicesUpdateDomainsClient.class);
+        cloudServicesUpdateDomainsClient.walkUpdateDomainWithResponseAsync(anyString(), anyString(), anyInt());
     }
+
+    public void testFlattenedModel() {
+        SharedGalleryInner sharedGallery = mock(SharedGalleryInner.class);
+        sharedGallery.withUniqueId(anyString());
+        sharedGallery.uniqueId();
+        sharedGallery.name();
+        sharedGallery.location();
+
+        PacketCaptureResultInner packetCaptureResult = mock(PacketCaptureResultInner.class);
+        packetCaptureResult.withTarget(anyString());
+        packetCaptureResult.target();
+
+        ExtendedProductInner extendedProduct = mock(ExtendedProductInner.class);
+        extendedProduct.uri();
+    }
+
+//    public void testIntEnum() {
+//        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
+//        containerServiceMasterProfile.withCount(Count.THREE);
+//        int countInt = containerServiceMasterProfile.count().toInt();
+//    }
 
     public void testException() {
         ManagementException exception = new DefaultErrorResponseErrorException(anyString(), null);

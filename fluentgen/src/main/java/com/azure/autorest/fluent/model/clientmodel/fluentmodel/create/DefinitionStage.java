@@ -5,8 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
+import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
 public class DefinitionStage extends FluentInterfaceStage {
 
@@ -14,7 +14,7 @@ public class DefinitionStage extends FluentInterfaceStage {
         super(name);
     }
 
-    public DefinitionStage(String name, ClientModelProperty property) {
+    public DefinitionStage(String name, ModelProperty property) {
         super(name, property);
     }
 
@@ -24,7 +24,7 @@ public class DefinitionStage extends FluentInterfaceStage {
                 : String.format("The stage of the %1$s definition allowing to specify %2$s.", modelName, property.getName());
     }
 
-    public ClientModelProperty getModelProperty() {
+    public ModelProperty getModelProperty() {
         return this.property;
     }
 }

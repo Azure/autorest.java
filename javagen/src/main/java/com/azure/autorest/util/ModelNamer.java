@@ -8,29 +8,29 @@ package com.azure.autorest.util;
 
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
 public class ModelNamer {
 
     public String modelPropertyGetterName(ServiceClientProperty property) {
-        return modelPropertyGetterName(
-                new ClientModelProperty.Builder()
-                        .name(property.getName())
-                        .isReadOnly(property.isReadOnly())
-                        .clientType(property.getType())
-                        .build());
+        return modelPropertyGetterName(property.getType(), property.getName());
     }
 
     public String modelPropertyGetterName(ClientModelProperty property) {
+        return modelPropertyGetterName(property.getClientType(), property.getName());
+    }
+
+    public String modelPropertyGetterName(IType clientType, String propertyName) {
         String prefix = "get";
-        if (property.getClientType() == PrimitiveType.Boolean || property.getClientType() == ClassType.Boolean) {
+        if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
             prefix = "is";
-            if (CodeNamer.toCamelCase(property.getName()).startsWith(prefix)) {
-                return CodeNamer.toCamelCase(property.getName());
+            if (CodeNamer.toCamelCase(propertyName).startsWith(prefix)) {
+                return CodeNamer.toCamelCase(propertyName);
             }
         }
-        return prefix + CodeNamer.toPascalCase(property.getName());
+        return prefix + CodeNamer.toPascalCase(propertyName);
     }
 
     public String modelPropertyGetterName(String propertyName) {

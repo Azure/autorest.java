@@ -13,7 +13,7 @@ import datetime
 from typing import List
 
 
-AUTOREST_CORE_VERSION = '3.1.3'
+AUTOREST_CORE_VERSION = '3.4.5'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 
@@ -60,9 +60,12 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str) -
         '--use=' + autorest_java,
         '--pipeline.modelerfour.additional-checks=false',
         '--pipeline.modelerfour.lenient-model-deduplication=true',
+        '--pipeline.modelerfour.flatten-models=false',
         '--azure-arm',
         '--fluent=lite',
         '--java.fluent=lite',
+        '--client-flattened-annotation-target=NONE',
+        '--generate-samples',
         '--java.license-header=MICROSOFT_MIT_SMALL',
         '--java.output-folder=' + output_sdk_dir,
         '--java.namespace=' + namespace,

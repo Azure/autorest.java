@@ -23,7 +23,10 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -48,6 +51,8 @@ public class Androidgen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> allFiles = listInputs();
         List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
@@ -71,7 +76,9 @@ public class Androidgen extends NewPlugin {
                 }
             };
 
-            Yaml newYaml  = new Yaml(representer);
+            LoaderOptions loaderOptions = new LoaderOptions();
+            loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+            Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
             // Step 2: Map
@@ -155,13 +162,16 @@ public class Androidgen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                try {
-                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                    writeFile(javaFile.getFilePath(), formattedSource, null);
-                } catch (Exception e) {
-                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
-                    return false;
+                String content = javaFile.getContents().toString();
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        content = formatter.formatSourceAndFixImports(content);
+                    } catch (Exception e) {
+                        LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        return false;
+                    }
                 }
+                writeFile(javaFile.getFilePath(), content, null);
             }
             String artifactId = JavaSettings.getInstance().getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {

@@ -20,7 +20,10 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -31,7 +34,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
-    private final Logger LOGGER = new PluginLogger(this, Javagen.class);
+    private final Logger logger = new PluginLogger(this, Javagen.class);
     static Javagen instance;
 
     public Javagen(Connection connection, String plugin, String sessionId) {
@@ -43,8 +46,14 @@ public class Javagen extends NewPlugin {
         return instance;
     }
 
+    public Logger getLogger() {
+        return this.logger;
+    }
+
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> allFiles = listInputs();
         List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
@@ -68,7 +77,9 @@ public class Javagen extends NewPlugin {
                 }
             };
 
-            Yaml newYaml  = new Yaml(representer);
+            LoaderOptions loaderOptions = new LoaderOptions();
+            loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+            Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
             // Step 2: Map
@@ -81,18 +92,9 @@ public class Javagen extends NewPlugin {
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            if (settings.shouldGenerateClientInterfaces()) {
                 javaPackage
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
-            }
-
-            // Method group
-            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
-                        methodGroupClient);
-                if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
-                }
             }
 
             // Service client builder
@@ -101,7 +103,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceClientBuilder(builderPackage,
                     client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
                 List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
@@ -115,8 +117,16 @@ public class Javagen extends NewPlugin {
                 }
             }
 
+            // Method group
+            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
+                        methodGroupClient);
+                if (settings.shouldGenerateClientInterfaces()) {
+                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                }
+            }
+
             // Service version
-            JavaSettings settings = JavaSettings.getInstance();
             if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
                 String packageName = settings.getPackage();
                 String serviceName = settings.getServiceName();
@@ -125,7 +135,7 @@ public class Javagen extends NewPlugin {
                 javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
             }
 
-            if (!JavaSettings.getInstance().isLowLevelClient()) {
+            if (!settings.isLowLevelClient()) {
                 // Response
                 for (ClientResponse response : client.getResponseModels()) {
                     javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
@@ -159,7 +169,7 @@ public class Javagen extends NewPlugin {
             }
 
             // Module-info
-            if (JavaSettings.getInstance().isLowLevelClient()) {
+            if (settings.isLowLevelClient()) {
                 javaPackage.addModuleInfo(client.getModuleInfo());
             }
 
@@ -167,22 +177,24 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                try {
-                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-//                    String formattedSource = javaFile.getContents().toString();
-                    writeFile(javaFile.getFilePath(), formattedSource, null);
-                } catch (Exception e) {
-                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
-                    return false;
+                String content = javaFile.getContents().toString();
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        content = formatter.formatSourceAndFixImports(content);
+                    } catch (Exception e) {
+                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        return false;
+                    }
                 }
+                writeFile(javaFile.getFilePath(), content, null);
             }
-            String artifactId = JavaSettings.getInstance().getArtifactId();
+            String artifactId = settings.getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
-            LOGGER.error("Failed to generate code.", ex);
+            logger.error("Failed to generate code.", ex);
             return false;
         }
         return true;

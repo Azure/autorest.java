@@ -3,10 +3,14 @@
 
 package com.azure.autorest.extension.base.plugin;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -91,6 +95,7 @@ public class JavaSettings
 
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
+                    host.getValue(new TypeReference<Map<String, Object>>() {}.getType(), "pipeline.modelerfour"),
                     host.getBooleanValue("azure-arm", false),
                     fluentSetting,
                     host.getBooleanValue("regenerate-pom", regeneratePomDefault),
@@ -127,7 +132,11 @@ public class JavaSettings
                     host.getBooleanValue("optional-constant-as-enum", false),
                     host.getBooleanValue("low-level-client", false),
                     host.getBooleanValue("use-iterable", false),
-                    host.getValue(List.class, "service-versions"));
+                    host.getValue(List.class, "service-versions"),
+                    host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
+                    host.getStringValue("client-flattened-annotation-target", ""),
+                    host.getStringValue("key-credential-header-name", ""),
+                    host.getBooleanValue("skip-formatting", false));
         }
         return _instance;
     }
@@ -149,8 +158,10 @@ public class JavaSettings
      @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
+     @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with JsonFlatten.
      */
-    private JavaSettings(boolean azure,
+    private JavaSettings(Map<String, Object> modelerSettings,
+                         boolean azure,
                          String fluent,
                          boolean regeneratePom,
                          String fileHeaderText,
@@ -185,8 +196,13 @@ public class JavaSettings
                          boolean optionalConstantAsEnum,
                          boolean lowLevelClient,
                          boolean useIterable,
-                         List<String> serviceVersions)
+                         List<String> serviceVersions,
+                         boolean requireXMsFlattenedToFlatten,
+                         String clientFlattenAnnotationTarget,
+                         String keyCredentialHeaderName,
+                         boolean skipFormatting)
     {
+        this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
         this.regeneratePom = regeneratePom;
@@ -219,12 +235,16 @@ public class JavaSettings
         this.lowLevelClient = lowLevelClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
+        this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
+        this.clientFlattenAnnotationTarget = (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
+                ? ClientFlattenAnnotationTarget.TYPE
+                : ClientFlattenAnnotationTarget.valueOf(clientFlattenAnnotationTarget.toUpperCase(Locale.ROOT));
 
         if (credentialType != null) {
             String[] splits = credentialType.split(",");
             this.credentialTypes = Arrays.stream(splits)
-                    .map(split -> split.trim())
-                    .map(type -> CredentialType.fromValue(credentialType))
+                    .map(String::trim)
+                    .map(CredentialType::fromValue)
                     .collect(Collectors.toSet());
         }
         if (credentialScopes != null) {
@@ -241,6 +261,13 @@ public class JavaSettings
         }
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
+        this.keyCredentialHeaderName = keyCredentialHeaderName;
+        this.skipFormatting = skipFormatting;
+    }
+
+    private String keyCredentialHeaderName;
+    public String getKeyCredentialHeaderName() {
+        return this.keyCredentialHeaderName;
     }
 
     private Set<CredentialType> credentialTypes;
@@ -268,7 +295,7 @@ public class JavaSettings
     public enum Fluent {
         NONE, LITE, PREMIUM
     }
-    private Fluent fluent;
+    private final Fluent fluent;
     public final boolean isFluent()
     {
         return fluent != Fluent.NONE;
@@ -284,6 +311,52 @@ public class JavaSettings
     public final boolean isAzureOrFluent()
     {
         return isAzure() || isFluent();
+    }
+
+    public enum ClientFlattenAnnotationTarget {
+        TYPE, FIELD, NONE
+    }
+    // target for @JsonFlatten annotation for x-ms-client-flatten
+    private final ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;
+
+    /**
+     * @return When flatten client mode, where to put the <code>@JsonFlatten</code> annotation. If NONE, flatten at getter/setter methods via codegen.
+     */
+    public ClientFlattenAnnotationTarget getClientFlattenAnnotationTarget() {
+        return this.clientFlattenAnnotationTarget;
+    }
+
+    public static class ModelerSettings {
+        private Map<String, Object> settings;
+
+        public ModelerSettings(Map<String, Object> settings) {
+            this.settings = settings == null ? Collections.emptyMap() : settings;
+        }
+
+        public Map<String, Object> getSettings() {
+            return settings;
+        }
+
+        /**
+         * If false, use client-flattened-annotation-target = TYPE for no flatten;
+         * client-flattened-annotation-target = NONE for flatten at getter/setter methods via codegen.
+         *
+         * If true, use client-flattened-annotation-target = TYPE for <code>@JsonFlatten</code> on type (i.e. on class);
+         * client-flattened-annotation-target = FIELD for <code>@JsonFlatten</code> on field.
+         *
+         * modelerfour.flatten-models = false and client-flattened-annotation-target = NONE would require modelerfour.flatten-payloads = false.
+         *
+         * @return value of modelerfour.flatten-models
+         */
+        public boolean isFlattenModel() {
+            return settings.containsKey("flatten-models") && (boolean) settings.get("flatten-models");
+        }
+    }
+
+    private final ModelerSettings modelerSettings;
+
+    public ModelerSettings getModelerSettings() {
+        return modelerSettings;
     }
 
     private boolean regeneratePom;
@@ -525,12 +598,20 @@ public class JavaSettings
     }
 
     boolean overrideSetterFromParent;
+    boolean skipFormatting;
 
     /**
      * @return whether to override superclass setter method in model.
      */
     public boolean isOverrideSetterFromSuperclass() {
         return overrideSetterFromParent;
+    }
+
+    /**
+     * @return whether to skip formatting java files.
+     */
+    public boolean isSkipFormatting() {
+        return skipFormatting;
     }
 
     private final boolean optionalConstantAsEnum;
@@ -556,6 +637,11 @@ public class JavaSettings
 
     public List<String> getServiceVersions() {
         return serviceVersions;
+    }
+
+    private final boolean requireXMsFlattenedToFlatten;
+    public boolean requireXMsFlattenedToFlatten() {
+        return requireXMsFlattenedToFlatten;
     }
 
     public static final String DefaultCodeGenerationHeader = "Code generated by Microsoft (R) AutoRest Code Generator %s" + "\r\n" +

@@ -23,4 +23,4 @@ fluent: lite
 
 <!-- LINKS -->
 [mgmt]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane
-[flag_index]: https://github.com/Azure/autorest/tree/master/docs/generate/flags.md
+[flag_index]: https://github.com/Azure/autorest/tree/main/docs/generate/flags.md
