@@ -143,18 +143,20 @@ public class ExampleParser {
     }
 
     private FluentExample getExample(Map<String, FluentExample> examples,
-                                            FluentResourceCollection resourceCollection,
-                                            FluentCollectionMethod collectionMethod,
-                                            String exampleName) {
+                                     FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod,
+                                     String exampleName) {
         return getExample(examples, resourceCollection.getInnerGroupClient(), collectionMethod.getInnerClientMethod(), exampleName);
     }
 
     private FluentExample getExample(Map<String, FluentExample> examples,
-                                            MethodGroupClient methodGroup, ClientMethod clientMethod,
-                                            String exampleName) {
+                                     MethodGroupClient methodGroup, ClientMethod clientMethod,
+                                     String exampleName) {
         String groupName = methodGroup.getClassBaseName();
         String methodName = clientMethod.getProxyMethod().getName();
         String name = CodeNamer.toPascalCase(groupName) + CodeNamer.toPascalCase(methodName);
+        if (!this.aggregateExamples) {
+            name += com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(exampleName);
+        }
         FluentExample example = examples.get(name);
         if (example == null) {
             example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName),
