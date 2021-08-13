@@ -55,8 +55,8 @@ public class FluentJavaPackage extends JavaPackage {
         textFiles.add(textFile);
     }
 
-    public final void addSampleMarkdown(Project project, List<FluentExample> examples) {
-        TextFile textFile = new TextFile("SAMPLE.md", new SampleTemplate().write(project, examples));
+    public final void addSampleMarkdown(List<FluentExample> examples, List<JavaFile> sampleJavaFiles) {
+        TextFile textFile = new TextFile("SAMPLE.md", new SampleTemplate().write(examples, sampleJavaFiles));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }
@@ -106,11 +106,12 @@ public class FluentJavaPackage extends JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addSample(FluentExample example) {
+    public final JavaFile addSample(FluentExample example) {
         JavaSettings settings = JavaSettings.getInstance();
         JavaFile javaFile = getJavaFileFactory().createSampleFile(
                 settings.getPackage(), example.getClassName());
         FluentExampleTemplate.getInstance().write(example, javaFile);
         addJavaFile(javaFile);
+        return javaFile;
     }
 }

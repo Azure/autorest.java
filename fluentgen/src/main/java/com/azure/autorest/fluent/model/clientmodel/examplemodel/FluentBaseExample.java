@@ -47,7 +47,7 @@ public abstract class FluentBaseExample implements FluentExample {
 
     @Override
     public String getEntryDescription() {
-        return manager.getDescription();
+        return String.format("Entry point to %1$s.", manager.getType().getName());
     }
 
     public FluentResourceCollection getResourceCollection() {
