@@ -90,18 +90,18 @@
               <async>true</async>
             </configuration>
           </execution>
-          <execution>
-            <id>report-coverage</id>
-            <phase>test</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>fixtures.report.CoverageReporter</mainClass>
-              <classpathScope>test</classpathScope>
-              <cleanupDaemonThreads>false</cleanupDaemonThreads>
-            </configuration>
-          </execution>
+<!--          <execution>-->
+<!--            <id>report-coverage</id>-->
+<!--            <phase>test</phase>-->
+<!--            <goals>-->
+<!--              <goal>java</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <mainClass>fixtures.report.CoverageReporter</mainClass>-->
+<!--              <classpathScope>test</classpathScope>-->
+<!--              <cleanupDaemonThreads>false</cleanupDaemonThreads>-->
+<!--            </configuration>-->
+<!--          </execution>-->
         </executions>
       </plugin>
     </plugins>

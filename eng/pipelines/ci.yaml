@@ -61,8 +61,8 @@ jobs:
         displayName: 'Run protocol tests'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'test'
-          options: '-DtestProtocol -pl protocol-tests'
+          goals: 'clean test'
+          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
