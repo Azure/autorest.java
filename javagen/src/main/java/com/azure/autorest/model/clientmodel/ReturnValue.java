@@ -18,6 +18,10 @@ public class ReturnValue {
      * The type of the return value.
      */
     private IType type;
+    /**
+     * The type of the response body.
+     */
+    private IType responseBodyType;
 
     /**
      * Create a new ReturnValue object from the provided properties.
@@ -35,6 +39,15 @@ public class ReturnValue {
 
     public final IType getType() {
         return type;
+    }
+
+    public final IType getResponseBodyType() {
+        return responseBodyType;
+    }
+
+    public final ReturnValue setResponseBodyType(IType responseBodyType) {
+        this.responseBodyType = responseBodyType;
+        return this;
     }
 
     /**

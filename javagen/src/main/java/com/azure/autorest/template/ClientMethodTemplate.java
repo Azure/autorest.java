@@ -732,7 +732,20 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param settings java settings
      */
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        String contextParam;
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+            contextParam = "context";
+        } else {
+            contextParam = "Context.NONE";
+        }
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.line("return PollerFlux.create(pollInterval,");
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line("ChainedPollingStrategy.createDefault(client.getHttpPipeline(), %s),", contextParam);
+            function.line("new TypeReference<%1$s>() { }, new TypeReference<%1$s>() { });", clientMethod.getReturnValue().getResponseBodyType().asNullable());
+            function.decreaseIndent();
+        });
     }
 
     /**
@@ -744,6 +757,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param settings java settings
      */
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.methodReturn(String.format("this.%s(%s).getSyncPoller()",
+                    clientMethod.getName() + "Async", clientMethod.getArgumentList()));
+        });
     }
 }

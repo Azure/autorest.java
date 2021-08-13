@@ -303,8 +303,13 @@ public class ClientMethod {
         }
 
         if (type == ClientMethodType.LongRunningBeginAsync) {
-            if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                imports.add("com.fasterxml.jackson.core.type.TypeReference");
+            if (settings.isFluent()) {
+                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                }
+            } else {
+                imports.add("com.azure.core.util.serializer.TypeReference");
+                imports.add("com.azure.core.util.polling.ChainedPollingStrategy");
             }
         }
     }
