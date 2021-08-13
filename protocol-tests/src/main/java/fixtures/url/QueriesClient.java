@@ -395,7 +395,7 @@ public final class QueriesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return '1.
+     * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions, Context context) {
@@ -433,7 +433,7 @@ public final class QueriesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return '-1.
+     * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions, Context context) {
@@ -509,7 +509,7 @@ public final class QueriesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return '9999999.
+     * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions, Context context) {
@@ -547,7 +547,7 @@ public final class QueriesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @return '-9999999.
+     * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions, Context context) {
