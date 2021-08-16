@@ -235,6 +235,8 @@ public class FluentJavaSettings {
         loadStringSetting("generate-samples", s -> {
             if (s.equalsIgnoreCase("SPECS")) {
                 generateSamples = SampleGeneration.REST_API_SPECS;
+            } else if (s.equalsIgnoreCase("false")) {
+                generateSamples = SampleGeneration.NONE;
             } else {
                 generateSamples = SampleGeneration.AGGREGATED;
             }
