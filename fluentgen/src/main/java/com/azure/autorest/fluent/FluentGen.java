@@ -177,10 +177,17 @@ public class FluentGen extends NewPlugin {
         if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
             FluentStatic.setClient(client);
             FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+            ExampleParser exampleParser = new ExampleParser();
             fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
-                    .flatMap(rc -> ExampleParser.parserMethodGroup(rc).stream())
-                    .sorted()
+                    .flatMap(mg -> exampleParser.parseMethodGroup(mg).stream())
                     .collect(Collectors.toList());
+
+            if (fluentJavaSettings.isGenerateSamplesForSpecs()) {
+                ExampleParser exampleParserForSpecs = new ExampleParser(false);
+                fluentPremiumExamples.addAll(client.getServiceClient().getMethodGroupClients().stream()
+                        .flatMap(mg -> exampleParserForSpecs.parseMethodGroup(mg).stream())
+                        .collect(Collectors.toList()));
+            }
         }
 
         return client;
@@ -325,6 +332,10 @@ public class FluentGen extends NewPlugin {
             List<JavaFile> sampleJavaFiles = new ArrayList<>();
             for (FluentExample example : fluentClient.getExamples()) {
                 sampleJavaFiles.add(javaPackage.addSample(example));
+            }
+            // Samples for REST API specs
+            for (FluentExample example : fluentClient.getExamplesForSpecs()) {
+                javaPackage.addSample(example);
             }
 
             // Readme and Changelog
