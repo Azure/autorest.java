@@ -75,6 +75,6 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
     }
 
     private String getVersionIdentifier(String version) {
-        return "V" + version.replaceAll("[-.]", "_");
+        return "V" + version.replaceAll("[-.]", "_").toUpperCase();
     }
 }
