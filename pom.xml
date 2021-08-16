@@ -131,6 +131,17 @@
 
   <profiles>
     <profile>
+      <id>testProtocol</id>
+      <activation>
+        <property>
+          <name>testProtocol</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./protocol-tests</module>
+      </modules>
+    </profile>
+    <profile>
       <id>testVanilla</id>
       <activation>
         <property>

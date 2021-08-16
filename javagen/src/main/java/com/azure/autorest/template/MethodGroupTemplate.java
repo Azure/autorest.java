@@ -89,7 +89,8 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
-            if (methodGroupClient.getClientMethods().stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
+            if (settings.isLowLevelClient() &&
+                    methodGroupClient.getClientMethods().stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
                 writePagingHelperMethods(methodGroupClient, classBlock);
             }
 

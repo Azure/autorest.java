@@ -103,7 +103,7 @@ The code formatter would require Java 11+ runtime.
 
 You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
 
-```yaml
+```yaml $(low-level-client)
 generate-client-interfaces: false
 generate-client-as-impl: true
 generate-sync-async-clients: true

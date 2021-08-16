@@ -57,6 +57,26 @@ jobs:
         displayName: 'Check no diff in generated files'
 
       - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'protocol-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
+
+      - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
@@ -75,6 +95,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run azure tests'
         inputs:
           mavenPomFile: pom.xml
