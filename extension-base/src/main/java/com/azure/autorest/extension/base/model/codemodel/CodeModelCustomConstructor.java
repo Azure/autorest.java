@@ -154,6 +154,7 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(UriSchema.class);
                         break;
                     }
+                    case "anyObjects":
                     case "any": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(AnySchema.class);
@@ -349,7 +350,7 @@ public class CodeModelCustomConstructor extends Constructor {
         for (NodeTuple schemaProps : value.getValue()) {
             if (((ScalarNode) schemaProps.getKeyNode()).getValue().equals("type")) {
                 switch (((ScalarNode) schemaProps.getValueNode()).getValue()) {
-                    case "any": return AnySchema.class;
+                    case "any-object": case "any": return AnySchema.class;
                     case "and": return AndSchema.class;
                     case "array": return ArraySchema.class;
                     case "boolean": return BooleanSchema.class;
