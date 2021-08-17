@@ -28,12 +28,11 @@ public class NamingConflictResolver {
         // conform to lowercase, to avoid problem on Windows system, where file name is case insensitive
         Set<String> methodGroupNamesLowerCase = new HashSet<>();
         Set<String> objectNamesLowerCase = codeModel.getSchemas().getObjects().stream()
-                .map(Utils::getDefaultName)
+                .map(Utils::getJavaName)
                 .map(n -> n.toLowerCase(Locale.ROOT))
                 .collect(Collectors.toSet());
         codeModel.getOperationGroups().forEach(og -> {
-            String name = Utils.getDefaultName(og);
-            String methodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(name));
+            String methodGroupName = CodeNamer.getPlural(Utils.getJavaName(og));
             String newMethodGroupName = methodGroupName;
             if (objectNamesLowerCase.contains(methodGroupName.toLowerCase(Locale.ROOT))) {
                 // deduplicate from objects
@@ -51,9 +50,9 @@ public class NamingConflictResolver {
             }
         });
 
-        String clientNameLowerCase = Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT);
+        String clientNameLowerCase = Utils.getJavaName(codeModel).toLowerCase(Locale.ROOT);
         if (methodGroupNamesLowerCase.contains(clientNameLowerCase) || objectNamesLowerCase.contains(clientNameLowerCase)) {
-            String name = Utils.getDefaultName(codeModel);
+            String name = Utils.getJavaName(codeModel);
             String newName;
 
             final String keywordManagementClient = "ManagementClient";
@@ -67,7 +66,7 @@ public class NamingConflictResolver {
             }
 
             logger.info("Rename code model from '{}' to '{}'", name, newName);
-            codeModel.getLanguage().getDefault().setName(newName);
+            codeModel.getLanguage().getJava().setName(newName);
         }
 
         // deduplicate enums from objects
@@ -77,20 +76,20 @@ public class NamingConflictResolver {
     }
 
     private static String renameOperationGroup(Metadata m) {
-        String name = Utils.getDefaultName(m);
+        String name = Utils.getJavaName(m);
         String newName = name + "Operation";
         logger.info("Rename operation group from '{}' to '{}'", name, newName);
-        m.getLanguage().getDefault().setName(newName);
+        m.getLanguage().getJava().setName(newName);
         return newName;
     }
 
     private static void validateChoiceName(ValueSchema choice, Set<String> objectNames) {
-        String name = Utils.getDefaultName(choice);
+        String name = Utils.getJavaName(choice);
         if (objectNames.contains(name.toLowerCase(Locale.ROOT))) {
             String newName = name + "Value";
             logger.warn("Name conflict of choice with object '{}'", name);
             logger.info("Rename choice from '{}' to '{}'", name, newName);
-            choice.getLanguage().getDefault().setName(newName);
+            choice.getLanguage().getJava().setName(newName);
         }
     }
 }
