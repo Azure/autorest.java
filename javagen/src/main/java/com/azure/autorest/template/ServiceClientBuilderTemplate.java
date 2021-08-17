@@ -30,6 +30,8 @@ import java.util.stream.Stream;
 public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
 
+    private final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
+
     protected ServiceClientBuilderTemplate() {
     }
 
@@ -200,17 +202,22 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     constructorArgs = ", " + constructorArgs;
                 }
 
-                final String serializerMemberName = getSerializerMemberName();
+                final String serializerExpression;
+                if (settings.isLowLevelClient()) {
+                    serializerExpression = JACKSON_SERIALIZER;
+                } else {
+                    serializerExpression = getSerializerMemberName();
+                }
 
                 if (settings.isFluent()) {
                     function.line(String.format("%1$s client = new %2$s(pipeline, %3$s, defaultPollInterval, environment%4$s);",
                             serviceClient.getClassName(),
                             serviceClient.getClassName(),
-                            serializerMemberName,
+                            serializerExpression,
                             constructorArgs));
                 } else {
                     function.line(String.format("%1$s client = new %2$s(pipeline, %3$s%4$s);",
-                            serviceClient.getClassName(), serviceClient.getClassName(), serializerMemberName, constructorArgs));
+                            serviceClient.getClassName(), serviceClient.getClassName(), serializerExpression, constructorArgs));
                 }
                 function.line("return client;");
             });
@@ -355,9 +362,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
                         : "createHttpPipeline()"));
 
-        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                ClassType.SerializerAdapter, getSerializerMemberName(), false,
-                settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+        // Low-level client does not need serializer. It returns BinaryData.
+        if (!settings.isLowLevelClient()) {
+            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+                    ClassType.SerializerAdapter, getSerializerMemberName(), false,
+                    settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));
+        }
 
         if (!settings.isAzureOrFluent()) {
 

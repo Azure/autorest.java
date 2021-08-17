@@ -13,7 +13,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,22 +62,6 @@ public final class MediaTypesClientBuilder {
      */
     public MediaTypesClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
-        return this;
-    }
-
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the MediaTypesClientBuilder.
-     */
-    public MediaTypesClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
         return this;
     }
 
@@ -176,10 +159,8 @@ public final class MediaTypesClientBuilder {
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        MediaTypesClientImpl client = new MediaTypesClientImpl(pipeline, serializerAdapter, host);
+        MediaTypesClientImpl client =
+                new MediaTypesClientImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
         return client;
     }
 
