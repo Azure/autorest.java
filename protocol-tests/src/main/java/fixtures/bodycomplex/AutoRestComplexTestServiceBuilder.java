@@ -13,7 +13,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,22 +98,6 @@ public final class AutoRestComplexTestServiceBuilder {
      */
     public AutoRestComplexTestServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
-        return this;
-    }
-
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestComplexTestServiceBuilder.
-     */
-    public AutoRestComplexTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
         return this;
     }
 
@@ -215,11 +198,9 @@ public final class AutoRestComplexTestServiceBuilder {
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
         AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(pipeline, serializerAdapter, host, serviceVersion);
+                new AutoRestComplexTestServiceImpl(
+                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
         return client;
     }
 

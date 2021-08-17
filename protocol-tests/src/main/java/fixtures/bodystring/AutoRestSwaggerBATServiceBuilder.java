@@ -13,7 +13,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,22 +68,6 @@ public final class AutoRestSwaggerBATServiceBuilder {
      */
     public AutoRestSwaggerBATServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
-        return this;
-    }
-
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
-     */
-    public AutoRestSwaggerBATServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
         return this;
     }
 
@@ -182,10 +165,8 @@ public final class AutoRestSwaggerBATServiceBuilder {
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestSwaggerBATServiceImpl client = new AutoRestSwaggerBATServiceImpl(pipeline, serializerAdapter, host);
+        AutoRestSwaggerBATServiceImpl client =
+                new AutoRestSwaggerBATServiceImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
         return client;
     }
 
