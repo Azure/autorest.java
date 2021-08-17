@@ -161,6 +161,7 @@ public class ExampleParser {
         if (example == null) {
             example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName),
                     this.aggregateExamples ? null : exampleName,
+                    clientMethod.getProxyMethod().getOperationId(),
                     getApiVersion(clientMethod));
             examples.put(name, example);
         }
@@ -532,8 +533,9 @@ public class ExampleParser {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static ExampleNode parseNode(IType type, Object objectValue) {
-        ExampleNode node = null;
+        ExampleNode node;
         if (type instanceof ListType && objectValue instanceof List) {
             IType elementType = ((ListType) type).getElementType();
             ListNode listNode = new ListNode(elementType, objectValue);

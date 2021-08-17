@@ -44,14 +44,26 @@ public class ProxyMethodExample {
     }
 
     private final Map<String, ParameterValue> parameters = new HashMap<>();
+    private final String xmsOriginalFile;
+    private final String operationId;
 
     public Map<String, ParameterValue> getParameters() {
         return parameters;
     }
 
+    public String getXmsOriginalFile() {
+        return xmsOriginalFile;
+    }
+
+    public String getOperationId() {
+        return operationId;
+    }
+
     // response is ignored for now
 
-    public ProxyMethodExample() {
+    private ProxyMethodExample(String xmsOriginalFile, String operationId) {
+        this.xmsOriginalFile = xmsOriginalFile;
+        this.operationId = operationId;
     }
 
     @Override
@@ -63,6 +75,8 @@ public class ProxyMethodExample {
 
     public static final class Builder {
         private final Map<String, ParameterValue> parameters = new HashMap<>();
+        private String xmsOriginalFile;
+        private String operationId;
 
         public Builder() {
         }
@@ -74,8 +88,18 @@ public class ProxyMethodExample {
             return this;
         }
 
+        public Builder xmsOriginalFile(String xmsOriginalFile) {
+            this.xmsOriginalFile = xmsOriginalFile;
+            return this;
+        }
+
+        public Builder operationId(String operationId) {
+            this.operationId = operationId;
+            return this;
+        }
+
         public ProxyMethodExample build() {
-            ProxyMethodExample proxyMethodExample = new ProxyMethodExample();
+            ProxyMethodExample proxyMethodExample = new ProxyMethodExample(xmsOriginalFile, operationId);
             proxyMethodExample.parameters.putAll(this.parameters);
             return proxyMethodExample;
         }

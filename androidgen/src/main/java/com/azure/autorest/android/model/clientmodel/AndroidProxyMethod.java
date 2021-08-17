@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -34,7 +35,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                                  ClassType unexpectedResponseExceptionType,
                                  Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
                                  String name, List<ProxyMethodParameter> parameters, String description,
-                                 IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
+                                 IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes,
+                                 String operationId, Map<String, ProxyMethodExample> examples) {
         super(requestContentType,
                 returnType,
                 httpMethod,
@@ -48,7 +50,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                 returnValueWireType,
                 isResumable,
                 responseContentTypes,
-                null);
+                operationId,
+                examples);
     }
 
     @Override
@@ -145,7 +148,9 @@ public class AndroidProxyMethod extends ProxyMethod {
                     description,
                     returnValueWireType,
                     isResumable,
-                    responseContentTypes);
+                    responseContentTypes,
+                    operationId,
+                    examples);
         }
     }
 }

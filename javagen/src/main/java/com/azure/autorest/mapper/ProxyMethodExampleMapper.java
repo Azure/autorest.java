@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExample> {
 
-    private static ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
+    private static final ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
 
     protected ProxyMethodExampleMapper() {
     }
@@ -20,17 +20,20 @@ public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExam
         return INSTANCE;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ProxyMethodExample map(Object xmsExample) {
         ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
 
         if (xmsExample instanceof Map) {
             Object parameters = ((Map<String, Object>) xmsExample).get("parameters");
-            if (parameters != null && parameters instanceof Map) {
+            if (parameters instanceof Map) {
                 for (Map.Entry<String, Object> entry : ((Map<String, Object>) parameters).entrySet()) {
                     builder.parameter(entry.getKey(), entry.getValue());
                 }
             }
+            String xmsOriginalFile = (String) ((Map<String, Object>) xmsExample).get("x-ms-original-file");
+            builder.xmsOriginalFile(xmsOriginalFile);
         }
         return builder.build();
     }
