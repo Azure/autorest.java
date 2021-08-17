@@ -31,7 +31,7 @@ public class LLCUpdateTests {
         requestOptions.addHeader("parameter2", "2");
         requestOptions.addHeader("parameter3", "3");
 
-        client.getRequired(requestOptions);
-        client2.getRequired(requestOptions);
+        client.getRequiredWithResponse(requestOptions, null);
+        client2.getRequiredWithResponse(requestOptions, null);
     }
 }

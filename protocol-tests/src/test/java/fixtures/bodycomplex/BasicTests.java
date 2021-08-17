@@ -20,8 +20,8 @@ public class BasicTests {
 
     @Test
     public void getValid() throws Exception {
-        BinaryData binaryData = client.getValid(null);
-        Map map = binaryData.toObject(Map.class);
+        BinaryData binaryData = client.getValidWithResponse(null, null).getValue();
+        Map<?, ?> map = binaryData.toObject(Map.class);
         Assertions.assertEquals(2, map.get("id"));
         Assertions.assertEquals("abc", map.get("name"));
         Assertions.assertEquals("YELLOW", map.get("color"));
@@ -30,25 +30,26 @@ public class BasicTests {
     @Test
     public void putValid() throws Exception {
         BinaryData binaryData = BinaryData.fromString("{\"id\": 2, \"name\": \"abc\", \"color\": \"Magenta\"}");
-        asyncClient.putValid(binaryData, null).block();
+        asyncClient.putValidWithResponse(binaryData, null).block();
     }
 
     @Test
     public void getEmpty() throws Exception {
-        BinaryData binaryData = client.getEmpty(null);
-        Map map = binaryData.toObject(Map.class);
+        BinaryData binaryData = client.getEmptyWithResponse(null, null).getValue();
+        Map<?, ?> map = binaryData.toObject(Map.class);
         Assertions.assertTrue(map.isEmpty());
     }
 
     @Test
     public void getNull() throws Exception {
-        BinaryData binaryData = client.getEmpty(null);
-        Map map = binaryData.toObject(Map.class);
-        Assertions.assertTrue(map.isEmpty());
+        BinaryData binaryData = client.getNullWithResponse(null, null).getValue();
+        Map<?, ?> map = binaryData.toObject(Map.class);
+        Assertions.assertNull(map.get("id"));
+        Assertions.assertNull(map.get("name"));
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assertions.assertEquals("", client.getNotProvided(null).toString());
+        Assertions.assertEquals("", client.getNotProvidedWithResponse(null, null).getValue().toString());
     }
 }

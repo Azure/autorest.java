@@ -22,7 +22,7 @@ public class HeaderOperationsTests {
     public void paramExistingKey() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("User-Agent", "overwrite");
-        client.paramExistingKey(requestOptions);
+        client.paramExistingKeyWithResponse(requestOptions, null);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class HeaderOperationsTests {
     public void paramProtectedKey() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("Content-Type", "text/html");
-        asyncClient.paramProtectedKey(requestOptions).block();
+        asyncClient.paramProtectedKeyWithResponse(requestOptions).block();
     }
 
     @Test
@@ -48,11 +48,11 @@ public class HeaderOperationsTests {
     public void paramInteger() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "positive").addHeader("value", "1");
-        client.paramInteger(requestOptions);
+        client.paramIntegerWithResponse(requestOptions, null);
 
         requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "negative").addHeader("value", "-2");
-        client.paramInteger(requestOptions);
+        client.paramIntegerWithResponse(requestOptions, null);
     }
 
     @Test
@@ -72,6 +72,6 @@ public class HeaderOperationsTests {
     public void customRequestId() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        client.customRequestId(requestOptions);
+        client.customRequestIdWithResponse(requestOptions, null);
     }
 }
