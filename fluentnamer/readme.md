@@ -20,6 +20,7 @@ pipeline:
     flatten-models: true
     flatten-payloads: false
     remove-empty-child-schemas: false
+    seal-single-value-enum-by-default: true
     naming:
       choiceValue: upper
       preserve-uppercase-max-length: 2
