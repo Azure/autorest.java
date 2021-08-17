@@ -32,23 +32,6 @@ public final class HttpFailureClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty error form server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getEmptyError(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyError(requestOptions);
-    }
-
-    /**
-     * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return empty error form server.
      */
@@ -67,46 +50,12 @@ public final class HttpFailureClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty error form server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getNoModelError(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelError(requestOptions);
-    }
-
-    /**
-     * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getNoModelErrorWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get empty response from server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty response from server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getNoModelEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelEmpty(requestOptions);
     }
 
     /**

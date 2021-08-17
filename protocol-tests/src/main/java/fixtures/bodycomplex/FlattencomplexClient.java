@@ -36,26 +36,6 @@ public final class FlattencomplexClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValid(requestOptions);
-    }
-
-    /**
-     * <strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */

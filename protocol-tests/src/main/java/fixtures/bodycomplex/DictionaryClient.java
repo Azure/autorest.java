@@ -37,55 +37,12 @@ public final class DictionaryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValid(requestOptions);
-    }
-
-    /**
-     * Get complex types with dictionary property.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getValidWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Put complex types with dictionary property.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(BinaryData complexBody, RequestOptions requestOptions) {
-        this.serviceClient.putValid(complexBody, requestOptions);
     }
 
     /**
@@ -126,54 +83,12 @@ public final class DictionaryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property which is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getEmpty(requestOptions);
-    }
-
-    /**
-     * Get complex types with dictionary property which is empty.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getEmptyWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Put complex types with dictionary property which is empty.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put an empty dictionary.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(BinaryData complexBody, RequestOptions requestOptions) {
-        this.serviceClient.putEmpty(complexBody, requestOptions);
     }
 
     /**
@@ -213,54 +128,12 @@ public final class DictionaryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property which is null.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNull(RequestOptions requestOptions) {
-        return this.serviceClient.getNull(requestOptions);
-    }
-
-    /**
-     * Get complex types with dictionary property which is null.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getNullWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property while server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNotProvided(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvided(requestOptions);
     }
 
     /**

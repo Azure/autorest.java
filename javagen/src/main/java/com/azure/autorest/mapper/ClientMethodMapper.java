@@ -266,7 +266,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (operation.getExtensions() != null
                     && operation.getExtensions().getXmsPageable() != null
                     && shouldGeneratePagingMethods()) {
-                // TODO: build protocol paging method
                 String pageableItemName = getPageableItemName(operation);
                 if (pageableItemName != null) {
                     boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
@@ -497,7 +496,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             null);
                 }
 
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE && !settings.isLowLevelClient()) {
                     methods.add(builder
                             .returnValue(createSimpleAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncMethodName())
@@ -531,18 +530,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .name(proxyMethod.getName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleSync)
-                            .isGroupedParameterRequired(false)
-                            .build();
+                            .isGroupedParameterRequired(false);
 
-                    if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
-                        // if context parameter is required, that method will do the overload with max parameters
-                        methods.add(builder.build());
-                    }
+                    if (!settings.isLowLevelClient()) {
+                        if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                            // if context parameter is required, that method will do the overload with max parameters
+                            methods.add(builder.build());
+                        }
 
-                    if (generateClientMethodWithOnlyRequiredParameters) {
-                        methods.add(builder
-                                .onlyRequiredParameters(true)
-                                .build());
+                        if (generateClientMethodWithOnlyRequiredParameters) {
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
+                        }
                     }
 
                     if (settings.isContextClientMethodParameter()) {

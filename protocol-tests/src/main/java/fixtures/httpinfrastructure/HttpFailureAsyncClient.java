@@ -52,42 +52,8 @@ public final class HttpFailureAsyncClient {
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getEmptyError(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyErrorAsync(requestOptions);
-    }
-
-    /**
-     * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty error form server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelErrorWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty error form server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getNoModelError(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelErrorAsync(requestOptions);
     }
 
     /**
@@ -105,22 +71,5 @@ public final class HttpFailureAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelEmptyWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get empty response from server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty response from server.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getNoModelEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelEmptyAsync(requestOptions);
     }
 }

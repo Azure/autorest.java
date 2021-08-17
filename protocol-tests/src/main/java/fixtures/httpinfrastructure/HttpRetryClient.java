@@ -26,32 +26,12 @@ public final class HttpRetryClient {
      * Return 408 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head408(RequestOptions requestOptions) {
-        this.serviceClient.head408(requestOptions);
-    }
-
-    /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head408WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head408WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put500(RequestOptions requestOptions) {
-        this.serviceClient.put500(requestOptions);
     }
 
     /**
@@ -70,32 +50,12 @@ public final class HttpRetryClient {
      * Return 500 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch500(RequestOptions requestOptions) {
-        this.serviceClient.patch500(requestOptions);
-    }
-
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch500WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch500WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get502(RequestOptions requestOptions) {
-        this.serviceClient.get502(requestOptions);
     }
 
     /**
@@ -114,32 +74,12 @@ public final class HttpRetryClient {
      * Return 503 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post503(RequestOptions requestOptions) {
-        this.serviceClient.post503(requestOptions);
-    }
-
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post503WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post503WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete503(RequestOptions requestOptions) {
-        this.serviceClient.delete503(requestOptions);
     }
 
     /**
@@ -158,32 +98,12 @@ public final class HttpRetryClient {
      * Return 504 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put504(RequestOptions requestOptions) {
-        this.serviceClient.put504(requestOptions);
-    }
-
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put504WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put504WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch504(RequestOptions requestOptions) {
-        this.serviceClient.patch504(requestOptions);
     }
 
     /**

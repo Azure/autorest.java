@@ -40,30 +40,8 @@ public final class HttpServerFailureAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head501(RequestOptions requestOptions) {
-        return this.serviceClient.head501Async(requestOptions);
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get501WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get501(RequestOptions requestOptions) {
-        return this.serviceClient.get501Async(requestOptions);
     }
 
     /**
@@ -84,29 +62,7 @@ public final class HttpServerFailureAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post505(RequestOptions requestOptions) {
-        return this.serviceClient.post505Async(requestOptions);
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete505WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete505(RequestOptions requestOptions) {
-        return this.serviceClient.delete505Async(requestOptions);
     }
 }

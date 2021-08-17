@@ -26,32 +26,12 @@ public final class PathsClient {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getBooleanTrue(RequestOptions requestOptions) {
-        this.serviceClient.getBooleanTrue(requestOptions);
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getBooleanTrueWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getBooleanFalse(RequestOptions requestOptions) {
-        this.serviceClient.getBooleanFalse(requestOptions);
     }
 
     /**
@@ -70,32 +50,12 @@ public final class PathsClient {
      * Get '1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getIntOneMillion(RequestOptions requestOptions) {
-        this.serviceClient.getIntOneMillion(requestOptions);
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getIntOneMillionWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getIntNegativeOneMillion(RequestOptions requestOptions) {
-        this.serviceClient.getIntNegativeOneMillion(requestOptions);
     }
 
     /**
@@ -114,32 +74,12 @@ public final class PathsClient {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getTenBillion(RequestOptions requestOptions) {
-        this.serviceClient.getTenBillion(requestOptions);
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getTenBillionWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getNegativeTenBillion(RequestOptions requestOptions) {
-        this.serviceClient.getNegativeTenBillion(requestOptions);
     }
 
     /**
@@ -158,32 +98,12 @@ public final class PathsClient {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void floatScientificPositive(RequestOptions requestOptions) {
-        this.serviceClient.floatScientificPositive(requestOptions);
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.floatScientificPositiveWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void floatScientificNegative(RequestOptions requestOptions) {
-        this.serviceClient.floatScientificNegative(requestOptions);
     }
 
     /**
@@ -202,32 +122,12 @@ public final class PathsClient {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void doubleDecimalPositive(RequestOptions requestOptions) {
-        this.serviceClient.doubleDecimalPositive(requestOptions);
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.doubleDecimalPositiveWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void doubleDecimalNegative(RequestOptions requestOptions) {
-        this.serviceClient.doubleDecimalNegative(requestOptions);
     }
 
     /**
@@ -246,32 +146,12 @@ public final class PathsClient {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUnicode(RequestOptions requestOptions) {
-        this.serviceClient.stringUnicode(requestOptions);
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.stringUnicodeWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUrlEncoded(RequestOptions requestOptions) {
-        this.serviceClient.stringUrlEncoded(requestOptions);
     }
 
     /**
@@ -290,16 +170,6 @@ public final class PathsClient {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUrlNonEncoded(RequestOptions requestOptions) {
-        this.serviceClient.stringUrlNonEncoded(requestOptions);
-    }
-
-    /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -312,33 +182,12 @@ public final class PathsClient {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringEmpty(RequestOptions requestOptions) {
-        this.serviceClient.stringEmpty(requestOptions);
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.stringEmptyWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringNull(String stringPath, RequestOptions requestOptions) {
-        this.serviceClient.stringNull(stringPath, requestOptions);
     }
 
     /**
@@ -359,34 +208,12 @@ public final class PathsClient {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void enumValid(String enumPath, RequestOptions requestOptions) {
-        this.serviceClient.enumValid(enumPath, requestOptions);
-    }
-
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.enumValidWithResponse(enumPath, requestOptions, context);
-    }
-
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void enumNull(String enumPath, RequestOptions requestOptions) {
-        this.serviceClient.enumNull(enumPath, requestOptions);
     }
 
     /**
@@ -407,33 +234,12 @@ public final class PathsClient {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteMultiByte(String bytePath, RequestOptions requestOptions) {
-        this.serviceClient.byteMultiByte(bytePath, requestOptions);
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.byteMultiByteWithResponse(bytePath, requestOptions, context);
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteEmpty(RequestOptions requestOptions) {
-        this.serviceClient.byteEmpty(requestOptions);
     }
 
     /**
@@ -453,33 +259,12 @@ public final class PathsClient {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteNull(String bytePath, RequestOptions requestOptions) {
-        this.serviceClient.byteNull(bytePath, requestOptions);
-    }
-
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.byteNullWithResponse(bytePath, requestOptions, context);
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateValid(RequestOptions requestOptions) {
-        this.serviceClient.dateValid(requestOptions);
     }
 
     /**
@@ -499,17 +284,6 @@ public final class PathsClient {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateNull(String datePath, RequestOptions requestOptions) {
-        this.serviceClient.dateNull(datePath, requestOptions);
-    }
-
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
@@ -522,33 +296,12 @@ public final class PathsClient {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateTimeValid(RequestOptions requestOptions) {
-        this.serviceClient.dateTimeValid(requestOptions);
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.dateTimeValidWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateTimeNull(String dateTimePath, RequestOptions requestOptions) {
-        this.serviceClient.dateTimeNull(dateTimePath, requestOptions);
     }
 
     /**
@@ -570,35 +323,12 @@ public final class PathsClient {
      *
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void base64Url(String base64UrlPath, RequestOptions requestOptions) {
-        this.serviceClient.base64Url(base64UrlPath, requestOptions);
-    }
-
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.base64UrlWithResponse(base64UrlPath, requestOptions, context);
-    }
-
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void arrayCsvInPath(String arrayPath, RequestOptions requestOptions) {
-        this.serviceClient.arrayCsvInPath(arrayPath, requestOptions);
     }
 
     /**
@@ -614,17 +344,6 @@ public final class PathsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.arrayCsvInPathWithResponse(arrayPath, requestOptions, context);
-    }
-
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void unixTimeUrl(long unixTimeUrlPath, RequestOptions requestOptions) {
-        this.serviceClient.unixTimeUrl(unixTimeUrlPath, requestOptions);
     }
 
     /**

@@ -234,81 +234,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError200ValidAsync(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError200ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError200ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError200ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model204NoModelDefaultError200Valid(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError200ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -360,81 +285,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError204ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200Model204NoModelDefaultError204Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError204ValidAsync(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError204ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError204ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError204ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model204NoModelDefaultError204Valid(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError204ValidAsync(requestOptions).block();
     }
 
     /**
@@ -514,81 +364,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError201InvalidAsync(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError201InvalidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError201InvalidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError201InvalidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model204NoModelDefaultError201Invalid(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError201InvalidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -640,81 +415,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError202NoneWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200Model204NoModelDefaultError202None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 202 response with no payload:.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError202NoneAsync(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError202NoneWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 202 response with no payload:.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError202NoneAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError202NoneWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 202 response with no payload:.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model204NoModelDefaultError202None(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError202NoneAsync(requestOptions).block();
     }
 
     /**
@@ -794,81 +494,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError400ValidAsync(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError400ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model204NoModelDefaultError400ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError400ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model204NoModelDefaultError400Valid(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError400ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -920,81 +545,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200Model201ModelDefaultError200ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200Model201ModelDefaultError200Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError200ValidAsync(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError200ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError200ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError200ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model201ModelDefaultError200Valid(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError200ValidAsync(requestOptions).block();
     }
 
     /**
@@ -1074,81 +624,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError201ValidAsync(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError201ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError201ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError201ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model201ModelDefaultError201Valid(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError201ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1200,81 +675,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200Model201ModelDefaultError400ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200Model201ModelDefaultError400Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError400ValidAsync(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError400ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200Model201ModelDefaultError400ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError400ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200Model201ModelDefaultError400Valid(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError400ValidAsync(requestOptions).block();
     }
 
     /**
@@ -1349,75 +749,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError200Valid(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1466,75 +797,6 @@ public final class MultipleResponsesImpl {
             RequestOptions requestOptions, Context context) {
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid(
                 this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError201Valid(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync(requestOptions).block();
     }
 
     /**
@@ -1607,75 +869,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError404Valid(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1736,75 +929,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError400Valid(RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1838,41 +962,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get202None204NoneDefaultError202None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 202 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError202NoneAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 202 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError202NoneAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 202 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultError202None(RequestOptions requestOptions) {
-        get202None204NoneDefaultError202NoneAsync(requestOptions).block();
     }
 
     /**
@@ -1918,41 +1007,6 @@ public final class MultipleResponsesImpl {
      * Send a 204 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError204NoneAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError204NoneAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultError204None(RequestOptions requestOptions) {
-        get202None204NoneDefaultError204NoneAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1986,41 +1040,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get202None204NoneDefaultError400Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError400ValidAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultError400ValidAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultError400Valid(RequestOptions requestOptions) {
-        get202None204NoneDefaultError400ValidAsync(requestOptions).block();
     }
 
     /**
@@ -2066,41 +1085,6 @@ public final class MultipleResponsesImpl {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone202InvalidAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone202InvalidAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultNone202Invalid(RequestOptions requestOptions) {
-        get202None204NoneDefaultNone202InvalidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2133,41 +1117,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get202None204NoneDefaultNone204None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone204NoneAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone204NoneAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultNone204None(RequestOptions requestOptions) {
-        get202None204NoneDefaultNone204NoneAsync(requestOptions).block();
     }
 
     /**
@@ -2212,41 +1161,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone400NoneAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone400NoneAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultNone400None(RequestOptions requestOptions) {
-        get202None204NoneDefaultNone400NoneAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2280,41 +1194,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone400InvalidAsync(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get202None204NoneDefaultNone400InvalidAsync(RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get202None204NoneDefaultNone400Invalid(RequestOptions requestOptions) {
-        get202None204NoneDefaultNone400InvalidAsync(requestOptions).block();
     }
 
     /**
@@ -2369,80 +1248,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> getDefaultModelA200ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.getDefaultModelA200Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDefaultModelA200ValidAsync(RequestOptions requestOptions) {
-        return getDefaultModelA200ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDefaultModelA200ValidAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA200ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getDefaultModelA200Valid(RequestOptions requestOptions) {
-        return getDefaultModelA200ValidAsync(requestOptions).block();
     }
 
     /**
@@ -2518,80 +1323,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDefaultModelA200NoneAsync(RequestOptions requestOptions) {
-        return getDefaultModelA200NoneWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDefaultModelA200NoneAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA200NoneWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getDefaultModelA200None(RequestOptions requestOptions) {
-        return getDefaultModelA200NoneAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2623,40 +1354,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.getDefaultModelA400Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA400ValidAsync(RequestOptions requestOptions) {
-        return getDefaultModelA400ValidWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA400ValidAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA400ValidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultModelA400Valid(RequestOptions requestOptions) {
-        getDefaultModelA400ValidAsync(requestOptions).block();
     }
 
     /**
@@ -2700,40 +1397,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA400NoneAsync(RequestOptions requestOptions) {
-        return getDefaultModelA400NoneWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA400NoneAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA400NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultModelA400None(RequestOptions requestOptions) {
-        getDefaultModelA400NoneAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2771,40 +1434,6 @@ public final class MultipleResponsesImpl {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone200InvalidAsync(RequestOptions requestOptions) {
-        return getDefaultNone200InvalidWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone200InvalidAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultNone200InvalidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultNone200Invalid(RequestOptions requestOptions) {
-        getDefaultNone200InvalidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2835,40 +1464,6 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.getDefaultNone200None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone200NoneAsync(RequestOptions requestOptions) {
-        return getDefaultNone200NoneWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone200NoneAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultNone200NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultNone200None(RequestOptions requestOptions) {
-        getDefaultNone200NoneAsync(requestOptions).block();
     }
 
     /**
@@ -2912,40 +1507,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone400InvalidAsync(RequestOptions requestOptions) {
-        return getDefaultNone400InvalidWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone400InvalidAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultNone400InvalidWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultNone400Invalid(RequestOptions requestOptions) {
-        getDefaultNone400InvalidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -2976,40 +1537,6 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.getDefaultNone400None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone400NoneAsync(RequestOptions requestOptions) {
-        return getDefaultNone400NoneWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultNone400NoneAsync(RequestOptions requestOptions, Context context) {
-        return getDefaultNone400NoneWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultNone400None(RequestOptions requestOptions) {
-        getDefaultNone400NoneAsync(requestOptions).block();
     }
 
     /**
@@ -3065,83 +1592,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200ModelA200NoneWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200ModelA200None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200NoneAsync(RequestOptions requestOptions) {
-        return get200ModelA200NoneWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200NoneAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA200NoneWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA200None(RequestOptions requestOptions) {
-        return get200ModelA200NoneAsync(requestOptions).block();
     }
 
     /**
@@ -3218,80 +1668,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA200ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200ValidAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA200ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA200Valid(RequestOptions requestOptions) {
-        return get200ModelA200ValidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -3339,80 +1715,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200ModelA200InvalidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200ModelA200Invalid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200InvalidAsync(RequestOptions requestOptions) {
-        return get200ModelA200InvalidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA200InvalidAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA200InvalidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA200Invalid(RequestOptions requestOptions) {
-        return get200ModelA200InvalidAsync(requestOptions).block();
     }
 
     /**
@@ -3488,80 +1790,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400NoneAsync(RequestOptions requestOptions) {
-        return get200ModelA400NoneWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400NoneAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA400NoneWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA400None(RequestOptions requestOptions) {
-        return get200ModelA400NoneAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -3609,80 +1837,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200ModelA400ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200ModelA400Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA400ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400ValidAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA400ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA400Valid(RequestOptions requestOptions) {
-        return get200ModelA400ValidAsync(requestOptions).block();
     }
 
     /**
@@ -3758,80 +1912,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400InvalidAsync(RequestOptions requestOptions) {
-        return get200ModelA400InvalidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA400InvalidAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA400InvalidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA400Invalid(RequestOptions requestOptions) {
-        return get200ModelA400InvalidAsync(requestOptions).block();
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -3879,80 +1959,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<BinaryData>> get200ModelA202ValidWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.get200ModelA202Valid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 202 response with payload {'statusCode': '202'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA202ValidAsync(RequestOptions requestOptions) {
-        return get200ModelA202ValidWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 202 response with payload {'statusCode': '202'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA202ValidAsync(RequestOptions requestOptions, Context context) {
-        return get200ModelA202ValidWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Send a 202 response with payload {'statusCode': '202'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA202Valid(RequestOptions requestOptions) {
-        return get200ModelA202ValidAsync(requestOptions).block();
     }
 
     /**

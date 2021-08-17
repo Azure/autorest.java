@@ -44,26 +44,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Get complex types with integer properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Integer
-     *     field2: Integer
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with integer properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getInt(RequestOptions requestOptions) {
-        return this.serviceClient.getIntAsync(requestOptions);
-    }
-
-    /**
      * Put complex types with integer properties.
      *
      * <p><strong>Request Body Schema</strong>
@@ -85,27 +65,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with integer properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Integer
-     *     field2: Integer
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put -1 and 2.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putInt(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putIntAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with long properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -123,26 +82,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getLongWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with long properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Long
-     *     field2: Long
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with long properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getLong(RequestOptions requestOptions) {
-        return this.serviceClient.getLongAsync(requestOptions);
     }
 
     /**
@@ -167,27 +106,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with long properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Long
-     *     field2: Long
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putLong(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putLongAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with float properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -205,26 +123,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getFloatWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with float properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Float
-     *     field2: Float
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with float properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getFloat(RequestOptions requestOptions) {
-        return this.serviceClient.getFloatAsync(requestOptions);
     }
 
     /**
@@ -249,27 +147,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with float properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Float
-     *     field2: Float
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 1.05 and -0.003.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFloat(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putFloatAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with double properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -287,26 +164,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDoubleWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with double properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Double
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with double properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDouble(RequestOptions requestOptions) {
-        return this.serviceClient.getDoubleAsync(requestOptions);
     }
 
     /**
@@ -331,27 +188,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with double properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field1: Double
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDouble(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putDoubleAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with bool properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -369,26 +205,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBoolWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with bool properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     fieldTrue: Boolean
-     *     fieldFalse: Boolean
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with bool properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getBool(RequestOptions requestOptions) {
-        return this.serviceClient.getBoolAsync(requestOptions);
     }
 
     /**
@@ -413,27 +229,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with bool properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     fieldTrue: Boolean
-     *     fieldFalse: Boolean
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put true and false.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBool(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putBoolAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with string properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -452,27 +247,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getStringWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with string properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     empty: String
-     *     nullProperty: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with string properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getString(RequestOptions requestOptions) {
-        return this.serviceClient.getStringAsync(requestOptions);
     }
 
     /**
@@ -498,28 +272,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with string properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     empty: String
-     *     nullProperty: String
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 'goodrequest', '', and null.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putString(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putStringAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with date properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -537,26 +289,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with date properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     leap: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with date properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDate(RequestOptions requestOptions) {
-        return this.serviceClient.getDateAsync(requestOptions);
     }
 
     /**
@@ -581,27 +313,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with date properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     leap: String
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDate(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putDateAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with datetime properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -619,26 +330,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with datetime properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     now: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with datetime properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDateTime(RequestOptions requestOptions) {
-        return this.serviceClient.getDateTimeAsync(requestOptions);
     }
 
     /**
@@ -663,27 +354,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with datetime properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     now: String
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTime(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putDateTimeAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with datetimeRfc1123 properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -701,26 +371,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeRfc1123WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     now: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with datetimeRfc1123 properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDateTimeRfc1123(RequestOptions requestOptions) {
-        return this.serviceClient.getDateTimeRfc1123Async(requestOptions);
     }
 
     /**
@@ -745,27 +395,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     *     now: String
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeRfc1123(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putDateTimeRfc1123Async(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with duration properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -782,25 +411,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDurationWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with duration properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with duration properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getDuration(RequestOptions requestOptions) {
-        return this.serviceClient.getDurationAsync(requestOptions);
     }
 
     /**
@@ -824,26 +434,6 @@ public final class PrimitiveAsyncClient {
     }
 
     /**
-     * Put complex types with duration properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: String
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDuration(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putDurationAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with byte properties.
      *
      * <p><strong>Response Body Schema</strong>
@@ -860,25 +450,6 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getByteWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with byte properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: byte[]
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with byte properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getByte(RequestOptions requestOptions) {
-        return this.serviceClient.getByteAsync(requestOptions);
     }
 
     /**
@@ -899,25 +470,5 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putByteWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Put complex types with byte properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     field: byte[]
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putByte(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putByteAsync(complexBody, requestOptions);
     }
 }

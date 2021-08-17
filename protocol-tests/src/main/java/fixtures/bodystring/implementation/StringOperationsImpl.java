@@ -152,74 +152,6 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null string value value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNullAsync(RequestOptions requestOptions) {
-        return getNullWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get null string value value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null string value value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNullAsync(RequestOptions requestOptions, Context context) {
-        return getNullWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get null string value value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null string value value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNull(RequestOptions requestOptions) {
-        return getNullAsync(requestOptions).block();
-    }
-
-    /**
-     * Get null string value value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null string value value.
      */
@@ -249,39 +181,6 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.putNull(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Set string value null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync(RequestOptions requestOptions) {
-        return putNullWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync(RequestOptions requestOptions, Context context) {
-        return putNullWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull(RequestOptions requestOptions) {
-        putNullAsync(requestOptions).block();
     }
 
     /**
@@ -341,74 +240,6 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty string value value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions) {
-        return getEmptyWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get empty string value value ''.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return empty string value value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getEmptyAsync(RequestOptions requestOptions, Context context) {
-        return getEmptyWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get empty string value value ''.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty string value value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getEmpty(RequestOptions requestOptions) {
-        return getEmptyAsync(requestOptions).block();
-    }
-
-    /**
-     * Get empty string value value ''.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return empty string value value ''.
      */
@@ -441,39 +272,6 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody = BinaryData.fromObject("");
         return service.putEmpty(this.client.getHost(), stringBody, requestOptions, context);
-    }
-
-    /**
-     * Set string value empty ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(RequestOptions requestOptions) {
-        return putEmptyWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value empty ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(RequestOptions requestOptions, Context context) {
-        return putEmptyWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value empty ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(RequestOptions requestOptions) {
-        putEmptyAsync(requestOptions).block();
     }
 
     /**
@@ -533,74 +331,6 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions) {
-        return getMbcsWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getMbcsAsync(RequestOptions requestOptions, Context context) {
-        return getMbcsWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getMbcs(RequestOptions requestOptions) {
-        return getMbcsAsync(requestOptions).block();
-    }
-
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
@@ -635,39 +365,6 @@ public final class StringOperationsImpl {
         final BinaryData stringBody =
                 BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
         return service.putMbcs(this.client.getHost(), stringBody, requestOptions, context);
-    }
-
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putMbcsAsync(RequestOptions requestOptions) {
-        return putMbcsWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putMbcsAsync(RequestOptions requestOptions, Context context) {
-        return putMbcsWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putMbcs(RequestOptions requestOptions) {
-        putMbcsAsync(requestOptions).block();
     }
 
     /**
@@ -732,80 +429,6 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions) {
-        return getWhitespaceWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getWhitespaceAsync(RequestOptions requestOptions, Context context) {
-        return getWhitespaceWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getWhitespace(RequestOptions requestOptions) {
-        return getWhitespaceAsync(requestOptions).block();
-    }
-
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -843,42 +466,6 @@ public final class StringOperationsImpl {
         final BinaryData stringBody =
                 BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
         return service.putWhitespace(this.client.getHost(), stringBody, requestOptions, context);
-    }
-
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions) {
-        return putWhitespaceWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putWhitespaceAsync(RequestOptions requestOptions, Context context) {
-        return putWhitespaceWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putWhitespace(RequestOptions requestOptions) {
-        putWhitespaceAsync(requestOptions).block();
     }
 
     /**
@@ -927,74 +514,6 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.getNotProvided(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value when no string value is sent in response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions) {
-        return getNotProvidedWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return string value when no string value is sent in response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNotProvidedAsync(RequestOptions requestOptions, Context context) {
-        return getNotProvidedWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value when no string value is sent in response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNotProvided(RequestOptions requestOptions) {
-        return getNotProvidedAsync(requestOptions).block();
     }
 
     /**
@@ -1061,74 +580,6 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64 encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions) {
-        return getBase64EncodedWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get value that is base64 encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return value that is base64 encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getBase64EncodedAsync(RequestOptions requestOptions, Context context) {
-        return getBase64EncodedWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get value that is base64 encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64 encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getBase64Encoded(RequestOptions requestOptions) {
-        return getBase64EncodedAsync(requestOptions).block();
-    }
-
-    /**
-     * Get value that is base64 encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return value that is base64 encoded.
      */
@@ -1172,74 +623,6 @@ public final class StringOperationsImpl {
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.getBase64UrlEncoded(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Get value that is base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions) {
-        return getBase64UrlEncodedWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get value that is base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return value that is base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
-        return getBase64UrlEncodedWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get value that is base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getBase64UrlEncoded(RequestOptions requestOptions) {
-        return getBase64UrlEncodedAsync(requestOptions).block();
     }
 
     /**
@@ -1311,62 +694,6 @@ public final class StringOperationsImpl {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions) {
-        return putBase64UrlEncodedWithResponseAsync(stringBody, requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put value that is base64url encoded.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBase64UrlEncodedAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        return putBase64UrlEncodedWithResponseAsync(stringBody, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put value that is base64url encoded.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBase64UrlEncoded(BinaryData stringBody, RequestOptions requestOptions) {
-        putBase64UrlEncodedAsync(stringBody, requestOptions).block();
-    }
-
-    /**
-     * Put value that is base64url encoded.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1411,74 +738,6 @@ public final class StringOperationsImpl {
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         return service.getNullBase64UrlEncoded(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null value that is expected to be base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions) {
-        return getNullBase64UrlEncodedWithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null value that is expected to be base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNullBase64UrlEncodedAsync(RequestOptions requestOptions, Context context) {
-        return getNullBase64UrlEncodedWithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<BinaryData> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null value that is expected to be base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNullBase64UrlEncoded(RequestOptions requestOptions) {
-        return getNullBase64UrlEncodedAsync(requestOptions).block();
     }
 
     /**

@@ -45,27 +45,6 @@ public final class DictionaryAsyncClient {
     }
 
     /**
-     * Get complex types with dictionary property.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValidAsync(requestOptions);
-    }
-
-    /**
      * Put complex types with dictionary property.
      *
      * <p><strong>Request Body Schema</strong>
@@ -89,29 +68,6 @@ public final class DictionaryAsyncClient {
     }
 
     /**
-     * Put complex types with dictionary property.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with dictionary property which is empty.
      *
      * <p><strong>Response Body Schema</strong>
@@ -130,27 +86,6 @@ public final class DictionaryAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with dictionary property which is empty.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property which is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyAsync(requestOptions);
     }
 
     /**
@@ -176,28 +111,6 @@ public final class DictionaryAsyncClient {
     }
 
     /**
-     * Put complex types with dictionary property which is empty.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put an empty dictionary.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmpty(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putEmptyAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get complex types with dictionary property which is null.
      *
      * <p><strong>Response Body Schema</strong>
@@ -219,27 +132,6 @@ public final class DictionaryAsyncClient {
     }
 
     /**
-     * Get complex types with dictionary property which is null.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property which is null.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNull(RequestOptions requestOptions) {
-        return this.serviceClient.getNullAsync(requestOptions);
-    }
-
-    /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * <p><strong>Response Body Schema</strong>
@@ -258,26 +150,5 @@ public final class DictionaryAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     defaultProgram: {
-     *         String: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types with dictionary property while server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNotProvided(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvidedAsync(requestOptions);
     }
 }

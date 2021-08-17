@@ -34,17 +34,6 @@ public final class HttpRetryAsyncClient {
     }
 
     /**
-     * Return 408 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head408(RequestOptions requestOptions) {
-        return this.serviceClient.head408Async(requestOptions);
-    }
-
-    /**
      * Return 500 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -62,30 +51,8 @@ public final class HttpRetryAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put500(RequestOptions requestOptions) {
-        return this.serviceClient.put500Async(requestOptions);
-    }
-
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch500WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 500 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch500(RequestOptions requestOptions) {
-        return this.serviceClient.patch500Async(requestOptions);
     }
 
     /**
@@ -97,17 +64,6 @@ public final class HttpRetryAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get502WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 502 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get502(RequestOptions requestOptions) {
-        return this.serviceClient.get502Async(requestOptions);
     }
 
     /**
@@ -128,30 +84,8 @@ public final class HttpRetryAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post503(RequestOptions requestOptions) {
-        return this.serviceClient.post503Async(requestOptions);
-    }
-
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete503WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 503 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete503(RequestOptions requestOptions) {
-        return this.serviceClient.delete503Async(requestOptions);
     }
 
     /**
@@ -172,29 +106,7 @@ public final class HttpRetryAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put504(RequestOptions requestOptions) {
-        return this.serviceClient.put504Async(requestOptions);
-    }
-
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch504WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Return 504 status code, then 200 after retry.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch504(RequestOptions requestOptions) {
-        return this.serviceClient.patch504Async(requestOptions);
     }
 }
