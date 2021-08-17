@@ -281,7 +281,8 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && exampleIsUpdate(entry.getKey())) {
                         // likely a resource update example
-                        break;
+                        logger.info("Skip possible resource update example '{}' in create", entry.getKey());
+                        continue;
                     }
 
                     logger.info("Parse resource create example '{}'", entry.getKey());
@@ -388,7 +389,8 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && !exampleIsUpdate(entry.getKey())) {
                         // likely not a resource update example
-                        break;
+                        logger.info("Skip possible resource create example '{}' in update", entry.getKey());
+                        continue;
                     }
 
                     logger.info("Parse resource update example '{}'", entry.getKey());
