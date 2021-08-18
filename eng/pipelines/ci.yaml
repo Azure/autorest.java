@@ -92,6 +92,11 @@ jobs:
           testRunTitle: 'azure-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
+      - script: |
+          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-vanilla.json
+          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-azure.json
+        displayName: 'Display coverage data'
+
       # autorest.testserver reads "package.json" 2 level up from "coverage" directory
       - script: |
           cp node_modules/@microsoft.azure/autorest.testserver/package.json node_modules/@microsoft.azure/package.json
