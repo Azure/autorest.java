@@ -116,18 +116,9 @@ public class FluentExampleTemplate {
     }
 
     private String getExampleTag(com.azure.autorest.fluent.model.clientmodel.FluentExample example, FluentExample exampleInfo) {
-        StringBuilder sb = new StringBuilder();
-
-        if ("ResourceProvider".equals(example.getGroupName())) {
-            // no operation group
-            sb.append("operationId: ").append(example.getMethodName()).append(System.lineSeparator());
-        } else {
-            sb.append("operationId: ").append(example.getGroupName()).append("_").append(example.getMethodName()).append(System.lineSeparator());
-        }
-        sb.append("api-version: ").append(example.getApiVersion()).append(System.lineSeparator());
-        sb.append("x-ms-examples: ").append(exampleInfo.getName());
-
-        return sb.toString();
+        return "operationId: " + example.getOperationId() + System.lineSeparator() +
+                "api-version: " + example.getApiVersion() + System.lineSeparator() +
+                "x-ms-examples: " + exampleInfo.getName();
     }
 
     private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
