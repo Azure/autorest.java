@@ -93,5 +93,5 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
       - script: |
-          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
+          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
         displayName: 'Publish coverage report to storage account'
