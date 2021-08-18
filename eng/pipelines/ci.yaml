@@ -17,10 +17,10 @@ jobs:
 
     variables:
       JavaVersion: 1.8
-      NodeVersion: '12.x'
+      NodeVersion: '14.x'
 
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     steps:
       - task: NodeTool@0
@@ -93,5 +93,5 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
       - script: |
-          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
+          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
         displayName: 'Publish coverage report to storage account'
