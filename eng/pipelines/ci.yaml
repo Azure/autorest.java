@@ -17,10 +17,10 @@ jobs:
 
     variables:
       JavaVersion: 1.8
-      NodeVersion: '12.x'
+      NodeVersion: '14.x'
 
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     steps:
       - task: NodeTool@0
@@ -92,6 +92,12 @@ jobs:
           testRunTitle: 'azure-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
+      # autorest.testserver reads "package.json" 2 level up from "coverage" directory
       - script: |
-          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
+          cp node_modules/@microsoft.azure/autorest.testserver/package.json node_modules/@microsoft.azure/package.json
+        displayName: 'Prepare for coverage report publish'
+
+      - script: |
+          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
+        condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
         displayName: 'Publish coverage report to storage account'
