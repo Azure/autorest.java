@@ -44,6 +44,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -64,6 +65,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -593,7 +595,8 @@ public class ExampleParser {
                 ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
                 node = clientModelNode;
 
-                for (ModelProperty modelProperty : getWritablePropertiesIncludeSuperclass(model)) {
+                List<ModelProperty> modelProperties = getWritablePropertiesIncludeSuperclass(model);
+                for (ModelProperty modelProperty : modelProperties) {
                     List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
@@ -602,6 +605,23 @@ public class ExampleParser {
                         node.getChildNodes().add(childNode);
                         clientModelNode.getClientModelProperties().put(childNode, modelProperty);
                     }
+                }
+
+                // additional properties
+                ModelProperty additionalPropertiesProperty = getAdditionalPropertiesProperty(model);
+                if (additionalPropertiesProperty != null) {
+                    // properties already defined in model
+                    Set<String> propertySerializedNames = modelProperties.stream()
+                            .map(p -> p.getSerializedNames().iterator().next())
+                            .collect(Collectors.toSet());
+                    // the remaining properties in json
+                    Map<String, Object> remainingValues = ((Map<String, Object>) objectValue).entrySet().stream()
+                            .filter(e -> !propertySerializedNames.contains(e.getKey()))
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+                    ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), remainingValues);
+                    node.getChildNodes().add(childNode);
+                    clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
                 }
             } else {
                 throw new IllegalStateException("model type not found for type " + type + " and value " + objectValue);
@@ -620,7 +640,13 @@ public class ExampleParser {
     private static Object getChildObjectValue(List<String> jsonPropertyNames, Object objectValue) {
         boolean found = true;
         Object childObjectValue = objectValue;
+        // walk the sequence of serialized names
         for (String name : jsonPropertyNames) {
+            if (name.isEmpty()) {
+                found = false;
+                break;
+            }
+
             if (childObjectValue instanceof Map) {
                 childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
                 if (childObjectValue == null) {
@@ -643,6 +669,17 @@ public class ExampleParser {
                 .filter(p -> !p.getIsConstant() && !p.getFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    private static ModelProperty getAdditionalPropertiesProperty(ClientModel model) {
+        ModelProperty modelProperty = null;
+        ClientModelProperty property = model.getProperties().stream()
+                .filter(ClientModelProperty::isAdditionalProperties)
+                .findFirst().orElse(null);
+        if (property != null && property.getClientType() instanceof MapType) {
+            modelProperty = ModelProperty.ofClientModelProperty(property);
+        }
+        return modelProperty;
     }
 
     private static List<ModelProperty> getWritablePropertiesIncludeSuperclass(ClientModel model) {
