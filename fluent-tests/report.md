@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-08-18T19:29:12.023829
+Generated at 2021-08-19T19:35:14.798649
 ## Success
 <details>
-<summary>RP count: 178</summary>
+<summary>RP count: 179</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -81,6 +81,7 @@ Generated at 2021-08-18T19:29:12.023829
 - fluidrelay
 - frontdoor
 - guestconfiguration
+- hanaonazure
 - hardwaresecuritymodules
 - hdinsight
 - healthbot
@@ -199,7 +200,7 @@ Generated at 2021-08-18T19:29:12.023829
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -259,7 +260,7 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -1002,7 +1003,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [JobSchedule, Statistics, SoftwareUpdateConfigurationMachineRun, DscNodeConfiguration, Job, Operation, Runbook, TestJob, Activity, SoftwareUpdateConfigurationRunListResult, JobCollectionItem, AutomationAccount, JobStreamListResult, SourceControl, Schedule, TypeField, LinkedWorkspace, SoftwareUpdateConfiguration, Watcher, SourceControlSyncJobStreamById, Usage, AgentRegistration, DscNodeReport, SoftwareUpdateConfigurationMachineRunListResult, NodeCounts, HybridRunbookWorkerGroup, JobStream, Variable, RunbookDraft, PrivateEndpointConnection, KeyListResult, SoftwareUpdateConfigurationListResult, Module, Webhook, Credential, DscNode, PrivateLinkResource, DscConfiguration, DscCompilationJob, Certificate, Connection, SoftwareUpdateConfigurationRun, SourceControlSyncJob, ConnectionType, RunbookDraftUndoEditResult, SourceControlSyncJobStream, SourceControlSyncJobById]
+INFORMATION (FluentMapper): Add Inner to response types: [Webhook, SoftwareUpdateConfigurationRun, JobStreamListResult, SourceControlSyncJobStream, Job, DscNodeReport, JobSchedule, DscConfiguration, SourceControlSyncJobStreamById, Usage, Operation, SourceControlSyncJob, SoftwareUpdateConfigurationListResult, HybridRunbookWorkerGroup, PrivateEndpointConnection, JobStream, Credential, SoftwareUpdateConfiguration, SourceControl, Certificate, LinkedWorkspace, SoftwareUpdateConfigurationMachineRun, TypeField, DscNode, Activity, Variable, PrivateLinkResource, Connection, Schedule, SoftwareUpdateConfigurationMachineRunListResult, AutomationAccount, TestJob, Statistics, ConnectionType, JobCollectionItem, SourceControlSyncJobById, KeyListResult, Watcher, RunbookDraftUndoEditResult, DscNodeConfiguration, SoftwareUpdateConfigurationRunListResult, Runbook, NodeCounts, Module, AgentRegistration, DscCompilationJob, RunbookDraft]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookCreateOrUpdateProperties, RunbookProperties]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookCreateOrUpdateProperties': [RunbookCreateOrUpdateParameters]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
@@ -1306,7 +1307,7 @@ java.lang.IllegalStateException: model type not found for type String and value 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -1328,30 +1329,11 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 </details>
 
 <details>
-<summary>hanaonazure</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
-
-```
-**stderr**
-```
-  Error: Unable to acquire shared lock on '/home/runner/.autorest' before timeout 20000 msec.
-
-```
-</details>
-
-<details>
 <summary>intune</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -1532,7 +1514,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Application, OperationResult, WipeDeviceOperationResult, FlaggedUser, IOsmamPolicy, AndroidMamPolicy, FlaggedEnrolledApp, GroupItem, Location, Device]
+INFORMATION (FluentMapper): Add Inner to response types: [WipeDeviceOperationResult, Application, GroupItem, Device, IOsmamPolicy, Location, OperationResult, FlaggedEnrolledApp, FlaggedUser, AndroidMamPolicy]
 
 ```
 **stderr**
@@ -1566,7 +1548,7 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -1770,7 +1752,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AlertType, SensorModel, AlertTypeList, DefenderSettingsModel, PackageDownloads, DeviceGroupModel, SitesList, DeviceModel, DeviceVulnerabilityModel, LocationModel, RecommendationType, DefenderSettingsList, OnPremiseSensorsList, SiteModel, OnPremiseSensor, AlertModel, RecommendationModel, RecommendationTypeList, SensorsList, Operation]
+INFORMATION (FluentMapper): Add Inner to response types: [SensorModel, PackageDownloads, AlertTypeList, RecommendationTypeList, RecommendationType, SiteModel, SensorsList, DefenderSettingsModel, SitesList, AlertModel, DeviceVulnerabilityModel, LocationModel, DefenderSettingsList, OnPremiseSensorsList, DeviceGroupModel, AlertType, RecommendationModel, DeviceModel, OnPremiseSensor, Operation]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'SensorModel', method reference 'createOrUpdate', body parameter 'SensorModelInner'
@@ -1885,8 +1867,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.102 s
-[INFO] Finished at: 2021-08-18T18:46:33Z
+[INFO] Total time:  2.286 s
+[INFO] Finished at: 2021-08-19T18:47:11Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -1911,7 +1893,7 @@ java.lang.NullPointerException
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -1936,7 +1918,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -2091,7 +2073,7 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -2116,7 +2098,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -2278,38 +2260,38 @@ WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that
 
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:63:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines"].get.parameters[4].name)
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:332:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes"].get.parameters[5].name)
 
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:4 ($.info.version)
 
 WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:971:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups"].get.operationId)
 
 WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1515:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].put.operationId)
-
-WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:4 ($.info.version)
 
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1645:8 ($.definitions.ResourceReference.properties.kind)
@@ -2443,7 +2425,7 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
@@ -2626,8 +2608,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.847 s
-[INFO] Finished at: 2021-08-18T19:22:18Z
+[INFO] Total time:  5.278 s
+[INFO] Finished at: 2021-08-19T19:27:20Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -2671,7 +2653,7 @@ java.lang.NullPointerException
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.4]
+AutoRest code generation utility [cli version: 3.3.2; node: v14.17.5]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
