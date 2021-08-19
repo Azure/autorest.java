@@ -83,39 +83,6 @@ public final class HttpServerFailuresImpl {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head501Async(RequestOptions requestOptions) {
-        return head501WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head501Async(RequestOptions requestOptions, Context context) {
-        return head501WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head501(RequestOptions requestOptions) {
-        head501Async(requestOptions).block();
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -145,39 +112,6 @@ public final class HttpServerFailuresImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.get501(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get501Async(RequestOptions requestOptions) {
-        return get501WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> get501Async(RequestOptions requestOptions, Context context) {
-        return get501WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get501(RequestOptions requestOptions) {
-        get501Async(requestOptions).block();
     }
 
     /**
@@ -219,39 +153,6 @@ public final class HttpServerFailuresImpl {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post505Async(RequestOptions requestOptions) {
-        return post505WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post505Async(RequestOptions requestOptions, Context context) {
-        return post505WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post505(RequestOptions requestOptions) {
-        post505Async(requestOptions).block();
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -281,39 +182,6 @@ public final class HttpServerFailuresImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.delete505(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete505Async(RequestOptions requestOptions) {
-        return delete505WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete505Async(RequestOptions requestOptions, Context context) {
-        return delete505WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete505(RequestOptions requestOptions) {
-        delete505Async(requestOptions).block();
     }
 
     /**

@@ -26,32 +26,12 @@ public final class HttpServerFailureClient {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head501(RequestOptions requestOptions) {
-        this.serviceClient.head501(requestOptions);
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head501WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get501(RequestOptions requestOptions) {
-        this.serviceClient.get501(requestOptions);
     }
 
     /**
@@ -70,32 +50,12 @@ public final class HttpServerFailureClient {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post505(RequestOptions requestOptions) {
-        this.serviceClient.post505(requestOptions);
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post505WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete505(RequestOptions requestOptions) {
-        this.serviceClient.delete505(requestOptions);
     }
 
     /**

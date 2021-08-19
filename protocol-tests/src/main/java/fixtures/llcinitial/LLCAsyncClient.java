@@ -49,31 +49,4 @@ public final class LLCAsyncClient {
     public Mono<Response<BinaryData>> getRequiredWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getRequiredWithResponseAsync(requestOptions);
     }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter1</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
-     *     <tr><td>parameter2</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
-     *     <tr><td>parameter3</td><td>String</td><td>Yes</td><td>I am a required parameter and I'm last in Swagger</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return true Boolean value on path.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getRequired(RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredAsync(requestOptions);
-    }
 }

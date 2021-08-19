@@ -260,39 +260,6 @@ public final class PathsImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return true Boolean value on path.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getBooleanTrueAsync(RequestOptions requestOptions) {
-        return getBooleanTrueWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return true Boolean value on path.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getBooleanTrueAsync(RequestOptions requestOptions, Context context) {
-        return getBooleanTrueWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getBooleanTrue(RequestOptions requestOptions) {
-        getBooleanTrueAsync(requestOptions).block();
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return true Boolean value on path.
      */
@@ -331,39 +298,6 @@ public final class PathsImpl {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return false Boolean value on path.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getBooleanFalseAsync(RequestOptions requestOptions) {
-        return getBooleanFalseWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return false Boolean value on path.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getBooleanFalseAsync(RequestOptions requestOptions, Context context) {
-        return getBooleanFalseWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getBooleanFalse(RequestOptions requestOptions) {
-        getBooleanFalseAsync(requestOptions).block();
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return false Boolean value on path.
      */
@@ -396,39 +330,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions, Context context) {
         final int intPath = 1000000;
         return service.getIntOneMillion(this.client.getHost(), intPath, requestOptions, context);
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '1000000' integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getIntOneMillionAsync(RequestOptions requestOptions) {
-        return getIntOneMillionWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '1000000' integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getIntOneMillionAsync(RequestOptions requestOptions, Context context) {
-        return getIntOneMillionWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getIntOneMillion(RequestOptions requestOptions) {
-        getIntOneMillionAsync(requestOptions).block();
     }
 
     /**
@@ -474,40 +375,6 @@ public final class PathsImpl {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-1000000' integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getIntNegativeOneMillionAsync(RequestOptions requestOptions) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '-1000000' integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getIntNegativeOneMillionAsync(RequestOptions requestOptions, Context context) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getIntNegativeOneMillion(RequestOptions requestOptions) {
-        getIntNegativeOneMillionAsync(requestOptions).block();
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '-1000000' integer value.
      */
@@ -546,39 +413,6 @@ public final class PathsImpl {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '10000000000' 64 bit integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getTenBillionAsync(RequestOptions requestOptions) {
-        return getTenBillionWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '10000000000' 64 bit integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getTenBillionAsync(RequestOptions requestOptions, Context context) {
-        return getTenBillionWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getTenBillion(RequestOptions requestOptions) {
-        getTenBillionAsync(requestOptions).block();
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '10000000000' 64 bit integer value.
      */
@@ -611,40 +445,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
         final long longPath = -10000000000L;
         return service.getNegativeTenBillion(this.client.getHost(), longPath, requestOptions, context);
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-10000000000' 64 bit integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getNegativeTenBillionAsync(RequestOptions requestOptions) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '-10000000000' 64 bit integer value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getNegativeTenBillionAsync(RequestOptions requestOptions, Context context) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getNegativeTenBillion(RequestOptions requestOptions) {
-        getNegativeTenBillionAsync(requestOptions).block();
     }
 
     /**
@@ -690,40 +490,6 @@ public final class PathsImpl {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '1.034E+20' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatScientificPositiveAsync(RequestOptions requestOptions) {
-        return floatScientificPositiveWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '1.034E+20' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatScientificPositiveAsync(RequestOptions requestOptions, Context context) {
-        return floatScientificPositiveWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void floatScientificPositive(RequestOptions requestOptions) {
-        floatScientificPositiveAsync(requestOptions).block();
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '1.034E+20' numeric value.
      */
@@ -757,40 +523,6 @@ public final class PathsImpl {
             RequestOptions requestOptions, Context context) {
         final float floatPath = -1.034E-20f;
         return service.floatScientificNegative(this.client.getHost(), floatPath, requestOptions, context);
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-1.034E-20' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatScientificNegativeAsync(RequestOptions requestOptions) {
-        return floatScientificNegativeWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '-1.034E-20' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatScientificNegativeAsync(RequestOptions requestOptions, Context context) {
-        return floatScientificNegativeWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void floatScientificNegative(RequestOptions requestOptions) {
-        floatScientificNegativeAsync(requestOptions).block();
     }
 
     /**
@@ -835,40 +567,6 @@ public final class PathsImpl {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '9999999.999' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> doubleDecimalPositiveAsync(RequestOptions requestOptions) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '9999999.999' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> doubleDecimalPositiveAsync(RequestOptions requestOptions, Context context) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void doubleDecimalPositive(RequestOptions requestOptions) {
-        doubleDecimalPositiveAsync(requestOptions).block();
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '9999999.999' numeric value.
      */
@@ -901,40 +599,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions, Context context) {
         final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(this.client.getHost(), doublePath, requestOptions, context);
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '-9999999.999' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> doubleDecimalNegativeAsync(RequestOptions requestOptions) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '-9999999.999' numeric value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> doubleDecimalNegativeAsync(RequestOptions requestOptions, Context context) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void doubleDecimalNegative(RequestOptions requestOptions) {
-        doubleDecimalNegativeAsync(requestOptions).block();
     }
 
     /**
@@ -979,39 +643,6 @@ public final class PathsImpl {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUnicodeAsync(RequestOptions requestOptions) {
-        return stringUnicodeWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUnicodeAsync(RequestOptions requestOptions, Context context) {
-        return stringUnicodeWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUnicode(RequestOptions requestOptions) {
-        stringUnicodeAsync(requestOptions).block();
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
@@ -1044,39 +675,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(this.client.getHost(), stringPath, requestOptions, context);
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUrlEncodedAsync(RequestOptions requestOptions) {
-        return stringUrlEncodedWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUrlEncodedAsync(RequestOptions requestOptions, Context context) {
-        return stringUrlEncodedWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUrlEncoded(RequestOptions requestOptions) {
-        stringUrlEncodedAsync(requestOptions).block();
     }
 
     /**
@@ -1121,40 +719,6 @@ public final class PathsImpl {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUrlNonEncodedAsync(RequestOptions requestOptions) {
-        return stringUrlNonEncodedWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringUrlNonEncodedAsync(RequestOptions requestOptions, Context context) {
-        return stringUrlNonEncodedWithResponseAsync(requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringUrlNonEncoded(RequestOptions requestOptions) {
-        stringUrlNonEncodedAsync(requestOptions).block();
-    }
-
-    /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1187,39 +751,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "";
         return service.stringEmpty(this.client.getHost(), stringPath, requestOptions, context);
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringEmptyAsync(RequestOptions requestOptions) {
-        return stringEmptyWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringEmptyAsync(RequestOptions requestOptions, Context context) {
-        return stringEmptyWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringEmpty(RequestOptions requestOptions) {
-        stringEmptyAsync(requestOptions).block();
     }
 
     /**
@@ -1259,43 +790,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> stringNullWithResponseAsync(
             String stringPath, RequestOptions requestOptions, Context context) {
         return service.stringNull(this.client.getHost(), stringPath, requestOptions, context);
-    }
-
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null (should throw).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringNullAsync(String stringPath, RequestOptions requestOptions) {
-        return stringNullWithResponseAsync(stringPath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null (should throw).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> stringNullAsync(String stringPath, RequestOptions requestOptions, Context context) {
-        return stringNullWithResponseAsync(stringPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stringNull(String stringPath, RequestOptions requestOptions) {
-        stringNullAsync(stringPath, requestOptions).block();
     }
 
     /**
@@ -1343,43 +837,6 @@ public final class PathsImpl {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return using uri with 'green color' in path parameter.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> enumValidAsync(String enumPath, RequestOptions requestOptions) {
-        return enumValidWithResponseAsync(enumPath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return using uri with 'green color' in path parameter.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> enumValidAsync(String enumPath, RequestOptions requestOptions, Context context) {
-        return enumValidWithResponseAsync(enumPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void enumValid(String enumPath, RequestOptions requestOptions) {
-        enumValidAsync(enumPath, requestOptions).block();
-    }
-
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return using uri with 'green color' in path parameter.
      */
@@ -1413,43 +870,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> enumNullWithResponseAsync(
             String enumPath, RequestOptions requestOptions, Context context) {
         return service.enumNull(this.client.getHost(), enumPath, requestOptions, context);
-    }
-
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null (should throw on the client before the request is sent on wire).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> enumNullAsync(String enumPath, RequestOptions requestOptions) {
-        return enumNullWithResponseAsync(enumPath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null (should throw on the client before the request is sent on wire).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> enumNullAsync(String enumPath, RequestOptions requestOptions, Context context) {
-        return enumNullWithResponseAsync(enumPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void enumNull(String enumPath, RequestOptions requestOptions) {
-        enumNullAsync(enumPath, requestOptions).block();
     }
 
     /**
@@ -1497,43 +917,6 @@ public final class PathsImpl {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteMultiByteAsync(String bytePath, RequestOptions requestOptions) {
-        return byteMultiByteWithResponseAsync(bytePath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteMultiByteAsync(String bytePath, RequestOptions requestOptions, Context context) {
-        return byteMultiByteWithResponseAsync(bytePath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteMultiByte(String bytePath, RequestOptions requestOptions) {
-        byteMultiByteAsync(bytePath, requestOptions).block();
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
@@ -1566,39 +949,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String bytePath = "";
         return service.byteEmpty(this.client.getHost(), bytePath, requestOptions, context);
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '' as byte array.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteEmptyAsync(RequestOptions requestOptions) {
-        return byteEmptyWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '' as byte array.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteEmptyAsync(RequestOptions requestOptions, Context context) {
-        return byteEmptyWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteEmpty(RequestOptions requestOptions) {
-        byteEmptyAsync(requestOptions).block();
     }
 
     /**
@@ -1645,43 +995,6 @@ public final class PathsImpl {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null as byte array (should throw).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteNullAsync(String bytePath, RequestOptions requestOptions) {
-        return byteNullWithResponseAsync(bytePath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null as byte array (should throw).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> byteNullAsync(String bytePath, RequestOptions requestOptions, Context context) {
-        return byteNullWithResponseAsync(bytePath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void byteNull(String bytePath, RequestOptions requestOptions) {
-        byteNullAsync(bytePath, requestOptions).block();
-    }
-
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null as byte array (should throw).
      */
@@ -1714,39 +1027,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String datePath = "2012-01-01";
         return service.dateValid(this.client.getHost(), datePath, requestOptions, context);
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '2012-01-01' as date.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateValidAsync(RequestOptions requestOptions) {
-        return dateValidWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '2012-01-01' as date.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateValidAsync(RequestOptions requestOptions, Context context) {
-        return dateValidWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateValid(RequestOptions requestOptions) {
-        dateValidAsync(requestOptions).block();
     }
 
     /**
@@ -1793,43 +1073,6 @@ public final class PathsImpl {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateNullAsync(String datePath, RequestOptions requestOptions) {
-        return dateNullWithResponseAsync(datePath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateNullAsync(String datePath, RequestOptions requestOptions, Context context) {
-        return dateNullWithResponseAsync(datePath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateNull(String datePath, RequestOptions requestOptions) {
-        dateNullAsync(datePath, requestOptions).block();
-    }
-
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
@@ -1862,39 +1105,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String dateTimePath = "2012-01-01T01:01:01Z";
         return service.dateTimeValid(this.client.getHost(), dateTimePath, requestOptions, context);
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return '2012-01-01T01:01:01Z' as date-time.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateTimeValidAsync(RequestOptions requestOptions) {
-        return dateTimeValidWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return '2012-01-01T01:01:01Z' as date-time.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateTimeValidAsync(RequestOptions requestOptions, Context context) {
-        return dateTimeValidWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateTimeValid(RequestOptions requestOptions) {
-        dateTimeValidAsync(requestOptions).block();
     }
 
     /**
@@ -1941,44 +1151,6 @@ public final class PathsImpl {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateTimeNullAsync(String dateTimePath, RequestOptions requestOptions) {
-        return dateTimeNullWithResponseAsync(dateTimePath, requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> dateTimeNullAsync(String dateTimePath, RequestOptions requestOptions, Context context) {
-        return dateTimeNullWithResponseAsync(dateTimePath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void dateTimeNull(String dateTimePath, RequestOptions requestOptions) {
-        dateTimeNullAsync(dateTimePath, requestOptions).block();
-    }
-
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
@@ -2013,43 +1185,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> base64UrlWithResponseAsync(
             String base64UrlPath, RequestOptions requestOptions, Context context) {
         return service.base64Url(this.client.getHost(), base64UrlPath, requestOptions, context);
-    }
-
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> base64UrlAsync(String base64UrlPath, RequestOptions requestOptions) {
-        return base64UrlWithResponseAsync(base64UrlPath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> base64UrlAsync(String base64UrlPath, RequestOptions requestOptions, Context context) {
-        return base64UrlWithResponseAsync(base64UrlPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void base64Url(String base64UrlPath, RequestOptions requestOptions) {
-        base64UrlAsync(base64UrlPath, requestOptions).block();
     }
 
     /**
@@ -2102,48 +1237,6 @@ public final class PathsImpl {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> arrayCsvInPathAsync(String arrayPath, RequestOptions requestOptions) {
-        return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> arrayCsvInPathAsync(String arrayPath, RequestOptions requestOptions, Context context) {
-        return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void arrayCsvInPath(String arrayPath, RequestOptions requestOptions) {
-        arrayCsvInPathAsync(arrayPath, requestOptions).block();
-    }
-
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
@@ -2178,44 +1271,6 @@ public final class PathsImpl {
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(
             long unixTimeUrlPath, RequestOptions requestOptions, Context context) {
         return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, requestOptions, context);
-    }
-
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> unixTimeUrlAsync(long unixTimeUrlPath, RequestOptions requestOptions) {
-        return unixTimeUrlWithResponseAsync(unixTimeUrlPath, requestOptions)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> unixTimeUrlAsync(long unixTimeUrlPath, RequestOptions requestOptions, Context context) {
-        return unixTimeUrlWithResponseAsync(unixTimeUrlPath, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void unixTimeUrl(long unixTimeUrlPath, RequestOptions requestOptions) {
-        unixTimeUrlAsync(unixTimeUrlPath, requestOptions).block();
     }
 
     /**

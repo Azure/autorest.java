@@ -45,27 +45,6 @@ public final class BasicAsyncClient {
     }
 
     /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValidAsync(requestOptions);
-    }
-
-    /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * <p><strong>Query Parameters</strong>
@@ -96,36 +75,6 @@ public final class BasicAsyncClient {
     }
 
     /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidAsync(complexBody, requestOptions);
-    }
-
-    /**
      * Get a basic complex type that is invalid for the local strong type.
      *
      * <p><strong>Response Body Schema</strong>
@@ -144,27 +93,6 @@ public final class BasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getInvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getInvalidWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a basic complex type that is invalid for the local strong type.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getInvalid(RequestOptions requestOptions) {
-        return this.serviceClient.getInvalidAsync(requestOptions);
     }
 
     /**
@@ -189,27 +117,6 @@ public final class BasicAsyncClient {
     }
 
     /**
-     * Get a basic complex type that is empty.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a basic complex type that is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyAsync(requestOptions);
-    }
-
-    /**
      * Get a basic complex type whose properties are null.
      *
      * <p><strong>Response Body Schema</strong>
@@ -231,27 +138,6 @@ public final class BasicAsyncClient {
     }
 
     /**
-     * Get a basic complex type whose properties are null.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a basic complex type whose properties are null.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNull(RequestOptions requestOptions) {
-        return this.serviceClient.getNullAsync(requestOptions);
-    }
-
-    /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * <p><strong>Response Body Schema</strong>
@@ -270,26 +156,5 @@ public final class BasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return a basic complex type while the server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getNotProvided(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvidedAsync(requestOptions);
     }
 }

@@ -27,176 +27,176 @@ public class QueriesTests {
     public void getBooleanTrue() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("boolQuery", "true");
-        client.getBooleanTrue(requestOptions);
+        client.getBooleanTrueWithResponse(requestOptions, null);
     }
 
     @Test
     public void getBooleanFalse() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("boolQuery", "false");
-        client.getBooleanFalse(requestOptions);
+        client.getBooleanFalseWithResponse(requestOptions, null);
     }
 
     @Test
     public void getBooleanNull() {
-        client.getBooleanNull(null);
+        client.getBooleanNullWithResponse(null, null);
     }
 
     @Test
     public void getIntOneMillion() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("intQuery", "1000000");
-        client.getIntOneMillion(requestOptions);
+        client.getIntOneMillionWithResponse(requestOptions, null);
     }
 
     @Test
     public void getIntNegativeOneMillion() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("intQuery", "-1000000");
-        client.getIntNegativeOneMillion(requestOptions);
+        client.getIntNegativeOneMillionWithResponse(requestOptions, null);
     }
 
     @Test
     public void getIntNull() {
-        client.getIntNull(null);
+        client.getIntNullWithResponse(null, null);
     }
 
     @Test
     public void getTenBillion() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("longQuery", "10000000000");
-        client.getTenBillion(requestOptions);
+        client.getTenBillionWithResponse(requestOptions, null);
     }
 
     @Test
     public void getNegativeTenBillion() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("longQuery", "-10000000000");
-        client.getNegativeTenBillion(requestOptions);
+        client.getNegativeTenBillionWithResponse(requestOptions, null);
     }
 
     @Test
     public void getLongNull() {
-        client.getLongNull(null);
+        client.getLongNullWithResponse(null, null);
     }
 
     @Test
     public void floatScientificPositive() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("floatQuery", "1.034E+20");
-        client.floatScientificPositive(requestOptions);
+        client.floatScientificPositiveWithResponse(requestOptions, null);
     }
 
     @Test
     public void floatScientificNegative() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("floatQuery", "-1.034E-20");
-        client.floatScientificNegative(requestOptions);
+        client.floatScientificNegativeWithResponse(requestOptions, null);
     }
 
     @Test
     public void floatNull() {
-        client.floatNull(null);
+        client.floatNullWithResponse(null, null);
     }
 
     @Test
     public void doubleDecimalPositive() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("doubleQuery", "9999999.999");
-        client.doubleDecimalPositive(requestOptions);
+        client.doubleDecimalPositiveWithResponse(requestOptions, null);
     }
 
     @Test
     public void doubleDecimalNegative() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("doubleQuery", "-9999999.999");
-        client.doubleDecimalNegative(requestOptions);
+        client.doubleDecimalNegativeWithResponse(requestOptions, null);
     }
 
     @Test
     public void doubleNull() {
-        client.doubleNull(null);
+        client.doubleNullWithResponse(null, null);
     }
 
     @Test
     public void stringUnicode() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("stringQuery", "啊齄丂狛狜隣郎隣兀﨩");
-        client.stringUnicode(requestOptions);
+        client.stringUnicodeWithResponse(requestOptions, null);
     }
 
     @Test
     public void stringUrlEncoded() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("stringQuery", "begin!*'();:@ &=+$,/?#[]end");
-        client.stringUrlEncoded(requestOptions);
+        client.stringUrlEncodedWithResponse(requestOptions, null);
     }
 
     @Test
     public void stringEmpty() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("stringQuery", "");
-        client.stringEmpty(requestOptions);
+        client.stringEmptyWithResponse(requestOptions, null);
     }
 
     @Test
     public void stringNull() {
-        client.stringNull(null);
+        client.stringNullWithResponse(null, null);
     }
 
     @Test
     public void enumValid() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("enumQuery", "green color");
-        client.enumValid(requestOptions);
+        client.enumValidWithResponse(requestOptions, null);
     }
 
     @Test
     public void enumNull() {
-        client.enumNull(null);
+        client.enumNullWithResponse(null, null);
     }
 
     @Test
     public void byteMultiByte() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("byteQuery", Base64Util.encodeToString("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8)));
-        client.byteMultiByte(requestOptions);
+        client.byteMultiByteWithResponse(requestOptions, null);
     }
 
     @Test
     public void byteEmpty() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("byteQuery", "");
-        client.byteEmpty(requestOptions);
+        client.byteEmptyWithResponse(requestOptions, null);
     }
 
     @Test
     public void byteNull() {
-        client.byteNull(null);
+        client.byteNullWithResponse(null, null);
     }
 
     @Test
     public void dateValid() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("dateQuery", "2012-01-01");
-        client.dateValid(requestOptions);
+        client.dateValidWithResponse(requestOptions, null);
     }
 
     @Test
     public void dateNull() {
-        client.dateNull(null);
+        client.dateNullWithResponse(null, null);
     }
 
     @Test
     public void dateTimeValid() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("dateTimeQuery", "2012-01-01T01:01:01Z");
-        client.dateTimeValid(requestOptions);
+        client.dateTimeValidWithResponse(requestOptions, null);
     }
 
     @Test
     public void dateTimeNull() {
-        client.dateTimeNull(null);
+        client.dateTimeNullWithResponse(null, null);
     }
 
     @Test
@@ -209,12 +209,12 @@ public class QueriesTests {
         list.add("");
         String query = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.CSV);
         requestOptions.addQueryParam("arrayQuery", query);
-        client.arrayStringCsvValid(requestOptions);
+        client.arrayStringCsvValidWithResponse(requestOptions, null);
     }
 
     @Test
     public void arrayStringCsvNull() {
-        client.arrayStringCsvNull(null);
+        client.arrayStringCsvNullWithResponse(null, null);
     }
 
     @Test
@@ -222,7 +222,7 @@ public class QueriesTests {
         RequestOptions requestOptions = new RequestOptions();
         String query = JacksonAdapter.createDefaultSerializerAdapter().serializeList(Collections.emptyList(), CollectionFormat.CSV);
         requestOptions.addQueryParam("arrayQuery", query);
-        client.arrayStringCsvEmpty(requestOptions);
+        client.arrayStringCsvEmptyWithResponse(requestOptions, null);
     }
 
     @Test
@@ -235,7 +235,7 @@ public class QueriesTests {
         list.add("");
         String query = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.SSV);
         requestOptions.addQueryParam("arrayQuery", query);
-        client.arrayStringSsvValid(requestOptions);
+        client.arrayStringSsvValidWithResponse(requestOptions, null);
     }
 
     @Test
@@ -248,7 +248,7 @@ public class QueriesTests {
         list.add("");
         String query = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.TSV);
         requestOptions.addQueryParam("arrayQuery", query);
-        client.arrayStringTsvValid(requestOptions);
+        client.arrayStringTsvValidWithResponse(requestOptions, null);
     }
 
     @Test
@@ -261,6 +261,6 @@ public class QueriesTests {
         list.add("");
         String query = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.PIPES);
         requestOptions.addQueryParam("arrayQuery", query);
-        client.arrayStringPipesValid(requestOptions);
+        client.arrayStringPipesValidWithResponse(requestOptions, null);
     }
 }

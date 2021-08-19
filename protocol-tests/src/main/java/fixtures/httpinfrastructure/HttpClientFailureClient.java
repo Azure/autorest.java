@@ -26,32 +26,12 @@ public final class HttpClientFailureClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head400(RequestOptions requestOptions) {
-        this.serviceClient.head400(requestOptions);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head400WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get400(RequestOptions requestOptions) {
-        this.serviceClient.get400(requestOptions);
     }
 
     /**
@@ -70,32 +50,12 @@ public final class HttpClientFailureClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put400(RequestOptions requestOptions) {
-        this.serviceClient.put400(requestOptions);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put400WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch400(RequestOptions requestOptions) {
-        this.serviceClient.patch400(requestOptions);
     }
 
     /**
@@ -114,32 +74,12 @@ public final class HttpClientFailureClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post400(RequestOptions requestOptions) {
-        this.serviceClient.post400(requestOptions);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post400WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete400(RequestOptions requestOptions) {
-        this.serviceClient.delete400(requestOptions);
     }
 
     /**
@@ -158,32 +98,12 @@ public final class HttpClientFailureClient {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head401(RequestOptions requestOptions) {
-        this.serviceClient.head401(requestOptions);
-    }
-
-    /**
-     * Return 401 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head401WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head401WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 402 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get402(RequestOptions requestOptions) {
-        this.serviceClient.get402(requestOptions);
     }
 
     /**
@@ -202,32 +122,12 @@ public final class HttpClientFailureClient {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get403(RequestOptions requestOptions) {
-        this.serviceClient.get403(requestOptions);
-    }
-
-    /**
-     * Return 403 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get403WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get403WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 404 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put404(RequestOptions requestOptions) {
-        this.serviceClient.put404(requestOptions);
     }
 
     /**
@@ -246,32 +146,12 @@ public final class HttpClientFailureClient {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch405(RequestOptions requestOptions) {
-        this.serviceClient.patch405(requestOptions);
-    }
-
-    /**
-     * Return 405 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch405WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch405WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 406 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post406(RequestOptions requestOptions) {
-        this.serviceClient.post406(requestOptions);
     }
 
     /**
@@ -290,32 +170,12 @@ public final class HttpClientFailureClient {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete407(RequestOptions requestOptions) {
-        this.serviceClient.delete407(requestOptions);
-    }
-
-    /**
-     * Return 407 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete407WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete407WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 409 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put409(RequestOptions requestOptions) {
-        this.serviceClient.put409(requestOptions);
     }
 
     /**
@@ -334,32 +194,12 @@ public final class HttpClientFailureClient {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head410(RequestOptions requestOptions) {
-        this.serviceClient.head410(requestOptions);
-    }
-
-    /**
-     * Return 410 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head410WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head410WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 411 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get411(RequestOptions requestOptions) {
-        this.serviceClient.get411(requestOptions);
     }
 
     /**
@@ -378,32 +218,12 @@ public final class HttpClientFailureClient {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get412(RequestOptions requestOptions) {
-        this.serviceClient.get412(requestOptions);
-    }
-
-    /**
-     * Return 412 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get412WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get412WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 413 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put413(RequestOptions requestOptions) {
-        this.serviceClient.put413(requestOptions);
     }
 
     /**
@@ -422,32 +242,12 @@ public final class HttpClientFailureClient {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch414(RequestOptions requestOptions) {
-        this.serviceClient.patch414(requestOptions);
-    }
-
-    /**
-     * Return 414 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch414WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch414WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 415 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post415(RequestOptions requestOptions) {
-        this.serviceClient.post415(requestOptions);
     }
 
     /**
@@ -466,16 +266,6 @@ public final class HttpClientFailureClient {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get416(RequestOptions requestOptions) {
-        this.serviceClient.get416(requestOptions);
-    }
-
-    /**
-     * Return 416 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -488,32 +278,12 @@ public final class HttpClientFailureClient {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete417(RequestOptions requestOptions) {
-        this.serviceClient.delete417(requestOptions);
-    }
-
-    /**
-     * Return 417 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete417WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete417WithResponse(requestOptions, context);
-    }
-
-    /**
-     * Return 429 status code - should be represented in the client as an error.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head429(RequestOptions requestOptions) {
-        this.serviceClient.head429(requestOptions);
     }
 
     /**

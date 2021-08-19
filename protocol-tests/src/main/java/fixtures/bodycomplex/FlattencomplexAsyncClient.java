@@ -42,24 +42,4 @@ public final class FlattencomplexAsyncClient {
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponseAsync(requestOptions);
     }
-
-    /**
-     * <strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValidAsync(requestOptions);
-    }
 }

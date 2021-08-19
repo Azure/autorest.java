@@ -19,7 +19,7 @@ public class HttpClientFailuresTests {
     @Test
     public void head400() throws Exception {
         try {
-            client.head400(null);
+            client.head400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -29,7 +29,7 @@ public class HttpClientFailuresTests {
     @Test
     public void get400() throws Exception {
         try {
-            client.get400(null);
+            client.get400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -39,7 +39,7 @@ public class HttpClientFailuresTests {
     @Test
     public void put400() throws Exception {
         try {
-            client.put400(null);
+            client.put400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -49,7 +49,7 @@ public class HttpClientFailuresTests {
     @Test
     public void patch400() throws Exception {
         try {
-            client.patch400(null);
+            client.patch400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -59,7 +59,7 @@ public class HttpClientFailuresTests {
     @Test
     public void post400() throws Exception {
         try {
-            client.post400(null);
+            client.post400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -69,7 +69,7 @@ public class HttpClientFailuresTests {
     @Test
     public void delete400() throws Exception {
         try {
-            client.delete400(null);
+            client.delete400WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(400, e.getResponse().getStatusCode());
@@ -79,7 +79,7 @@ public class HttpClientFailuresTests {
     @Test
     public void head401() throws Exception {
         try {
-            client.head401(null);
+            client.head401WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(401, e.getResponse().getStatusCode());
@@ -89,7 +89,7 @@ public class HttpClientFailuresTests {
     @Test
     public void get402() throws Exception {
         try {
-            client.get402(null);
+            client.get402WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(402, e.getResponse().getStatusCode());
@@ -99,7 +99,7 @@ public class HttpClientFailuresTests {
     @Test
     public void get403() throws Exception {
         try {
-            client.get403(null);
+            client.get403WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(403, e.getResponse().getStatusCode());
@@ -109,7 +109,7 @@ public class HttpClientFailuresTests {
     @Test
     public void put404() throws Exception {
         try {
-            client.put404(null);
+            client.put404WithResponse(null, null).getValue();
             Assertions.fail();
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());

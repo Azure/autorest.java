@@ -44,26 +44,6 @@ public final class ReadonlypropertyAsyncClient {
     }
 
     /**
-     * Get complex types that have readonly properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     size: Integer
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types that have readonly properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValidAsync(requestOptions);
-    }
-
-    /**
      * Put complex types that have readonly properties.
      *
      * <p><strong>Request Body Schema</strong>
@@ -82,26 +62,5 @@ public final class ReadonlypropertyAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     size: Integer
-     * }
-     * }</pre>
-     *
-     * @param complexBody The complexBody parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidAsync(complexBody, requestOptions);
     }
 }

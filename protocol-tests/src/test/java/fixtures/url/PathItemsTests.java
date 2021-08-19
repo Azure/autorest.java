@@ -23,7 +23,7 @@ public class PathItemsTests {
         requestOptions.addQueryParam("globalStringQuery", "globalStringQuery");
         requestOptions.addQueryParam("pathItemStringQuery", "pathItemStringQuery");
         requestOptions.addQueryParam("localStringQuery", "localStringQuery");
-        client.getAllWithValues("pathItemStringPath", "localStringPath", requestOptions);
+        client.getAllWithValuesWithResponse("pathItemStringPath", "localStringPath", requestOptions, null);
     }
 
     @Test
@@ -31,20 +31,20 @@ public class PathItemsTests {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("pathItemStringQuery", "pathItemStringQuery");
         requestOptions.addQueryParam("localStringQuery", "localStringQuery");
-        client.getGlobalQueryNull("pathItemStringPath", "localStringPath", requestOptions);
+        client.getGlobalQueryNullWithResponse("pathItemStringPath", "localStringPath", requestOptions, null);
     }
 
     @Test
     public void getGlobalAndLocalQueryNull() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("pathItemStringQuery", "pathItemStringQuery");
-        client.getGlobalAndLocalQueryNull("pathItemStringPath", "localStringPath", requestOptions);
+        client.getGlobalAndLocalQueryNullWithResponse("pathItemStringPath", "localStringPath", requestOptions, null);
     }
 
     @Test
     public void getLocalPathItemQueryNull() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("globalStringQuery", "globalStringQuery");
-        client.getLocalPathItemQueryNull("pathItemStringPath", "localStringPath", requestOptions);
+        client.getLocalPathItemQueryNullWithResponse("pathItemStringPath", "localStringPath", requestOptions, null);
     }
 }

@@ -40,30 +40,6 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getAllWithValues(String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        this.serviceClient.getAllWithValues(pathItemStringPath, localStringPath, requestOptions);
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
-     * </table>
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -72,30 +48,6 @@ public final class PathItemsClient {
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.getAllWithValuesWithResponse(
                 pathItemStringPath, localStringPath, requestOptions, context);
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
-     * </table>
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getGlobalQueryNull(String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        this.serviceClient.getGlobalQueryNull(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -144,31 +96,6 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getGlobalAndLocalQueryNull(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        this.serviceClient.getGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, requestOptions);
-    }
-
-    /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
-     * </table>
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -177,31 +104,6 @@ public final class PathItemsClient {
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
         return this.serviceClient.getGlobalAndLocalQueryNullWithResponse(
                 pathItemStringPath, localStringPath, requestOptions, context);
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     * </table>
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getLocalPathItemQueryNull(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        this.serviceClient.getLocalPathItemQueryNull(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**

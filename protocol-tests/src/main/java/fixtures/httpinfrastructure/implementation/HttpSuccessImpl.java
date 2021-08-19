@@ -127,39 +127,6 @@ public final class HttpSuccessImpl {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head200Async(RequestOptions requestOptions) {
-        return head200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 200 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head200Async(RequestOptions requestOptions, Context context) {
-        return head200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 200 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head200(RequestOptions requestOptions) {
-        head200Async(requestOptions).block();
-    }
-
-    /**
-     * Return 200 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -213,79 +180,6 @@ public final class HttpSuccessImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return 200 success.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> get200Async(RequestOptions requestOptions) {
-        return get200WithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get 200 success.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return 200 success.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> get200Async(RequestOptions requestOptions, Context context) {
-        return get200WithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Get 200 success.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return 200 success.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean get200(RequestOptions requestOptions) {
-        Boolean value = get200Async(requestOptions).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
-    }
-
-    /**
-     * Get 200 success.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return 200 success.
      */
@@ -315,39 +209,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.put200(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put200Async(RequestOptions requestOptions) {
-        return put200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put200Async(RequestOptions requestOptions, Context context) {
-        return put200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put200(RequestOptions requestOptions) {
-        put200Async(requestOptions).block();
     }
 
     /**
@@ -389,39 +250,6 @@ public final class HttpSuccessImpl {
      * Patch true Boolean value in request returning 200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch200Async(RequestOptions requestOptions) {
-        return patch200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch200Async(RequestOptions requestOptions, Context context) {
-        return patch200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch200(RequestOptions requestOptions) {
-        patch200Async(requestOptions).block();
-    }
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -451,39 +279,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.post200(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post200Async(RequestOptions requestOptions) {
-        return post200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post200Async(RequestOptions requestOptions, Context context) {
-        return post200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post200(RequestOptions requestOptions) {
-        post200Async(requestOptions).block();
     }
 
     /**
@@ -525,39 +320,6 @@ public final class HttpSuccessImpl {
      * Delete simple boolean value true returns 200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete200Async(RequestOptions requestOptions) {
-        return delete200WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete200Async(RequestOptions requestOptions, Context context) {
-        return delete200WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete200(RequestOptions requestOptions) {
-        delete200Async(requestOptions).block();
-    }
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -587,39 +349,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.put201(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put201Async(RequestOptions requestOptions) {
-        return put201WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put201Async(RequestOptions requestOptions, Context context) {
-        return put201WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put201(RequestOptions requestOptions) {
-        put201Async(requestOptions).block();
     }
 
     /**
@@ -661,39 +390,6 @@ public final class HttpSuccessImpl {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post201Async(RequestOptions requestOptions) {
-        return post201WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post201Async(RequestOptions requestOptions, Context context) {
-        return post201WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post201(RequestOptions requestOptions) {
-        post201Async(requestOptions).block();
-    }
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -723,39 +419,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.put202(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put202Async(RequestOptions requestOptions) {
-        return put202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put202Async(RequestOptions requestOptions, Context context) {
-        return put202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put202(RequestOptions requestOptions) {
-        put202Async(requestOptions).block();
     }
 
     /**
@@ -797,39 +460,6 @@ public final class HttpSuccessImpl {
      * Patch true Boolean value in request returns 202.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch202Async(RequestOptions requestOptions) {
-        return patch202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch202Async(RequestOptions requestOptions, Context context) {
-        return patch202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch202(RequestOptions requestOptions) {
-        patch202Async(requestOptions).block();
-    }
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -859,39 +489,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.post202(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post202Async(RequestOptions requestOptions) {
-        return post202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post202Async(RequestOptions requestOptions, Context context) {
-        return post202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post202(RequestOptions requestOptions) {
-        post202Async(requestOptions).block();
     }
 
     /**
@@ -933,39 +530,6 @@ public final class HttpSuccessImpl {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete202Async(RequestOptions requestOptions) {
-        return delete202WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete202Async(RequestOptions requestOptions, Context context) {
-        return delete202WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete202(RequestOptions requestOptions) {
-        delete202Async(requestOptions).block();
-    }
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -995,39 +559,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head204(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Return 204 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head204Async(RequestOptions requestOptions) {
-        return head204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 204 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head204Async(RequestOptions requestOptions, Context context) {
-        return head204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Return 204 status code if successful.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head204(RequestOptions requestOptions) {
-        head204Async(requestOptions).block();
     }
 
     /**
@@ -1069,39 +600,6 @@ public final class HttpSuccessImpl {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put204Async(RequestOptions requestOptions) {
-        return put204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put204Async(RequestOptions requestOptions, Context context) {
-        return put204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put204(RequestOptions requestOptions) {
-        put204Async(requestOptions).block();
-    }
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1131,39 +629,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.patch204(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch204Async(RequestOptions requestOptions) {
-        return patch204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> patch204Async(RequestOptions requestOptions, Context context) {
-        return patch204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void patch204(RequestOptions requestOptions) {
-        patch204Async(requestOptions).block();
     }
 
     /**
@@ -1205,39 +670,6 @@ public final class HttpSuccessImpl {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post204Async(RequestOptions requestOptions) {
-        return post204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> post204Async(RequestOptions requestOptions, Context context) {
-        return post204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post204(RequestOptions requestOptions) {
-        post204Async(requestOptions).block();
-    }
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -1267,39 +699,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.delete204(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete204Async(RequestOptions requestOptions) {
-        return delete204WithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> delete204Async(RequestOptions requestOptions, Context context) {
-        return delete204WithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete204(RequestOptions requestOptions) {
-        delete204Async(requestOptions).block();
     }
 
     /**
@@ -1347,79 +746,6 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions, Context context) {
         return service.head404(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Return 404 status code.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return whether resource exists.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> head404Async(RequestOptions requestOptions) {
-        return head404WithResponseAsync(requestOptions)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Return 404 status code.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @return whether resource exists.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> head404Async(RequestOptions requestOptions, Context context) {
-        return head404WithResponseAsync(requestOptions, context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
-    }
-
-    /**
-     * Return 404 status code.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return whether resource exists.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean head404(RequestOptions requestOptions) {
-        Boolean value = head404Async(requestOptions).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
     }
 
     /**

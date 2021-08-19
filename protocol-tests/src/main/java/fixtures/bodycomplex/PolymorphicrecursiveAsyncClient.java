@@ -47,29 +47,6 @@ public final class PolymorphicrecursiveAsyncClient {
     }
 
     /**
-     * Get complex types that are polymorphic and have recursive references.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         (recursive schema, see above)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return complex types that are polymorphic and have recursive references.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getValid(RequestOptions requestOptions) {
-        return this.serviceClient.getValidAsync(requestOptions);
-    }
-
-    /**
      * Put complex types that are polymorphic and have recursive references.
      *
      * <p><strong>Request Body Schema</strong>
@@ -97,35 +74,5 @@ public final class PolymorphicrecursiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Put complex types that are polymorphic and have recursive references.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         (recursive schema, see above)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidAsync(complexBody, requestOptions);
     }
 }

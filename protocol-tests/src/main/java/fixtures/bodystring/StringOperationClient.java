@@ -33,39 +33,12 @@ public final class StringOperationClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null string value value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNull(RequestOptions requestOptions) {
-        return this.serviceClient.getNull(requestOptions);
-    }
-
-    /**
-     * Get null string value value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getNullWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Set string value null.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull(RequestOptions requestOptions) {
-        this.serviceClient.putNull(requestOptions);
     }
 
     /**
@@ -90,39 +63,12 @@ public final class StringOperationClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return empty string value value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getEmpty(RequestOptions requestOptions) {
-        return this.serviceClient.getEmpty(requestOptions);
-    }
-
-    /**
-     * Get empty string value value ''.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getEmptyWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Set string value empty ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(RequestOptions requestOptions) {
-        this.serviceClient.putEmpty(requestOptions);
     }
 
     /**
@@ -147,23 +93,6 @@ public final class StringOperationClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getMbcs(RequestOptions requestOptions) {
-        return this.serviceClient.getMbcs(requestOptions);
-    }
-
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
@@ -176,41 +105,12 @@ public final class StringOperationClient {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putMbcs(RequestOptions requestOptions) {
-        this.serviceClient.putMbcs(requestOptions);
-    }
-
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.putMbcsWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getWhitespace(RequestOptions requestOptions) {
-        return this.serviceClient.getWhitespace(requestOptions);
     }
 
     /**
@@ -238,40 +138,12 @@ public final class StringOperationClient {
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putWhitespace(RequestOptions requestOptions) {
-        this.serviceClient.putWhitespace(requestOptions);
-    }
-
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
-     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.putWhitespaceWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return string value when no string value is sent in response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNotProvided(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvided(requestOptions);
     }
 
     /**
@@ -302,46 +174,12 @@ public final class StringOperationClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64 encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getBase64Encoded(RequestOptions requestOptions) {
-        return this.serviceClient.getBase64Encoded(requestOptions);
-    }
-
-    /**
-     * Get value that is base64 encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getBase64EncodedWithResponse(requestOptions, context);
-    }
-
-    /**
-     * Get value that is base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return value that is base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getBase64UrlEncoded(RequestOptions requestOptions) {
-        return this.serviceClient.getBase64UrlEncoded(requestOptions);
     }
 
     /**
@@ -373,23 +211,6 @@ public final class StringOperationClient {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBase64UrlEncoded(BinaryData stringBody, RequestOptions requestOptions) {
-        this.serviceClient.putBase64UrlEncoded(stringBody, requestOptions);
-    }
-
-    /**
-     * Put value that is base64url encoded.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @return the response.
      */
@@ -397,23 +218,6 @@ public final class StringOperationClient {
     public Response<Void> putBase64UrlEncodedWithResponse(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
         return this.serviceClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions, context);
-    }
-
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @return null value that is expected to be base64url encoded.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getNullBase64UrlEncoded(RequestOptions requestOptions) {
-        return this.serviceClient.getNullBase64UrlEncoded(requestOptions);
     }
 
     /**
