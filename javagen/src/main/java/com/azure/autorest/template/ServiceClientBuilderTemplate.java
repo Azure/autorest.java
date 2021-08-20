@@ -59,6 +59,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
+        imports.add("com.azure.core.http.HttpHeaders");
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -290,6 +291,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.http.policy.HttpPolicyProviders");
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
+        imports.add("com.azure.core.http.policy.AddHeadersPolicy");
     }
 
     protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
@@ -305,13 +307,19 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 function.line("httpLogOptions = new HttpLogOptions();");
             });
 
+            function.ifBlock("clientOptions == null", action -> {
+                function.line("clientOptions = new ClientOptions();");
+            });
+
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
 
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-            function.line("policies.add(new UserAgentPolicy(httpLogOptions.getApplicationId(), clientName, "
+            function.line("String applicationId = clientOptions.getApplicationId() == null ? " +
+                    "httpLogOptions.getApplicationId() : clientOptions.getApplicationId();");
+            function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
@@ -339,6 +347,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
             function.line("policies.addAll(this.pipelinePolicies);");
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
+
+            // clientOptions header
+            function.line("HttpHeaders headers = new HttpHeaders();");
+            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
+            function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
 
@@ -392,6 +405,16 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             commonProperties.add(new ServiceClientProperty("The list of Http pipeline policies to add.",
                     new ListType(ClassType.HttpPipelinePolicy), "pipelinePolicies", true, null));
+        }
+
+        if (settings.isLowLevelClient()) {
+            commonProperties.add(new ServiceClientProperty(
+                    "The client options such as application ID and custom headers to set on a request.",
+                    ClassType.ClientOptions,
+                    "clientOptions",
+                    false,
+                    // It should be new ClientOptions()
+                    null));
         }
 
         return commonProperties;
