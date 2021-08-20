@@ -496,7 +496,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             null);
                 }
 
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE && !settings.isLowLevelClient()) {
+                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(createSimpleAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncMethodName())
