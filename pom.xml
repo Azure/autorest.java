@@ -127,6 +127,7 @@
     <module>./fluentgen</module>
     <module>./fluentnamer</module>
     <module>./androidgen</module>
+    <module>./protocol-resilience-test</module>
   </modules>
 
   <profiles>
