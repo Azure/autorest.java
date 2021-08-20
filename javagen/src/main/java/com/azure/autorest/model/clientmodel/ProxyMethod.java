@@ -91,6 +91,8 @@ public class ProxyMethod {
 
     private Map<String, ProxyMethodExample> examples;
 
+    private String operationId;
+
     /**
      * Create a new RestAPIMethod with the provided properties.
      * @param requestContentType The Content-Type of the request.
@@ -106,6 +108,7 @@ public class ProxyMethod {
      * @param description The description of this method.
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
+     * @param operationId the operation ID
      * @param examples the examples for the method.
      */
     protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
@@ -116,7 +119,7 @@ public class ProxyMethod {
                           List<ProxyMethodParameter> allParameters, String description,
                           IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
                           boolean isResumable, Set<String> responseContentTypes,
-                          Map<String, ProxyMethodExample> examples) {
+                          String operationId, Map<String, ProxyMethodExample> examples) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -134,6 +137,7 @@ public class ProxyMethod {
         this.rawResponseBodyType = rawResponseBodyType;
         this.isResumable = isResumable;
         this.responseContentTypes = responseContentTypes;
+        this.operationId = operationId;
         this.examples = examples;
     }
 
@@ -219,6 +223,10 @@ public class ProxyMethod {
 
     public final Set<String> getResponseContentTypes() {
         return responseContentTypes;
+    }
+
+    public String getOperationId() {
+        return operationId;
     }
 
     public Map<String, ProxyMethodExample> getExamples() {
@@ -337,6 +345,7 @@ public class ProxyMethod {
         protected boolean isResumable;
         protected Set<String> responseContentTypes;
         protected Map<String, ProxyMethodExample> examples;
+        protected String operationId;
 
         /*
          * Sets the Content-Type of the request.
@@ -518,6 +527,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets the operation ID for reference.
+         * @param operationId the operation ID
+         * @return the Builder itself
+         */
+        public Builder operationId(String operationId) {
+            this.operationId = operationId;
+            return this;
+        }
+
+        /**
          * @return an immutable ProxyMethod instance with the configurations on this builder.
          */
         public ProxyMethod build() {
@@ -538,6 +557,7 @@ public class ProxyMethod {
                     rawResponseBodyType,
                     isResumable,
                     responseContentTypes,
+                    operationId,
                     examples);
         }
     }

@@ -253,6 +253,7 @@ public class Schema extends Metadata {
 
     public enum AllSchemaTypes {
         ANY("any"),
+        ANY_OBJECT("any-object"),
         AND("and"),
         ARRAY("array"),
         BINARY("binary"),

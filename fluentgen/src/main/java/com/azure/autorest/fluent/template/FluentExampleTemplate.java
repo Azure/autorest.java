@@ -23,6 +23,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
@@ -82,6 +83,8 @@ public class FluentExampleTemplate {
         });
         javaFile.publicFinalClass(className, classBlock -> {
             for (ExampleMethod exampleMethod : exampleMethods) {
+                classBlock.blockComment(getExampleTag(example, exampleMethod.getExample()));
+
                 classBlock.javadocComment(commentBlock -> {
                     commentBlock.description(String.format("Sample code: %1$s", exampleMethod.getExample().getName()));
                     commentBlock.param(exampleMethod.getExample().getEntryName(),
@@ -111,6 +114,12 @@ public class FluentExampleTemplate {
                 });
             }
         });
+    }
+
+    private String getExampleTag(com.azure.autorest.fluent.model.clientmodel.FluentExample example, FluentExample exampleInfo) {
+        return "operationId: " + example.getOperationId() + System.lineSeparator() +
+                "api-version: " + example.getApiVersion() + System.lineSeparator() +
+                "x-ms-examples: " + exampleInfo.getName();
     }
 
     private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
@@ -220,21 +229,23 @@ public class FluentExampleTemplate {
 
                 return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
             } else if (node instanceof ObjectNode) {
-                PrimitiveType primitiveType = null;
+                IType simpleType = null;
                 if (node.getObjectValue() instanceof Integer) {
-                    primitiveType = PrimitiveType.Int;
+                    simpleType = PrimitiveType.Int;
                 } else if (node.getObjectValue() instanceof Long) {
-                    primitiveType = PrimitiveType.Long;
+                    simpleType = PrimitiveType.Long;
                 } else if (node.getObjectValue() instanceof Float) {
-                    primitiveType = PrimitiveType.Float;
+                    simpleType = PrimitiveType.Float;
                 } else if (node.getObjectValue() instanceof Double) {
-                    primitiveType = PrimitiveType.Double;
+                    simpleType = PrimitiveType.Double;
                 } else if (node.getObjectValue() instanceof Boolean) {
-                    primitiveType = PrimitiveType.Boolean;
+                    simpleType = PrimitiveType.Boolean;
+                } else if (node.getObjectValue() instanceof String) {
+                    simpleType = ClassType.String;
                 }
 
-                if (primitiveType != null) {
-                    return primitiveType.defaultValueExpression(node.getObjectValue().toString());
+                if (simpleType != null) {
+                    return simpleType.defaultValueExpression(node.getObjectValue().toString());
                 } else {
                     imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
                     imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());

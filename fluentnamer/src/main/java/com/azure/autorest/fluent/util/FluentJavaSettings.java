@@ -70,11 +70,17 @@ public class FluentJavaSettings {
 
     private String artifactVersion;
 
-    private boolean generateSamples = false;
+    private SampleGeneration generateSamples = SampleGeneration.NONE;
 
     private boolean sdkIntegration = false;
 
     private AutorestSettings autorestSettings;
+
+    private enum SampleGeneration {
+        NONE,
+        AGGREGATED,
+        REST_API_SPECS
+    }
 
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
@@ -130,7 +136,11 @@ public class FluentJavaSettings {
     }
 
     public boolean isGenerateSamples() {
-        return generateSamples;
+        return generateSamples != SampleGeneration.NONE;
+    }
+
+    public boolean isGenerateSamplesForSpecs() {
+        return generateSamples == SampleGeneration.REST_API_SPECS;
     }
 
     public boolean isSdkIntegration() {
@@ -222,7 +232,15 @@ public class FluentJavaSettings {
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
 
-        loadBooleanSetting("generate-samples", b -> generateSamples = b);
+        loadStringSetting("generate-samples", s -> {
+            if (s.equalsIgnoreCase("SPECS")) {
+                generateSamples = SampleGeneration.REST_API_SPECS;
+            } else if (s.equalsIgnoreCase("false")) {
+                generateSamples = SampleGeneration.NONE;
+            } else {
+                generateSamples = SampleGeneration.AGGREGATED;
+            }
+        });
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 

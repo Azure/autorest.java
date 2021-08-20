@@ -27,6 +27,7 @@ public class FluentClient {
     private final List<FluentResourceCollection> resourceCollections = new ArrayList<>();
 
     private final List<FluentExample> examples = new ArrayList<>();
+    private final List<FluentExample> examplesForSpecs = new ArrayList<>();
 
     public FluentClient(Client client) {
         this.client = client;
@@ -62,5 +63,9 @@ public class FluentClient {
 
     public List<FluentExample> getExamples() {
         return examples;
+    }
+
+    public List<FluentExample> getExamplesForSpecs() {
+        return examplesForSpecs;
     }
 }
