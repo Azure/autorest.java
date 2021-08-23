@@ -6,6 +6,7 @@ import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
@@ -184,6 +185,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -204,6 +207,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -224,6 +229,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -243,6 +250,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -263,6 +272,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -283,6 +294,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -302,6 +315,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -322,6 +337,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -342,6 +359,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -361,6 +380,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -382,6 +403,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -402,6 +425,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -421,6 +446,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -442,6 +469,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -463,6 +492,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -482,6 +513,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -502,6 +535,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -522,6 +557,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -541,6 +578,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -561,6 +600,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -581,6 +622,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -600,6 +643,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -621,6 +666,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -641,6 +688,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -660,6 +709,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -680,6 +731,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -700,6 +753,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -719,6 +774,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -740,6 +797,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -761,6 +820,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -780,6 +841,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -801,6 +864,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -822,6 +887,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -841,6 +908,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -861,6 +930,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -881,6 +952,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -900,6 +973,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -921,6 +996,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -941,6 +1018,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -960,6 +1039,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -981,6 +1062,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1001,6 +1084,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1020,6 +1105,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1040,6 +1127,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1060,6 +1149,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1079,6 +1170,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1099,6 +1192,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1119,6 +1214,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1138,6 +1235,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1159,6 +1258,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1179,6 +1280,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1198,6 +1301,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1218,6 +1323,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1238,6 +1345,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1257,6 +1366,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1277,6 +1388,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1297,6 +1410,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1316,6 +1431,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1336,6 +1453,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1356,6 +1475,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1375,6 +1496,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1395,6 +1518,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1415,6 +1540,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1434,6 +1561,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1454,6 +1583,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1474,6 +1605,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1493,6 +1626,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1513,6 +1648,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1533,6 +1670,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1552,6 +1691,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1572,6 +1713,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1592,6 +1735,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1611,6 +1756,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1631,6 +1778,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1651,6 +1800,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1670,6 +1821,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1690,6 +1843,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1710,6 +1865,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1729,6 +1886,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1749,6 +1908,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1769,6 +1930,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1788,6 +1951,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1808,6 +1973,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1828,6 +1995,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1847,6 +2016,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1869,6 +2040,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1890,6 +2063,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1910,6 +2085,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1931,6 +2108,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1951,6 +2130,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1970,6 +2151,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1991,6 +2174,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2011,6 +2196,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2031,6 +2218,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2053,6 +2242,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2075,6 +2266,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2095,6 +2288,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
@@ -2117,6 +2312,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
@@ -2138,6 +2335,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
@@ -2158,6 +2357,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
@@ -2180,6 +2381,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
@@ -2201,6 +2404,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
@@ -2222,6 +2427,8 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */
@@ -2245,6 +2452,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */
@@ -2267,6 +2476,8 @@ public final class QueriesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */

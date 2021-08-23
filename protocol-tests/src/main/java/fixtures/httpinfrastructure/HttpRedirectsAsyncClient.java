@@ -3,6 +3,7 @@ package fixtures.httpinfrastructure;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -27,6 +28,8 @@ public final class HttpRedirectsAsyncClient {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -46,6 +49,8 @@ public final class HttpRedirectsAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -57,6 +62,8 @@ public final class HttpRedirectsAsyncClient {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -68,6 +75,8 @@ public final class HttpRedirectsAsyncClient {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -80,6 +89,8 @@ public final class HttpRedirectsAsyncClient {
      * return the received 301 to the caller for evaluation.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,6 +102,8 @@ public final class HttpRedirectsAsyncClient {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -102,6 +115,8 @@ public final class HttpRedirectsAsyncClient {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -114,6 +129,8 @@ public final class HttpRedirectsAsyncClient {
      * return the received 302 to the caller for evaluation.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -126,6 +143,8 @@ public final class HttpRedirectsAsyncClient {
      * ultimately returning a 200 status code.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -137,6 +156,8 @@ public final class HttpRedirectsAsyncClient {
      * Redirect with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -148,6 +169,8 @@ public final class HttpRedirectsAsyncClient {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -159,6 +182,8 @@ public final class HttpRedirectsAsyncClient {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -170,6 +195,8 @@ public final class HttpRedirectsAsyncClient {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -181,6 +208,8 @@ public final class HttpRedirectsAsyncClient {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -192,6 +221,8 @@ public final class HttpRedirectsAsyncClient {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

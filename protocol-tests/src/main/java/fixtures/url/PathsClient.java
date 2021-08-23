@@ -3,6 +3,7 @@ package fixtures.url;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
@@ -27,6 +28,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -39,6 +42,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -51,6 +56,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,6 +70,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -75,6 +84,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -87,6 +98,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -99,6 +112,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,6 +126,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -123,6 +140,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -135,6 +154,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -147,6 +168,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -159,6 +182,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -171,6 +196,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -183,6 +210,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -196,6 +225,8 @@ public final class PathsClient {
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -209,6 +240,8 @@ public final class PathsClient {
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -222,6 +255,8 @@ public final class PathsClient {
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -235,6 +270,8 @@ public final class PathsClient {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -247,6 +284,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -260,6 +299,8 @@ public final class PathsClient {
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -272,6 +313,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -285,6 +328,8 @@ public final class PathsClient {
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -297,6 +342,8 @@ public final class PathsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -310,6 +357,8 @@ public final class PathsClient {
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -324,6 +373,8 @@ public final class PathsClient {
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -338,6 +389,8 @@ public final class PathsClient {
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -352,6 +405,8 @@ public final class PathsClient {
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

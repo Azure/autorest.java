@@ -3,6 +3,7 @@ package fixtures.httpinfrastructure;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
@@ -27,6 +28,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -39,6 +42,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -51,6 +56,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,6 +70,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -75,6 +84,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -87,6 +98,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -99,6 +112,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,6 +126,8 @@ public final class HttpRetryClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -8,6 +8,7 @@ import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
@@ -76,6 +77,8 @@ public final class InheritancesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -106,6 +109,8 @@ public final class InheritancesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -136,6 +141,8 @@ public final class InheritancesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -168,6 +175,8 @@ public final class InheritancesImpl {
      *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -202,6 +211,8 @@ public final class InheritancesImpl {
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -236,6 +247,8 @@ public final class InheritancesImpl {
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
+     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
+     *     in requestOptions is true.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
