@@ -119,8 +119,7 @@ public class Javagen extends NewPlugin {
 
             // Method group
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
-                        methodGroupClient);
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
                 if (settings.shouldGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }

@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.18.1"
+  "@autorest/modelerfour": "4.20.0"
 
 pipeline:
 
@@ -20,6 +20,7 @@ pipeline:
     flatten-models: true
     flatten-payloads: false
     remove-empty-child-schemas: false
+    seal-single-value-enum-by-default: true
     naming:
       choiceValue: upper
       preserve-uppercase-max-length: 2

@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
+import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
@@ -57,6 +58,21 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .description(operation.getDescription())
                 .name(operation.getLanguage().getJava().getName())
                 .isResumable(false);
+
+        if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // "default" could be null for generated method like "listNext"
+            String operationId;
+            if (operation.getOperationGroup() != null
+                    && operation.getOperationGroup().getLanguage() != null
+                    && operation.getOperationGroup().getLanguage().getDefault() != null
+                    && !CoreUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName())
+                    // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
+                    && !(settings.isFluent() && "ResourceProvider".equals(operation.getOperationGroup().getLanguage().getDefault().getName()))) {
+                operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_" + operation.getLanguage().getDefault().getName();
+            } else {
+                operationId = operation.getLanguage().getDefault().getName();
+            }
+            builder.operationId(operationId);
+        }
 
         List<HttpResponseStatus> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())

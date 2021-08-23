@@ -107,9 +107,8 @@ public class FluentJavaPackage extends JavaPackage {
     }
 
     public final JavaFile addSample(FluentExample example) {
-        JavaSettings settings = JavaSettings.getInstance();
         JavaFile javaFile = getJavaFileFactory().createSampleFile(
-                settings.getPackage(), example.getClassName());
+                example.getPackageName(), example.getClassName());
         FluentExampleTemplate.getInstance().write(example, javaFile);
         addJavaFile(javaFile);
         return javaFile;
