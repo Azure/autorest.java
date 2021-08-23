@@ -239,7 +239,7 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> (item != null) ? item.toString() : "").collect(Collectors.toList());
+                arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
