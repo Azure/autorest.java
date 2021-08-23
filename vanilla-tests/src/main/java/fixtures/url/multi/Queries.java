@@ -87,13 +87,9 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        if (arrayQuery == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter arrayQuery is required and cannot be null."));
-        }
-
         final String accept = "application/json";
-        List<String> arrayQueryConverted = arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
+        List<String> arrayQueryConverted =
+                arrayQuery.stream().map((item) -> (item != null) ? item.toString() : "").collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -166,7 +162,8 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted = arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
+        List<String> arrayQueryConverted =
+                arrayQuery.stream().map((item) -> (item != null) ? item.toString() : "").collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -241,12 +238,8 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted = arrayQuery.stream().map((item) -> {
-          if (item != null) {
-            return item.toString();
-          }
-          return "";
-        }).collect(Collectors.toList());
+        List<String> arrayQueryConverted =
+                arrayQuery.stream().map((item) -> (item != null) ? item.toString() : "").collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
