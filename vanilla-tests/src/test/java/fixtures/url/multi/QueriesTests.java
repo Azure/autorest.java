@@ -1,5 +1,6 @@
 package fixtures.url.multi;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,7 +18,13 @@ public class QueriesTests {
 
     @Test
     public void arrayStringMultiNull() {
-        // client.getQueries().arrayStringMultiNull(null);
+        try {
+            client.getQueries().arrayStringMultiNull(null);
+            Assert.assertFalse(true); // should not reach here
+        }
+        catch (Exception e) {
+
+        }
     }
 
     @Test
