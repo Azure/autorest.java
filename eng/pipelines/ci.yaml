@@ -49,6 +49,7 @@ jobs:
         displayName: 'Generate code'
 
       - script: |
+          git status
           git diff
         displayName: 'Git Diff'
 
