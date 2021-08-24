@@ -738,12 +738,16 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         } else {
             contextParam = "Context.NONE";
         }
+        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.line("return PollerFlux.create(pollInterval,");
+            function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
-            function.line("ChainedPollingStrategy.createDefault(client.getHttpPipeline(), %s),", contextParam);
-            function.line("new TypeReference<%1$s>() { }, new TypeReference<%1$s>() { });", clientMethod.getReturnValue().getResponseBodyType().asNullable());
+            function.line(pollingStrategy + ",");
+            function.line("new TypeReference<>() { }, new TypeReference<>() { });");
             function.decreaseIndent();
         });
     }

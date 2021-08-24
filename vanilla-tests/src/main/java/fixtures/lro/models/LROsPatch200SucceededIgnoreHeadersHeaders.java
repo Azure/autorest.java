@@ -1,13 +1,9 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The LROsPatch200SucceededIgnoreHeadersHeaders model.
- */
+/** The LROsPatch200SucceededIgnoreHeadersHeaders model. */
 @Fluent
 public final class LROsPatch200SucceededIgnoreHeadersHeaders {
     /*
@@ -18,7 +14,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     * 
+     *
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -27,7 +23,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     * 
+     *
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPatch200SucceededIgnoreHeadersHeaders object itself.
      */
@@ -38,9 +34,8 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

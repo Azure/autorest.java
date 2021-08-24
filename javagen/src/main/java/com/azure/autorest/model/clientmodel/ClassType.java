@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.util.BinaryData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,6 +74,7 @@ public class ClassType implements IType {
     public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
+    public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).build();
 
 
     private final String packageName;

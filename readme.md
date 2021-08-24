@@ -71,6 +71,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
 |`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
+|`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 
 ## Additional settings for Fluent
 
@@ -97,6 +98,30 @@ Following settings only works when `fluent` option is specified.
 For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
 
 The code formatter would require Java 11+ runtime.
+
+## Polling configuration
+Polling configurations can be set through `--polling` setting globally or for each operation. The format is a key value map specified below:
+
+```
+polling:
+  {operationId}:
+    strategy: {strategy}
+    intermediate-type: {intermediate-type}
+    final-type: {final-type}
+    poll-interval: {poll-interval}
+```
+
+With the fields specified below:
+
+|Field|Type|Required|Description|Example|
+|-----|----|--------|-----------|-------|
+|operationId|String|true|The `operationId` of the operation. For global polling configuration, use `default`. Case insensitive.|`Pets_put`|
+|strategy|String|false|The invocation to construct a polling strategy. Use fully qualified class name if outside the implementation subpackage specified in `namespace` & `implementation-subpackage`. Use dynamic literals `{httpPipeline}`, `{context}`, `{serializerAdapter}` if these components are required to construct the polling strategy. Default is `com.azure.core.util.polling.ChainedPollingStrategy.createDefault({httpPipeline}, {context})`.|`new com.azure.core.util.polling.OperationResourcePollingStrategy<>({httpPipeline}, {context})`|
+|intermediate-type|String|false|The type of the polling intermediate type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`PollResult`,`com.azure.core.util.BinaryData`|
+|intermediate-type|String|false|The type of the final result type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`Pet`,`com.azure.core.util.BinaryData`|
+|poll-interval|integer|false|The default interval in seconds to poll with (can be modified by users in `PollerFlux` and `SyncPoller`. Default is 1.|30|
+
+To use default settings globally, use `--polling={}`.
 
 # Customizations
 
@@ -819,6 +844,9 @@ help-content:
       - key: skip-formatting
         type: bool
         description: Indicates whether to skip formatting Java file. Default is false.
+      - key: polling
+        type: string
+        description: Configures how to generate long running operations. See [Polling Configuration](https://github.com/Azure/autorest.java#polling-configuration) to see more details on how to use this flag.
 
   javafluent:
     activationScope: fluent

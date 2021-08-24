@@ -1,13 +1,9 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The LRORetrysDeleteProvisioning202Accepted200SucceededHeaders model.
- */
+/** The LRORetrysDeleteProvisioning202Accepted200SucceededHeaders model. */
 @Fluent
 public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
     /*
@@ -24,7 +20,7 @@ public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     * 
+     *
      * @return the retryAfter value.
      */
     public Integer getRetryAfter() {
@@ -33,10 +29,9 @@ public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     * 
+     *
      * @param retryAfter the retryAfter value to set.
-     * @return the LRORetrysDeleteProvisioning202Accepted200SucceededHeaders
-     * object itself.
+     * @return the LRORetrysDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
     public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
@@ -45,7 +40,7 @@ public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Get the location property: The Location property.
-     * 
+     *
      * @return the location value.
      */
     public String getLocation() {
@@ -54,10 +49,9 @@ public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Set the location property: The Location property.
-     * 
+     *
      * @param location the location value to set.
-     * @return the LRORetrysDeleteProvisioning202Accepted200SucceededHeaders
-     * object itself.
+     * @return the LRORetrysDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
     public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders setLocation(String location) {
         this.location = location;
@@ -66,9 +60,8 @@ public final class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

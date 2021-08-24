@@ -4,17 +4,14 @@ import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.AzureKeyCredentialPolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import java.util.ArrayList;
@@ -22,9 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A builder for creating a new instance of the AutoRestLongRunningOperationTestService type.
- */
+/** A builder for creating a new instance of the AutoRestLongRunningOperationTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestLongRunningOperationTestService.class})
 public final class AutoRestLongRunningOperationTestServiceBuilder {
     private static final String SDK_NAME = "name";
@@ -33,9 +28,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
-    /**
-     * Create an instance of the AutoRestLongRunningOperationTestServiceBuilder.
-     */
+    /** Create an instance of the AutoRestLongRunningOperationTestServiceBuilder. */
     public AutoRestLongRunningOperationTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -47,7 +40,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -63,7 +56,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -79,7 +72,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The serializer to serialize an object into a string.
-     * 
+     *
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -95,7 +88,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The HTTP client used to send the request.
-     * 
+     *
      * @param httpClient the httpClient value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -112,7 +105,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The configuration store that is used during construction of the service client.
-     * 
+     *
      * @param configuration the configuration value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -128,7 +121,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
-     * 
+     *
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -145,7 +138,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     * 
+     *
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -161,7 +154,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Adds a custom Http pipeline policy.
-     * 
+     *
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -172,7 +165,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestLongRunningOperationTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestLongRunningOperationTestService.
      */
     public AutoRestLongRunningOperationTestService buildClient() {
@@ -185,26 +178,33 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestLongRunningOperationTestService client = new AutoRestLongRunningOperationTestService(pipeline, serializerAdapter, host);
+        AutoRestLongRunningOperationTestService client =
+                new AutoRestLongRunningOperationTestService(pipeline, serializerAdapter, host);
         return client;
     }
 
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration =
+                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         if (httpLogOptions == null) {
             httpLogOptions = new HttpLogOptions();
         }
         List<HttpPipelinePolicy> policies = new ArrayList<>();
         String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
         String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
-        policies.add(new UserAgentPolicy(httpLogOptions.getApplicationId(), clientName, clientVersion, buildConfiguration));
+        policies.add(
+                new UserAgentPolicy(httpLogOptions.getApplicationId(), clientName, clientVersion, buildConfiguration));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);
         policies.add(new CookiePolicy());
         policies.addAll(this.pipelinePolicies);
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).build();
+        HttpPipeline httpPipeline =
+                new HttpPipelineBuilder()
+                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
+                        .httpClient(httpClient)
+                        .build();
         return httpPipeline;
     }
 }

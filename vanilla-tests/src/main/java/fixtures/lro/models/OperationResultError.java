@@ -1,13 +1,9 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The OperationResultError model.
- */
+/** The OperationResultError model. */
 @Fluent
 public final class OperationResultError {
     /*
@@ -24,7 +20,7 @@ public final class OperationResultError {
 
     /**
      * Get the code property: The error code for an operation failure.
-     * 
+     *
      * @return the code value.
      */
     public Integer getCode() {
@@ -33,7 +29,7 @@ public final class OperationResultError {
 
     /**
      * Set the code property: The error code for an operation failure.
-     * 
+     *
      * @param code the code value to set.
      * @return the OperationResultError object itself.
      */
@@ -44,7 +40,7 @@ public final class OperationResultError {
 
     /**
      * Get the message property: The detailed arror message.
-     * 
+     *
      * @return the message value.
      */
     public String getMessage() {
@@ -53,7 +49,7 @@ public final class OperationResultError {
 
     /**
      * Set the message property: The detailed arror message.
-     * 
+     *
      * @param message the message value to set.
      * @return the OperationResultError object itself.
      */
@@ -64,9 +60,8 @@ public final class OperationResultError {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }
