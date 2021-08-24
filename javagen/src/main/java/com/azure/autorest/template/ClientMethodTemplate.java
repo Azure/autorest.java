@@ -287,7 +287,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                         parameter.getCollectionFormat().toString().toUpperCase());
                             }
                         } else {
-                            expression = String.format("%s.stream().map((item) -> (item != null) ? item : \"\")" + 
+                            expression = String.format("%s.stream().map((item) -> java.util.Objects.toString(item, \"\"))" + 
                                     ".collect(Collectors.toList())",
                                     parameterName);                            
                         }

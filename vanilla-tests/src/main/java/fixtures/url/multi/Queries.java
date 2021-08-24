@@ -89,7 +89,7 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> (item != null) ? item : "").collect(Collectors.toList());
+                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -163,7 +163,7 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> (item != null) ? item : "").collect(Collectors.toList());
+                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -239,7 +239,7 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> (item != null) ? item : "").collect(Collectors.toList());
+                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
