@@ -68,10 +68,10 @@ autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azur
 rm ./protocol-tests/src/main/java/module-info.java
 
 # Protocol resilience
-autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/llc_initial.json --namespace=fixtures.llc_initial --output-folder=protocol-resilience-tests/llcinitial
-autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/llc_update1.json --namespace=fixtures.llc_update1 --output-folder=protocol-resilience-tests/llcupdate1
-rm ./protocol-resilience-tests/llcinitial/src/main/java/module-info.java
-rm ./protocol-resilience-tests/llcupdate1/src/main/java/module-info.java
+autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/llc_initial.json --namespace=fixtures.llc_initial --output-folder=protocol-resilience-test/llcinitial
+autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/llc_update1.json --namespace=fixtures.llc_update1 --output-folder=protocol-resilience-test/llcupdate1
+rm ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
+rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 
 # customization
 autorest --version=3.4.5 --use:. customization-tests/swagger
