@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
-    "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <!-- This is a checkstyle configuration file. For descriptions of
 what the following rules do, please see the checkstyle configuration
@@ -26,13 +26,10 @@ page at http://checkstyle.sourceforge.net/config.html -->
     <property name="fileExtensions" value="java"/>
   </module>
 
-  <module name="FileTabCharacter">
-    <!-- Checks that there are no tab characters in the file. -->
-  </module>
+  <!-- Checks that there are no tab characters in the file. -->
+  <module name="FileTabCharacter" />
 
-  <module name="NewlineAtEndOfFile">
-    <property name="lineSeparator" value="lf"/>
-  </module>
+  <module name="NewlineAtEndOfFile" />
 
   <module name="RegexpSingleline">
     <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
@@ -55,7 +52,7 @@ page at http://checkstyle.sourceforge.net/config.html -->
     <property name="max" value="120"/>
     <!-- Allow codeSnippet to override max line length -->
     <!-- Allow comment with single word to override max line length -->
-    <property name="ignorePattern" value=".*(\{@codesnippet.*\}|&lt;a href)|^ *\* *[^ ]+$"/>
+    <property name="ignorePattern" value=".*(\{@codesnippet.*\}|&lt;a href)|^ *\* *[^ ]+$||http://|https://|^ *\* *[^ ]+$"/>
   </module>
 
   <!-- All Java AST specific tests live under TreeWalker module. -->
@@ -272,19 +269,135 @@ page at http://checkstyle.sourceforge.net/config.html -->
 
     <!--Checks for package naming and name length limit. Package names have to starting with either-->
     <!--'com.microsoft.azure' or 'com.azure', and then the extension names should only contains-->
-    <!--characters 'a' to 'z' with no more than 20 characters and  the package names should be no-->
+    <!--characters 'a' to 'z' with no more than 30 characters and  the package names should be no-->
     <!--more than 80 characters.-->
     <module name="PackageName">
-      <property name="format" value="^(?=.{9,80}$)((com.microsoft.azure|com.azure)(\.[a-z]{1,20})*)+$"/>
+      <property name="format" value="^(?=.{9,80}$)((com.microsoft|com.azure)(\.[a-z]{1,30})*)+$"/>
     </module>
 
     <!-- Javadoc checks                                   -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html -->
     <module name="JavadocMethod">
-      <property name="scope" value="protected"/>
+      <property name="accessModifiers" value="public, protected"/>
     </module>
     <module name="MissingJavadocMethod"/>
     <module name="MissingJavadocType"/>
     <module name="MissingJavadocPackage"/>
+
+
+    <!-- Verifies that all throws in the public API have JavaDocs explaining why and when they are thrown. -->
+    <!-- The check verifies both checked (in the throws clause) and unchecked throws -->
+    <module name="com.azure.tools.checkstyle.checks.JavadocThrowsChecks"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Checks for the public API that should
+    1) not return classes in the implementation package
+    2) no class of implementation package as method's parameters -->
+    <module name="com.azure.tools.checkstyle.checks.NoImplInPublicAPI"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Verify the classes with annotation @ServiceClient should have following rules:
+    1) No public or protected constructors
+    2) No public static method named 'builder'
+    3) Since these classes are supposed to be immutable, all fields in the service client classes should be final.
+
+    Also, verify all methods that have a @ServiceMethod annotation in a class annotated with @ServiceClient should
+    follow below rules:
+    1) Follows method naming pattern. Refer to Java Spec.
+    2) Methods should not have "Async" added to the method name
+    3) The return type of async and sync clients should be as per guidelines:
+      3.1) The return type for async collection should be of type? extends PagedFlux
+      3.2) The return type for async single value should be of type? extends Mono
+      3.3) The return type for sync collection should be of type? extends PagedIterable
+      3.4) The return type for sync single value should be of type? extends Response -->
+    <module name="com.azure.tools.checkstyle.checks.ServiceClientCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Checks for no external dependency exposed in the public API.
+    We should only return types, and accept argument types, that are from the com.azure namespace.
+    All other types should have suppression added if required. -->
+    <module name="com.azure.tools.checkstyle.checks.ExternalDependencyExposedCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- The @ServiceClientBuilder class should have the following rules:
+    1) All service client builder should be named <ServiceName>ClientBuilder and annotated with @ServiceClientBuilder.
+    2) Has a method 'buildClient()' to build a synchronous client,
+    3) Has a method 'buildAsyncClient()' to build an asynchronous client -->
+    <module name="com.azure.tools.checkstyle.checks.ServiceClientBuilderCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- The @ServiceInterface class should have the following rules:
+    1) The annotation property 'name' should be non-empty
+    2) The length of value of property 'name' should be less than 20 characters and without space -->
+    <module name="com.azure.tools.checkstyle.checks.ServiceInterfaceCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- The @Immutable class should have the following rules:
+    1) All fields must be final -->
+    <module name="com.azure.tools.checkstyle.checks.OnlyFinalFieldsForImmutableClassCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Verify the whenever a field is assigned just once in constructor to be final -->
+    <module name="com.azure.tools.checkstyle.checks.EnforceFinalFieldsCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Javadoc format: 'param / return / throws' descriptions text should only have one space character after the
+     parameter name or return -->
+    <module name="com.azure.tools.checkstyle.checks.JavaDocFormatting"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Must use 'logger.logAndThrow' but not directly calling 'throw exception' -->
+    <module name="com.azure.tools.checkstyle.checks.ThrowFromClientLoggerCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Any class that implements the HttpPipelinePolicy interface should:
+    1) Must be a public class.
+    2) Not in an implementation package or sub-package. -->
+    <module name="com.azure.tools.checkstyle.checks.HttpPipelinePolicyCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Javadoc inline check should:
+    1) Use {@codesnippet ...} instead of '<code>', '<pre>', or '{@code ...}' if these tags span multiple lines.
+       Inline code sample are fine as-is.
+    2) No check on class-level Javadoc. -->
+    <!-- This check was removed as it causes more noise than fixes. The purpose of this check was to move away from -->
+    <!-- using <code>, <pre>, and {@code} tags while we were on-boarding codesnippets. These tags have since been   -->
+    <!-- removed and codesnippets are expected.                                                                     -->
+    <!-- <module name="com.azure.tools.checkstyle.checks.JavadocInlineTagCheck"/> -->
+
+    <!-- CUSTOM CHECKS -->
+    <!-- {@codesnippet ...} description should match naming pattern requirement below:
+    1) Package, class and method names should be concatenated by dot '.'. Ex. packageName.className.methodName
+    2) Methods arguments should be concatenated by dash '-'. Ex. string-string  for methodName(String s, String s2)
+    3) Use '#' to concatenate 1) and 2), ex packageName.className.methodName#string-string -->
+    <module name="com.azure.tools.checkstyle.checks.JavadocCodeSnippetCheck"/>
+
+    <!--CUSTOM CHECKS-->
+    <!-- Good Logging Practice
+    1) ClientLogger in public API should all named 'logger', public API classes are those classes that are declared
+       as public and that do not exist in an implementation package or subpackage.
+    2) ClientLogger should be non-static instance logger
+    3) Should not use any external logger class, only use ClientLogger. No slf4j, log4j, or other logging imports are allowed.
+      'System.out' and 'System.err' is not allowed as well.
+    4) All classes should use ClientLogger as logger only but except ClientLogger itself -->
+    <module name="com.azure.tools.checkstyle.checks.GoodLoggingCheck"/>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Public API classes should follow Camelcase rules: -->
+    <!-- 1. ClassName -->
+    <!-- 2. methodName -->
+    <!-- 3. variableName -->
+    <!-- 4. longerVariableOrMethodName -->
+    <module name="com.azure.tools.checkstyle.checks.BlacklistedWordsCheck">
+      <property name="blacklistedWords" value="URL, HTTP, XML, JSON, SAS, CPK, API" />
+    </module>
+
+    <!-- CUSTOM CHECKS -->
+    <!-- Fluent method checks:
+    (1) A method returns an instance of the class, and that have one parameter,
+    (2) should not start with the words in the avoidStartWords list.-->
+    <!-- <module name="com.azure.tools.checkstyle.checks.FluentMethodNameCheck">-->
+    <!--    <property name="avoidStartWords" value="with,set"/>-->
+    <!-- </module>-->
   </module>
 </module>
