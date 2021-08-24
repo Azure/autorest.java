@@ -40,8 +40,8 @@ public final class PolymorphicrecursiveAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -72,8 +72,8 @@ public final class PolymorphicrecursiveAsyncClient {
      *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
      *     "species": "dangerous", "length": 10, "age": 105 } ] }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

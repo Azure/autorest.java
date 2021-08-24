@@ -39,8 +39,8 @@ public final class BasicClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -72,8 +72,8 @@ public final class BasicClient {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -96,8 +96,8 @@ public final class BasicClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -120,8 +120,8 @@ public final class BasicClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -144,8 +144,8 @@ public final class BasicClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -168,8 +168,8 @@ public final class BasicClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

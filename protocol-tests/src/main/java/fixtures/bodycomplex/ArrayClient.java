@@ -39,8 +39,8 @@ public final class ArrayClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -65,8 +65,8 @@ public final class ArrayClient {
      *     fox jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,8 +89,8 @@ public final class ArrayClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -114,8 +114,8 @@ public final class ArrayClient {
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -138,8 +138,8 @@ public final class ArrayClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

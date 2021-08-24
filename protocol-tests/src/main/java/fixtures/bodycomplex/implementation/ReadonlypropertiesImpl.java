@@ -69,8 +69,8 @@ public final class ReadonlypropertiesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -92,8 +92,8 @@ public final class ReadonlypropertiesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -115,8 +115,8 @@ public final class ReadonlypropertiesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -138,8 +138,8 @@ public final class ReadonlypropertiesImpl {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -163,8 +163,8 @@ public final class ReadonlypropertiesImpl {
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -188,8 +188,8 @@ public final class ReadonlypropertiesImpl {
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

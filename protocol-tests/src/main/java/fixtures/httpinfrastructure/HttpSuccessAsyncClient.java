@@ -27,8 +27,8 @@ public final class HttpSuccessAsyncClient {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -46,8 +46,8 @@ public final class HttpSuccessAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -59,8 +59,8 @@ public final class HttpSuccessAsyncClient {
      * Put boolean value true returning 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -72,8 +72,8 @@ public final class HttpSuccessAsyncClient {
      * Patch true Boolean value in request returning 200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -85,8 +85,8 @@ public final class HttpSuccessAsyncClient {
      * Post bollean value true in request that returns a 200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -98,8 +98,8 @@ public final class HttpSuccessAsyncClient {
      * Delete simple boolean value true returns 200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,8 +111,8 @@ public final class HttpSuccessAsyncClient {
      * Put true Boolean value in request returns 201.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -124,8 +124,8 @@ public final class HttpSuccessAsyncClient {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -137,8 +137,8 @@ public final class HttpSuccessAsyncClient {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -150,8 +150,8 @@ public final class HttpSuccessAsyncClient {
      * Patch true Boolean value in request returns 202.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -163,8 +163,8 @@ public final class HttpSuccessAsyncClient {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -176,8 +176,8 @@ public final class HttpSuccessAsyncClient {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -189,8 +189,8 @@ public final class HttpSuccessAsyncClient {
      * Return 204 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -202,8 +202,8 @@ public final class HttpSuccessAsyncClient {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -215,8 +215,8 @@ public final class HttpSuccessAsyncClient {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -228,8 +228,8 @@ public final class HttpSuccessAsyncClient {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -241,8 +241,8 @@ public final class HttpSuccessAsyncClient {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -260,8 +260,8 @@ public final class HttpSuccessAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException Thrown when status code is 400 or above if requestOptions is null or throwOnError
-     *     in requestOptions is true.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
