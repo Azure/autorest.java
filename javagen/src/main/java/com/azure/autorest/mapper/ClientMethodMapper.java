@@ -353,10 +353,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         && operation.getOperationGroup().getLanguage().getDefault() != null
                         && operation.getOperationGroup().getLanguage().getDefault().getName() != null
                         && !operation.getOperationGroup().getLanguage().getDefault().getName().isEmpty()) {
-                    operationKey = operation.getOperationGroup().getLanguage().getDefault().getName() + "."
+                    operationKey = operation.getOperationGroup().getLanguage().getDefault().getName() + "_"
                             + operation.getLanguage().getDefault().getName();
                 } else {
-                    operationKey = operation.getLanguage().getJava().getName();
+                    operationKey = operation.getLanguage().getDefault().getName();
                 }
 
                 MethodPollingDetails pollingDetails = null;
