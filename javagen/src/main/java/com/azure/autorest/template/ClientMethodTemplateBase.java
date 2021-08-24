@@ -54,7 +54,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
 
         clientMethod.getParameters().forEach(p -> commentBlock.param(p.getName(), methodParameterDescriptionOrDefault(p)));
-        commentBlock.methodThrows("HttpResponseException", "Thrown when status code is 400 or above if requestOptions is null or throwOnError in requestOptions is true");
+        commentBlock.methodThrows("HttpResponseException", "thrown if status code is 400 or above, if throwOnError in requestOptions is not false");
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
 
