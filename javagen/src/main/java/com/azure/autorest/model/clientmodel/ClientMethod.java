@@ -269,7 +269,7 @@ public class ClientMethod {
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         imports.add("com.azure.core.annotation.ServiceMethod");
-        imports.add("com.azure.core.annotation.ReturnType");        
+        imports.add("com.azure.core.annotation.ReturnType");
 
         for (ClientMethodParameter parameter : getParameters()) {
             parameter.addImportsTo(imports, includeImplementationImports);
