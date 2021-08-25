@@ -15,8 +15,12 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.url.multi.models.ErrorException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -89,7 +93,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
+                Optional.ofNullable(arrayQuery)
+                        .map(Collection::stream)
+                        .orElseGet(Stream::empty)
+                        .map((item) -> Objects.toString(item, ""))
+                        .collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -163,7 +171,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
+                Optional.ofNullable(arrayQuery)
+                        .map(Collection::stream)
+                        .orElseGet(Stream::empty)
+                        .map((item) -> Objects.toString(item, ""))
+                        .collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -239,7 +251,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                arrayQuery.stream().map((item) -> java.util.Objects.toString(item, "")).collect(Collectors.toList());
+                Optional.ofNullable(arrayQuery)
+                        .map(Collection::stream)
+                        .orElseGet(Stream::empty)
+                        .map((item) -> Objects.toString(item, ""))
+                        .collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }

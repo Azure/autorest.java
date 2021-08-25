@@ -18,13 +18,7 @@ public class QueriesTests {
 
     @Test
     public void arrayStringMultiNull() {
-        try {
-            client.getQueries().arrayStringMultiNull(null);
-            Assert.assertFalse(true); // should not reach here
-        }
-        catch (Exception e) {
-
-        }
+        client.getQueries().arrayStringMultiNull(null);        
     }
 
     @Test
