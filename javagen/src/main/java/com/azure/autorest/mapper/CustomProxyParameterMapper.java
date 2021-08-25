@@ -82,7 +82,14 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
                 wireType = ClassType.String;
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
-            wireType = ClassType.String;
+            if (parameter.getProtocol().getHttp().getExplode()) {
+                wireType = new ListType(ClassType.String);
+            } else {
+                wireType = ClassType.String;
+            }
+        }
+        if (parameter.getProtocol().getHttp().getExplode()) {
+            builder.alreadyEncoded(true);
         }
         builder.wireType(wireType);
 
@@ -146,6 +153,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
             collectionFormat = CollectionFormat.CSV;
         }
         builder.collectionFormat(collectionFormat);
+        builder.explode(parameter.getProtocol().getHttp().getExplode());
 
         return builder.build();
     }

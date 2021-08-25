@@ -234,7 +234,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                parameterWireType = ClassType.String;
+                if (parameter.getExplode() == false) {
+                    parameterWireType = ClassType.String;
+                } else {
+                    parameterWireType = new ListType(ClassType.String);
+                }
             }
 
             if (parameterWireType != parameterClientType) {
@@ -273,7 +277,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         String expression;
                         if (alwaysNull) {
                             expression = "null";
-                        } else {
+                        } else if (!parameter.getExplode()){
                             expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
                                             ".serializeList(%s, CollectionFormat.%s)", parameterName,
                                     parameter.getCollectionFormat().toString().toUpperCase());
@@ -282,6 +286,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                                 ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
                                         parameter.getCollectionFormat().toString().toUpperCase());
                             }
+                        } else {
+                            expression = String.format("Optional.ofNullable(%s).map(Collection::stream)" +
+                                    ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" + 
+                                    ".collect(Collectors.toList())",
+                                    parameterName);                            
                         }
                         function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;
