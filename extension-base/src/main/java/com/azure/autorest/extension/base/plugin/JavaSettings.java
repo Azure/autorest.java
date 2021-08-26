@@ -136,7 +136,8 @@ public class JavaSettings
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
                     host.getStringValue("key-credential-header-name", ""),
-                    host.getBooleanValue("skip-formatting", false));
+                    host.getBooleanValue("skip-formatting", false),
+                    host.getValue(Map.class, "properties"));
         }
         return _instance;
     }
@@ -200,7 +201,8 @@ public class JavaSettings
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
                          String keyCredentialHeaderName,
-                         boolean skipFormatting)
+                         boolean skipFormatting,
+                         Map<String, String> properties)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -263,6 +265,7 @@ public class JavaSettings
         this.customizationClass = customizationClass;
         this.keyCredentialHeaderName = keyCredentialHeaderName;
         this.skipFormatting = skipFormatting;
+        this.properties = properties;
     }
 
     private String keyCredentialHeaderName;
@@ -637,6 +640,12 @@ public class JavaSettings
 
     public List<String> getServiceVersions() {
         return serviceVersions;
+    }
+
+    private final Map<String, String> properties;
+
+    public Map<String, String> getProperties() {
+        return properties;
     }
 
     private final boolean requireXMsFlattenedToFlatten;

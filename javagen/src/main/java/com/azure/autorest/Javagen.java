@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.model.javamodel.PlainFile;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -172,6 +173,16 @@ public class Javagen extends NewPlugin {
                 javaPackage.addModuleInfo(client.getModuleInfo());
             }
 
+            // CHANGELOG.md
+            if (settings.isLowLevelClient()) {
+                javaPackage.addChangelog();
+            }
+
+            // pom.xml
+            if (settings.isLowLevelClient()) {
+                javaPackage.addServicePom();
+            }
+
             // TODO: POM, Manager
             //Step 4: Print to files
             Formatter formatter = new Formatter();
@@ -187,6 +198,12 @@ public class Javagen extends NewPlugin {
                 }
                 writeFile(javaFile.getFilePath(), content, null);
             }
+
+            // Write plain files
+            javaPackage.getPlainFiles().stream().filter(f -> f.getContent() != null)
+                    .forEach(f -> writeFile(f.getFilePath(), f.getContent(), null));
+
+            // .properties file
             String artifactId = settings.getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {
                 writeFile("src/main/resources/" + artifactId + ".properties",

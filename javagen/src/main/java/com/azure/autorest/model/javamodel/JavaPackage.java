@@ -8,10 +8,7 @@ import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class JavaPackage {
     private final Logger logger;
@@ -19,6 +16,7 @@ public class JavaPackage {
     private final JavaSettings settings;
     private final List<JavaFile> javaFiles;
     private final List<XmlFile> xmlFiles;
+    private final List<PlainFile> plainFiles;
     private final JavaFileFactory javaFileFactory;
 
     private final Set<String> filePaths = new HashSet<>();
@@ -27,6 +25,7 @@ public class JavaPackage {
         this.settings = JavaSettings.getInstance();
         this.javaFiles = new ArrayList<>();
         this.xmlFiles = new ArrayList<>();
+        this.plainFiles = new ArrayList<>();
         this.javaFileFactory = new JavaFileFactory(settings);
         this.logger = new PluginLogger(host, JavaPackage.class);
     }
@@ -41,6 +40,10 @@ public class JavaPackage {
 
     public List<XmlFile> getXmlFiles() {
         return xmlFiles;
+    }
+
+    public List<PlainFile> getPlainFiles() {
+        return plainFiles;
     }
 
     public final void addManager(String package_Keyword, String name, Manager model) {
@@ -165,6 +168,20 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
+    public final void addChangelog() {
+        PlainFile plainFile = new PlainFile("CHANGELOG.md");
+        plainFile.loadFromResource("CHANGELOG.md", settings.getProperties());
+        addPlainFile(plainFile);
+    }
+
+    public final void addServicePom() {
+        PlainFile plainFile = new PlainFile("pom.xml");
+        Map<String, String> model = settings.getProperties();
+        model.put("artifact-id", settings.getArtifactId());
+        plainFile.loadFromResource("pom.xml", model);
+        addPlainFile(plainFile);
+    }
+
     public final void addPom(String name, Pom pom) {
         XmlFile xmlFile = new XmlFile(name, new XmlFile.Options().setIndent(2));
         Templates.getPomTemplate().write(pom, xmlFile);
@@ -176,6 +193,10 @@ public class JavaPackage {
         this.checkDuplicateFile(javaFile.getFilePath());
         filePaths.add(javaFile.getFilePath());
         javaFiles.add(javaFile);
+    }
+
+    public void addPlainFile(PlainFile plainFile) {
+        plainFiles.add(plainFile);
     }
 
     protected void checkDuplicateFile(String filePath) {
