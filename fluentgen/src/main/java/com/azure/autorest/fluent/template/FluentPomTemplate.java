@@ -76,6 +76,26 @@ public class FluentPomTemplate extends PomTemplate {
                             configurationBlock.tag("release", "11");
                         });
                     });
+                    // build-helper-maven-plugin: allow samples to be compiled
+                    pluginsBlock.block("plugin", pluginBlock -> {
+                        pluginBlock.tag("groupId", "org.codehaus.mojo");
+                        pluginBlock.tag("artifactId", "build-helper-maven-plugin");
+                        pluginBlock.tag("version", "3.0.0");
+                        pluginBlock.block("executions", executionsBlock -> {
+                            executionsBlock.block("execution", executionBlock -> {
+                                executionBlock.tag("id", "add-test-source");
+                                executionBlock.tag("phase", "generate-test-sources");
+                                executionBlock.block("goals", goalsBlock -> {
+                                    goalsBlock.tag("goal", "add-test-source");
+                                });
+                                executionBlock.block("configuration", configurationBlock -> {
+                                    configurationBlock.block("sources", sourcesBlock -> {
+                                        sourcesBlock.tag("source", "${basedir}/src/samples");
+                                    });
+                                });
+                            });
+                        });
+                    });
                 }
             });
         });
