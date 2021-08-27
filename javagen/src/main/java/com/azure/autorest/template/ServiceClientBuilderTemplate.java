@@ -322,6 +322,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
+            // clientOptions header
+            function.line("HttpHeaders headers = new HttpHeaders();");
+            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
+            function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
+
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
             function.line("policies.add(new CookiePolicy());");
@@ -347,11 +352,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
             function.line("policies.addAll(this.pipelinePolicies);");
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
-
-            // clientOptions header
-            function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
-            function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
 
