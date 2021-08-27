@@ -8,6 +8,7 @@ import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
+import java.nio.file.Paths;
 import java.util.*;
 
 public class JavaPackage {
@@ -20,6 +21,8 @@ public class JavaPackage {
     private final JavaFileFactory javaFileFactory;
 
     private final Set<String> filePaths = new HashSet<>();
+
+    private Map<String, String> model;
 
     public JavaPackage(NewPlugin host) {
         this.settings = JavaSettings.getInstance();
@@ -170,15 +173,25 @@ public class JavaPackage {
 
     public final void addChangelog() {
         PlainFile plainFile = new PlainFile("CHANGELOG.md");
-        plainFile.loadFromResource("CHANGELOG.md", settings.getProperties());
+        plainFile.loadFromResource("changelog.md", getModel());
         addPlainFile(plainFile);
     }
 
     public final void addServicePom() {
         PlainFile plainFile = new PlainFile("pom.xml");
-        Map<String, String> model = settings.getProperties();
-        model.put("artifact-id", settings.getArtifactId());
-        plainFile.loadFromResource("pom.xml", model);
+        plainFile.loadFromResource("pom.xml", getModel());
+        addPlainFile(plainFile);
+    }
+
+    public final void addReadme() {
+        PlainFile plainFile = new PlainFile("README.md");
+        plainFile.loadFromResource("readme.md", getModel());
+        addPlainFile(plainFile);
+    }
+
+    public final void addSampleReadme() {
+        PlainFile plainFile = new PlainFile(Paths.get("src", "samples", "README.md").toString());
+        plainFile.loadFromResource("sample_readme.md", getModel());
         addPlainFile(plainFile);
     }
 
@@ -204,5 +217,19 @@ public class JavaPackage {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));
             logger.warn(String.format("Name conflict for output file '%1$s'.", filePath));
         }
+    }
+
+    private Map<String, String> getModel() {
+        if (model == null) {
+            model = settings.getLlcProperties();
+            model.put("artifact-id", settings.getArtifactId());
+            model.put("service-name", settings.getServiceName());
+            model.put("namespace-path", settings.getPackage().replaceAll("\\.", "/"));
+            if (!model.containsKey("url-fragment")) {
+                model.put("url-fragment",
+                        settings.getServiceName().replaceAll("\\s", "-").toLowerCase() + "-java-samples");
+            }
+        }
+        return model;
     }
 }

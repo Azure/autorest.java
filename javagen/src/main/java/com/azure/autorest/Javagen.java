@@ -129,7 +129,7 @@ public class Javagen extends NewPlugin {
             // Service version
             if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
                 String packageName = settings.getPackage();
-                String serviceName = settings.getServiceName();
+                String serviceName = settings.getServiceName().replaceAll("\\s", "");
                 String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 List<String> serviceVersions = settings.getServiceVersions();
                 javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
@@ -181,6 +181,16 @@ public class Javagen extends NewPlugin {
             // pom.xml
             if (settings.isLowLevelClient()) {
                 javaPackage.addServicePom();
+            }
+
+            // README.md
+            if (settings.isLowLevelClient()) {
+                javaPackage.addReadme();
+            }
+
+            // Sample README.md
+            if (settings.isLowLevelClient()) {
+                javaPackage.addSampleReadme();
             }
 
             // TODO: POM, Manager

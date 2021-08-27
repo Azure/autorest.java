@@ -11,10 +11,10 @@
 
     <groupId>${group-id}</groupId>
     <artifactId>${artifact-id}</artifactId>
-    <version>${version}</version> <!-- {x-version-update;com.azure:azure-analytics-purview-account;current} -->
+    <version>${version}</version> <!-- {x-version-update;${group-id}:${artifact-id};current} -->
 
-    <name>Microsoft Azure client library for Purview Account</name>
-    <description>This package contains Microsoft Azure Purview Account client library.</description>
+    <name>Microsoft Azure client library for ${service-name}</name>
+    <description>This package contains Microsoft Azure ${service-name} SDK</description>
 
     <distributionManagement>
         <site>

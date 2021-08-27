@@ -1,6 +1,6 @@
-# Azure Purview Account client library for Java
+# Azure ${service-name} client library for Java
 
-${description}
+${readme-description}
 
 **Please rely heavily on the [service's documentation][product_documentation] and [Low-Level client documentation][low_level_client] to use this library**
 
@@ -12,18 +12,15 @@ ${description}
 
 - A [Java Development Kit (JDK)][jdk_link], version 8 or later.
 - [Azure Subscription][azure_subscription]
-- An existing Azure Purview account.
-
-For more information about creating the account see [here][create_azure_purview_account].
 
 ### Include the Package
 
-[//]: # ({x-version-update-start;com.azure:azure-analytics-purview-account;current})
+[//]: # ({x-version-update-start;${group-id}:${artifact-id};current})
 ```xml
 <dependency>
-  <groupId>com.azure</groupId>
-  <artifactId>azure-analytics-purview-account</artifactId>
-  <version>1.0.0-beta.1</version>
+  <groupId>${group-id}</groupId>
+  <artifactId>${artifact-id}</artifactId>
+  <version>${version}</version>
 </dependency>
 ```
 [//]: # ({x-version-update-end})
@@ -52,12 +49,9 @@ To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
 ##### Example
-<!-- embedme ./src/samples/java/com/azure/analytics/purview/account/ReadmeSamples.java#L10-L13 -->
+<!-- embedme ./src/samples/java/${namespace-path}/ReadmeSamples.java#L${line-start}-L${line-end} -->
 ```java
-AccountsClient client = new PurviewAccountClientBuilder()
-    .host(System.getenv("ACCOUNT_ENDPOINT"))
-    .credential(new DefaultAzureCredentialBuilder().build())
-    .buildAccountsClient();
+${example-code}
 ```
 
 ## Key concepts
@@ -84,22 +78,19 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[samples]: src/samples/java/com/azure/analytics/purview/account
-[source_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/purview/azure-analytics-purview-account/src
-[samples_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/purview/azure-analytics-purview-account/src/samples/
+[source_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/${rp-name}/${artifact-id}/src
+[samples_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/${rp-name}/${artifact-id}/src/samples/
 [azure_subscription]: https://azure.microsoft.com/free/
 [api_reference_doc]: https://azure.github.io/azure-sdk-for-java
-[product_documentation]: https://azure.microsoft.com/services/purview/
+[product_documentation]: https://azure.microsoft.com/services/${rp-name}/
 [azure_identity]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/identity/azure-identity
 [DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/identity/azure-identity/README.md#defaultazurecredential
 [jdk_link]: https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable
-[package]: https://mvnrepository.com/artifact/com.azure/azure-analytics-purview-account
-[samples_readme]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/purview/azure-analytics-purview-account/src/samples/README.md
+[package]: https://mvnrepository.com/artifact/${group-id}/${artifact-id}
+[samples_readme]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/${rp-name}/${artifact-id}/src/samples/README.md
 [low_level_client]: https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[create_azure_purview_account]: https://docs.microsoft.com/azure/purview/create-catalog-portal
 [logging]: https://github.com/Azure/azure-sdk-for-java/wiki/Logging-with-Azure-SDK
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-java%2Fsdk%2Fpurview%2Fazure-analytics-purview-account%2FREADME.png)
