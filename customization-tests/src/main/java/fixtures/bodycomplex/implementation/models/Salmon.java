@@ -57,7 +57,7 @@ public class Salmon extends Fish {
      *
      * @return the iswild value.
      */
-    public Boolean isWild() {
+    public Boolean iswild() {
         return this.iswild;
     }
 
@@ -67,7 +67,7 @@ public class Salmon extends Fish {
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
-    public Salmon setWild(Boolean iswild) {
+    public Salmon setIswild(Boolean iswild) {
         this.iswild = iswild;
         return this;
     }
