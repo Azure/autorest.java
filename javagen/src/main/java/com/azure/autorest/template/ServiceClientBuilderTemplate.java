@@ -404,15 +404,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             commonProperties.add(new ServiceClientProperty("The list of Http pipeline policies to add.",
                     new ListType(ClassType.HttpPipelinePolicy), "pipelinePolicies", true, null));
-        }
 
-        commonProperties.add(new ServiceClientProperty(
-                "The client options such as application ID and custom headers to set on a request.",
-                ClassType.ClientOptions,
-                "clientOptions",
-                false,
-                // It should be new ClientOptions()
-                null));
+            commonProperties.add(new ServiceClientProperty(
+                    "The client options such as application ID and custom headers to set on a request.",
+                    ClassType.ClientOptions,
+                    "clientOptions",
+                    false,
+                    // It should be new ClientOptions()
+                    null));
+        }
 
         return commonProperties;
     }
