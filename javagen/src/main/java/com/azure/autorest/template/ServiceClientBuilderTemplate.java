@@ -317,8 +317,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-            function.line("String applicationId = clientOptions.getApplicationId() == null ? " +
-                    "httpLogOptions.getApplicationId() : clientOptions.getApplicationId();");
+            function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
