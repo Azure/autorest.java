@@ -45,14 +45,12 @@ To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below
     <version>${azure-identity-version}</version>
 </dependency>
 ```
+[//]: # ({x-version-update-end})
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
 ##### Example
-<!-- embedme ./src/samples/java/${namespace-path}/ReadmeSamples.java#L${line-start}-L${line-end} -->
-```java
-${example-code}
-```
+[ATTENTION] PLEASE FILL!
 
 ## Key concepts
 
