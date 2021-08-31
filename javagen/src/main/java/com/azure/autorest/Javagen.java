@@ -174,22 +174,22 @@ public class Javagen extends NewPlugin {
             }
 
             // CHANGELOG.md
-            if (settings.isLowLevelClient()) {
+            if (settings.isLowLevelClient() && settings.isLlcGenerateChangelog()) {
                 javaPackage.addChangelog();
             }
 
             // pom.xml
-            if (settings.isLowLevelClient()) {
+            if (settings.isLowLevelClient() && settings.isLlcGeneratePom()) {
                 javaPackage.addServicePom();
             }
 
             // README.md
-            if (settings.isLowLevelClient()) {
+            if (settings.isLowLevelClient() && settings.isLlcGenerateReadme()) {
                 javaPackage.addReadme();
             }
 
             // Sample README.md
-            if (settings.isLowLevelClient()) {
+            if (settings.isLowLevelClient() && settings.isLlcGenerateSampleReadme()) {
                 javaPackage.addSampleReadme();
             }
 

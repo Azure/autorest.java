@@ -5,13 +5,7 @@ package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -137,7 +131,12 @@ public class JavaSettings
                     host.getStringValue("client-flattened-annotation-target", ""),
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("skip-formatting", false),
-                    host.getValue(Map.class, "llc-properties"));
+                    host.getValue(Map.class, "llc-properties"),
+                    host.getBooleanValue("llc-generate-non-code", false),
+                    host.getBooleanValue("llc-generate-pom", false),
+                    host.getBooleanValue("llc-generate-changelog", false),
+                    host.getBooleanValue("llc-generate-readme", false),
+                    host.getBooleanValue("llc-generate-sample-readme", false));
         }
         return _instance;
     }
@@ -202,7 +201,12 @@ public class JavaSettings
                          String clientFlattenAnnotationTarget,
                          String keyCredentialHeaderName,
                          boolean skipFormatting,
-                         Map<String, String> llcProperties)
+                         Map<String, String> llcProperties,
+                         boolean llcGenerateNonCode,
+                         boolean llcGeneratePom,
+                         boolean llcGenerateChangelog,
+                         boolean llcGenerateReadme,
+                         boolean llcGenerateSampleReadme)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -266,6 +270,11 @@ public class JavaSettings
         this.keyCredentialHeaderName = keyCredentialHeaderName;
         this.skipFormatting = skipFormatting;
         this.llcProperties = llcProperties;
+        this.llcGenerateNonCode = llcGenerateNonCode;
+        this.llcGeneratePom = llcGeneratePom;
+        this.llcGenerateChangelog = llcGenerateChangelog;
+        this.llcGenerateReadme = llcGenerateReadme;
+        this.llcGenerateSampleReadme = llcGenerateSampleReadme;
     }
 
     private String keyCredentialHeaderName;
@@ -642,10 +651,49 @@ public class JavaSettings
         return serviceVersions;
     }
 
-    private final Map<String, String> llcProperties;
+    private Map<String, String> llcProperties;
 
     public Map<String, String> getLlcProperties() {
+        if (llcProperties == null) {
+            llcProperties = new HashMap<>();
+        }
+        llcProperties.put("artifact-id", getArtifactId());
+        llcProperties.put("service-name", getServiceName());
+        llcProperties.put("namespace-path", getPackage().replaceAll("\\.", "/"));
+        if (!llcProperties.containsKey("url-fragment") && getServiceName() != null) {
+            llcProperties.put("url-fragment", getServiceName().replaceAll("\\s", "-").toLowerCase() + "-java-samples");
+        }
         return llcProperties;
+    }
+
+    private final boolean llcGenerateNonCode;
+
+    public boolean isLlcGenerateNonCode() {
+        return llcGenerateNonCode;
+    }
+
+    private final boolean llcGeneratePom;
+
+    public boolean isLlcGeneratePom() {
+        return llcGeneratePom || llcGenerateNonCode;
+    }
+
+    private final boolean llcGenerateChangelog;
+
+    public boolean isLlcGenerateChangelog() {
+        return llcGenerateChangelog || llcGenerateNonCode;
+    }
+
+    private final boolean llcGenerateReadme;
+
+    public boolean isLlcGenerateReadme() {
+        return llcGenerateReadme || llcGenerateNonCode;
+    }
+
+    private final boolean llcGenerateSampleReadme;
+
+    public boolean isLlcGenerateSampleReadme() {
+        return llcGenerateSampleReadme || llcGenerateNonCode;
     }
 
     private final boolean requireXMsFlattenedToFlatten;

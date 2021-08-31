@@ -173,25 +173,25 @@ public class JavaPackage {
 
     public final void addChangelog() {
         PlainFile plainFile = new PlainFile("CHANGELOG.md");
-        plainFile.loadFromResource("changelog.md", getModel());
+        plainFile.loadFromResource("changelog.md", settings.getLlcProperties());
         addPlainFile(plainFile);
     }
 
     public final void addServicePom() {
         PlainFile plainFile = new PlainFile("pom.xml");
-        plainFile.loadFromResource("pom.xml", getModel());
+        plainFile.loadFromResource("pom.xml", settings.getLlcProperties());
         addPlainFile(plainFile);
     }
 
     public final void addReadme() {
         PlainFile plainFile = new PlainFile("README.md");
-        plainFile.loadFromResource("readme.md", getModel());
+        plainFile.loadFromResource("readme.md", settings.getLlcProperties());
         addPlainFile(plainFile);
     }
 
     public final void addSampleReadme() {
         PlainFile plainFile = new PlainFile(Paths.get("src", "samples", "README.md").toString());
-        plainFile.loadFromResource("sample_readme.md", getModel());
+        plainFile.loadFromResource("sample_readme.md", settings.getLlcProperties());
         addPlainFile(plainFile);
     }
 
@@ -201,7 +201,7 @@ public class JavaPackage {
         this.checkDuplicateFile(xmlFile.getFilePath());
         xmlFiles.add(xmlFile);
     }
-    
+
     protected void addJavaFile(JavaFile javaFile) {
         this.checkDuplicateFile(javaFile.getFilePath());
         filePaths.add(javaFile.getFilePath());
@@ -217,19 +217,5 @@ public class JavaPackage {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));
             logger.warn(String.format("Name conflict for output file '%1$s'.", filePath));
         }
-    }
-
-    private Map<String, String> getModel() {
-        if (model == null) {
-            model = settings.getLlcProperties();
-            model.put("artifact-id", settings.getArtifactId());
-            model.put("service-name", settings.getServiceName());
-            model.put("namespace-path", settings.getPackage().replaceAll("\\.", "/"));
-            if (!model.containsKey("url-fragment")) {
-                model.put("url-fragment",
-                        settings.getServiceName().replaceAll("\\s", "-").toLowerCase() + "-java-samples");
-            }
-        }
-        return model;
     }
 }
