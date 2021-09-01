@@ -132,11 +132,7 @@ public class JavaSettings
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("skip-formatting", false),
                     host.getValue(Map.class, "llc-properties"),
-                    host.getBooleanValue("llc-generate-non-code", false),
-                    host.getBooleanValue("llc-generate-pom", false),
-                    host.getBooleanValue("llc-generate-changelog", false),
-                    host.getBooleanValue("llc-generate-readme", false),
-                    host.getBooleanValue("llc-generate-sample-readme", false));
+                    host.getBooleanValue("llc-generate-non-code", false));
         }
         return _instance;
     }
@@ -202,11 +198,7 @@ public class JavaSettings
                          String keyCredentialHeaderName,
                          boolean skipFormatting,
                          Map<String, String> llcProperties,
-                         boolean llcGenerateNonCode,
-                         boolean llcGeneratePom,
-                         boolean llcGenerateChangelog,
-                         boolean llcGenerateReadme,
-                         boolean llcGenerateSampleReadme)
+                         boolean llcGenerateNonCode)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -271,10 +263,6 @@ public class JavaSettings
         this.skipFormatting = skipFormatting;
         this.llcProperties = llcProperties;
         this.llcGenerateNonCode = llcGenerateNonCode;
-        this.llcGeneratePom = llcGeneratePom;
-        this.llcGenerateChangelog = llcGenerateChangelog;
-        this.llcGenerateReadme = llcGenerateReadme;
-        this.llcGenerateSampleReadme = llcGenerateSampleReadme;
     }
 
     private String keyCredentialHeaderName;
@@ -670,30 +658,6 @@ public class JavaSettings
 
     public boolean isLlcGenerateNonCode() {
         return llcGenerateNonCode;
-    }
-
-    private final boolean llcGeneratePom;
-
-    public boolean isLlcGeneratePom() {
-        return llcGeneratePom || llcGenerateNonCode;
-    }
-
-    private final boolean llcGenerateChangelog;
-
-    public boolean isLlcGenerateChangelog() {
-        return llcGenerateChangelog || llcGenerateNonCode;
-    }
-
-    private final boolean llcGenerateReadme;
-
-    public boolean isLlcGenerateReadme() {
-        return llcGenerateReadme || llcGenerateNonCode;
-    }
-
-    private final boolean llcGenerateSampleReadme;
-
-    public boolean isLlcGenerateSampleReadme() {
-        return llcGenerateSampleReadme || llcGenerateNonCode;
     }
 
     private final boolean requireXMsFlattenedToFlatten;
