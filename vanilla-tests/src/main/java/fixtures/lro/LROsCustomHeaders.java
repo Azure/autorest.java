@@ -16,7 +16,11 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.ChainedPollingStrategy;
+import com.azure.core.util.polling.LocationPollingStrategy;
+import com.azure.core.util.polling.OperationResourcePollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.StatusCheckPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
 import fixtures.lro.models.CloudErrorException;
@@ -134,10 +138,14 @@ public final class LROsCustomHeaders {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(product),
-                com.azure.core.util.polling.ChainedPollingStrategy.createDefault(
-                        this.client.getHttpPipeline(), Context.NONE),
-                new TypeReference<>() {},
-                new TypeReference<>() {});
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReference<Product>() {},
+                new TypeReference<Product>() {});
     }
 
     /**
@@ -198,10 +206,14 @@ public final class LROsCustomHeaders {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
-                com.azure.core.util.polling.ChainedPollingStrategy.createDefault(
-                        this.client.getHttpPipeline(), Context.NONE),
-                new TypeReference<>() {},
-                new TypeReference<>() {});
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReference<Product>() {},
+                new TypeReference<Product>() {});
     }
 
     /**
@@ -260,10 +272,14 @@ public final class LROsCustomHeaders {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
-                com.azure.core.util.polling.ChainedPollingStrategy.createDefault(
-                        this.client.getHttpPipeline(), Context.NONE),
-                new TypeReference<>() {},
-                new TypeReference<>() {});
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReference<BinaryData>() {},
+                new TypeReference<BinaryData>() {});
     }
 
     /**
@@ -324,10 +340,14 @@ public final class LROsCustomHeaders {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(product),
-                com.azure.core.util.polling.ChainedPollingStrategy.createDefault(
-                        this.client.getHttpPipeline(), Context.NONE),
-                new TypeReference<>() {},
-                new TypeReference<>() {});
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReference<BinaryData>() {},
+                new TypeReference<BinaryData>() {});
     }
 
     /**

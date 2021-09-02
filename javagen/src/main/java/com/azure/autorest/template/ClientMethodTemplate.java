@@ -741,13 +741,17 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{context}", contextParam)
-                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()");
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            function.line("new TypeReference<>() { }, new TypeReference<>() { });");
+            function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
+                    clientMethod.getMethodPollingDetails().getIntermediateType(),
+                    clientMethod.getMethodPollingDetails().getFinalType());
             function.decreaseIndent();
         });
     }

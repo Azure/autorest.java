@@ -5,7 +5,7 @@ import fixtures.lro.models.Product;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.Duration;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +22,89 @@ public class LROsTests {
         Product product = new Product();
         product.setLocation("West US");
 
-        SyncPoller<Product, Product> poller = client.getLROs().beginPut200Succeeded(product, Duration.ofSeconds(1));
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut200Succeeded(product);
         assertEquals("Succeeded", poller.getFinalResult().getProvisioningState());
+    }
+//
+//    @Test
+//    public void beginPatch200SucceededIgnoreHeaders() throws Exception {
+//        Product product = new Product();
+//        product.setLocation("West US");
+//
+//        SyncPoller<Product, Product> poller = client.getLROs().beginPatch200SucceededIgnoreHeaders(product);
+//        assertEquals("Succeeded", poller.getFinalResult().getProvisioningState());
+//    }
+
+    @Test
+    public void beginPut201Succeeded() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut201Succeeded(product);
+        assertEquals("Succeeded", poller.getFinalResult().getProvisioningState());
+    }
+
+    @Test
+    public void beginPost202List() throws Exception {
+        SyncPoller<List<Product>, List<Product>> poller = client.getLROs().beginPost202List();
+        List<Product> products = poller.getFinalResult();
+        assertEquals(1, products.size());
+        assertEquals("100", products.get(0).getId());
+        assertEquals("foo", products.get(0).getName());
+    }
+
+    @Test
+    public void beginPut200SucceededNoState() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut200SucceededNoState(product);
+        Product actual = poller.getFinalResult();
+        assertEquals("100", actual.getId());
+        assertEquals("foo", actual.getName());
+    }
+
+//    @Test
+//    public void beginPut202Retry200() throws Exception {
+//        Product product = new Product();
+//        product.setLocation("West US");
+//
+//        SyncPoller<Product, Product> poller = client.getLROs().beginPut202Retry200(product);
+//        Product actual = poller.getFinalResult();
+//        assertEquals("100", actual.getId());
+//        assertEquals("foo", actual.getName());
+//    }
+
+    @Test
+    public void beginPut201CreatingSucceeded200() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut201CreatingSucceeded200(product);
+        Product actual = poller.getFinalResult();
+        assertEquals("100", actual.getId());
+        assertEquals("foo", actual.getName());
+    }
+
+    @Test
+    public void beginPut200UpdatingSucceeded204() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut200UpdatingSucceeded204(product);
+        Product actual = poller.getFinalResult();
+        assertEquals("100", actual.getId());
+        assertEquals("foo", actual.getName());
+    }
+
+    @Test
+    public void beginPut201CreatingFailed200() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+
+        SyncPoller<Product, Product> poller = client.getLROs().beginPut201CreatingFailed200(product);
+        Product actual = poller.getFinalResult();
+        assertEquals("100", actual.getId());
+        assertEquals("foo", actual.getName());
     }
 }

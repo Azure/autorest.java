@@ -347,32 +347,33 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             parameters);
                 }
 
-                String operationKey;
+                String operationId;
                 if (operation.getOperationGroup() != null
                         && operation.getOperationGroup().getLanguage() != null
                         && operation.getOperationGroup().getLanguage().getDefault() != null
                         && operation.getOperationGroup().getLanguage().getDefault().getName() != null
                         && !operation.getOperationGroup().getLanguage().getDefault().getName().isEmpty()) {
-                    operationKey = operation.getOperationGroup().getLanguage().getDefault().getName() + "_"
+                    operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_"
                             + operation.getLanguage().getDefault().getName();
                 } else {
-                    operationKey = operation.getLanguage().getDefault().getName();
+                    operationId = operation.getLanguage().getDefault().getName();
                 }
+                JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(operationId);
 
-                MethodPollingDetails pollingDetails = null;
-                if (settings.getPollingConfig(operationKey) != null) {
-                    pollingDetails = new MethodPollingDetails(
-                            settings.getPollingConfig(operationKey).getStrategy(),
-                            getPollingIntermediateType(settings.getPollingConfig(operationKey), syncReturnType),
-                            getPollingFinalType(settings.getPollingConfig(operationKey), syncReturnType),
-                            settings.getPollingConfig(operationKey).getPollInterval());
-                    builder = builder.methodPollingDetails(pollingDetails);
+                MethodPollingDetails methodPollingDetails = null;
+                if (pollingDetails != null) {
+                    methodPollingDetails = new MethodPollingDetails(
+                            pollingDetails.getStrategy(),
+                            getPollingIntermediateType(pollingDetails, syncReturnType),
+                            getPollingFinalType(pollingDetails, syncReturnType),
+                            pollingDetails.getPollInterval());
+                    builder = builder.methodPollingDetails(methodPollingDetails);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     // begin method async
                     methods.add(builder
-                            .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, pollingDetails))
+                            .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginAsync)
@@ -392,7 +393,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     // begin method sync
                     methods.add(builder
-                            .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, pollingDetails))
+                            .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginSync)

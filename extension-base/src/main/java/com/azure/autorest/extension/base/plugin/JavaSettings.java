@@ -647,7 +647,7 @@ public class JavaSettings
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
-                return "com.azure.core.util.polling.ChainedPollingStrategy.createDefault({httpPipeline}, {context})";
+                return "new DefaultPollingStrategy<>({httpPipeline}, {context})";
             } else {
                 return strategy;
             }

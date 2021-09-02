@@ -12,6 +12,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -317,6 +320,20 @@ public class ClientMethod {
             } else {
                 imports.add("com.azure.core.util.serializer.TypeReference");
                 imports.add("java.time.Duration");
+
+                if (getMethodPollingDetails().getPollingStrategy() != null) {
+                    List<String> knownPollingStrategies = Arrays.asList(
+                            "DefaultPollingStrategy",
+                            "ChainedPollingStrategy",
+                            "OperationResourcePollingStrategy",
+                            "LocationPollingStrategy",
+                            "StatusCheckPollingStrategy");
+                    for (String pollingStrategy : knownPollingStrategies) {
+                        if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                            imports.add("com.azure.core.util.polling." + pollingStrategy);
+                        }
+                    }
+                }
             }
         }
     }
