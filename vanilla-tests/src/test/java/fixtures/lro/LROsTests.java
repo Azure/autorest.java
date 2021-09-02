@@ -1,7 +1,9 @@
 package fixtures.lro;
 
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.models.Product;
+import fixtures.lro.models.Sku;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -106,5 +108,13 @@ public class LROsTests {
         Product actual = poller.getFinalResult();
         assertEquals("100", actual.getId());
         assertEquals("foo", actual.getName());
+    }
+
+    @Test
+    public void beginPost200WithPayload() throws Exception {
+        SyncPoller<Sku, Sku> poller = client.getLROs().beginPost200WithPayload();
+        Sku actual = poller.getFinalResult();
+        assertEquals("1", actual.getId());
+        assertEquals("product", actual.getName());
     }
 }
