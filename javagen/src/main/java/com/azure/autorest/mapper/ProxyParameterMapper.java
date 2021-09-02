@@ -88,6 +88,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
             if (parameterRequestLocation == RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.BinaryData;
+            } else {
+                wireType = ClassType.String;
             }
         }
         builder.wireType(wireType);
