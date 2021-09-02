@@ -25,7 +25,7 @@ autorest --java
 ```
 The first time running it will take a little longer to download and install all the components.
 
-To build from source code, clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
+To build from source code, clone this repo and checkout to main branch. Make sure all prerequisites are met, and run
 
 ```bash
 mvn package -P local
