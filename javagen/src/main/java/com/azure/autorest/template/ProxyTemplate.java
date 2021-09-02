@@ -95,10 +95,24 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                             case Path:
                             case Query:
                             case Header:
+<<<<<<< HEAD
                                 parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(location.toString())));
                                 if ((location == RequestParameterLocation.Path || location == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
                                 } else if (location == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
+=======
+                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
+                                if (parameter.getRequestParameterLocation() == RequestParameterLocation.Query && parameter.getAlreadyEncoded() && parameter.getExplode()) {
+                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true, multipleQueryParams = true", parameter.getRequestParameterName()));
+                                } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Query && parameter.getExplode()) {
+                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", multipleQueryParams = true", parameter.getRequestParameterName()));
+                                } else if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path ||
+                                            parameter.getRequestParameterLocation() == RequestParameterLocation.Query)
+                                        && parameter.getAlreadyEncoded()) {
+                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
+                                } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null
+                                        && !parameter.getHeaderCollectionPrefix().isEmpty()) {
+>>>>>>> v4
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
                                 } else {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getRequestParameterName()));

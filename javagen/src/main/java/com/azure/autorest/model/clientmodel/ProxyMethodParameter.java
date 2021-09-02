@@ -79,6 +79,10 @@ public class ProxyMethodParameter {
      * The collection format if the parameter is a list type.
      */
     private CollectionFormat collectionFormat;
+    /**
+     * The explode if the parameter is a list type.
+     */
+    private boolean explode;	
 
     /**
      * Create a new RestAPIParameter based on the provided properties.
@@ -98,8 +102,13 @@ public class ProxyMethodParameter {
      * @param parameterReference The reference to this parameter from a caller.
      * @param defaultValue The default value of the parameter.
      * @param collectionFormat The collection format if the parameter is a list type.
+     * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
+<<<<<<< HEAD
     protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat) {
+=======
+    protected ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
+>>>>>>> v4
         this.description = description;
         this.rawType = rawType;
         this.wireType = wireType;
@@ -115,6 +124,7 @@ public class ProxyMethodParameter {
         this.headerCollectionPrefix = headerCollectionPrefix;
         this.parameterReference = parameterReference;
         this.collectionFormat = collectionFormat;
+        this.explode = explode;
         this.defaultValue = defaultValue;
     }
 
@@ -186,6 +196,9 @@ public class ProxyMethodParameter {
         return collectionFormat;
     }
 
+    public final boolean getExplode() {
+        return explode;
+    }
 
     public final String convertFromClientType(String source, String target, boolean alwaysNull) {
         return convertFromClientType(source, target, alwaysNull, false);
@@ -223,11 +236,17 @@ public class ProxyMethodParameter {
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
             if (getClientType() == ArrayType.ByteArray) {
                 imports.add("com.azure.core.util.Base64Util");
-            } else if (getClientType() instanceof ListType) {
+            } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
+<<<<<<< HEAD
                 if (!settings.isLowLevelClient()) {
                     imports.add("com.azure.core.util.serializer.JacksonAdapter");
                 }
+=======
+                imports.add("com.azure.core.util.serializer.JacksonAdapter");
+            } else if (getClientType() instanceof ListType && getExplode()) {
+                imports.add("java.util.stream.Collectors");
+>>>>>>> v4
             }
         }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
@@ -254,6 +273,7 @@ public class ProxyMethodParameter {
         protected String parameterReference;
         protected String defaultValue;
         protected CollectionFormat collectionFormat;
+        protected boolean explode;
 
         /**
          * Sets the description of this parameter.
@@ -414,6 +434,16 @@ public class ProxyMethodParameter {
             this.collectionFormat = collectionFormat;
             return this;
         }
+        
+        /**
+         * Sets the explode if the parameter is a list type.
+         * @param explode the explode if the parameter is a list type
+         * @return the Builder itself
+         */
+        public Builder explode(boolean explode) {
+            this.explode = explode;
+            return this;
+        }
 
         public ProxyMethodParameter build() {
             return new ProxyMethodParameter(description,
@@ -431,7 +461,8 @@ public class ProxyMethodParameter {
                     headerCollectionPrefix,
                     parameterReference,
                     defaultValue,
-                    collectionFormat);
+                    collectionFormat,
+                    explode);
         }
     }
 }

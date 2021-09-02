@@ -293,6 +293,7 @@ public class ClientMethod {
                 imports.add("com.azure.core.util.Context");
             }
 
+<<<<<<< HEAD
             // Paging
             if (getMethodPageDetails() != null) {
                 imports.add("com.azure.core.http.rest.PagedResponseBase");
@@ -302,6 +303,20 @@ public class ClientMethod {
                 imports.add("java.util.List");
                 imports.add("java.util.Map");
                 imports.add("java.util.stream.Collectors");
+=======
+        if (includeImplementationImports) {
+            proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+            for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                parameter.getClientType().addImportsTo(imports, true);
+
+                if (parameter.getExplode()) {
+                    imports.add("java.util.Objects");
+                    imports.add("java.util.Optional");
+                    imports.add("java.util.stream.Stream");
+                    imports.add("java.util.stream.Collectors");
+                    imports.add("java.util.Collection");
+                }
+>>>>>>> v4
             }
         } else {
             getReturnValue().addImportsTo(imports, includeImplementationImports);
