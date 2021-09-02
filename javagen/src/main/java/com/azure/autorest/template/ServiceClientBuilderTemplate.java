@@ -6,7 +6,11 @@ package com.azure.autorest.template;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -25,6 +29,8 @@ import java.util.stream.Stream;
  */
 public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
+
+    private final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
 
     protected ServiceClientBuilderTemplate() {
     }
@@ -53,6 +59,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
+        imports.add("com.azure.core.http.HttpHeaders");
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -60,14 +67,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
             ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
         }
         final boolean singleBuilder = asyncClients.size() == 1;
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()
+                || JavaSettings.getInstance().isLowLevelClient()) {
             List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
             if (!settings.isFluentLite()) {
                 clients.addAll(asyncClients);
@@ -117,6 +125,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                 });
             }
+
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
@@ -165,6 +174,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
 
             String buildMethodName = this.primaryBuildMethodName(settings);
+
             JavaVisibility visibility = settings.shouldGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
             // build method
@@ -193,23 +203,28 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     constructorArgs = ", " + constructorArgs;
                 }
 
-                final String serializerMemberName = getSerializerMemberName();
+                final String serializerExpression;
+                if (settings.isLowLevelClient()) {
+                    serializerExpression = JACKSON_SERIALIZER;
+                } else {
+                    serializerExpression = getSerializerMemberName();
+                }
 
                 if (settings.isFluent()) {
                     function.line(String.format("%1$s client = new %2$s(pipeline, %3$s, defaultPollInterval, environment%4$s);",
                             serviceClient.getClassName(),
                             serviceClient.getClassName(),
-                            serializerMemberName,
+                            serializerExpression,
                             constructorArgs));
                 } else {
                     function.line(String.format("%1$s client = new %2$s(pipeline, %3$s%4$s);",
-                        serviceClient.getClassName(), serviceClient.getClassName(), serializerMemberName, constructorArgs));
+                            serviceClient.getClassName(), serviceClient.getClassName(), serializerExpression, constructorArgs));
                 }
                 function.line("return client;");
             });
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName, serviceClient.getDefaultCredentialScopes());
+                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes());
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
@@ -256,7 +271,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
             }
         });
-
     }
 
     protected String getSerializerMemberName() {
@@ -277,20 +291,24 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.http.policy.HttpPolicyProviders");
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
+        imports.add("com.azure.core.http.policy.AddHeadersPolicy");
     }
 
     protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName, String defaultCredentialScopes) {
-        classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
-                buildMethodName), function -> {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
+        classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 
             function.ifBlock("httpLogOptions == null", action -> {
                 function.line("httpLogOptions = new HttpLogOptions();");
+            });
+
+            function.ifBlock("clientOptions == null", action -> {
+                function.line("clientOptions = new ClientOptions();");
             });
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
@@ -299,8 +317,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-            function.line("policies.add(new UserAgentPolicy(httpLogOptions.getApplicationId(), clientName, "
+            function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
+            function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
+
+            // clientOptions header
+            function.line("HttpHeaders headers = new HttpHeaders();");
+            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
+            function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
@@ -350,9 +374,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
                         : "createHttpPipeline()"));
 
-        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-          ClassType.SerializerAdapter, getSerializerMemberName(), false,
-          settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+        // Low-level client does not need serializer. It returns BinaryData.
+        if (!settings.isLowLevelClient()) {
+            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+                    ClassType.SerializerAdapter, getSerializerMemberName(), false,
+                    settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));
+        }
 
         if (!settings.isAzureOrFluent()) {
 
@@ -377,6 +404,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             commonProperties.add(new ServiceClientProperty("The list of Http pipeline policies to add.",
                     new ListType(ClassType.HttpPipelinePolicy), "pipelinePolicies", true, null));
+
+            commonProperties.add(new ServiceClientProperty(
+                    "The client options such as application ID and custom headers to set on a request.",
+                    ClassType.ClientOptions,
+                    "clientOptions",
+                    false,
+                    // It should be new ClientOptions()
+                    null));
         }
 
         return commonProperties;

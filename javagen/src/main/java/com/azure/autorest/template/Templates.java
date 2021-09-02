@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-
 /**
  * A collection of templates for writing JV models to Java files and contexts.
  */
@@ -25,6 +24,10 @@ public class Templates {
 
     public static ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
         return factory.getServiceClientBuilderTemplate();
+    }
+
+    public static ServiceVersionTemplate getServiceVersionTemplate() {
+        return factory.getServiceVersionTemplate();
     }
 
     public static ManagerTemplate getManagerTemplate() {

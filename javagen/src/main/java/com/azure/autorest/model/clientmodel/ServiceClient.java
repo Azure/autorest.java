@@ -205,7 +205,7 @@ public class ServiceClient {
             }
         }
 
-        if (includeBuilderImports || includeImplementationImports) {
+        if (includeBuilderImports || (includeImplementationImports)) {
             if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {

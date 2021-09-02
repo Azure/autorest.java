@@ -47,6 +47,7 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                                           boolean explode) {
         super(description,
                 wireType,
+                wireType,
                 clientType,
                 name,
                 requestParameterLocation,

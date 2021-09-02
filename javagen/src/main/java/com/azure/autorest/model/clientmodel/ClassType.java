@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.util.ClientOptions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,7 +74,9 @@ public class ClassType implements IType {
     public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
-
+    public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
+    public static final ClassType RequestOptions = new Builder().packageName("com.azure.core.http.rest").name("RequestOptions").build();
+    public static final ClassType ClientOptions = new Builder().knownClass(com.azure.core.util.ClientOptions.class).build();
 
     private final String packageName;
     private final String name;
@@ -192,6 +195,8 @@ public class ClassType implements IType {
             expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
+        } else if (this == ClassType.URL) {
+            expression = java.lang.String.format("new URL(%s)", expression);
         }
 
         return expression;
@@ -203,6 +208,8 @@ public class ClassType implements IType {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
+        } else if (this == ClassType.URL) {
+            expression = java.lang.String.format("%s.toString()", expression);
         }
 
         return expression;

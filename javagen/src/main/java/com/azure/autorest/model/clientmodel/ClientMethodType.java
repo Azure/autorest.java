@@ -24,9 +24,15 @@ public enum ClientMethodType {
     SimpleAsyncRestResponse(11),
     SimpleSyncRestResponse(12),
 
-    Resumable(13);
+    Resumable(13),
 
-    public static final int SIZE = Integer.SIZE;
+    ProtocolSimpleAsync(14),
+    ProtocolSimpleSync(15),
+    ProtocolLongRunningBeginAsync(16),
+    ProtocolLongRunningBeginSync(17),
+    ProtocolPagingAsync(18),
+    ProtocolPagingSync(19);
+
     private static java.util.HashMap<Integer, ClientMethodType> mappings;
     private int intValue;
 

@@ -7,11 +7,13 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +34,10 @@ public class ProxyMethod {
      * Get the HTTP method that will be used for this method.
      */
     private HttpMethod httpMethod;
+    /**
+     * Get the base URL that will be used for each REST API method.
+     */
+    private String baseUrl;
     /**
      * Get the path of this method's request URL.
      */
@@ -55,6 +61,10 @@ public class ProxyMethod {
      */
     protected List<ProxyMethodParameter> parameters;
     /**
+     * Get all parameters defined in swagger to this method.
+     */
+    protected List<ProxyMethodParameter> allParameters;
+    /**
      * Get the description of this method.
      */
     private String description;
@@ -62,6 +72,14 @@ public class ProxyMethod {
      * The value of the ReturnValueWireType annotation for this method.
      */
     protected IType returnValueWireType;
+    /**
+     * The response body type.
+     */
+    private IType responseBodyType;
+    /**
+     * The raw response body type. responseBodyType is set to BinaryData in low-level mode. We need raw type.
+     */
+    private IType rawResponseBodyType;
     /**
      * Get whether or not this method resumes polling of an LRO.
      */
@@ -80,6 +98,7 @@ public class ProxyMethod {
      * @param requestContentType The Content-Type of the request.
      * @param returnType The type of value that is returned from this method.
      * @param httpMethod The HTTP method that will be used for this method.
+     * @param baseUrl The base URL that will be used for each REST API method.
      * @param urlPath The path of this method's request URL.
      * @param responseExpectedStatusCodes The status codes that are expected in the response.
      * @param returnValueWireType The return value's type as it is received from the network (across the wire).
@@ -89,27 +108,33 @@ public class ProxyMethod {
      * @param description The description of this method.
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
-     * @param operationId the operation ID.
+     * @param operationId the operation ID
      * @param examples the examples for the method.
      */
-    protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
-                          List<HttpResponseStatus> responseExpectedStatusCodes,
+    protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
+                          String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
                           ClassType unexpectedResponseExceptionType,
                           Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
-                          String name, List<ProxyMethodParameter> parameters, String description,
-                          IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes,
+                          String name, List<ProxyMethodParameter> parameters,
+                          List<ProxyMethodParameter> allParameters, String description,
+                          IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
+                          boolean isResumable, Set<String> responseContentTypes,
                           String operationId, Map<String, ProxyMethodExample> examples) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
+        this.baseUrl = baseUrl;
         this.urlPath = urlPath;
         this.responseExpectedStatusCodes = responseExpectedStatusCodes;
         this.unexpectedResponseExceptionType = unexpectedResponseExceptionType;
         this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
         this.name = name;
         this.parameters = parameters;
+        this.allParameters = allParameters;
         this.description = description;
         this.returnValueWireType = returnValueWireType;
+        this.responseBodyType = responseBodyType;
+        this.rawResponseBodyType = rawResponseBodyType;
         this.isResumable = isResumable;
         this.responseContentTypes = responseContentTypes;
         this.operationId = operationId;
@@ -126,6 +151,10 @@ public class ProxyMethod {
 
     public final HttpMethod getHttpMethod() {
         return httpMethod;
+    }
+
+    public final String getBaseUrl() {
+        return baseUrl;
     }
 
     public final String getUrlPath() {
@@ -152,6 +181,10 @@ public class ProxyMethod {
         return parameters;
     }
 
+    public final List<ProxyMethodParameter> getAllParameters() {
+        return allParameters;
+    }
+
     public final String getDescription() {
         return description;
     }
@@ -160,7 +193,15 @@ public class ProxyMethod {
         return returnValueWireType;
     }
 
-    public final boolean getIsResumable() {
+    public IType getResponseBodyType() {
+        return responseBodyType;
+    }
+
+    public IType getRawResponseBodyType() {
+        return rawResponseBodyType;
+    }
+
+    public final boolean isResumable() {
         return isResumable;
     }
 
@@ -248,7 +289,6 @@ public class ProxyMethod {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
                 imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
@@ -258,7 +298,7 @@ public class ProxyMethod {
                 imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
-            if (getIsResumable()) {
+            if (isResumable()) {
                 imports.add("com.azure.core.annotation.ResumeOperation");
             }
             imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer
@@ -290,14 +330,18 @@ public class ProxyMethod {
         protected String requestContentType;
         protected IType returnType;
         protected HttpMethod httpMethod;
+        protected String baseUrl;
         protected String urlPath;
         protected List<HttpResponseStatus> responseExpectedStatusCodes;
         protected ClassType unexpectedResponseExceptionType;
         protected Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
         protected String name;
         protected List<ProxyMethodParameter> parameters;
+        protected List<ProxyMethodParameter> allParameters;
         protected String description;
         protected IType returnValueWireType;
+        protected IType responseBodyType;
+        protected IType rawResponseBodyType;
         protected boolean isResumable;
         protected Set<String> responseContentTypes;
         protected Map<String, ProxyMethodExample> examples;
@@ -330,6 +374,15 @@ public class ProxyMethod {
          */
         public Builder httpMethod(HttpMethod httpMethod) {
             this.httpMethod = httpMethod;
+            return this;
+        }
+        /**
+         * Sets the base URL that will be used for each REST API method.
+         * @param baseUrl the base URL that will be used for each REST API method
+         * @return the Builder itself
+         */
+        public Builder baseURL(String baseUrl) {
+            this.baseUrl = baseUrl;
             return this;
         }
 
@@ -394,6 +447,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets all parameters defined in swagger to this method.
+         * @param allParameters the parameters that are provided to this method
+         * @return the Builder itself
+         */
+        public Builder allParameters(List<ProxyMethodParameter> allParameters) {
+            this.allParameters = allParameters;
+            return this;
+        }
+
+        /**
          * Sets the description of this method.
          * @param description the description of this method
          * @return the Builder itself
@@ -410,6 +473,26 @@ public class ProxyMethod {
          */
         public Builder returnValueWireType(IType returnValueWireType) {
             this.returnValueWireType = returnValueWireType;
+            return this;
+        }
+
+        /**
+         * Sets the response body type.
+         * @param responseBodyType the response body type
+         * @return the Builder itself
+         */
+        public Builder responseBodyType(IType responseBodyType) {
+            this.responseBodyType = responseBodyType;
+            return this;
+        }
+
+        /**
+         * Sets the raw response body type.
+         * @param rawResponseBodyType the response body type
+         * @return the Builder itself
+         */
+        public Builder rawResponseBodyType(IType rawResponseBodyType) {
+            this.rawResponseBodyType = rawResponseBodyType;
             return this;
         }
 
@@ -460,14 +543,18 @@ public class ProxyMethod {
             return new ProxyMethod(requestContentType,
                     returnType,
                     httpMethod,
+                    baseUrl,
                     urlPath,
                     responseExpectedStatusCodes,
                     unexpectedResponseExceptionType,
                     unexpectedResponseExceptionTypes,
                     name,
                     parameters,
+                    allParameters,
                     description,
                     returnValueWireType,
+                    responseBodyType,
+                    rawResponseBodyType,
                     isResumable,
                     responseContentTypes,
                     operationId,

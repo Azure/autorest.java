@@ -127,9 +127,21 @@
     <module>./fluentgen</module>
     <module>./fluentnamer</module>
     <module>./androidgen</module>
+    <module>./protocol-resilience-test</module>
   </modules>
 
   <profiles>
+    <profile>
+      <id>testProtocol</id>
+      <activation>
+        <property>
+          <name>testProtocol</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./protocol-tests</module>
+      </modules>
+    </profile>
     <profile>
       <id>testVanilla</id>
       <activation>

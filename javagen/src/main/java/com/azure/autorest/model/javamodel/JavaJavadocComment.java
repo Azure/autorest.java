@@ -34,8 +34,12 @@ public class JavaJavadocComment {
 
     public final void description(String description) {
         String processedText = processText(description);
-        if (processedText != null && !processedText.isEmpty()) {
-            contents.line(processedText);
+        line(processedText);
+    }
+
+    public final void line(String text) {
+        if (text != null && !text.isEmpty()) {
+            contents.line(text);
             expectsLineSeparator = true;
         }
     }

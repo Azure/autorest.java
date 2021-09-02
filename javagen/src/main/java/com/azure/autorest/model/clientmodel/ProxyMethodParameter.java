@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
+
 import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -18,6 +19,10 @@ public class ProxyMethodParameter {
      * Get the description of this parameter.
      */
     private String description;
+    /**
+     * Get the raw type of this parameter. Result of SchemaMapper.
+     */
+    private IType rawType;
     /**
      * Get the type of this parameter.
      */
@@ -82,6 +87,7 @@ public class ProxyMethodParameter {
     /**
      * Create a new RestAPIParameter based on the provided properties.
      * @param description The description of this parameter.
+     * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param wireType The type of this parameter.
      * @param clientType The type of this parameter users interact with.
      * @param name The name of this parameter when it is used as a variable.
@@ -98,8 +104,9 @@ public class ProxyMethodParameter {
      * @param collectionFormat The collection format if the parameter is a list type.
      * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
-    protected ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
+    protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
         this.description = description;
+        this.rawType = rawType;
         this.wireType = wireType;
         this.clientType = clientType;
         this.name = name;
@@ -123,6 +130,10 @@ public class ProxyMethodParameter {
 
     public final String getDescription() {
         return description;
+    }
+
+    public final IType getRawType() {
+        return rawType;
     }
 
     public final IType getWireType() {
@@ -196,8 +207,7 @@ public class ProxyMethodParameter {
     //C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
 //ORIGINAL LINE: public string ConvertFromClientType(string source, string target, bool alwaysNull = false, bool alwaysNonNull = false)
     public final String convertFromClientType(String source, String target, boolean alwaysNull, boolean alwaysNonNull) {
-        IType clientType = getWireType().getClientType();
-        if (clientType == getWireType()) {
+        if (getClientType() == getWireType()) {
             return String.format("%1$s %2$s = %3$s;", getWireType(), target, source);
         }
         if (alwaysNull) {
@@ -224,7 +234,9 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.Base64Util");
             } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
-                imports.add("com.azure.core.util.serializer.JacksonAdapter");
+                if (!settings.isLowLevelClient()) {
+                    imports.add("com.azure.core.util.serializer.JacksonAdapter");
+                }
             } else if (getClientType() instanceof ListType && getExplode()) {
                 imports.add("java.util.stream.Collectors");
             }
@@ -238,6 +250,7 @@ public class ProxyMethodParameter {
 
     public static class Builder {
         protected String description;
+        protected IType rawType;
         protected IType wireType;
         protected IType clientType;
         protected String name;
@@ -261,6 +274,16 @@ public class ProxyMethodParameter {
          */
         public Builder description(String description) {
             this.description = description;
+            return this;
+        }
+
+        /**
+         * Sets the raw type of this parameter. Result of SchemaMapper.
+         * @param rawType the raw type of this parameter
+         * @return the Builder itself
+         */
+        public Builder rawType(IType rawType) {
+            this.rawType = rawType;
             return this;
         }
 
@@ -416,6 +439,7 @@ public class ProxyMethodParameter {
 
         public ProxyMethodParameter build() {
             return new ProxyMethodParameter(description,
+                    rawType,
                     wireType,
                     clientType,
                     name,

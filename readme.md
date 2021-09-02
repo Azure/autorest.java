@@ -99,6 +99,35 @@ For example, `generate-client-interfaces`, `context-client-method-parameter`, `r
 
 The code formatter would require Java 11+ runtime.
 
+# Protocol clients (low level clients)
+
+You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
+
+```yaml $(low-level-client)
+generate-client-interfaces: false
+generate-client-as-impl: true
+generate-sync-async-clients: true
+```
+
+The generated code has the following structure
+
+```
+- pom.xml
+- /src/main/java
+  |
+  - module-info.java
+  - /com/azure/<group>/<service>
+    |
+    - <Service>Builder.java
+    - <Service>Client.java
+    - <Service>AsyncClient.java
+    - /implementation
+      |
+      - <Service>ClientImpl.java
+```
+
+and requires `azure-core` 1.19.0-beta.1 as a dependency.
+
 # Customizations
 
 To set up customizations, create a Maven project with dependency:
@@ -814,6 +843,9 @@ help-content:
       - key: model-override-setter-from-superclass
         type: bool
         description: Indicates whether to override the superclass setter method in model. Default is false.
+      - key: low-level-client
+        type: bool
+        description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.
       - key: client-flattened-annotation-target
         type: string
         description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.

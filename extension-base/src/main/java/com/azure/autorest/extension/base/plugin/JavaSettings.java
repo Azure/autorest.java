@@ -130,7 +130,9 @@ public class JavaSettings
                     host.getBooleanValue("model-override-setter-from-superclass",
                             modelOverrideSetterFromSuperclassDefault),
                     host.getBooleanValue("optional-constant-as-enum", false),
+                    host.getBooleanValue("low-level-client", false),
                     host.getBooleanValue("use-iterable", false),
+                    host.getValue(List.class, "service-versions"),
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
                     host.getStringValue("key-credential-header-name", ""),
@@ -192,7 +194,9 @@ public class JavaSettings
                          String customizationClass,
                          boolean overrideSetterFromSuperclass,
                          boolean optionalConstantAsEnum,
+                         boolean lowLevelClient,
                          boolean useIterable,
+                         List<String> serviceVersions,
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
                          String keyCredentialHeaderName,
@@ -228,7 +232,9 @@ public class JavaSettings
         this.artifactId = artifactId;
         this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
+        this.lowLevelClient = lowLevelClient;
         this.useIterable = useIterable;
+        this.serviceVersions = serviceVersions;
         this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
         this.clientFlattenAnnotationTarget = (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
                 ? ClientFlattenAnnotationTarget.TYPE
@@ -613,9 +619,24 @@ public class JavaSettings
         return optionalConstantAsEnum;
     }
 
+    private final boolean lowLevelClient;
+    public boolean isLowLevelClient() {
+        return lowLevelClient;
+    }
+
     private final boolean useIterable;
     public boolean shouldUseIterable() {
         return useIterable;
+    }
+
+    /**
+     * Service version list. It maps to api-version parameter in swagger.
+     * Last one is the latest version, also default version
+     */
+    private final List<String> serviceVersions;
+
+    public List<String> getServiceVersions() {
+        return serviceVersions;
     }
 
     private final boolean requireXMsFlattenedToFlatten;

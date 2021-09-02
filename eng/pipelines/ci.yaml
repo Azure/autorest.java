@@ -49,6 +49,7 @@ jobs:
         displayName: 'Generate code'
 
       - script: |
+          git status
           git diff
         displayName: 'Git Diff'
 
@@ -57,6 +58,26 @@ jobs:
         displayName: 'Check no diff in generated files'
 
       - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'protocol-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
+
+      - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
@@ -75,6 +96,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run azure tests'
         inputs:
           mavenPomFile: pom.xml
@@ -106,3 +128,14 @@ jobs:
           npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
         condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
         displayName: 'Publish coverage report to storage account'
+
+      - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol resilience tests'
+        inputs:
+          mavenPomFile: protocol-resilience-test/pom.xml
+          goals: 'package revapi:check'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
