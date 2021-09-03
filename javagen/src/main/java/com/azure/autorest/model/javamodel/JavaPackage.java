@@ -178,6 +178,10 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
+    public void addLLCExamples(String name, ProxyMethodExample example) {
+        System.out.println(name);
+    }
+
     protected void checkDuplicateFile(String filePath) {
         if (filePaths.contains(filePath)) {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));
