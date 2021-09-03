@@ -141,8 +141,8 @@ public final class LROsCustomHeaders {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -209,8 +209,8 @@ public final class LROsCustomHeaders {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -275,8 +275,8 @@ public final class LROsCustomHeaders {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -343,8 +343,8 @@ public final class LROsCustomHeaders {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});

@@ -452,8 +452,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -515,8 +515,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -577,8 +577,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -631,8 +631,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<List<Product>>() {},
                 new TypeReference<List<Product>>() {});
@@ -691,8 +691,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -752,8 +752,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -816,8 +816,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -881,8 +881,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -946,8 +946,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1011,8 +1011,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1074,8 +1074,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1138,8 +1138,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1203,8 +1203,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1268,8 +1268,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1333,8 +1333,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1396,8 +1396,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1455,8 +1455,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Sku>() {},
                 new TypeReference<Sku>() {});
@@ -1514,8 +1514,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Sku>() {},
                 new TypeReference<Sku>() {});
@@ -1572,8 +1572,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<SubProduct>() {},
                 new TypeReference<SubProduct>() {});
@@ -1631,8 +1631,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<SubProduct>() {},
                 new TypeReference<SubProduct>() {});
@@ -1688,8 +1688,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1745,8 +1745,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1802,8 +1802,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1853,8 +1853,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -1904,8 +1904,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -1956,8 +1956,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2008,8 +2008,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2061,8 +2061,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2114,8 +2114,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2167,8 +2167,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2219,8 +2219,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2272,8 +2272,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2324,8 +2324,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Sku>() {},
                 new TypeReference<Sku>() {});
@@ -2384,8 +2384,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2446,8 +2446,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2501,8 +2501,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2554,8 +2554,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2609,8 +2609,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2672,8 +2672,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2737,8 +2737,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<Product>() {},
                 new TypeReference<Product>() {});
@@ -2802,8 +2802,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});
@@ -2867,8 +2867,8 @@ public final class LROs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), Context.NONE, null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), Context.NONE),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReference<BinaryData>() {},
                 new TypeReference<BinaryData>() {});

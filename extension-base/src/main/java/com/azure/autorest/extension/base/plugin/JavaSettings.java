@@ -647,7 +647,7 @@ public class JavaSettings
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
-                return "new DefaultPollingStrategy<>({httpPipeline}, {context})";
+                return "new DefaultPollingStrategy<>({httpPipeline})";
             } else {
                 return strategy;
             }

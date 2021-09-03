@@ -320,7 +320,6 @@ public class ClientMethod {
             } else {
                 imports.add("com.azure.core.util.serializer.TypeReference");
                 imports.add("java.time.Duration");
-                ClassType.Context.addImportsTo(imports, true);
 
                 if (getMethodPollingDetails().getPollingStrategy() != null) {
                     List<String> knownPollingStrategies = Arrays.asList(

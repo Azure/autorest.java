@@ -8,7 +8,7 @@ polling:
   default:
     strategy: >-
       new ChainedPollingStrategy<>(java.util.Arrays.asList(
-            new OperationResourcePollingStrategy<>({httpPipeline}, {context}, null, "Azure-AsyncOperation"),
-            new LocationPollingStrategy<>({httpPipeline}, {context}),
+            new OperationResourcePollingStrategy<>({httpPipeline}, null, "Azure-AsyncOperation"),
+            new LocationPollingStrategy<>({httpPipeline}),
             new StatusCheckPollingStrategy<>()))
 ```
