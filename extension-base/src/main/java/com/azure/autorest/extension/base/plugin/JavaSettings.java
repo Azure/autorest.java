@@ -682,7 +682,7 @@ public class JavaSettings
             return finalType;
         }
 
-        public int getPollInterval() {
+        public int getPollIntervalInSeconds() {
             return pollInterval != null
                     ? Integer.parseInt(pollInterval)
                     : 1;

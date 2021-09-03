@@ -394,18 +394,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             parameters);
                 }
 
-                String operationId;
-                if (operation.getOperationGroup() != null
-                        && operation.getOperationGroup().getLanguage() != null
-                        && operation.getOperationGroup().getLanguage().getDefault() != null
-                        && operation.getOperationGroup().getLanguage().getDefault().getName() != null
-                        && !operation.getOperationGroup().getLanguage().getDefault().getName().isEmpty()) {
-                    operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_"
-                            + operation.getLanguage().getDefault().getName();
-                } else {
-                    operationId = operation.getLanguage().getDefault().getName();
-                }
-                JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(operationId);
+                JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(proxyMethod.getOperationId());
 
                 MethodPollingDetails methodPollingDetails = null;
                 if (pollingDetails != null) {
@@ -413,7 +402,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             pollingDetails.getStrategy(),
                             getPollingIntermediateType(pollingDetails, syncReturnType),
                             getPollingFinalType(pollingDetails, syncReturnType),
-                            pollingDetails.getPollInterval());
+                            pollingDetails.getPollIntervalInSeconds());
                     builder = builder.methodPollingDetails(methodPollingDetails);
                 }
 
