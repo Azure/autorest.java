@@ -70,6 +70,7 @@ fluentgen/*.yaml
 # Generated code for tests #
 fluent-tests/src/main/java/com/azure/mgmttest/**
 fluent-tests/src/main/java/com/azure/mgmtlitetest/**
+fluent-tests/src/main/java/module-info.java
 fluent-tests/src/samples/**
 fluent-tests/pom_generated_*.xml
 
@@ -78,3 +79,6 @@ fluent-tests/pom_generated_*.xml
 
 # language server
 postprocessor/jdt-language-server
+
+# Module info
+protocol-tests/src/main/java/module-info.java

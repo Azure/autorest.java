@@ -43,19 +43,28 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.headerCollectionPrefix(headerCollectionPrefix);
 
-        Schema ParameterJvWireType = parameter.getSchema();
-        IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
-        if (parameter.isNullable() || !parameter.isRequired()) {
-            wireType = wireType.asNullable();
-        }
-        IType clientType = wireType.getClientType();
-        builder.clientType(clientType);
-
         RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
         builder.requestParameterLocation(parameterRequestLocation);
 
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
         builder.fromClient(parameterIsServiceClientProperty);
+
+        Schema ParameterJvWireType = parameter.getSchema();
+        IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
+        if (parameter.isNullable() || !parameter.isRequired()) {
+            wireType = wireType.asNullable();
+        }
+        builder.rawType(wireType);
+
+        IType clientType = wireType.getClientType();
+        if (settings.isLowLevelClient() && !(clientType instanceof PrimitiveType)) {
+            if (parameterRequestLocation == RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
+                clientType = ClassType.BinaryData;
+            } else {
+                clientType = ClassType.String;
+            }
+        }
+        builder.clientType(clientType);
 
         if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.Body){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -71,15 +80,36 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 wireType = ClassType.String;
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
-            wireType = ClassType.String;
+            if (parameter.getProtocol().getHttp().getExplode()) {
+                wireType = new ListType(ClassType.String);
+            } else {
+                wireType = ClassType.String;
+            }
+        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+            if (parameterRequestLocation == RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
+                wireType = ClassType.BinaryData;
+            } else {
+                wireType = ClassType.String;
+            }
         }
         builder.wireType(wireType);
 
-        String parameterDescription = parameter.getDescription();
-        if (parameterDescription == null || parameterDescription.isEmpty()) {
-            parameterDescription = String.format("the %s value", clientType);
+        String description = null;
+        // parameter description
+        if (parameter.getLanguage() != null) {
+            description = parameter.getLanguage().getDefault().getDescription();
         }
-        builder.description(parameterDescription);
+        // fallback to parameter schema description
+        if (description == null || description.isEmpty()) {
+            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
+                description = parameter.getSchema().getLanguage().getDefault().getDescription();
+            }
+        }
+        // fallback to dummy description
+        if (description == null || description.isEmpty()) {
+            description = String.format("The %s parameter", name);
+        }
+        builder.description(description);
 
         if (parameter.getExtensions() != null) {
             builder.alreadyEncoded(parameter.getExtensions().isXmsSkipUrlEncoding());
@@ -97,6 +127,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String operationGroupName = parameter.getOperation().getOperationGroup().getLanguage().getJava().getName();
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
+            boolean isServiceVersion = false;
+            if (settings.isLowLevelClient() && clientPropertyName.equals("apiVersion")) {
+                isServiceVersion = true;
+                clientPropertyName = "serviceVersion";
+            }
             if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
                 clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
             }
@@ -109,6 +144,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 }
             }
             parameterReference = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
+            if (isServiceVersion) {
+                parameterReference += ".getVersion()";
+            }
         }
         builder.parameterReference(parameterReference);
 
@@ -136,6 +174,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             collectionFormat = CollectionFormat.CSV;
         }
         builder.collectionFormat(collectionFormat);
+        builder.explode(parameter.getProtocol().getHttp().getExplode());
 
         return builder.build();
     }

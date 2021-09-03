@@ -10,7 +10,9 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.HttpMethod;
+import com.azure.core.util.CoreUtils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -113,5 +115,20 @@ public class SchemaUtil {
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
                 .anyMatch(Objects::nonNull);
+    }
+
+    public static String mergeDescription(String summary, String description) {
+        if (Objects.equals(summary, description)) {
+            summary = null;
+        }
+
+        List<String> parts = new ArrayList<>();
+        if (!CoreUtils.isNullOrEmpty(summary)) {
+            parts.add(summary);
+        }
+        if (!CoreUtils.isNullOrEmpty(description)) {
+            parts.add(description);
+        }
+        return String.join(" ", parts);
     }
 }

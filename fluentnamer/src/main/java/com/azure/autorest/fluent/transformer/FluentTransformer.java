@@ -40,14 +40,14 @@ public class FluentTransformer {
         codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings);
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
-        codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = renameHostParameter(codeModel);
         //codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
-        codeModel = new SchemaRenamer(fluentJavaSettings.getRenameModel()).process(codeModel);
+        codeModel = new NamingConflictResolver().process(codeModel);
+        codeModel = new SchemaRenamer(fluentJavaSettings.getJavaNamesForRenameModel()).process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
         codeModel = new ErrorTypeNormalization().process(codeModel);
@@ -55,7 +55,7 @@ public class FluentTransformer {
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
-        codeModel = new SchemaCleanup().process(codeModel);
+        codeModel = new SchemaCleanup(fluentJavaSettings.getJavaNamesForPreserveModel()).process(codeModel);
         return codeModel;
     }
 

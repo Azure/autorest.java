@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
@@ -16,14 +18,29 @@ public class FluentExample implements Comparable<FluentExample> {
 
     private final String groupName;
     private final String methodName;
+    private final String operationId;
+    private final String apiVersion;
+    private final String exampleName;
 
     private final List<FluentCollectionMethodExample> collectionMethodExamples = new ArrayList<>();
     private final List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
     private final List<FluentResourceUpdateExample> resourceUpdateExamples = new ArrayList<>();
 
-    public FluentExample(String groupName, String methodName) {
+    private final List<FluentClientMethodExample> clientMethodExamples = new ArrayList<>();
+
+//    public FluentExample(String groupName, String methodName, String operationId, String apiVersion) {
+//        this.groupName = groupName;
+//        this.methodName = methodName;
+//        this.apiVersion = apiVersion;
+//        this.exampleName = null;
+//    }
+
+    public FluentExample(String groupName, String methodName, String exampleName, String operationId, String apiVersion) {
         this.groupName = groupName;
         this.methodName = methodName;
+        this.operationId = operationId;
+        this.apiVersion = apiVersion;
+        this.exampleName = exampleName;
     }
 
     public List<FluentCollectionMethodExample> getCollectionMethodExamples() {
@@ -38,6 +55,10 @@ public class FluentExample implements Comparable<FluentExample> {
         return resourceUpdateExamples;
     }
 
+    public List<FluentClientMethodExample> getClientMethodExamples() {
+        return clientMethodExamples;
+    }
+
     public String getGroupName() {
         return groupName;
     }
@@ -46,8 +67,35 @@ public class FluentExample implements Comparable<FluentExample> {
         return methodName;
     }
 
+    public String getOperationId() {
+        return operationId;
+    }
+
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public String getPackageName() {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (isAggregatedExamples()) {
+            return settings.getPackage();
+        } else {
+            return settings.getPackage("examples");
+        }
+    }
+
     public String getClassName() {
-        return groupName + methodName + "Samples";
+        if (isAggregatedExamples()) {
+            return groupName + methodName + "Samples";
+        } else {
+            return groupName + methodName +
+                    com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(this.exampleName) +
+                    "Samples";
+        }
+    }
+
+    private boolean isAggregatedExamples() {
+        return exampleName == null;
     }
 
     @Override
@@ -55,6 +103,9 @@ public class FluentExample implements Comparable<FluentExample> {
         int ret = this.groupName.compareTo(o.groupName);
         if (ret == 0) {
             ret = this.methodName.compareTo(o.methodName);
+        }
+        if (ret == 0 && this.exampleName != null && o.exampleName != null) {
+            ret = this.exampleName.compareTo(o.exampleName);
         }
         return ret;
     }

@@ -1321,7 +1321,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Float>>> getFloatValidWithResponseAsync() {
@@ -1338,7 +1338,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatValidAsync() {
@@ -1358,7 +1358,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatValid() {
@@ -1420,7 +1420,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Float>>> getFloatInvalidNullWithResponseAsync() {
@@ -1437,7 +1437,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatInvalidNullAsync() {
@@ -1457,7 +1457,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidNull() {
@@ -1469,7 +1469,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Float>>> getFloatInvalidStringWithResponseAsync() {
@@ -1486,7 +1486,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatInvalidStringAsync() {
@@ -1506,7 +1506,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidString() {
@@ -1518,7 +1518,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Double>>> getDoubleValidWithResponseAsync() {
@@ -1535,7 +1535,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleValidAsync() {
@@ -1555,7 +1555,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0, -0.
+     * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleValid() {
@@ -1617,7 +1617,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Double>>> getDoubleInvalidNullWithResponseAsync() {
@@ -1634,7 +1634,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleInvalidNullAsync() {
@@ -1654,7 +1654,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return float array value [0.
+     * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidNull() {
@@ -1666,7 +1666,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Double>>> getDoubleInvalidStringWithResponseAsync() {
@@ -1683,7 +1683,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleInvalidStringAsync() {
@@ -1703,7 +1703,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean array value [1.
+     * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidString() {
@@ -2777,7 +2777,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration array value ['P123DT22H14M12.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<Duration>>> getDurationValidWithResponseAsync() {
@@ -2794,7 +2794,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration array value ['P123DT22H14M12.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Duration>> getDurationValidAsync() {
@@ -2814,7 +2814,7 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return duration array value ['P123DT22H14M12.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Duration> getDurationValid() {

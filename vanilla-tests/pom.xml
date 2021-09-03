@@ -71,9 +71,9 @@
             </goals>
             <configuration>
               <executable>node</executable>
-              <workingDirectory>${session.executionRootDirectory}</workingDirectory>
+              <workingDirectory>${session.executionRootDirectory}/node_modules/@microsoft.azure/autorest.testserver</workingDirectory>
               <arguments>
-                <argument>node_modules/@microsoft.azure/autorest.testserver</argument>
+                <argument>.</argument>
               </arguments>
               <async>true</async>
             </configuration>

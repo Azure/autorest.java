@@ -92,6 +92,7 @@ Following settings only works when `fluent` option is specified.
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
 | `--remove-model` | CSV. Remove classes. |
+| `--preserve-model` | CSV. Preserve classes from clean-up. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.
@@ -122,6 +123,35 @@ With the fields specified below:
 |poll-interval|integer|false|The default interval in seconds to poll with (can be modified by users in `PollerFlux` and `SyncPoller`. Default is 1.|30|
 
 To use default settings globally, use `--polling={}`.
+
+# Protocol clients (low level clients)
+
+You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
+
+```yaml $(low-level-client)
+generate-client-interfaces: false
+generate-client-as-impl: true
+generate-sync-async-clients: true
+```
+
+The generated code has the following structure
+
+```
+- pom.xml
+- /src/main/java
+  |
+  - module-info.java
+  - /com/azure/<group>/<service>
+    |
+    - <Service>Builder.java
+    - <Service>Client.java
+    - <Service>AsyncClient.java
+    - /implementation
+      |
+      - <Service>ClientImpl.java
+```
+
+and requires `azure-core` 1.19.0-beta.1 as a dependency.
 
 # Customizations
 
@@ -838,6 +868,9 @@ help-content:
       - key: model-override-setter-from-superclass
         type: bool
         description: Indicates whether to override the superclass setter method in model. Default is false.
+      - key: low-level-client
+        type: bool
+        description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.
       - key: client-flattened-annotation-target
         type: string
         description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
@@ -885,6 +918,9 @@ help-content:
       - key: remove-model
         type: string
         description: CSV. Remove classes.
+      - key: preserve-model
+        type: string
+        description: CSV. Preserve classes from clean-up.
       - key: name-for-ungrouped-operations
         type: string
         description: String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite.

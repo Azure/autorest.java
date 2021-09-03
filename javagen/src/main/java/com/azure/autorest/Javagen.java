@@ -89,19 +89,19 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = new JavaPackage(this);
             // Service client
             javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                    client.getServiceClient());
+                    .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                            client.getServiceClient());
 
             if (settings.shouldGenerateClientInterfaces()) {
                 javaPackage
-                    .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
             // Service client builder
             String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
             String builderSuffix = ClientModelUtil.getBuilderSuffix();
             javaPackage.addServiceClientBuilder(builderPackage,
-                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+                    client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
 
             if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -119,42 +119,57 @@ public class Javagen extends NewPlugin {
 
             // Method group
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
-                    methodGroupClient);
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
                 if (settings.shouldGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
 
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+            // Service version
+            if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
+                String packageName = settings.getPackage();
+                String serviceName = settings.getServiceName();
+                String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+                List<String> serviceVersions = settings.getServiceVersions();
+                javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
             }
 
-            // Client model
-            for (ClientModel model : client.getModels()) {
-                javaPackage.addModel(model.getPackage(), model.getName(), model);
-            }
+            if (!settings.isLowLevelClient()) {
+                // Response
+                for (ClientResponse response : client.getResponseModels()) {
+                    javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+                }
 
-            // Enum
-            for (EnumType enumType : client.getEnums()) {
-                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-            }
+                // Client model
+                for (ClientModel model : client.getModels()) {
+                    javaPackage.addModel(model.getPackage(), model.getName(), model);
+                }
 
-            // Exception
-            for (ClientException exception : client.getExceptions()) {
-                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-            }
+                // Enum
+                for (EnumType enumType : client.getEnums()) {
+                    javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+                }
 
-            // XML sequence wrapper
-            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
-                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+                // Exception
+                for (ClientException exception : client.getExceptions()) {
+                    javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+                }
+
+                // XML sequence wrapper
+                for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                    javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                            xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+                }
             }
 
             // Package-info
             for (PackageInfo packageInfo : client.getPackageInfos()) {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+            }
+
+            // Module-info
+            if (settings.isLowLevelClient()) {
+                javaPackage.addModuleInfo(client.getModuleInfo());
             }
 
             // TODO: POM, Manager
@@ -172,7 +187,7 @@ public class Javagen extends NewPlugin {
                 }
                 writeFile(javaFile.getFilePath(), content, null);
             }
-            String artifactId = JavaSettings.getInstance().getArtifactId();
+            String artifactId = settings.getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);

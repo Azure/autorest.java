@@ -3,19 +3,7 @@ package com.azure.autorest.model.javamodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClientException;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.Manager;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.clientmodel.ModuleInfo;
-import com.azure.autorest.model.clientmodel.PackageInfo;
-import com.azure.autorest.model.clientmodel.PageDetails;
-import com.azure.autorest.model.clientmodel.Pom;
-import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
@@ -100,6 +88,14 @@ public class JavaPackage {
     public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addServiceVersion(String package_Keyword, String serviceName, String className,
+                                        List<String> serviceVersions, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, className);
+        Templates.getServiceVersionTemplate().serviceName(serviceName).className(className)
+                .serviceVersions(serviceVersions).write(model, javaFile);
         addJavaFile(javaFile);
     }
 

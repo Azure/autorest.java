@@ -92,7 +92,10 @@ public class ClientModelUtil {
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
-        if (!settings.isFluent() && settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
+        if (!settings.isFluent()
+                && settings.shouldGenerateClientAsImpl()
+                && !settings.shouldGenerateSyncAsyncClients()
+                && !settings.isLowLevelClient()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
@@ -102,7 +105,7 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if (settings.shouldGenerateSyncAsyncClients() && !settings.isFluent()) {
+        if ((settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) && !settings.isFluent()) {
             builderPackage = settings.getPackage();
         } else if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());

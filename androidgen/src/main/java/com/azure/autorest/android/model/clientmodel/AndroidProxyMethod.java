@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -29,26 +30,32 @@ public class AndroidProxyMethod extends ProxyMethod {
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
      */
-    protected AndroidProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
-                                 List<HttpResponseStatus> responseExpectedStatusCodes,
+    protected AndroidProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
+                                 String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
                                  ClassType unexpectedResponseExceptionType,
                                  Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
                                  String name, List<ProxyMethodParameter> parameters, String description,
-                                 IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
+                                 IType returnValueWireType, IType responseBodyType, boolean isResumable, Set<String> responseContentTypes,
+                                 String operationId, Map<String, ProxyMethodExample> examples) {
         super(requestContentType,
                 returnType,
                 httpMethod,
+                baseUrl,
                 urlPath,
                 responseExpectedStatusCodes,
                 unexpectedResponseExceptionType,
                 unexpectedResponseExceptionTypes,
                 name,
                 parameters,
+                parameters,
                 description,
                 returnValueWireType,
+                responseBodyType,
+                responseBodyType,
                 isResumable,
                 responseContentTypes,
-                null);
+                operationId,
+                examples);
     }
 
     @Override
@@ -64,7 +71,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                 imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
-            if (getIsResumable()) {
+            if (isResumable()) {
                 imports.add("com.azure.android.core.rest.annotation.ResumeOperation");
             }
             imports.add(String.format("com.azure.android.core.rest.annotation.%1$s", com.azure.autorest.util.CodeNamer
@@ -85,7 +92,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                 imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
-            if (getIsResumable()) {
+            if (isResumable()) {
                 imports.add("com.azure.android.core.rest.annotation.ResumeOperation");
             }
             imports.add(String.format("com.azure.android.core.rest.annotation.%1$s", com.azure.autorest.util.CodeNamer
@@ -136,6 +143,7 @@ public class AndroidProxyMethod extends ProxyMethod {
             return new AndroidProxyMethod(requestContentType,
                     returnType,
                     httpMethod,
+                    baseUrl,
                     urlPath,
                     responseExpectedStatusCodes,
                     unexpectedResponseExceptionType,
@@ -144,8 +152,11 @@ public class AndroidProxyMethod extends ProxyMethod {
                     parameters,
                     description,
                     returnValueWireType,
+                    responseBodyType,
                     isResumable,
-                    responseContentTypes);
+                    responseContentTypes,
+                    operationId,
+                    examples);
         }
     }
 }

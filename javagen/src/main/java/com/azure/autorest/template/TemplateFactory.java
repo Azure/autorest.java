@@ -8,6 +8,8 @@ public interface TemplateFactory {
 
     ServiceClientBuilderTemplate getServiceClientBuilderTemplate();
 
+    ServiceVersionTemplate getServiceVersionTemplate();
+
     ManagerTemplate getManagerTemplate();
 
     MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate();
@@ -42,4 +44,3 @@ public interface TemplateFactory {
 
     ModuleInfoTemplate getModuleInfoTemplate();
 }
-

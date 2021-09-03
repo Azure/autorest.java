@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,6 +27,10 @@ public class ClientMethodParameter {
      */
     private IType wireType;
     /**
+     * The raw type of this parameter. In low-level mode, wireType might be BinaryData. Result of SchemaMapper.
+     */
+    private IType rawType;
+    /**
      * The name of this parameter.
      */
     private String name;
@@ -49,27 +55,32 @@ public class ClientMethodParameter {
      */
     private List<ClassType> annotations;
 
+    private RequestParameterLocation location;
+
     /**
      * Create a new Parameter with the provided properties.
      * @param description The description of this parameter.
      * @param isFinal Whether or not this parameter is final.
      * @param wireType The type of this parameter.
+     * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param name The name of this parameter.
      * @param isRequired Whether or not this parameter is required.
      * @param isConstant Whether or not this parameter has a constant value.
      * @param fromClient Whether or not this parameter is from a client property.
      * @param annotations The annotations that should be part of this Parameter's declaration.
      */
-    private ClientMethodParameter(String description, boolean isFinal, IType wireType, String name, boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations) {
+    private ClientMethodParameter(String description, boolean isFinal, IType wireType, IType rawType, String name, boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations, RequestParameterLocation location) {
         this.description = description;
         this.isFinal = isFinal;
         this.wireType = wireType;
+        this.rawType = rawType;
         this.name = name;
         this.isRequired = isRequired;
         this.isConstant = isConstant;
         this.fromClient = fromClient;
         this.defaultValue = defaultValue;
         this.annotations = annotations;
+        this.location = location;
     }
 
     public final String getDescription() {
@@ -89,6 +100,10 @@ public class ClientMethodParameter {
 
     public final IType getWireType() {
         return wireType;
+    }
+
+    public final IType getRawType() {
+        return rawType;
     }
 
     public final String getName() {
@@ -115,6 +130,10 @@ public class ClientMethodParameter {
         return annotations;
     }
 
+    public final RequestParameterLocation getLocation() {
+        return location;
+    }
+
     /**
      * The full declaration of this parameter as it appears in a method signature.
      */
@@ -138,12 +157,14 @@ public class ClientMethodParameter {
         private String description;
         private boolean isFinal;
         private IType wireType;
+        private IType rawType;
         private String name;
         private boolean isRequired;
         private boolean isConstant;
         private boolean fromClient;
         private String defaultValue;
         private List<ClassType> annotations;
+        private RequestParameterLocation location;
 
         /**
          * Sets the description of this parameter.
@@ -172,6 +193,16 @@ public class ClientMethodParameter {
          */
         public Builder wireType(IType wireType) {
             this.wireType = wireType;
+            return this;
+        }
+
+        /**
+         * Sets the raw type of this parameter. Result of SchemaMapper.
+         * @param rawType the raw type of this parameter
+         * @return the Builder itself
+         */
+        public Builder rawType(IType rawType) {
+            this.rawType = rawType;
             return this;
         }
 
@@ -235,16 +266,28 @@ public class ClientMethodParameter {
             return this;
         }
 
+        /**
+         * Sets the location of the parameter.
+         * @param location the location of the parameter
+         * @return the Builder itself
+         */
+        public Builder location(RequestParameterLocation location) {
+            this.location = location;
+            return this;
+        }
+
         public ClientMethodParameter build() {
             return new ClientMethodParameter(description,
                     isFinal,
                     wireType,
+                    rawType,
                     name,
                     isRequired,
                     isConstant,
                     fromClient,
                     defaultValue,
-                    annotations);
+                    annotations,
+                    location);
         }
     }
 }

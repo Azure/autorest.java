@@ -10,15 +10,11 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.model.javamodel.*;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.BinaryData;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,7 +89,28 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
+            if (settings.isLowLevelClient() &&
+                    methodGroupClient.getClientMethods().stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
+                writePagingHelperMethods(methodGroupClient, classBlock);
+            }
+
             writeAdditionalClassBlock(classBlock);
+        });
+    }
+
+    protected void writePagingHelperMethods(MethodGroupClient methodGroupClient, JavaClass classBlock) {
+        classBlock.privateMethod("List<BinaryData> getValues(BinaryData binaryData, String path)", block -> {
+            block.line("try {");
+            block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
+            block.line("List<?> values = (List<?>) obj.get(path);");
+            block.line("return values.stream().map(BinaryData::fromObject).collect(Collectors.toList());");
+            block.line("} catch (RuntimeException e) { return null; }");
+        });
+        classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
+            block.line("try {");
+            block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
+            block.line("return (String) obj.get(path);");
+            block.line("} catch (RuntimeException e) { return null; }");
         });
     }
 

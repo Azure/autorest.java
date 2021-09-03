@@ -3,22 +3,24 @@ trigger:
     include:
     - v4
     - main
+    - llc
 
 pr:
   branches:
     include:
     - v4
     - main
+    - llc
 
 jobs:
   - job: Build
 
     variables:
       JavaVersion: 1.8
-      NodeVersion: '12.x'
+      NodeVersion: '14.x'
 
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     steps:
       - task: NodeTool@0
@@ -47,6 +49,7 @@ jobs:
         displayName: 'Generate code'
 
       - script: |
+          git status
           git diff
         displayName: 'Git Diff'
 
@@ -55,6 +58,26 @@ jobs:
         displayName: 'Check no diff in generated files'
 
       - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'protocol-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
+
+      - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
@@ -73,6 +96,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
+        condition: succeededOrFailed()
         displayName: 'Run azure tests'
         inputs:
           mavenPomFile: pom.xml
@@ -90,10 +114,28 @@ jobs:
           testRunTitle: 'azure-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
-#      - script: |
-#          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
-#        displayName: 'Copy coverage report'
+      - script: |
+          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-vanilla.json
+          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-azure.json
+        displayName: 'Display coverage data'
+
+      # autorest.testserver reads "package.json" 2 level up from "coverage" directory
+      - script: |
+          cp node_modules/@microsoft.azure/autorest.testserver/package.json node_modules/@microsoft.azure/package.json
+        displayName: 'Prepare for coverage report publish'
 
       - script: |
-          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
+          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
+        condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
         displayName: 'Publish coverage report to storage account'
+
+      - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol resilience tests'
+        inputs:
+          mavenPomFile: protocol-resilience-test/pom.xml
+          goals: 'package revapi:check'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false

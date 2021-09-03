@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.checker.JavaFormatter;
+import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
@@ -66,6 +67,8 @@ public class FluentGen extends NewPlugin {
 
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
+
+    private List<FluentExample> fluentPremiumExamples;
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -161,12 +164,32 @@ public class FluentGen extends NewPlugin {
     }
 
     Client handleMap(CodeModel codeModel) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         FluentMapper fluentMapper = this.getFluentMapper();
 
         logger.info("Map code model to client model");
         fluentMapper.preModelMap(codeModel);
 
         Client client = Mappers.getClientMapper().map(codeModel);
+
+        // samples for Fluent Premium
+        if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
+            FluentStatic.setClient(client);
+            FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+            ExampleParser exampleParser = new ExampleParser();
+            fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
+                    .flatMap(mg -> exampleParser.parseMethodGroup(mg).stream())
+                    .collect(Collectors.toList());
+
+            if (fluentJavaSettings.isGenerateSamplesForSpecs()) {
+                ExampleParser exampleParserForSpecs = new ExampleParser(false);
+                fluentPremiumExamples.addAll(client.getServiceClient().getMethodGroupClients().stream()
+                        .flatMap(mg -> exampleParserForSpecs.parseMethodGroup(mg).stream())
+                        .collect(Collectors.toList()));
+            }
+        }
+
         return client;
     }
 
@@ -248,6 +271,13 @@ public class FluentGen extends NewPlugin {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
         }
 
+        // Samples
+        if (fluentPremiumExamples != null) {
+            for (FluentExample example : fluentPremiumExamples) {
+                javaPackage.addSample(example);
+            }
+        }
+
         return javaPackage;
     }
 
@@ -298,18 +328,23 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 
+            // Samples
+            List<JavaFile> sampleJavaFiles = new ArrayList<>();
+            for (FluentExample example : fluentClient.getExamples()) {
+                sampleJavaFiles.add(javaPackage.addSample(example));
+            }
+            // Samples for REST API specs
+            for (FluentExample example : fluentClient.getExamplesForSpecs()) {
+                javaPackage.addSample(example);
+            }
+
             // Readme and Changelog
             if (isSdkIntegration) {
                 javaPackage.addReadmeMarkdown(project);
                 javaPackage.addChangelogMarkdown(project.getChangelog());
                 if (fluentJavaSettings.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
-                    javaPackage.addSampleMarkdown(project, fluentClient.getExamples());
+                    javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
                 }
-            }
-
-            // Samples
-            for (FluentExample example : fluentClient.getExamples()) {
-                javaPackage.addSample(example);
             }
         }
 

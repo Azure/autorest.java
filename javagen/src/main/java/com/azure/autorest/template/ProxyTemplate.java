@@ -62,40 +62,50 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
-                    if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
-                        interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
-                    }
+                    if (!settings.isLowLevelClient()) {
+                        if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
+                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
+                        }
 
-                    if (restAPIMethod.getReturnValueWireType() != null) {
-                        interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
-                            restAPIMethod.getReturnValueWireType()));
-                    }
+                        if (restAPIMethod.getReturnValueWireType() != null) {
+                            interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
+                                    restAPIMethod.getReturnValueWireType()));
+                        }
 
-                    if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
-                        writeUnexpectedExceptions(restAPIMethod, interfaceBlock);
-                    }
+                        if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                            writeUnexpectedExceptions(restAPIMethod, interfaceBlock);
+                        }
 
-                    if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                        writeSingleUnexpectedException(restAPIMethod, interfaceBlock);
+                        if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+                            writeSingleUnexpectedException(restAPIMethod, interfaceBlock);
+                        }
                     }
 
                     ArrayList<String> parameterDeclarationList = new ArrayList<String>();
-                    if (restAPIMethod.getIsResumable()) {
+                    if (restAPIMethod.isResumable()) {
                         interfaceBlock.annotation(String.format("ResumeOperation"));
                     }
 
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
                         StringBuilder parameterDeclarationBuilder = new StringBuilder();
+                        RequestParameterLocation location = parameter.getRequestParameterLocation();
 
-                        switch (parameter.getRequestParameterLocation()) {
+                        switch (location) {
                             case Uri:
                             case Path:
                             case Query:
                             case Header:
-                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
-                                if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
+                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(location.toString())));
+                                if (location == RequestParameterLocation.Query && parameter.getAlreadyEncoded() && parameter.getExplode()) {
+                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true, multipleQueryParams = true", parameter.getRequestParameterName()));
+                                } else if (location == RequestParameterLocation.Query && parameter.getExplode()) {
+                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", multipleQueryParams = true", parameter.getRequestParameterName()));
+                                } else if ((location == RequestParameterLocation.Path ||
+                                            location == RequestParameterLocation.Query)
+                                        && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
-                                } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
+                                } else if (location == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null
+                                        && !parameter.getHeaderCollectionPrefix().isEmpty()) {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
                                 } else {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getRequestParameterName()));
@@ -121,8 +131,8 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
 
                             default:
-                                if (!restAPIMethod.getIsResumable() && parameter.getWireType() != ClassType.Context) {
-                                    throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());
+                                if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
+                                    throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + location);
                                 }
 
                                 break;

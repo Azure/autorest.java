@@ -7,54 +7,17 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.model.clientmodel.ClassType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class FluentBaseExample {
+public abstract class FluentBaseExample implements FluentExample {
 
     private final String name;
     private final FluentManager manager;
     private final FluentResourceCollection collection;
     private final List<ParameterExample> parameters = new ArrayList<>();
-
-    public static class ParameterExample {
-        private final FluentMethod fluentMethod;
-        private final List<ExampleNode> exampleNodes = new ArrayList<>();
-
-        public ParameterExample(FluentMethod fluentMethod, Collection<ExampleNode> exampleNodeIterator) {
-            this.fluentMethod = fluentMethod;
-            exampleNodes.addAll(exampleNodeIterator);
-        }
-
-        public ParameterExample(FluentMethod fluentMethod, ExampleNode exampleNode) {
-            this.fluentMethod = fluentMethod;
-            if (exampleNode != null) {
-                this.exampleNodes.add(exampleNode);
-            }
-        }
-
-        public ParameterExample(ExampleNode exampleNode) {
-            this.fluentMethod = null;
-            if (exampleNode != null) {
-                this.exampleNodes.add(exampleNode);
-            }
-        }
-
-        public FluentMethod getFluentMethod() {
-            return fluentMethod;
-        }
-
-        public List<ExampleNode> getExampleNodes() {
-            return exampleNodes;
-        }
-
-        public ExampleNode getExampleNode() {
-            return exampleNodes.isEmpty() ? null : exampleNodes.iterator().next();
-        }
-    }
 
     public FluentBaseExample(String name, FluentManager manager, FluentResourceCollection collection) {
         this.name = name;
@@ -62,6 +25,7 @@ public class FluentBaseExample {
         this.collection = collection;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -70,10 +34,27 @@ public class FluentBaseExample {
         return manager;
     }
 
+
+    @Override
+    public ClassType getEntryType() {
+        return manager.getType();
+    }
+
+    @Override
+    public String getEntryName() {
+        return "manager";
+    }
+
+    @Override
+    public String getEntryDescription() {
+        return String.format("Entry point to %1$s.", manager.getType().getName());
+    }
+
     public FluentResourceCollection getResourceCollection() {
         return collection;
     }
 
+    @Override
     public List<ParameterExample> getParameters() {
         return parameters;
     }

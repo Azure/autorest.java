@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>azure-autorest-parent</artifactId>
+        <groupId>com.azure.tools</groupId>
+        <version>1.0.0-beta.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>azure-autorest-protocol-resilience-test</artifactId>
+    <version>1.0.0-beta.1</version>
+
+    <modules>
+        <module>llcinitial</module>
+        <module>llcupdate1</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>1.19.0-beta.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <version>0.14.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>0.24.4</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <oldArtifacts>
+                        <artifact>com.azure.tools:llcinitial:1.0.0-beta.1</artifact>
+                    </oldArtifacts>
+                    <newArtifacts>
+                        <artifact>com.azure.tools:llcupdate1:1.0.0-beta.1</artifact>
+                    </newArtifacts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals><goal>check</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
