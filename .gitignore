@@ -43,8 +43,6 @@ local.properties
 .loadpath
 
 # Other Tooling #
-.classpath
-.project
 target
 .idea
 *.iml

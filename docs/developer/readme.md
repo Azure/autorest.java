@@ -4,9 +4,9 @@
 
 AutoRest Java is the Java language generator for AutoRest.
 
-As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/v4/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`, `androidgen`.
+As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/main/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`, `androidgen`.
 
-As AutoRest plugin, it is defined by the [YAML section in `readme.md`](https://github.com/Azure/autorest.java/blob/v4/javagen/readme.md), located in the same folders of `package.json`.
+As AutoRest plugin, it is defined by the [YAML section in `readme.md`](https://github.com/Azure/autorest.java/blob/main/javagen/readme.md), located in the same folders of `package.json`.
 
 ## Build and Unit Test
 
@@ -30,12 +30,12 @@ There is unit tests under fluentgen. It depends on [recorded YAML output of flue
 
 Vanilla tests and Azure tests both depends on [AutoRest Test Server](https://github.com/Azure/autorest.testserver), which provides OpenAPI 2.0 swaggers and NodeJS test server which implements the swaggers.
 
-The generated code is checked-in to the repository. [`generate` or `generate.bat` script](https://github.com/Azure/autorest.java/blob/v4/generate) in project root will re-generate the code.
+The generated code is checked-in to the repository. [`generate` or `generate.bat` script](https://github.com/Azure/autorest.java/blob/main/generate) in project root will re-generate the code.
 Maven will start the NodeJS test server and run the tests, which communicate with the test server.
 
 Fluent tests is different. It depends on the real OpenAPI 2.0 swaggers for ARM services.
 
-The generated code is not checked-in. Instead, code is generated on-the-fly during the test, via [`prepare-tests.bat` script](https://github.com/Azure/autorest.java/blob/v4/fluent-tests/prepare-tests.bat).
+The generated code is not checked-in. Instead, code is generated on-the-fly during the test, via [`prepare-tests.bat` script](https://github.com/Azure/autorest.java/blob/main/fluent-tests/prepare-tests.bat).
 
 `CompilationTests` relies on Java compiler to pin-down certain features of the generated code, while `RuntimeTests` executes the generated code and verify the result.
 
