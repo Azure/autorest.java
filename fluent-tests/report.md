@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-09-04T19:17:36.223329
+Generated at 2021-09-05T19:26:19.690185
 ## Success
 <details>
-<summary>RP count: 177</summary>
+<summary>RP count: 178</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -146,6 +146,7 @@ Generated at 2021-09-04T19:17:36.223329
 - reservations
 - resourcegraph
 - resourcehealth
+- resourcemover
 - saas
 - scheduler
 - search
@@ -286,8 +287,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.037 s
-[INFO] Finished at: 2021-09-04T18:10:35Z
+[INFO] Total time:  4.548 s
+[INFO] Finished at: 2021-09-05T18:11:46Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-authorization: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization/src/main/java/com/azure/resourcemanager/authorization/fluent/models/AccessReviewDecisionProperties.java:[225,19] method principalId() is already defined in class com.azure.resourcemanager.authorization.fluent.models.AccessReviewDecisionProperties
@@ -1059,10 +1060,10 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [SourceControlSyncJobById, Certificate, JobStreamListResult, SoftwareUpdateConfigurationRunListResult, Statistics, SourceControlSyncJobStream, PrivateEndpointConnection, NodeCounts, ConnectionType, JobSchedule, SourceControlSyncJob, KeyListResult, TypeField, Connection, SoftwareUpdateConfigurationRun, HybridRunbookWorkerGroup, TestJob, DscNodeReport, Module, SoftwareUpdateConfigurationMachineRunListResult, Webhook, Activity, Operation, DscCompilationJob, AgentRegistration, Job, DscConfiguration, DscNode, Schedule, PrivateLinkResource, Watcher, Credential, JobStream, SourceControl, SoftwareUpdateConfigurationMachineRun, LinkedWorkspace, RunbookDraftUndoEditResult, SoftwareUpdateConfiguration, RunbookDraft, Variable, Runbook, DscNodeConfiguration, SoftwareUpdateConfigurationListResult, JobCollectionItem, AutomationAccount, SourceControlSyncJobStreamById, Usage]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookProperties, RunbookCreateOrUpdateProperties]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
+INFORMATION (FluentMapper): Add Inner to response types: [SourceControlSyncJobStreamById, LinkedWorkspace, SourceControlSyncJob, DscNodeReport, RunbookDraftUndoEditResult, PrivateLinkResource, Operation, Schedule, KeyListResult, JobSchedule, ConnectionType, DscNode, Runbook, Credential, DscCompilationJob, DscConfiguration, SoftwareUpdateConfiguration, Statistics, TypeField, JobStreamListResult, SourceControlSyncJobById, Webhook, Watcher, Usage, Module, SoftwareUpdateConfigurationMachineRun, SoftwareUpdateConfigurationMachineRunListResult, PrivateEndpointConnection, NodeCounts, TestJob, SoftwareUpdateConfigurationRun, SoftwareUpdateConfigurationRunListResult, SourceControl, Variable, Job, JobStream, JobCollectionItem, Activity, HybridRunbookWorkerGroup, SourceControlSyncJobStream, Certificate, Connection, AgentRegistration, SoftwareUpdateConfigurationListResult, RunbookDraft, DscNodeConfiguration, AutomationAccount]
+INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookCreateOrUpdateProperties, RunbookProperties]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookCreateOrUpdateProperties': [RunbookCreateOrUpdateParameters]
+INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'PrivateEndpointConnection', method reference 'createOrUpdate', body parameter 'PrivateEndpointConnectionInner'
@@ -1570,7 +1571,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [GroupItem, IOsmamPolicy, Application, AndroidMamPolicy, Location, FlaggedUser, OperationResult, Device, FlaggedEnrolledApp, WipeDeviceOperationResult]
+INFORMATION (FluentMapper): Add Inner to response types: [FlaggedUser, IOsmamPolicy, FlaggedEnrolledApp, Application, AndroidMamPolicy, OperationResult, Device, GroupItem, WipeDeviceOperationResult, Location]
 
 ```
 **stderr**
@@ -1808,7 +1809,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AlertType, OnPremiseSensor, DefenderSettingsList, LocationModel, SitesList, RecommendationModel, Operation, OnPremiseSensorsList, RecommendationTypeList, RecommendationType, DeviceModel, DeviceGroupModel, AlertModel, SiteModel, SensorModel, SensorsList, DefenderSettingsModel, DeviceVulnerabilityModel, AlertTypeList, PackageDownloads]
+INFORMATION (FluentMapper): Add Inner to response types: [RecommendationTypeList, DefenderSettingsList, AlertModel, Operation, OnPremiseSensor, OnPremiseSensorsList, SitesList, AlertType, DeviceGroupModel, AlertTypeList, DeviceVulnerabilityModel, DefenderSettingsModel, SensorsList, RecommendationModel, DeviceModel, RecommendationType, SiteModel, PackageDownloads, SensorModel, LocationModel]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'SensorModel', method reference 'createOrUpdate', body parameter 'SensorModelInner'
@@ -1923,8 +1924,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.906 s
-[INFO] Finished at: 2021-09-04T18:38:35Z
+[INFO] Total time:  1.990 s
+[INFO] Finished at: 2021-09-05T18:42:43Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -2125,29 +2126,6 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 </details>
 
 <details>
-<summary>resourcemover</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-Failure:
-
-```
-**stderr**
-```
-Error: Unable to acquire shared lock on '/home/runner/.autorest' before timeout 20000 msec.
-Error: Unable to acquire shared lock on '/home/runner/.autorest' before timeout 20000 msec.
-    at SharedLock.acquire (/opt/hostedtoolcache/node/14.17.6/x64/lib/node_modules/autorest/dist/vendors-common_temp_node_modules_pnpm_azure-tools_eventing_3_0_252_node_modules_azure-tools_e-67ffa1.js:1503:19)
-    at Function.Create (/opt/hostedtoolcache/node/14.17.6/x64/lib/node_modules/autorest/dist/src_autorest-as-a-service_ts.js:8949:61)
-    at Object.loadConfig (/opt/hostedtoolcache/node/14.17.6/x64/lib/node_modules/autorest/dist/src_autorest-as-a-service_ts.js:606:27)
-    at main (/opt/hostedtoolcache/node/14.17.6/x64/lib/node_modules/autorest/dist/app.js:90:24)
-
-```
-</details>
-
-<details>
 <summary>resources</summary>
 
 **stdout**
@@ -2313,38 +2291,12 @@ WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should 
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1405:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups"].post.operationId)
 
-WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
-WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:63:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines"].get.parameters[4].name)
 
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
 
-WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
 
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
@@ -2363,8 +2315,34 @@ WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that
 
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
 WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:971:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups"].get.operationId)
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
+
+WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
 WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1515:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].put.operationId)
@@ -2433,7 +2411,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MapResponse, MachinesSummary, Liveness, Process, MachineGroup, Port, ClientGroup, Connection, ClientGroupMembersCount, ClientGroupMember, Machine]
+INFORMATION (FluentMapper): Add Inner to response types: [Machine, ClientGroup, ClientGroupMembersCount, MachinesSummary, Process, MapResponse, MachineGroup, Connection, ClientGroupMember, Port, Liveness]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ExampleParser): Parse collection method example 'SMMachinesListByWorkspaceGet'
@@ -2687,8 +2665,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.344 s
-[INFO] Finished at: 2021-09-04T19:11:16Z
+[INFO] Total time:  4.941 s
+[INFO] Finished at: 2021-09-05T19:19:17Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
