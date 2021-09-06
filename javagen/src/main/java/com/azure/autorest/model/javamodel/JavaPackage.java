@@ -178,6 +178,17 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
+    public void addLLCExamples(String name, ProxyMethodExample example, ProxyMethod method, ServiceClient model) {
+        System.err.println(name);
+        System.err.println(example);
+        System.err.println(method.getName());
+        System.err.println();
+        String filename = name.replace("_", "");
+        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
+        Templates.getProtocolSampleTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
     protected void checkDuplicateFile(String filePath) {
         if (filePaths.contains(filePath)) {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));

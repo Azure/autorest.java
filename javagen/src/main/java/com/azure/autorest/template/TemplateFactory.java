@@ -43,4 +43,6 @@ public interface TemplateFactory {
     PomTemplate getPomTemplate();
 
     ModuleInfoTemplate getModuleInfoTemplate();
+
+    ProtocolSampleTemplate getProtocolSampleTemplate();
 }
