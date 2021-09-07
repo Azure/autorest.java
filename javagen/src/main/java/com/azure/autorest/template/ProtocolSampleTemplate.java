@@ -5,6 +5,9 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProtocolSampleTemplate {
     private static final ProtocolSampleTemplate _instance = new ProtocolSampleTemplate();
 
@@ -19,19 +22,38 @@ public class ProtocolSampleTemplate {
         System.err.println(method.getType());
         System.err.println(filename);
         System.err.println(example);
+        method.getParameters().forEach(p -> System.err.println(p.getName()));
         System.err.println();
 
-        javaFile.declareImport("com.azure.core.util.BinaryData");
-        javaFile.declareImport("com.azure.identity.DefaultAzureCredentialBuilder");
+        List<String> imports = new ArrayList<>();
+        imports.add("com.azure.core.http.rest.PagedIterable");
+        imports.add("com.azure.core.http.rest.Response");
+        imports.add("com.azure.core.util.BinaryData");
+        imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
+        javaFile.declareImport(imports);
+
+        int numParam = method.getParameters().size();
+        List<String> params = new ArrayList<>();
+        for (int i = 0; i < numParam; i++) {
+            params.add("null");
+        }
+        example.getParameters().forEach((k, v) -> {
+
+        });
 
         String clientName = client.getInterfaceName() + "Client";
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
-                methodBlock.line(String.format("%s client = new %s()", clientName, builderName));
-                methodBlock.line(".endpoint(System.getenv(\"ENDPOINT\"))");
-                methodBlock.line(".credential(new DefaultAzureCredentialBuilder().build())");
-                methodBlock.line(".buildAccountsClient();");
-                methodBlock.line("BinaryData response = client.foo().getValue();");
+                String clientInit = "%s client = new %s()" +
+                        ".endpoint(System.getenv(\"ENDPOINT\"))" +
+                        ".credential(new DefaultAzureCredentialBuilder().build())" +
+                        ".build%s();";
+                methodBlock.line(String.format(clientInit, clientName, builderName, clientName));
+                methodBlock.line(String.format(
+                        "%s response = client.%s(%s);",
+                        method.getReturnValue().getType(),
+                        method.getName(),
+                        String.join(", ", params)));
             });
         });
     }
