@@ -6,7 +6,15 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
@@ -25,6 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.azure.autorest.model.clientmodel.ClientMethodType.PagingSync;
+import static com.azure.autorest.model.clientmodel.ClientMethodType.SimpleSyncRestResponse;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -93,8 +104,8 @@ public class Javagen extends NewPlugin {
             // Service client builder
             String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
             String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            javaPackage.addServiceClientBuilder(builderPackage,
-                    client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+            String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+            javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
 
             if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -120,6 +131,10 @@ public class Javagen extends NewPlugin {
 
             if (settings.isGenerateLLCSamples()) {
                 client.getServiceClient().getMethodGroupClients()
+                        .forEach(c -> c.getClientMethods().stream()
+                        .filter(m -> m.getType() == SimpleSyncRestResponse || m.getType() == PagingSync)
+                        .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName)));
+
 //                client.getServiceClient().getMethodGroupClients().forEach(c -> c.getProxy().getMethods()
 //                        .stream().filter(m -> !m.getName().endsWith("Next"))
 //                        .forEach(m -> m.getExamples()
