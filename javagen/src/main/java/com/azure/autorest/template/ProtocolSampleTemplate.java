@@ -1,6 +1,9 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -33,12 +36,24 @@ public class ProtocolSampleTemplate {
         javaFile.declareImport(imports);
 
         int numParam = method.getParameters().size();
+        // Parameter values to pass in
         List<String> params = new ArrayList<>();
         for (int i = 0; i < numParam; i++) {
             params.add("null");
         }
-        example.getParameters().forEach((k, v) -> {
+        example.getParameters().forEach((key, value) -> {
+            for (int i = 0; i < numParam; i++) {
+                ClientMethodParameter p = method.getParameters().get(i);
+                if (p.getName().equals(key)) {
+                    if (p.getClientType() != ClassType.BinaryData) {
+                        // Simple type
+                        params.set(i, '"' + value.getObjectValue().toString() + '"');
+                    } else {
+                        // BinaryData
 
+                    }
+                }
+            }
         });
 
         String clientName = client.getInterfaceName() + "Client";
