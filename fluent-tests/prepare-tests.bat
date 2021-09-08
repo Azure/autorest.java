@@ -9,6 +9,7 @@ java -version
 REM re-generate code
 RMDIR /S /Q "src\main\java\com\azure\mgmttest"
 RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
+RMDIR /S /Q "src\samples"
 
 SET AUTOREST_CORE_VERSION=3.4.5
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
