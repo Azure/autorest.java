@@ -44,7 +44,7 @@ public class ProxyMethodExample {
             }
         }
 
-        public String getObjectToString() {
+        public String getJsonString() {
             try {
                 return NORMAL_PRINTER.writeValueAsString(objectValue);
             } catch (JsonProcessingException e) {

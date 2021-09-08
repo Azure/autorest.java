@@ -9,6 +9,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -31,11 +32,8 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.azure.autorest.model.clientmodel.ClientMethodType.PagingSync;
-import static com.azure.autorest.model.clientmodel.ClientMethodType.SimpleSyncRestResponse;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -132,7 +130,7 @@ public class Javagen extends NewPlugin {
             if (settings.isGenerateLLCSamples()) {
                 client.getServiceClient().getMethodGroupClients()
                         .forEach(c -> c.getClientMethods().stream()
-                        .filter(m -> m.getType() == SimpleSyncRestResponse || m.getType() == PagingSync)
+                        .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
                         .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName)));
             }
 

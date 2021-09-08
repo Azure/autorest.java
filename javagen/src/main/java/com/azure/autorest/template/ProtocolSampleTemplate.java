@@ -25,6 +25,7 @@ public class ProtocolSampleTemplate {
         // Import
         List<String> imports = new ArrayList<>();
         imports.add("com.azure.core.http.rest.PagedIterable");
+        imports.add("com.azure.core.http.rest.RequestOptions");
         imports.add("com.azure.core.http.rest.Response");
         imports.add("com.azure.core.util.BinaryData");
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
@@ -51,7 +52,7 @@ public class ProtocolSampleTemplate {
                         params.set(i, '"' + value.getObjectValue().toString() + '"');
                     } else {
                         // BinaryData
-                        String binaryDataValue = '"' + value.getObjectToString().replace("\"", "\\\"") + '"';
+                        String binaryDataValue = '"' + value.getJsonString().replace("\"", "\\\"") + '"';
                         binaryDataStmt.append(String.format(
                                 "BinaryData %s = BinaryData.fromString(%s);", key, binaryDataValue));
                         params.set(i, key);
@@ -61,7 +62,7 @@ public class ProtocolSampleTemplate {
                 }
             }
             if (!match) {
-                method.getProxyMethod().getParameters().stream().filter(p -> p.getName().equals(key)).findFirst().ifPresent(p -> {
+                method.getProxyMethod().getAllParameters().stream().filter(p -> p.getName().equals(key)).findFirst().ifPresent(p -> {
                     if (p.getRequestParameterLocation() == RequestParameterLocation.Query) {
                         requestOptionsStmts.add(String.format("requestOptions.addQueryParam(\"%s\", \"%s\");",
                                 key, value.getObjectValue().toString()));
