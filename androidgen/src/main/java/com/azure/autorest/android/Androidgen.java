@@ -98,11 +98,13 @@ public class Androidgen extends NewPlugin {
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
-            // Service client builder
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            javaPackage.addServiceClientBuilder(builderPackage,
-                    client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+            if (!client.getServiceClient().builderDisabled()) {
+                // Service client builder
+                String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+                String builderSuffix = ClientModelUtil.getBuilderSuffix();
+                javaPackage.addServiceClientBuilder(builderPackage,
+                        client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+            }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
