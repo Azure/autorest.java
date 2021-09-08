@@ -78,9 +78,9 @@ public class FluentExample implements Comparable<FluentExample> {
     public String getPackageName() {
         JavaSettings settings = JavaSettings.getInstance();
         if (isAggregatedExamples()) {
-            return settings.getPackage();
+            return settings.getPackage("generated");
         } else {
-            return settings.getPackage("examples");
+            return settings.getPackage("generated", "examples");
         }
     }
 
