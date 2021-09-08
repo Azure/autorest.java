@@ -78,8 +78,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         additionalMethods.forEach(method -> method.addImportsTo(imports));
         javaFile.declareImport(imports);
 
-        final JavaVisibility visibility = serviceClient.getPackage()
-            .equals(ClientModelUtil.getServiceClientBuilderPackageName(serviceClient))
+        final JavaVisibility visibility = !serviceClient.builderDisabled()
+                && serviceClient.getPackage().equals(ClientModelUtil.getServiceClientBuilderPackageName(serviceClient))
             ? JavaVisibility.PackagePrivate
             : JavaVisibility.Public;
 
