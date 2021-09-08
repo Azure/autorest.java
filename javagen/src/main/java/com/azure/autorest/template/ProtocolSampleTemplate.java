@@ -41,6 +41,7 @@ public class ProtocolSampleTemplate {
         for (int i = 0; i < numParam; i++) {
             params.add("null");
         }
+        StringBuilder binaryDataStmt = new StringBuilder();
         example.getParameters().forEach((key, value) -> {
             for (int i = 0; i < numParam; i++) {
                 ClientMethodParameter p = method.getParameters().get(i);
@@ -50,7 +51,10 @@ public class ProtocolSampleTemplate {
                         params.set(i, '"' + value.getObjectValue().toString() + '"');
                     } else {
                         // BinaryData
-
+                        String binaryDataValue = '"' + value.getObjectToString().replace("\"", "\\\"") + '"';
+                        binaryDataStmt.append(String.format(
+                                "BinaryData %s = BinaryData.fromString(%s);", key, binaryDataValue));
+                        params.set(i, key);
                     }
                 }
             }
@@ -64,6 +68,9 @@ public class ProtocolSampleTemplate {
                         ".credential(new DefaultAzureCredentialBuilder().build())" +
                         ".build%s();";
                 methodBlock.line(String.format(clientInit, clientName, builderName, clientName));
+                if (binaryDataStmt.length() > 0) {
+                    methodBlock.line(binaryDataStmt.toString());
+                }
                 methodBlock.line(String.format(
                         "%s response = client.%s(%s);",
                         method.getReturnValue().getType(),
