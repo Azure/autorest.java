@@ -2,10 +2,10 @@
 *                           @jianghaolu @srnagar @qwordy
 
 # fluentgen
-/fluentnamer                @weidongxu-microsoft @yungezz @haolingdong-msft
-/fluentgen                  @weidongxu-microsoft @yungezz @haolingdong-msft
-/fluent-tests               @weidongxu-microsoft @yungezz @haolingdong-msft
-/azure-tests                @weidongxu-microsoft @yungezz @haolingdong-msft
+/fluentnamer                @weidongxu-microsoft @haolingdong-msft
+/fluentgen                  @weidongxu-microsoft @haolingdong-msft
+/fluent-tests               @weidongxu-microsoft @haolingdong-msft
+/azure-tests                @weidongxu-microsoft @haolingdong-msft
 
 # androidgen
 /androidgen                 @JianpingChen @anuchandy
