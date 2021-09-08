@@ -183,7 +183,8 @@ public class JavaPackage {
             String filename = name.replace("_", "");
             if (!protocolExampleNameSet.contains(filename)) {
                 JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
-                Templates.getProtocolSampleTemplate().write(method, client, builderName, filename, example, javaFile);
+                ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example);
+                Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
                 javaFiles.add(javaFile);
                 protocolExampleNameSet.add(filename);
             }

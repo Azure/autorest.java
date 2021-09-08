@@ -1,18 +1,18 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtocolSampleTemplate {
+public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, JavaFile> {
     private static final ProtocolSampleTemplate _instance = new ProtocolSampleTemplate();
 
     protected ProtocolSampleTemplate() {}
@@ -21,7 +21,13 @@ public class ProtocolSampleTemplate {
         return _instance;
     }
 
-    public void write(ClientMethod method, MethodGroupClient client, String builderName, String filename, ProxyMethodExample example, JavaFile javaFile) {
+    public void write(ProtocolExample protocolExample, JavaFile javaFile) {
+        ClientMethod method = protocolExample.getClientMethod();
+        MethodGroupClient client = protocolExample.getMethodGroupClient();
+        String builderName = protocolExample.getBuilderName();
+        String filename = protocolExample.getFilename();
+        ProxyMethodExample example = protocolExample.getProxyMethodExample();
+
         // Import
         List<String> imports = new ArrayList<>();
         imports.add("com.azure.core.http.rest.PagedIterable");
