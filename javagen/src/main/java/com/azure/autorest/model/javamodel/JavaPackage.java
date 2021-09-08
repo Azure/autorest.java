@@ -178,23 +178,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-//    public void addLLCExamples(String name, ProxyMethodExample example, ProxyMethod method, ServiceClient model) {
-//        System.err.println(name);
-//        System.err.println(example);
-//        System.err.println(method.getName());
-//        System.err.println();
-//        String filename = name.replace("_", "");
-//        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
-//        Templates.getProtocolSampleTemplate().write(model, javaFile);
-//        javaFiles.add(javaFile);
-//    }
-
     public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName) {
-//        System.err.println(method.getName());
-//        System.err.println(method.getType());
-//        System.err.println(method.getProxyMethod().getName());
-//        System.err.println(method.getProxyMethod().getExamples());
-//        System.err.println();
         method.getProxyMethod().getExamples().forEach((name, example) -> {
             String filename = name.replace("_", "");
             if (!protocolExampleNameSet.contains(filename)) {

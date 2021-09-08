@@ -134,19 +134,6 @@ public class Javagen extends NewPlugin {
                         .forEach(c -> c.getClientMethods().stream()
                         .filter(m -> m.getType() == SimpleSyncRestResponse || m.getType() == PagingSync)
                         .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName)));
-
-//                client.getServiceClient().getMethodGroupClients().forEach(c -> c.getProxy().getMethods()
-//                        .stream().filter(m -> !m.getName().endsWith("Next"))
-//                        .forEach(m -> m.getExamples()
-//                        .forEach((key, value) -> javaPackage.addLLCExamples(key, value, m, client.getServiceClient()))));
-
-//                for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-//                    for (ProxyMethod method : methodGroupClient.getProxy().getMethods()) {
-//                        for (Map.Entry<String, ProxyMethodExample> entry : method.getExamples().entrySet()) {
-//                            javaPackage.addLLCExamples(entry.getKey(), entry.getValue());
-//                        }
-//                    }
-//                }
             }
 
             // Service version

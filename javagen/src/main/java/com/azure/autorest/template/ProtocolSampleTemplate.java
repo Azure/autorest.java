@@ -22,16 +22,6 @@ public class ProtocolSampleTemplate {
     }
 
     public void write(ClientMethod method, MethodGroupClient client, String builderName, String filename, ProxyMethodExample example, JavaFile javaFile) {
-        System.err.println(method.getName());
-        System.err.println(method.getType());
-        System.err.println(filename);
-        System.err.println(example);
-        method.getParameters().forEach(p -> System.err.print(p.getName() + " "));
-        System.err.println();
-        method.getProxyMethod().getParameters().forEach(p -> System.err.print(p.getName() + " "));
-        System.err.println();
-        System.err.println();
-
         // Import
         List<String> imports = new ArrayList<>();
         imports.add("com.azure.core.http.rest.PagedIterable");
@@ -72,7 +62,6 @@ public class ProtocolSampleTemplate {
             }
             if (!match) {
                 method.getProxyMethod().getParameters().stream().filter(p -> p.getName().equals(key)).findFirst().ifPresent(p -> {
-                    System.err.println("Proxy parameter match: " + key);
                     if (p.getRequestParameterLocation() == RequestParameterLocation.Query) {
                         requestOptionsStmts.add(String.format("requestOptions.addQueryParam(\"%s\", \"%s\");",
                                 key, value.getObjectValue().toString()));
@@ -83,7 +72,6 @@ public class ProtocolSampleTemplate {
                 });
             }
         });
-        System.err.println();
 
         String clientName = client.getInterfaceName() + "Client";
         javaFile.publicClass(null, filename, classBlock -> {
