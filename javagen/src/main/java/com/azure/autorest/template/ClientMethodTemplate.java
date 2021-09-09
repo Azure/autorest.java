@@ -767,7 +767,28 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param settings java settings
      */
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        String contextParam;
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+            contextParam = "context";
+        } else {
+            contextParam = "Context.NONE";
+        }
+        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
+                    clientMethod.getMethodPollingDetails().getIntermediateType(),
+                    clientMethod.getMethodPollingDetails().getFinalType());
+            function.decreaseIndent();
+        });
     }
 
     /**
@@ -779,6 +800,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param settings java settings
      */
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.methodReturn(String.format("this.%s(%s).getSyncPoller()",
+                    clientMethod.getName() + "Async", clientMethod.getArgumentList()));
+        });
     }
 }
