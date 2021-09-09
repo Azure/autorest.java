@@ -20,6 +20,11 @@ public interface FluentExample {
     String getName();
 
     /**
+     * @return the file name of the original example in JSON.
+     */
+    String getOriginalFileName();
+
+    /**
      * @return the type of the entry (usually a {@link com.azure.autorest.fluent.model.clientmodel.FluentManager}).
      */
     ClassType getEntryType();

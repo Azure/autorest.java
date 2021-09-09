@@ -18,8 +18,6 @@ public class FluentExample implements Comparable<FluentExample> {
 
     private final String groupName;
     private final String methodName;
-    private final String operationId;
-    private final String apiVersion;
     private final String exampleName;
 
     private final List<FluentCollectionMethodExample> collectionMethodExamples = new ArrayList<>();
@@ -28,18 +26,9 @@ public class FluentExample implements Comparable<FluentExample> {
 
     private final List<FluentClientMethodExample> clientMethodExamples = new ArrayList<>();
 
-//    public FluentExample(String groupName, String methodName, String operationId, String apiVersion) {
-//        this.groupName = groupName;
-//        this.methodName = methodName;
-//        this.apiVersion = apiVersion;
-//        this.exampleName = null;
-//    }
-
-    public FluentExample(String groupName, String methodName, String exampleName, String operationId, String apiVersion) {
+    public FluentExample(String groupName, String methodName, String exampleName) {
         this.groupName = groupName;
         this.methodName = methodName;
-        this.operationId = operationId;
-        this.apiVersion = apiVersion;
         this.exampleName = exampleName;
     }
 
@@ -67,12 +56,8 @@ public class FluentExample implements Comparable<FluentExample> {
         return methodName;
     }
 
-    public String getOperationId() {
-        return operationId;
-    }
-
-    public String getApiVersion() {
-        return apiVersion;
+    public String getExampleName() {
+        return exampleName;
     }
 
     public String getPackageName() {

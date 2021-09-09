@@ -162,25 +162,23 @@ public class ExampleParser {
         FluentExample example = examples.get(name);
         if (example == null) {
             example = new FluentExample(CodeNamer.toPascalCase(groupName), CodeNamer.toPascalCase(methodName),
-                    this.aggregateExamples ? null : exampleName,
-                    clientMethod.getProxyMethod().getOperationId(),
-                    getApiVersion(clientMethod));
+                    this.aggregateExamples ? null : exampleName);
             examples.put(name, example);
         }
         return example;
     }
 
-    private static String getApiVersion(ClientMethod clientMethod) {
-        String apiVersion = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> "api-version".equals(p.getRequestParameterName()))
-                .map(ProxyMethodParameter::getDefaultValue)
-                .findFirst()
-                .orElse(null);
-        if (apiVersion == null) {
-            logger.warn("Failed to find api-version in method '{}'", clientMethod.getName());
-        }
-        return apiVersion;
-    }
+//    private static String getApiVersion(ClientMethod clientMethod) {
+//        String apiVersion = clientMethod.getProxyMethod().getParameters().stream()
+//                .filter(p -> "api-version".equals(p.getRequestParameterName()))
+//                .map(ProxyMethodParameter::getDefaultValue)
+//                .findFirst()
+//                .orElse(null);
+//        if (apiVersion == null) {
+//            logger.warn("Failed to find api-version in method '{}'", clientMethod.getName());
+//        }
+//        return apiVersion;
+//    }
 
     private static List<FluentCollectionMethodExample> parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         List<FluentCollectionMethodExample> ret = null;
@@ -222,7 +220,8 @@ public class ExampleParser {
     private static FluentCollectionMethodExample parseMethodForExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
                                                                        List<MethodParameter> methodParameters,
                                                                        String exampleName, ProxyMethodExample proxyMethodExample) {
-        FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(exampleName,
+        FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(
+                exampleName, proxyMethodExample.getRelativeOriginalFileName(),
                 FluentStatic.getFluentManager(), collection, collectionMethod);
 
         for (MethodParameter methodParameter : methodParameters) {
@@ -244,7 +243,8 @@ public class ExampleParser {
     private static FluentClientMethodExample parseMethodForExample(MethodGroupClient methodGroup, ClientMethod clientMethod,
                                                                        List<MethodParameter> methodParameters,
                                                                        String exampleName, ProxyMethodExample proxyMethodExample) {
-        FluentClientMethodExample collectionMethodExample = new FluentClientMethodExample(exampleName,methodGroup, clientMethod);
+        FluentClientMethodExample collectionMethodExample = new FluentClientMethodExample(
+                exampleName, proxyMethodExample.getRelativeOriginalFileName(), methodGroup, clientMethod);
 
         for (MethodParameter methodParameter : methodParameters) {
             ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
@@ -291,7 +291,8 @@ public class ExampleParser {
                     logger.info("Parse resource create example '{}'", entry.getKey());
 
                     ProxyMethodExample example = entry.getValue();
-                    FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(entry.getKey(),
+                    FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(
+                            entry.getKey(), example.getRelativeOriginalFileName(),
                             FluentStatic.getFluentManager(), collection, resourceCreate);
 
                     FluentDefineMethod defineMethod = resourceCreate.getDefineMethod();
@@ -401,7 +402,8 @@ public class ExampleParser {
                     ProxyMethodExample example = entry.getValue();
                     FluentCollectionMethodExample resourceGetExample =
                             parseMethodForExample(collection, resourceGetMethod, resourceGetMethodParameters, entry.getKey(), example);
-                    FluentResourceUpdateExample resourceUpdateExample = new FluentResourceUpdateExample(entry.getKey(),
+                    FluentResourceUpdateExample resourceUpdateExample = new FluentResourceUpdateExample(
+                            entry.getKey(), example.getRelativeOriginalFileName(),
                             FluentStatic.getFluentManager(), collection, resourceUpdate, resourceGetExample);
 
                     for (UpdateStage stage : resourceUpdate.getUpdateStages()) {

@@ -16,9 +16,10 @@ public class FluentResourceCreateExample extends FluentBaseExample {
 
     private final ResourceCreate resourceCreate;
 
-    public FluentResourceCreateExample(String name, FluentManager manager, FluentResourceCollection collection,
+    public FluentResourceCreateExample(String name, String originalFileName,
+                                       FluentManager manager, FluentResourceCollection collection,
                                        ResourceCreate resourceCreate) {
-        super(name, manager, collection);
+        super(name, originalFileName, manager, collection);
         this.resourceCreate = resourceCreate;
     }
 
