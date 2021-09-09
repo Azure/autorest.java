@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -60,7 +61,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FluentGen extends NewPlugin {
+public class FluentGen extends Javagen {
 
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
@@ -73,6 +74,7 @@ public class FluentGen extends NewPlugin {
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
         instance = this;
+        Javagen.instance = this;
     }
 
     public static FluentGen getPluginInstance() {
