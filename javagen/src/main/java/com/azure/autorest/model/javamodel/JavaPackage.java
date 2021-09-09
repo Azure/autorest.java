@@ -9,7 +9,11 @@ import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class JavaPackage {
     private final Logger logger;
