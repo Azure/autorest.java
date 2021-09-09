@@ -139,7 +139,9 @@ public class JavaSettings
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("skip-formatting", false),
                     host.getValue(Map.class, "llc-properties"),
-                    host.getBooleanValue("llc-generate-non-code", false));
+                    host.getBooleanValue("llc-generate-non-code", false),
+                    host.getStringValue("version"),
+                    host.getStringValue("group-id"));
         }
         return _instance;
     }
@@ -205,7 +207,9 @@ public class JavaSettings
                          String keyCredentialHeaderName,
                          boolean skipFormatting,
                          Map<String, String> llcProperties,
-                         boolean llcGenerateNonCode)
+                         boolean llcGenerateNonCode,
+                         String version,
+                         String groupId)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -270,6 +274,8 @@ public class JavaSettings
         this.skipFormatting = skipFormatting;
         this.llcProperties = llcProperties;
         this.llcGenerateNonCode = llcGenerateNonCode;
+        this.artifactVersion = version;
+        this.groupId = groupId;
     }
 
     private String keyCredentialHeaderName;
@@ -653,6 +659,8 @@ public class JavaSettings
             llcProperties = new HashMap<>();
         }
         llcProperties.put("artifact-id", getArtifactId());
+        llcProperties.put("version", getVersion());
+        llcProperties.put("group-id", getGroupId());
         llcProperties.put("service-name", getServiceName());
         llcProperties.put("namespace-path", getPackage().replaceAll("\\.", "/"));
         if (!llcProperties.containsKey("url-fragment") && getServiceName() != null) {
@@ -665,6 +673,18 @@ public class JavaSettings
 
     public boolean isLlcGenerateNonCode() {
         return llcGenerateNonCode;
+    }
+
+    private String artifactVersion;
+
+    public String getVersion() {
+        return artifactVersion;
+    }
+
+    private String groupId;
+
+    public String getGroupId() {
+        return groupId;
     }
 
     private final boolean requireXMsFlattenedToFlatten;

@@ -2,4 +2,4 @@
 
 ## ${version} (${date})
 
-- ${changelog}
+PLEASE FILL!
