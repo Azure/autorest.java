@@ -46,10 +46,6 @@ public class Javagen extends NewPlugin {
         return instance;
     }
 
-    public Logger getLogger() {
-        return this.logger;
-    }
-
     @Override
     public boolean processInternal() {
         JavaSettings settings = JavaSettings.getInstance();
