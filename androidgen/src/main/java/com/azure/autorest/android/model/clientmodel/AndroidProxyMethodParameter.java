@@ -43,7 +43,8 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                                           String headerCollectionPrefix,
                                           String parameterReference,
                                           String defaultValue,
-                                          CollectionFormat collectionFormat) {
+                                          CollectionFormat collectionFormat,
+                                          boolean explode) {
         super(description,
                 wireType,
                 wireType,
@@ -59,7 +60,8 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                 headerCollectionPrefix,
                 parameterReference,
                 defaultValue,
-                collectionFormat);
+                collectionFormat,
+                explode);
     }
 
     @Override
@@ -93,7 +95,8 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                     headerCollectionPrefix,
                     parameterReference,
                     defaultValue,
-                    collectionFormat);
+                    collectionFormat,
+                    explode);
         }
     }
 }

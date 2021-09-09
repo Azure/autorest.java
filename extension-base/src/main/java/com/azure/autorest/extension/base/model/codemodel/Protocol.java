@@ -15,6 +15,7 @@ public class Protocol {
     private String method;
     private KnownMediaType knownMediaType;
     private SerializationStyle style;
+    private boolean explode;
     private List<String> mediaTypes;
     private List<Server> servers;
     private List<String> statusCodes;
@@ -98,5 +99,13 @@ public class Protocol {
 
     public void setStyle(SerializationStyle style) {
         this.style = style;
+    }
+    
+    public boolean getExplode() {
+        return explode;
+    }
+
+    public void setExplode(boolean explode) {
+        this.explode = explode;
     }
 }

@@ -43,8 +43,6 @@ local.properties
 .loadpath
 
 # Other Tooling #
-.classpath
-.project
 target
 .idea
 *.iml
@@ -79,3 +77,6 @@ fluent-tests/pom_generated_*.xml
 
 # language server
 postprocessor/jdt-language-server
+
+# Module info
+protocol-tests/src/main/java/module-info.java

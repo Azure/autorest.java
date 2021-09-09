@@ -318,6 +318,14 @@ public class ClientMethod {
                 proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
                 for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
                     parameter.getClientType().addImportsTo(imports, true);
+
+                    if (parameter.getExplode()) {
+                        imports.add("java.util.Objects");
+                        imports.add("java.util.Optional");
+                        imports.add("java.util.stream.Stream");
+                        imports.add("java.util.stream.Collectors");
+                        imports.add("java.util.Collection");
+                    }
                 }
 
                 if (getReturnValue().getType() == ClassType.InputStream) {
