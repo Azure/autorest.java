@@ -168,18 +168,6 @@ public class ExampleParser {
         return example;
     }
 
-//    private static String getApiVersion(ClientMethod clientMethod) {
-//        String apiVersion = clientMethod.getProxyMethod().getParameters().stream()
-//                .filter(p -> "api-version".equals(p.getRequestParameterName()))
-//                .map(ProxyMethodParameter::getDefaultValue)
-//                .findFirst()
-//                .orElse(null);
-//        if (apiVersion == null) {
-//            logger.warn("Failed to find api-version in method '{}'", clientMethod.getName());
-//        }
-//        return apiVersion;
-//    }
-
     private static List<FluentCollectionMethodExample> parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         List<FluentCollectionMethodExample> ret = null;
 
