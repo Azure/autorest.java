@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class ProxyMethodExample {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
+//    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
 
     // https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md
 
@@ -124,11 +124,11 @@ public class ProxyMethodExample {
 
                     default:
                     {
-                        LOGGER.error("Unknown protocol in x-ms-original-file: '{}'", originalFileName);
+//                        LOGGER.error("Unknown protocol in x-ms-original-file: '{}'", originalFileName);
                     }
                 }
             } catch (MalformedURLException | URISyntaxException | IllegalArgumentException e) {
-                LOGGER.error("Failed to parse x-ms-original-file: '{}'", originalFileName);
+//                LOGGER.error("Failed to parse x-ms-original-file: '{}'", originalFileName);
             }
             relativeOriginalFileName = originalFileName;
         }
