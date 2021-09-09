@@ -6,7 +6,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
-import com.azure.autorest.preprocessor.namer.CodeNamer;
+import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -181,7 +181,7 @@ public class JavaPackage {
 
     public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName) {
         method.getProxyMethod().getExamples().forEach((name, example) -> {
-            String filename = CodeNamer.getTypeName(name);
+            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
             if (!protocolExampleNameSet.contains(filename)) {
                 JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
                 ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example);
