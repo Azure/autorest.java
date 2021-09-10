@@ -26,12 +26,15 @@ import java.util.regex.Pattern;
 public class FluentClientMethodExample implements FluentMethodExample {
 
     private final String name;
+    private final String originalFileName;
     private final MethodGroupClient methodGroup;
     private final ClientMethod clientMethod;
     private final List<ParameterExample> parameters = new ArrayList<>();
 
-    public FluentClientMethodExample(String name, MethodGroupClient methodGroup, ClientMethod clientMethod) {
+    public FluentClientMethodExample(String name, String originalFileName,
+                                     MethodGroupClient methodGroup, ClientMethod clientMethod) {
         this.name = name;
+        this.originalFileName = originalFileName;
         this.methodGroup = methodGroup;
         this.clientMethod = clientMethod;
     }
@@ -47,6 +50,11 @@ public class FluentClientMethodExample implements FluentMethodExample {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getOriginalFileName() {
+        return originalFileName;
     }
 
     @Override

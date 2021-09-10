@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -16,6 +17,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,6 +30,9 @@ import java.util.stream.Stream;
  * Writes a ServiceClient to a JavaFile.
  */
 public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+
+    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
+
     private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
 
     private final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
@@ -333,7 +338,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
                 if (JavaSettings.getInstance().getKeyCredentialHeaderName() == null
                     || JavaSettings.getInstance().getKeyCredentialHeaderName().isEmpty()) {
-                    Javagen.getPluginInstance().getLogger().error("key-credential-header-name is required for " +
+                    LOGGER.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
