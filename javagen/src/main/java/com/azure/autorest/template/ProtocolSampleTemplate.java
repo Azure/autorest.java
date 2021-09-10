@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -14,6 +15,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, JavaFile> {
     private static final ProtocolSampleTemplate _instance = new ProtocolSampleTemplate();
@@ -83,14 +85,24 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
             }
         });
 
-        String clientName = client.getInterfaceName() + "Client";
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
+                String clientName = client.getInterfaceName() + "Client";
+                String credentialExpr;
+                Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
+                if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
+                    credentialExpr = "new DefaultAzureCredentialBuilder().build()";
+                } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
+                    credentialExpr = "new AzureKeyCredential(System.getenv(\"API_KEY\"))";
+                } else {
+                    credentialExpr = "new DefaultAzureCredentialBuilder().build()";
+                }
+
                 String clientInit = "%s client = new %s()" +
                         ".endpoint(System.getenv(\"ENDPOINT\"))" +
-                        ".credential(new DefaultAzureCredentialBuilder().build())" +
+                        ".credential(%s)" +
                         ".build%s();";
-                methodBlock.line(String.format(clientInit, clientName, builderName, clientName));
+                methodBlock.line(String.format(clientInit, clientName, builderName, credentialExpr, clientName));
                 if (binaryDataStmt.length() > 0) {
                     methodBlock.line(binaryDataStmt.toString());
                 }
