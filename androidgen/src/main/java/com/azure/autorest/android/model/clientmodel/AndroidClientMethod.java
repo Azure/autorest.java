@@ -6,6 +6,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
+import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ReturnValue;
@@ -40,7 +41,7 @@ public class AndroidClientMethod extends ClientMethod {
                                   String clientReference, List<String> requiredNullableParameterExpressions,
                                   boolean isGroupedParameterRequired, String groupedParameterTypeName,
                                   MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
-                                  JavaVisibility methodVisibility) {
+                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails) {
         super(description,
                 returnValue,
                 name,
@@ -55,7 +56,8 @@ public class AndroidClientMethod extends ClientMethod {
                 groupedParameterTypeName,
                 methodPageDetails,
                 methodTransformationDetails,
-                methodVisibility);
+                methodVisibility,
+                methodPollingDetails);
     }
 
     @Override
@@ -109,7 +111,8 @@ public class AndroidClientMethod extends ClientMethod {
                     groupedParameterTypeName,
                     methodPageDetails,
                     methodTransformationDetails,
-                    methodVisibility);
+                    methodVisibility,
+                    methodPollingDetails);
         }
     }
 }

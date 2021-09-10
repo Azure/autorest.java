@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
-    static Javagen instance;
+    protected static Javagen instance;
 
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -46,10 +46,6 @@ public class Javagen extends NewPlugin {
 
     public static Javagen getPluginInstance() {
         return instance;
-    }
-
-    public Logger getLogger() {
-        return this.logger;
     }
 
     @Override

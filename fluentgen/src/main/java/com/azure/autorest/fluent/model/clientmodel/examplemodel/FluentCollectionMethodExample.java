@@ -17,9 +17,10 @@ public class FluentCollectionMethodExample extends FluentBaseExample implements 
 
     private final FluentCollectionMethod collectionMethod;
 
-    public FluentCollectionMethodExample(String name, FluentManager manager, FluentResourceCollection collection,
+    public FluentCollectionMethodExample(String name, String originalFileName,
+                                         FluentManager manager, FluentResourceCollection collection,
                                          FluentCollectionMethod collectionMethod) {
-        super(name, manager, collection);
+        super(name, originalFileName, manager, collection);
         this.collectionMethod = collectionMethod;
     }
 

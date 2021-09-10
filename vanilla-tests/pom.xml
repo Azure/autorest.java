@@ -35,7 +35,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>${azure-core.version}</version>
+      <version>1.20.0-beta.1</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>

@@ -12,6 +12,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -80,6 +82,8 @@ public class ClientMethod {
 
     private JavaVisibility methodVisibility;
 
+    private MethodPollingDetails methodPollingDetails;
+
     /**
      * Create a new ClientMethod with the provided properties.
      * @param description The description of this ClientMethod.
@@ -97,7 +101,7 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility) {
+    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -113,6 +117,7 @@ public class ClientMethod {
         this.methodPageDetails = methodPageDetails;
         this.methodTransformationDetails = methodTransformationDetails;
         this.methodVisibility = methodVisibility;
+        this.methodPollingDetails = methodPollingDetails;
     }
 
     public final String getDescription() {
@@ -265,6 +270,10 @@ public class ClientMethod {
         return methodVisibility;
     }
 
+    public MethodPollingDetails getMethodPollingDetails() {
+        return methodPollingDetails;
+    }
+
     /**
      * Add this ClientMethod's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
@@ -346,8 +355,27 @@ public class ClientMethod {
             }
 
             if (type == ClientMethodType.LongRunningBeginAsync) {
-                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                if (settings.isFluent()) {
+                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                    }
+                } else {
+                    imports.add("com.azure.core.util.serializer.TypeReference");
+                    imports.add("java.time.Duration");
+
+                    if (getMethodPollingDetails().getPollingStrategy() != null) {
+                        List<String> knownPollingStrategies = Arrays.asList(
+                                "DefaultPollingStrategy",
+                                "ChainedPollingStrategy",
+                                "OperationResourcePollingStrategy",
+                                "LocationPollingStrategy",
+                                "StatusCheckPollingStrategy");
+                        for (String pollingStrategy : knownPollingStrategies) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                                imports.add("com.azure.core.util.polling." + pollingStrategy);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -369,6 +397,7 @@ public class ClientMethod {
         protected MethodPageDetails methodPageDetails;
         protected List<MethodTransformationDetail> methodTransformationDetails;
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
+        protected MethodPollingDetails methodPollingDetails;
 
         /**
          * Sets the description of this ClientMethod.
@@ -521,6 +550,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets the polling information if this is a long running method.
+         * @param methodPollingDetails the polling information
+         * @return the Builder itself
+         */
+        public Builder methodPollingDetails(MethodPollingDetails methodPollingDetails) {
+            this.methodPollingDetails = methodPollingDetails;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -539,7 +578,8 @@ public class ClientMethod {
                     groupedParameterTypeName,
                     methodPageDetails,
                     methodTransformationDetails,
-                    methodVisibility);
+                    methodVisibility,
+                    methodPollingDetails);
         }
     }
 }
