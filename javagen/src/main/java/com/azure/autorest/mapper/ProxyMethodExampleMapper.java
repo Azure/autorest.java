@@ -33,7 +33,7 @@ public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExam
                 }
             }
             String xmsOriginalFile = (String) ((Map<String, Object>) xmsExample).get("x-ms-original-file");
-            builder.xmsOriginalFile(xmsOriginalFile);
+            builder.originalFile(xmsOriginalFile);
         }
         return builder.build();
     }

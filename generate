@@ -41,6 +41,7 @@ autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
+autorest --version=3.4.5 --use=./ vanilla-tests/swagger/lro.md
 
 # local swagger
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD

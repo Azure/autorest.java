@@ -6,7 +6,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.core.util.ClientOptions;
 
 import java.util.Arrays;
 import java.util.List;

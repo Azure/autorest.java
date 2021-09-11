@@ -83,7 +83,7 @@ public class FluentExampleTemplate {
         });
         javaFile.publicFinalClass(className, classBlock -> {
             for (ExampleMethod exampleMethod : exampleMethods) {
-                classBlock.blockComment(getExampleTag(example, exampleMethod.getExample()));
+                classBlock.blockComment(getExampleTag(exampleMethod.getExample()));
 
                 classBlock.javadocComment(commentBlock -> {
                     commentBlock.description(String.format("Sample code: %1$s", exampleMethod.getExample().getName()));
@@ -116,10 +116,8 @@ public class FluentExampleTemplate {
         });
     }
 
-    private String getExampleTag(com.azure.autorest.fluent.model.clientmodel.FluentExample example, FluentExample exampleInfo) {
-        return "operationId: " + example.getOperationId() + System.lineSeparator() +
-                "api-version: " + example.getApiVersion() + System.lineSeparator() +
-                "x-ms-examples: " + exampleInfo.getName();
+    private String getExampleTag(FluentExample example) {
+        return "x-ms-original-file: " + example.getOriginalFileName();
     }
 
     private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {

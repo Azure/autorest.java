@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-09-07T19:14:04.386249
+Generated at 2021-09-10T19:26:13.205958
 ## Success
 <details>
 <summary>RP count: 178</summary>
@@ -200,50 +200,32 @@ Generated at 2021-09-07T19:14:04.386249
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
-
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 
 ```
@@ -287,8 +269,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.031 s
-[INFO] Finished at: 2021-09-07T18:12:00Z
+[INFO] Total time:  4.940 s
+[INFO] Finished at: 2021-09-10T18:12:00Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-authorization: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization/src/main/java/com/azure/resourcemanager/authorization/fluent/models/AccessReviewDecisionProperties.java:[225,19] method principalId() is already defined in class com.azure.resourcemanager.authorization.fluent.models.AccessReviewDecisionProperties
@@ -317,15 +299,15 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/automation/resource-manager/Microsoft.Automation/preview/2020-01-13-preview/python2package.json:11:2
 WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
@@ -425,605 +407,306 @@ WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See 
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ScheduleProperties > properties > frequency)
   keys: [ [32m'type'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/automation/resource-manager/Microsoft.Automation/stable/2015-10-31/schedule.json:251:5
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameter' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameterSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameterValidationSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityOutputType' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Activity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleErrorInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentHash' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentLink' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'PythonPackageCreateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'PythonPackageCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'PythonPackageUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Module' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TypeField' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TypeFieldListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeReportListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscReportResourceNavigation' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscMetaConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeReport' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscReportResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscReportError' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AgentRegistration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AgentRegistrationKeys' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNode' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeExtensionHandlerAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeConfigurationAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AgentRegistrationRegenerateKeyParameter' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeUpdateParameters-properties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentHash' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentSource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeConfigurationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeExtensionHandlerAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeConfigurationCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscNodeConfigurationCreateOrUpdateParametersProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscCompilationJob' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscCompilationJobCreateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscCompilationJobProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscCompilationJobListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscCompilationJobCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStream' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'NodeCounts' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'NodeCount' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'NodeCountProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControl' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSecurityTokenProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobCreateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobById' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobByIdProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJob' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobStreamsListBySyncJob' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobStream' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobStreamProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobStreamById' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SourceControlSyncJobStreamByIdProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccount' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Sku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Statistics' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'StatisticsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Usage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'UsageCounterName' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'UsageListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Key' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'KeyListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AutomationAccountUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Identity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'EncryptionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'EncryptionProperties-identity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Certificate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CertificateUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Connection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionTypeAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FieldDefinition' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionTypeProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionType' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionTypeListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionTypeCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionTypeCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Credential' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'CredentialUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunAsCredentialAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridRunbookWorkerGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridRunbookWorkerGroupsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridRunbookWorkerGroupUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobScheduleListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobSchedule' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobScheduleProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobScheduleCreateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobScheduleCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'LinkedWorkspace' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameter' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameterSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityParameterValidationSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityOutputType' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Activity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ActivityListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleErrorInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentHash' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentLink' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ModuleUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Module' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TypeField' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TypeFieldListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedSchedule' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedScheduleMonthlyOccurrence' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Schedule' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Variable' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'VariableProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Watcher' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WatcherProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WatcherUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WatcherUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WatcherListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentHash' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentSource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationParameter' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DscConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStream' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Job' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobListResultV2' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobCollectionItemProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobCreateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'SUCScheduleProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedSchedule' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedScheduleMonthlyOccurrence' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationCollectionItemProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationRunProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationRunListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'softwareUpdateConfigurationMachineRunListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'updateConfigurationMachineRunProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStream' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'JobStreamListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentHash' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ContentLink' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Runbook' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookDraftUndoEditResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookDraft' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookParameter' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TestJobCreateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'TestJob' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookCreateOrUpdateDraftProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookCreateOrUpdateDraftParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Webhook' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'RunbookAssociationProperty' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookCreateOrUpdateParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WebhookCreateOrUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridRunbookWorker' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Modeler/MissingType): The schema 'ScheduleCreateOrUpdateProperties-interval' has no type or format information whatsoever. Location:
    file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/automation/resource-manager/Microsoft.Automation/preview/2020-01-13-preview/schedule.json#/components/schemas/ScheduleCreateOrUpdateProperties-interval
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Modeler/MissingType): The schema 'ScheduleProperties-interval' has no type or format information whatsoever. Location:
    file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/automation/resource-manager/Microsoft.Automation/preview/2020-01-13-preview/schedule.json#/components/schemas/ScheduleProperties-interval
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
@@ -1042,7 +725,6 @@ INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to
 INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
 INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
 INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
-
 WARNING (SchemaNameNormalization): Rename schema default name, from 'ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties' to 'IdentityUserAssignedIdentities'
 INFORMATION (NamingConflictResolver): Rename operation group from 'Statistics' to 'StatisticsOperation'
 INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'AutomationAccount'
@@ -1075,10 +757,10 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [TypeField, SoftwareUpdateConfigurationRun, RunbookDraftUndoEditResult, Module, RunbookDraft, Variable, PrivateLinkResource, DscNode, SoftwareUpdateConfigurationListResult, Statistics, SourceControlSyncJobStreamById, HybridRunbookWorkerGroup, Activity, Certificate, SourceControlSyncJob, LinkedWorkspace, Operation, SourceControlSyncJobById, JobCollectionItem, Schedule, KeyListResult, SourceControl, Webhook, DscCompilationJob, Credential, AgentRegistration, DscConfiguration, ConnectionType, SoftwareUpdateConfigurationRunListResult, Runbook, DscNodeReport, Usage, AutomationAccount, NodeCounts, SoftwareUpdateConfigurationMachineRunListResult, SoftwareUpdateConfigurationMachineRun, HybridRunbookWorker, Connection, TestJob, DscNodeConfiguration, Job, JobSchedule, GraphicalRunbookContent, SoftwareUpdateConfiguration, JobStream, JobStreamListResult, SourceControlSyncJobStream, PrivateEndpointConnection, Watcher]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookProperties, RunbookCreateOrUpdateProperties]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
+INFORMATION (FluentMapper): Add Inner to response types: [SoftwareUpdateConfigurationListResult, AutomationAccount, KeyListResult, Activity, DscCompilationJob, SoftwareUpdateConfiguration, Usage, DscNodeReport, SourceControlSyncJobStream, SourceControlSyncJobById, Webhook, Credential, SoftwareUpdateConfigurationMachineRunListResult, Statistics, SoftwareUpdateConfigurationMachineRun, JobSchedule, DscNodeConfiguration, PrivateEndpointConnection, Operation, SoftwareUpdateConfigurationRunListResult, SourceControlSyncJobStreamById, SoftwareUpdateConfigurationRun, Runbook, NodeCounts, SourceControl, RunbookDraftUndoEditResult, DscNode, Schedule, DscConfiguration, Job, ConnectionType, SourceControlSyncJob, HybridRunbookWorkerGroup, JobStreamListResult, GraphicalRunbookContent, AgentRegistration, Certificate, Module, JobCollectionItem, JobStream, Watcher, LinkedWorkspace, TypeField, Variable, PrivateLinkResource, TestJob, HybridRunbookWorker, RunbookDraft, Connection]
+INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookCreateOrUpdateProperties, RunbookProperties]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookCreateOrUpdateProperties': [RunbookCreateOrUpdateParameters]
+INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'PrivateEndpointConnection', method reference 'createOrUpdate', body parameter 'PrivateEndpointConnectionInner'
@@ -1107,7 +789,7 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'SourceControl', meth
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'SourceControlSyncJob', method reference 'create', body parameter 'SourceControlSyncJobCreateParameters'
 INFORMATION (ResourceParser): Fluent model 'SourceControlSyncJob' as category NESTED_CHILD
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'AutomationAccount', method reference 'createOrUpdate', body parameter 'AutomationAccountCreateOrUpdateParameters'
-INFORMATION (ResourceParser): Fluent model 'AutomationAccount' as category RESOURCE_GROUP_AS_PARENT
+INFORMATION (ResourceParser): Fluent model 'AutomationAccount' as category RESOURCEGROUP_ASPARENT
 INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'AutomationAccount', method reference 'update', body parameter 'AutomationAccountUpdateParameters'
 INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'AutomationAccount', method reference 'getByResourceGroup'
 INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'AutomationAccount', method reference 'delete'
@@ -1156,9 +838,7 @@ INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'Watcher', method ref
 INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'Watcher', method reference 'get'
 INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'Watcher', method reference 'delete'
 INFORMATION (ResourceActions): ResourceActions: Fluent model 'Watcher', action methods: [stop, start]
-
 WARNING (ResourceParser): client model not found for type name 'String', method 'createOrUpdate'
-
 WARNING (ResourceParser): client model not found for collection 'DscConfigurations', method 'createOrUpdate'
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'DscConfiguration', method reference 'createOrUpdate', body parameter 'DscConfigurationCreateOrUpdateParameters'
 INFORMATION (ResourceParser): Fluent model 'DscConfiguration' as category NESTED_CHILD
@@ -1335,7 +1015,6 @@ INFORMATION (ExampleParser): Parse collection method example 'Create or Update C
 ```
 **stderr**
 ```
-
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: model type not found for type String and value {name=SetupServer, location=East US 2, properties={description=sample configuration, source={type=embeddedContent, hash={algorithm=sha256, value=A9E5DB56BA21513F61E0B3868816FDC6D4DF5131F5617D7FF0D769674BD5072F}, value=Configuration SetupServer {
     Node localhost {
                                WindowsFeature IIS {
@@ -1352,11 +1031,11 @@ java.lang.IllegalStateException: model type not found for type String and value 
         }
     }
 }}}}
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseNode(ExampleParser.java:627)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromMethodParameter(ExampleParser.java:536)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:475)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseMethodForExample(ExampleParser.java:229)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseMethod(ExampleParser.java:197)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseNode(ExampleParser.java:617)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromMethodParameter(ExampleParser.java:526)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:465)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseMethodForExample(ExampleParser.java:216)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseMethod(ExampleParser.java:183)
 	at com.azure.autorest.fluent.mapper.ExampleParser.lambda$parseResourceCollection$2(ExampleParser.java:112)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCollection(ExampleParser.java:111)
@@ -1369,8 +1048,8 @@ java.lang.IllegalStateException: model type not found for type String and value 
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
 	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:68)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:298)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:106)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:299)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:107)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:206)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1391,15 +1070,15 @@ java.lang.IllegalStateException: model type not found for type String and value 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 
 ```
 **stderr**
@@ -1417,122 +1096,68 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
-
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Location' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'LocationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Error' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'LocationCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'GroupsCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'GroupItem' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'GroupProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Application' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'IOSMAMPolicyCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppIdOrGroupIdPayload' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppOrGroupIdProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicyProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DeviceCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'Device' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'DeviceProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResultProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'operationMetadataProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'StatusesDefault' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'StatusesProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUser' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledApp' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppError' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
@@ -1598,20 +1223,19 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [OperationResult, FlaggedEnrolledApp, GroupItem, WipeDeviceOperationResult, IOsmamPolicy, AndroidMamPolicy, Device, FlaggedUser, Location, Application]
+INFORMATION (FluentMapper): Add Inner to response types: [Application, OperationResult, Device, AndroidMamPolicy, Location, WipeDeviceOperationResult, FlaggedEnrolledApp, GroupItem, FlaggedUser, IOsmamPolicy]
 
 ```
 **stderr**
 ```
-
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not found among properties of client model StatusesDefault
 java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not found among properties of client model StatusesDefault
-	at com.azure.autorest.mapper.ClientMethodMapper.map(ClientMethodMapper.java:86)
+	at com.azure.autorest.mapper.ClientMethodMapper.map(ClientMethodMapper.java:87)
 	at com.azure.autorest.mapper.MethodGroupMapper.map(MethodGroupMapper.java:115)
 	at com.azure.autorest.mapper.ServiceClientMapper.map(ServiceClientMapper.java:93)
 	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:120)
-	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:174)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:175)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:101)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:206)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1632,15 +1256,15 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SiteModel > properties > systemData)
   keys: [ [32m'readOnly'[39m, [32m'type'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/iotsecurity/resource-manager/Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json:59:5
@@ -1716,85 +1340,45 @@ WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See 
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SensorModel > properties > systemData)
   keys: [ [32m'readOnly'[39m, [32m'type'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/iotsecurity/resource-manager/Microsoft.IoTSecurity/preview/2021-09-01-preview/sensors.json:59:5
-
 WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponseModel-error' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
@@ -1808,13 +1392,9 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentNamer): Transform code model
-
 WARNING (FluentTransformer): Modify parameter 'iotDefenderLocation' implementation from CLIENT to METHOD
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[createOrUpdate, get, list, delete]', in operation group 'Sites'
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[downloadActivation, createOrUpdate, get, downloadResetPassword, list, delete, triggerTiPackageUpdate]', in operation group 'Sensors'
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[get, list]', in operation group 'Locations'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProxyResource'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'SensorModel'
@@ -1836,11 +1416,11 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AlertModel, SensorModel, Operation, DeviceModel, DefenderSettingsModel, OnPremiseSensor, SitesList, RecommendationType, RecommendationModel, SensorsList, DeviceVulnerabilityModel, PackageDownloads, DeviceGroupModel, AlertTypeList, AlertType, OnPremiseSensorsList, RecommendationTypeList, DefenderSettingsList, SiteModel, LocationModel]
+INFORMATION (FluentMapper): Add Inner to response types: [RecommendationModel, OnPremiseSensor, OnPremiseSensorsList, SensorModel, SensorsList, LocationModel, PackageDownloads, DeviceVulnerabilityModel, DefenderSettingsList, RecommendationTypeList, RecommendationType, DeviceModel, AlertModel, SitesList, DefenderSettingsModel, Operation, AlertType, SiteModel, DeviceGroupModel, AlertTypeList]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'SensorModel', method reference 'createOrUpdate', body parameter 'SensorModelInner'
-INFORMATION (ResourceParser): Fluent model 'SensorModel' as category SCOPE_AS_PARENT
+INFORMATION (ResourceParser): Fluent model 'SensorModel' as category SCOPEASPARENT
 INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'SensorModel', method reference 'createOrUpdate', body parameter 'SensorModelInner'
 INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'SensorModel', method reference 'get'
 INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'SensorModel', method reference 'delete'
@@ -1889,11 +1469,10 @@ INFORMATION (ExampleParser): Parse resource create example 'Create or update IoT
 ```
 **stderr**
 ```
-
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.NullPointerException
 java.lang.NullPointerException
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:461)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCreate(ExampleParser.java:301)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:451)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCreate(ExampleParser.java:290)
 	at com.azure.autorest.fluent.mapper.ExampleParser.lambda$parseResourceCollection$3(ExampleParser.java:118)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCollection(ExampleParser.java:117)
@@ -1906,8 +1485,8 @@ java.lang.NullPointerException
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
 	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:68)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:298)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:106)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:299)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:107)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:206)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1951,8 +1530,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.607 s
-[INFO] Finished at: 2021-09-07T18:38:24Z
+[INFO] Total time:  2.056 s
+[INFO] Finished at: 2021-09-10T18:44:06Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -1977,15 +1556,15 @@ java.lang.NullPointerException
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -2002,15 +1581,15 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryOptions`1 > properties > filter)
   keys: [ [32m'readOnly'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:503:5
@@ -2157,15 +1736,15 @@ ERROR: Semantic violation: Discriminator must be a required property. (component
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -2182,11 +1761,11 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Installing AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5)
 INFORMATION: > Installed AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5->1.1.10)
@@ -2196,7 +1775,7 @@ INFORMATION: > Installing AutoRest extension 'oav' (~0.4.20)
 INFORMATION: > Installed AutoRest extension 'oav' (~0.4.20->0.4.70)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (definitions > ProcessReference > properties > properties > properties > machine)
   keys: [ [32m'readOnly'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1686:12 ($.definitions.ProcessReference.properties.properties.properties.machine)
@@ -2215,195 +1794,108 @@ WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See 
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MachineReferenceWithHints > properties > properties > properties > osFamilyHint)
   keys: [ [32m'readOnly'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:179:7
-
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PortReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineReferenceWithHints' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CoreResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Machine' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Process' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Port' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupMember' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachinesSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Relationship' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Connection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Acceptor' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RelationshipProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AcceptorProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Ipv4NetworkInterface' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Ipv6NetworkInterface' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'NetworkConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AgentConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Timezone' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OperatingSystemConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineResourcesConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'VirtualMachineConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HypervisorConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureCloudServiceConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureVmScaleSetConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureServiceFabricClusterConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ImageConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessUser' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessDetails' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostedService' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureProcessHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SingleMachineDependencyMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MultipleMachinesMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineListMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroupMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1231:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/generateMap"].post.operationId)
-
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1405:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups"].post.operationId)
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ResourceReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PortReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineReferenceWithHints' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CoreResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Machine' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Process' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Port' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupMember' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachinesSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Relationship' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Connection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Acceptor' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RelationshipProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AcceptorProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Ipv4NetworkInterface' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Ipv6NetworkInterface' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'NetworkConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AgentConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Timezone' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperatingSystemConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineResourcesConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'VirtualMachineConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'HypervisorConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'HostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureCloudServiceConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureVmScaleSetConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureServiceFabricClusterConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ImageConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessUser' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessDetails' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostedService' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureProcessHostingConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'SingleMachineDependencyMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MultipleMachinesMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineListMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroupMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
-WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:4 ($.info.version)
-
-WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:971:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups"].get.operationId)
-
-WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1515:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].put.operationId)
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:63:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines"].get.parameters[4].name)
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:332:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes"].get.parameters[5].name)
-
+WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:971:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups"].get.operationId)
+WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:4 ($.info.version)
+WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1515:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].put.operationId)
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1645:8 ($.definitions.ResourceReference.properties.kind)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1778:8 ($.definitions.CoreResource.properties.kind)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2142:8 ($.definitions.Relationship.properties.kind)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2747:8 ($.definitions.HostingConfiguration.properties.provider)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2754:8 ($.definitions.HostingConfiguration.properties.kind)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3014:8 ($.definitions.ProcessHostingConfiguration.properties.provider)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3021:8 ($.definitions.ProcessHostingConfiguration.properties.kind)
-
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3158:8 ($.definitions.MapRequest.properties.kind)
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3132:8 ($.definitions.Liveness.properties.live)
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: filterProcesses
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3198:8 ($.definitions.MultipleMachinesMapRequest.properties.filterProcesses)
 INFORMATION (FluentNamer): Load fluent settings
@@ -2438,7 +1930,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MachineGroup, ClientGroupMembersCount, MachinesSummary, Connection, ClientGroupMember, Machine, MapResponse, Liveness, Port, ClientGroup, Process]
+INFORMATION (FluentMapper): Add Inner to response types: [Port, ClientGroup, Machine, MachineGroup, ClientGroupMembersCount, Liveness, Process, MapResponse, MachinesSummary, ClientGroupMember, Connection]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ExampleParser): Parse collection method example 'SMMachinesListByWorkspaceGet'
@@ -2460,24 +1952,18 @@ INFORMATION (ExampleParser): Parse collection method example 'SMClientGroupsGetG
 INFORMATION (ExampleParser): Parse collection method example 'SMClientGroupsGetMembersCountGet'
 INFORMATION (ExampleParser): Parse collection method example 'SMClientGroupsListMembersGet'
 INFORMATION (ExampleParser): Parse collection method example 'SMMapsGenerateMachineGroupDependencyPost'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'map:machine-group-dependency'
 INFORMATION (ExampleParser): Parse collection method example 'SMMapsGenerateMachineListDependencyPost'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'map:machine-list-dependency'
 INFORMATION (ExampleParser): Parse collection method example 'SMMapsGenerateSingleMachineDependencyPost'
 INFORMATION (ExampleParser): Parse collection method example 'SMSummariesGetMachinesGet'
 INFORMATION (ExampleParser): Parse collection method example 'SMMachineGroupsListByWorkspaceGet'
 INFORMATION (ExampleParser): Parse collection method example 'SMMachineGroupsCreatePost'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'machineGroup'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'ref:machinewithhints'
 INFORMATION (ExampleParser): Parse collection method example 'SMMachineGroupsGetGet'
 INFORMATION (ExampleParser): Parse collection method example 'SMMachineGroupsUpdatePut'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'machineGroup'
-
 WARNING (ExampleParser): Failed to find the subclass with discriminator value 'ref:machinewithhints'
 INFORMATION (ExampleParser): Parse collection method example 'SMMachineGroupsDeleteDelete'
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2496,7 +1982,6 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-
 ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is defined without a 200 or 204 error response implementation,please add it.'
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1591:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].delete.responses)
   Error: Plugin model-validator reported failure.
@@ -2509,15 +1994,15 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/softwareplan/resource-manager/Microsoft.SoftwarePlan/preview/2019-06-01-preview/softwareplan.json:12:2
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > HybridUseBenefitProperties > properties > provisioningState)
@@ -2528,29 +2013,17 @@ WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not su
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > HybridUseBenefitProperties > properties > provisioningState)
   keys: [ [32m'type'[39m, [32m'readOnly'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/softwareplan/resource-manager/Microsoft.SoftwarePlan/stable/2019-12-01/softwareplan.json:135:5
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitModel' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitModel' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HybridUseBenefitProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
-
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
-
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
-
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
@@ -2564,13 +2037,9 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentNamer): Transform code model
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[register]', in operation group 'SoftwarePlan'
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[get, update, create, list, delete]', in operation group 'HybridUseBenefit'
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[list]', in operation group 'HybridUseBenefitRevision'
-
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[list]', in operation group 'Operations'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'HybridUseBenefitModel'
 INFORMATION (ErrorTypeNormalization): Rename error from 'Error' to 'ManagementError'
@@ -2588,11 +2057,11 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [OperationResponse, HybridUseBenefitModel]
+INFORMATION (FluentMapper): Add Inner to response types: [HybridUseBenefitModel, OperationResponse]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'HybridUseBenefitModel', method reference 'create', body parameter 'HybridUseBenefitModelInner'
-INFORMATION (ResourceParser): Fluent model 'HybridUseBenefitModel' as category SCOPE_AS_PARENT
+INFORMATION (ResourceParser): Fluent model 'HybridUseBenefitModel' as category SCOPEASPARENT
 INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'HybridUseBenefitModel', method reference 'update', body parameter 'HybridUseBenefitModelInner'
 INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'HybridUseBenefitModel', method reference 'get'
 INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'HybridUseBenefitModel', method reference 'delete'
@@ -2611,11 +2080,10 @@ INFORMATION (ExampleParser): Parse resource create example 'HybridUseBenefit'
 ```
 **stderr**
 ```
-
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.NullPointerException
 java.lang.NullPointerException
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:461)
-	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCreate(ExampleParser.java:301)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseNodeFromParameter(ExampleParser.java:451)
+	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCreate(ExampleParser.java:290)
 	at com.azure.autorest.fluent.mapper.ExampleParser.lambda$parseResourceCollection$3(ExampleParser.java:118)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at com.azure.autorest.fluent.mapper.ExampleParser.parseResourceCollection(ExampleParser.java:117)
@@ -2628,8 +2096,8 @@ java.lang.NullPointerException
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
 	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:68)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:298)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:106)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:299)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:107)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:206)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -2692,8 +2160,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.816 s
-[INFO] Finished at: 2021-09-07T19:08:10Z
+[INFO] Total time:  4.649 s
+[INFO] Finished at: 2021-09-10T19:19:28Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -2737,15 +2205,15 @@ java.lang.NullPointerException
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.3.2; node: v14.17.6]
+AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.20.0->4.20.0)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
 WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkResource > properties > properties)
   keys: [ [32m'readOnly'[39m ]
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json:57:5

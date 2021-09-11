@@ -1,11 +1,11 @@
 package com.azure.autorest.android;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.android.mapper.AndroidMapperFactory;
 import com.azure.autorest.android.template.AndroidTemplateFactory;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
@@ -36,13 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Androidgen extends NewPlugin {
+public class Androidgen extends Javagen {
     private final Logger LOGGER = new PluginLogger(this, Androidgen.class);
     private static Androidgen instance;
 
     public Androidgen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
         instance = this;
+        Javagen.instance = this;
     }
 
     public static Androidgen getPluginInstance() {
