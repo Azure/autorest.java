@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-09-10T19:26:13.205958
+Generated at 2021-09-11T19:42:54.044422
 ## Success
 <details>
-<summary>RP count: 178</summary>
+<summary>RP count: 179</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -170,6 +170,7 @@ Generated at 2021-09-10T19:26:13.205958
 - storsimple8000series
 - subscription
 - support
+- synapse
 - testbase
 - timeseriesinsights
 - trafficmanager
@@ -269,8 +270,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.940 s
-[INFO] Finished at: 2021-09-10T18:12:00Z
+[INFO] Total time:  5.430 s
+[INFO] Finished at: 2021-09-11T18:14:12Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-authorization: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization/src/main/java/com/azure/resourcemanager/authorization/fluent/models/AccessReviewDecisionProperties.java:[225,19] method principalId() is already defined in class com.azure.resourcemanager.authorization.fluent.models.AccessReviewDecisionProperties
@@ -757,10 +758,10 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [SoftwareUpdateConfigurationListResult, AutomationAccount, KeyListResult, Activity, DscCompilationJob, SoftwareUpdateConfiguration, Usage, DscNodeReport, SourceControlSyncJobStream, SourceControlSyncJobById, Webhook, Credential, SoftwareUpdateConfigurationMachineRunListResult, Statistics, SoftwareUpdateConfigurationMachineRun, JobSchedule, DscNodeConfiguration, PrivateEndpointConnection, Operation, SoftwareUpdateConfigurationRunListResult, SourceControlSyncJobStreamById, SoftwareUpdateConfigurationRun, Runbook, NodeCounts, SourceControl, RunbookDraftUndoEditResult, DscNode, Schedule, DscConfiguration, Job, ConnectionType, SourceControlSyncJob, HybridRunbookWorkerGroup, JobStreamListResult, GraphicalRunbookContent, AgentRegistration, Certificate, Module, JobCollectionItem, JobStream, Watcher, LinkedWorkspace, TypeField, Variable, PrivateLinkResource, TestJob, HybridRunbookWorker, RunbookDraft, Connection]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookCreateOrUpdateProperties, RunbookProperties]
-INFORMATION (FluentMapper): Add Inner for type 'RunbookCreateOrUpdateProperties': [RunbookCreateOrUpdateParameters]
+INFORMATION (FluentMapper): Add Inner to response types: [ConnectionType, TypeField, Schedule, PrivateLinkResource, DscNodeConfiguration, Variable, HybridRunbookWorker, SourceControlSyncJobStreamById, Certificate, SourceControlSyncJobById, RunbookDraft, Statistics, DscNode, AgentRegistration, Runbook, TestJob, SoftwareUpdateConfigurationMachineRun, Watcher, SoftwareUpdateConfigurationMachineRunListResult, JobStream, Usage, SourceControlSyncJobStream, RunbookDraftUndoEditResult, GraphicalRunbookContent, SoftwareUpdateConfigurationListResult, JobSchedule, SoftwareUpdateConfiguration, Credential, LinkedWorkspace, DscConfiguration, Activity, KeyListResult, SoftwareUpdateConfigurationRun, Module, JobCollectionItem, JobStreamListResult, NodeCounts, Webhook, Operation, Job, Connection, SourceControlSyncJob, SourceControl, HybridRunbookWorkerGroup, DscCompilationJob, AutomationAccount, PrivateEndpointConnection, DscNodeReport, SoftwareUpdateConfigurationRunListResult]
+INFORMATION (FluentMapper): Add Inner for type 'RunbookDraft': [RunbookProperties, RunbookCreateOrUpdateProperties]
 INFORMATION (FluentMapper): Add Inner for type 'RunbookProperties': []
+INFORMATION (FluentMapper): Add Inner for type 'RunbookCreateOrUpdateProperties': [RunbookCreateOrUpdateParameters]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'PrivateEndpointConnection', method reference 'createOrUpdate', body parameter 'PrivateEndpointConnectionInner'
@@ -1416,7 +1417,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [RecommendationModel, OnPremiseSensor, OnPremiseSensorsList, SensorModel, SensorsList, LocationModel, PackageDownloads, DeviceVulnerabilityModel, DefenderSettingsList, RecommendationTypeList, RecommendationType, DeviceModel, AlertModel, SitesList, DefenderSettingsModel, Operation, AlertType, SiteModel, DeviceGroupModel, AlertTypeList]
+INFORMATION (FluentMapper): Add Inner to response types: [SiteModel, DeviceGroupModel, SensorModel, RecommendationModel, AlertTypeList, DefenderSettingsModel, RecommendationTypeList, DeviceVulnerabilityModel, AlertModel, PackageDownloads, RecommendationType, DeviceModel, LocationModel, SensorsList, OnPremiseSensorsList, Operation, DefenderSettingsList, OnPremiseSensor, SitesList, AlertType]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'SensorModel', method reference 'createOrUpdate', body parameter 'SensorModelInner'
@@ -1530,8 +1531,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.056 s
-[INFO] Finished at: 2021-09-10T18:44:06Z
+[INFO] Total time:  2.532 s
+[INFO] Finished at: 2021-09-11T18:51:27Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -1841,11 +1842,11 @@ WARNING (PreCheck/SchemaMissingType): The schema 'MultipleMachinesMapRequest' wi
 WARNING (PreCheck/SchemaMissingType): The schema 'MachineListMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
 WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroupMapRequest' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1231:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/generateMap"].post.operationId)
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1405:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups"].post.operationId)
-WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
 WARNING (UnkownSecurityScheme): Security scheme azure_auth is unknown and will not be processed. Only supported types are AADToken,AzureKey,Anonymous
 WARNING (SecurityDefinedSpecAndConfig): OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
 WARNING (Deprecated): seal-single-value-enum-by-default is a temporary flag that WILL be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.
@@ -1930,7 +1931,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Port, ClientGroup, Machine, MachineGroup, ClientGroupMembersCount, Liveness, Process, MapResponse, MachinesSummary, ClientGroupMember, Connection]
+INFORMATION (FluentMapper): Add Inner to response types: [Port, Liveness, Connection, Process, ClientGroup, ClientGroupMembersCount, MapResponse, MachinesSummary, MachineGroup, ClientGroupMember, Machine]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ExampleParser): Parse collection method example 'SMMachinesListByWorkspaceGet'
@@ -2057,7 +2058,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, string, generate-samples : true
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [HybridUseBenefitModel, OperationResponse]
+INFORMATION (FluentMapper): Add Inner to response types: [OperationResponse, HybridUseBenefitModel]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'HybridUseBenefitModel', method reference 'create', body parameter 'HybridUseBenefitModelInner'
@@ -2160,8 +2161,8 @@ java.lang.NullPointerException
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.649 s
-[INFO] Finished at: 2021-09-10T19:19:28Z
+[INFO] Total time:  5.510 s
+[INFO] Finished at: 2021-09-11T19:34:00Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -2196,71 +2197,6 @@ java.lang.NullPointerException
 ```
 **stderr**
 ```
-
-```
-</details>
-
-<details>
-<summary>synapse</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.4.0; node: v14.17.6]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-NOTE: AutoRest core version selected from configuration: 3.4.5.
-   Loading AutoRest core      '/home/runner/.autorest/@autorestcore@3.4.5/nodemodules/@autorest/core/dist' (3.4.5)
-INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.21.0->4.21.0)
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkResource > properties > properties)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json:57:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionForPrivateLinkHubBasic > properties > properties)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json:102:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ManagedIntegrationRuntime > properties > state)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json:74:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IntegrationRuntimeStatus > properties > state)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json:612:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ManagedIntegrationRuntimeStatusTypeProperties > properties > lastOperation)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json:692:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SelfHostedIntegrationRuntimeStatusTypeProperties > properties > autoUpdate)
-  keys: [ [32m'readOnly'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json:909:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > status)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/types.json:133:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > error)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/types.json:137:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkServiceProxyBase > properties > remotePrivateLinkServiceConnectionState)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:143:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkServiceProxyBase > properties > remotePrivateEndpointConnection)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:147:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionForPrivateLinkHubBasic > properties > properties)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:317:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionBasic > properties > properties)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:359:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionProxyBase > properties > remotePrivateEndpoint)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:379:5
-WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionForPrivateLinkHubProxyBase > properties > remotePrivateEndpoint)
-  keys: [ [32m'type'[39m ]
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/common/v1/privateEndpointConnection.json:407:5
-
-```
-**stderr**
-```
-  Error: $ref to original location 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json#/components/schemas/SubResource' is not found in the new refs collection
 
 ```
 </details>
