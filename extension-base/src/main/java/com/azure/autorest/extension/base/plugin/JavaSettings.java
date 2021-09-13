@@ -137,6 +137,7 @@ public class JavaSettings
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
                     host.getStringValue("key-credential-header-name", ""),
+                    host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
                     host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
                     host.getBooleanValue("generate-llc-samples", false));
@@ -203,6 +204,7 @@ public class JavaSettings
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
                          String keyCredentialHeaderName,
+                         boolean clientBuilderDisabled,
                          boolean skipFormatting,
                          Map<String, PollingDetails> pollingConfig,
                          boolean generateLLCSamples)
@@ -267,6 +269,7 @@ public class JavaSettings
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
         this.keyCredentialHeaderName = keyCredentialHeaderName;
+        this.clientBuilderDisabled = clientBuilderDisabled;
         this.skipFormatting = skipFormatting;
         if (pollingConfig != null) {
             if (!pollingConfig.containsKey("default")) {
@@ -660,6 +663,11 @@ public class JavaSettings
 
     public boolean isGenerateLLCSamples() {
         return generateLLCSamples;
+    }
+
+    private final boolean clientBuilderDisabled;
+    public boolean clientBuilderDisabled() {
+        return clientBuilderDisabled;
     }
 
     public static class PollingDetails {

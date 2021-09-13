@@ -95,11 +95,13 @@ public class Javagen extends NewPlugin {
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
-            // Service client builder
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
-            javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
+            if (!client.getServiceClient().builderDisabled()) {
+                // Service client builder
+                String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+                String builderSuffix = ClientModelUtil.getBuilderSuffix();
+                String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+                javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
+            }
 
             if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
