@@ -109,6 +109,12 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 if (requestOptionsStmts.size() > 0) {
                     methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
                     requestOptionsStmts.forEach(methodBlock::line);
+                    for (int i = 0; i < numParam; i++) {
+                        if (method.getParameters().get(i).getName().equals("requestOptions")) {
+                            params.set(i, "requestOptions");
+                            break;
+                        }
+                    }
                 }
                 methodBlock.line(String.format(
                         "%s response = client.%s(%s);",
