@@ -42,6 +42,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         JavaSettings settings = JavaSettings.getInstance();
 
         ServiceClient.Builder builder = createClientBuilder();
+        builder.builderDisabled(JavaSettings.getInstance().clientBuilderDisabled());
 
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();

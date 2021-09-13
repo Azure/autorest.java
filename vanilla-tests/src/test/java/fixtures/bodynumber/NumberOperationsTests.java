@@ -16,7 +16,7 @@ public class NumberOperationsTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestNumberTestServiceBuilder().buildClient();
+    client = new AutoRestNumberTestService("http://localhost:3000");
   }
 
   @Test
