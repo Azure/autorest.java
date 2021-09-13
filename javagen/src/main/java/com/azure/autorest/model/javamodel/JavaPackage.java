@@ -180,6 +180,9 @@ public class JavaPackage {
     }
 
     public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName) {
+        if (method.getProxyMethod().getExamples() == null) {
+            return;
+        }
         method.getProxyMethod().getExamples().forEach((name, example) -> {
             String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
             if (!protocolExampleNameSet.contains(filename)) {
