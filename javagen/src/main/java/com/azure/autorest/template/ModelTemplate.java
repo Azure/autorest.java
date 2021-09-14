@@ -90,7 +90,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         if (model.getIsPolymorphic()) {
-            javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"%1$s\"%2$s)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+            if (settings.isDiscriminatorPassedToChildDeserialization()) {
+                javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = \"%1$s\"%2$s, visible = true)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+            } else {
+                javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"%1$s\"%2$s)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+            }
             javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
 
             if (hasDerivedModels) {

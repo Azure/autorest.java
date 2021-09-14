@@ -38,11 +38,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
-    private static ClientMethodMapper instance = new ClientMethodMapper();
-    private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
+    private static final ClientMethodMapper instance = new ClientMethodMapper();
+
+    private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
+
+    private final Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
     protected ClientMethodMapper() {
     }
@@ -787,7 +791,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             String intermediateTypeName;
             String intermediateTypePackage;
             if (details.getIntermediateType().contains(".")) {
-                intermediateTypeName = details.getIntermediateType().replaceAll(".*\\.", "");
+                intermediateTypeName = ANYTHING_THEN_PERIOD.matcher(details.getIntermediateType()).replaceAll("");
                 intermediateTypePackage = details.getIntermediateType().replace("." + intermediateTypeName, "");
             } else {
                 intermediateTypeName = details.getIntermediateType();
@@ -812,7 +816,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             String finalTypeName;
             String finalTypePackage;
             if (details.getFinalType().contains(".")) {
-                finalTypeName = details.getFinalType().replaceAll(".*\\.", "");
+                finalTypeName = ANYTHING_THEN_PERIOD.matcher(details.getFinalType()).replaceAll("");
                 finalTypePackage = details.getFinalType().replace("." + finalTypeName, "");
             } else {
                 finalTypeName = details.getFinalType();

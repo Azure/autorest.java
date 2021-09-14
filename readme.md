@@ -73,6 +73,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. Default is false.|
 |`--skip-formatting`|Indicates whether to skip formatting Java file. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
+|`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 
 ## Additional settings for Fluent
 

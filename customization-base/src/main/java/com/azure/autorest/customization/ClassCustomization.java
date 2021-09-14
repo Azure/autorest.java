@@ -77,7 +77,7 @@ public final class ClassCustomization extends CodeCustomization {
             methodSignature = methodNameOrSignature.replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
             String returnTypeAndMethodName = methodNameOrSignature.split("\\(")[0];
             if (returnTypeAndMethodName.contains(" ")) {
-                methodName = returnTypeAndMethodName.replaceAll(".* ", "");
+                methodName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
             } else {
                 methodName = returnTypeAndMethodName;
             }
@@ -118,7 +118,7 @@ public final class ClassCustomization extends CodeCustomization {
                 .replaceFirst(" *private ", "");
             String returnTypeAndMethodName = constructorNameOrSignature.split("\\(")[0];
             if (returnTypeAndMethodName.contains(" ")) {
-                constructorName = returnTypeAndMethodName.replaceAll(".* ", "");
+                constructorName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
             } else {
                 constructorName = returnTypeAndMethodName;
             }
