@@ -24,6 +24,8 @@ public class JavaPackage {
 
     private final Set<String> filePaths = new HashSet<>();
 
+    private final Set<String> protocolExampleNameSet = new HashSet<>();
+
     public JavaPackage(NewPlugin host) {
         this.settings = JavaSettings.getInstance();
         this.javaFiles = new ArrayList<>();
@@ -194,8 +196,6 @@ public class JavaPackage {
             }
         });
     }
-
-    private Set<String> protocolExampleNameSet = new HashSet<>();
 
     protected void checkDuplicateFile(String filePath) {
         if (filePaths.contains(filePath)) {
