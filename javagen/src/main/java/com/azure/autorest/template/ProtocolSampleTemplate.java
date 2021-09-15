@@ -87,7 +87,11 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
-                String clientName = client.getInterfaceName() + "Client";
+                String clientName = client.getClassBaseName();
+                if (!clientName.endsWith("Client")) {
+                    clientName += "Client";
+                }
+
                 String credentialExpr;
                 Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
                 if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
