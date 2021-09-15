@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.PartialUpdater;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
@@ -174,6 +175,9 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
+                if (settings.isLowLevelClient()) {
+                    javaFile = PartialUpdater.merge(javaFile);
+                }
                 String content = javaFile.getContents().toString();
                 if (!settings.isSkipFormatting()) {
                     try {

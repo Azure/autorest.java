@@ -139,7 +139,8 @@ public class JavaSettings
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
-                    host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"));
+                    host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
+                    host.getStringValue("output-folder", ""));
         }
         return _instance;
     }
@@ -205,7 +206,8 @@ public class JavaSettings
                          String keyCredentialHeaderName,
                          boolean clientBuilderDisabled,
                          boolean skipFormatting,
-                         Map<String, PollingDetails> pollingConfig)
+                         Map<String, PollingDetails> pollingConfig,
+                         String outputFolder)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -275,6 +277,7 @@ public class JavaSettings
             }
         }
         this.pollingConfig = pollingConfig;
+        this.outputFolder = outputFolder;
     }
 
     private String keyCredentialHeaderName;
@@ -659,6 +662,12 @@ public class JavaSettings
     private final boolean clientBuilderDisabled;
     public boolean clientBuilderDisabled() {
         return clientBuilderDisabled;
+    }
+
+    private String outputFolder;
+
+    public String getOutputFolder() {
+        return outputFolder;
     }
 
     public static class PollingDetails {

@@ -264,4 +264,11 @@ public final class StringOperationClient {
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions, context);
     }
+
+    @com.azure.core.annotation.Manual private int manualField;
+
+    @com.azure.core.annotation.Manual
+    public int manualMethod() {
+        return 1;
+    }
 }
