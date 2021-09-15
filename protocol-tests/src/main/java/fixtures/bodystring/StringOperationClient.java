@@ -266,7 +266,11 @@ public final class StringOperationClient {
     }
 
     @com.azure.core.annotation.Manual private int manualField;
-
+    /**
+     * Manual method
+     *
+     * @return an integer
+     */
     @com.azure.core.annotation.Manual
     public int manualMethod() {
         return 1;
