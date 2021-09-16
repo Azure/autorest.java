@@ -139,7 +139,8 @@ public class JavaSettings
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
-                    host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"));
+                    host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
+                    host.getBooleanValue("generate-llc-samples", true));
         }
         return _instance;
     }
@@ -205,7 +206,8 @@ public class JavaSettings
                          String keyCredentialHeaderName,
                          boolean clientBuilderDisabled,
                          boolean skipFormatting,
-                         Map<String, PollingDetails> pollingConfig)
+                         Map<String, PollingDetails> pollingConfig,
+                         boolean generateLLCSamples)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
@@ -275,6 +277,7 @@ public class JavaSettings
             }
         }
         this.pollingConfig = pollingConfig;
+        this.generateLLCSamples = generateLLCSamples;
     }
 
     private String keyCredentialHeaderName;
@@ -654,6 +657,12 @@ public class JavaSettings
     private final boolean requireXMsFlattenedToFlatten;
     public boolean requireXMsFlattenedToFlatten() {
         return requireXMsFlattenedToFlatten;
+    }
+
+    private final boolean generateLLCSamples;
+
+    public boolean isGenerateLLCSamples() {
+        return generateLLCSamples;
     }
 
     private final boolean clientBuilderDisabled;

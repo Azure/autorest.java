@@ -34,6 +34,8 @@ public class ProxyMethodExample {
 
         private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
+        private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
+
         public ParameterValue(Object objectValue) {
             this.objectValue = objectValue;
         }
@@ -55,6 +57,14 @@ public class ProxyMethodExample {
                 return "ParameterValue{" +
                         "objectValue=" + objectValue +
                         '}';
+            }
+        }
+
+        public String getJsonString() {
+            try {
+                return NORMAL_PRINTER.writeValueAsString(objectValue);
+            } catch (JsonProcessingException e) {
+                return objectValue.toString();
             }
         }
     }
