@@ -32,6 +32,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         String builderName = protocolExample.getBuilderName();
         String filename = protocolExample.getFilename();
         ProxyMethodExample example = protocolExample.getProxyMethodExample();
+        String hostName = protocolExample.getHostName();
 
         // Import
         List<String> imports = new ArrayList<>();
@@ -95,18 +96,18 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 String credentialExpr;
                 Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
                 if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
-                    credentialExpr = "new DefaultAzureCredentialBuilder().build()";
+                    credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
                 } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
-                    credentialExpr = "new AzureKeyCredential(System.getenv(\"API_KEY\"))";
+                    credentialExpr = ".credential(new AzureKeyCredential(System.getenv(\"API_KEY\")))";
                 } else {
-                    credentialExpr = "new DefaultAzureCredentialBuilder().build()";
+                    credentialExpr = "";
                 }
 
                 String clientInit = "%s client = new %s()" +
-                        ".endpoint(System.getenv(\"ENDPOINT\"))" +
-                        ".credential(%s)" +
+                        ".%s(System.getenv(\"%s\"))" +
+                        "%s" +
                         ".build%s();";
-                methodBlock.line(String.format(clientInit, clientName, builderName, credentialExpr, clientName));
+                methodBlock.line(String.format(clientInit, clientName, builderName, hostName, hostName.toUpperCase(), credentialExpr, clientName));
                 if (binaryDataStmt.length() > 0) {
                     methodBlock.line(binaryDataStmt.toString());
                 }

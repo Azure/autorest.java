@@ -14,12 +14,21 @@ public class ProtocolExample {
 
     private ProxyMethodExample proxyMethodExample;
 
-    public ProtocolExample(ClientMethod clientMethod, MethodGroupClient methodGroupClient, String builderName, String filename, ProxyMethodExample proxyMethodExample) {
+    private String hostName;
+
+    public ProtocolExample(
+            ClientMethod clientMethod,
+            MethodGroupClient methodGroupClient,
+            String builderName,
+            String filename,
+            ProxyMethodExample proxyMethodExample,
+            String hostName) {
         this.clientMethod = clientMethod;
         this.methodGroupClient = methodGroupClient;
         this.builderName = builderName;
         this.filename = filename;
         this.proxyMethodExample = proxyMethodExample;
+        this.hostName = hostName;
     }
 
     public ClientMethod getClientMethod() {
@@ -40,5 +49,9 @@ public class ProtocolExample {
 
     public ProxyMethodExample getProxyMethodExample() {
         return proxyMethodExample;
+    }
+
+    public String getHostName() {
+        return hostName;
     }
 }

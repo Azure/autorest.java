@@ -125,11 +125,18 @@ public class Javagen extends NewPlugin {
                 }
             }
 
-            if (settings.isGenerateLLCSamples()) {
+            if (settings.isLowLevelClient() && settings.isGenerateLLCSamples()) {
+                String hostName0 = "host";
+                if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("host"))) {
+                    hostName0 = "host";
+                } else if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("endpoint"))) {
+                    hostName0 = "endpoint";
+                }
+                String hostName = hostName0;
                 client.getServiceClient().getMethodGroupClients()
                         .forEach(c -> c.getClientMethods().stream()
                         .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
-                        .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName)));
+                        .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName, hostName)));
             }
 
             // Service version

@@ -181,7 +181,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName) {
+    public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName, String hostName) {
         if (method.getProxyMethod().getExamples() == null) {
             return;
         }
@@ -189,7 +189,7 @@ public class JavaPackage {
             String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
             if (!protocolExampleNameSet.contains(filename)) {
                 JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
-                ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example);
+                ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example, hostName);
                 Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
                 javaFiles.add(javaFile);
                 protocolExampleNameSet.add(filename);
