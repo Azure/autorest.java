@@ -5,7 +5,7 @@ package fixtures.inheritance.passdiscriminator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import fixtures.inheritance.donotpassdiscriminator.MetricAlerts;
+import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class ValidateDiscriminatorIsPassedTests {
     @Test
     public void superClassPassesDiscriminator() {
-        JsonTypeInfo jsonTypeInfo = MetricAlerts.class.getAnnotation(JsonTypeInfo.class);
+        JsonTypeInfo jsonTypeInfo = MetricAlertCriteria.class.getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
         assertEquals(JsonTypeInfo.As.EXISTING_PROPERTY, jsonTypeInfo.include());
