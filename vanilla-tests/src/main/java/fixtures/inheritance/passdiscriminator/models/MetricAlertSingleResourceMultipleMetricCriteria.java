@@ -18,10 +18,25 @@ import java.util.List;
 @Fluent
 public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
+     * specifies the type of the alert criteria.
+     */
+    @JsonProperty(value = "odata\\.type", required = true)
+    private Odatatype odataType;
+
+    /*
      * The list of metric criteria for this 'all of' operation.
      */
     @JsonProperty(value = "allOf")
     private List<String> allOf;
+
+    /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     *
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return this.odataType;
+    }
 
     /**
      * Get the allOf property: The list of metric criteria for this 'all of' operation.

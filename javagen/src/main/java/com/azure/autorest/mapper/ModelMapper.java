@@ -172,7 +172,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.serializedName(modelSerializedName);
 
             List<ClientModel> derivedTypes = new ArrayList<>();
-            if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
+            boolean hasChildren = compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null;
+            if (hasChildren) {
                 for (Schema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = this.map((ObjectSchema) childSchema);
@@ -192,6 +193,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
+            List<ClientModelProperty> properties = new ArrayList<>();
+
             boolean needsFlatten = false;
             if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
                     && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
@@ -206,14 +209,48 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (isPolymorphic) {
                 String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
                 // Only escape the discriminator if the model will be flattened.
-                builder.polymorphicDiscriminator(needsFlatten
-                        ? discriminatorSerializedName.replace(".", "\\\\.")
-                        : discriminatorSerializedName);
+                String polymorphicDiscriminator = needsFlatten
+                    ? discriminatorSerializedName.replace(".", "\\\\.")
+                    : discriminatorSerializedName;
+
+                builder.polymorphicDiscriminator(polymorphicDiscriminator);
+
+                // Given the discriminator value is being passed if this is the terminal type
+                // add a read-only property to the class which is the discriminator type.
+                if (settings.isDiscriminatorPassedToChildDeserialization() && !hasChildren) {
+                    ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()
+                        .map(SchemaUtil.getDiscriminatorProperty(compositeType));
+
+                    ClientModelProperty formattedDiscriminatorProperty = new ClientModelProperty.Builder()
+                        .name(discriminatorProperty.getName())
+                        .description(discriminatorProperty.getDescription())
+                        .annotationArguments(discriminatorProperty.getAnnotationArguments()
+                            .replace(discriminatorSerializedName, polymorphicDiscriminator))
+                        .isXmlAttribute(discriminatorProperty.getIsXmlAttribute())
+                        .xmlName(discriminatorProperty.getXmlName())
+                        .serializedName(polymorphicDiscriminator)
+                        .isXmlWrapper(discriminatorProperty.getIsXmlWrapper())
+                        .xmlListElementName(discriminatorProperty.getXmlListElementName())
+                        .wireType(discriminatorProperty.getWireType())
+                        .clientType(discriminatorProperty.getClientType())
+                        .isConstant(discriminatorProperty.getIsConstant())
+                        .defaultValue(discriminatorProperty.getDefaultValue())
+                        .isReadOnly(true)
+                        .isRequired(false)
+                        .headerCollectionPrefix(discriminatorProperty.getHeaderCollectionPrefix())
+                        .isAdditionalProperties(discriminatorProperty.isAdditionalProperties())
+                        .xmlNamespace(discriminatorProperty.getXmlNamespace())
+                        .mutabilities(discriminatorProperty.getMutabilities())
+                        .needsFlatten(discriminatorProperty.getNeedsFlatten())
+                        .clientFlatten(discriminatorProperty.getClientFlatten())
+                        .build();
+
+                    properties.add(formattedDiscriminatorProperty);
+                }
             }
 
             builder.needsFlatten(needsFlatten);
 
-            List<ClientModelProperty> properties = new ArrayList<>();
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);

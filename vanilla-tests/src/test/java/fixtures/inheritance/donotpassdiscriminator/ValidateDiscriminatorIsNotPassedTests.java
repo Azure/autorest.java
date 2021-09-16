@@ -4,7 +4,7 @@
 package fixtures.inheritance.donotpassdiscriminator;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
+import fixtures.inheritance.donotpassdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

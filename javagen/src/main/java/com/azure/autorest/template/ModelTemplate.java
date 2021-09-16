@@ -431,9 +431,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             {
                 comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
 
-                requiredParentProperties.stream().forEach(property -> comment
+                requiredParentProperties.forEach(property -> comment
                         .param(property.getName(), String.format("the %s value to set", property.getName())));
-                requiredProperties.stream().forEach(property -> comment
+                requiredProperties.forEach(property -> comment
                         .param(property.getName(), String.format("the %s value to set", property.getName())));
             });
 
