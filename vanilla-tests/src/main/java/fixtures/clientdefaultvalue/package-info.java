@@ -1,5 +1,2 @@
-/**
- * Package containing the classes for MonitorManagementClient. Azure Monitor client to create/update/delete metric based
- * alerts.
- */
+/** Package containing the classes for DefaultValueClient. default value client. */
 package fixtures.clientdefaultvalue;

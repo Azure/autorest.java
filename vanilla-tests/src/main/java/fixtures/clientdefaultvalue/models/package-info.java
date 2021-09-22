@@ -1,5 +1,2 @@
-/**
- * Package containing the data models for MonitorManagementClient. Azure Monitor client to create/update/delete metric
- * based alerts.
- */
+/** Package containing the data models for DefaultValueClient. default value client. */
 package fixtures.clientdefaultvalue.models;

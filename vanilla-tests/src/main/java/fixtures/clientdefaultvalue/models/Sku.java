@@ -33,7 +33,7 @@ public final class Sku {
     private Integer softDeleteRetentionInDays = 90;
 
     /*
-     * The location of the original vault.
+     * test string description.
      */
     @JsonProperty(value = "testString", access = JsonProperty.Access.WRITE_ONLY)
     private String testString = "test string";
@@ -121,7 +121,7 @@ public final class Sku {
     }
 
     /**
-     * Get the testString property: The location of the original vault.
+     * Get the testString property: test string description.
      *
      * @return the testString value.
      */

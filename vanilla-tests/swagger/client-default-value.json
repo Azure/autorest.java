@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-09-15",
-    "title": "MonitorManagementClient",
+    "title": "DefaultValueClient",
     "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
+      "name": "DefaultValueClient"
     },
-    "description": "Azure Monitor client to create/update/delete metric based alerts."
+    "description": "default value client"
   },
   "host": "management.azure.com",
   "schemes": [
