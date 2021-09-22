@@ -170,6 +170,14 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         // handle x-ms-client-default for primitive type, enum, boxed type and string
+        if (property.getClientDefaultValue() == null) {
+            if (property.getSchema() != null && property.getSchema() instanceof ConstantSchema) {
+                ConstantSchema constantSchema = (ConstantSchema) property.getSchema();
+                if (constantSchema.getValue() != null) {
+                    property.setClientDefaultValue(constantSchema.getValue().getValue().toString());
+                }
+            }
+        }
         if (property.getClientDefaultValue() != null &&
                 (propertyWireType instanceof PrimitiveType || propertyWireType instanceof EnumType ||
                         (propertyWireType instanceof ClassType && ((ClassType) propertyWireType).isBoxedType()) ||
