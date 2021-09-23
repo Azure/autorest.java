@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-15",
+    "title": "DefaultValueClient",
+    "x-ms-code-generation-settings": {
+      "name": "DefaultValueClient"
+    },
+    "description": "default value client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "SKU family name",
+          "enum": [
+            "A"
+          ],
+          "x-ms-client-default": "A",
+          "x-ms-enum": {
+            "name": "SkuFamily",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "SKU name to specify whether the key vault is a standard vault or a premium vault.",
+          "enum": [
+            "standard",
+            "premium"
+          ],
+          "x-ms-client-default": "standard",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          }
+        },
+        "enabledForDeployment": {
+          "type": "boolean",
+          "x-ms-client-default": "true",
+          "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
+        },
+        "softDeleteRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "x-ms-client-default": 90,
+          "description": "softDelete data retention days. It accepts >=7 and <=90."
+        },
+        "testString": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-client-default": "test string",
+          "description": "test string description."
+        }
+      },
+      "description": "SKU details",
+      "required": [
+        "name",
+        "family"
+      ]
+    }
+  }
+}

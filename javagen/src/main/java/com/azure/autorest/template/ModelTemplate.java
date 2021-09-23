@@ -90,11 +90,34 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         if (model.getIsPolymorphic()) {
-            if (settings.isDiscriminatorPassedToChildDeserialization()) {
-                javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = \"%1$s\"%2$s, visible = true)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+            StringBuilder jsonTypeInfo = new StringBuilder("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = ");
+
+            // If the discriminator isn't being passed to child models or this model has derived, children, models
+            // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
+            // property using the property attribute of the annotation instead of looking for a @JsonProperty.
+            if (!settings.isDiscriminatorPassedToChildDeserialization() || hasDerivedModels) {
+                jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
             } else {
-                javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"%1$s\"%2$s)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+                // Otherwise, serialize the discriminator property with an existing property on the class.
+                jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
             }
+
+            jsonTypeInfo.append(model.getPolymorphicDiscriminator())
+                .append("\"");
+
+            // If the class has derived models add itself as a default implementation.
+            if (hasDerivedModels) {
+                jsonTypeInfo.append(", defaultImpl = ")
+                    .append(model.getName())
+                    .append(".class");
+            }
+
+            // If the discriminator is passed to child models the discriminator property needs to be set to visible.
+            if (settings.isDiscriminatorPassedToChildDeserialization()) {
+                jsonTypeInfo.append(", visible = true");
+            }
+
+            javaFile.annotation(jsonTypeInfo.append(")").toString());
             javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
 
             if (hasDerivedModels) {
@@ -212,7 +235,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         // if the property of flattened model is required, initialize it
                         classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
                     } else {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                        // handle x-ms-client-default
+                        if (property.getDefaultValue() != null) {
+                            classBlock.privateMemberVariable(String.format("%1$s %2$s = %3$s", property.getWireType(), property.getName(), property.getDefaultValue()));
+                        } else {
+                            classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                        }
                     }
                 }
             }

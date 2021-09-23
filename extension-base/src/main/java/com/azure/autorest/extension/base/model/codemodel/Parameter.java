@@ -19,14 +19,6 @@ public class Parameter extends Value {
     private Property targetProperty;
 
     public String getClientDefaultValue() {
-        if (clientDefaultValue == null) {
-            if (this.getSchema() != null && this.getSchema() instanceof ConstantSchema) {
-                ConstantSchema constantSchema = (ConstantSchema) this.getSchema();
-                if (constantSchema.getValue() != null) {
-                    this.setClientDefaultValue(constantSchema.getValue().getValue().toString());
-                }
-            }
-        }
         return clientDefaultValue;
     }
 

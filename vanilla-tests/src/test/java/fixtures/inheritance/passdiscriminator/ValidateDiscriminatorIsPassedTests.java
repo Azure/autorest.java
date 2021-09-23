@@ -22,7 +22,7 @@ public class ValidateDiscriminatorIsPassedTests {
         JsonTypeInfo jsonTypeInfo = MetricAlertCriteria.class.getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
-        assertEquals(JsonTypeInfo.As.EXISTING_PROPERTY, jsonTypeInfo.include());
+        assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
     }
 
     @Test

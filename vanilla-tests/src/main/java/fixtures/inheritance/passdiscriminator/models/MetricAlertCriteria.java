@@ -14,7 +14,7 @@ import java.util.Map;
 /** The rule criteria that defines the conditions of the alert rule. */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        include = JsonTypeInfo.As.PROPERTY,
         property = "odata\\.type",
         defaultImpl = MetricAlertCriteria.class,
         visible = true)

@@ -140,6 +140,7 @@ public class JavaSettings
                     host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
                     host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
+                    host.getBooleanValue("generate-llc-samples", true),
                     host.getBooleanValue("pass-discriminator-to-child-deserialization", false));
         }
         return _instance;
@@ -208,6 +209,7 @@ public class JavaSettings
                          boolean clientBuilderDisabled,
                          boolean skipFormatting,
                          Map<String, PollingDetails> pollingConfig,
+                         boolean generateLLCSamples,
                          boolean passDiscriminatorToChildDeserialization)
     {
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -278,6 +280,7 @@ public class JavaSettings
             }
         }
         this.pollingConfig = pollingConfig;
+        this.generateLLCSamples = generateLLCSamples;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
     }
 
@@ -658,6 +661,12 @@ public class JavaSettings
     private final boolean requireXMsFlattenedToFlatten;
     public boolean requireXMsFlattenedToFlatten() {
         return requireXMsFlattenedToFlatten;
+    }
+
+    private final boolean generateLLCSamples;
+
+    public boolean isGenerateLLCSamples() {
+        return generateLLCSamples;
     }
 
     private final boolean clientBuilderDisabled;

@@ -122,10 +122,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             if (!settings.isFluent()) {
                 serviceClientPropertyIsReadOnly = false;
             }
-            String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
+            String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
 
             if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
-                String serviceName = settings.getServiceName();
+                String serviceName = settings.getServiceName().replaceAll("\\s", "");
                 String enumTypeName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()
