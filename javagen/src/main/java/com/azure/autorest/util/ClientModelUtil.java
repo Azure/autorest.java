@@ -5,6 +5,8 @@
 
 package com.azure.autorest.util;
 
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -145,5 +147,18 @@ public class ClientModelUtil {
         } else {
             return settings.getPackage();
         }
+    }
+
+    public static String getClientDefaultValueOrConstantValue(Parameter parameter) {
+        String clientDefaultValueOrConstantValue = parameter.getClientDefaultValue();
+        if (clientDefaultValueOrConstantValue == null) {
+            if (parameter.getSchema() != null && parameter.getSchema() instanceof ConstantSchema) {
+                ConstantSchema constantSchema = (ConstantSchema) parameter.getSchema();
+                if (constantSchema.getValue() != null) {
+                    clientDefaultValueOrConstantValue = constantSchema.getValue().getValue().toString();
+                }
+            }
+        }
+        return clientDefaultValueOrConstantValue;
     }
 }

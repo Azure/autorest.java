@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -184,7 +185,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 if (!settings.isLowLevelClient() || (parameter.isRequired() &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query ||
-                        parameter.getClientDefaultValue() != null &&
+                        ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null &&
                         parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion"))) {
                     parameters.add(proxyMethodParameter);
                 }
