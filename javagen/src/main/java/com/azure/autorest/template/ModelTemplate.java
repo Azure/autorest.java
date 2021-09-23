@@ -208,7 +208,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         // if the property of flattened model is required, initialize it
                         classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
                     } else {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                        // handle x-ms-client-default
+                        if (property.getDefaultValue() != null) {
+                            classBlock.privateMemberVariable(String.format("%1$s %2$s = %3$s", property.getWireType(), property.getName(), property.getDefaultValue()));
+                        } else {
+                            classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                        }
                     }
                 }
             }

@@ -41,6 +41,8 @@ public class Property extends Value {
 
     private List<Parameter> originalParameter;
 
+    private String clientDefaultValue;
+
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
@@ -127,5 +129,13 @@ public class Property extends Value {
 
     public void setOriginalParameter(List<Parameter> originalParameter) {
         this.originalParameter = originalParameter;
+    }
+
+    public String getClientDefaultValue() {
+        return clientDefaultValue;
+    }
+
+    public void setClientDefaultValue(String clientDefaultValue) {
+        this.clientDefaultValue = clientDefaultValue;
     }
 }
