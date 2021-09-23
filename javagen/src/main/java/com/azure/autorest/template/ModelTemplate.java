@@ -90,7 +90,34 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         if (model.getIsPolymorphic()) {
-            javaFile.annotation(String.format("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"%1$s\"%2$s)", model.getPolymorphicDiscriminator(), (hasDerivedModels ? String.format(", defaultImpl = %1$s.class", model.getName()) : "")));
+            StringBuilder jsonTypeInfo = new StringBuilder("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = ");
+
+            // If the discriminator isn't being passed to child models or this model has derived, children, models
+            // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
+            // property using the property attribute of the annotation instead of looking for a @JsonProperty.
+            if (!settings.isDiscriminatorPassedToChildDeserialization() || hasDerivedModels) {
+                jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
+            } else {
+                // Otherwise, serialize the discriminator property with an existing property on the class.
+                jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
+            }
+
+            jsonTypeInfo.append(model.getPolymorphicDiscriminator())
+                .append("\"");
+
+            // If the class has derived models add itself as a default implementation.
+            if (hasDerivedModels) {
+                jsonTypeInfo.append(", defaultImpl = ")
+                    .append(model.getName())
+                    .append(".class");
+            }
+
+            // If the discriminator is passed to child models the discriminator property needs to be set to visible.
+            if (settings.isDiscriminatorPassedToChildDeserialization()) {
+                jsonTypeInfo.append(", visible = true");
+            }
+
+            javaFile.annotation(jsonTypeInfo.append(")").toString());
             javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
 
             if (hasDerivedModels) {
@@ -432,9 +459,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             {
                 comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
 
-                requiredParentProperties.stream().forEach(property -> comment
+                requiredParentProperties.forEach(property -> comment
                         .param(property.getName(), String.format("the %s value to set", property.getName())));
-                requiredProperties.stream().forEach(property -> comment
+                requiredProperties.forEach(property -> comment
                         .param(property.getName(), String.format("the %s value to set", property.getName())));
             });
 

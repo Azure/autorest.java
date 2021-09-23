@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
@@ -66,7 +67,7 @@ public final class JavadocCustomization {
         this.fileUri = fileUri;
         this.fileName = fileName;
 
-        this.indent = editor.getFileLine(fileName, symbolLine).replaceAll("[^ ].*$", "");
+        this.indent = Utils.getIndent(editor.getFileLine(fileName, symbolLine));
         parseJavadoc(symbolLine);
     }
 

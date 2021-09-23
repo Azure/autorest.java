@@ -79,6 +79,11 @@ public class CodeNamer {
 
     private static NamerFactory factory = new DefaultNamerFactory();
 
+    private static final Pattern CAMEL_CASE_SPLIT = Pattern.compile("[_\\- ]");
+    private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
+    private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
+    private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
+
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
     }
@@ -102,7 +107,7 @@ public class CodeNamer {
         }
 
         List<String> parts = new ArrayList<>();
-        String[] splits = name.split("[_\\- ]");
+        String[] splits = CAMEL_CASE_SPLIT.split(name);
         if (splits.length == 0) {
             return "";
         }
@@ -125,7 +130,7 @@ public class CodeNamer {
             return '_' + toCamelCase(name.substring(1));
         }
 
-        return Arrays.stream(name.split("[_\\- ]"))
+        return CAMEL_CASE_SPLIT.splitAsStream(name)
                 .filter(s -> s != null && !s.isEmpty())
                 .map(s -> formatCase(s, false))
                 .collect(Collectors.joining());
@@ -147,7 +152,7 @@ public class CodeNamer {
             return null;
         }
 
-        return comment.replaceAll(Pattern.quote("*/"), "*&#47;");
+        return ESCAPE_COMMENT.matcher(comment).replaceAll("*&#47;");
     }
 
     private static String formatCase(String name, boolean toLower) {
@@ -227,8 +232,8 @@ public class CodeNamer {
             name = sb.toString();
         }
 
-        String result = removeInvalidCharacters(name.replaceAll("[\\\\/.+ -]+", "_"));
-        result = result.replaceAll("_{2,}", "_");  // merge multiple underlines
+        String result = removeInvalidCharacters(CHARACTERS_TO_REPLACE_WITH_UNDERSCORE.matcher(name).replaceAll("_"));
+        result = MERGE_UNDERSCORES.matcher(result).replaceAll("_");  // merge multiple underlines
         Function<Character, Boolean> isUpper = c -> c >= 'A' && c <= 'Z';
         Function<Character, Boolean> isLower = c -> c >= 'a' && c <= 'z';
         for (int i = 1; i < result.length() - 1; i++) {

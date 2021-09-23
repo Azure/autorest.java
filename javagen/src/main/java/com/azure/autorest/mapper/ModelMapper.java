@@ -21,12 +21,14 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -172,7 +174,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.serializedName(modelSerializedName);
 
             List<ClientModel> derivedTypes = new ArrayList<>();
-            if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
+            boolean hasChildren = compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null;
+            if (hasChildren) {
                 for (Schema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = this.map((ObjectSchema) childSchema);
@@ -192,6 +195,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
+            List<ClientModelProperty> properties = new ArrayList<>();
+
             boolean needsFlatten = false;
             if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
                     && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
@@ -206,14 +211,24 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (isPolymorphic) {
                 String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
                 // Only escape the discriminator if the model will be flattened.
-                builder.polymorphicDiscriminator(needsFlatten
-                        ? discriminatorSerializedName.replace(".", "\\\\.")
-                        : discriminatorSerializedName);
+                String polymorphicDiscriminator = needsFlatten
+                    ? discriminatorSerializedName.replace(".", "\\\\.")
+                    : discriminatorSerializedName;
+
+                builder.polymorphicDiscriminator(polymorphicDiscriminator);
+
+                ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
+                    settings.isDiscriminatorPassedToChildDeserialization(), hasChildren, compositeType,
+                    annotationArgs -> annotationArgs.replace(discriminatorSerializedName, polymorphicDiscriminator),
+                    polymorphicDiscriminator);
+
+                if (discriminatorProperty != null) {
+                    properties.add(discriminatorProperty);
+                }
             }
 
             builder.needsFlatten(needsFlatten);
 
-            List<ClientModelProperty> properties = new ArrayList<>();
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
@@ -248,6 +263,57 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         }
 
         return result;
+    }
+
+    /**
+     * Creates a {@link ClientModelProperty} for the discriminator type in a polymorphic Swagger model.
+     * <p>
+     * By default if the discriminator isn't passed to child type deserialization or if the type isn't a terminal, or
+     * leaf type, in the hierarchy no {@link ClientModelProperty} will be created.
+     * <p>
+     * This method serves as an extension point for Fluent generator.
+     *
+     * @param isDiscriminatorPassedToChildDeserialization Flag indicating whether the generator should pass the
+     * discriminator property to child classes.
+     * @param hasChildren Flag indicating whether the Swagger model has children models.
+     * @param compositeType The Swagger schema of the model.
+     * @param annotationArgumentsMapper Function that maps the {@link ClientModelProperty#getAnnotationArguments()} of
+     * the {@code compositeType} into the attributes of {@link JsonProperty} for the discriminator property.
+     * @param serializedName The serialized name of the discriminator property.
+     * @return A {@link ClientModelProperty} that is the discriminator field property, or null if either the
+     * discriminator shouldn't be made into a property or if the model isn't a terminal, or leaf, type.
+     */
+    protected ClientModelProperty createDiscriminatorProperty(boolean isDiscriminatorPassedToChildDeserialization,
+        boolean hasChildren, ObjectSchema compositeType, Function<String, String> annotationArgumentsMapper,
+        String serializedName) {
+        if (!isDiscriminatorPassedToChildDeserialization || hasChildren) {
+            return null;
+        }
+        ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()
+            .map(SchemaUtil.getDiscriminatorProperty(compositeType));
+
+        return new ClientModelProperty.Builder()
+            .name(discriminatorProperty.getName())
+            .description(discriminatorProperty.getDescription())
+            .annotationArguments(annotationArgumentsMapper.apply(discriminatorProperty.getAnnotationArguments()))
+            .isXmlAttribute(discriminatorProperty.getIsXmlAttribute())
+            .xmlName(discriminatorProperty.getXmlName())
+            .serializedName(serializedName)
+            .isXmlWrapper(discriminatorProperty.getIsXmlWrapper())
+            .xmlListElementName(discriminatorProperty.getXmlListElementName())
+            .wireType(discriminatorProperty.getWireType())
+            .clientType(discriminatorProperty.getClientType())
+            .isConstant(discriminatorProperty.getIsConstant())
+            .defaultValue(discriminatorProperty.getDefaultValue())
+            .isReadOnly(true)
+            .isRequired(false)
+            .headerCollectionPrefix(discriminatorProperty.getHeaderCollectionPrefix())
+            .isAdditionalProperties(discriminatorProperty.isAdditionalProperties())
+            .xmlNamespace(discriminatorProperty.getXmlNamespace())
+            .mutabilities(discriminatorProperty.getMutabilities())
+            .needsFlatten(discriminatorProperty.getNeedsFlatten())
+            .clientFlatten(discriminatorProperty.getClientFlatten())
+            .build();
     }
 
     protected ClientModel.Builder createModelBuilder() {
