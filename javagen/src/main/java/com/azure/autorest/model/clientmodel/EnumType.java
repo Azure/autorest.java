@@ -99,6 +99,11 @@ public class EnumType implements IType {
         }
     }
 
+    @Override
+    public String defaultValueExpression() {
+        return "null";
+    }
+
     public final IType getClientType() {
         return this;
     }

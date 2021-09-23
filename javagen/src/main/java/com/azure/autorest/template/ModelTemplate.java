@@ -258,7 +258,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             methodBlock.methodReturn(expression);
                         }
                     } else {
-                        methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn("null"));
+                        methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
 
                         String propertyConversion = propertyType.convertToClientType(expression);
 
@@ -347,11 +347,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     generateGetterJavadoc(classBlock, model, property);
 
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
-                        // use ternary operator to avoid directly
+                        // use ternary operator to avoid directly return null
                         String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
-                        String nullClause = (propertyClientTypeFinal instanceof PrimitiveType)
-                                ? ((PrimitiveType) propertyClientTypeFinal).defaultValueExpression()
-                                : "null";
+                        String nullClause = propertyClientTypeFinal.defaultValueExpression();
                         String valueClause = String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName());
 
                         methodBlock.methodReturn(String.format("%1$s ? %2$s : %3$s", ifClause, nullClause, valueClause));

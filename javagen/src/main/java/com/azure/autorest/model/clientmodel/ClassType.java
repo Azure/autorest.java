@@ -178,6 +178,11 @@ public class ClassType implements IType {
         return result;
     }
 
+    @Override
+    public String defaultValueExpression() {
+        return "null";
+    }
+
     public final IType getClientType() {
         IType clientType = this;
         if (this == ClassType.DateTimeRfc1123) {
