@@ -76,7 +76,7 @@ public final class AutoRestComplexTestServiceBuilder {
     /*
      * Service version
      */
-    private BodyComplexServiceVersion serviceVersion;
+    private AutoRestComplexTestServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
@@ -84,7 +84,7 @@ public final class AutoRestComplexTestServiceBuilder {
      * @param serviceVersion the serviceVersion value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
-    public AutoRestComplexTestServiceBuilder serviceVersion(BodyComplexServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceBuilder serviceVersion(AutoRestComplexTestServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -214,7 +214,7 @@ public final class AutoRestComplexTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (serviceVersion == null) {
-            this.serviceVersion = BodyComplexServiceVersion.getLatest();
+            this.serviceVersion = AutoRestComplexTestServiceVersion.getLatest();
         }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
