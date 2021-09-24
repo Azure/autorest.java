@@ -57,5 +57,17 @@ public interface IType {
      */
     String defaultValueExpression(String sourceExpression);
 
+    /**
+     * The default value expression, when this type does not have data.
+     *
+     * This is the expression of the type provided as client.
+     * By default, the expression is "null" for class types.
+     * For primitive types, this would be the Java default value, usually "0".
+     * For some collection types, this could be the empty collection.
+     *
+     * @return the default value expression, when this type does not have data.
+     */
+    String defaultValueExpression();
+
     String validate(String expression);
 }
