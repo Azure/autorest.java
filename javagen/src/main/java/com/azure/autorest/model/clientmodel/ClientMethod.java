@@ -353,27 +353,27 @@ public class ClientMethod {
                     imports.add("com.azure.core.util.FluxUtil");
                 }
             }
+        }
 
-            if (type == ClientMethodType.LongRunningBeginAsync) {
-                if (settings.isFluent()) {
-                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
-                    }
-                } else {
-                    imports.add("com.azure.core.util.serializer.TypeReference");
-                    imports.add("java.time.Duration");
+        if (type == ClientMethodType.LongRunningBeginAsync) {
+            if (settings.isFluent()) {
+                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                }
+            } else {
+                imports.add("com.azure.core.util.serializer.TypeReference");
+                imports.add("java.time.Duration");
 
-                    if (getMethodPollingDetails().getPollingStrategy() != null) {
-                        List<String> knownPollingStrategies = Arrays.asList(
-                                "DefaultPollingStrategy",
-                                "ChainedPollingStrategy",
-                                "OperationResourcePollingStrategy",
-                                "LocationPollingStrategy",
-                                "StatusCheckPollingStrategy");
-                        for (String pollingStrategy : knownPollingStrategies) {
-                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
-                                imports.add("com.azure.core.util.polling." + pollingStrategy);
-                            }
+                if (getMethodPollingDetails().getPollingStrategy() != null) {
+                    List<String> knownPollingStrategies = Arrays.asList(
+                            "DefaultPollingStrategy",
+                            "ChainedPollingStrategy",
+                            "OperationResourcePollingStrategy",
+                            "LocationPollingStrategy",
+                            "StatusCheckPollingStrategy");
+                    for (String pollingStrategy : knownPollingStrategies) {
+                        if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                            imports.add("com.azure.core.util.polling." + pollingStrategy);
                         }
                     }
                 }
