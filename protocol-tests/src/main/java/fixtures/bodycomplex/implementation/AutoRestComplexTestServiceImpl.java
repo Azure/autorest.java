@@ -7,7 +7,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import fixtures.bodycomplex.BodyComplexServiceVersion;
+import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
 
 /** Initializes a new instance of the AutoRestComplexTestService type. */
 public final class AutoRestComplexTestServiceImpl {
@@ -24,14 +24,14 @@ public final class AutoRestComplexTestServiceImpl {
     }
 
     /** Service version. */
-    private final BodyComplexServiceVersion serviceVersion;
+    private final AutoRestComplexTestServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
      *
      * @return the serviceVersion value.
      */
-    public BodyComplexServiceVersion getServiceVersion() {
+    public AutoRestComplexTestServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
@@ -173,7 +173,7 @@ public final class AutoRestComplexTestServiceImpl {
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(String host, BodyComplexServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceImpl(String host, AutoRestComplexTestServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -191,7 +191,7 @@ public final class AutoRestComplexTestServiceImpl {
      * @param serviceVersion Service version.
      */
     public AutoRestComplexTestServiceImpl(
-            HttpPipeline httpPipeline, String host, BodyComplexServiceVersion serviceVersion) {
+            HttpPipeline httpPipeline, String host, AutoRestComplexTestServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
@@ -207,7 +207,7 @@ public final class AutoRestComplexTestServiceImpl {
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String host,
-            BodyComplexServiceVersion serviceVersion) {
+            AutoRestComplexTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
