@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.mapper.Mappers;
@@ -85,6 +86,26 @@ public class SchemaUtil {
         }
 
         return responseBodyType;
+    }
+
+    public static Property getDiscriminatorProperty(ObjectSchema compositeType) {
+        Property discriminatorProperty = null;
+        if (compositeType.getDiscriminator() != null) {
+            discriminatorProperty = compositeType.getDiscriminator().getProperty();
+        } else {
+            for (Schema parent : compositeType.getParents().getAll()) {
+                if (parent instanceof ObjectSchema && ((ObjectSchema) parent).getDiscriminator() != null) {
+                    discriminatorProperty = ((ObjectSchema) parent).getDiscriminator().getProperty();
+                    break;
+                }
+            }
+        }
+        if (discriminatorProperty == null) {
+            throw new IllegalArgumentException(String.format("discriminator not found in type %s and its parents",
+                compositeType.getLanguage().getJava().getName()));
+        }
+
+        return discriminatorProperty;
     }
 
     public static String getDiscriminatorSerializedName(ObjectSchema compositeType) {

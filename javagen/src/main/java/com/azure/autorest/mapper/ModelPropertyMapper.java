@@ -7,8 +7,11 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -164,6 +167,15 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                         .collect(Collectors.toList());
                 builder.mutabilities(mutabilities);
             }
+        }
+
+        // handle x-ms-client-default for primitive type, enum, boxed type and string
+        if (property.getClientDefaultValue() != null &&
+                (propertyWireType instanceof PrimitiveType || propertyWireType instanceof EnumType ||
+                        (propertyWireType instanceof ClassType && ((ClassType) propertyWireType).isBoxedType()) ||
+                        propertyWireType.equals(ClassType.String))) {
+            String autoRestPropertyDefaultValueExpression = propertyWireType.defaultValueExpression(property.getClientDefaultValue());
+            builder.defaultValue(autoRestPropertyDefaultValueExpression);
         }
 
         return builder.build();

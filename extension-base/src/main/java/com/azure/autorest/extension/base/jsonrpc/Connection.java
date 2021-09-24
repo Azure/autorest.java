@@ -20,12 +20,13 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Connection {
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
     private OutputStream writer;
     private PeekingBinaryReader reader;
     private boolean _isDisposed = false;
     private AtomicInteger requestId;
     private final Map<Integer, CallerResponse<?>> tasks = new ConcurrentHashMap<>();
-    private ObjectMapper mapper = new ObjectMapper();
     private ExecutorService executorService = Executors.newCachedThreadPool();
     private CompletableFuture<Void> _loop;
 
@@ -57,7 +58,7 @@ public class Connection {
             }
             try
             {
-                json = mapper.readTree(jsonText);
+                json = MAPPER.readTree(jsonText);
                 if (json != null) {
                     return json;
                 }
@@ -79,7 +80,7 @@ public class Connection {
                 return "null";
             }
             try {
-                return mapper.writeValueAsString(result);
+                return MAPPER.writeValueAsString(result);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -145,14 +146,14 @@ public class Connection {
         _dispatch.put(path, input -> {
             List<JsonNode> args = readArguments(input, 2);
             try {
-                P1 a1 = mapper.treeToValue(args.get(0), p1Class);
-                P2 a2 = mapper.treeToValue(args.get(1), p2Class);
+                P1 a1 = MAPPER.treeToValue(args.get(0), p1Class);
+                P2 a2 = MAPPER.treeToValue(args.get(1), p2Class);
 
                 T result = method.apply(a1, a2);
                 if (result == null) {
                     return "null";
                 }
-                return mapper.writeValueAsString(result);
+                return MAPPER.writeValueAsString(result);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -163,7 +164,7 @@ public class Connection {
     {
         try {
             byte[] bytes = reader.readBytes(contentLength);
-            return mapper.readTree(new String(bytes, StandardCharsets.UTF_8));
+            return MAPPER.readTree(bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -291,7 +292,7 @@ public class Connection {
                                 } else if (f.type.getRawClass().equals(String.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
                                     f.complete("");
                                 } else {
-                                    f.complete(mapper.convertValue(jobject.get("result"), f.type));
+                                    f.complete(MAPPER.convertValue(jobject.get("result"), f.type));
                                 }
                             }
                         }
@@ -364,21 +365,21 @@ public class Connection {
 
     public void sendError(int id, int code, String message)
     {
-        JsonNode node = new ObjectNode(mapper.getNodeFactory())
+        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("id", id)
                 .put("message", message)
-                .set("error", new ObjectNode(mapper.getNodeFactory()).put("code", code));
+                .set("error", new ObjectNode(MAPPER.getNodeFactory()).put("code", code));
         send(node.toString());
     }
     public void respond(int id, String value)
     {
-        JsonNode node = null;
+        JsonNode node;
         try {
-            node = new ObjectNode(mapper.getNodeFactory())
+            node = new ObjectNode(MAPPER.getNodeFactory())
                     .put("jsonrpc", "2.0")
                     .put("id", id)
-                    .set("result", mapper.readTree(value));
+                    .set("result", MAPPER.readTree(value));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -387,23 +388,23 @@ public class Connection {
 
     public void notify(String methodName, Object... values) {
 //        System.err.println("JSON-RPC call: " + methodName);
-        JsonNode node = new ObjectNode(mapper.getNodeFactory())
+        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName);
         if (values != null && values.length > 0 ) {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory(),
-                    Arrays.stream(values).map(o -> mapper.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
+            node = ((ObjectNode) node).set("params", new ArrayNode(MAPPER.getNodeFactory(),
+                    Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
         }
         send(node.toString());
     }
 
     public void notifyWithObject(String methodName, Object parameter) {
 //        System.err.println("JSON-RPC call: " + methodName);
-        JsonNode node = new ObjectNode(mapper.getNodeFactory())
+        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName);
         if (parameter != null) {
-            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
+            node = ((ObjectNode) node).set("params", MAPPER.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
     }
@@ -413,13 +414,13 @@ public class Connection {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
         tasks.put(id, response);
-        JsonNode node = new ObjectNode(mapper.getNodeFactory())
+        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName)
                 .put("id", id);
         if (values != null && values.length > 0 ) {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory(),
-                    Arrays.stream(values).map(o -> mapper.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
+            node = ((ObjectNode) node).set("params", new ArrayNode(MAPPER.getNodeFactory(),
+                    Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
         }
         send(node.toString());
         try {
@@ -434,12 +435,12 @@ public class Connection {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
         tasks.put(id, response);
-        JsonNode node = new ObjectNode(mapper.getNodeFactory())
+        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName)
                 .put("id", id);
         if (parameter != null) {
-            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
+            node = ((ObjectNode) node).set("params", MAPPER.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
         try {
@@ -450,9 +451,9 @@ public class Connection {
     }
 
     public void batch(List<String> calls) {
-        send(new ArrayNode(mapper.getNodeFactory(), calls.stream().map(s -> {
+        send(new ArrayNode(MAPPER.getNodeFactory(), calls.stream().map(s -> {
             try {
-                return mapper.readTree(s);
+                return MAPPER.readTree(s);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
