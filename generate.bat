@@ -1,8 +1,8 @@
 set VANILLA_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set AZURE_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set ARM_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=./ --output-folder=protocol-tests --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --pipeline.modelerfour.flatten-models=false --pipeline.modelerfour.flatten-payloads=false --pipeline.modelerfour.group-parameters=false --low-level-client
-set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.4.5 --java --use=./ --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --pipeline.modelerfour.flatten-models=false --pipeline.modelerfour.flatten-payloads=false --pipeline.modelerfour.group-parameters=false --low-level-client
+set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=./ --output-folder=protocol-tests --low-level-client
+set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.4.5 --java --use=./ --low-level-client
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray

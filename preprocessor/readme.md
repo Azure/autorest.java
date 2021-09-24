@@ -15,9 +15,6 @@ pipeline:
   # "Shake the tree", and normalize the model
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
-    flatten-models: true
-    flatten-payloads: true
-    group-parameters: true
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
@@ -25,4 +22,28 @@ pipeline:
 
   preprocessor:
     input: modelerfour/identity
+```
+
+```yaml !$(low-level-client)
+pipeline:
+  modelerfour:
+    flatten-models: true
+    flatten-payloads: true
+    group-parameters: true
+```
+
+```yaml $(low-level-client)
+generate-client-interfaces: false
+generate-client-as-impl: true
+generate-sync-async-clients: true
+add-context-parameter: true
+context-client-method-parameter: true
+sync-methods: all
+
+pipeline:
+  modelerfour:
+    flatten-models: false
+    flatten-payloads: false
+    group-parameters: false
+    lenient-model-deduplication: true
 ```
