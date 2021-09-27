@@ -10,7 +10,7 @@ public final class ChildProduct {
      * Constant string
      */
     @JsonProperty(value = "constProperty", required = true)
-    private String constProperty;
+    private String constProperty = "constant";
 
     /*
      * Count

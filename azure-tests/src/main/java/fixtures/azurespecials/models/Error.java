@@ -16,7 +16,7 @@ public final class Error {
      * The constantId property.
      */
     @JsonProperty(value = "constantId", required = true)
-    private int constantId;
+    private int constantId = 1;
 
     /*
      * The message property.

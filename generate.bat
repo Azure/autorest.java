@@ -1,8 +1,10 @@
 set VANILLA_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set AZURE_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set ARM_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=./ --output-folder=protocol-tests --low-level-client
-set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.4.5 --java --use=./ --low-level-client
+set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=protocol-tests --low-level-client
+set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.4.5 --java --use=. --low-level-client
+
+rem 3.0.37
 set TEST_SERVER_COMMIT=c4d01ebca63c339b059a996deaa9ddca5887a099
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
@@ -62,16 +64,19 @@ rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-string.json --namespace=fixtures.bodystring
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/paging.json --namespace=fixtures.paging
-call autorest bodycomplex.md $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/header.json --namespace=fixtures.header
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/media_types.json --namespace=fixtures.mediatypes
-call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/url.json --namespace=fixtures.url
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-string.json --namespace=fixtures.bodystring
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/paging.json --namespace=fixtures.paging
+call autorest bodycomplex.md %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/header.json --namespace=fixtures.header
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/media_types.json --namespace=fixtures.mediatypes
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/url.json --namespace=fixtures.url
+del protocol-tests\src\main\java\module-info.java
 
-call autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+del protocol-resilience-test\llcinitial\src\main\java\module-info.java
+del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
 call autorest --version=3.4.5 --use:. customization-tests/swagger
 

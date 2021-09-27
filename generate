@@ -5,6 +5,8 @@ AZURE_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=azure-tests --s
 ARM_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
 PROTOCOL_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=protocol-tests --low-level-client'
 PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.4.5 --java --use=./ --low-level-client'
+
+# 3.0.37
 TEST_SERVER_COMMIT=c4d01ebca63c339b059a996deaa9ddca5887a099
 
 # Vanilla

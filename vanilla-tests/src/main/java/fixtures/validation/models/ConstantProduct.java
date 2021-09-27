@@ -10,13 +10,13 @@ public final class ConstantProduct {
      * Constant string
      */
     @JsonProperty(value = "constProperty", required = true)
-    private String constProperty;
+    private String constProperty = "constant";
 
     /*
      * Constant string2
      */
     @JsonProperty(value = "constProperty2", required = true)
-    private String constProperty2;
+    private String constProperty2 = "constant2";
 
     /** Creates an instance of ConstantProduct class. */
     public ConstantProduct() {
