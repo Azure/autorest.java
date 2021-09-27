@@ -73,6 +73,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. Default is false.|
 |`--skip-formatting`|Indicates whether to skip formatting Java file. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
+|`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 
 ## Additional settings for Fluent
 
@@ -129,10 +130,13 @@ To use default settings globally, use `--polling={}`.
 
 You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
 
-```yaml $(low-level-client)
+```
 generate-client-interfaces: false
 generate-client-as-impl: true
 generate-sync-async-clients: true
+add-context-parameter: true
+context-client-method-parameter: true
+sync-methods: all
 ```
 
 The generated code has the following structure

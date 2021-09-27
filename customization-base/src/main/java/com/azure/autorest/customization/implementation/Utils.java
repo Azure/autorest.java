@@ -60,6 +60,11 @@ public class Utils {
      */
     private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
 
+    /**
+     * This pattern matches anything then the space.
+     */
+    public static final Pattern ANYTHING_THEN_SPACE_PATTERN = Pattern.compile(".* ");
+
     /*
      * This pattern determines if a line is a beginning of constructor or method. The following is an explanation of
      * the pattern:
