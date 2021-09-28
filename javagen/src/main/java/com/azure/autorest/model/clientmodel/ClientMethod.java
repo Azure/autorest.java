@@ -312,6 +312,12 @@ public class ClientMethod {
                 imports.add("java.util.Map");
                 imports.add("java.util.stream.Collectors");
             }
+
+            // Long-running operation
+            if (getMethodPollingDetails() != null) {
+                imports.add("com.azure.core.util.polling.PollerFlux");
+                imports.add("com.azure.core.util.polling.SyncPoller");
+            }
         } else {
             getReturnValue().addImportsTo(imports, includeImplementationImports);
 
