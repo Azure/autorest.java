@@ -284,6 +284,8 @@ public class ClientMethod {
         imports.add("com.azure.core.annotation.ServiceMethod");
         imports.add("com.azure.core.annotation.ReturnType");
 
+        getReturnValue().addImportsTo(imports, includeImplementationImports);
+
         if (settings.isLowLevelClient()) {
             imports.add("com.azure.core.http.HttpMethod");
             imports.add("com.azure.core.http.rest.Response");
@@ -313,8 +315,6 @@ public class ClientMethod {
                 imports.add("java.util.stream.Collectors");
             }
         } else {
-            getReturnValue().addImportsTo(imports, includeImplementationImports);
-
             for (ClientMethodParameter parameter : getParameters()) {
                 parameter.addImportsTo(imports, includeImplementationImports);
             }

@@ -39,6 +39,7 @@ generate-sync-async-clients: true
 add-context-parameter: true
 context-client-method-parameter: true
 sync-methods: all
+polling: {}
 
 pipeline:
   modelerfour:
