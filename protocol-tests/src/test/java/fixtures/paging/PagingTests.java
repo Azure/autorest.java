@@ -4,6 +4,7 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -28,27 +29,27 @@ public class PagingTests {
 
     @Test
     public void getSinglePages() {
-        PagedIterable<BinaryData> response = client.getSinglePages(null);
+        PagedIterable<BinaryData> response = client.getSinglePages(null, Context.NONE);
         Assertions.assertEquals(1, response.stream().count());
     }
 
     @Test
     public void getMultiplePages() {
-        PagedIterable<BinaryData> response = client.getMultiplePages(null, null);
+        PagedIterable<BinaryData> response = client.getMultiplePages(null, Context.NONE);
         List<BinaryData> list = response.stream().collect(Collectors.toList());
         Assertions.assertEquals(10, list.size());
     }
 
     @Test
     public void getOdataMultiplePages() {
-        PagedIterable<BinaryData> response = client.getOdataMultiplePages(null);
+        PagedIterable<BinaryData> response = client.getOdataMultiplePages(null, Context.NONE);
         List<BinaryData> list = response.stream().collect(Collectors.toList());
         Assertions.assertEquals(10, list.size());
     }
 
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
-        PagedIterable<BinaryData> response = client.getMultiplePagesWithOffset(100, null);
+        PagedIterable<BinaryData> response = client.getMultiplePagesWithOffset(100, null, Context.NONE);
         List<BinaryData> list = response.stream().collect(Collectors.toList());
         Assertions.assertEquals(10, list.size());
         Assertions.assertEquals("{\"properties\":{\"id\":110,\"name\":\"product\"}}", list.get(list.size() - 1).toString());
@@ -69,14 +70,14 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
-        PagedIterable<BinaryData> response = client.getMultiplePagesRetryFirst(null);
+        PagedIterable<BinaryData> response = client.getMultiplePagesRetryFirst(null, Context.NONE);
         List<BinaryData> list = response.stream().collect(Collectors.toList());
         Assertions.assertEquals(10, list.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
-        PagedIterable<BinaryData> response = client.getMultiplePagesRetrySecond(null);
+        PagedIterable<BinaryData> response = client.getMultiplePagesRetrySecond(null, Context.NONE);
         List<BinaryData> list = response.stream().collect(Collectors.toList());
         Assertions.assertEquals(10, list.size());
     }
@@ -84,7 +85,7 @@ public class PagingTests {
     @Test
     public void getSinglePagesFailure() throws Exception {
         try {
-            PagedIterable<BinaryData> response  = client.getSinglePagesFailure(null);
+            PagedIterable<BinaryData> response  = client.getSinglePagesFailure(null, Context.NONE);
             List<BinaryData> list = response.stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (HttpResponseException ex) {
@@ -95,7 +96,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            List<BinaryData> list = client.getMultiplePagesFailure(null).stream().collect(Collectors.toList());
+            List<BinaryData> list = client.getMultiplePagesFailure(null, Context.NONE).stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (HttpResponseException ex) {
             Assertions.assertNotNull(ex.getResponse());
@@ -105,7 +106,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailureUri() {
         try {
-            client.getMultiplePagesFailureUri(null).stream().collect(Collectors.toList());
+            client.getMultiplePagesFailureUri(null, Context.NONE).stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (Exception e) {
             Assertions.assertTrue(e instanceof HttpResponseException);
@@ -118,7 +119,7 @@ public class PagingTests {
     public void getMultiplePagesFragmentNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("api_version", "1.6");
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("test_user", requestOptions);
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("test_user", requestOptions, Context.NONE);
         Assertions.assertEquals(10, response.stream().count());
     }
 
@@ -126,19 +127,19 @@ public class PagingTests {
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("api_version", "1.6");
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("test_user", requestOptions);
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("test_user", requestOptions, Context.NONE);
         Assertions.assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getNoItemNamePages() {
-        long count = client.getNoItemNamePages(null).stream().count();
+        long count = client.getNoItemNamePages(null, Context.NONE).stream().count();
         Assertions.assertEquals(1, count);
     }
 
     @Test
     public void getNullNextLinkNamePages() {
-        long count = client.getNullNextLinkNamePages(null).stream().count();
+        long count = client.getNullNextLinkNamePages(null, Context.NONE).stream().count();
         Assertions.assertEquals(1, count);
     }
 
@@ -146,19 +147,19 @@ public class PagingTests {
     public void getWithQueryParams() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("requiredQueryParameter", "100").addQueryParam("queryConstant", "true");
-        long count = client.getWithQueryParams(requestOptions).stream().count();
+        long count = client.getWithQueryParams(requestOptions, Context.NONE).stream().count();
         Assertions.assertEquals(2, count);
     }
 
     @Test
     public void getPagingModelWithItemNameWithXMSClientName() {
-        long count = client.getPagingModelWithItemNameWithXMSClientName(null).stream().count();
+        long count = client.getPagingModelWithItemNameWithXMSClientName(null, Context.NONE).stream().count();
         Assertions.assertEquals(1, count);
     }
 
     @Test
     public void firstResponseEmpty() {
-        long count = client.firstResponseEmpty(null).stream().count();
+        long count = client.firstResponseEmpty(null, Context.NONE).stream().count();
         Assertions.assertEquals(1, count);
     }
 }

@@ -351,7 +351,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
 
                         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                            builder.methodVisibility(VISIBLE);
+                            builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, false));
 
                             builder
                                     .returnValue(createPagingSyncReturnValue(operation, syncReturnType))
@@ -373,7 +373,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             }
 
                             if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder, parameters);
+                                addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, true)), parameters);
                             }
                         }
                     }
@@ -717,7 +717,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isLowLevelClient()) {
-            return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync)
+            return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
+                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter))
                     ? NOT_GENERATE
                     : VISIBLE;
         } else {

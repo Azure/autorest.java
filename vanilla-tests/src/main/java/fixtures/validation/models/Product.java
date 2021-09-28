@@ -41,19 +41,19 @@ public final class Product {
      * Constant int
      */
     @JsonProperty(value = "constInt", required = true)
-    private int constInt;
+    private int constInt = 0;
 
     /*
      * Constant string
      */
     @JsonProperty(value = "constString", required = true)
-    private String constString;
+    private String constString = "constant";
 
     /*
      * Constant string as Enum
      */
     @JsonProperty(value = "constStringAsEnum")
-    private String constStringAsEnum;
+    private String constStringAsEnum = "constant_string_as_enum";
 
     /** Creates an instance of Product class. */
     public Product() {
