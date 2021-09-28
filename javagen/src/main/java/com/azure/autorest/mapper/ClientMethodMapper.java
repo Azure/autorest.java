@@ -429,8 +429,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    builder.methodVisibility(VISIBLE);
-
                     // begin method sync
                     methods.add(builder
                             .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
@@ -438,10 +436,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginSync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
+                        addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
                     }
                 }
 
@@ -718,7 +717,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isLowLevelClient()) {
             return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
-                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter))
+                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginSync && !hasContextParameter))
                     ? NOT_GENERATE
                     : VISIBLE;
         } else {

@@ -411,31 +411,19 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 //                break;
 
             case LongRunningAsync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginAsync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginSync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningSync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
