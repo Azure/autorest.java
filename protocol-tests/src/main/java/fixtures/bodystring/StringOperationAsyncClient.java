@@ -46,6 +46,12 @@ public final class StringOperationAsyncClient {
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -78,6 +84,12 @@ public final class StringOperationAsyncClient {
     /**
      * Set string value empty ''.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -109,6 +121,12 @@ public final class StringOperationAsyncClient {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -144,6 +162,12 @@ public final class StringOperationAsyncClient {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not

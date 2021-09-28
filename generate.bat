@@ -64,6 +64,7 @@ rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
+rem Protocol
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-string.json --namespace=fixtures.bodystring
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/paging.json --namespace=fixtures.paging
 call autorest bodycomplex.md %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
@@ -73,11 +74,13 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.co
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/url.json --namespace=fixtures.url
 del protocol-tests\src\main\java\module-info.java
 
+rem Protocol resilience
 call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
 call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
+rem customization
 call autorest --version=3.4.5 --use:. customization-tests/swagger
 
 call autorest --use:. docs/samples/specification/azure_key_credential/readme.md

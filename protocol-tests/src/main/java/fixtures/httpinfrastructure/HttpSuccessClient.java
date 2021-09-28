@@ -60,6 +60,12 @@ public final class HttpSuccessClient {
     /**
      * Put boolean value true returning 200 success.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -73,6 +79,12 @@ public final class HttpSuccessClient {
 
     /**
      * Patch true Boolean value in request returning 200.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -88,6 +100,12 @@ public final class HttpSuccessClient {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -101,6 +119,12 @@ public final class HttpSuccessClient {
 
     /**
      * Delete simple boolean value true returns 200.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -116,6 +140,12 @@ public final class HttpSuccessClient {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -129,6 +159,12 @@ public final class HttpSuccessClient {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -144,6 +180,12 @@ public final class HttpSuccessClient {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -157,6 +199,12 @@ public final class HttpSuccessClient {
 
     /**
      * Patch true Boolean value in request returns 202.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -172,6 +220,12 @@ public final class HttpSuccessClient {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -185,6 +239,12 @@ public final class HttpSuccessClient {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -214,6 +274,12 @@ public final class HttpSuccessClient {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -227,6 +293,12 @@ public final class HttpSuccessClient {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -242,6 +314,12 @@ public final class HttpSuccessClient {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -255,6 +333,12 @@ public final class HttpSuccessClient {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.

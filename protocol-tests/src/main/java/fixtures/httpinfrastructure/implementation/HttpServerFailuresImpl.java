@@ -142,6 +142,12 @@ public final class HttpServerFailuresImpl {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -154,6 +160,12 @@ public final class HttpServerFailuresImpl {
 
     /**
      * Return 505 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -169,6 +181,12 @@ public final class HttpServerFailuresImpl {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -183,6 +201,12 @@ public final class HttpServerFailuresImpl {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -195,6 +219,12 @@ public final class HttpServerFailuresImpl {
 
     /**
      * Return 505 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -209,6 +239,12 @@ public final class HttpServerFailuresImpl {
 
     /**
      * Return 505 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.

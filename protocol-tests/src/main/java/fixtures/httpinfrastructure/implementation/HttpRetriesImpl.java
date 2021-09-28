@@ -114,6 +114,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -126,6 +132,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 500 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -141,6 +153,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -155,6 +173,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -167,6 +191,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 500 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -181,6 +211,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 500 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -237,6 +273,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -249,6 +291,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 503 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -264,6 +312,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -278,6 +332,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -290,6 +350,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 503 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -305,6 +371,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -319,6 +391,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -331,6 +409,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 504 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -346,6 +430,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -360,6 +450,12 @@ public final class HttpRetriesImpl {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -372,6 +468,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 504 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -386,6 +488,12 @@ public final class HttpRetriesImpl {
 
     /**
      * Return 504 status code, then 200 after retry.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.

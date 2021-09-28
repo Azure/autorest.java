@@ -36,6 +36,12 @@ public final class MediaTypesClient {
      *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -65,6 +71,12 @@ public final class MediaTypesClient {
      *     <tr><td>contentLength</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -78,6 +90,12 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
