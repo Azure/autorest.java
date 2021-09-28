@@ -36,11 +36,11 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         // Request body
         Set<IType> typesInJavadoc = new HashSet<>();
 
-        clientMethod.getMethodInputParameters()
-                .stream().filter(p -> RequestParameterLocation.Body.equals(p.getLocation()))
-                .map(ClientMethodParameter::getRawType)
+        clientMethod.getProxyMethod().getAllParameters()
+                .stream().filter(p -> RequestParameterLocation.Body.equals(p.getRequestParameterLocation()))
+                .map(ProxyMethodParameter::getRawType)
                 .findFirst()
-                .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
+                .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc));
 
         // Response body
         IType responseBodyType;
@@ -75,6 +75,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {
+        typesInJavadoc.clear();
+
         if (requestBodyType == null) {
             return;
         }
@@ -85,6 +87,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void responseBodySchemaJavadoc(IType responseBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {
+        typesInJavadoc.clear();
+
         if (responseBodyType == null) {
             return;
         }

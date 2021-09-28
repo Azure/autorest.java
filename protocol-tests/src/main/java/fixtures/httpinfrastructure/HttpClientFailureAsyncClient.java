@@ -52,6 +52,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -64,6 +70,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -78,6 +90,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -90,6 +108,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -143,6 +167,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -155,6 +185,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 405 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -169,6 +205,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -182,6 +224,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -194,6 +242,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 409 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -247,6 +301,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -260,6 +320,12 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -272,6 +338,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 415 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -298,6 +370,12 @@ public final class HttpClientFailureAsyncClient {
 
     /**
      * Return 417 status code - should be represented in the client as an error.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not

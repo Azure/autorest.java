@@ -140,7 +140,7 @@ public class JavaSettings
                     host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
                     host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
-                    host.getBooleanValue("generate-llc-samples", true),
+                    host.getBooleanValue("generate-llc-samples", false),
                     host.getBooleanValue("pass-discriminator-to-child-deserialization", false));
         }
         return _instance;

@@ -794,7 +794,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * (recursive schema, see above)
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @param complexBody The complexBody parameter.
@@ -837,7 +851,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * (recursive schema, see above)
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @param complexBody The complexBody parameter.
@@ -879,7 +907,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * (recursive schema, see above)
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @param complexBody The complexBody parameter.

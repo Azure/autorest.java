@@ -15,12 +15,17 @@ pipeline:
   # "Shake the tree", and normalize the model
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
-    additional-checks: true
-    lenient-model-deduplication: false
+
     flatten-models: true
     flatten-payloads: false
+
+    include-x-ms-examples-original-file: true
+
+    additional-checks: true
+    lenient-model-deduplication: false
     remove-empty-child-schemas: false
     seal-single-value-enum-by-default: true
+
     naming:
       choiceValue: upper
       preserve-uppercase-max-length: 2
