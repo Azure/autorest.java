@@ -327,8 +327,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -388,8 +388,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -450,8 +450,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -513,8 +513,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -567,8 +567,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -618,8 +618,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -672,8 +672,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -732,8 +732,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -793,8 +793,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -856,8 +856,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -919,8 +919,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -985,8 +985,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1054,8 +1054,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1109,8 +1109,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1163,8 +1163,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1223,8 +1223,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1289,8 +1289,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1352,8 +1352,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1416,8 +1416,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1485,8 +1485,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1543,8 +1543,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1599,8 +1599,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1655,8 +1655,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1717,8 +1717,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1783,8 +1783,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1852,8 +1852,8 @@ public final class LrosaDs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1871,4 +1871,8 @@ public final class LrosaDs {
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
         return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
+
+    private static final class TypeReferenceProduct extends TypeReference<Product> {}
+
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
 }
