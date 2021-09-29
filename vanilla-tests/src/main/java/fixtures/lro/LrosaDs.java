@@ -316,6 +316,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -339,6 +340,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400(Product product) {
         return this.beginPutNonRetry400Async(product).getSyncPoller();
     }
@@ -375,6 +377,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -398,6 +401,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400(Product product) {
         return this.beginPutNonRetry201Creating400Async(product).getSyncPoller();
     }
@@ -435,6 +439,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -458,6 +463,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson(Product product) {
         return this.beginPutNonRetry201Creating400InvalidJsonAsync(product).getSyncPoller();
     }
@@ -496,6 +502,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -520,6 +527,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400(Product product) {
         return this.beginPutAsyncRelativeRetry400Async(product).getSyncPoller();
     }
@@ -548,6 +556,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteNonRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -569,6 +578,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteNonRetry400() {
         return this.beginDeleteNonRetry400Async().getSyncPoller();
     }
@@ -597,6 +607,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete202NonRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -618,6 +629,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete202NonRetry400() {
         return this.beginDelete202NonRetry400Async().getSyncPoller();
     }
@@ -649,6 +661,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -671,6 +684,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400() {
         return this.beginDeleteAsyncRelativeRetry400Async().getSyncPoller();
     }
@@ -707,6 +721,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -730,6 +745,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400(Product product) {
         return this.beginPostNonRetry400Async(product).getSyncPoller();
     }
@@ -766,6 +782,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -789,6 +806,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400(Product product) {
         return this.beginPost202NonRetry400Async(product).getSyncPoller();
     }
@@ -827,6 +845,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -851,6 +870,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(Product product) {
         return this.beginPostAsyncRelativeRetry400Async(product).getSyncPoller();
     }
@@ -888,6 +908,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -911,6 +932,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload(Product product) {
         return this.beginPutError201NoProvisioningStatePayloadAsync(product).getSyncPoller();
     }
@@ -952,6 +974,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -977,6 +1000,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus(Product product) {
         return this.beginPutAsyncRelativeRetryNoStatusAsync(product).getSyncPoller();
     }
@@ -1019,6 +1043,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1044,6 +1069,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
         return this.beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).getSyncPoller();
     }
@@ -1072,6 +1098,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1093,6 +1120,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded() {
         return this.beginDelete204SucceededAsync().getSyncPoller();
     }
@@ -1124,6 +1152,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatusAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1146,6 +1175,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus() {
         return this.beginDeleteAsyncRelativeRetryNoStatusAsync().getSyncPoller();
     }
@@ -1182,6 +1212,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1205,6 +1236,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation(Product product) {
         return this.beginPost202NoLocationAsync(product).getSyncPoller();
     }
@@ -1246,6 +1278,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1271,6 +1304,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(Product product) {
         return this.beginPostAsyncRelativeRetryNoPayloadAsync(product).getSyncPoller();
     }
@@ -1307,6 +1341,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200InvalidJsonAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1330,6 +1365,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson(Product product) {
         return this.beginPut200InvalidJsonAsync(product).getSyncPoller();
     }
@@ -1369,6 +1405,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1393,6 +1430,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) {
         return this.beginPutAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
     }
@@ -1436,6 +1474,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1461,6 +1500,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
         return this.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
@@ -1492,6 +1532,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete202RetryInvalidHeaderAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1514,6 +1555,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete202RetryInvalidHeader() {
         return this.beginDelete202RetryInvalidHeaderAsync().getSyncPoller();
     }
@@ -1546,6 +1588,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1568,6 +1611,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader() {
         return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync().getSyncPoller();
     }
@@ -1600,6 +1644,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1622,6 +1667,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
         return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().getSyncPoller();
     }
@@ -1660,6 +1706,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1684,6 +1731,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader(Product product) {
         return this.beginPost202RetryInvalidHeaderAsync(product).getSyncPoller();
     }
@@ -1724,6 +1772,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1748,6 +1797,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(Product product) {
         return this.beginPostAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
     }
@@ -1791,6 +1841,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1816,6 +1867,7 @@ public final class LrosaDs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
         return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
