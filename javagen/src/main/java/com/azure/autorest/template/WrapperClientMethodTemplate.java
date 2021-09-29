@@ -46,6 +46,10 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             case PagingAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 break;
+            case LongRunningBeginSync:
+            case LongRunningBeginAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+                break;
             default:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 break;
