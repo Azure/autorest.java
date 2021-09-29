@@ -773,9 +773,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
-                    clientMethod.getMethodPollingDetails().getIntermediateType(),
-                    clientMethod.getMethodPollingDetails().getFinalType());
+            if (!(clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType || clientMethod.getMethodPollingDetails().getFinalType() instanceof GenericType)) {
+                // use static inner class
+                function.line("new TypeReference%s(), new TypeReference%s());",
+                        clientMethod.getMethodPollingDetails().getIntermediateType(),
+                        clientMethod.getMethodPollingDetails().getFinalType());
+            } else {
+                function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
+                        clientMethod.getMethodPollingDetails().getIntermediateType(),
+                        clientMethod.getMethodPollingDetails().getFinalType());
+            }
             function.decreaseIndent();
         });
     }

@@ -8,6 +8,8 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.*;
@@ -85,8 +87,22 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
             Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
 
+            Set<String> typeReferenceStaticClasses = new HashSet<>();
+
             for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
+
+                if (clientMethod.getType() == ClientMethodType.LongRunningBeginAsync && clientMethod.getMethodPollingDetails() != null) {
+                    if (!(clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType || clientMethod.getMethodPollingDetails().getFinalType() instanceof GenericType)) {
+                        typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getIntermediateType().toString());
+                        typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getFinalType().toString());
+                    }
+                }
+            }
+
+            for (String typeReferenceStaticClass : typeReferenceStaticClasses) {
+                classBlock.privateStaticFinalClass(String.format("TypeReference%1$s extends TypeReference<%1$s>", typeReferenceStaticClass), classBlock1 -> {
+                });
             }
 
             if (settings.isLowLevelClient() &&
