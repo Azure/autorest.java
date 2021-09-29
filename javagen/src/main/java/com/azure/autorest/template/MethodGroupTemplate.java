@@ -14,7 +14,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.*;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.BinaryData;
 
 import java.util.*;
 import java.util.stream.Collectors;
