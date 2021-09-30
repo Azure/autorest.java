@@ -63,7 +63,7 @@ public final class AutoRestNumberTestService {
      *
      * @param host server parameter.
      */
-    AutoRestNumberTestService(String host) {
+    public AutoRestNumberTestService(String host) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -78,7 +78,7 @@ public final class AutoRestNumberTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
-    AutoRestNumberTestService(HttpPipeline httpPipeline, String host) {
+    public AutoRestNumberTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
@@ -89,7 +89,7 @@ public final class AutoRestNumberTestService {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
      */
-    AutoRestNumberTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public AutoRestNumberTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;

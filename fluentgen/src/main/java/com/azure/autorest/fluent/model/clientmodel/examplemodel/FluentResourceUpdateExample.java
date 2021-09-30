@@ -17,10 +17,11 @@ public class FluentResourceUpdateExample extends FluentBaseExample {
     private final ResourceUpdate resourceUpdate;
     private final FluentCollectionMethodExample resourceGetExample;
 
-    public FluentResourceUpdateExample(String name, FluentManager manager, FluentResourceCollection collection,
+    public FluentResourceUpdateExample(String name, String originalFileName,
+                                       FluentManager manager, FluentResourceCollection collection,
                                        ResourceUpdate resourceUpdate,
                                        FluentCollectionMethodExample resourceGetExample) {
-        super(name, manager, collection);
+        super(name, originalFileName, manager, collection);
         this.resourceUpdate = resourceUpdate;
         this.resourceGetExample = resourceGetExample;
     }

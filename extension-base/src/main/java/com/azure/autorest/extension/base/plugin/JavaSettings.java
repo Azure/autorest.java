@@ -3,6 +3,7 @@
 
 package com.azure.autorest.extension.base.plugin;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.ArrayList;
@@ -137,7 +138,11 @@ public class JavaSettings
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
                     host.getStringValue("key-credential-header-name", ""),
+                    host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),
+                    host.getValue(new TypeReference<Map<String, PollingDetails>>() { }.getType(), "polling"),
+                    host.getBooleanValue("generate-llc-samples", false),
+                    host.getBooleanValue("pass-discriminator-to-child-deserialization", false),
                     host.getValue(Map.class, "llc-properties"),
                     host.getBooleanValue("llc-generate-non-code", false),
                     host.getStringValue("version"),
@@ -164,6 +169,7 @@ public class JavaSettings
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
      @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with JsonFlatten.
+     @param passDiscriminatorToChildDeserialization If set to true, Jackson sub-type deserialization will be passed the discriminator field.
      */
     private JavaSettings(Map<String, Object> modelerSettings,
                          boolean azure,
@@ -205,7 +211,11 @@ public class JavaSettings
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
                          String keyCredentialHeaderName,
+                         boolean clientBuilderDisabled,
                          boolean skipFormatting,
+                         Map<String, PollingDetails> pollingConfig,
+                         boolean generateLLCSamples,
+                         boolean passDiscriminatorToChildDeserialization,
                          Map<String, String> llcProperties,
                          boolean llcGenerateNonCode,
                          String version,
@@ -271,7 +281,16 @@ public class JavaSettings
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
         this.keyCredentialHeaderName = keyCredentialHeaderName;
+        this.clientBuilderDisabled = clientBuilderDisabled;
         this.skipFormatting = skipFormatting;
+        if (pollingConfig != null) {
+            if (!pollingConfig.containsKey("default")) {
+                pollingConfig.put("default", new PollingDetails());
+            }
+        }
+        this.pollingConfig = pollingConfig;
+        this.generateLLCSamples = generateLLCSamples;
+        this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.llcProperties = llcProperties;
         this.llcGenerateNonCode = llcGenerateNonCode;
         this.artifactVersion = version;
@@ -690,6 +709,68 @@ public class JavaSettings
     private final boolean requireXMsFlattenedToFlatten;
     public boolean requireXMsFlattenedToFlatten() {
         return requireXMsFlattenedToFlatten;
+    }
+
+    private final boolean generateLLCSamples;
+
+    public boolean isGenerateLLCSamples() {
+        return generateLLCSamples;
+    }
+
+    private final boolean clientBuilderDisabled;
+    public boolean clientBuilderDisabled() {
+        return clientBuilderDisabled;
+    }
+
+    public static class PollingDetails {
+        @JsonProperty("strategy")
+        private String strategy;
+        @JsonProperty("intermediate-type")
+        private String intermediateType;
+        @JsonProperty("final-type")
+        private String finalType;
+        @JsonProperty("poll-interval")
+        private String pollInterval;
+
+        public String getStrategy() {
+            if (strategy == null || "default".equalsIgnoreCase(strategy)) {
+                return "new DefaultPollingStrategy<>({httpPipeline})";
+            } else {
+                return strategy;
+            }
+        }
+
+        public String getIntermediateType() {
+            return intermediateType;
+        }
+
+        public String getFinalType() {
+            return finalType;
+        }
+
+        public int getPollIntervalInSeconds() {
+            return pollInterval != null
+                    ? Integer.parseInt(pollInterval)
+                    : 1;
+        }
+    }
+
+    private final Map<String, PollingDetails> pollingConfig;
+    public PollingDetails getPollingConfig(String operation) {
+        if (pollingConfig == null) {
+            return null;
+        }
+        for (String key : pollingConfig.keySet()) {
+            if (key.equalsIgnoreCase(operation)) {
+                return pollingConfig.get(key);
+            }
+        }
+        return pollingConfig.get("default");
+    }
+
+    private final boolean passDiscriminatorToChildDeserialization;
+    public boolean isDiscriminatorPassedToChildDeserialization() {
+        return passDiscriminatorToChildDeserialization;
     }
 
     public static final String DefaultCodeGenerationHeader = "Code generated by Microsoft (R) AutoRest Code Generator %s" + "\r\n" +

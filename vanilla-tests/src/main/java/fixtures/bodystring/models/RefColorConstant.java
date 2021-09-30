@@ -10,7 +10,7 @@ public final class RefColorConstant {
      * Referenced Color Constant Description.
      */
     @JsonProperty(value = "ColorConstant", required = true)
-    private String colorConstant;
+    private String colorConstant = "green-color";
 
     /*
      * Sample string.

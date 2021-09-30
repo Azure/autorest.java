@@ -15,12 +15,15 @@ import java.util.List;
 public abstract class FluentBaseExample implements FluentExample {
 
     private final String name;
+    private final String originalFileName;
     private final FluentManager manager;
     private final FluentResourceCollection collection;
     private final List<ParameterExample> parameters = new ArrayList<>();
 
-    public FluentBaseExample(String name, FluentManager manager, FluentResourceCollection collection) {
+    public FluentBaseExample(String name, String originalFileName,
+                             FluentManager manager, FluentResourceCollection collection) {
         this.name = name;
+        this.originalFileName = originalFileName;
         this.manager = manager;
         this.collection = collection;
     }
@@ -28,6 +31,11 @@ public abstract class FluentBaseExample implements FluentExample {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getOriginalFileName() {
+        return originalFileName;
     }
 
     public FluentManager getManager() {

@@ -10,7 +10,7 @@ public final class HttpRedirectsPut301Headers {
      * The Location property.
      */
     @JsonProperty(value = "Location")
-    private String location;
+    private String location = "/http/failure/500";
 
     /**
      * Get the location property: The Location property.

@@ -1,4 +1,4 @@
-package fixtures.bodynumber;
+package fixtures.lro;
 
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
@@ -23,17 +23,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** A builder for creating a new instance of the AutoRestNumberTestService type. */
-@ServiceClientBuilder(serviceClients = {AutoRestNumberTestService.class})
-public final class AutoRestNumberTestServiceBuilder {
+/** A builder for creating a new instance of the AutoRestLongRunningOperationTestService type. */
+@ServiceClientBuilder(serviceClients = {AutoRestLongRunningOperationTestService.class})
+public final class AutoRestLongRunningOperationTestServiceBuilder {
     private static final String SDK_NAME = "name";
 
     private static final String SDK_VERSION = "version";
 
     private final Map<String, String> properties = new HashMap<>();
 
-    /** Create an instance of the AutoRestNumberTestServiceBuilder. */
-    public AutoRestNumberTestServiceBuilder() {
+    /** Create an instance of the AutoRestLongRunningOperationTestServiceBuilder. */
+    public AutoRestLongRunningOperationTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -46,9 +46,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder host(String host) {
+    public AutoRestLongRunningOperationTestServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -62,9 +62,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestLongRunningOperationTestServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -78,9 +78,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The serializer to serialize an object into a string.
      *
      * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
+    public AutoRestLongRunningOperationTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
     }
@@ -94,9 +94,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder httpClient(HttpClient httpClient) {
+    public AutoRestLongRunningOperationTestServiceBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -111,9 +111,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder configuration(Configuration configuration) {
+    public AutoRestLongRunningOperationTestServiceBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -127,9 +127,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public AutoRestLongRunningOperationTestServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -144,9 +144,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public AutoRestLongRunningOperationTestServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -166,9 +166,9 @@ public final class AutoRestNumberTestServiceBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder clientOptions(ClientOptions clientOptions) {
+    public AutoRestLongRunningOperationTestServiceBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -177,19 +177,19 @@ public final class AutoRestNumberTestServiceBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestNumberTestServiceBuilder.
+     * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
-    public AutoRestNumberTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public AutoRestLongRunningOperationTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestNumberTestService with the provided parameters.
+     * Builds an instance of AutoRestLongRunningOperationTestService with the provided parameters.
      *
-     * @return an instance of AutoRestNumberTestService.
+     * @return an instance of AutoRestLongRunningOperationTestService.
      */
-    public AutoRestNumberTestService buildClient() {
+    public AutoRestLongRunningOperationTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
@@ -199,7 +199,8 @@ public final class AutoRestNumberTestServiceBuilder {
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestNumberTestService client = new AutoRestNumberTestService(pipeline, serializerAdapter, host);
+        AutoRestLongRunningOperationTestService client =
+                new AutoRestLongRunningOperationTestService(pipeline, serializerAdapter, host);
         return client;
     }
 

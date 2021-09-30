@@ -159,6 +159,11 @@ public class GenericType implements IType {
         return sourceExpression;
     }
 
+    @Override
+    public String defaultValueExpression() {
+        return "null";
+    }
+
     public final IType getClientType() {
         IType clientType = this;
 

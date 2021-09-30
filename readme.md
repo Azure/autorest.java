@@ -70,7 +70,10 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
-|`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
+|`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. Default is false.|
+|`--skip-formatting`|Indicates whether to skip formatting Java file. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
+|`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
+|`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 
 ## Additional settings for Fluent
 
@@ -99,14 +102,41 @@ For example, `generate-client-interfaces`, `context-client-method-parameter`, `r
 
 The code formatter would require Java 11+ runtime.
 
+## Polling configuration
+Polling configurations can be set through `--polling` setting globally or for each operation. The format is a key value map specified below:
+
+```
+polling:
+  {operationId}:
+    strategy: {strategy}
+    intermediate-type: {intermediate-type}
+    final-type: {final-type}
+    poll-interval: {poll-interval}
+```
+
+With the fields specified below:
+
+|Field|Type|Required|Description|Example|
+|-----|----|--------|-----------|-------|
+|operationId|String|true|The `operationId` of the operation. For global polling configuration, use `default`. Case insensitive.|`Pets_put`|
+|strategy|String|false|The invocation to construct a polling strategy. Use fully qualified class name if outside the implementation subpackage specified in `namespace` & `implementation-subpackage`. Use dynamic literals `{httpPipeline}`, `{context}`, `{serializerAdapter}`, `{intermediate-type}`, `{final-type}` if these components are required to construct the polling strategy. Default is `com.azure.core.util.polling.ChainedPollingStrategy.createDefault({httpPipeline}, {context})`.|`new com.azure.core.util.polling.OperationResourcePollingStrategy<>({httpPipeline}, {context})`|
+|intermediate-type|String|false|The type of the polling intermediate type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`PollResult`,`com.azure.core.util.BinaryData`|
+|final-type|String|false|The type of the final result type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`Pet`,`com.azure.core.util.BinaryData`|
+|poll-interval|integer|false|The default interval in seconds to poll with (can be modified by users in `PollerFlux` and `SyncPoller`. Default is 1.|30|
+
+To use default settings globally, use `--polling={}`.
+
 # Protocol clients (low level clients)
 
 You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
 
-```yaml $(low-level-client)
+```
 generate-client-interfaces: false
 generate-client-as-impl: true
 generate-sync-async-clients: true
+add-context-parameter: true
+context-client-method-parameter: true
+sync-methods: all
 ```
 
 The generated code has the following structure
@@ -849,9 +879,15 @@ help-content:
       - key: client-flattened-annotation-target
         type: string
         description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
+      - key: disable-client-builder
+        type: bool
+        description: Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.
       - key: skip-formatting
         type: bool
         description: Indicates whether to skip formatting Java file. Default is false.
+      - key: polling
+        type: string
+        description: Configures how to generate long running operations. See [Polling Configuration](https://github.com/Azure/autorest.java#polling-configuration) to see more details on how to use this flag.
 
   javafluent:
     activationScope: fluent

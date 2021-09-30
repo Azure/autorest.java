@@ -58,6 +58,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Put boolean value true returning 200 success.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -70,6 +76,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Patch true Boolean value in request returning 200.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -84,6 +96,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -96,6 +114,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Delete simple boolean value true returns 200.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -110,6 +134,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -122,6 +152,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -136,6 +172,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -148,6 +190,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Patch true Boolean value in request returns 202.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -162,6 +210,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -174,6 +228,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -201,6 +261,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -213,6 +279,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -227,6 +299,12 @@ public final class HttpSuccessAsyncClient {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -239,6 +317,12 @@ public final class HttpSuccessAsyncClient {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not

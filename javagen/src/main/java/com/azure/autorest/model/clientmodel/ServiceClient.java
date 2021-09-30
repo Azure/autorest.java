@@ -69,6 +69,8 @@ public class ServiceClient {
 
     private String defaultCredentialScopes;
 
+    private boolean builderDisabled;
+
     /**
      * Create a new ServiceClient with the provided properties.
      * @param packageName The package that this service client belongs to.
@@ -86,7 +88,8 @@ public class ServiceClient {
      * @param defaultPollIntervalParameter The default poll interval parameter.
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
-                          ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes) {
+                            ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
+                            boolean builderDisabled) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -102,6 +105,7 @@ public class ServiceClient {
         this.defaultPollIntervalParameter = defaultPollIntervalParameter;
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
         this.defaultCredentialScopes = defaultCredentialScopes;
+        this.builderDisabled = builderDisabled;
     }
 
     public final String getPackage() {
@@ -162,6 +166,10 @@ public class ServiceClient {
 
     public final String getDefaultCredentialScopes() {
         return defaultCredentialScopes;
+    }
+
+    public final boolean builderDisabled() {
+        return builderDisabled;
     }
 
     /**
@@ -256,6 +264,7 @@ public class ServiceClient {
         protected ClientMethodParameter serializerAdapterParameter;
         protected ClientMethodParameter defaultPollIntervalParameter;
         protected String defaultCredentialScopes;
+        protected boolean builderDisabled;
 
         /**
          * Sets the package that this service client belongs to.
@@ -397,6 +406,16 @@ public class ServiceClient {
             return this;
         }
 
+        /**
+         * Sets the builderDisabled parameter.
+         * @param builderDisabled whether to disable ClientBuilder class
+         * @return the Builder itself
+         */
+        public Builder builderDisabled(boolean builderDisabled) {
+            this.builderDisabled = builderDisabled;
+            return this;
+        }
+
         public ServiceClient build() {
             return new ServiceClient(packageName,
                     className,
@@ -411,7 +430,8 @@ public class ServiceClient {
                     httpPipelineParameter,
                     serializerAdapterParameter,
                     defaultPollIntervalParameter,
-                    defaultCredentialScopes);
+                    defaultCredentialScopes,
+                    builderDisabled);
         }
     }
 }

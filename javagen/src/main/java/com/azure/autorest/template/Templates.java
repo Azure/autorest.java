@@ -97,4 +97,8 @@ public class Templates {
     public static ModuleInfoTemplate getModuleInfoTemplate() {
         return factory.getModuleInfoTemplate();
     }
+
+    public static ProtocolSampleTemplate getProtocolSampleTemplate() {
+        return factory.getProtocolSampleTemplate();
+    }
 }

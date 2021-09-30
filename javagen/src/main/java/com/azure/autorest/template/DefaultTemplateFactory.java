@@ -105,4 +105,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public ModuleInfoTemplate getModuleInfoTemplate() {
         return ModuleInfoTemplate.getInstance();
     }
+
+    @Override
+    public ProtocolSampleTemplate getProtocolSampleTemplate() {
+        return ProtocolSampleTemplate.getInstance();
+    }
 }

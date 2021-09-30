@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
+import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -37,11 +38,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
-    private static ClientMethodMapper instance = new ClientMethodMapper();
-    private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
+    private static final ClientMethodMapper instance = new ClientMethodMapper();
+
+    private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
+
+    private final Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
     protected ClientMethodMapper() {
     }
@@ -346,7 +351,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
 
                         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                            builder.methodVisibility(VISIBLE);
+                            builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, false));
 
                             builder
                                     .returnValue(createPagingSyncReturnValue(operation, syncReturnType))
@@ -368,12 +373,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             }
 
                             if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder, parameters);
+                                addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, true)), parameters);
                             }
                         }
                     }
                 }
-            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
+                    && (settings.isFluent() || settings.getPollingConfig("default") != null)
                     && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
                 // WithResponseAsync, with required and optional parameters
                 // TODO: Build protocol LRO methods
@@ -392,10 +398,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             parameters);
                 }
 
+                JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(proxyMethod.getOperationId());
+
+                MethodPollingDetails methodPollingDetails = null;
+                if (pollingDetails != null) {
+                    methodPollingDetails = new MethodPollingDetails(
+                            pollingDetails.getStrategy(),
+                            getPollingIntermediateType(pollingDetails, syncReturnType),
+                            getPollingFinalType(pollingDetails, syncReturnType),
+                            pollingDetails.getPollIntervalInSeconds());
+                    builder = builder.methodPollingDetails(methodPollingDetails);
+                }
+
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     // begin method async
                     methods.add(builder
-                            .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType))
+                            .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginAsync)
@@ -411,23 +429,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    builder.methodVisibility(VISIBLE);
-
                     // begin method sync
                     methods.add(builder
-                            .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType))
+                            .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginSync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
+                        addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
                     }
                 }
 
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                if (settings.isFluent()
+                        && settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncMethodName())
@@ -450,7 +468,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 }
 
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                if (settings.isFluent()
+                        && settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
                     builder.methodVisibility(VISIBLE);
 
                     methods.add(builder
@@ -598,14 +617,24 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType);
     }
 
-    private ReturnValue createLongRunningBeginSyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
-        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+    private ReturnValue createLongRunningBeginSyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType, MethodPollingDetails pollingDetails) {
+        if (JavaSettings.getInstance().isFluent()) {
+            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                    GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+        } else {
+            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), pollingDetails.getFinalType()),
+                    GenericType.SyncPoller(pollingDetails.getIntermediateType(), pollingDetails.getFinalType()));
+        }
     }
 
-    protected ReturnValue createLongRunningBeginAsyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
-        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+    protected ReturnValue createLongRunningBeginAsyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType, MethodPollingDetails pollingDetails) {
+        if (JavaSettings.getInstance().isFluent()) {
+            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                    GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+        } else {
+            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), pollingDetails.getFinalType()),
+                    GenericType.PollerFlux(pollingDetails.getIntermediateType(), pollingDetails.getFinalType()));
+        }
     }
 
     protected ReturnValue createPagingSyncReturnValue(Operation operation, IType syncReturnType) {
@@ -687,7 +716,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isLowLevelClient()) {
-            return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync)
+            return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
+                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginSync && !hasContextParameter))
                     ? NOT_GENERATE
                     : VISIBLE;
         } else {
@@ -750,6 +781,56 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return responseBodyModel.getProperties().stream()
             .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
             .map(ClientModelProperty::getName).findAny().orElse(null);
+    }
+
+    private IType getPollingIntermediateType(JavaSettings.PollingDetails details, IType syncReturnType) {
+        IType pollResponseType = syncReturnType.asNullable();
+        if (JavaSettings.getInstance().isFluent()) {
+            return pollResponseType;
+        }
+        if (details != null && details.getIntermediateType() != null) {
+            String intermediateTypeName;
+            String intermediateTypePackage;
+            if (details.getIntermediateType().contains(".")) {
+                intermediateTypeName = ANYTHING_THEN_PERIOD.matcher(details.getIntermediateType()).replaceAll("");
+                intermediateTypePackage = details.getIntermediateType().replace("." + intermediateTypeName, "");
+            } else {
+                intermediateTypeName = details.getIntermediateType();
+                intermediateTypePackage = JavaSettings.getInstance().getPackage();
+            }
+            pollResponseType = new ClassType.Builder().packageName(intermediateTypePackage).name(intermediateTypeName).build();
+        }
+        // azure-core wants poll response to be non-null
+        if (pollResponseType == ClassType.Void) {
+            pollResponseType = ClassType.BinaryData;
+        }
+
+        return pollResponseType;
+    }
+
+    private IType getPollingFinalType(JavaSettings.PollingDetails details, IType syncReturnType) {
+        IType resultType = syncReturnType.asNullable();
+        if (JavaSettings.getInstance().isFluent()) {
+            return resultType;
+        }
+        if (details != null && details.getFinalType() != null) {
+            String finalTypeName;
+            String finalTypePackage;
+            if (details.getFinalType().contains(".")) {
+                finalTypeName = ANYTHING_THEN_PERIOD.matcher(details.getFinalType()).replaceAll("");
+                finalTypePackage = details.getFinalType().replace("." + finalTypeName, "");
+            } else {
+                finalTypeName = details.getFinalType();
+                finalTypePackage = JavaSettings.getInstance().getPackage();
+            }
+            resultType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
+        }
+        // azure-core wants poll response to be non-null
+        if (resultType == ClassType.Void) {
+            resultType = ClassType.BinaryData;
+        }
+
+        return resultType;
     }
 
     private static boolean hasNonRequiredParameters(List<ClientMethodParameter> parameters) {

@@ -6,9 +6,11 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static final ServiceVersionTemplate _instance = new ServiceVersionTemplate();
+    private static final Pattern VERSION_TO_ENUM = Pattern.compile("[-.]");
 
     private String serviceName;
 
@@ -75,6 +77,6 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
     }
 
     private String getVersionIdentifier(String version) {
-        return "V" + version.replaceAll("[-.]", "_").toUpperCase();
+        return "V" + VERSION_TO_ENUM.matcher(version).replaceAll("_").toUpperCase();
     }
 }

@@ -88,6 +88,12 @@ public final class HttpRedirectsAsyncClient {
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -128,6 +134,12 @@ public final class HttpRedirectsAsyncClient {
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -141,6 +153,12 @@ public final class HttpRedirectsAsyncClient {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -181,6 +199,12 @@ public final class HttpRedirectsAsyncClient {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -193,6 +217,12 @@ public final class HttpRedirectsAsyncClient {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
@@ -207,6 +237,12 @@ public final class HttpRedirectsAsyncClient {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
@@ -219,6 +255,12 @@ public final class HttpRedirectsAsyncClient {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Boolean
+     * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not

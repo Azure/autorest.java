@@ -411,31 +411,19 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 //                break;
 
             case LongRunningAsync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginAsync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginSync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningSync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1046
-                    generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
@@ -767,7 +755,29 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param settings java settings
      */
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        String contextParam;
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+            contextParam = "context";
+        } else {
+            contextParam = "Context.NONE";
+        }
+        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
+                    clientMethod.getMethodPollingDetails().getIntermediateType(),
+                    clientMethod.getMethodPollingDetails().getFinalType());
+            function.decreaseIndent();
+        });
     }
 
     /**
@@ -779,6 +789,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param settings java settings
      */
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.methodReturn(String.format("this.%s(%s).getSyncPoller()",
+                    clientMethod.getName() + "Async", clientMethod.getArgumentList()));
+        });
     }
 }

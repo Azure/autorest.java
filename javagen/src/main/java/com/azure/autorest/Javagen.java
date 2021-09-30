@@ -9,6 +9,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -34,9 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
-    static Javagen instance;
+    protected static Javagen instance;
 
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -45,10 +47,6 @@ public class Javagen extends NewPlugin {
 
     public static Javagen getPluginInstance() {
         return instance;
-    }
-
-    public Logger getLogger() {
-        return this.logger;
     }
 
     @Override
@@ -98,11 +96,13 @@ public class Javagen extends NewPlugin {
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
-            // Service client builder
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
             String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            javaPackage.addServiceClientBuilder(builderPackage,
-                    client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+            String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+            if (!client.getServiceClient().builderDisabled()) {
+                // Service client builder
+                String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+                javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
+            }
 
             if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -126,10 +126,29 @@ public class Javagen extends NewPlugin {
                 }
             }
 
+            if (settings.isLowLevelClient() && settings.isGenerateLLCSamples()) {
+                String hostName0 = "host";
+                if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("host"))) {
+                    hostName0 = "host";
+                } else if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("endpoint"))) {
+                    hostName0 = "endpoint";
+                }
+                String hostName = hostName0;
+                client.getServiceClient().getMethodGroupClients()
+                        .forEach(c -> c.getClientMethods().stream()
+                        .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
+                        .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName, hostName)));
+            }
+
             // Service version
             if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
                 String packageName = settings.getPackage();
-                String serviceName = settings.getServiceName().replaceAll("\\s", "");
+                String serviceName;
+                if (settings.getServiceName() == null) {
+                    serviceName = client.getServiceClient().getInterfaceName();
+                } else {
+                    serviceName = settings.getServiceName().replaceAll("\\s", "");
+                }
                 String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 List<String> serviceVersions = settings.getServiceVersions();
                 javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());

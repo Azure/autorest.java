@@ -49,6 +49,11 @@ public class ArrayType implements IType {
         return defaultValueExpressionConverter.apply(sourceExpression);
     }
 
+    @Override
+    public String defaultValueExpression() {
+        return defaultValueExpression(null);
+    }
+
     public final IType getClientType() {
         // The only supported array type is byte[]
         return this;

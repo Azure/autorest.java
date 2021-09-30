@@ -6,6 +6,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.nio.file.Paths;
@@ -27,6 +28,8 @@ public class JavaPackage {
     private final Set<String> filePaths = new HashSet<>();
 
     private Map<String, String> model;
+
+    private final Set<String> protocolExampleNameSet = new HashSet<>();
 
     public JavaPackage(NewPlugin host) {
         this.settings = JavaSettings.getInstance();
@@ -214,6 +217,22 @@ public class JavaPackage {
 
     public void addPlainFile(PlainFile plainFile) {
         plainFiles.add(plainFile);
+    }
+
+    public void addProtocolExamples(ClientMethod method, MethodGroupClient client, String builderName, String hostName) {
+        if (method.getProxyMethod().getExamples() == null) {
+            return;
+        }
+        method.getProxyMethod().getExamples().forEach((name, example) -> {
+            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+            if (!protocolExampleNameSet.contains(filename)) {
+                JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), filename);
+                ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example, hostName);
+                Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
+                javaFiles.add(javaFile);
+                protocolExampleNameSet.add(filename);
+            }
+        });
     }
 
     protected void checkDuplicateFile(String filePath) {
