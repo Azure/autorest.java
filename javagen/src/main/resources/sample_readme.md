@@ -23,7 +23,7 @@ Getting started explained in detail [here][SDK_README_GETTING_STARTED].
 
 The following sections provide code samples covering common scenario operations with the Azure ${service-name} client library.
 
-[ATTENTION] PLEASE FILL THIS TABLE!
+PLEASE FILL THIS TABLE!
 
 |**File Name**|**Description**|
 |----------------|-------------|

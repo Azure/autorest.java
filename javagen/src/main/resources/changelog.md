@@ -1,5 +1,5 @@
 # Release History
 
-## ${version} (${date})
+## ${version} (unreleased)
 
 PLEASE FILL!

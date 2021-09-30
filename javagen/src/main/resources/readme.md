@@ -1,6 +1,6 @@
 # Azure ${service-name} client library for Java
 
-${readme-description}
+PLEASE FILL!
 
 **Please rely heavily on the [service's documentation][product_documentation] and [Low-Level client documentation][low_level_client] to use this library**
 
@@ -42,7 +42,7 @@ To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-identity</artifactId>
-    <version>${azure-identity-version}</version>
+    <version>PLEASE FILL!</version>
 </dependency>
 ```
 [//]: # ({x-version-update-end})
@@ -50,7 +50,7 @@ To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
 ##### Example
-[ATTENTION] PLEASE FILL!
+PLEASE FILL!
 
 ## Key concepts
 
