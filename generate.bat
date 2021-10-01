@@ -69,7 +69,7 @@ rmdir /S /Q "protocol-tests\src\main"
 rmdir /S /Q "protocol-tests\src\samples"
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-string.json --namespace=fixtures.bodystring
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/paging.json --namespace=fixtures.paging
-call autorest bodycomplex.md %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
+call autorest protocol-tests\swagger\bodycomplex.md %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/header.json --namespace=fixtures.header
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/media_types.json --namespace=fixtures.mediatypes

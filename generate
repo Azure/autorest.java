@@ -67,7 +67,7 @@ rm -rf "protocol-tests\src\main"
 rm -rf "protocol-tests\src\samples"
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-string.json --namespace=fixtures.bodystring
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/paging.json --namespace=fixtures.paging
-autorest bodycomplex.md $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-complex.json --namespace=fixtures.bodycomplex
+autorest protocol-tests/swagger/bodycomplex.md $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-complex.json --namespace=fixtures.bodycomplex
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/header.json --namespace=fixtures.header
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/media_types.json --namespace=fixtures.mediatypes
