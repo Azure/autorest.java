@@ -14,7 +14,7 @@ RMDIR /S /Q "src\samples"
 SET AUTOREST_CORE_VERSION=3.6.0
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
-SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent --pipeline.modelerfour.flatten-payloads=true
+SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --generate-samples
 
 REM fluent premium
