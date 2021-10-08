@@ -50,7 +50,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         final ResourceLocalVariables localVariables = resourceLocalVariables.getDeduplicatedLocalVariables(new HashSet<>(Collections.singleton(ModelNaming.METHOD_PARAMETER_NAME_ID)));
         final boolean removeResponseInReturnType = !includeContextParameter;
         final IType returnType = getReturnType(collectionMethod.getFluentReturnType(), removeResponseInReturnType);
-        final boolean responseInReturnTypeRemoved = returnType != collectionMethod.getFluentReturnType();
+        final boolean responseInReturnTypeRemoved = returnType != collectionMethod.getFluentReturnType() && returnType != PrimitiveType.Void;
 
         final List<ClientMethodParameter> parameters = new ArrayList<>();
         // id parameter
