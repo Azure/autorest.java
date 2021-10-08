@@ -54,6 +54,33 @@ public final class LROsImpl implements LROs {
         }
     }
 
+    public Product patch200SucceededIgnoreHeaders(ProductInner product) {
+        ProductInner inner = this.serviceClient().patch200SucceededIgnoreHeaders(product);
+        if (inner != null) {
+            return new ProductImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Product patch200SucceededIgnoreHeaders() {
+        ProductInner inner = this.serviceClient().patch200SucceededIgnoreHeaders();
+        if (inner != null) {
+            return new ProductImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Product patch200SucceededIgnoreHeaders(ProductInner product, Context context) {
+        ProductInner inner = this.serviceClient().patch200SucceededIgnoreHeaders(product, context);
+        if (inner != null) {
+            return new ProductImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
     public Product put201Succeeded(ProductInner product) {
         ProductInner inner = this.serviceClient().put201Succeeded(product);
         if (inner != null) {

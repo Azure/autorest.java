@@ -44,6 +44,41 @@ public interface LROs {
     Product put200Succeeded(ProductInner product, Context context);
 
     /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Product patch200SucceededIgnoreHeaders(ProductInner product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Product patch200SucceededIgnoreHeaders();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     *
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Product patch200SucceededIgnoreHeaders(ProductInner product, Context context);
+
+    /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
