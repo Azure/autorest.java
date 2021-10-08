@@ -1,14 +1,12 @@
 # default
-*                           @jianghaolu @srnagar @qwordy
+*                           @weidongxu-microsoft @srnagar
 
 # fluentgen
-/fluentnamer                @weidongxu-microsoft @haolingdong-msft
-/fluentgen                  @weidongxu-microsoft @haolingdong-msft
-/fluent-tests               @weidongxu-microsoft @haolingdong-msft
+/fluent*                    @weidongxu-microsoft @haolingdong-msft
 /azure-tests                @weidongxu-microsoft @haolingdong-msft
 
 # androidgen
 /androidgen                 @JianpingChen @anuchandy
 
 # protocol
-/protocol*                  @qwordy @jianghaolu
+/protocol*                  @weidongxu-microsoft @srnagar

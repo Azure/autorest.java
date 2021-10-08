@@ -28,6 +28,14 @@ public final class ResourceProvidersImpl implements ResourceProviders {
         return this.serviceClient().pollWithParameterizedEndpoints(accountName, context);
     }
 
+    public String pollWithConstantParameterizedEndpoints(String accountName) {
+        return this.serviceClient().pollWithConstantParameterizedEndpoints(accountName);
+    }
+
+    public String pollWithConstantParameterizedEndpoints(String accountName, Context context) {
+        return this.serviceClient().pollWithConstantParameterizedEndpoints(accountName, context);
+    }
+
     private ResourceProvidersClient serviceClient() {
         return this.innerClient;
     }

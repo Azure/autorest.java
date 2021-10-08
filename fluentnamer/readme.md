@@ -16,7 +16,7 @@ pipeline:
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
 
-    flatten-models: true
+    flatten-models: false
     flatten-payloads: false
 
     include-x-ms-examples-original-file: true
