@@ -4,14 +4,17 @@
 package fixtures.inheritance.passdiscriminator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.lang.reflect.Field;
 import java.util.Objects;
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,21 +29,33 @@ public class ValidateDiscriminatorIsPassedTests {
     }
 
     @Test
-    public void subClassAcceptsDiscriminator() {
+    public void subClassAcceptsDiscriminator() throws IllegalAccessException {
         JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
         assertEquals(JsonTypeInfo.As.EXISTING_PROPERTY, jsonTypeInfo.include());
 
-        assertTrue(Arrays.stream(MetricAlertSingleResourceMultipleMetricCriteria.class.getDeclaredFields())
-            .anyMatch(field -> {
-                JsonProperty jsonProperty = field.getAnnotation(JsonProperty.class);
-                if (jsonProperty == null) {
-                    return false;
-                }
+        String discriminatorValue = MetricAlertSingleResourceMultipleMetricCriteria.class
+            .getAnnotation(JsonTypeName.class)
+            .value();
 
-                return Objects.equals(jsonTypeInfo.property(), jsonProperty.value());
-            }));
+        for (Field declaredField : MetricAlertSingleResourceMultipleMetricCriteria.class.getDeclaredFields()) {
+            JsonProperty jsonProperty = declaredField.getAnnotation(JsonProperty.class);
+            if (jsonProperty == null) {
+                continue;
+            }
+
+            String propertyDefaultDiscriminatorValue = (String) declaredField
+                .get(new MetricAlertSingleResourceMultipleMetricCriteria());
+
+            if (Objects.equals(jsonTypeInfo.property(), jsonProperty.value())
+                && declaredField.isAnnotationPresent(JsonTypeId.class)
+                && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue)) {
+                return;
+            }
+        }
+
+        fail("Generation didn't match expected pattern when passing discriminator property to child classes.");
     }
 }
