@@ -41,6 +41,10 @@ public class JavaSettings
         {
             _header = MicrosoftMitLicenseHeader + "\n" + DefaultCodeGenerationHeaderWithoutVersion;
         }
+        else if ("MICROSOFT_MIT_SMALL_NO_VERSION".equals(value))
+        {
+            _header = MicrosoftMitSmallLicenseHeader + "\n" + DefaultCodeGenerationHeaderWithoutVersion;
+        }
         else if ("MICROSOFT_APACHE_NO_VERSION".equals(value))
         {
             _header = MicrosoftApacheLicenseHeader + "\n" + DefaultCodeGenerationHeaderWithoutVersion;

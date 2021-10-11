@@ -17,96 +17,98 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     /**
      * Get the name of this property.
      */
-    private String name;
+    private final String name;
     /**
      * Get the description of this property.
      */
-    private String description;
+    private final String description;
     /**
      * Get the arguments that go into this property's JsonProperty annotation.
      */
-    private String annotationArguments;
+    private final String annotationArguments;
     /**
-     * Get whether or not this property is an attribute when serialized to XML.
+     * Get whether this property is an attribute when serialized to XML.
      */
-    private boolean isXmlAttribute;
+    private final boolean isXmlAttribute;
     /**
      * Get this property's name when serialized to XML.
      */
-    private String xmlName;
+    private final String xmlName;
     private final String xmlNamespace;
     /**
      * Get this property's name when it is serialized.
      */
-    private String serializedName;
+    private final String serializedName;
     /**
-     * Get whether or not this property is a container.
+     * Get whether this property is a container.
      */
-    private boolean isXmlWrapper;
+    private final boolean isXmlWrapper;
     /**
      * The name of each list element tag within an XML list property.
      */
-    private String xmlListElementName;
+    private final String xmlListElementName;
     /**
      * The type of this property as it is transmitted across the network (across the wire).
      */
-    private IType wireType;
+    private final IType wireType;
     /**
      * The type of this property as it will be exposed via the client.
      */
-    private IType clientType;
+    private final IType clientType;
     /**
-     * Get whether or not this property has a constant value.
+     * Get whether this property has a constant value.
      */
-    private boolean isConstant;
+    private final boolean isConstant;
     /**
      * Get the default value expression of this property.
      */
-    private String defaultValue;
+    private final String defaultValue;
     /**
-     * Get whether or not this property's value can be changed by the client library.
+     * Get whether this property's value can be changed by the client library.
      */
-    private boolean isReadOnly;
+    private final boolean isReadOnly;
     /**
-     * Whether or not this property is required.
+     * Whether this property is required.
      */
     private boolean isRequired;
     /**
      * The prefix of the headers that make up this property's values.
      */
-    private String headerCollectionPrefix;
+    private final String headerCollectionPrefix;
 
-    private boolean isAdditionalProperties;
+    private final boolean isAdditionalProperties;
 
-    private List<Mutability> mutabilities;
+    private final List<Mutability> mutabilities;
 
-    private boolean needsFlatten;
-    private boolean clientFlatten;
+    private final boolean needsFlatten;
+    private final boolean clientFlatten;
+    private final boolean polymorphicDiscriminator;
 
     /**
      * Create a new ClientModelProperty with the provided properties.
      * @param name The name of this property.
      * @param description The description of this property.
      * @param annotationArguments The arguments that go into this property's JsonProperty annotation.
-     * @param isXmlAttribute Whether or not this property is an attribute when serialized to XML.
+     * @param isXmlAttribute Whether this property is an attribute when serialized to XML.
      * @param xmlName This property's name when serialized to XML.
      * @param serializedName This property's name when it is serialized.
-     * @param isXmlWrapper Whether or not this property is a container.
+     * @param isXmlWrapper Whether this property is a container.
      * @param xmlListElementName The name of each list element tag within an XML list property.
      * @param wireType The type of this property as it is transmitted across the network (across the wire).
      * @param clientType The type of this property as it will be exposed via the client.
-     * @param isConstant Whether or not this property has a constant value.
+     * @param isConstant Whether this property has a constant value.
      * @param defaultValue The default value expression of this property.
-     * @param isReadOnly Whether or not this property's value can be changed by the client library.
+     * @param isReadOnly Whether this property's value can be changed by the client library.
      * @param mutabilities List of property mutability.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
-     * @param isAdditionalProperties Whether or not this property contain the additional properties.
+     * @param isAdditionalProperties Whether this property contain the additional properties.
+     * @param polymorphicDiscriminator Whether this property is a polymorphic discriminator.
      */
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
             String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
             IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities,
             boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties,
-            boolean needsFlatten, boolean clientFlatten) {
+            boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -127,6 +129,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.isAdditionalProperties = isAdditionalProperties;
         this.needsFlatten = needsFlatten;
         this.clientFlatten = clientFlatten;
+        this.polymorphicDiscriminator = polymorphicDiscriminator;
     }
 
     public final String getName() {
@@ -227,6 +230,13 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     }
 
     /**
+     * @return whether the property is a polymorphic discriminator.
+     */
+    public final boolean isPolymorphicDiscriminator() {
+        return polymorphicDiscriminator;
+    }
+
+    /**
      * Add this ServiceModelProperty's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
      */
@@ -312,6 +322,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         private List<Mutability> mutabilities;
         private boolean needsFlatten = false;
         private boolean clientFlatten = false;
+        private boolean polymorphicDiscriminator = false;
 
         /**
          * Sets the name of this property.
@@ -344,8 +355,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property is an attribute when serialized to XML.
-         * @param isXmlAttribute whether or not this property is an attribute when serialized to XML
+         * Sets whether this property is an attribute when serialized to XML.
+         * @param isXmlAttribute whether this property is an attribute when serialized to XML
          * @return the Builder itself
          */
         public Builder isXmlAttribute(boolean isXmlAttribute) {
@@ -384,8 +395,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property is a container.
-         * @param isXmlWrapper whether or not this property is a container
+         * Sets whether this property is a container.
+         * @param isXmlWrapper whether this property is a container
          * @return the Builder itself
          */
         public Builder isXmlWrapper(boolean isXmlWrapper) {
@@ -424,8 +435,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property has a constant value.
-         * @param isConstant whether or not this property has a constant value
+         * Sets whether this property has a constant value.
+         * @param isConstant whether this property has a constant value
          * @return the Builder itself
          */
         public Builder isConstant(boolean isConstant) {
@@ -444,8 +455,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property's value can be changed by the client library.
-         * @param isReadOnly whether or not this property's value can be changed by the client library
+         * Sets whether this property's value can be changed by the client library.
+         * @param isReadOnly whether this property's value can be changed by the client library
          * @return the Builder itself
          */
         public Builder isReadOnly(boolean isReadOnly) {
@@ -454,8 +465,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property is required.
-         * @param isRequired whether or not this property is required
+         * Sets whether this property is required.
+         * @param isRequired whether this property is required
          * @return the Builder itself
          */
         public Builder isRequired(boolean isRequired) {
@@ -474,8 +485,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property contain the additional properties.
-         * @param isAdditionalProperties whether or not this property contain the additional properties
+         * Sets whether this property contain the additional properties.
+         * @param isAdditionalProperties whether this property contain the additional properties
          * @return the Builder itself
          */
         public Builder isAdditionalProperties(boolean isAdditionalProperties) {
@@ -494,11 +505,11 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property needs serialization flattening.
+         * Sets whether this property needs serialization flattening.
          *
          * Code will add <code>@JsonFlatten</code> annotation, and escape the <code>@JsonValue</code>.
          *
-         * @param needsFlatten whether or not this property needs serialization flattening
+         * @param needsFlatten whether this property needs serialization flattening
          * @return the Builder itself
          */
         public Builder needsFlatten(boolean needsFlatten) {
@@ -507,15 +518,26 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
-         * Sets whether or not this property is required to be flattened.
+         * Sets whether this property is required to be flattened.
          *
          * Code will make the accessors to the property <code>private</code> to hide them from user.
          *
-         * @param clientFlatten whether or not this property is required to be flattened
+         * @param clientFlatten whether this property is required to be flattened
          * @return the Builder itself
          */
         public Builder clientFlatten(boolean clientFlatten) {
             this.clientFlatten = clientFlatten;
+            return this;
+        }
+
+        /**
+         * Sets whether this property is a polymorphic discriminator.
+         *
+         * @param polymorphicDiscriminator Whether this property is a polymorphic discriminator.
+         * @return the Builder itself
+         */
+        public Builder polymorphicDiscriminator(boolean polymorphicDiscriminator) {
+            this.polymorphicDiscriminator = polymorphicDiscriminator;
             return this;
         }
 
@@ -539,7 +561,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
                     headerCollectionPrefix,
                     isAdditionalProperties,
                     needsFlatten,
-                    clientFlatten);
+                    clientFlatten,
+                    polymorphicDiscriminator);
         }
     }
 }

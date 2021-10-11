@@ -150,7 +150,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
             }
-            builder.imports(new ArrayList<>(modelImports));
             if (hasAdditionalProperties) {
                 for (Property property : compositeTypeProperties) {
                     if (property.getLanguage().getJava().getName().equals("additionalProperties")) {
@@ -224,10 +223,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 if (discriminatorProperty != null) {
                     properties.add(discriminatorProperty);
+                    modelImports.add("com.fasterxml.jackson.annotation.JsonTypeId");
                 }
             }
 
             builder.needsFlatten(needsFlatten);
+            builder.imports(new ArrayList<>(modelImports));
 
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
@@ -313,6 +314,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             .mutabilities(discriminatorProperty.getMutabilities())
             .needsFlatten(discriminatorProperty.getNeedsFlatten())
             .clientFlatten(discriminatorProperty.getClientFlatten())
+            .polymorphicDiscriminator(true)
             .build();
     }
 
