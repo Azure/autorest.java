@@ -145,8 +145,8 @@ public final class LROsCustomHeaders {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -215,8 +215,8 @@ public final class LROsCustomHeaders {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -283,8 +283,8 @@ public final class LROsCustomHeaders {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -353,8 +353,8 @@ public final class LROsCustomHeaders {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -373,4 +373,8 @@ public final class LROsCustomHeaders {
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(Product product) {
         return this.beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
     }
+
+    private static final class TypeReferenceProduct extends TypeReference<Product> {}
+
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
 }
