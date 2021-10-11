@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
+import fixtures.inheritance.passdiscriminator.models.Odatatype;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -46,12 +47,12 @@ public class ValidateDiscriminatorIsPassedTests {
                 continue;
             }
 
-            String propertyDefaultDiscriminatorValue = (String) declaredField
+            Odatatype propertyDefaultDiscriminatorValue = (Odatatype) declaredField
                 .get(new MetricAlertSingleResourceMultipleMetricCriteria());
 
             if (Objects.equals(jsonTypeInfo.property(), jsonProperty.value())
                 && declaredField.isAnnotationPresent(JsonTypeId.class)
-                && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue)) {
+                && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue.toString())) {
                 return;
             }
         }
