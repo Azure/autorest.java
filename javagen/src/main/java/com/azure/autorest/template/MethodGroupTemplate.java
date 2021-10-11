@@ -6,14 +6,12 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.*;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -86,46 +84,9 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
             Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
 
-            Set<String> typeReferenceStaticClasses = new HashSet<>();
-
-            for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
-                Templates.getClientMethodTemplate().write(clientMethod, classBlock);
-
-                if (clientMethod.getType() == ClientMethodType.LongRunningBeginAsync && clientMethod.getMethodPollingDetails() != null) {
-                    if (!(clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType || clientMethod.getMethodPollingDetails().getFinalType() instanceof GenericType)) {
-                        typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getIntermediateType().toString());
-                        typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getFinalType().toString());
-                    }
-                }
-            }
-
-            for (String typeReferenceStaticClass : typeReferenceStaticClasses) {
-                classBlock.privateStaticFinalClass(String.format("TypeReference%1$s extends TypeReference<%1$s>", typeReferenceStaticClass), classBlock1 -> {
-                });
-            }
-
-            if (settings.isLowLevelClient() &&
-                    methodGroupClient.getClientMethods().stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
-                writePagingHelperMethods(methodGroupClient, classBlock);
-            }
+            TemplateUtil.writeClientMethodsAndHelpers(classBlock, methodGroupClient.getClientMethods());
 
             writeAdditionalClassBlock(classBlock);
-        });
-    }
-
-    protected void writePagingHelperMethods(MethodGroupClient methodGroupClient, JavaClass classBlock) {
-        classBlock.privateMethod("List<BinaryData> getValues(BinaryData binaryData, String path)", block -> {
-            block.line("try {");
-            block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
-            block.line("List<?> values = (List<?>) obj.get(path);");
-            block.line("return values.stream().map(BinaryData::fromObject).collect(Collectors.toList());");
-            block.line("} catch (RuntimeException e) { return null; }");
-        });
-        classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
-            block.line("try {");
-            block.line("Map<?, ?> obj = binaryData.toObject(Map.class);");
-            block.line("return (String) obj.get(path);");
-            block.line("} catch (RuntimeException e) { return null; }");
         });
     }
 

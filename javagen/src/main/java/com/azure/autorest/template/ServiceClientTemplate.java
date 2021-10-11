@@ -10,7 +10,6 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -24,6 +23,7 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelNamer;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -281,9 +281,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
             Templates.getProxyTemplate().write(serviceClient.getProxy(), classBlock);
 
-            for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
-                Templates.getClientMethodTemplate().write(clientMethod, classBlock);
-            }
+            TemplateUtil.writeClientMethodsAndHelpers(classBlock, serviceClient.getClientMethods());
 
             additionalMethods.forEach(method -> method.writeMethod(classBlock));
 

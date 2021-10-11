@@ -27,6 +27,7 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
@@ -766,16 +767,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            if (!(clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType || clientMethod.getMethodPollingDetails().getFinalType() instanceof GenericType)) {
-                // use static inner class
-                function.line("new TypeReference%s(), new TypeReference%s());",
-                        clientMethod.getMethodPollingDetails().getIntermediateType(),
-                        clientMethod.getMethodPollingDetails().getFinalType());
-            } else {
-                function.line("new TypeReference<%s>() { }, new TypeReference<%s>() { });",
-                        clientMethod.getMethodPollingDetails().getIntermediateType(),
-                        clientMethod.getMethodPollingDetails().getFinalType());
-            }
+            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
             function.decreaseIndent();
         });
     }
