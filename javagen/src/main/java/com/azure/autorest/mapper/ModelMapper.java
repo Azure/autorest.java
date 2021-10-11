@@ -305,7 +305,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             .wireType(discriminatorProperty.getWireType())
             .clientType(discriminatorProperty.getClientType())
             .isConstant(discriminatorProperty.getIsConstant())
-            .defaultValue(discriminatorProperty.getDefaultValue())
+            .defaultValue("\"" + compositeType.getDiscriminatorValue() + "\"")
             .isReadOnly(true)
             .isRequired(false)
             .headerCollectionPrefix(discriminatorProperty.getHeaderCollectionPrefix())
