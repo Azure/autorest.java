@@ -72,7 +72,7 @@ public final class LROsCustomHeaderClient {
      *     false.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(
             RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions, context);
@@ -126,7 +126,7 @@ public final class LROsCustomHeaderClient {
      *     false.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
             RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions, context);
@@ -161,7 +161,7 @@ public final class LROsCustomHeaderClient {
      *     false.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginPost202Retry200(requestOptions, context);
     }
@@ -196,7 +196,7 @@ public final class LROsCustomHeaderClient {
      *     false.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(
             RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions, context);
