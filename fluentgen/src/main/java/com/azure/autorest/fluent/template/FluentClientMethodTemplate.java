@@ -242,7 +242,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         String contextParam = mergeContextParameter ? "context" : "Context.NONE";
 
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
@@ -261,7 +261,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());

@@ -187,7 +187,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200Async(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = put201CreatingSucceeded200WithResponseAsync(product);
@@ -209,7 +209,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200Async(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -231,7 +231,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(ProductInner product) {
         return beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
@@ -248,7 +248,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(
         ProductInner product, Context context) {
         return beginPut201CreatingSucceeded200Async(product, context).getSyncPoller();
@@ -421,7 +421,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetrySucceededAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetrySucceededWithResponseAsync(product);
@@ -443,7 +443,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetrySucceededAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -465,7 +465,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetrySucceeded(
         ProductInner product) {
         return beginPutAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
@@ -483,7 +483,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetrySucceeded(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetrySucceededAsync(product, context).getSyncPoller();
@@ -646,7 +646,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteProvisioning202Accepted200SucceededWithResponseAsync();
         return this
@@ -666,7 +666,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(
         Context context) {
         context = this.client.mergeContext(context);
@@ -686,7 +686,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200Succeeded() {
         return beginDeleteProvisioning202Accepted200SucceededAsync().getSyncPoller();
     }
@@ -702,7 +702,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200Succeeded(
         Context context) {
         return beginDeleteProvisioning202Accepted200SucceededAsync(context).getSyncPoller();
@@ -825,7 +825,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202Retry200Async() {
         Mono<Response<Flux<ByteBuffer>>> mono = delete202Retry200WithResponseAsync();
         return this
@@ -843,7 +843,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202Retry200Async(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = delete202Retry200WithResponseAsync(context);
@@ -860,7 +860,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202Retry200() {
         return beginDelete202Retry200Async().getSyncPoller();
     }
@@ -875,7 +875,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202Retry200(Context context) {
         return beginDelete202Retry200Async(context).getSyncPoller();
     }
@@ -988,7 +988,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetrySucceededAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetrySucceededWithResponseAsync();
         return this
@@ -1006,7 +1006,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetrySucceededAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetrySucceededWithResponseAsync(context);
@@ -1023,7 +1023,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetrySucceeded() {
         return beginDeleteAsyncRelativeRetrySucceededAsync().getSyncPoller();
     }
@@ -1038,7 +1038,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetrySucceeded(Context context) {
         return beginDeleteAsyncRelativeRetrySucceededAsync(context).getSyncPoller();
     }
@@ -1163,7 +1163,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202Retry200Async(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = post202Retry200WithResponseAsync(product);
         return this
@@ -1182,7 +1182,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202Retry200Async(ProductInner product, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = post202Retry200WithResponseAsync(product, context);
@@ -1201,7 +1201,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product) {
         return beginPost202Retry200Async(product).getSyncPoller();
     }
@@ -1217,7 +1217,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product, Context context) {
         return beginPost202Retry200Async(product, context).getSyncPoller();
     }
@@ -1378,7 +1378,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRelativeRetrySucceededWithResponseAsync(product);
         return this
@@ -1398,7 +1398,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetrySucceededAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -1419,7 +1419,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetrySucceeded(ProductInner product) {
         return beginPostAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
     }
@@ -1436,7 +1436,7 @@ public final class LroRetrysClientImpl implements LroRetrysClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetrySucceeded(
         ProductInner product, Context context) {
         return beginPostAsyncRelativeRetrySucceededAsync(product, context).getSyncPoller();

@@ -445,6 +445,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200SucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -455,8 +456,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -469,6 +470,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200Succeeded(Product product) {
         return this.beginPut200SucceededAsync(product).getSyncPoller();
     }
@@ -508,6 +510,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPatch200SucceededIgnoreHeadersAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -518,8 +521,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -532,6 +535,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPatch200SucceededIgnoreHeaders(Product product) {
         return this.beginPatch200SucceededIgnoreHeadersAsync(product).getSyncPoller();
     }
@@ -570,6 +574,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201SucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -580,8 +585,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -594,6 +599,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut201Succeeded(Product product) {
         return this.beginPut201SucceededAsync(product).getSyncPoller();
     }
@@ -624,6 +630,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of Product.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<List<Product>, List<Product>> beginPost202ListAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -646,6 +653,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of Product.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<List<Product>, List<Product>> beginPost202List() {
         return this.beginPost202ListAsync().getSyncPoller();
     }
@@ -684,6 +692,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200SucceededNoStateAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -694,8 +703,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -708,6 +717,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200SucceededNoState(Product product) {
         return this.beginPut200SucceededNoStateAsync(product).getSyncPoller();
     }
@@ -745,6 +755,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut202Retry200Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -755,8 +766,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -769,6 +780,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut202Retry200(Product product) {
         return this.beginPut202Retry200Async(product).getSyncPoller();
     }
@@ -809,6 +821,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -819,8 +832,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -834,6 +847,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut201CreatingSucceeded200(Product product) {
         return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
@@ -874,6 +888,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200UpdatingSucceeded204Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -884,8 +899,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -899,6 +914,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200UpdatingSucceeded204(Product product) {
         return this.beginPut200UpdatingSucceeded204Async(product).getSyncPoller();
     }
@@ -939,6 +955,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingFailed200Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -949,8 +966,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -964,6 +981,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut201CreatingFailed200(Product product) {
         return this.beginPut201CreatingFailed200Async(product).getSyncPoller();
     }
@@ -1004,6 +1022,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200Acceptedcanceled200Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1014,8 +1033,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1029,6 +1048,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200Acceptedcanceled200(Product product) {
         return this.beginPut200Acceptedcanceled200Async(product).getSyncPoller();
     }
@@ -1067,6 +1087,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNoHeaderInRetryAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1077,8 +1098,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1091,6 +1112,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNoHeaderInRetry(Product product) {
         return this.beginPutNoHeaderInRetryAsync(product).getSyncPoller();
     }
@@ -1131,6 +1153,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetrySucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1141,8 +1164,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1156,6 +1179,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRetrySucceeded(Product product) {
         return this.beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
     }
@@ -1196,6 +1220,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncNoRetrySucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1206,8 +1231,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1221,6 +1246,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncNoRetrySucceeded(Product product) {
         return this.beginPutAsyncNoRetrySucceededAsync(product).getSyncPoller();
     }
@@ -1261,6 +1287,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetryFailedAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1271,8 +1298,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1286,6 +1313,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRetryFailed(Product product) {
         return this.beginPutAsyncRetryFailedAsync(product).getSyncPoller();
     }
@@ -1326,6 +1354,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncNoRetrycanceledAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1336,8 +1365,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1351,6 +1380,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncNoRetrycanceled(Product product) {
         return this.beginPutAsyncNoRetrycanceledAsync(product).getSyncPoller();
     }
@@ -1389,6 +1419,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncNoHeaderInRetryAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1399,8 +1430,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1413,6 +1444,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncNoHeaderInRetry(Product product) {
         return this.beginPutAsyncNoHeaderInRetryAsync(product).getSyncPoller();
     }
@@ -1448,6 +1480,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Sku, Sku> beginPutNonResourceAsync(Sku sku) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1458,8 +1491,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Sku>() {},
-                new TypeReference<Sku>() {});
+                new TypeReferenceSku(),
+                new TypeReferenceSku());
     }
 
     /**
@@ -1471,6 +1504,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Sku, Sku> beginPutNonResource(Sku sku) {
         return this.beginPutNonResourceAsync(sku).getSyncPoller();
     }
@@ -1507,6 +1541,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Sku, Sku> beginPutAsyncNonResourceAsync(Sku sku) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1517,8 +1552,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Sku>() {},
-                new TypeReference<Sku>() {});
+                new TypeReferenceSku(),
+                new TypeReferenceSku());
     }
 
     /**
@@ -1530,6 +1565,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Sku, Sku> beginPutAsyncNonResource(Sku sku) {
         return this.beginPutAsyncNonResourceAsync(sku).getSyncPoller();
     }
@@ -1565,6 +1601,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<SubProduct, SubProduct> beginPutSubResourceAsync(SubProduct product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1575,8 +1612,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<SubProduct>() {},
-                new TypeReference<SubProduct>() {});
+                new TypeReferenceSubProduct(),
+                new TypeReferenceSubProduct());
     }
 
     /**
@@ -1588,6 +1625,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<SubProduct, SubProduct> beginPutSubResource(SubProduct product) {
         return this.beginPutSubResourceAsync(product).getSyncPoller();
     }
@@ -1624,6 +1662,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<SubProduct, SubProduct> beginPutAsyncSubResourceAsync(SubProduct product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1634,8 +1673,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<SubProduct>() {},
-                new TypeReference<SubProduct>() {});
+                new TypeReferenceSubProduct(),
+                new TypeReferenceSubProduct());
     }
 
     /**
@@ -1647,6 +1686,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<SubProduct, SubProduct> beginPutAsyncSubResource(SubProduct product) {
         return this.beginPutAsyncSubResourceAsync(product).getSyncPoller();
     }
@@ -1681,6 +1721,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginDeleteProvisioning202Accepted200SucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1691,8 +1732,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1704,6 +1745,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginDeleteProvisioning202Accepted200Succeeded() {
         return this.beginDeleteProvisioning202Accepted200SucceededAsync().getSyncPoller();
     }
@@ -1738,6 +1780,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginDeleteProvisioning202DeletingFailed200Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1748,8 +1791,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1761,6 +1804,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginDeleteProvisioning202DeletingFailed200() {
         return this.beginDeleteProvisioning202DeletingFailed200Async().getSyncPoller();
     }
@@ -1795,6 +1839,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginDeleteProvisioning202Deletingcanceled200Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1805,8 +1850,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1818,6 +1863,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginDeleteProvisioning202Deletingcanceled200() {
         return this.beginDeleteProvisioning202Deletingcanceled200Async().getSyncPoller();
     }
@@ -1846,6 +1892,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1856,8 +1903,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -1867,6 +1914,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded() {
         return this.beginDelete204SucceededAsync().getSyncPoller();
     }
@@ -1897,6 +1945,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginDelete202Retry200Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1907,8 +1956,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1919,6 +1968,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginDelete202Retry200() {
         return this.beginDelete202Retry200Async().getSyncPoller();
     }
@@ -1949,6 +1999,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginDelete202NoRetry204Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -1959,8 +2010,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -1971,6 +2022,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginDelete202NoRetry204() {
         return this.beginDelete202NoRetry204Async().getSyncPoller();
     }
@@ -2001,6 +2053,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteNoHeaderInRetryAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2011,8 +2064,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2023,6 +2076,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteNoHeaderInRetry() {
         return this.beginDeleteNoHeaderInRetryAsync().getSyncPoller();
     }
@@ -2054,6 +2108,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetryAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2064,8 +2119,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2076,6 +2131,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetry() {
         return this.beginDeleteAsyncNoHeaderInRetryAsync().getSyncPoller();
     }
@@ -2107,6 +2163,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetrySucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2117,8 +2174,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2129,6 +2186,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrySucceeded() {
         return this.beginDeleteAsyncRetrySucceededAsync().getSyncPoller();
     }
@@ -2160,6 +2218,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2170,8 +2229,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2182,6 +2241,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceeded() {
         return this.beginDeleteAsyncNoRetrySucceededAsync().getSyncPoller();
     }
@@ -2212,6 +2272,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetryFailedAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2222,8 +2283,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2234,6 +2295,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetryFailed() {
         return this.beginDeleteAsyncRetryFailedAsync().getSyncPoller();
     }
@@ -2265,6 +2327,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetrycanceledAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2275,8 +2338,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2287,6 +2350,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrycanceled() {
         return this.beginDeleteAsyncRetrycanceledAsync().getSyncPoller();
     }
@@ -2317,6 +2381,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Sku, Sku> beginPost200WithPayloadAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2327,8 +2392,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Sku>() {},
-                new TypeReference<Sku>() {});
+                new TypeReferenceSku(),
+                new TypeReferenceSku());
     }
 
     /**
@@ -2339,6 +2404,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Sku, Sku> beginPost200WithPayload() {
         return this.beginPost200WithPayloadAsync().getSyncPoller();
     }
@@ -2377,6 +2443,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2387,8 +2454,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2401,6 +2468,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(Product product) {
         return this.beginPost202Retry200Async(product).getSyncPoller();
     }
@@ -2439,6 +2507,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPost202NoRetry204Async(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2449,8 +2518,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2463,6 +2532,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPost202NoRetry204(Product product) {
         return this.beginPost202NoRetry204Async(product).getSyncPoller();
     }
@@ -2494,6 +2564,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPostDoubleHeadersFinalLocationGetAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2504,8 +2575,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2516,6 +2587,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPostDoubleHeadersFinalLocationGet() {
         return this.beginPostDoubleHeadersFinalLocationGetAsync().getSyncPoller();
     }
@@ -2547,6 +2619,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPostDoubleHeadersFinalAzureHeaderGetAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2557,8 +2630,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2569,6 +2642,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPostDoubleHeadersFinalAzureHeaderGet() {
         return this.beginPostDoubleHeadersFinalAzureHeaderGetAsync().getSyncPoller();
     }
@@ -2602,6 +2676,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2612,8 +2687,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2625,6 +2700,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPostDoubleHeadersFinalAzureHeaderGetDefault() {
         return this.beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync().getSyncPoller();
     }
@@ -2665,6 +2741,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPostAsyncRetrySucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2675,8 +2752,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2690,6 +2767,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPostAsyncRetrySucceeded(Product product) {
         return this.beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
     }
@@ -2730,6 +2808,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPostAsyncNoRetrySucceededAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2740,8 +2819,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<Product>() {},
-                new TypeReference<Product>() {});
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
     }
 
     /**
@@ -2755,6 +2834,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPostAsyncNoRetrySucceeded(Product product) {
         return this.beginPostAsyncNoRetrySucceededAsync(product).getSyncPoller();
     }
@@ -2795,6 +2875,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetryFailedAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2805,8 +2886,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2820,6 +2901,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailed(Product product) {
         return this.beginPostAsyncRetryFailedAsync(product).getSyncPoller();
     }
@@ -2860,6 +2942,7 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrycanceledAsync(Product product) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -2870,8 +2953,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline()),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<BinaryData>() {},
-                new TypeReference<BinaryData>() {});
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
     }
 
     /**
@@ -2885,7 +2968,16 @@ public final class LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceled(Product product) {
         return this.beginPostAsyncRetrycanceledAsync(product).getSyncPoller();
     }
+
+    private static final class TypeReferenceSubProduct extends TypeReference<SubProduct> {}
+
+    private static final class TypeReferenceProduct extends TypeReference<Product> {}
+
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
+
+    private static final class TypeReferenceSku extends TypeReference<Sku> {}
 }

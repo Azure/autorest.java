@@ -27,6 +27,7 @@ import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
@@ -92,7 +93,7 @@ public class CompilationTests {
 
     public void testFlattenedParameter() {
         CloudServicesUpdateDomainsClient cloudServicesUpdateDomainsClient = mock(CloudServicesUpdateDomainsClient.class);
-        cloudServicesUpdateDomainsClient.walkUpdateDomainWithResponseAsync(anyString(), anyString(), anyInt());
+        cloudServicesUpdateDomainsClient.walkUpdateDomainWithResponseAsync(anyString(), anyString(), anyInt(), any());
     }
 
     public void testFlattenedModel() {

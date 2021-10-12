@@ -80,6 +80,7 @@ public class JavaSettings
             boolean generateClientInterfacesDefault = false;
             boolean requiredParameterClientMethodsDefault = false;
             boolean modelOverrideSetterFromSuperclassDefault = false;
+            String clientFlattenAnnotationTargetDefault = "";
 
             String fluentSetting = host.getStringValue("fluent");
             if (fluentSetting != null) {
@@ -92,6 +93,7 @@ public class JavaSettings
                 generateClientInterfacesDefault = true;
                 requiredParameterClientMethodsDefault = true;
                 modelOverrideSetterFromSuperclassDefault = true;
+                clientFlattenAnnotationTargetDefault = "none";
             }
 
             setHeader(host.getStringValue("license-header"));
@@ -135,7 +137,7 @@ public class JavaSettings
                     host.getBooleanValue("use-iterable", false),
                     host.getValue(List.class, "service-versions"),
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
-                    host.getStringValue("client-flattened-annotation-target", ""),
+                    host.getStringValue("client-flattened-annotation-target", clientFlattenAnnotationTargetDefault),
                     host.getStringValue("key-credential-header-name", ""),
                     host.getBooleanValue("disable-client-builder", false),
                     host.getBooleanValue("skip-formatting", false),

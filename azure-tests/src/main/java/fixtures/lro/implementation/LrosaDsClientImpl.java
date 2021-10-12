@@ -353,7 +353,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry400Async(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putNonRetry400WithResponseAsync(product);
         return this
@@ -372,7 +372,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry400Async(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -392,7 +392,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry400(ProductInner product) {
         return beginPutNonRetry400Async(product).getSyncPoller();
     }
@@ -407,7 +407,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry400(
         ProductInner product, Context context) {
         return beginPutNonRetry400Async(product, context).getSyncPoller();
@@ -560,7 +560,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400Async(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putNonRetry201Creating400WithResponseAsync(product);
@@ -580,7 +580,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400Async(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -600,7 +600,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400(ProductInner product) {
         return beginPutNonRetry201Creating400Async(product).getSyncPoller();
     }
@@ -615,7 +615,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400(
         ProductInner product, Context context) {
         return beginPutNonRetry201Creating400Async(product, context).getSyncPoller();
@@ -772,7 +772,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putNonRetry201Creating400InvalidJsonWithResponseAsync(product);
@@ -792,7 +792,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -812,7 +812,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400InvalidJson(
         ProductInner product) {
         return beginPutNonRetry201Creating400InvalidJsonAsync(product).getSyncPoller();
@@ -828,7 +828,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNonRetry201Creating400InvalidJson(
         ProductInner product, Context context) {
         return beginPutNonRetry201Creating400InvalidJsonAsync(product, context).getSyncPoller();
@@ -990,7 +990,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetry400Async(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetry400WithResponseAsync(product);
@@ -1011,7 +1011,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetry400Async(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -1032,7 +1032,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetry400(ProductInner product) {
         return beginPutAsyncRelativeRetry400Async(product).getSyncPoller();
     }
@@ -1048,7 +1048,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetry400(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetry400Async(product, context).getSyncPoller();
@@ -1196,7 +1196,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteNonRetry400Async() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteNonRetry400WithResponseAsync();
         return this
@@ -1213,7 +1213,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteNonRetry400Async(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteNonRetry400WithResponseAsync(context);
@@ -1229,7 +1229,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteNonRetry400() {
         return beginDeleteNonRetry400Async().getSyncPoller();
     }
@@ -1243,7 +1243,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteNonRetry400(Context context) {
         return beginDeleteNonRetry400Async(context).getSyncPoller();
     }
@@ -1348,7 +1348,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202NonRetry400Async() {
         Mono<Response<Flux<ByteBuffer>>> mono = delete202NonRetry400WithResponseAsync();
         return this
@@ -1365,7 +1365,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202NonRetry400Async(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = delete202NonRetry400WithResponseAsync(context);
@@ -1381,7 +1381,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202NonRetry400() {
         return beginDelete202NonRetry400Async().getSyncPoller();
     }
@@ -1395,7 +1395,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202NonRetry400(Context context) {
         return beginDelete202NonRetry400Async(context).getSyncPoller();
     }
@@ -1503,7 +1503,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetry400Async() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetry400WithResponseAsync();
         return this
@@ -1521,7 +1521,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetry400Async(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetry400WithResponseAsync(context);
@@ -1538,7 +1538,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetry400() {
         return beginDeleteAsyncRelativeRetry400Async().getSyncPoller();
     }
@@ -1553,7 +1553,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetry400(Context context) {
         return beginDeleteAsyncRelativeRetry400Async(context).getSyncPoller();
     }
@@ -1673,7 +1673,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostNonRetry400Async(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postNonRetry400WithResponseAsync(product);
         return this
@@ -1691,7 +1691,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostNonRetry400Async(ProductInner product, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = postNonRetry400WithResponseAsync(product, context);
@@ -1709,7 +1709,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostNonRetry400(ProductInner product) {
         return beginPostNonRetry400Async(product).getSyncPoller();
     }
@@ -1724,7 +1724,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostNonRetry400(ProductInner product, Context context) {
         return beginPostNonRetry400Async(product, context).getSyncPoller();
     }
@@ -1872,7 +1872,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202NonRetry400Async(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = post202NonRetry400WithResponseAsync(product);
         return this
@@ -1890,7 +1890,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202NonRetry400Async(ProductInner product, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = post202NonRetry400WithResponseAsync(product, context);
@@ -1908,7 +1908,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202NonRetry400(ProductInner product) {
         return beginPost202NonRetry400Async(product).getSyncPoller();
     }
@@ -1923,7 +1923,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202NonRetry400(ProductInner product, Context context) {
         return beginPost202NonRetry400Async(product, context).getSyncPoller();
     }
@@ -2075,7 +2075,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetry400Async(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRelativeRetry400WithResponseAsync(product);
         return this
@@ -2094,7 +2094,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetry400Async(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -2114,7 +2114,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetry400(ProductInner product) {
         return beginPostAsyncRelativeRetry400Async(product).getSyncPoller();
     }
@@ -2130,7 +2130,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetry400(ProductInner product, Context context) {
         return beginPostAsyncRelativeRetry400Async(product, context).getSyncPoller();
     }
@@ -2289,7 +2289,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutError201NoProvisioningStatePayloadAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putError201NoProvisioningStatePayloadWithResponseAsync(product);
@@ -2309,7 +2309,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutError201NoProvisioningStatePayloadAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -2330,7 +2330,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutError201NoProvisioningStatePayload(
         ProductInner product) {
         return beginPutError201NoProvisioningStatePayloadAsync(product).getSyncPoller();
@@ -2346,7 +2346,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutError201NoProvisioningStatePayload(
         ProductInner product, Context context) {
         return beginPutError201NoProvisioningStatePayloadAsync(product, context).getSyncPoller();
@@ -2511,7 +2511,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetryNoStatusWithResponseAsync(product);
@@ -2533,7 +2533,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -2555,7 +2555,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatus(ProductInner product) {
         return beginPutAsyncRelativeRetryNoStatusAsync(product).getSyncPoller();
     }
@@ -2572,7 +2572,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatus(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetryNoStatusAsync(product, context).getSyncPoller();
@@ -2747,7 +2747,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(product);
@@ -2769,7 +2769,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -2791,7 +2791,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusPayload(
         ProductInner product) {
         return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).getSyncPoller();
@@ -2809,7 +2809,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryNoStatusPayload(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product, context).getSyncPoller();
@@ -2967,7 +2967,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete204SucceededAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = delete204SucceededWithResponseAsync();
         return this
@@ -2984,7 +2984,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete204SucceededAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = delete204SucceededWithResponseAsync(context);
@@ -3000,7 +3000,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete204Succeeded() {
         return beginDelete204SucceededAsync().getSyncPoller();
     }
@@ -3014,7 +3014,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete204Succeeded(Context context) {
         return beginDelete204SucceededAsync(context).getSyncPoller();
     }
@@ -3123,7 +3123,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryNoStatusAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryNoStatusWithResponseAsync();
         return this
@@ -3141,7 +3141,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryNoStatusAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryNoStatusWithResponseAsync(context);
@@ -3158,7 +3158,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryNoStatus() {
         return beginDeleteAsyncRelativeRetryNoStatusAsync().getSyncPoller();
     }
@@ -3173,7 +3173,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryNoStatus(Context context) {
         return beginDeleteAsyncRelativeRetryNoStatusAsync(context).getSyncPoller();
     }
@@ -3295,7 +3295,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202NoLocationAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = post202NoLocationWithResponseAsync(product);
         return this
@@ -3313,7 +3313,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202NoLocationAsync(ProductInner product, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = post202NoLocationWithResponseAsync(product, context);
@@ -3331,7 +3331,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202NoLocation(ProductInner product) {
         return beginPost202NoLocationAsync(product).getSyncPoller();
     }
@@ -3346,7 +3346,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202NoLocation(ProductInner product, Context context) {
         return beginPost202NoLocationAsync(product, context).getSyncPoller();
     }
@@ -3501,7 +3501,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRelativeRetryNoPayloadWithResponseAsync(product);
         return this
@@ -3521,7 +3521,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryNoPayloadAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -3542,7 +3542,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryNoPayload(ProductInner product) {
         return beginPostAsyncRelativeRetryNoPayloadAsync(product).getSyncPoller();
     }
@@ -3559,7 +3559,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryNoPayload(
         ProductInner product, Context context) {
         return beginPostAsyncRelativeRetryNoPayloadAsync(product, context).getSyncPoller();
@@ -3721,7 +3721,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200InvalidJsonAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = put200InvalidJsonWithResponseAsync(product);
         return this
@@ -3740,7 +3740,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200InvalidJsonAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -3760,7 +3760,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200InvalidJson(ProductInner product) {
         return beginPut200InvalidJsonAsync(product).getSyncPoller();
     }
@@ -3775,7 +3775,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200InvalidJson(
         ProductInner product, Context context) {
         return beginPut200InvalidJsonAsync(product, context).getSyncPoller();
@@ -3932,7 +3932,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetryInvalidHeaderWithResponseAsync(product);
@@ -3953,7 +3953,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -3974,7 +3974,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidHeader(
         ProductInner product) {
         return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
@@ -3991,7 +3991,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidHeader(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetryInvalidHeaderAsync(product, context).getSyncPoller();
@@ -4165,7 +4165,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product);
@@ -4187,7 +4187,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -4210,7 +4210,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidJsonPolling(
         ProductInner product) {
         return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
@@ -4228,7 +4228,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRelativeRetryInvalidJsonPolling(
         ProductInner product, Context context) {
         return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product, context).getSyncPoller();
@@ -4389,7 +4389,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202RetryInvalidHeaderAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = delete202RetryInvalidHeaderWithResponseAsync();
         return this
@@ -4407,7 +4407,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDelete202RetryInvalidHeaderAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = delete202RetryInvalidHeaderWithResponseAsync(context);
@@ -4424,7 +4424,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202RetryInvalidHeader() {
         return beginDelete202RetryInvalidHeaderAsync().getSyncPoller();
     }
@@ -4439,7 +4439,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete202RetryInvalidHeader(Context context) {
         return beginDelete202RetryInvalidHeaderAsync(context).getSyncPoller();
     }
@@ -4552,7 +4552,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync();
         return this
@@ -4570,7 +4570,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(context);
@@ -4587,7 +4587,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidHeader() {
         return beginDeleteAsyncRelativeRetryInvalidHeaderAsync().getSyncPoller();
     }
@@ -4602,7 +4602,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidHeader(Context context) {
         return beginDeleteAsyncRelativeRetryInvalidHeaderAsync(context).getSyncPoller();
     }
@@ -4719,7 +4719,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync();
         return this
@@ -4737,7 +4737,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(context);
@@ -4754,7 +4754,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
         return beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().getSyncPoller();
     }
@@ -4769,7 +4769,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling(Context context) {
         return beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(context).getSyncPoller();
     }
@@ -4898,7 +4898,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202RetryInvalidHeaderAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = post202RetryInvalidHeaderWithResponseAsync(product);
         return this
@@ -4917,7 +4917,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPost202RetryInvalidHeaderAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -4937,7 +4937,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202RetryInvalidHeader(ProductInner product) {
         return beginPost202RetryInvalidHeaderAsync(product).getSyncPoller();
     }
@@ -4953,7 +4953,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202RetryInvalidHeader(ProductInner product, Context context) {
         return beginPost202RetryInvalidHeaderAsync(product, context).getSyncPoller();
     }
@@ -5115,7 +5115,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRelativeRetryInvalidHeaderWithResponseAsync(product);
         return this
@@ -5134,7 +5134,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -5154,7 +5154,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidHeader(ProductInner product) {
         return beginPostAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
     }
@@ -5170,7 +5170,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidHeader(
         ProductInner product, Context context) {
         return beginPostAsyncRelativeRetryInvalidHeaderAsync(product, context).getSyncPoller();
@@ -5341,7 +5341,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(
         ProductInner product) {
         Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product);
@@ -5362,7 +5362,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(
         ProductInner product, Context context) {
         context = this.client.mergeContext(context);
@@ -5384,7 +5384,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
         return beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
@@ -5401,7 +5401,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRelativeRetryInvalidJsonPolling(
         ProductInner product, Context context) {
         return beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product, context).getSyncPoller();
