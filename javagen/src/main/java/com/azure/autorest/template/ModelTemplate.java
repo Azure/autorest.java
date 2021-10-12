@@ -203,6 +203,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
                     classBlock.annotation("JsonFlatten");
                 }
+
+                // If the property is a polymorphic discriminator for the class add the annotation @JsonTypeId.
+                // This will indicate to Jackson that the discriminator serialization is determined by the property
+                // instead of the class level @JsonTypeName annotation. This prevents the discriminator property from
+                // being serialized twice, once for the class level annotation and again for the property annotation.
+                if (property.isPolymorphicDiscriminator()) {
+                    classBlock.annotation("JsonTypeId");
+                }
+
                 if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
                     classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
@@ -465,7 +474,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
 
             classBlock.annotation("JsonCreator");
-            classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), ctorArgs.toString()), (constructor) ->
+            classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), ctorArgs), (constructor) ->
             {
                 if (!requiredParentProperties.isEmpty()) {
                     constructor.line(String.format("super(%1$s);",

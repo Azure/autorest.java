@@ -3,6 +3,7 @@ package fixtures.inheritance.passdiscriminator.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
@@ -20,8 +21,9 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     /*
      * specifies the type of the alert criteria.
      */
+    @JsonTypeId
     @JsonProperty(value = "odata\\.type", required = true)
-    private Odatatype odataType;
+    private Odatatype odataType = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
 
     /*
      * The list of metric criteria for this 'all of' operation.
