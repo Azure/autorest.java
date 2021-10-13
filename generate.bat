@@ -1,7 +1,7 @@
 set VANILLA_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set AZURE_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set ARM_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=protocol-tests --low-level-client --generate-llc-samples
+set PROTOCOL_ARGUMENTS=--version=3.4.5 --java --use=. --output-folder=protocol-tests --low-level-client --generate-samples
 set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.4.5 --java --use=. --low-level-client
 
 rem 3.0.37

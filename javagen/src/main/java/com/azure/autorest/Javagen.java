@@ -103,9 +103,9 @@ public class Javagen extends NewPlugin {
                 javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
             }
 
+            List<AsyncSyncClient> syncClients = new ArrayList<>();
             if (settings.shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
-                List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
@@ -125,7 +125,8 @@ public class Javagen extends NewPlugin {
                 }
             }
 
-            if (settings.isLowLevelClient() && settings.isGenerateLLCSamples()) {
+            // Sample
+            if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
                 String hostName0 = "host";
                 if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("host"))) {
                     hostName0 = "host";
@@ -133,8 +134,8 @@ public class Javagen extends NewPlugin {
                     hostName0 = "endpoint";
                 }
                 String hostName = hostName0;
-                client.getServiceClient().getMethodGroupClients()
-                        .forEach(c -> c.getClientMethods().stream()
+                syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
+                        .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
                         .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
                         .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName, hostName)));
             }

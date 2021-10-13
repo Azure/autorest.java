@@ -3,15 +3,18 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
     public void write(ProtocolExample protocolExample, JavaFile javaFile) {
         ClientMethod method = protocolExample.getClientMethod();
-        MethodGroupClient client = protocolExample.getMethodGroupClient();
+        AsyncSyncClient client = protocolExample.getClient();
         String builderName = protocolExample.getBuilderName();
         String filename = protocolExample.getFilename();
         ProxyMethodExample example = protocolExample.getProxyMethodExample();
@@ -36,10 +39,13 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         // Import
         List<String> imports = new ArrayList<>();
-        imports.add("com.azure.core.http.rest.PagedIterable");
-        imports.add("com.azure.core.http.rest.RequestOptions");
-        imports.add("com.azure.core.http.rest.Response");
-        imports.add("com.azure.core.util.BinaryData");
+        imports.add(client.getPackageName() + "." + client.getClassName());
+        imports.add(client.getPackageName() + "." + builderName);
+        imports.add(PagedIterable.class.getName());
+        imports.add(Response.class.getName());
+        imports.add(BinaryData.class.getName());
+        imports.add(Context.class.getName());
+        imports.add(ClassType.RequestOptions.getFullName());
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
         javaFile.declareImport(imports);
 
@@ -54,33 +60,52 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         List<String> requestOptionsStmts = new ArrayList<>();
 
-        example.getParameters().forEach((key, value) -> {
-            boolean match = false;
+        example.getParameters().forEach((parameterName, parameterValue) -> {
+            boolean matchRequiredParameter = false;
             for (int i = 0; i < numParam; i++) {
                 ClientMethodParameter p = method.getParameters().get(i);
-                if (p.getName().equals(key)) {
+                if (p.getName().equalsIgnoreCase(parameterName)) {
                     if (p.getClientType() != ClassType.BinaryData) {
-                        // Simple type
-                        params.set(i, '"' + value.getObjectValue().toString() + '"');
+                        // simple type
+                        params.set(i, p.getClientType().defaultValueExpression(parameterValue.getObjectValue().toString()));
                     } else {
                         // BinaryData
-                        String binaryDataValue = '"' + value.getJsonString().replace("\"", "\\\"") + '"';
-                        binaryDataStmt.append(String.format(
-                                "BinaryData %s = BinaryData.fromString(%s);", key, binaryDataValue));
-                        params.set(i, key);
+                        String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
+                        binaryDataStmt.append(
+                                String.format("BinaryData %s = BinaryData.fromString(%s);",
+                                        parameterName, binaryDataValue));
+                        params.set(i, parameterName);
                     }
-                    match = true;
+                    matchRequiredParameter = true;
                     break;
                 }
             }
-            if (!match) {
-                method.getProxyMethod().getAllParameters().stream().filter(p -> p.getName().equals(key)).findFirst().ifPresent(p -> {
-                    if (p.getRequestParameterLocation() == RequestParameterLocation.Query) {
-                        requestOptionsStmts.add(String.format("requestOptions.addQueryParam(\"%s\", \"%s\");",
-                                key, value.getObjectValue().toString()));
-                    } else if (p.getRequestParameterLocation() == RequestParameterLocation.Header) {
-                        requestOptionsStmts.add(String.format("requestOptions.addHeader(\"%s\", \"%s\");",
-                                key, value.getObjectValue().toString()));
+            if (!matchRequiredParameter) {
+                method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
+                    String clientValue = p.getClientType()
+                            .defaultValueExpression(parameterValue.getObjectValue().toString());
+
+                    switch (p.getRequestParameterLocation()) {
+                        case Query:
+                            requestOptionsStmts.add(
+                                    String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                            parameterName, clientValue));
+                            break;
+
+                        case Header:
+                            requestOptionsStmts.add(
+                                    String.format("requestOptions.addHeader(\"%s\", %s);",
+                                            parameterName, clientValue));
+                            break;
+
+                        case Body:
+                            String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
+                            requestOptionsStmts.add(
+                                    String.format("requestOptions.setBody(BinaryData.fromString(%s));",
+                                            binaryDataValue));
+                            break;
+
+                        // Path cannot be optional
                     }
                 });
             }
@@ -88,11 +113,6 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
-                String clientName = client.getClassBaseName();
-                if (!clientName.endsWith("Client")) {
-                    clientName += "Client";
-                }
-
                 String credentialExpr;
                 Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
                 if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
@@ -103,22 +123,29 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                     credentialExpr = "";
                 }
 
+                // client
                 String clientInit = "%s client = new %s()" +
                         ".%s(System.getenv(\"%s\"))" +
                         "%s" +
                         ".build%s();";
-                methodBlock.line(String.format(clientInit, clientName, builderName, hostName, hostName.toUpperCase(), credentialExpr, clientName));
+                methodBlock.line(
+                        String.format(clientInit,
+                                client.getClassName(), builderName, hostName, hostName.toUpperCase(),
+                                credentialExpr, client.getClassName()));
+
+                // binaryData
                 if (binaryDataStmt.length() > 0) {
                     methodBlock.line(binaryDataStmt.toString());
                 }
-                if (requestOptionsStmts.size() > 0) {
-                    methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
-                    requestOptionsStmts.forEach(methodBlock::line);
-                    for (int i = 0; i < numParam; i++) {
-                        if (method.getParameters().get(i).getName().equals("requestOptions")) {
-                            params.set(i, "requestOptions");
-                            break;
-                        }
+                // requestOptions and context
+                methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
+                requestOptionsStmts.forEach(methodBlock::line);
+                for (int i = 0; i < numParam; i++) {
+                    ClientMethodParameter parameter = method.getParameters().get(i);
+                    if (parameter.getClientType() == ClassType.RequestOptions) {
+                        params.set(i, "requestOptions");
+                    } else if (parameter.getClientType() == ClassType.Context) {
+                        params.set(i, "Context.NONE");
                     }
                 }
                 methodBlock.line(String.format(

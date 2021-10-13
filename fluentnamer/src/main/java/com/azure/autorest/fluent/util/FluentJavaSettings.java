@@ -232,15 +232,7 @@ public class FluentJavaSettings {
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
 
-        loadStringSetting("generate-samples", s -> {
-            if (s.equalsIgnoreCase("SPECS")) {
-                generateSamples = SampleGeneration.REST_API_SPECS;
-            } else if (s.equalsIgnoreCase("false")) {
-                generateSamples = SampleGeneration.NONE;
-            } else {
-                generateSamples = SampleGeneration.AGGREGATED;
-            }
-        });
+        loadBooleanSetting("generate-samples", s -> generateSamples = (s ? SampleGeneration.AGGREGATED : SampleGeneration.NONE));
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
