@@ -399,6 +399,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         .type(ClassType.AzureKeyCredential)
                         .name("azureKeyCredential")
                         .accessorMethodSuffix("credential")
+                        .readOnly(false)
                         .build());
             }
             if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
@@ -407,6 +408,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         .type(ClassType.TokenCredential)
                         .name("tokenCredential")
                         .accessorMethodSuffix("credential")
+                        .readOnly(false)
                         .build());
             }
 
