@@ -152,7 +152,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 usesCredentials = true;
             } else {
                 ServiceClientProperty serviceClientProperty =
-                        new ServiceClientProperty.Builder().description(serviceClientPropertyDescription)
+                        new ServiceClientProperty.Builder()
+                                .description(serviceClientPropertyDescription)
                                 .type(serviceClientPropertyClientType)
                                 .name(serviceClientPropertyName)
                                 .readOnly(serviceClientPropertyIsReadOnly)
