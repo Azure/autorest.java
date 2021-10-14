@@ -1,13 +1,12 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.model.javamodel.JavaVisibility;
 
 import java.util.Objects;
 import java.util.Set;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 /**
  * A property that exists within a service's client.
@@ -16,30 +15,32 @@ public class ServiceClientProperty {
     /**
      * The description of this property.
      */
-    private String description;
+    private final String description;
     /**
      * The type of this property that is exposed via the client.
      */
-    private IType type;
+    private final IType type;
     /**
      * The name of this property.
      */
-    private String name;
+    private final String name;
 
     /**
      * THe accessor method suffix of this property
      */
-    private String accessorMethodSuffix;
+    private final String accessorMethodSuffix;
     /**
      * Get whether or not this property's value can be changed by the client library.
      */
-    private boolean readOnly;
+    private final boolean readOnly;
     /**
      * Get the expression that evaluates to this property's default value.
      */
-    private String defaultValueExpression;
+    private final String defaultValueExpression;
 
-    private JavaVisibility methodVisibility = JavaVisibility.Public;
+    private final JavaVisibility methodVisibility;
+
+    private final boolean required;
 
     /**
      * Create a new ServiceClientProperty with the provided properties.
@@ -50,22 +51,23 @@ public class ServiceClientProperty {
      * @param defaultValueExpression The expression that evaluates to this property's default value.
      */
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression) {
-        this(description, type, name, name, readOnly, defaultValueExpression);
+        this(description, type, name, readOnly, defaultValueExpression, name, JavaVisibility.Public, false);
     }
 
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression, JavaVisibility methodVisibility) {
-        this(description, type, name, name, readOnly, defaultValueExpression);
-        this.methodVisibility = methodVisibility;
+        this(description, type, name, readOnly, defaultValueExpression, name, methodVisibility, false);
     }
 
-    public ServiceClientProperty(String description, IType type, String name, String accessorMethodSuffix, boolean readOnly,
-            String defaultValueExpression) {
+    private ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression,
+                                  String accessorMethodSuffix, JavaVisibility methodVisibility, boolean required) {
         this.description = description;
         this.type = type;
         this.name = name;
-        this.accessorMethodSuffix = accessorMethodSuffix;
         this.readOnly = readOnly;
         this.defaultValueExpression = defaultValueExpression;
+        this.accessorMethodSuffix = accessorMethodSuffix;
+        this.methodVisibility = methodVisibility;
+        this.required = required;
     }
 
     public final String getDescription() {
@@ -96,6 +98,10 @@ public class ServiceClientProperty {
         return methodVisibility;
     }
 
+    public boolean isRequired() {
+        return required;
+    }
+
     /**
      * Add this property's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
@@ -120,5 +126,64 @@ public class ServiceClientProperty {
     @Override
     public int hashCode() {
         return Objects.hash(description, type, name, readOnly, defaultValueExpression);
+    }
+
+    public static final class Builder {
+        private String description;
+        private IType type;
+        private String name;
+        private String accessorMethodSuffix;
+        private boolean readOnly = false;
+        private String defaultValueExpression = null;
+        private JavaVisibility methodVisibility = JavaVisibility.Public;
+        private boolean required = false;
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder type(IType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder accessorMethodSuffix(String accessorMethodSuffix) {
+            this.accessorMethodSuffix = accessorMethodSuffix;
+            return this;
+        }
+
+        public Builder readOnly(boolean readOnly) {
+            this.readOnly = readOnly;
+            return this;
+        }
+
+        public Builder defaultValueExpression(String defaultValueExpression) {
+            this.defaultValueExpression = defaultValueExpression;
+            return this;
+        }
+
+        public Builder methodVisibility(JavaVisibility methodVisibility) {
+            this.methodVisibility = methodVisibility;
+            return this;
+        }
+
+        public Builder required(boolean required) {
+            this.required = required;
+            return this;
+        }
+
+        public ServiceClientProperty build() {
+            if (accessorMethodSuffix == null) {
+                accessorMethodSuffix = name;
+            }
+            return new ServiceClientProperty(description, type, name, readOnly, defaultValueExpression,
+                    accessorMethodSuffix, methodVisibility, required);
+        }
     }
 }

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -111,8 +114,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
-            String serviceClientPropertySerializedName = p.getLanguage().getJava().getSerializedName();
-
             IType serviceClientPropertyClientType = Mappers.getSchemaMapper().map(p.getSchema());
             if (p.isNullable() && serviceClientPropertyClientType != null) {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
@@ -123,6 +124,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyIsReadOnly = false;
             }
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
+            boolean serviceClientPropertyRequired = p.isRequired();
 
             if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
                 if (settings.getServiceVersions() == null || settings.getServiceVersions().isEmpty()) {
@@ -143,17 +145,20 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyName = "serviceVersion";
                 serviceClientPropertyIsReadOnly = false;
                 serviceClientPropertyDefaultValueExpression = enumTypeName + ".getLatest()";
+                serviceClientPropertyRequired = false;
             }
 
             if (serviceClientPropertyClientType == ClassType.TokenCredential) {
                 usesCredentials = true;
             } else {
                 ServiceClientProperty serviceClientProperty =
-                        new ServiceClientProperty(serviceClientPropertyDescription,
-                                serviceClientPropertyClientType,
-                                serviceClientPropertyName,
-                                serviceClientPropertyIsReadOnly,
-                                serviceClientPropertyDefaultValueExpression);
+                        new ServiceClientProperty.Builder().description(serviceClientPropertyDescription)
+                                .type(serviceClientPropertyClientType)
+                                .name(serviceClientPropertyName)
+                                .readOnly(serviceClientPropertyIsReadOnly)
+                                .defaultValueExpression(serviceClientPropertyDefaultValueExpression)
+                                .required(serviceClientPropertyRequired)
+                                .build();
                 if (!serviceClientProperties.contains(serviceClientProperty)) {
                     // Ignore duplicate client property.
                     serviceClientProperties.add(serviceClientProperty);
@@ -163,8 +168,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         addHttpPipelineProperty(serviceClientProperties);
         addSerializerAdapterProperty(serviceClientProperties, settings);
         if (settings.isFluent()) {
-            serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running operation.",
-                    ClassType.Duration, "defaultPollInterval", true, null));
+            serviceClientProperties.add(new ServiceClientProperty.Builder()
+                    .description("The default poll interval for long-running operation.")
+                    .type(ClassType.Duration)
+                    .name("defaultPollInterval")
+                    .readOnly(true)
+                    .build());
         }
 
         builder.properties(serviceClientProperties);

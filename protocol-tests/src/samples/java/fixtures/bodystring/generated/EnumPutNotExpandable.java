@@ -9,7 +9,7 @@ import fixtures.bodystring.EnumClient;
 
 public class EnumPutNotExpandable {
     public static void main(String[] args) {
-        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host(System.getenv("HOST")).buildEnumClient();
+        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host("http://localhost:3000").buildEnumClient();
         BinaryData stringBody = BinaryData.fromString("\"red color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.putNotExpandableWithResponse(stringBody, requestOptions, Context.NONE);

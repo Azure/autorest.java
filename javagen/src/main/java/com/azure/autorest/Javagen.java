@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
@@ -15,10 +18,12 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.CodeNamer;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
@@ -31,7 +36,9 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -127,17 +134,23 @@ public class Javagen extends NewPlugin {
 
             // Sample
             if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
-                String hostName0 = "host";
-                if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("host"))) {
-                    hostName0 = "host";
-                } else if (client.getServiceClient().getProperties().stream().anyMatch(p -> p.getName().equals("endpoint"))) {
-                    hostName0 = "endpoint";
-                }
-                String hostName = hostName0;
+                Set<String> protocolExampleNameSet = new HashSet<>();
+
                 syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
                         .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
                         .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
-                        .forEach(m -> javaPackage.addProtocolExamples(m, c, builderName, hostName)));
+                        .forEach(m -> {
+                            if (m.getProxyMethod().getExamples() != null) {
+                                m.getProxyMethod().getExamples().forEach((name, example) -> {
+                                    String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                                    if (!protocolExampleNameSet.contains(filename)) {
+                                        ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, filename, example);
+                                        javaPackage.addProtocolExamples(protocolExample);
+                                        protocolExampleNameSet.add(filename);
+                                    }
+                                });
+                            }
+                        }));
             }
 
             // Service version

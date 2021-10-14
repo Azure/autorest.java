@@ -8,7 +8,7 @@ import fixtures.bodystring.EnumClient;
 
 public class EnumGetReferenced {
     public static void main(String[] args) {
-        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host(System.getenv("HOST")).buildEnumClient();
+        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host("http://localhost:3000").buildEnumClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<String> response = client.getReferencedWithResponse(requestOptions, Context.NONE);
     }

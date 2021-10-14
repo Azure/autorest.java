@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -6,7 +9,6 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
-import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -23,8 +25,6 @@ public class JavaPackage {
     private final JavaFileFactory javaFileFactory;
 
     private final Set<String> filePaths = new HashSet<>();
-
-    private final Set<String> protocolExampleNameSet = new HashSet<>();
 
     public JavaPackage(NewPlugin host) {
         this.settings = JavaSettings.getInstance();
@@ -181,20 +181,10 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolExamples(ClientMethod method, AsyncSyncClient client, String builderName, String hostName) {
-        if (method.getProxyMethod().getExamples() == null) {
-            return;
-        }
-        method.getProxyMethod().getExamples().forEach((name, example) -> {
-            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-            if (!protocolExampleNameSet.contains(filename)) {
-                JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), filename);
-                ProtocolExample protocolExample = new ProtocolExample(method, client, builderName, filename, example, hostName);
-                Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
-                javaFiles.add(javaFile);
-                protocolExampleNameSet.add(filename);
-            }
-        });
+    public void addProtocolExamples(ProtocolExample protocolExample) {
+        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), protocolExample.getFilename());
+        Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
+        javaFiles.add(javaFile);
     }
 
     protected void checkDuplicateFile(String filePath) {
