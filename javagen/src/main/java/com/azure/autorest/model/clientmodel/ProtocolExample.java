@@ -6,7 +6,7 @@ package com.azure.autorest.model.clientmodel;
 public class ProtocolExample {
     private ClientMethod clientMethod;
 
-    private MethodGroupClient methodGroupClient;
+    private AsyncSyncClient client;
 
     private String builderName;
 
@@ -18,13 +18,13 @@ public class ProtocolExample {
 
     public ProtocolExample(
             ClientMethod clientMethod,
-            MethodGroupClient methodGroupClient,
+            AsyncSyncClient client,
             String builderName,
             String filename,
             ProxyMethodExample proxyMethodExample,
             String hostName) {
         this.clientMethod = clientMethod;
-        this.methodGroupClient = methodGroupClient;
+        this.client = client;
         this.builderName = builderName;
         this.filename = filename;
         this.proxyMethodExample = proxyMethodExample;
@@ -35,8 +35,8 @@ public class ProtocolExample {
         return clientMethod;
     }
 
-    public MethodGroupClient getMethodGroupClient() {
-        return methodGroupClient;
+    public AsyncSyncClient getClient() {
+        return client;
     }
 
     public String getBuilderName() {
