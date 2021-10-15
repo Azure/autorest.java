@@ -10,7 +10,7 @@ import fixtures.bodystring.StringOperationClient;
 public class StringPutEmpty {
     public static void main(String[] args) {
         StringOperationClient client =
-                new AutoRestSwaggerBATServiceBuilder().host(System.getenv("HOST")).buildStringOperationClient();
+                new AutoRestSwaggerBATServiceBuilder().host("http://localhost:3000").buildStringOperationClient();
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setBody(BinaryData.fromString("\"\""));
         Response<Void> response = client.putEmptyWithResponse(requestOptions, Context.NONE);

@@ -10,6 +10,9 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
@@ -17,7 +20,10 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, JavaFile> {
@@ -32,10 +38,10 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
     public void write(ProtocolExample protocolExample, JavaFile javaFile) {
         ClientMethod method = protocolExample.getClientMethod();
         AsyncSyncClient client = protocolExample.getClient();
+        ServiceClient serviceClient = protocolExample.getServiceClient();
         String builderName = protocolExample.getBuilderName();
         String filename = protocolExample.getFilename();
         ProxyMethodExample example = protocolExample.getProxyMethodExample();
-        String hostName = protocolExample.getHostName();
 
         // Import
         List<String> imports = new ArrayList<>();
@@ -59,6 +65,9 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         StringBuilder binaryDataStmt = new StringBuilder();
 
         List<String> requestOptionsStmts = new ArrayList<>();
+
+        List<String> clientParameterLines = new ArrayList<>();
+        Set<ServiceClientProperty> processedServiceClientProperties = new HashSet<>();
 
         example.getParameters().forEach((parameterName, parameterValue) -> {
             boolean matchRequiredParameter = false;
@@ -108,30 +117,56 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                         // Path cannot be optional
                     }
                 });
+
+                method.getProxyMethod().getAllParameters().stream().filter(ProxyMethodParameter::getFromClient).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
+                    String clientValue = p.getClientType()
+                            .defaultValueExpression(parameterValue.getObjectValue().toString());
+
+                    serviceClient.getProperties().stream().filter(p1 -> Objects.equals(p.getName(), p1.getName())).findFirst().ifPresent(serviceClientProperty -> {
+                        processedServiceClientProperties.add(serviceClientProperty);
+
+                        clientParameterLines.add(
+                                String.format(".%1$s(%2$s)", serviceClientProperty.getAccessorMethodSuffix(), clientValue));
+                    });
+                });
             }
         });
 
+        // required service client properties
+        serviceClient.getProperties().stream().filter(ServiceClientProperty::isRequired).filter(p -> !processedServiceClientProperties.contains(p)).forEach(serviceClientProperty -> {
+            String defaultValueExpression = serviceClientProperty.getDefaultValueExpression();
+            if (defaultValueExpression == null) {
+                defaultValueExpression = String.format("System.getenv(\"%1$s\")", serviceClientProperty.getName().toUpperCase(Locale.ROOT));
+            }
+
+            clientParameterLines.add(
+                    String.format(".%1$s(%2$s)", serviceClientProperty.getAccessorMethodSuffix(), defaultValueExpression));
+        });
+        String clientParameterExpr = String.join("", clientParameterLines);
+
+        // credentials
+        String credentialExpr;
+        Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
+        if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
+            credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
+        } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
+            credentialExpr = ".credential(new AzureKeyCredential(System.getenv(\"API_KEY\")))";
+        } else {
+            credentialExpr = "";
+        }
+
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
-                String credentialExpr;
-                Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
-                if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
-                    credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
-                } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
-                    credentialExpr = ".credential(new AzureKeyCredential(System.getenv(\"API_KEY\")))";
-                } else {
-                    credentialExpr = "";
-                }
-
                 // client
-                String clientInit = "%s client = new %s()" +
-                        ".%s(System.getenv(\"%s\"))" +
-                        "%s" +
-                        ".build%s();";
+                String clientInit = "%1$s client = new %2$s()" +
+                        "%3$s" +  // credentials
+                        "%4$s" +  // client properties
+                        ".build%1$s();";
                 methodBlock.line(
                         String.format(clientInit,
-                                client.getClassName(), builderName, hostName, hostName.toUpperCase(),
-                                credentialExpr, client.getClassName()));
+                                client.getClassName(), builderName,
+                                credentialExpr,
+                                clientParameterExpr));
 
                 // binaryData
                 if (binaryDataStmt.length() > 0) {

@@ -4,31 +4,32 @@
 package com.azure.autorest.model.clientmodel;
 
 public class ProtocolExample {
-    private ClientMethod clientMethod;
 
-    private AsyncSyncClient client;
+    private final ClientMethod clientMethod;
 
-    private String builderName;
+    private final AsyncSyncClient client;
 
-    private String filename;
+    private final ServiceClient serviceClient;
 
-    private ProxyMethodExample proxyMethodExample;
+    private final String builderName;
 
-    private String hostName;
+    private final String filename;
+
+    private final ProxyMethodExample proxyMethodExample;
 
     public ProtocolExample(
             ClientMethod clientMethod,
             AsyncSyncClient client,
+            ServiceClient serviceClient,
             String builderName,
             String filename,
-            ProxyMethodExample proxyMethodExample,
-            String hostName) {
+            ProxyMethodExample proxyMethodExample) {
         this.clientMethod = clientMethod;
         this.client = client;
+        this.serviceClient = serviceClient;
         this.builderName = builderName;
         this.filename = filename;
         this.proxyMethodExample = proxyMethodExample;
-        this.hostName = hostName;
     }
 
     public ClientMethod getClientMethod() {
@@ -37,6 +38,10 @@ public class ProtocolExample {
 
     public AsyncSyncClient getClient() {
         return client;
+    }
+
+    public ServiceClient getServiceClient() {
+        return serviceClient;
     }
 
     public String getBuilderName() {
@@ -49,9 +54,5 @@ public class ProtocolExample {
 
     public ProxyMethodExample getProxyMethodExample() {
         return proxyMethodExample;
-    }
-
-    public String getHostName() {
-        return hostName;
     }
 }

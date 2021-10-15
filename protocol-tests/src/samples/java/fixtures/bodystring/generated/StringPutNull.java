@@ -9,7 +9,7 @@ import fixtures.bodystring.StringOperationClient;
 public class StringPutNull {
     public static void main(String[] args) {
         StringOperationClient client =
-                new AutoRestSwaggerBATServiceBuilder().host(System.getenv("HOST")).buildStringOperationClient();
+                new AutoRestSwaggerBATServiceBuilder().host("http://localhost:3000").buildStringOperationClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.putNullWithResponse(requestOptions, Context.NONE);
     }

@@ -9,7 +9,7 @@ import fixtures.bodystring.EnumClient;
 
 public class EnumPutReferencedConstant {
     public static void main(String[] args) {
-        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host(System.getenv("HOST")).buildEnumClient();
+        EnumClient client = new AutoRestSwaggerBATServiceBuilder().host("http://localhost:3000").buildEnumClient();
         BinaryData enumStringBody = BinaryData.fromString("\"green-color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response =

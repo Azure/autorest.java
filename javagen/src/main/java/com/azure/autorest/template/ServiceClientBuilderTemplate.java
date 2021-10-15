@@ -394,12 +394,22 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     + "construction of the service client.", ClassType.Configuration, "configuration", false, null));
 
             if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
-                commonProperties.add(new ServiceClientProperty("The Azure Key Credential used for authentication.",
-                        ClassType.AzureKeyCredential, "azureKeyCredential", "credential", false, null));
+                commonProperties.add(new ServiceClientProperty.Builder()
+                        .description("The Azure Key Credential used for authentication.")
+                        .type(ClassType.AzureKeyCredential)
+                        .name("azureKeyCredential")
+                        .accessorMethodSuffix("credential")
+                        .readOnly(false)
+                        .build());
             }
             if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
-                commonProperties.add(new ServiceClientProperty("The TokenCredential used for authentication.",
-                        ClassType.TokenCredential, "tokenCredential", "credential", false, null));
+                commonProperties.add(new ServiceClientProperty.Builder()
+                        .description("The TokenCredential used for authentication.")
+                        .type(ClassType.TokenCredential)
+                        .name("tokenCredential")
+                        .accessorMethodSuffix("credential")
+                        .readOnly(false)
+                        .build());
             }
 
             commonProperties.add(new ServiceClientProperty("The logging configuration for HTTP requests and "
