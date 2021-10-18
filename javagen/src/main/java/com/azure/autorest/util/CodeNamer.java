@@ -83,6 +83,10 @@ public class CodeNamer {
     private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
+    private static final Pattern WORD_WRAP_SPLITTER = Pattern.compile("\r?\n");
+
+    private static final Set<Character> INVALID_CHARACTERS = new HashSet<>(Arrays.asList('_', '-'));
+    private static final Set<Character> INVALID_CHARACTERS_NAMESPACE = new HashSet<>(Arrays.asList('_', '-', '.'));
 
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
@@ -168,19 +172,28 @@ public class CodeNamer {
     }
 
     public static String removeInvalidCharacters(String name) {
-        return getValidName(name, '_', '-');
+        return getValidName(name, INVALID_CHARACTERS);
     }
 
     protected static String removeInvalidCharactersNamespace(String name) {
-        return getValidName(name, '_', '-', '.');
+        return getValidName(name, INVALID_CHARACTERS_NAMESPACE);
     }
 
     public static String getValidName(String name, char... allowedCharacters) {
+        Set<Character> allowed = new HashSet<>();
+        for (char allowedCharacter : allowedCharacters) {
+            allowed.add(allowedCharacter);
+        }
+
+        return getValidName(name, allowed);
+    }
+
+    private static String getValidName(String name, Set<Character> allowedCharacters) {
         String correctName = removeInvalidCharacters(name, allowedCharacters);
 
         // here we have only letters and digits or an empty String
         if (correctName == null || correctName.isEmpty() ||
-                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
+            BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
             StringBuilder sb = new StringBuilder();
             for (char symbol : name.toCharArray()) {
                 if (BASIC_LATIC_CHARACTERS.containsKey(symbol)) {
@@ -195,7 +208,7 @@ public class CodeNamer {
         // if it is still empty String, throw
         if (correctName == null || correctName.isEmpty()) {
             throw new IllegalArgumentException(
-                    String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
+                String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
         }
 
         return correctName;
@@ -274,7 +287,7 @@ public class CodeNamer {
     public static List<String> wordWrap(String text, int width) {
         Objects.requireNonNull(text);
         List<String> ret = new ArrayList<>();
-        String[] lines = text.split("\r?\n", -1);
+        String[] lines = WORD_WRAP_SPLITTER.split(text, -1);
         for (String line : lines) {
             String processedLine = line.trim();
 
@@ -339,18 +352,14 @@ public class CodeNamer {
         return name;
     }
 
-    private static String removeInvalidCharacters(String name, char... allowerCharacters) {
+    private static String removeInvalidCharacters(String name, Set<Character> allowedCharacters) {
         if (name == null || name.isEmpty()) {
             return name;
         }
 
         StringBuilder builder = new StringBuilder();
-        List<Character> allowed = new ArrayList<>();
-        for (Character c : allowerCharacters) {
-            allowed.add(c);
-        }
         for (Character c : name.toCharArray()) {
-            if (Character.isLetterOrDigit(c) || allowed.contains(c)) {
+            if (Character.isLetterOrDigit(c) || allowedCharacters.contains(c)) {
                 builder.append(c);
             } else {
                 builder.append("_");

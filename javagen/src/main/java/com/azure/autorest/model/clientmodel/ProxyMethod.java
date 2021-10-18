@@ -7,7 +7,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
@@ -318,6 +317,10 @@ public class ProxyMethod {
 
             if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(this.requestContentType)) {
                 imports.add("com.azure.core.annotation.FormParam");
+            }
+
+            if ("multipart/form-data".equals(this.requestContentType)) {
+                imports.add("com.azure.core.annotation.FormData");
             }
 
             for (ProxyMethodParameter parameter : parameters) {

@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
+    private static final Pattern CASE_SPLITTER = Pattern.compile("[_\\- ]");
+
     private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
         put((char) 32, "Space");
         put((char) 33, "ExclamationMark");
@@ -83,7 +86,7 @@ public class CodeNamer {
                 "Get", "Put", "Post", "Patch", "Delete", "Headers",
                 "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
                 "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam",
-                "Fluent", "Immutable", "JsonFlatten"
+                "Fluent", "Immutable", "JsonFlatten", "FormData"
         ));
     }
 
@@ -102,7 +105,7 @@ public class CodeNamer {
         }
 
         List<String> parts = new ArrayList<>();
-        String[] splits = name.split("[_\\- ]");
+        String[] splits = CASE_SPLITTER.split(name);
         if (splits.length == 0) {
             return "";
         }
@@ -125,7 +128,7 @@ public class CodeNamer {
             return '_' + toCamelCase(name.substring(1));
         }
 
-        return Arrays.stream(name.split("[_\\- ]"))
+        return CASE_SPLITTER.splitAsStream(name)
                 .filter(s -> s != null && !s.isEmpty())
                 .map(s -> formatCase(s, false))
                 .collect(Collectors.joining());
@@ -251,14 +254,14 @@ public class CodeNamer {
         return name;
     }
 
-    private static String removeInvalidCharacters(String name, char... allowerCharacters) {
+    private static String removeInvalidCharacters(String name, char... allowedCharacters) {
         if (name == null || name.isEmpty()) {
             return name;
         }
 
         StringBuilder builder = new StringBuilder();
-        List<Character> allowed = new ArrayList<>();
-        for (Character c : allowerCharacters) {
+        Set<Character> allowed = new HashSet<>();
+        for (Character c : allowedCharacters) {
             allowed.add(c);
         }
         for (Character c : name.toCharArray()) {

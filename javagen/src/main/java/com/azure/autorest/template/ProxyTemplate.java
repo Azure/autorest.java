@@ -54,7 +54,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
             classBlock.interfaceBlock(visibility, restAPI.getName(), interfaceBlock ->
             {
                 for (ProxyMethod restAPIMethod : restAPI.getMethods()) {
-                    if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {
+                    if (restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {
                         interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
                     }
 
@@ -83,7 +83,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     ArrayList<String> parameterDeclarationList = new ArrayList<String>();
                     if (restAPIMethod.isResumable()) {
-                        interfaceBlock.annotation(String.format("ResumeOperation"));
+                        interfaceBlock.annotation("ResumeOperation");
                     }
 
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
@@ -119,7 +119,11 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
                                             parameter.getRequestParameterName()));
                                     break;
+                                } else if (restAPIMethod.getRequestContentType().equals("multipart/form-data")) {
+                                    parameterDeclarationBuilder.append(String.format("@FormData(\"%1$s\") ",
+                                        parameter.getRequestParameterName()));
                                 }
+
                                 parameterDeclarationBuilder.append(String.format("@BodyParam(\"%1$s\") ", restAPIMethod.getRequestContentType()));
                                 break;
 
@@ -138,7 +142,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
                         }
 
-                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameter.getName());
+                        parameterDeclarationBuilder.append(parameter.getWireType())
+                            .append(" ")
+                            .append(parameter.getName());
                         parameterDeclarationList.add(parameterDeclarationBuilder.toString());
                     }
 
