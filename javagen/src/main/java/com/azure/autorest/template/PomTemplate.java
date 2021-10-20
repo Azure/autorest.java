@@ -145,13 +145,13 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
      * @param pom the pom model.
      */
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
-        projectBlock.block("build", buildBlock -> {
-            buildBlock.block("plugins", pluginsBlock -> {
-                if (!JavaSettings.getInstance().isSdkIntegration()) {
+        if (!JavaSettings.getInstance().isSdkIntegration()) {
+            projectBlock.block("build", buildBlock -> {
+                buildBlock.block("plugins", pluginsBlock -> {
                     writeStandAlonePlugins(projectBlock);
-                }
+                });
             });
-        });
+        }
     }
 
     protected void writeStandAlonePlugins(XmlBlock pluginsBlock) {
