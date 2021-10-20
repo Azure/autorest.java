@@ -80,8 +80,8 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.co
 del protocol-tests\src\main\java\module-info.java
 
 rem Protocol resilience
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 

@@ -233,8 +233,10 @@ public class Javagen extends NewPlugin {
                 javaPackage.addModuleInfo(client.getModuleInfo());
 
                 // POM
-                Pom pom = new PomMapper().map(project);
-                javaPackage.addPom("pom.xml", pom);
+                if (settings.isSdkIntegration() || settings.shouldRegeneratePom()) {
+                    Pom pom = new PomMapper().map(project);
+                    javaPackage.addPom("pom.xml", pom);
+                }
             }
 
             //Step 4: Print to files
