@@ -174,7 +174,7 @@ public class Javagen extends NewPlugin {
                             .findFirst()
                             .orElse(null);
                     if (apiVersion == null) {
-                        throw new IllegalArgumentException("'api-version' not found. Please provide by 'serviceVersions' parameter.");
+                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
                     }
                     serviceVersions = Collections.singletonList(apiVersion);
                 }

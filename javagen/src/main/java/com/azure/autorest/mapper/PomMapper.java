@@ -16,18 +16,20 @@ import java.util.stream.Collectors;
 
 public class PomMapper implements IMapper<Project, Pom> {
 
-    private static final String CORE_KEY = "com.azure:azure-core:";
-    private static final String CORE_HTTP_NETTY_KEY = "com.azure:azure-core-http-netty:";
-    private static final String CORE_TEST_KEY = "com.azure:azure-core-test:";
-    private static final String IDENTITY_KEY = "com.azure:azure-identity:";
-    private static final String JUNIT_JUPITER_ENGINE_KEY = "org.junit.jupiter:junit-jupiter-engine:";
+    private static final String CORE_PREFIX = "com.azure:azure-core:";
+    private static final String CORE_HTTP_NETTY_PREFIX = "com.azure:azure-core-http-netty:";
+    private static final String CORE_TEST_PREFIX = "com.azure:azure-core-test:";
+    private static final String IDENTITY_PREFIX = "com.azure:azure-identity:";
+    private static final String JUNIT_JUPITER_ENGINE_PREFIX = "org.junit.jupiter:junit-jupiter-engine:";
 
-    private static final List<String> KNOWN_DEPENDENCY_KEYS = Arrays.asList(
-            CORE_KEY,
-            CORE_HTTP_NETTY_KEY,
-            CORE_TEST_KEY,
-            IDENTITY_KEY,
-            JUNIT_JUPITER_ENGINE_KEY
+    private static final String TEST_SUFFIX = ":test";
+
+    private static final List<String> KNOWN_DEPENDENCY_PREFIXES = Arrays.asList(
+            CORE_PREFIX,
+            CORE_HTTP_NETTY_PREFIX,
+            CORE_TEST_PREFIX,
+            IDENTITY_PREFIX,
+            JUNIT_JUPITER_ENGINE_PREFIX
     );
 
     @Override
@@ -41,13 +43,13 @@ public class PomMapper implements IMapper<Project, Pom> {
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         List<String> dependencyIdentifiers = new ArrayList<>();
-        dependencyIdentifiers.add(CORE_KEY + project.getPackageVersions().getAzureCoreVersion());
-        dependencyIdentifiers.add(CORE_HTTP_NETTY_KEY + project.getPackageVersions().getAzureCoreHttpNettyVersion());
-        dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_KEY + project.getPackageVersions().getJunitVersion() + ":test");
-        dependencyIdentifiers.add(CORE_TEST_KEY + project.getPackageVersions().getAzureCoreTestVersion() + ":test");
-        dependencyIdentifiers.add(IDENTITY_KEY + project.getPackageVersions().getAzureIdentityVersion() + ":test");
+        dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
+        dependencyIdentifiers.add(CORE_HTTP_NETTY_PREFIX + project.getPackageVersions().getAzureCoreHttpNettyVersion());
+        dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
+        dependencyIdentifiers.add(CORE_TEST_PREFIX + project.getPackageVersions().getAzureCoreTestVersion() + TEST_SUFFIX);
+        dependencyIdentifiers.add(IDENTITY_PREFIX + project.getPackageVersions().getAzureIdentityVersion() + TEST_SUFFIX);
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
-                .filter(dependencyIdentifier -> KNOWN_DEPENDENCY_KEYS.stream().noneMatch(dependencyIdentifier::startsWith))
+                .filter(dependencyIdentifier -> KNOWN_DEPENDENCY_PREFIXES.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 

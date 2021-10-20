@@ -48,7 +48,6 @@ public class Project {
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
     protected String sdkRepositoryUri;
 //    private Changelog changelog;
-//    private final List<CodeSample> codeSamples = new ArrayList<>();
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
@@ -59,7 +58,6 @@ public class Project {
         private String azureIdentityVersion = "1.4.0";
 //        private String azureResourceManagerResourcesVersion = "2.4.0";
         private String junitVersion = "5.7.2";
-//        private String jacocoMavenPlugin = "0.8.5";
         private String revapiMavenPlugin = "0.11.2";
 
         public String getAzureClientSdkParentVersion() {
@@ -123,15 +121,11 @@ public class Project {
     }
 
     public void integrateWithSdk() {
-//        FluentPomTemplate.setProject(this);
-
         findPackageVersions();
 
         findPomDependencies();
 
 //        updateChangelog();
-//
-//        findCodeSamples();
 
         findSdkRepositoryUri();
     }
@@ -393,10 +387,6 @@ public class Project {
     public List<String> getPomDependencyIdentifiers() {
         return pomDependencyIdentifiers;
     }
-
-//    public List<CodeSample> getCodeSamples() {
-//        return codeSamples;
-//    }
 
     public Optional<String> getSdkRepositoryUri() {
         return Optional.ofNullable(sdkRepositoryUri);
