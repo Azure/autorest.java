@@ -7,12 +7,12 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.projectmodel.CodeSample;
-import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
 
 public class ReadmeTemplate {
 
-    public String write(Project project) {
+    public String write(FluentProject project) {
         StringBuilder sampleCodesBuilder = new StringBuilder();
         for (CodeSample codeSample : project.getCodeSamples()) {
             if (codeSample.getCode() != null) {

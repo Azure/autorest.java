@@ -4,11 +4,13 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.mapper.PomMapper;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -18,10 +20,13 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.model.projectmodel.Project;
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.google.googlejavaformat.java.Formatter;
@@ -36,8 +41,10 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -154,7 +161,24 @@ public class Javagen extends NewPlugin {
             }
 
             // Service version
-            if (settings.isLowLevelClient() && settings.getServiceVersions() != null) {
+            if (settings.isLowLevelClient()) {
+                List<String> serviceVersions = settings.getServiceVersions();
+                if (serviceVersions == null) {
+                    String apiVersion = codeModel.getOperationGroups().stream()
+                            .flatMap(og -> og.getOperations().stream())
+                            .filter(o -> o.getApiVersions() != null)
+                            .flatMap(o -> o.getApiVersions().stream())
+                            .filter(Objects::nonNull)
+                            .map(ApiVersion::getVersion)
+                            .filter(Objects::nonNull)
+                            .findFirst()
+                            .orElse(null);
+                    if (apiVersion == null) {
+                        throw new IllegalArgumentException("'api-version' not found. Please provide by 'serviceVersions' parameter.");
+                    }
+                    serviceVersions = Collections.singletonList(apiVersion);
+                }
+
                 String packageName = settings.getPackage();
                 String serviceName;
                 if (settings.getServiceName() == null) {
@@ -163,7 +187,6 @@ public class Javagen extends NewPlugin {
                     serviceName = settings.getServiceName().replaceAll("\\s", "");
                 }
                 String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
-                List<String> serviceVersions = settings.getServiceVersions();
                 javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
             }
 
@@ -200,12 +223,20 @@ public class Javagen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
-            // Module-info
             if (settings.isLowLevelClient()) {
+                Project project = new Project(client);
+                if (settings.isSdkIntegration()) {
+                    project.integrateWithSdk();
+                }
+
+                // Module-info
                 javaPackage.addModuleInfo(client.getModuleInfo());
+
+                // POM
+                Pom pom = new PomMapper().map(project);
+                javaPackage.addPom("pom.xml", pom);
             }
 
-            // TODO: POM, Manager
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
@@ -220,6 +251,10 @@ public class Javagen extends NewPlugin {
                 }
                 writeFile(javaFile.getFilePath(), content, null);
             }
+            for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
+                writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
+            }
+
             String artifactId = settings.getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {
                 writeFile("src/main/resources/" + artifactId + ".properties",

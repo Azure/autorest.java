@@ -13,7 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
-import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
 import com.azure.autorest.fluent.template.FluentExampleTemplate;
@@ -43,7 +43,7 @@ public class FluentJavaPackage extends JavaPackage {
         return textFiles;
     }
 
-    public final void addReadmeMarkdown(Project project) {
+    public final void addReadmeMarkdown(FluentProject project) {
         TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
@@ -89,7 +89,7 @@ public class FluentJavaPackage extends JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addFluentManager(FluentManager model, Project project) {
+    public final void addFluentManager(FluentManager model, FluentProject project) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(
                 model.getType().getPackage(),
                 model.getType().getName());
