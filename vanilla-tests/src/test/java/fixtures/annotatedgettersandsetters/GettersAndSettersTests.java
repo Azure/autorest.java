@@ -82,7 +82,7 @@ public class GettersAndSettersTests {
         Class<?> returnType = method.getReturnType();
 
         // 'get*' and 'set*' are both 3 characters, if the method is a boolean getter then it's 'is*' so 2 characters.
-        String expectedFieldName = (returnType == boolean.class || returnType == Boolean.TYPE)
+        String expectedFieldName = (returnType == boolean.class || returnType == Boolean.class)
             ? method.getName().substring(2)
             : method.getName().substring(3);
 
