@@ -69,7 +69,9 @@ public class JavaFormatter {
             }
             return formattedCode;
         } catch (Exception e) {
-            logger.warn("Failed to parse Java file '{}', message: '{}'", path, e.getMessage());
+            logger.warn("Failed to parse Java file '{}', message: '{}'",
+                    path,
+                    (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage());
             return content;
         }
     }

@@ -36,7 +36,7 @@ public class JavaFormatterTests {
             "    public JavaFormatter(String content, String path) {\n" +
             "        this.content = content;\n" +
             "        this.path = path;\n" +
-            "        String longString = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}\"\n" +
+            "        String longString = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}\";\n" +
             "    }\n" +
             "}\n";
 
@@ -51,7 +51,9 @@ public class JavaFormatterTests {
     @Test
     public void testFormatter() {
         JavaFormatter formatter = new JavaFormatter(JAVA_CONTENT, "mock");
-        formatter.format(true);
+        String content = formatter.format(true);
+        String[] lines = content.split("\r?\n", -1);
+        Assertions.assertTrue(Arrays.stream(lines).noneMatch(s -> s.equals("import com.azure.autorest.extension.base.plugin.PluginLogger;")));
     }
 
     @Test
