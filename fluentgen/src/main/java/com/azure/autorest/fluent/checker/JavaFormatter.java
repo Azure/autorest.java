@@ -56,6 +56,8 @@ public class JavaFormatter {
             return content;
         }
 
+        // fork https://github.com/weidongxu-microsoft/google-java-format/tree/tweak_format
+
         try {
             //return new Formatter().formatSourceAndFixImports(content);
 
