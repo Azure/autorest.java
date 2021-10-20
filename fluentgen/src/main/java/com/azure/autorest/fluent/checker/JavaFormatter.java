@@ -27,7 +27,7 @@ public class JavaFormatter {
         if (!CoreUtils.isNullOrEmpty(version)) {
             logger.info("Java version: {}", version);
             String[] segments = version.split(Pattern.quote("."));
-            if (segments.length >= 2 && !segments[0].equals("1")) {
+            if (segments.length >= 1 && !segments[0].equals("1")) {
                 try {
                     int majorVersion = Integer.parseInt(segments[0]);
                     if (majorVersion >= 11) {
