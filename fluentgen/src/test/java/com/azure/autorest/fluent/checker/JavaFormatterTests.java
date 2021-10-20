@@ -11,6 +11,8 @@ import com.azure.autorest.fluent.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
 import java.util.Arrays;
 
@@ -49,6 +51,7 @@ public class JavaFormatterTests {
     }
 
     @Test
+    @EnabledForJreRange(min = JRE.JAVA_11)
     public void testFormatter() {
         JavaFormatter formatter = new JavaFormatter(JAVA_CONTENT, "mock");
         String content = formatter.format(true);
@@ -57,6 +60,7 @@ public class JavaFormatterTests {
     }
 
     @Test
+    @EnabledForJreRange(min = JRE.JAVA_11)
     public void testLengthLimit() {
         final int lengthLimit = 120;
         String content = JavaFormatter.fixOverlongStringLiteral(JAVA_CONTENT, lengthLimit);
