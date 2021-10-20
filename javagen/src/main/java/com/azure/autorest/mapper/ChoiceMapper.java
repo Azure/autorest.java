@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
-    private static ChoiceMapper instance = new ChoiceMapper();
+    private static final ChoiceMapper INSTANCE = new ChoiceMapper();
     Map<ChoiceSchema, IType> parsed = new HashMap<>();
 
     private ChoiceMapper() {
     }
 
     public static ChoiceMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

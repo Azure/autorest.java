@@ -32,13 +32,16 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.azure.autorest.util.TemplateUtil.addJsonGetter;
+import static com.azure.autorest.util.TemplateUtil.addJsonSetter;
+
 /**
  * Writes a ClientModel to a JavaFile.
  */
 public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
-    private static ModelTemplate _instance = new ModelTemplate();
+    private static final ModelTemplate _instance = new ModelTemplate();
 
     protected ModelTemplate() {
     }
@@ -53,13 +56,24 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         JavaSettings settings = JavaSettings.getInstance();
-        Set<String> imports = new HashSet<String>();
+        Set<String> imports = new HashSet<>();
+
+        // If there is client side validation and the model will generate a ClientLogger to log the validation
+        // exceptions add an import of 'com.azure.core.util.logging.ClientLogger' and
+        // 'com.fasterxml.jackson.annotation.JsonIgnore'.
+        //
+        // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
+        // included in serialization.
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
             imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
+        // TODO: Determine whether imports should be added here.
         imports.add("com.fasterxml.jackson.annotation.JsonCreator");
+        imports.add("com.fasterxml.jackson.annotation.JsonGetter");
+        imports.add("com.fasterxml.jackson.annotation.JsonSetter");
+
         String lastParentName = model.getName();
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
@@ -72,6 +86,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
             propertyReferences.forEach(p -> p.addImportsTo(imports, false));
         }
+
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 model.getPropertyReferences().forEach(p -> p.addImportsTo(imports, false));
@@ -84,9 +99,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-        {
-            comment.description(model.getDescription());
-        });
+            comment.description(model.getDescription()));
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         if (model.getIsPolymorphic()) {
@@ -123,13 +136,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (hasDerivedModels) {
                 javaFile.line("@JsonSubTypes({");
                 javaFile.indent(() -> {
-                    Function<ClientModel, String> getDerivedTypeAnnotation = (ClientModel derivedType) -> String.format("@JsonSubTypes.Type(name = \"%1$s\", value = %2$s.class)", derivedType.getSerializedName(), derivedType.getName());
+                    Function<ClientModel, String> getDerivedTypeAnnotation = (ClientModel derivedType) ->
+                        String.format("@JsonSubTypes.Type(name = \"%1$s\", value = %2$s.class)",
+                            derivedType.getSerializedName(), derivedType.getName());
 
                     for (int i = 0; i != model.getDerivedModels().size() - 1; i++) {
                         ClientModel derivedModel = model.getDerivedModels().get(i);
                         javaFile.line(getDerivedTypeAnnotation.apply(derivedModel) + ',');
                     }
-                    javaFile.line(getDerivedTypeAnnotation.apply(model.getDerivedModels().get(model.getDerivedModels().size() - 1)));
+                    javaFile.line(getDerivedTypeAnnotation.apply(model.getDerivedModels()
+                        .get(model.getDerivedModels().size() - 1)));
                 });
                 javaFile.line("})");
             }
@@ -148,7 +164,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             javaFile.annotation("JsonFlatten");
         }
 
-        ArrayList<JavaModifier> classModifiers = new ArrayList<JavaModifier>();
+        ArrayList<JavaModifier> classModifiers = new ArrayList<>();
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
             if (!settings.isFluent() || !model.getName().endsWith("Identity")) {    // bug https://github.com/Azure/azure-sdk-for-java/issues/8372
                 classModifiers.add(JavaModifier.Final);
@@ -196,9 +212,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                {
-                    comment.line(property.getDescription());
-                });
+                    comment.line(property.getDescription()));
 
                 if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
                     classBlock.annotation("JsonFlatten");
@@ -272,6 +286,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
+                if (!property.getIsReadOnly()) {
+                    addJsonGetter(classBlock, settings, property.getSerializedName());
+                }
                 classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
                 {
                     String sourceTypeName = propertyType.toString();
@@ -309,7 +326,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
-
+                    addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
@@ -342,15 +359,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
                     classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
-                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock -> {
-                           ifBlock.line("%s = new HashMap<>();", property.getName());
-                        });
+                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock ->
+                            ifBlock.line("%s = new HashMap<>();", property.getName()));
                         methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
                     });
                 }
             }
 
-            if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+            if (settings.isOverrideSetterFromSuperclass()) {
                 // reference to properties from parent model
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromParentModel).collect(Collectors.toList())) {
                     ClientModelPropertyAccess parentProperty = propertyReference.getReferenceProperty();
@@ -370,7 +386,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 // reference to properties from flattened client model
                 for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
                     ClientModelPropertyAccess property = propertyReference.getReferenceProperty();
@@ -386,7 +402,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                     // getter
                     generateGetterJavadoc(classBlock, model, property);
-
+                    if (targetProperty.getIsReadOnly()) {
+                        addJsonGetter(classBlock, settings, targetProperty.getSerializedName());
+                    }
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
                         // use ternary operator to avoid directly return null
                         String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
@@ -399,11 +417,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // setter
                     if (!property.getIsReadOnly()) {
                         generateSetterJavadoc(classBlock, model, property);
-
+                        addJsonSetter(classBlock, settings, targetProperty.getSerializedName());
                         classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
-                            methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
-                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType()));
-                            });
+                            methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
+                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType())));
 
                             methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
@@ -496,9 +513,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         } else if (!constantProperties.isEmpty()) {
             classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-            {
-                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
-            });
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName())));
             classBlock.publicConstructor(String.format("%1$s()", model.getName()), (constructor) ->
             {
                 for (ClientModelProperty constantProperty : constantProperties) {
@@ -546,9 +561,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
                         }
                     } else if (validation != null) {
-                        methodBlock.ifBlock(String.format("%s() != null", getGetterName(model, property)), ifBlock -> {
-                            ifBlock.line(validation + ";");
-                        });
+                        methodBlock.ifBlock(String.format("%s() != null", getGetterName(model, property)), ifBlock ->
+                            ifBlock.line(validation + ";"));
                     }
                 }
             });
@@ -624,8 +638,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
                 comment.description(String.format("Set the %s property", property.getName()));
             } else {
-                comment.description(String
-                        .format("Set the %s property: %s", property.getName(), property.getDescription()));
+                comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
             }
             comment.param(property.getName(), String.format("the %s value to set", property.getName()));
             comment.methodReturns(String.format("the %s object itself.", model.getName()));

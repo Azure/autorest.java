@@ -22,13 +22,13 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty> {
-    private static ModelPropertyMapper instance = new ModelPropertyMapper();
+    private static final ModelPropertyMapper INSTANCE = new ModelPropertyMapper();
 
     private ModelPropertyMapper() {
     }
 
     public static ModelPropertyMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                             .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
                     if (!flattened) {
                         String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
-                        flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+                        flattened = discriminatorSerializedName.contains(".");
                     }
                 }
             } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
@@ -121,6 +121,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.isRequired()) {
             annotationArgumentList.add("required = true");
         }
+
+        // Though this looks odd to add WRITE_ONLY access when the property is marked as read-only it is the correct
+        // behavior. The Swagger definition for read-only is from the perspective of the service which correlates to
+        // write-only behavior in an SDK.
         if (property.isReadOnly()) {
             annotationArgumentList.add("access = JsonProperty.Access.WRITE_ONLY");
         }

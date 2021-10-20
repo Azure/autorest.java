@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ArrayMapper implements IMapper<ArraySchema, IType> {
-    private static ArrayMapper instance = new ArrayMapper();
+    private static final ArrayMapper INSTANCE = new ArrayMapper();
     Map<ArraySchema, IType> parsed = new HashMap<>();
 
     private ArrayMapper() {
     }
 
     public static ArrayMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -24,14 +24,14 @@ public class ArrayMapper implements IMapper<ArraySchema, IType> {
         if (sequenceType == null) {
             return null;
         }
-        if (parsed.containsKey(sequenceType)) {
-            return parsed.get(sequenceType);
-        }
-        IType iType = new ListType(Mappers.getSchemaMapper().map(sequenceType.getElementType()));
-        if (JavaSettings.getInstance().shouldUseIterable()) {
-            iType = new IterableType(Mappers.getSchemaMapper().map(sequenceType.getElementType()));
-        }
-        parsed.put(sequenceType, iType);
-        return iType;
+
+        return parsed.computeIfAbsent(sequenceType, sType -> {
+            IType mappedType = Mappers.getSchemaMapper().map(sequenceType.getElementType());
+
+            // Choose IterableType or ListType depending on whether arrays should use Iterable.
+            return JavaSettings.getInstance().shouldUseIterable()
+                ? new IterableType(mappedType)
+                : new ListType(mappedType);
+        });
     }
 }

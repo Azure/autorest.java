@@ -24,6 +24,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
@@ -221,7 +222,7 @@ public class Javagen extends NewPlugin {
                 writeFile(javaFile.getFilePath(), content, null);
             }
             String artifactId = settings.getArtifactId();
-            if (!(artifactId == null || artifactId.isEmpty())) {
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
