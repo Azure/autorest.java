@@ -7,10 +7,9 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
-import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -56,7 +55,7 @@ public class FluentManagerTemplate {
         return INSTANCE;
     }
 
-    public void write(FluentManager manager, Project project, JavaFile javaFile) {
+    public void write(FluentManager manager, FluentProject project, JavaFile javaFile) {
         ServiceClient serviceClient = manager.getClient().getServiceClient();
 
         final boolean hasEndpointParameter = serviceClient.getProperties().stream()

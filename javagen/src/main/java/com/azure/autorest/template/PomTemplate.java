@@ -7,9 +7,9 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
 
 import java.util.HashMap;
@@ -20,7 +20,6 @@ import java.util.Map;
  */
 public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     private static PomTemplate _instance = new PomTemplate();
-    private static JavaSettings settings = JavaSettings.getInstance();
 
     protected PomTemplate() {
     }
@@ -30,7 +29,6 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {
-        // TODO: license header
         Map<String, String> projectAnnotations = new HashMap<>();
         projectAnnotations.put("xmlns", "http://maven.apache.org/POM/4.0.0");
         projectAnnotations.put("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -62,7 +60,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s Management", pom.getServiceName()));
+            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
             projectBlock.tag("description", pom.getServiceDescription());
             projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 
@@ -95,6 +93,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
                 propertiesBlock.tagCData("legal", "[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.");
+                propertiesBlock.tag("jacoco.skip.coverage.check", "true");
+                propertiesBlock.tag("skipNewCodesnippetTooling", "false");
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
@@ -116,7 +116,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                             scope = null;
                         }
                         dependenciesBlock.block("dependency", dependencyBlock -> {
-                            boolean externalDependency = !groupId.startsWith("com.azure");
+                            boolean externalDependency = !groupId.startsWith("com.azure");  // a bit of hack here
                             dependenciesBlock.tag("groupId", groupId);
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
@@ -145,5 +145,44 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
      * @param pom the pom model.
      */
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
+        if (!JavaSettings.getInstance().isSdkIntegration()) {
+            projectBlock.block("build", buildBlock -> {
+                buildBlock.block("plugins", pluginsBlock -> {
+                    writeStandAlonePlugins(projectBlock);
+                });
+            });
+        }
+    }
+
+    protected void writeStandAlonePlugins(XmlBlock pluginsBlock) {
+        // maven-compiler-plugin
+        pluginsBlock.block("plugin", pluginBlock -> {
+            pluginBlock.tag("groupId", "org.apache.maven.plugins");
+            pluginBlock.tag("artifactId", "maven-compiler-plugin");
+            pluginBlock.tag("version", "3.8.1");
+            pluginBlock.block("configuration", configurationBlock -> {
+                configurationBlock.tag("release", "11");
+            });
+        });
+        // build-helper-maven-plugin: allow samples to be compiled
+        pluginsBlock.block("plugin", pluginBlock -> {
+            pluginBlock.tag("groupId", "org.codehaus.mojo");
+            pluginBlock.tag("artifactId", "build-helper-maven-plugin");
+            pluginBlock.tag("version", "3.0.0");
+            pluginBlock.block("executions", executionsBlock -> {
+                executionsBlock.block("execution", executionBlock -> {
+                    executionBlock.tag("id", "add-test-source");
+                    executionBlock.tag("phase", "generate-test-sources");
+                    executionBlock.block("goals", goalsBlock -> {
+                        goalsBlock.tag("goal", "add-test-source");
+                    });
+                    executionBlock.block("configuration", configurationBlock -> {
+                        configurationBlock.block("sources", sourcesBlock -> {
+                            sourcesBlock.tag("source", "${basedir}/src/samples");
+                        });
+                    });
+                });
+            });
+        });
     }
 }

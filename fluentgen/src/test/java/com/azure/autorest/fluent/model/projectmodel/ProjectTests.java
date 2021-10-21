@@ -26,11 +26,11 @@ public class ProjectTests {
     }
 
     @Test
-    public void testProject() {
+    public void testFluentProject() {
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         FluentClient fluentClient = content.getFluentClient();
 
-        Project project = new Project(fluentClient);
+        FluentProject project = new FluentProject(fluentClient);
         Assertions.assertEquals("com.azure.resourcemanager", project.getGroupId());
         Assertions.assertEquals("azure-resourcemanager-mock", project.getArtifactId());
         Assertions.assertNotNull(project.getChangelog());
@@ -38,7 +38,7 @@ public class ProjectTests {
         // ignore for IO
         project.integrateWithSdk();
 
-        Optional<String> coreMgmtVer = Project.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management");
+        Optional<String> coreMgmtVer = FluentProject.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management");
         Assertions.assertTrue(coreMgmtVer.isPresent());
         Assertions.assertEquals("1.1.0", coreMgmtVer.get());
     }

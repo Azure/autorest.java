@@ -69,7 +69,7 @@ rmdir /S /Q "protocol-tests\src\main"
 rmdir /S /Q "protocol-tests\src\samples"
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-string.json --namespace=fixtures.bodystring
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/paging.json --namespace=fixtures.paging
-call autorest protocol-tests\swagger\bodycomplex.md %PROTOCOL_ARGUMENTS% --output-folder=.. --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/body-complex.json --namespace=fixtures.bodycomplex
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/header.json --namespace=fixtures.header
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/media_types.json --namespace=fixtures.mediatypes
@@ -80,8 +80,10 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.co
 del protocol-tests\src\main\java\module-info.java
 
 rem Protocol resilience
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+rmdir /S /Q "protocol-resilience-test\llcinitial\src\main"
+rmdir /S /Q "protocol-resilience-test\llcupdate1\src\main"
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/llc_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/llc_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 

@@ -3,16 +3,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.projectmodel;
+package com.azure.autorest.model.projectmodel;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluent.FluentGen;
-import com.azure.autorest.fluent.model.clientmodel.FluentClient;
-import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.template.FluentPomTemplate;
-import com.azure.autorest.fluent.util.FluentJavaSettings;
-import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.clientmodel.Client;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -33,34 +30,34 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class Project {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Project.class);
+    private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
-    private final String serviceName;
-    private final ServiceDescription serviceDescription = new ServiceDescription();
-
-    private final String namespace;
-    private final String groupId = "com.azure.resourcemanager";
-    private final String artifactId;
-    private String version = "1.0.0-beta.1";
-    private final PackageVersions packageVersions = new PackageVersions();
-    private Changelog changelog;
-    private final List<String> pomDependencyIdentifiers = new ArrayList<>();
-    private final List<CodeSample> codeSamples = new ArrayList<>();
-    private String sdkRepositoryUri;
+    protected String serviceName;
+    protected String serviceDescription;
+    protected String namespace;
+    protected String groupId = "com.azure";
+    protected String artifactId;
+    protected String version = "1.0.0-beta.1";
+    protected final PackageVersions packageVersions = new PackageVersions();
+    protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
+    protected String sdkRepositoryUri;
+//    private Changelog changelog;
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureCoreVersion = "1.21.0";
         private String azureCoreManagementVersion = "1.4.2";
-//        private String azureCoreTestVersion = "1.6.1";
-//        private String azureIdentityVersion = "1.2.5";
+        private String azureCoreHttpNettyVersion = "1.11.1";
+        private String azureCoreTestVersion = "1.7.3";
+        private String azureIdentityVersion = "1.4.0";
 //        private String azureResourceManagerResourcesVersion = "2.4.0";
-        private String jacocoMavenPlugin = "0.8.5";
+        private String junitVersion = "5.7.2";
         private String revapiMavenPlugin = "0.11.2";
 
         public String getAzureClientSdkParentVersion() {
@@ -75,20 +72,20 @@ public class Project {
             return azureCoreManagementVersion;
         }
 
-//        public String getAzureCoreTestVersion() {
-//            return azureCoreTestVersion;
-//        }
-//
-//        public String getAzureIdentityVersion() {
-//            return azureIdentityVersion;
-//        }
-//
-//        public String getAzureResourceManagerResourcesVersion() {
-//            return azureResourceManagerResourcesVersion;
-//        }
+        public String getAzureCoreHttpNettyVersion() {
+            return azureCoreHttpNettyVersion;
+        }
 
-        public String getJacocoMavenPlugin() {
-            return jacocoMavenPlugin;
+        public String getAzureCoreTestVersion() {
+            return azureCoreTestVersion;
+        }
+
+        public String getAzureIdentityVersion() {
+            return azureIdentityVersion;
+        }
+
+        public String getJunitVersion() {
+            return junitVersion;
         }
 
         public String getRevapiMavenPlugin() {
@@ -96,77 +93,45 @@ public class Project {
         }
     }
 
-    private static class ServiceDescription {
-        private String simpleDescription;
-        private String clientDescription;
-        private String tagDescription;
-
-        private String getServiceDescription() {
-            return String.format("%1$s %2$s %3$s",
-                    simpleDescription,
-                    clientDescription,
-                    tagDescription);
-        }
-
-        public String getServiceDescriptionForPom() {
-            return String.format("%1$s %2$s %3$s %4$s",
-                    simpleDescription,
-                    "For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt.",
-                    clientDescription,
-                    tagDescription);
-        }
-
-        public String getServiceDescriptionForMarkdown() {
-            return this.getServiceDescription() + " For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
-        }
+    protected Project() {
     }
 
-    public Project(FluentClient fluentClient) {
-        this(fluentClient.getManager().getServiceName(), fluentClient.getInnerClient().getClientDescription());
-    }
-
-    protected Project(String serviceName, String clientDescription) {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+    public Project(Client client) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String serviceName = settings.getServiceName();
+        if (CoreUtils.isNullOrEmpty(serviceName)) {
+            serviceName = client.getClientName();
+        }
 
         this.serviceName = serviceName;
         this.namespace = JavaSettings.getInstance().getPackage();
-        this.artifactId = FluentUtils.getArtifactId();
+        this.artifactId = getArtifactIdFromNamespace();
 
-        settings.getArtifactVersion().ifPresent(version -> this.version = version);
+//        String clientDescription = client.getClientDescription();
+//        if (clientDescription == null) {
+//            clientDescription = "";
+//        }
+//        if (!clientDescription.isEmpty() && !clientDescription.endsWith(".")) {
+//            clientDescription += ".";
+//        }
 
-        if (clientDescription == null) {
-            clientDescription = "";
-        }
-        if (!clientDescription.isEmpty() && !clientDescription.endsWith(".")) {
-            clientDescription += ".";
-        }
+        serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
 
-        final String simpleDescriptionTemplate = "This package contains Microsoft Azure SDK for %1$s Management SDK.";
-        final String tagDescriptionTemplate = "Package tag %1$s.";
-
-        this.serviceDescription.simpleDescription = String.format(simpleDescriptionTemplate, serviceName);
-        this.serviceDescription.clientDescription = clientDescription;
-        this.serviceDescription.tagDescription = String.format(tagDescriptionTemplate, settings.getAutorestSettings().getTag());
-
-        this.changelog = new Changelog(this);
+//        this.changelog = new Changelog(this);
     }
 
     public void integrateWithSdk() {
-        FluentPomTemplate.setProject(this);
-
         findPackageVersions();
 
         findPomDependencies();
 
-        updateChangelog();
-
-        findCodeSamples();
+//        updateChangelog();
 
         findSdkRepositoryUri();
     }
 
-    private void findSdkRepositoryUri() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+    protected void findSdkRepositoryUri() {
+        JavaSettings settings = JavaSettings.getInstance();
         String outputFolder = settings.getAutorestSettings().getOutputFolder();
         if (outputFolder != null) {
             Path path = Paths.get(outputFolder).normalize();
@@ -191,7 +156,7 @@ public class Project {
     }
 
     private Optional<String> findSdkFolder() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        JavaSettings settings = JavaSettings.getInstance();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
         if (!sdkFolderOpt.isPresent()) {
             logger.info("'azure-libraries-for-java-folder' parameter not available");
@@ -230,7 +195,7 @@ public class Project {
         return sdkFolderOpt;
     }
 
-    private void findPackageVersions() {
+    protected void findPackageVersions() {
         Optional<String> sdkFolderOpt = findSdkFolder();
         if (!sdkFolderOpt.isPresent()) {
             return;
@@ -259,19 +224,19 @@ public class Project {
     private void findPackageVersions(Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
-                checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
                 checkArtifact(line, "org.revapi:revapi-maven-plugin").ifPresent(v -> packageVersions.revapiMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
-//                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
-//                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
+                checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
+                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
+                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
 //                checkArtifact(line, "com.azure.resourcemanager:azure-resourcemanager-resources").ifPresent(v -> packageVersions.azureResourceManagerResourcesVersion = v);
             });
         }
     }
 
-    static Optional<String> checkArtifact(String line, String artifact) {
+    public static Optional<String> checkArtifact(String line, String artifact) {
         if (line.startsWith(artifact + ";")) {
             String[] segments = line.split(Pattern.quote(";"));
             if (segments.length >= 2) {
@@ -283,54 +248,30 @@ public class Project {
         return Optional.empty();
     }
 
-    private void updateChangelog() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        String outputFolder = settings.getAutorestSettings().getOutputFolder();
-        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
-            Path changelogPath = Paths.get(outputFolder, "CHANGELOG.md");
+//    private void updateChangelog() {
+//        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+//        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+//        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
+//            Path changelogPath = Paths.get(outputFolder, "CHANGELOG.md");
+//
+//            if (Files.isReadable(changelogPath)) {
+//                try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
+//                    this.changelog = new Changelog(reader);
+//                    logger.info("Update 'CHANGELOG.md' for version '{}'", version);
+//                    this.changelog.updateForVersion(this);
+//                } catch (IOException e) {
+//                    logger.warn("Failed to parse 'CHANGELOG.md'", e);
+//                }
+//            } else {
+//                logger.info("'CHANGELOG.md' not found or not readable");
+//            }
+//        } else {
+//            logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
+//        }
+//    }
 
-            if (Files.isReadable(changelogPath)) {
-                try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
-                    this.changelog = new Changelog(reader);
-                    logger.info("Update 'CHANGELOG.md' for version '{}'", version);
-                    this.changelog.updateForVersion(this);
-                } catch (IOException e) {
-                    logger.warn("Failed to parse 'CHANGELOG.md'", e);
-                }
-            } else {
-                logger.info("'CHANGELOG.md' not found or not readable");
-            }
-        } else {
-            logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
-        }
-    }
-
-    private void findCodeSamples() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        String outputFolder = settings.getAutorestSettings().getOutputFolder();
-        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
-            Path srcTestJavaPath = Paths.get(outputFolder).resolve(Paths.get("src", "test", "java"));
-            if (Files.isDirectory(srcTestJavaPath)) {
-                try {
-                    Files.walk(srcTestJavaPath).forEach(path -> {
-                        if (!Files.isDirectory(path) && Files.isReadable(path)
-                                && (path.getFileName().toString().endsWith("Tests.java")
-                                || path.getFileName().toString().endsWith("Test.java"))) {
-                            logger.info("Attempt to find code sample from test file '{}'", path);
-                            codeSamples.add(CodeSample.fromTestFile(path));
-                        }
-                    });
-                } catch (IOException e) {
-                    logger.warn("Failed to walk path '" + srcTestJavaPath + "'", e);
-                }
-            }
-        } else {
-            logger.warn("'output-folder' parameter is not an absolute path, skip code samples");
-        }
-    }
-
-    private void findPomDependencies() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+    protected void findPomDependencies() {
+        JavaSettings settings = JavaSettings.getInstance();
         String outputFolder = settings.getAutorestSettings().getOutputFolder();
         if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
             Path pomPath = Paths.get(outputFolder, "pom.xml");
@@ -408,15 +349,15 @@ public class Project {
     }
 
     public String getServiceDescription() {
-        return this.serviceDescription.getServiceDescription();
+        return this.serviceDescription;
     }
 
     public String getServiceDescriptionForPom() {
-        return this.serviceDescription.getServiceDescriptionForPom();
+        return this.serviceDescription;
     }
 
     public String getServiceDescriptionForMarkdown() {
-        return this.serviceDescription.getServiceDescriptionForMarkdown();
+        return this.serviceDescription;
     }
 
     public String getNamespace() {
@@ -439,16 +380,12 @@ public class Project {
         return packageVersions;
     }
 
-    public Changelog getChangelog() {
-        return changelog;
-    }
+//    public Changelog getChangelog() {
+//        return changelog;
+//    }
 
     public List<String> getPomDependencyIdentifiers() {
         return pomDependencyIdentifiers;
-    }
-
-    public List<CodeSample> getCodeSamples() {
-        return codeSamples;
     }
 
     public Optional<String> getSdkRepositoryUri() {
@@ -456,7 +393,17 @@ public class Project {
     }
 
     public boolean isGenerateSamples() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        return settings.isGenerateSamples();
+        return JavaSettings.getInstance().isGenerateSamples();
+    }
+
+    private static String getArtifactIdFromNamespace() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String artifactId = settings.getArtifactId();
+        if (CoreUtils.isNullOrEmpty(artifactId)) {
+            artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
+                    .replace("com.", "")
+                    .replace(".", "-");
+        }
+        return artifactId;
     }
 }

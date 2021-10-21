@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.util;
+package com.azure.autorest.extension.base.plugin;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -127,9 +127,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             boolean serviceClientPropertyRequired = p.isRequired();
 
             if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
-                if (settings.getServiceVersions() == null || settings.getServiceVersions().isEmpty()) {
-                    throw new RuntimeException("Please set --service-versions parameter.");
-                }
                 String serviceName;
                 if (settings.getServiceName() == null) {
                     serviceName = serviceClientInterfaceName;

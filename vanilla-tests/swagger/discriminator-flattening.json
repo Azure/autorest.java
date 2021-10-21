@@ -162,7 +162,7 @@
             "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
           },
           "description": "The list of network configurations."
-        },
+        }
       },
       "description": "Describes a virtual machine scale set network profile."
     },

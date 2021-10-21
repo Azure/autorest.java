@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class CodeSample {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Project.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), CodeSample.class);
 
     private static final String TEST_ANNOTATION = "@Test";
     private static final String EMBEDME_START_COMMENT = "// @embedmeStart";
