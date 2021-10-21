@@ -47,7 +47,10 @@ public class Postprocessor extends NewPlugin {
     String className = JavaSettings.getInstance().getCustomizationClass();
     String readme = null;
     try {
-      readme = new String(Files.readAllBytes(Paths.get(new URI(getReadme()))));
+      String readmePath = getReadme();
+      if (readmePath != null) {
+        readme = new String(Files.readAllBytes(Paths.get(new URI(getReadme()))));
+      }
     } catch (IOException | URISyntaxException e) {
       return false;
     }
