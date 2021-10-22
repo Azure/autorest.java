@@ -32,7 +32,15 @@ public class SchemaMapper implements IMapper<Schema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(value, this::createSchemaType);
+        IType schemaType = parsed.get(value);
+        if (schemaType != null) {
+            return schemaType;
+        }
+
+        schemaType = createSchemaType(value);
+        parsed.put(value, schemaType);
+
+        return schemaType;
     }
 
     private IType createSchemaType(Schema value) {

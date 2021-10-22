@@ -31,7 +31,15 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(enumType, this::createSealedChoiceType);
+        IType sealedChoiceType = parsed.get(enumType);
+        if (sealedChoiceType != null) {
+            return sealedChoiceType;
+        }
+
+        sealedChoiceType = createSealedChoiceType(enumType);
+        parsed.put(enumType, sealedChoiceType);
+
+        return sealedChoiceType;
     }
 
     private IType createSealedChoiceType(SealedChoiceSchema enumType) {

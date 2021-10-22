@@ -26,13 +26,19 @@ public class ArrayMapper implements IMapper<ArraySchema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(sequenceType, sType -> {
-            IType mappedType = Mappers.getSchemaMapper().map(sequenceType.getElementType());
+        IType arrayType = parsed.get(sequenceType);
+        if (arrayType != null) {
+            return arrayType;
+        }
 
-            // Choose IterableType or ListType depending on whether arrays should use Iterable.
-            return JavaSettings.getInstance().shouldUseIterable()
-                ? new IterableType(mappedType)
-                : new ListType(mappedType);
-        });
+        IType mappedType = Mappers.getSchemaMapper().map(sequenceType.getElementType());
+
+        // Choose IterableType or ListType depending on whether arrays should use Iterable.
+        arrayType = JavaSettings.getInstance().shouldUseIterable()
+            ? new IterableType(mappedType)
+            : new ListType(mappedType);
+
+        parsed.put(sequenceType, arrayType);
+        return arrayType;
     }
 }

@@ -30,7 +30,15 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
     @Override
     public MethodGroupClient map(OperationGroup methodGroup) {
-        return parsed.computeIfAbsent(methodGroup, this::createMethodGroupClient);
+        MethodGroupClient methodGroupClient = parsed.get(methodGroup);
+        if (methodGroupClient != null) {
+            return methodGroupClient;
+        }
+
+        methodGroupClient = createMethodGroupClient(methodGroup);
+        parsed.put(methodGroup, methodGroupClient);
+
+        return methodGroupClient;
     }
 
     private MethodGroupClient createMethodGroupClient(OperationGroup methodGroup) {

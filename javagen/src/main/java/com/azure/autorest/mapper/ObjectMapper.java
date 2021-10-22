@@ -33,8 +33,12 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
     private ClassType createClassType(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
+
         if (settings.isFluent()) {
-            return mapPredefinedModel(compositeType);
+            ClassType result = mapPredefinedModel(compositeType);
+            if (result != null) {
+                return result;
+            }
         }
 
         if (isPlainObject(compositeType)) {

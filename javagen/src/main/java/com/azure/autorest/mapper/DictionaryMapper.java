@@ -24,7 +24,14 @@ public class DictionaryMapper implements IMapper<DictionarySchema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(dictionaryType, dType ->
-            new MapType(Mappers.getSchemaMapper().map(dType.getElementType())));
+        IType dictType = parsed.get(dictionaryType);
+        if (dictType != null) {
+            return dictType;
+        }
+
+        dictType = new MapType(Mappers.getSchemaMapper().map(dictionaryType.getElementType()));
+        parsed.put(dictionaryType, dictType);
+
+        return dictType;
     }
 }

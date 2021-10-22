@@ -23,9 +23,15 @@ public class ConstantMapper implements IMapper<ConstantSchema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(constantSchema, cSchema -> {
-            //TODO: constants
-            return Mappers.getSchemaMapper().map(cSchema.getValueType());
-        });
+        IType constantType = parsed.get(constantSchema);
+        if (constantType != null) {
+            return constantType;
+        }
+
+        //TODO: constants
+        constantType = Mappers.getSchemaMapper().map(constantSchema.getValueType());
+        parsed.put(constantSchema, constantType);
+
+        return constantType;
     }
 }

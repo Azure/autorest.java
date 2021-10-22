@@ -31,7 +31,15 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
             return null;
         }
 
-        return parsed.computeIfAbsent(enumType, this::createChoiceType);
+        IType choiceType = parsed.get(enumType);
+        if (choiceType != null) {
+            return choiceType;
+        }
+
+        choiceType = createChoiceType(enumType);
+        parsed.put(enumType, choiceType);
+
+        return choiceType;
     }
 
     private IType createChoiceType(ChoiceSchema enumType) {

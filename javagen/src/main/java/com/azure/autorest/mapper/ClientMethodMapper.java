@@ -65,7 +65,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     @Override
     public List<ClientMethod> map(Operation operation) {
-        return parsed.computeIfAbsent(operation, this::createClientMethods);
+        List<ClientMethod> clientMethods = parsed.get(operation);
+        if (clientMethods != null) {
+            return clientMethods;
+        }
+
+        clientMethods = createClientMethods(operation);
+        parsed.put(operation, clientMethods);
+
+        return clientMethods;
     }
 
     private List<ClientMethod> createClientMethods(Operation operation) {
