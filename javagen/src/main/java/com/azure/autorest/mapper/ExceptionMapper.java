@@ -3,18 +3,19 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientException;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
-    private static ExceptionMapper instance = new ExceptionMapper();
-    Map<ObjectSchema, ClientException> parsed = new HashMap<>();
+    private static final ExceptionMapper INSTANCE = new ExceptionMapper();
+    Map<ObjectSchema, ClientException> parsed = new ConcurrentHashMap<>();
 
     protected ExceptionMapper() {
     }
 
     public static ExceptionMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -23,15 +24,7 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
             return null;
         }
 
-        JavaSettings settings = JavaSettings.getInstance();
-
-        if (parsed.containsKey(compositeType)) {
-            return parsed.get(compositeType);
-        }
-
-        ClientException exception = buildException(compositeType, settings);
-        parsed.put(compositeType, exception);
-        return exception;
+        return parsed.computeIfAbsent(compositeType, cType -> buildException(cType, JavaSettings.getInstance()));
     }
 
     protected ClientException buildException(ObjectSchema compositeType, JavaSettings settings) {

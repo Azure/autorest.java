@@ -16,13 +16,13 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
-    private static ProxyParameterMapper instance = new ProxyParameterMapper();
+    private static final ProxyParameterMapper INSTANCE = new ProxyParameterMapper();
 
     protected ProxyParameterMapper() {
     }
 
     public static ProxyParameterMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

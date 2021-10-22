@@ -4,8 +4,8 @@
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "java -jar target/azure-autorest-fluentgen-jar-with-dependencies.jar",
-    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar target/azure-autorest-fluentgen-jar-with-dependencies.jar",
+    "start": "java --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar target/azure-autorest-fluentgen-jar-with-dependencies.jar",
+    "debug": "java --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar target/azure-autorest-fluentgen-jar-with-dependencies.jar",
     "build": "mvn package -P local"
   },
   "repository": {

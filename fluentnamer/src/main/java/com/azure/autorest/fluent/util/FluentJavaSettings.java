@@ -6,6 +6,7 @@
 
 package com.azure.autorest.fluent.util;
 
+import com.azure.autorest.extension.base.plugin.AutorestSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.core.util.CoreUtils;

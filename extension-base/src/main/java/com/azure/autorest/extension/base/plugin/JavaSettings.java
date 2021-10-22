@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -21,6 +23,9 @@ import java.util.stream.Collectors;
  */
 public class JavaSettings {
     private static final String VERSION = "4.0.0";
+
+    private static final Pattern LEADING_PERIOD = Pattern.compile("^\\.");
+    private static final Pattern TRAILING_PERIOD = Pattern.compile("\\.$");
 
     private static JavaSettings _instance;
 
@@ -83,11 +88,24 @@ public class JavaSettings {
                 clientFlattenAnnotationTargetDefault = "none";
             }
 
+            AutorestSettings autorestSettings = new AutorestSettings();
+            loadStringSetting("tag", autorestSettings::setTag);
+            loadStringSetting("base-folder", autorestSettings::setBaseFolder);
+            loadStringSetting("output-folder", autorestSettings::setOutputFolder);
+            loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setAzureLibrariesForJavaFolder);
+            List<Object> inputFiles = host.getValue(List.class, "input-file");
+            if (inputFiles != null) {
+                autorestSettings.getInputFiles().addAll(
+                    inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+            }
+
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
+                autorestSettings,
                 host.getValue(new TypeReference<Map<String, Object>>() {
                 }.getType(), "pipeline.modelerfour"),
                 host.getBooleanValue("azure-arm", false),
+                host.getBooleanValue("sdk-integration", false),
                 fluentSetting,
                 host.getBooleanValue("regenerate-pom", regeneratePomDefault),
                 _header,
@@ -148,16 +166,14 @@ public class JavaSettings {
      * @param maximumJavadocCommentWidth
      * @param serviceName
      * @param shouldGenerateXmlSerialization
-     * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client
-     * methods.
+     * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
-     * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group
-     * clients.
+     * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
      * @param implementationSubpackage The sub-package that the Service and Method Group client implementation classes
      * will be put into.
      * @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
-     * @param requiredParameterClientMethods Whether Service and Method Group client method overloads that omit
-     * optional parameters will be created.
+     * @param requiredParameterClientMethods Whether Service and Method Group client method overloads that omit optional
+     * parameters will be created.
      * @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
      * @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with
      * JsonFlatten.
@@ -167,8 +183,10 @@ public class JavaSettings {
      * getters and setters in generated models to handle serialization and deserialization. For now, fields will
      * continue being annotated to ensure that there are no backwards compatibility breaks.
      */
-    private JavaSettings(Map<String, Object> modelerSettings,
+    private JavaSettings(AutorestSettings autorestSettings,
+        Map<String, Object> modelerSettings,
         boolean azure,
+        boolean sdkIntegration,
         String fluent,
         boolean regeneratePom,
         String fileHeaderText,
@@ -213,8 +231,11 @@ public class JavaSettings {
         boolean generateSamples,
         boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization) {
+
+        this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
         this.azure = azure;
+        this.sdkIntegration = sdkIntegration;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
         this.regeneratePom = regeneratePom;
         this.fileHeaderText = fileHeaderText;
@@ -387,6 +408,18 @@ public class JavaSettings {
         return modelerSettings;
     }
 
+    private final AutorestSettings autorestSettings;
+
+    public AutorestSettings getAutorestSettings() {
+        return autorestSettings;
+    }
+
+    private final boolean sdkIntegration;
+
+    public boolean isSdkIntegration() {
+        return sdkIntegration;
+    }
+
     private boolean regeneratePom;
 
     public final boolean shouldRegeneratePom() {
@@ -422,9 +455,11 @@ public class JavaSettings {
         if (packageSuffixes != null) {
             for (String packageSuffix : packageSuffixes) {
                 if (packageSuffix != null && !packageSuffix.isEmpty()) {
-                    packageBuilder.append(".").append(packageSuffix
-                        .replaceAll("\\.$", "")
-                        .replaceAll("^\\.", ""));
+                    // Cleanse the package suffix to remove leading and trailing periods.
+                    String cleansedPackageSuffix = LEADING_PERIOD.matcher(packageSuffix).replaceAll("");
+                    cleansedPackageSuffix = TRAILING_PERIOD.matcher(cleansedPackageSuffix).replaceAll("");
+
+                    packageBuilder.append(".").append(cleansedPackageSuffix);
                 }
             }
         }
@@ -798,4 +833,11 @@ public class JavaSettings {
         "Copyright (c) Microsoft Corporation. All rights reserved.",
         "Licensed under the MIT License.",
         "");
+
+    private static void loadStringSetting(String settingName, Consumer<String> action) {
+        String settingValue = host.getStringValue(settingName);
+        if (settingValue != null) {
+            action.accept(settingValue);
+        }
+    }
 }

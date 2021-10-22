@@ -33,7 +33,7 @@ public class Changelog {
 
     private final List<String> lines;
 
-    public Changelog(Project project) {
+    public Changelog(FluentProject project) {
         this(FluentUtils.loadTextFromResource("Changelog.txt",
                 TextTemplate.SERVICE_NAME, project.getServiceName(),
                 TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
@@ -50,7 +50,7 @@ public class Changelog {
         this.lines = reader.lines().collect(Collectors.toList());
     }
 
-    public void updateForVersion(Project project) {
+    public void updateForVersion(FluentProject project) {
         List<String> sectionBefore = new ArrayList<>();
         List<String> sectionAfter = new ArrayList<>();
         String previousUnreleasedVersion = null;

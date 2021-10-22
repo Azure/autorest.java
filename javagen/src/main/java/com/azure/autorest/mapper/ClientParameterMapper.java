@@ -11,16 +11,16 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 public class ClientParameterMapper implements IMapper<Parameter, ClientMethodParameter> {
-    private static ClientParameterMapper instance = new ClientParameterMapper();
+    private static final ClientParameterMapper INSTANCE = new ClientParameterMapper();
 
     private ClientParameterMapper() {
     }
 
     public static ClientParameterMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         builder.wireType(wireType);
 
         builder.annotations(settings.shouldNonNullAnnotations() && parameter.isRequired() ?
-                Arrays.asList(ClassType.NonNull) : new ArrayList<>());
+            Collections.singletonList(ClassType.NonNull) : new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;

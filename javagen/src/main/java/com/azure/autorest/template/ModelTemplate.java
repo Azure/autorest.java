@@ -22,6 +22,7 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -31,9 +32,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static com.azure.autorest.util.TemplateUtil.addJsonGetter;
-import static com.azure.autorest.util.TemplateUtil.addJsonSetter;
 
 /**
  * Writes a ClientModel to a JavaFile.
@@ -287,7 +285,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.annotation("JsonAnyGetter");
                 }
                 if (!property.getIsReadOnly()) {
-                    addJsonGetter(classBlock, settings, property.getSerializedName());
+                    TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
                 classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
                 {
@@ -326,7 +324,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
-                    addJsonSetter(classBlock, settings, property.getSerializedName());
+                    TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
@@ -402,9 +400,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                     // getter
                     generateGetterJavadoc(classBlock, model, property);
-                    if (targetProperty.getIsReadOnly()) {
-                        addJsonGetter(classBlock, settings, targetProperty.getSerializedName());
-                    }
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
                         // use ternary operator to avoid directly return null
                         String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
@@ -417,7 +412,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // setter
                     if (!property.getIsReadOnly()) {
                         generateSetterJavadoc(classBlock, model, property);
-                        addJsonSetter(classBlock, settings, targetProperty.getSerializedName());
                         classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
                                 methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType())));

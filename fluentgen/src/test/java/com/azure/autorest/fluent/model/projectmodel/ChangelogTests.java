@@ -14,7 +14,7 @@ public class ChangelogTests {
 
     private static final String CHANGELOG_LINE = "Provides operations for working with resources and resource groups. Package tag package-resources-2020-06. For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
 
-    private static class MockProject extends Project {
+    private static class MockProject extends FluentProject {
 
         public MockProject() {
             super("Resource", null);
@@ -38,7 +38,7 @@ public class ChangelogTests {
 
     @Test
     public void testChangelog() {
-        Project mockProject = new MockProject();
+        FluentProject mockProject = new MockProject();
         String dateUtc = Changelog.getDateUtc();
 
         {

@@ -14,14 +14,14 @@ import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
-import com.azure.autorest.fluent.mapper.PomMapper;
+import com.azure.autorest.fluent.mapper.FluentPomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
-import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -299,7 +299,7 @@ public class FluentGen extends Javagen {
             fluentClient = this.getFluentMapper().map(codeModel, client);
 
             // project
-            Project project = new Project(fluentClient);
+            FluentProject project = new FluentProject(fluentClient);
             if (isSdkIntegration) {
                 project.integrateWithSdk();
             }
@@ -325,7 +325,7 @@ public class FluentGen extends Javagen {
 
             // POM
             if (javaSettings.shouldRegeneratePom()) {
-                Pom pom = new PomMapper().map(project);
+                Pom pom = new FluentPomMapper().map(project);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 

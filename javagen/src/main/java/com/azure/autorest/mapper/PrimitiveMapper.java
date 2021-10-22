@@ -4,24 +4,24 @@ import com.azure.autorest.extension.base.model.codemodel.ByteArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DateTimeSchema;
 import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
-import com.azure.autorest.extension.base.model.codemodel.TimeSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
-    private static PrimitiveMapper instance = new PrimitiveMapper();
+    private static final PrimitiveMapper INSTANCE = new PrimitiveMapper();
     protected Map<PrimitiveSchema, IType> parsed = new HashMap<>();
 
     protected PrimitiveMapper() {
     }
 
     public static PrimitiveMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -29,100 +29,69 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
         if (primaryType == null) {
             return null;
         }
-        if (parsed.containsKey(primaryType)) {
-            return parsed.get(primaryType);
-        }
+
+        return parsed.computeIfAbsent(primaryType, this::createPrimitiveType);
+    }
+
+    private IType createPrimitiveType(PrimitiveSchema primaryType) {
         boolean isLowLevelClient = JavaSettings.getInstance().isLowLevelClient();
-        IType iType;
         switch (primaryType.getType()) {
 //            case null:
 //                iType = PrimitiveType.Void;
 //                break;
-            case BOOLEAN:
-                iType = PrimitiveType.Boolean;
-                break;
+            case BOOLEAN: return PrimitiveType.Boolean;
             case BYTE_ARRAY:
                 ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
-                if (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL) {
-                    iType = ClassType.Base64Url;
-                } else {
-                    iType = ArrayType.ByteArray;
-                }
-                break;
-            case CHAR:
-                iType = PrimitiveType.Char;
-                break;
-            case DATE:
-                iType = isLowLevelClient ? ClassType.String : ClassType.LocalDate;
-                break;
+                return (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL)
+                    ? ClassType.Base64Url
+                    : ArrayType.ByteArray;
+            case CHAR: return PrimitiveType.Char;
+            case DATE: return isLowLevelClient ? ClassType.String : ClassType.LocalDate;
             case DATE_TIME:
                 if (isLowLevelClient) {
-                    iType = ClassType.String;
+                    return ClassType.String;
                 } else {
                     DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
-                    if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
-                        iType = ClassType.DateTimeRfc1123;
-                    } else {
-                        iType = ClassType.DateTime;
-                    }
+                    return (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123)
+                        ? ClassType.DateTimeRfc1123
+                        : ClassType.DateTime;
                 }
-                break;
             case TIME:
-                TimeSchema timeSchema = (TimeSchema) primaryType;
-                iType = ClassType.String;
-                break;
+//                TimeSchema timeSchema = (TimeSchema) primaryType;
+                return ClassType.String;
 //            case KnownPrimaryType.DateTimeRfc1123:
 //                iType = ClassType.DateTimeRfc1123;
 //                break;
             case NUMBER:
                 NumberSchema numberSchema = (NumberSchema) primaryType;
                 if (numberSchema.getPrecision() == 64) {
-                    iType = PrimitiveType.Double;
+                    return PrimitiveType.Double;
                 } else if (numberSchema.getPrecision() == 32) {
-                    iType = PrimitiveType.Float;
+                    return PrimitiveType.Float;
                 } else {
-                    iType = ClassType.BigDecimal;
+                    return ClassType.BigDecimal;
                 }
-                break;
             case INTEGER:
                 NumberSchema intSchema = (NumberSchema) primaryType;
-                if (intSchema.getPrecision() == 64) {
-                    iType = PrimitiveType.Long;
-                } else {
-                    iType = PrimitiveType.Int;
-                }
-                break;
+                return (intSchema.getPrecision() == 64)
+                    ? PrimitiveType.Long
+                    : PrimitiveType.Int;
 //            case KnownPrimaryType.Long:
 //                iType = PrimitiveType.Long;
 //                break;
 //            case KnownPrimaryType.Stream:
 //                iType = GenericType.FluxByteBuffer;
 //                break;
-            case STRING:
-                iType = ClassType.String;
-                break;
-            case URI:
-                iType = isLowLevelClient ? ClassType.String : ClassType.URL;
-                break;
-            case DURATION:
-                iType = isLowLevelClient ? ClassType.String : ClassType.Duration;
-                break;
-            case UNIXTIME:
-                iType = isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
-                break;
-            case UUID:
-                iType = isLowLevelClient ? ClassType.String : ClassType.UUID;
-                break;
-            case OBJECT:
-                iType = ClassType.Object;
-                break;
-            case CREDENTIAL:
-                iType = ClassType.TokenCredential;
-                break;
+            case STRING: return ClassType.String;
+            case URI: return isLowLevelClient ? ClassType.String : ClassType.URL;
+            case DURATION: return isLowLevelClient ? ClassType.String : ClassType.Duration;
+            case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
+            case UUID: return isLowLevelClient ? ClassType.String : ClassType.UUID;
+            case OBJECT: return ClassType.Object;
+            case CREDENTIAL: return ClassType.TokenCredential;
             default:
-                throw new UnsupportedOperationException(String.format("Unrecognized AutoRest Primitive Type: %s", primaryType.getType()));
+                throw new UnsupportedOperationException(String.format("Unrecognized AutoRest Primitive Type: %s",
+                    primaryType.getType()));
         }
-        parsed.put(primaryType, iType);
-        return iType;
     }
 }

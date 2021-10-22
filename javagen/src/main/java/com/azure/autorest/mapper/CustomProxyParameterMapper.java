@@ -18,13 +18,13 @@ import com.azure.core.util.serializer.CollectionFormat;
 
 public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
 
-    private static CustomProxyParameterMapper instance = new CustomProxyParameterMapper();
+    private static final CustomProxyParameterMapper INSTANCE = new CustomProxyParameterMapper();
 
     private CustomProxyParameterMapper() {
     }
 
     public static CustomProxyParameterMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
 

@@ -10,29 +10,31 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupClient> {
-    private static MethodGroupMapper instance = new MethodGroupMapper();
-    private Map<OperationGroup, MethodGroupClient> parsed = new HashMap<>();
+    private static final MethodGroupMapper INSTANCE = new MethodGroupMapper();
+    private final Map<OperationGroup, MethodGroupClient> parsed = new ConcurrentHashMap<>();
 
     protected MethodGroupMapper() {
     }
 
     public static MethodGroupMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
     public MethodGroupClient map(OperationGroup methodGroup) {
+        return parsed.computeIfAbsent(methodGroup, this::createMethodGroupClient);
+    }
+
+    private MethodGroupClient createMethodGroupClient(OperationGroup methodGroup) {
         JavaSettings settings = JavaSettings.getInstance();
-        if (parsed.containsKey(methodGroup)) {
-            return parsed.get(methodGroup);
-        }
         MethodGroupClient.Builder builder = createMethodGroupClientBuilder();
 
         String classBaseName = methodGroup.getLanguage().getJava().getName();
@@ -40,7 +42,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         String interfaceName = CodeNamer.getPlural(classBaseName);
         final String interfaceNameForCheckDeduplicate = interfaceName;
         if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> interfaceNameForCheckDeduplicate.equals(cm.getName()))
-                || parsed.values().stream().anyMatch(mg -> interfaceNameForCheckDeduplicate.equals(mg.getInterfaceName()))) {
+            || parsed.values().stream().anyMatch(mg -> interfaceNameForCheckDeduplicate.equals(mg.getInterfaceName()))) {
             interfaceName += "Operations";
         }
         builder.interfaceName(interfaceName);
@@ -63,8 +65,8 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
         // TODO: Assume all operations share the same base url
         proxyBuilder.name(restAPIName)
-                .clientTypeName(serviceClientName + interfaceName)
-                .baseURL(methodGroup.getOperations().get(0).getRequests().get(0).getProtocol().getHttp().getUri());
+            .clientTypeName(serviceClientName + interfaceName)
+            .baseURL(methodGroup.getOperations().get(0).getRequests().get(0).getProtocol().getHttp().getUri());
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
@@ -81,7 +83,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
 
         builder.proxy(proxyBuilder.build())
-                .serviceClientName(serviceClientName);
+            .serviceClientName(serviceClientName);
 
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
@@ -118,11 +120,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        MethodGroupClient methodGroupClient = builder.build();
-
-        parsed.put(methodGroup, methodGroupClient);
-
-        return methodGroupClient;
+        return builder.build();
     }
 
     protected MethodGroupClient.Builder createMethodGroupClientBuilder() {

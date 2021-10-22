@@ -5,12 +5,13 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ArrayMapper implements IMapper<ArraySchema, IType> {
     private static final ArrayMapper INSTANCE = new ArrayMapper();
-    Map<ArraySchema, IType> parsed = new HashMap<>();
+    Map<ArraySchema, IType> parsed = new ConcurrentHashMap<>();
 
     private ArrayMapper() {
     }
