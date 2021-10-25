@@ -78,11 +78,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
-            // azure-core does not support OPTIONS HTTP method.
-            // https://github.com/Azure/autorest.java/issues/453
-            if (!"options".equals(method.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values());
-            }
+            restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values());
         }
         proxyBuilder.methods(restAPIMethods);
 
@@ -119,11 +115,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         List<ClientMethod> clientMethods = new ArrayList<>();
         for (Operation operation : methodGroup.getOperations()) {
-            // "options" is not supported in HttpMethod in azure-core
-            // https://github.com/Azure/autorest.java/issues/453
-            if (!"options".equals(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
-            }
+            clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
         }
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
