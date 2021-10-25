@@ -27,7 +27,10 @@ public class SwaggerReadmeTemplate {
     public String write(Project project) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        line("```yml");
+        line("## Generate autorest code");
+        newLine();
+
+        line("```yaml");
         for (String jsonPath : settings.getAutorestSettings().getInputFiles()) {
             line(String.format("%s: %s", "input-file", jsonPath));
         }
