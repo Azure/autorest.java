@@ -8,8 +8,8 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.projectmodel.Project;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class SwaggerReadmeTemplate {
 
@@ -17,10 +17,10 @@ public class SwaggerReadmeTemplate {
 
     private static final String NEW_LINE = System.lineSeparator();
 
-    private static final Map<String, String> OVERRIDE_SETTINGS = new HashMap<>();
+    private static final Map<String, String> OVERRIDE_SETTINGS = new TreeMap<>();
     static {
-        OVERRIDE_SETTINGS.put("java", "true");
         OVERRIDE_SETTINGS.put("output-folder", "../");
+        OVERRIDE_SETTINGS.put("java", "true");
         OVERRIDE_SETTINGS.put("regenerate-pom", "false");
         OVERRIDE_SETTINGS.put("sdk-integration", null);
     }
