@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -241,6 +242,10 @@ public class Javagen extends NewPlugin {
                     Pom pom = new PomMapper().map(project);
                     javaPackage.addPom("pom.xml", pom);
                 }
+
+                if (settings.isSdkIntegration()) {
+                    javaPackage.addReadmeMarkdown(project);
+                }
             }
 
             //Step 4: Print to files
@@ -259,6 +264,9 @@ public class Javagen extends NewPlugin {
             }
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
+            }
+            for (TextFile textFile : javaPackage.getTextFiles()) {
+                writeFile(textFile.getFilePath(), textFile.getContents(), null);
             }
 
             String artifactId = settings.getArtifactId();

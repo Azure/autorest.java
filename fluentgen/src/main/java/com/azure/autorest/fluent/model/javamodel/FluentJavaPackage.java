@@ -14,7 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.model.projectmodel.TextFile;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
 import com.azure.autorest.fluent.template.FluentExampleTemplate;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
@@ -33,23 +33,17 @@ import java.util.List;
 
 public class FluentJavaPackage extends JavaPackage {
 
-    private final List<TextFile> textFiles = new ArrayList<>();
-
     public FluentJavaPackage(NewPlugin host) {
         super(host);
     }
 
-    public final List<TextFile> getTextFiles() {
-        return textFiles;
-    }
-
-    public final void addReadmeMarkdown(FluentProject project) {
+    public void addReadmeMarkdown(FluentProject project) {
         TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }
 
-    public final void addChangelogMarkdown(Changelog changelog) {
+    public void addChangelogMarkdown(Changelog changelog) {
         TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(changelog));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);

@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
@@ -179,10 +180,10 @@ public class FluentManagerTemplate {
             // Configurable class
             javaFile.line();
             String configurableClassText = FluentUtils.loadTextFromResource("Manager_Configurable.txt",
-                    TextTemplate.SERVICE_NAME, manager.getServiceName(),
-                    TextTemplate.MANAGER_CLASS, manager.getType().getName(),
-                    TextTemplate.PACKAGE_NAME, project.getNamespace(),
-                    TextTemplate.ARTIFACT_VERSION, project.getVersion()
+                    TemplateUtil.SERVICE_NAME, manager.getServiceName(),
+                    TemplateUtil.MANAGER_CLASS, manager.getType().getName(),
+                    TemplateUtil.PACKAGE_NAME, project.getNamespace(),
+                    TemplateUtil.ARTIFACT_VERSION, project.getVersion()
             );
             javaFile.text(configurableClassText);
 

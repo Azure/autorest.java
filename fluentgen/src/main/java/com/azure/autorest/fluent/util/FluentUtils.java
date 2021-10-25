@@ -17,7 +17,6 @@ import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
-import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -27,17 +26,13 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.ResourceUtil;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -239,34 +234,7 @@ public class FluentUtils {
     }
 
     public static String loadTextFromResource(String filename, String... replacements) {
-        String text = "";
-        try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
-            if (inputStream != null) {
-                text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                        .lines()
-                        .collect(Collectors.joining(System.lineSeparator()));
-                if (!text.isEmpty()) {
-                    text += System.lineSeparator();
-                }
-            }
-
-            if (replacements.length > 0) {
-                if (replacements.length % 2 == 0) {
-                    // replacement in template
-                    for (int i = 0; i < replacements.length; i += 2) {
-                        String key = replacements[i];
-                        String value = replacements[i+1];
-                        text = text.replace("{{" + key + "}}", value);
-                    }
-                } else {
-                    logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
-                }
-            }
-            return text;
-        } catch (IOException e) {
-            logger.error("Failed to read file '{}'", filename);
-            throw new IllegalStateException(e);
-        }
+        return ResourceUtil.loadTextFromResource(filename, replacements);
     }
 
     /**

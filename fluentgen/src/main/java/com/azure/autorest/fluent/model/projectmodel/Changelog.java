@@ -7,8 +7,8 @@ package com.azure.autorest.fluent.model.projectmodel;
 
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
-import com.azure.autorest.fluent.template.TextTemplate;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.util.TemplateUtil;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -35,10 +35,10 @@ public class Changelog {
 
     public Changelog(FluentProject project) {
         this(FluentUtils.loadTextFromResource("Changelog.txt",
-                TextTemplate.SERVICE_NAME, project.getServiceName(),
-                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
-                TextTemplate.ARTIFACT_VERSION, project.getVersion(),
-                TextTemplate.DATE_UTC, getDateUtc()
+                TemplateUtil.SERVICE_NAME, project.getServiceName(),
+                TemplateUtil.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
+                TemplateUtil.ARTIFACT_VERSION, project.getVersion(),
+                TemplateUtil.DATE_UTC, getDateUtc()
         ));
     }
 

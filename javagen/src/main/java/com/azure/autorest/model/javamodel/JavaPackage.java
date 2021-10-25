@@ -7,7 +7,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.projectmodel.Project;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
@@ -22,6 +25,8 @@ public class JavaPackage {
     private final JavaSettings settings;
     private final List<JavaFile> javaFiles;
     private final List<XmlFile> xmlFiles;
+    protected final List<TextFile> textFiles = new ArrayList<>();
+
     private final JavaFileFactory javaFileFactory;
 
     private final Set<String> filePaths = new HashSet<>();
@@ -44,6 +49,10 @@ public class JavaPackage {
 
     public List<XmlFile> getXmlFiles() {
         return xmlFiles;
+    }
+
+    public List<TextFile> getTextFiles() {
+        return textFiles;
     }
 
     public final void addManager(String package_Keyword, String name, Manager model) {
@@ -185,6 +194,12 @@ public class JavaPackage {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), protocolExample.getFilename());
         Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
         javaFiles.add(javaFile);
+    }
+
+    public void addReadmeMarkdown(Project project) {
+        TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
     }
 
     protected void checkDuplicateFile(String filePath) {
