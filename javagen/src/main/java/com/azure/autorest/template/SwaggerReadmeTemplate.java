@@ -25,13 +25,18 @@ public class SwaggerReadmeTemplate {
     }
 
     public String write(Project project) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         line("```yml");
+        for (String jsonPath : settings.getAutorestSettings().getInputFiles()) {
+            line(String.format("%s: %s", "input-file", jsonPath));
+        }
         for (Map.Entry<String, String> entry : OVERRIDE_SETTINGS.entrySet()) {
             if (entry.getValue() != null) {
                 line(String.format("%s: %s", entry.getKey(), entry.getValue()));
             }
         }
-        for (Map.Entry<String, String> entry : JavaSettings.getInstance().getSimpleJavaSettings().entrySet()) {
+        for (Map.Entry<String, String> entry : settings.getSimpleJavaSettings().entrySet()) {
             if (!OVERRIDE_SETTINGS.containsKey(entry.getKey()) && entry.getValue() != null) {
                 line(String.format("%s: %s", entry.getKey(), entry.getValue()));
             }
