@@ -33,14 +33,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
-    private static ModelMapper instance = new ModelMapper();
-    private ClientModels serviceModels = ClientModels.Instance;
+    private static final ModelMapper INSTANCE = new ModelMapper();
+    private final ClientModels serviceModels = ClientModels.Instance;
 
     protected ModelMapper() {
     }
 
     public static ModelMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

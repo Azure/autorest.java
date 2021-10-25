@@ -8,20 +8,21 @@ import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
-    private static SealedChoiceMapper instance = new SealedChoiceMapper();
-    Map<SealedChoiceSchema, IType> parsed = new HashMap<>();
+    private static final SealedChoiceMapper INSTANCE = new SealedChoiceMapper();
+    Map<SealedChoiceSchema, IType> parsed = new ConcurrentHashMap<>();
 
     private SealedChoiceMapper() {
     }
 
     public static SealedChoiceMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -30,16 +31,23 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             return null;
         }
 
-        JavaSettings settings = JavaSettings.getInstance();
-
-        if (parsed.containsKey(enumType)) {
-            return parsed.get(enumType);
+        IType sealedChoiceType = parsed.get(enumType);
+        if (sealedChoiceType != null) {
+            return sealedChoiceType;
         }
-        IType _itype;
+
+        sealedChoiceType = createSealedChoiceType(enumType);
+        parsed.put(enumType, sealedChoiceType);
+
+        return sealedChoiceType;
+    }
+
+    private IType createSealedChoiceType(SealedChoiceSchema enumType) {
+        JavaSettings settings = JavaSettings.getInstance();
         String enumTypeName = enumType.getLanguage().getJava().getName();
 
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
-            _itype = ClassType.String;
+            return ClassType.String;
         } else {
             String enumSubpackage = settings.getModelsSubpackage();
             if (settings.isCustomType(enumTypeName)) {
@@ -52,10 +60,10 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
                 String enumName = enumValue.getValue();
                 if (!settings.isFluent()) {
                     if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
-                            && enumValue.getLanguage().getJava().getName() != null) {
+                        && enumValue.getLanguage().getJava().getName() != null) {
                         enumName = enumValue.getLanguage().getJava().getName();
                     } else if (enumValue.getLanguage() != null && enumValue.getLanguage().getDefault() != null
-                            && enumValue.getLanguage().getDefault().getName() != null) {
+                        && enumValue.getLanguage().getDefault().getName() != null) {
                         enumName = enumValue.getLanguage().getDefault().getName();
                     }
                 }
@@ -63,16 +71,13 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            _itype = new EnumType.Builder()
-                    .packageName(enumPackage)
-                    .name(enumTypeName)
-                    .expandable(false)
-                    .values(enumValues)
-                    .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
-                    .build();
-            parsed.put(enumType, _itype);
+            return new EnumType.Builder()
+                .packageName(enumPackage)
+                .name(enumTypeName)
+                .expandable(false)
+                .values(enumValues)
+                .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
+                .build();
         }
-
-        return _itype;
     }
 }

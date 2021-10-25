@@ -21,8 +21,6 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.IterableType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
@@ -41,13 +39,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ClientMapper implements IMapper<CodeModel, Client> {
-    private static ClientMapper instance = new ClientMapper();
+    private static final ClientMapper INSTANCE = new ClientMapper();
 
     private ClientMapper() {
     }
 
     public static ClientMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

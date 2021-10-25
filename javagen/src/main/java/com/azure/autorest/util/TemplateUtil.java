@@ -16,6 +16,7 @@ import com.azure.autorest.template.Templates;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class TemplateUtil {
 
@@ -85,5 +86,34 @@ public class TemplateUtil {
             block.line("return (String) obj.get(path);");
             block.line("} catch (RuntimeException e) { return null; }");
         });
+    }
+
+    /**
+     * Helper function to add a JsonGetter to a class block.
+     *
+     * @param classBlock The class block being annotated.
+     * @param settings The AutoRest settings to determine if JsonGetter should be added.
+     * @param propertyName The JSON property name for the JsonGetter.
+     */
+    public static void addJsonGetter(JavaClass classBlock, JavaSettings settings, String propertyName) {
+        addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonGetter(\"" + propertyName + "\")");
+    }
+
+    /**
+     * Helper function to add a JsonSetter to a class block.
+     *
+     * @param classBlock The class block being annotated.
+     * @param settings The AutoRest settings to determine if JsonSetter should be added.
+     * @param propertyName The JSON property name for the JsonSetter.
+     */
+    public static void addJsonSetter(JavaClass classBlock, JavaSettings settings, String propertyName) {
+        addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonSetter(\"" + propertyName + "\")");
+    }
+
+    private static void addJsonGetterOrJsonSetter(JavaClass classBlock, JavaSettings settings,
+        Supplier<String> annotation) {
+        if (settings.isGettersAndSettersAnnotatedForSerialization()) {
+            classBlock.annotation(annotation.get());
+        }
     }
 }

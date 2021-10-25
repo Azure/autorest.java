@@ -7,72 +7,74 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ObjectMapper implements IMapper<ObjectSchema, IType> {
-    private static ObjectMapper instance = new ObjectMapper();
-    Map<ObjectSchema, ClassType> parsed = new HashMap<>();
+    private static final ObjectMapper INSTANCE = new ObjectMapper();
+    Map<ObjectSchema, ClassType> parsed = new ConcurrentHashMap<>();
 
     protected ObjectMapper() {
     }
 
     public static ObjectMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
     public ClassType map(ObjectSchema compositeType) {
-        JavaSettings settings = JavaSettings.getInstance();
-
         if (compositeType == null) {
             return null;
         }
-        if (parsed.containsKey(compositeType)) {
-            return parsed.get(compositeType);
-        }
 
-        ClassType result = null;
+        return parsed.computeIfAbsent(compositeType, this::createClassType);
+    }
+
+    private ClassType createClassType(ObjectSchema compositeType) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         if (settings.isFluent()) {
-            result = mapPredefinedModel(compositeType);
-        }
-        if (result == null) {
-            if (isPlainObject(compositeType)) {
-                result = ClassType.Object;
-            } else {
-                String classPackage;
-                String className = compositeType.getLanguage().getJava().getName();
-                if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                    classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-                } else if (settings.isFluent() && isInnerModel(compositeType)) {
-                    className += "Inner";
-                    classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
-                } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
-                    // put class of flattened type to implementation package
-                    classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
-                } else {
-                    classPackage = settings.getPackage(settings.getModelsSubpackage());
-                }
-                result = new ClassType.Builder()
-                        .packageName(classPackage)
-                        .name(className)
-                        .extensions(compositeType.getExtensions())
-                        .build();
+            ClassType result = mapPredefinedModel(compositeType);
+            if (result != null) {
+                return result;
             }
         }
 
-        parsed.put(compositeType, result);
-        return result;
+        if (isPlainObject(compositeType)) {
+            return ClassType.Object;
+        }
+
+        String classPackage;
+        String className = compositeType.getLanguage().getJava().getName();
+        if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
+            classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+        } else if (settings.isFluent() && isInnerModel(compositeType)) {
+            className += "Inner";
+            classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
+        } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
+            // put class of flattened type to implementation package
+            classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
+        } else {
+            classPackage = settings.getPackage(settings.getModelsSubpackage());
+        }
+
+        return new ClassType.Builder()
+            .packageName(classPackage)
+            .name(className)
+            .extensions(compositeType.getExtensions())
+            .build();
     }
 
     /**
      * Check that the type can be regarded as a plain java.lang.Object.
+     *
      * @param compositeType The type to check.
      */
     public static boolean isPlainObject(ObjectSchema compositeType) {
         return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
-                && compositeType.getParents() == null && compositeType.getChildren() == null
-                && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
+            && compositeType.getParents() == null && compositeType.getChildren() == null
+            && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
     }
 
     /**

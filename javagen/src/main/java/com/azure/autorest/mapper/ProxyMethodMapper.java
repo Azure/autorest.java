@@ -30,7 +30,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,16 +40,18 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
     private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
         , ClassType.UnixTimeDateTime);
     private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
-    private static ProxyMethodMapper instance = new ProxyMethodMapper();
+    private static final ProxyMethodMapper INSTANCE = new ProxyMethodMapper();
+
+    private static final Pattern APOSTROPHE = Pattern.compile("'");
 
 //    private static final jdk.nashorn.internal.runtime.regexp.joni.Regex methodTypeLeading = new Regex("^/+");
 //    private static final Regex methodTypeTrailing = new Regex("/+$");
-    private Map<Request, ProxyMethod> parsed = new HashMap<>();
+    private Map<Request, ProxyMethod> parsed = new ConcurrentHashMap<>();
     protected ProxyMethodMapper() {
     }
 
     public static ProxyMethodMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -77,7 +81,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         List<HttpResponseStatus> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
-                .map(s -> s.replaceAll("'", ""))
+                .map(s -> APOSTROPHE.matcher(s).replaceAll(""))
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);

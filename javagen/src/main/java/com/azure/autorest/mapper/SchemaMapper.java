@@ -11,18 +11,19 @@ import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.model.clientmodel.IType;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SchemaMapper implements IMapper<Schema, IType> {
-    private static SchemaMapper instance = new SchemaMapper();
-    Map<Schema, IType> parsed = new HashMap<>();
+    private static final SchemaMapper INSTANCE = new SchemaMapper();
+    Map<Schema, IType> parsed = new ConcurrentHashMap<>();
 
     private SchemaMapper() {
     }
 
     public static SchemaMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -31,6 +32,18 @@ public class SchemaMapper implements IMapper<Schema, IType> {
             return null;
         }
 
+        IType schemaType = parsed.get(value);
+        if (schemaType != null) {
+            return schemaType;
+        }
+
+        schemaType = createSchemaType(value);
+        parsed.put(value, schemaType);
+
+        return schemaType;
+    }
+
+    private IType createSchemaType(Schema value) {
         if (value instanceof PrimitiveSchema) {
             return Mappers.getPrimitiveMapper().map((PrimitiveSchema) value);
         } else if (value instanceof ChoiceSchema) {
@@ -50,7 +63,8 @@ public class SchemaMapper implements IMapper<Schema, IType> {
         } else if(value instanceof BinarySchema) {
             return Mappers.getBinaryMapper().map((BinarySchema) value);
         } else {
-            throw new UnsupportedOperationException("Cannot find a mapper for schema type " + value.getClass() + ". Key: " + value.get$key());
+            throw new UnsupportedOperationException("Cannot find a mapper for schema type " + value.getClass()
+                + ". Key: " + value.get$key());
         }
     }
 }

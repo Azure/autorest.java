@@ -2,6 +2,7 @@ package com.azure.autorest.model.javamodel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -10,24 +11,24 @@ import java.util.stream.Collectors;
 public class JavaFile implements JavaContext {
     private String packageKeyword;
     private int packageWithPeriodLength;
-    private String FilePath;
-    private JavaFileContents Contents;
+    private final String filePath;
+    private final JavaFileContents contents;
 
     public JavaFile(String filePath) {
         this(filePath, null);
     }
 
     public JavaFile(String filePath, String fileContents) {
-        FilePath = filePath;
-        Contents = new JavaFileContents(fileContents);
+        this.filePath = filePath;
+        contents = new JavaFileContents(fileContents);
     }
 
     public final String getFilePath() {
-        return FilePath;
+        return filePath;
     }
 
     public final JavaFileContents getContents() {
-        return Contents;
+        return contents;
     }
 
     public final void text(String text) {
@@ -47,7 +48,7 @@ public class JavaFile implements JavaContext {
     }
 
     public final void publicFinalClass(String classDeclaration, Consumer<JavaClass> classAction) {
-        publicClass(Arrays.asList(JavaModifier.Final), classDeclaration, classAction);
+        publicClass(Collections.singletonList(JavaModifier.Final), classDeclaration, classAction);
     }
 
     public final void publicClass(List<JavaModifier> modifiers, String classDeclaration, Consumer<JavaClass> classAction) {

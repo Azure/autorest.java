@@ -29,6 +29,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
@@ -46,10 +47,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
 public class Javagen extends NewPlugin {
+    private static final Pattern SPACE = Pattern.compile("\\s");
+
     private final Logger logger = new PluginLogger(this, Javagen.class);
     protected static Javagen instance;
 
@@ -184,7 +188,7 @@ public class Javagen extends NewPlugin {
                 if (settings.getServiceName() == null) {
                     serviceName = client.getServiceClient().getInterfaceName();
                 } else {
-                    serviceName = settings.getServiceName().replaceAll("\\s", "");
+                    serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
                 }
                 String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
@@ -258,7 +262,7 @@ public class Javagen extends NewPlugin {
             }
 
             String artifactId = settings.getArtifactId();
-            if (!(artifactId == null || artifactId.isEmpty())) {
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }

@@ -1,8 +1,11 @@
 package fixtures.llcresi.implementation;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -40,8 +43,23 @@ public final class ParamsImpl {
     @Host("{$host}")
     @ServiceInterface(name = "LLCClientParams")
     private interface ParamsService {
-        @Get("/llc/parameters")
+        @Get("/servicedriven/parameters")
         Mono<Response<BinaryData>> getRequired(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Post("/servicedriven/parameters")
+        Mono<Response<BinaryData>> postParameters(
+                @HostParam("$host") String host,
+                @BodyParam("image/jpeg") BinaryData parameter,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/servicedriven/parameters")
+        Mono<Response<Void>> deleteParameters(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/servicedriven/newpath")
+        Mono<Response<BinaryData>> getNewOperation(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
@@ -53,9 +71,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter1</td><td>String</td><td>Yes</td><td>I am a required parameter with a client default value</td></tr>
-     *     <tr><td>parameter2</td><td>String</td><td>No</td><td>I was a required parameter, but now I'm optional</td></tr>
-     *     <tr><td>parameter3</td><td>String</td><td>Yes</td><td>I am a required parameter and I'm last in Swagger</td></tr>
+     *     <tr><td>parameter</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -82,9 +99,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter1</td><td>String</td><td>Yes</td><td>I am a required parameter with a client default value</td></tr>
-     *     <tr><td>parameter2</td><td>String</td><td>No</td><td>I was a required parameter, but now I'm optional</td></tr>
-     *     <tr><td>parameter3</td><td>String</td><td>Yes</td><td>I am a required parameter and I'm last in Swagger</td></tr>
+     *     <tr><td>parameter</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -112,9 +128,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter1</td><td>String</td><td>Yes</td><td>I am a required parameter with a client default value</td></tr>
-     *     <tr><td>parameter2</td><td>String</td><td>No</td><td>I was a required parameter, but now I'm optional</td></tr>
-     *     <tr><td>parameter3</td><td>String</td><td>Yes</td><td>I am a required parameter and I'm last in Swagger</td></tr>
+     *     <tr><td>parameter</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -132,5 +147,217 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {
         return getRequiredWithResponseAsync(requestOptions, context).block();
+    }
+
+    /**
+     * POST a JSON or a JPEG.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
+     *     "http://example.org/myimage.jpeg" }.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> postParametersWithResponseAsync(
+            BinaryData parameter, RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.postParameters(this.client.getHost(), parameter, requestOptions, context));
+    }
+
+    /**
+     * POST a JSON or a JPEG.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
+     *     "http://example.org/myimage.jpeg" }.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> postParametersWithResponseAsync(
+            BinaryData parameter, RequestOptions requestOptions, Context context) {
+        return service.postParameters(this.client.getHost(), parameter, requestOptions, context);
+    }
+
+    /**
+     * POST a JSON or a JPEG.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
+     *     "http://example.org/myimage.jpeg" }.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> postParametersWithResponse(
+            BinaryData parameter, RequestOptions requestOptions, Context context) {
+        return postParametersWithResponseAsync(parameter, requestOptions, context).block();
+    }
+
+    /**
+     * Delete something.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteParametersWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.deleteParameters(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Delete something.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteParametersWithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.deleteParameters(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Delete something.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions, Context context) {
+        return deleteParametersWithResponseAsync(requestOptions, context).block();
+    }
+
+    /**
+     * I'm a new operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getNewOperationWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.getNewOperation(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * I'm a new operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getNewOperationWithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.getNewOperation(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * I'm a new operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions, Context context) {
+        return getNewOperationWithResponseAsync(requestOptions, context).block();
     }
 }

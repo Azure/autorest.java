@@ -5,18 +5,19 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ArrayMapper implements IMapper<ArraySchema, IType> {
-    private static ArrayMapper instance = new ArrayMapper();
-    Map<ArraySchema, IType> parsed = new HashMap<>();
+    private static final ArrayMapper INSTANCE = new ArrayMapper();
+    Map<ArraySchema, IType> parsed = new ConcurrentHashMap<>();
 
     private ArrayMapper() {
     }
 
     public static ArrayMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -24,14 +25,20 @@ public class ArrayMapper implements IMapper<ArraySchema, IType> {
         if (sequenceType == null) {
             return null;
         }
-        if (parsed.containsKey(sequenceType)) {
-            return parsed.get(sequenceType);
+
+        IType arrayType = parsed.get(sequenceType);
+        if (arrayType != null) {
+            return arrayType;
         }
-        IType iType = new ListType(Mappers.getSchemaMapper().map(sequenceType.getElementType()));
-        if (JavaSettings.getInstance().shouldUseIterable()) {
-            iType = new IterableType(Mappers.getSchemaMapper().map(sequenceType.getElementType()));
-        }
-        parsed.put(sequenceType, iType);
-        return iType;
+
+        IType mappedType = Mappers.getSchemaMapper().map(sequenceType.getElementType());
+
+        // Choose IterableType or ListType depending on whether arrays should use Iterable.
+        arrayType = JavaSettings.getInstance().shouldUseIterable()
+            ? new IterableType(mappedType)
+            : new ListType(mappedType);
+
+        parsed.put(sequenceType, arrayType);
+        return arrayType;
     }
 }

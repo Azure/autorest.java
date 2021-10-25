@@ -24,20 +24,26 @@ import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
-    private static ServiceClientMapper instance = new ServiceClientMapper();
+    private static final ServiceClientMapper INSTANCE = new ServiceClientMapper();
+
+    private static final Pattern SPACE = Pattern.compile("\\s");
+    private static final Pattern TRAILING_FORWARD_SLASH = Pattern.compile("/+$");
+    private static final Pattern URL_PATH = Pattern.compile("(?<!/)[/][^/]+");
 
     protected ServiceClientMapper() {
     }
 
     public static ServiceClientMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -131,7 +137,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 if (settings.getServiceName() == null) {
                     serviceName = serviceClientInterfaceName;
                 } else {
-                    serviceName = settings.getServiceName().replaceAll("\\s", "");
+                    serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
                 }
                 String enumTypeName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
                 serviceClientPropertyDescription = "Service version";
@@ -186,7 +192,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NonNull)
                         : new ArrayList<>())
                 .build();
 
@@ -200,7 +206,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NonNull)
                         : new ArrayList<>())
                 .build();
 
@@ -216,7 +222,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 if (proxy == null) {
                     proxy = serviceClientMethodGroupClients.get(0).getProxy();
                 }
-                String host = proxy.getBaseURL().replaceAll("/+$", "").replaceAll("(?<!/)[/][^/]+", "");
+                String host = TRAILING_FORWARD_SLASH.matcher(proxy.getBaseURL()).replaceAll("");
+                host = URL_PATH.matcher(host).replaceAll("");
                 List<String> parameters = new ArrayList<>();
                 int start = host.indexOf("{");
                 while (start >= 0) {
@@ -251,7 +258,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .fromClient(true)
                     .defaultValue("AzureEnvironment.AZURE")
                     .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                            ? Arrays.asList(ClassType.NonNull)
+                            ? Collections.singletonList(ClassType.NonNull)
                             : new ArrayList<>())
                     .build();
 
@@ -265,7 +272,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .fromClient(true)
                     .defaultValue("Duration.ofSeconds(30)")
                     .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                            ? Arrays.asList(ClassType.NonNull)
+                            ? Collections.singletonList(ClassType.NonNull)
                             : new ArrayList<>())
                     .build();
 
@@ -278,7 +285,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .constructors(serviceClientConstructors);
         } else {
             serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+            serviceClientConstructors.add(new Constructor(Collections.singletonList(httpPipelineParameter)));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)
@@ -304,7 +311,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NonNull)
                         : new ArrayList<>())
                 .build();
     }

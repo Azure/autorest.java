@@ -6,7 +6,6 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
@@ -15,13 +14,13 @@ import com.azure.autorest.util.CodeNamer;
  * Writes an XmlSequenceWrapper to a JavaFile.
  */
 public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrapper, JavaFile> {
-    private static XmlSequenceWrapperTemplate _instance = new XmlSequenceWrapperTemplate();
+    private static final XmlSequenceWrapperTemplate INSTANCE = new XmlSequenceWrapperTemplate();
 
     private XmlSequenceWrapperTemplate() {
     }
 
     public static XmlSequenceWrapperTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(XmlSequenceWrapper xmlSequenceWrapper, JavaFile javaFile) {
@@ -34,10 +33,8 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
         javaFile.declareImport(xmlSequenceWrapper.getImports());
 
-        javaFile.javadocComment(comment ->
-        {
-            comment.description(String.format("A wrapper around %1$s which provides top-level metadata for serialization.", sequenceType));
-        });
+        javaFile.javadocComment(comment -> comment.description(
+            String.format("A wrapper around %1$s which provides top-level metadata for serialization.", sequenceType)));
         javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", xmlRootElementName));
         javaFile.publicFinalClass(xmlSequenceWrapper.getWrapperClassName(), classBlock ->
         {
@@ -51,9 +48,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
             });
             classBlock.annotation("JsonCreator");
             classBlock.publicConstructor(String.format("%1$s(@JsonProperty(\"%2$s\") %3$s %4$s)", xmlSequenceWrapper.getWrapperClassName(), xmlListElementName, sequenceType, xmlElementNameCamelCase), constructor ->
-            {
-                constructor.line(String.format("this.%1$s = %2$s;", xmlElementNameCamelCase, xmlElementNameCamelCase));
-            });
+                constructor.line(String.format("this.%1$s = %2$s;", xmlElementNameCamelCase, xmlElementNameCamelCase)));
 
             classBlock.javadocComment(comment ->
             {

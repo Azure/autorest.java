@@ -2,18 +2,19 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.model.clientmodel.IType;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ConstantMapper implements IMapper<ConstantSchema, IType> {
-    private static ConstantMapper instance = new ConstantMapper();
-    Map<ConstantSchema, IType> parsed = new HashMap<>();
+    private static final ConstantMapper INSTANCE = new ConstantMapper();
+    Map<ConstantSchema, IType> parsed = new ConcurrentHashMap<>();
 
     private ConstantMapper() {
     }
 
     public static ConstantMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -21,16 +22,16 @@ public class ConstantMapper implements IMapper<ConstantSchema, IType> {
         if (constantSchema == null) {
             return null;
         }
-        if (parsed.containsKey(constantSchema)) {
-            return parsed.get(constantSchema);
+
+        IType constantType = parsed.get(constantSchema);
+        if (constantType != null) {
+            return constantType;
         }
 
-        IType backedType = Mappers.getSchemaMapper().map(constantSchema.getValueType());
-
         //TODO: constants
-        IType iType = backedType;
+        constantType = Mappers.getSchemaMapper().map(constantSchema.getValueType());
+        parsed.put(constantSchema, constantType);
 
-        parsed.put(constantSchema, iType);
-        return iType;
+        return constantType;
     }
 }
