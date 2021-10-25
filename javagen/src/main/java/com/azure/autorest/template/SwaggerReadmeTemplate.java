@@ -21,6 +21,7 @@ public class SwaggerReadmeTemplate {
     static {
         OVERRIDE_SETTINGS.put("java", "true");
         OVERRIDE_SETTINGS.put("output-folder", "../");
+        OVERRIDE_SETTINGS.put("regenerate-pom", "false");
         OVERRIDE_SETTINGS.put("sdk-integration", null);
     }
 
