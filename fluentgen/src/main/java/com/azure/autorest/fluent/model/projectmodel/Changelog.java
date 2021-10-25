@@ -28,8 +28,10 @@ import java.util.stream.Collectors;
 import static java.time.temporal.ChronoField.*;
 
 public class Changelog {
-
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Changelog.class);
+
+    private static final Pattern UNRELEASED_VERSION_PATTERN =
+        Pattern.compile("^## ([0-9][-.a-z|0-9]+) \\(Unreleased\\)");
 
     private final List<String> lines;
 
@@ -56,7 +58,6 @@ public class Changelog {
         String previousUnreleasedVersion = null;
         List<String> previousChangelog = new ArrayList<>();
 
-        Pattern unreleasedVersionPattern = Pattern.compile("^## ([0-9][-.a-z|0-9]+) \\(Unreleased\\)");
         Pattern currentVersionPattern = Pattern.compile("^## " + Pattern.quote(project.getVersion())+ " \\(.*\\)");
 
         boolean beforeUnreleasedSection = true;
@@ -67,7 +68,7 @@ public class Changelog {
                     beforeUnreleasedSection = false;
 
                     if (line.trim().endsWith("(Unreleased)")) {
-                        Matcher m = unreleasedVersionPattern.matcher(line.trim());
+                        Matcher m = UNRELEASED_VERSION_PATTERN.matcher(line.trim());
                         if (m.find()) {
                             previousUnreleasedVersion = m.group(1);
                             logger.info("Found last unreleased version '{}'", previousUnreleasedVersion);
