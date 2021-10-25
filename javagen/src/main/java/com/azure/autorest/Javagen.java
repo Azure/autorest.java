@@ -246,6 +246,7 @@ public class Javagen extends NewPlugin {
                 // Readme, Changelog
                 if (settings.isSdkIntegration()) {
                     javaPackage.addReadmeMarkdown(project);
+                    javaPackage.addSwaggerReadmeMarkdown(project);
                     javaPackage.addChangelogMarkdown(project);
                 }
             }

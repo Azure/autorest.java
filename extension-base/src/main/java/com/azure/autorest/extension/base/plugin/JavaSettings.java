@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,6 +33,8 @@ public class JavaSettings {
     private static NewPlugin host;
 
     private static String _header;
+
+    private static final Map<String, String> simpleJavaSettings = new HashMap<>();
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -63,31 +66,6 @@ public class JavaSettings {
 
     public static JavaSettings getInstance() {
         if (_instance == null) {
-            boolean regeneratePomDefault = false;
-            String syncMethodsDefault = "essential";
-            boolean addContextParameterDefault = false;
-            boolean contextClientMethodParameterDefault = false;
-            boolean clientSideValidationsDefault = false;
-            boolean clientLoggerDefault = false;
-            boolean generateClientInterfacesDefault = false;
-            boolean requiredParameterClientMethodsDefault = false;
-            boolean modelOverrideSetterFromSuperclassDefault = false;
-            String clientFlattenAnnotationTargetDefault = "";
-
-            String fluentSetting = host.getStringValue("fluent");
-            if (fluentSetting != null) {
-                regeneratePomDefault = true;
-                syncMethodsDefault = "all";
-                addContextParameterDefault = true;
-                contextClientMethodParameterDefault = true;
-                clientSideValidationsDefault = true;
-                clientLoggerDefault = true;
-                generateClientInterfacesDefault = true;
-                requiredParameterClientMethodsDefault = true;
-                modelOverrideSetterFromSuperclassDefault = true;
-                clientFlattenAnnotationTargetDefault = "none";
-            }
-
             AutorestSettings autorestSettings = new AutorestSettings();
             loadStringSetting("tag", autorestSettings::setTag);
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
@@ -99,59 +77,58 @@ public class JavaSettings {
                     inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
             }
 
-            setHeader(host.getStringValue("license-header"));
+            setHeader(getStringValue(host, "license-header"));
             _instance = new JavaSettings(
                 autorestSettings,
                 host.getValue(new TypeReference<Map<String, Object>>() {
                 }.getType(), "pipeline.modelerfour"),
-                host.getBooleanValue("azure-arm", false),
-                host.getBooleanValue("sdk-integration", false),
-                fluentSetting,
-                host.getBooleanValue("regenerate-pom", regeneratePomDefault),
+                getBooleanValue(host, "azure-arm", false),
+                getBooleanValue(host, "sdk-integration", false),
+                getStringValue(host, "fluent"),
+                getBooleanValue(host, "regenerate-pom", false),
                 _header,
                 80,
-                host.getStringValue("service-name"),
-                host.getStringValue("namespace", "").toLowerCase(),
-                host.getBooleanValue("enable-xml", false),
-                host.getBooleanValue("non-null-annotations", false),
-                host.getBooleanValue("client-side-validations", clientSideValidationsDefault),
-                host.getStringValue("client-type-prefix"),
-                host.getBooleanValue("generate-client-interfaces", generateClientInterfacesDefault),
-                host.getBooleanValue("generate-client-as-impl", false),
-                host.getStringValue("implementation-subpackage", "implementation"),
-                host.getStringValue("models-subpackage", "models"),
-                host.getStringValue("custom-types", ""),
-                host.getStringValue("custom-types-subpackage", ""),
-                host.getStringValue("fluent-subpackage", "fluent"),
-                host.getBooleanValue("required-parameter-client-methods", requiredParameterClientMethodsDefault),
-                host.getBooleanValue("add-context-parameter", addContextParameterDefault),
-                host.getBooleanValue("context-client-method-parameter", contextClientMethodParameterDefault),
-                host.getBooleanValue("generate-sync-async-clients", false),
-                host.getStringValue("sync-methods", syncMethodsDefault),
-                host.getBooleanValue("client-logger", clientLoggerDefault),
-                host.getBooleanValue("required-fields-as-ctor-args", false),
-                host.getBooleanValue("service-interface-as-public", false),
-                host.getStringValue("artifact-id", ""),
-                host.getStringValue("credential-types", "none"),
-                host.getStringValue("credential-scopes"),
-                host.getStringValue("customization-jar-path"),
-                host.getStringValue("customization-class"),
-                host.getBooleanValue("model-override-setter-from-superclass",
-                    modelOverrideSetterFromSuperclassDefault),
-                host.getBooleanValue("optional-constant-as-enum", false),
-                host.getBooleanValue("low-level-client", false),
-                host.getBooleanValue("use-iterable", false),
+                getStringValue(host, "service-name"),
+                getStringValue(host, "namespace", "").toLowerCase(),
+                getBooleanValue(host, "enable-xml", false),
+                getBooleanValue(host, "non-null-annotations", false),
+                getBooleanValue(host, "client-side-validations", false),
+                getStringValue(host, "client-type-prefix"),
+                getBooleanValue(host, "generate-client-interfaces", false),
+                getBooleanValue(host, "generate-client-as-impl", false),
+                getStringValue(host, "implementation-subpackage", "implementation"),
+                getStringValue(host, "models-subpackage", "models"),
+                getStringValue(host, "custom-types", ""),
+                getStringValue(host, "custom-types-subpackage", ""),
+                getStringValue(host, "fluent-subpackage", "fluent"),
+                getBooleanValue(host, "required-parameter-client-methods", false),
+                getBooleanValue(host, "add-context-parameter", false),
+                getBooleanValue(host, "context-client-method-parameter", false),
+                getBooleanValue(host, "generate-sync-async-clients", false),
+                getStringValue(host, "sync-methods", "essential"),
+                getBooleanValue(host, "client-logger", false),
+                getBooleanValue(host, "required-fields-as-ctor-args", false),
+                getBooleanValue(host, "service-interface-as-public", false),
+                getStringValue(host, "artifact-id", ""),
+                getStringValue(host, "credential-types", "none"),
+                getStringValue(host, "credential-scopes"),
+                getStringValue(host, "customization-jar-path"),
+                getStringValue(host, "customization-class"),
+                getBooleanValue(host, "model-override-setter-from-superclass", false),
+                getBooleanValue(host, "optional-constant-as-enum", false),
+                getBooleanValue(host, "low-level-client", false),
+                getBooleanValue(host, "use-iterable", false),
                 host.getValue(List.class, "service-versions"),
-                host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
-                host.getStringValue("client-flattened-annotation-target", clientFlattenAnnotationTargetDefault),
-                host.getStringValue("key-credential-header-name", ""),
-                host.getBooleanValue("disable-client-builder", false),
-                host.getBooleanValue("skip-formatting", false),
+                getBooleanValue(host, "require-x-ms-flattened-to-flatten", false),
+                getStringValue(host, "client-flattened-annotation-target", ""),
+                getStringValue(host, "key-credential-header-name", ""),
+                getBooleanValue(host, "disable-client-builder", false),
+                getBooleanValue(host, "skip-formatting", false),
                 host.getValue(new TypeReference<Map<String, PollingDetails>>() {
                 }.getType(), "polling"),
-                host.getBooleanValue("generate-samples", false),
-                host.getBooleanValue("pass-discriminator-to-child-deserialization", false),
-                host.getBooleanValue("annotate-getters-and-setters-for-serialization", false));
+                getBooleanValue(host, "generate-samples", false),
+                getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
+                getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false));
         }
         return _instance;
     }
@@ -412,6 +389,10 @@ public class JavaSettings {
 
     public AutorestSettings getAutorestSettings() {
         return autorestSettings;
+    }
+
+    public Map<String, String> getSimpleJavaSettings() {
+        return simpleJavaSettings;
     }
 
     private final boolean sdkIntegration;
@@ -838,6 +819,34 @@ public class JavaSettings {
         String settingValue = host.getStringValue(settingName);
         if (settingValue != null) {
             action.accept(settingValue);
+        }
+    }
+
+    private static String getStringValue(NewPlugin host, String settingName) {
+        String value = host.getStringValue(settingName);
+        if (value != null) {
+            simpleJavaSettings.put(settingName, value);
+        }
+        return value;
+    }
+
+    private static String getStringValue(NewPlugin host, String settingName, String defaultValue) {
+        String ret = host.getStringValue(settingName);
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            simpleJavaSettings.put(settingName, ret);
+            return ret;
+        }
+    }
+
+    private static boolean getBooleanValue(NewPlugin host, String settingName, boolean defaultValue) {
+        Boolean ret = host.getBooleanValue(settingName);
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            simpleJavaSettings.put(settingName, String.valueOf(ret));
+            return ret;
         }
     }
 }

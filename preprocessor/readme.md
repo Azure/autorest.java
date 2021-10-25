@@ -33,6 +33,7 @@ pipeline:
 ```
 
 ```yaml $(low-level-client)
+license-header: MICROSOFT_MIT_SMALL
 generate-client-interfaces: false
 generate-client-as-impl: true
 generate-sync-async-clients: true

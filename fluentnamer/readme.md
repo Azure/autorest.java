@@ -52,4 +52,16 @@ pipeline:
         sTag: stag
         tagname: tagName
         tagvalue: tagValue
+
+license-header: MICROSOFT_MIT_SMALL
+regenerate-pom: true
+sync-methods: all
+add-context-parameter: true
+context-client-method-parameter: true
+client-side-validations: true
+client-logger: true
+generate-client-interfaces: true
+required-parameter-client-methods: true
+model-override-setter-from-superclass: true
+client-flattened-annotation-target: none
 ```
