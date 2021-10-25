@@ -2,11 +2,11 @@
 *                           @weidongxu-microsoft @srnagar
 
 # fluentgen
-/fluent*                    @weidongxu-microsoft @haolingdong-msft
-/azure-tests                @weidongxu-microsoft @haolingdong-msft
+/fluent*                    @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
+/azure-tests                @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
 
 # androidgen
 /androidgen                 @JianpingChen @anuchandy
 
 # protocol
-/protocol*                  @weidongxu-microsoft @srnagar
+/protocol*                  @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
