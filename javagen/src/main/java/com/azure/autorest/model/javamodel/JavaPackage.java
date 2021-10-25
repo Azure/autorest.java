@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.template.ChangelogTemplate;
 import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
@@ -198,6 +199,12 @@ public class JavaPackage {
 
     public void addReadmeMarkdown(Project project) {
         TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
+    }
+
+    public void addChangelogMarkdown(Project project) {
+        TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

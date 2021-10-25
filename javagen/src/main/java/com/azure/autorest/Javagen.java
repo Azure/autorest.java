@@ -238,13 +238,15 @@ public class Javagen extends NewPlugin {
                 javaPackage.addModuleInfo(client.getModuleInfo());
 
                 // POM
-                if (settings.isSdkIntegration() || settings.shouldRegeneratePom()) {
+                if (settings.shouldRegeneratePom()) {
                     Pom pom = new PomMapper().map(project);
                     javaPackage.addPom("pom.xml", pom);
                 }
 
+                // Readme, Changelog
                 if (settings.isSdkIntegration()) {
                     javaPackage.addReadmeMarkdown(project);
+                    javaPackage.addChangelogMarkdown(project);
                 }
             }
 

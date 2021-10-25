@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 public class TemplateUtil {
 
+    // begin of constant for template replacement, used in ResourceUtil.loadTextFromResource
     public static final String SERVICE_NAME = "service-name";
     public static final String SERVICE_DESCRIPTION = "service-description";
 
@@ -33,7 +34,14 @@ public class TemplateUtil {
     public static final String SAMPLE_CODES = "sample-codes";
 
     public static final String DATE_UTC = "date-utc";
+    // end of constant for template replacement
 
+    /**
+     * Helper function to write client methods to service client and method group
+     *
+     * @param classBlock Java class block
+     * @param clientMethods collection of client methods
+     */
     public static void writeClientMethodsAndHelpers(JavaClass classBlock, List<ClientMethod> clientMethods) {
         JavaSettings settings = JavaSettings.getInstance();
 
@@ -86,6 +94,11 @@ public class TemplateUtil {
         });
     }
 
+    /**
+     * Helper function to write helper methods for LLC paging
+     *
+     * @param classBlock Java class block
+     */
     private static void writePagingHelperMethods(JavaClass classBlock) {
         classBlock.privateMethod("List<BinaryData> getValues(BinaryData binaryData, String path)", block -> {
             block.line("try {");

@@ -48,3 +48,7 @@ pipeline:
     group-parameters: false
     lenient-model-deduplication: true
 ```
+
+```yaml $(low-level-client) && $(sdk-integration)
+regenerate-pom: true
+```
