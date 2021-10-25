@@ -9,8 +9,9 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.projectmodel.CodeSample;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.util.TemplateUtil;
 
-public class ReadmeTemplate {
+public class ReadmeTemplate extends com.azure.autorest.template.ReadmeTemplate {
 
     public String write(FluentProject project) {
         StringBuilder sampleCodesBuilder = new StringBuilder();
@@ -29,13 +30,13 @@ public class ReadmeTemplate {
         }
 
         return FluentUtils.loadTextFromResource("Readme.txt",
-                TextTemplate.SERVICE_NAME, project.getServiceName(),
-                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
-                TextTemplate.GROUP_ID, project.getGroupId(),
-                TextTemplate.ARTIFACT_ID, project.getArtifactId(),
-                TextTemplate.ARTIFACT_VERSION, project.getVersion(),
-                TextTemplate.MANAGER_CLASS, FluentStatic.getFluentManager().getType().getName(),
-                TextTemplate.SAMPLE_CODES, sampleCodesBuilder.toString()
+                TemplateUtil.SERVICE_NAME, project.getServiceName(),
+                TemplateUtil.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
+                TemplateUtil.GROUP_ID, project.getGroupId(),
+                TemplateUtil.ARTIFACT_ID, project.getArtifactId(),
+                TemplateUtil.ARTIFACT_VERSION, project.getVersion(),
+                TemplateUtil.MANAGER_CLASS, FluentStatic.getFluentManager().getType().getName(),
+                TemplateUtil.SAMPLE_CODES, sampleCodesBuilder.toString()
         );
     }
 }
