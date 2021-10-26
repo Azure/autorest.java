@@ -218,8 +218,8 @@ public class ProxyMethod {
     }
 
     public final String getSimpleRestResponseMethodName() {
-                return getName() + "WithResponse";
-        }
+        return getName() + "WithResponse";
+    }
 
     public final Set<String> getResponseContentTypes() {
         return responseContentTypes;
