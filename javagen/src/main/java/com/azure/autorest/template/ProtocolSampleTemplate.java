@@ -17,6 +17,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         imports.add(Response.class.getName());
         imports.add(BinaryData.class.getName());
         imports.add(Context.class.getName());
+        imports.add(Configuration.class.getName());
         imports.add(ClassType.RequestOptions.getFullName());
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
         javaFile.declareImport(imports);
@@ -136,7 +138,8 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         serviceClient.getProperties().stream().filter(ServiceClientProperty::isRequired).filter(p -> !processedServiceClientProperties.contains(p)).forEach(serviceClientProperty -> {
             String defaultValueExpression = serviceClientProperty.getDefaultValueExpression();
             if (defaultValueExpression == null) {
-                defaultValueExpression = String.format("System.getenv(\"%1$s\")", serviceClientProperty.getName().toUpperCase(Locale.ROOT));
+                defaultValueExpression = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\")",
+                        serviceClientProperty.getName().toUpperCase(Locale.ROOT));
             }
 
             clientParameterLines.add(
@@ -150,7 +153,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
             credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
         } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
-            credentialExpr = ".credential(new AzureKeyCredential(System.getenv(\"API_KEY\")))";
+            credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
         } else {
             credentialExpr = "";
         }
