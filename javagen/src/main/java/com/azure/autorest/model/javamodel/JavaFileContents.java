@@ -15,10 +15,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class JavaFileContents {
     private static final String singleIndent = "    ";
+    private static final Pattern QUOTED_NEW_LINE = Pattern.compile(Pattern.quote("\n"));
 
     private StringBuilder contents;
     private StringBuilder linePrefix;
@@ -64,7 +66,7 @@ public class JavaFileContents {
     }
 
     public final String[] getLines() {
-        return toString().split(java.util.regex.Pattern.quote("\n"), -1);
+        return QUOTED_NEW_LINE.split(toString(), -1);
     }
 
     public final void addToPrefix(String toAdd) {
@@ -105,7 +107,7 @@ public class JavaFileContents {
     }
 
     private List<String> wordWrap(String line, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
 
         if (wordWrapWidth == null) {
             lines.add(line);

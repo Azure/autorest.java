@@ -43,6 +43,11 @@ public final class ClassCustomization extends CodeCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
+    private static final Pattern BLOCK_OPEN = Pattern.compile("\\) *\\{");
+    private static final Pattern PUBLIC_MODIFIER = Pattern.compile(" *public ");
+    private static final Pattern PRIVATE_MODIFIER = Pattern.compile(" *private ");
+    private static final Pattern MEMBER_PARAMS = Pattern.compile("\\(.*\\)");
+
     private final String packageName;
     private final String className;
 
@@ -74,7 +79,10 @@ public final class ClassCustomization extends CodeCustomization {
         String methodSignature = null;
         if (methodNameOrSignature.contains("(")) {
             // method signature
-            methodSignature = methodNameOrSignature.replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
+            methodSignature = BLOCK_OPEN.matcher(methodNameOrSignature).replaceFirst("");
+            methodSignature = PUBLIC_MODIFIER.matcher(methodSignature).replaceFirst("");
+            methodSignature = PRIVATE_MODIFIER.matcher(methodSignature).replaceFirst("");
+
             String returnTypeAndMethodName = methodNameOrSignature.split("\\(")[0];
             if (returnTypeAndMethodName.contains(" ")) {
                 methodName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
@@ -85,15 +93,18 @@ public final class ClassCustomization extends CodeCustomization {
             methodName = methodNameOrSignature;
         }
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
+            .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(methodName)
+                && si.getKind() == SymbolKind.METHOD)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodNameOrSignature))
             .findFirst();
         if (!methodSymbol.isPresent()) {
             throw new IllegalArgumentException("Method " + methodNameOrSignature + " does not exist in class " + className);
         }
         if (methodSignature == null) {
-            methodSignature = editor.getFileLine(fileName, methodSymbol.get().getLocation().getRange().getStart().getLine())
-                .replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
+            methodSignature = editor.getFileLine(fileName, methodSymbol.get().getLocation().getRange().getStart().getLine());
+            methodSignature = BLOCK_OPEN.matcher(methodSignature).replaceFirst("");
+            methodSignature = PUBLIC_MODIFIER.matcher(methodSignature).replaceFirst("");
+            methodSignature = PRIVATE_MODIFIER.matcher(methodSignature).replaceFirst("");
         }
         return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature, methodSymbol.get());
     }
@@ -113,9 +124,9 @@ public final class ClassCustomization extends CodeCustomization {
         String constructorSignature = null;
         if (constructorNameOrSignature.contains("(")) {
             // method signature
-            constructorSignature = constructorNameOrSignature.replaceFirst("\\) *\\{", "")
-                .replaceFirst(" *public ", "")
-                .replaceFirst(" *private ", "");
+            constructorSignature = BLOCK_OPEN.matcher(constructorNameOrSignature).replaceFirst("");
+            constructorSignature = PUBLIC_MODIFIER.matcher(constructorSignature).replaceFirst("");
+            constructorSignature = PRIVATE_MODIFIER.matcher(constructorSignature).replaceFirst("");
             String returnTypeAndMethodName = constructorNameOrSignature.split("\\(")[0];
             if (returnTypeAndMethodName.contains(" ")) {
                 constructorName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
@@ -127,7 +138,7 @@ public final class ClassCustomization extends CodeCustomization {
         }
 
         List<SymbolInformation> constructorSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(constructorName)
+            .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(constructorName)
                 && si.getKind() == SymbolKind.CONSTRUCTOR)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
                 .contains(constructorNameOrSignature))
@@ -144,8 +155,10 @@ public final class ClassCustomization extends CodeCustomization {
         }
 
         if (constructorSignature == null) {
-            constructorSignature = editor.getFileLine(fileName, constructorSymbol.get(0).getLocation().getRange().getStart().getLine())
-                .replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
+            constructorSignature = editor.getFileLine(fileName, constructorSymbol.get(0).getLocation().getRange().getStart().getLine());
+            constructorSignature = BLOCK_OPEN.matcher(constructorSignature).replaceFirst("");
+            constructorSignature = PUBLIC_MODIFIER.matcher(constructorSignature).replaceFirst("");
+            constructorSignature = PRIVATE_MODIFIER.matcher(constructorSignature).replaceFirst("");
         }
         return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
             constructorSymbol.get(0));
@@ -236,7 +249,7 @@ public final class ClassCustomization extends CodeCustomization {
             }
         }
 
-        int indentAmount = editor.getFileLine(fileName, constructorStartLine).replaceFirst("[^ ].*$", "").length();
+        int indentAmount = Utils.getIndent(editor.getFileLine(fileName, constructorStartLine)).length();
 
         editor.insertBlankLine(fileName, ++constructorStartLine, false);
         Position constructorPosition = editor.insertBlankLineWithIndent(fileName, ++constructorStartLine, indentAmount);
@@ -285,7 +298,7 @@ public final class ClassCustomization extends CodeCustomization {
             currentLine = fileLines.get(--lineNum);
         }
 
-        int indentAmount = currentLine.replaceFirst("[^ ].*$", "").length();
+        int indentAmount = Utils.getIndent(currentLine).length();
 
         editor.insertBlankLine(fileName, ++lineNum, false);
         Position newMethod = editor.insertBlankLineWithIndent(fileName, ++lineNum, indentAmount);

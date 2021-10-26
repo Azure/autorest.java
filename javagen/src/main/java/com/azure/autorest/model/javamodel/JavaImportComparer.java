@@ -5,7 +5,7 @@ import java.util.Locale;
 
 public class JavaImportComparer implements Comparator<String> {
     private static String[] getImportParts(String import_Keyword) {
-        return import_Keyword.split("[.]", -1);
+        return import_Keyword.split("\\.", -1);
     }
 
     private static boolean isLastPart(int importIndex, String[] importParts) {

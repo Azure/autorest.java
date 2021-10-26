@@ -13,6 +13,7 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCo
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
  * The Javadoc customization for an AutoRest generated classes and methods.
  */
 public final class PropertyCustomization extends CodeCustomization {
+    private static final Pattern METHOD_PARAMS_CAPTURE = Pattern.compile("\\(.*\\)");
+
     private final String packageName;
     private final String className;
     private final String propertyName;
@@ -51,7 +54,8 @@ public final class PropertyCustomization extends CodeCustomization {
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             } else if (symbol.getKind() == SymbolKind.METHOD) {
                 String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
-                    .replace(propertyName, newName).replaceFirst("\\(.*\\)", "");
+                    .replace(propertyName, newName);
+                methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
                 WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName);
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }

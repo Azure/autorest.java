@@ -40,6 +40,13 @@ public final class JavadocCustomization {
 
     private static final Pattern EMPTY_JAVADOC_LINE_PATTERN = Pattern.compile("\\s*\\*\\/?\\s*");
 
+    private static final Pattern THROWS_TAG = Pattern.compile(".*@throws ");
+    private static final Pattern PARAM_TAG = Pattern.compile(".*@param ");
+    private static final Pattern SPACE_THEN_ANYTHING = Pattern.compile(" .*");
+    private static final Pattern JAVADOC_LINE_WITH_CONTENT = Pattern.compile("\\* .*$");
+    private static final Pattern END_JAVADOC_LINE = Pattern.compile(" \\*/$");
+    private static final Pattern JAVADOC_CONTENT = Pattern.compile(" +\\* ");
+
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final URI fileUri;
@@ -285,7 +292,8 @@ public final class JavadocCustomization {
             int currentDocEndLine = symbolLine;
             while (!lineContent.contains("/*")) {
                 if (lineContent.contains("@throws")) {
-                    String type = lineContent.replaceFirst(".*@throws ", "").replaceFirst(" .*", "");
+                    String type = THROWS_TAG.matcher(lineContent).replaceFirst("");
+                    type = SPACE_THEN_ANYTHING.matcher(type).replaceFirst("");
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@throws") + 8);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
                     throwsDocs.put(type, readJavadocTextRange(editor, fileName, docStart, docEnd));
@@ -311,7 +319,8 @@ public final class JavadocCustomization {
                     deprecatedDoc = readJavadocTextRange(editor, fileName, docStart, docEnd);
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@param")) {
-                    String name = lineContent.replaceFirst(".*@param ", "").replaceFirst(" .*", "");
+                    String name = PARAM_TAG.matcher(lineContent).replaceFirst("");
+                    name = SPACE_THEN_ANYTHING.matcher(name).replaceFirst("");
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@param") + 8 + name.length());
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
                     paramDocs.put(name, readJavadocTextRange(editor, fileName, docStart, docEnd));
@@ -327,13 +336,14 @@ public final class JavadocCustomization {
             if (lineContent.endsWith("/*") || lineContent.endsWith("/**")) {
                 symbolLine++;
             }
-            Position descriptionStart = new Position(symbolLine, editor.getFileLine(fileName, symbolLine).replaceFirst("\\* .*$", "").length() + 2);
+            Position descriptionStart = new Position(symbolLine, JAVADOC_LINE_WITH_CONTENT.matcher(editor.getFileLine(fileName, symbolLine)).replaceFirst("").length() + 2);
             String descriptionEndLineContent = editor.getFileLine(fileName, currentDocEndLine);
             while (descriptionEndLineContent.trim().endsWith("*")) {
                 descriptionEndLineContent = editor.getFileLine(fileName, --currentDocEndLine);
             }
-            Position descriptionEnd = new Position(currentDocEndLine, descriptionEndLineContent.replaceFirst(" \\*/$", "").length());
-            this.descriptionDocs = editor.getTextInRange(fileName, new Range(descriptionStart, descriptionEnd), " ").replaceAll(" +\\* ", " ").trim();
+            Position descriptionEnd = new Position(currentDocEndLine, END_JAVADOC_LINE.matcher(descriptionEndLineContent).replaceFirst("").length());
+            this.descriptionDocs = JAVADOC_CONTENT.matcher(editor.getTextInRange(fileName, new Range(descriptionStart, descriptionEnd), " "))
+                .replaceAll(" ").trim();
         } else {
             initialize(symbolLine);
         }
@@ -348,7 +358,7 @@ public final class JavadocCustomization {
     }
 
     private void commit() {
-        // Given this method is self contained use StringBuilder as it doesn't have synchronization.
+        // Given this method is self-contained use StringBuilder as it doesn't have synchronization.
         // Additional start with a sizeable 4kb buffer to reduce chances of resizing while keeping it small.
         StringBuilder stringBuilder = new StringBuilder(4096);
 

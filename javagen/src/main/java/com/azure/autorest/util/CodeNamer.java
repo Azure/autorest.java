@@ -83,6 +83,7 @@ public class CodeNamer {
     private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
+    private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
@@ -274,7 +275,7 @@ public class CodeNamer {
     public static List<String> wordWrap(String text, int width) {
         Objects.requireNonNull(text);
         List<String> ret = new ArrayList<>();
-        String[] lines = text.split("\r?\n", -1);
+        String[] lines = NEW_LINE.split(text, -1);
         for (String line : lines) {
             String processedLine = line.trim();
 
