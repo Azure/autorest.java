@@ -357,6 +357,16 @@ public class JavaFileContents {
         currentLineType = CurrentLineType.AfterIf;
     }
 
+    public void elseIfBlock(String condition, Consumer<JavaBlock> ifAction) {
+        line(String.format(" else if (%s) {", condition), false);
+        indent(() ->
+        {
+            ifAction.accept(new JavaBlock(this));
+        });
+        text("}");
+        currentLineType = CurrentLineType.AfterIf;
+    }
+
     public void elseBlock(Consumer<JavaBlock> elseAction) {
         line(" else {", false);
         indent(() -> elseAction.accept(new JavaBlock(this)));
