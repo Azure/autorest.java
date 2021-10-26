@@ -11,6 +11,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
+import com.azure.autorest.template.ProtocolTestBlankTemplate;
 import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
@@ -195,6 +196,12 @@ public class JavaPackage {
     public void addProtocolExamples(ProtocolExample protocolExample) {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), protocolExample.getFilename());
         Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
+        javaFiles.add(javaFile);
+    }
+
+    public void addProtocolTestBlank(ServiceClient serviceClient) {
+        JavaFile javaFile = javaFileFactory.createTestFile(settings.getPackage(), "ClientTests");
+        new ProtocolTestBlankTemplate().write(serviceClient, javaFile);
         javaFiles.add(javaFile);
     }
 
