@@ -47,7 +47,8 @@ public class Project {
     protected final PackageVersions packageVersions = new PackageVersions();
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
     protected String sdkRepositoryUri;
-//    private Changelog changelog;
+
+    private String apiVersion;
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
@@ -56,7 +57,6 @@ public class Project {
         private String azureCoreHttpNettyVersion = "1.11.1";
         private String azureCoreTestVersion = "1.7.3";
         private String azureIdentityVersion = "1.4.0";
-//        private String azureResourceManagerResourcesVersion = "2.4.0";
         private String junitVersion = "5.7.2";
         private String revapiMavenPlugin = "0.11.2";
 
@@ -96,7 +96,7 @@ public class Project {
     protected Project() {
     }
 
-    public Project(Client client) {
+    public Project(Client client, String apiVersion) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
@@ -107,25 +107,15 @@ public class Project {
         this.namespace = JavaSettings.getInstance().getPackage();
         this.artifactId = getArtifactIdFromNamespace();
 
-//        String clientDescription = client.getClientDescription();
-//        if (clientDescription == null) {
-//            clientDescription = "";
-//        }
-//        if (!clientDescription.isEmpty() && !clientDescription.endsWith(".")) {
-//            clientDescription += ".";
-//        }
+        this.serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
 
-        serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
-
-//        this.changelog = new Changelog(this);
+        this.apiVersion = apiVersion;
     }
 
     public void integrateWithSdk() {
         findPackageVersions();
 
         findPomDependencies();
-
-//        updateChangelog();
 
         findSdkRepositoryUri();
     }
@@ -231,7 +221,6 @@ public class Project {
                 checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
                 checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
                 checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
-//                checkArtifact(line, "com.azure.resourcemanager:azure-resourcemanager-resources").ifPresent(v -> packageVersions.azureResourceManagerResourcesVersion = v);
             });
         }
     }
@@ -247,28 +236,6 @@ public class Project {
         }
         return Optional.empty();
     }
-
-//    private void updateChangelog() {
-//        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-//        String outputFolder = settings.getAutorestSettings().getOutputFolder();
-//        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
-//            Path changelogPath = Paths.get(outputFolder, "CHANGELOG.md");
-//
-//            if (Files.isReadable(changelogPath)) {
-//                try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
-//                    this.changelog = new Changelog(reader);
-//                    logger.info("Update 'CHANGELOG.md' for version '{}'", version);
-//                    this.changelog.updateForVersion(this);
-//                } catch (IOException e) {
-//                    logger.warn("Failed to parse 'CHANGELOG.md'", e);
-//                }
-//            } else {
-//                logger.info("'CHANGELOG.md' not found or not readable");
-//            }
-//        } else {
-//            logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
-//        }
-//    }
 
     protected void findPomDependencies() {
         JavaSettings settings = JavaSettings.getInstance();
@@ -380,9 +347,9 @@ public class Project {
         return packageVersions;
     }
 
-//    public Changelog getChangelog() {
-//        return changelog;
-//    }
+    public String getApiVersion() {
+        return apiVersion;
+    }
 
     public List<String> getPomDependencyIdentifiers() {
         return pomDependencyIdentifiers;

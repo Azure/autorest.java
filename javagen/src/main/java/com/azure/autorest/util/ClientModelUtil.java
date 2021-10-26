@@ -5,6 +5,8 @@
 
 package com.azure.autorest.util;
 
+import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -13,6 +15,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Utilities for client model.
@@ -160,5 +163,18 @@ public class ClientModelUtil {
             }
         }
         return clientDefaultValueOrConstantValue;
+    }
+
+    public static String getFirstApiVersion(CodeModel codeModel) {
+        String apiVersion = codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .filter(o -> o.getApiVersions() != null)
+                .flatMap(o -> o.getApiVersions().stream())
+                .filter(Objects::nonNull)
+                .map(ApiVersion::getVersion)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+        return apiVersion;
     }
 }
