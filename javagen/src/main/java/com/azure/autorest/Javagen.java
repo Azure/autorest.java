@@ -239,7 +239,7 @@ public class Javagen extends NewPlugin {
                     javaPackage.addSwaggerReadmeMarkdown(project);
                     javaPackage.addChangelogMarkdown(project);
 
-                    // Test stub
+                    // Blank test case
                     javaPackage.addProtocolTestBlank(client.getServiceClient());
                 }
             }
