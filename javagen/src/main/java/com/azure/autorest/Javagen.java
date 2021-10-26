@@ -4,7 +4,6 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -46,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -169,15 +167,7 @@ public class Javagen extends NewPlugin {
             if (settings.isLowLevelClient()) {
                 List<String> serviceVersions = settings.getServiceVersions();
                 if (serviceVersions == null) {
-                    String apiVersion = codeModel.getOperationGroups().stream()
-                            .flatMap(og -> og.getOperations().stream())
-                            .filter(o -> o.getApiVersions() != null)
-                            .flatMap(o -> o.getApiVersions().stream())
-                            .filter(Objects::nonNull)
-                            .map(ApiVersion::getVersion)
-                            .filter(Objects::nonNull)
-                            .findFirst()
-                            .orElse(null);
+                    String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
                     if (apiVersion == null) {
                         throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
                     }
@@ -229,7 +219,7 @@ public class Javagen extends NewPlugin {
             }
 
             if (settings.isLowLevelClient()) {
-                Project project = new Project(client);
+                Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
                 if (settings.isSdkIntegration()) {
                     project.integrateWithSdk();
                 }
