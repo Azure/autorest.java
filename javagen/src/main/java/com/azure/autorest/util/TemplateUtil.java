@@ -131,7 +131,7 @@ public class TemplateUtil {
                     clientMethod.getMethodPollingDetails().getIntermediateType(),
                     clientMethod.getMethodPollingDetails().getFinalType());
         } else {
-            javaBlock.line("new TypeReference<%s>() {\n// empty\n}, new TypeReference<%s>() {\nempty\n});",
+            javaBlock.line("new TypeReference<%s>() {\n// empty\n}, new TypeReference<%s>() {\n// empty\n});",
                     clientMethod.getMethodPollingDetails().getIntermediateType(),
                     clientMethod.getMethodPollingDetails().getFinalType());
         }
