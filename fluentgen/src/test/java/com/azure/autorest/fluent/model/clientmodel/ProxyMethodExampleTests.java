@@ -36,4 +36,34 @@ public class ProxyMethodExampleTests {
                 .build();
         Assertions.assertEquals(example.getOriginalFile(), example.getRelativeOriginalFileName());
     }
+
+    @Test
+    public void testUnescapeQueryValue() {
+        String queryNotEscaped1 = "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'";
+        String queryNotEscaped2 = "properties/extensionHandler/any(eh: eh/version gt '2.70') and contains(name,'sql') and contains(properties/nodeConfiguration/name,'$$Not$$Configured$$')";
+
+        String queryNotEscaped3 = "properties/eventDate ge 2020-05-20 AND properties/eventDate le 2020-05-30";
+        String queryEscaped3 = "properties/eventDate+ge+2020-05-20+AND+properties/eventDate+le+2020-05-30";
+
+        String queryNotEscaped4 = "(properties/archived eq false)";
+        String queryEscaped4 = "(properties%2farchived+eq+false)";
+
+        String queryNotEscaped5 = "status eq 'Active' and severity eq 'Critical'";
+        String queryEscaped5 = "status%20eq%20'Active'%20and%20severity%20eq%20'Critical'";
+
+        ProxyMethodExample.ParameterValue parameterValue = new ProxyMethodExample.ParameterValue(queryNotEscaped1);
+        Assertions.assertEquals(queryNotEscaped1, parameterValue.getUnescapedQueryValue().toString());
+
+        parameterValue = new ProxyMethodExample.ParameterValue(queryNotEscaped2);
+        Assertions.assertEquals(queryNotEscaped2, parameterValue.getUnescapedQueryValue().toString());
+
+        parameterValue = new ProxyMethodExample.ParameterValue(queryEscaped3);
+        Assertions.assertEquals(queryNotEscaped3, parameterValue.getUnescapedQueryValue().toString());
+
+        parameterValue = new ProxyMethodExample.ParameterValue(queryEscaped4);
+        Assertions.assertEquals(queryNotEscaped4, parameterValue.getUnescapedQueryValue().toString());
+
+        parameterValue = new ProxyMethodExample.ParameterValue(queryEscaped5);
+        Assertions.assertEquals(queryNotEscaped5, parameterValue.getUnescapedQueryValue().toString());
+    }
 }
