@@ -26,7 +26,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.ResourceUtil;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
@@ -234,7 +234,7 @@ public class FluentUtils {
     }
 
     public static String loadTextFromResource(String filename, String... replacements) {
-        return ResourceUtil.loadTextFromResource(filename, replacements);
+        return TemplateUtil.loadTextFromResource(filename, replacements);
     }
 
     /**

@@ -44,6 +44,7 @@ public class ProtocolTestBlankTemplate implements IJavaTemplate<ServiceClient, J
                 "com.azure.identity.DefaultAzureCredentialBuilder",
                 "com.azure.core.test.TestBase",
                 "com.azure.core.test.TestMode",
+                "com.azure.core.test.annotation.DoNotRecord",
                 "org.junit.jupiter.api.BeforeEach",
                 "org.junit.jupiter.api.Test"
         ));
@@ -97,8 +98,9 @@ public class ProtocolTestBlankTemplate implements IJavaTemplate<ServiceClient, J
                 }
             });
 
-            classBlock.annotation("Test");
+            classBlock.annotation("Test", "DoNotRecord(skipInPlayback = true)");
             classBlock.publicMethod("void testClient()", methodBlock -> {
+                methodBlock.line("// use the builder to create client");
             });
         });
     }

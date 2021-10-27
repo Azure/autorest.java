@@ -989,5 +989,7 @@ public final class LROsCustomHeadersImpl {
         return this.beginPostAsyncRetrySucceededAsync(requestOptions, context).getSyncPoller();
     }
 
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
+        // empty
+    }
 }

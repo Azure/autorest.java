@@ -25,6 +25,12 @@
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-javagen</artifactId>
       <version>1.0.0-beta.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.googlejavaformat</groupId>
+          <artifactId>google-java-format</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
