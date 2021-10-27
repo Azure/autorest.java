@@ -1,10 +1,16 @@
 node_modules
 eng
+docs
 vanilla-tests
 azure-tests
 fluent-tests
 customization-tests
+protocol-tests
+protocol-resilience-test
 logs
+generate
+generate.bat
+generate-android.bat
 .git
 .github
 .gitignore
