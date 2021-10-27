@@ -1,16 +1,12 @@
 trigger:
   branches:
     include:
-    - v4
     - main
-    - llc
 
 pr:
   branches:
     include:
-    - v4
     - main
-    - llc
 
 jobs:
   - job: Build
@@ -139,3 +135,7 @@ jobs:
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
+
+      - script: |
+          ./protocol-sdk-integration-tests/test.py
+        displayName: 'Run protocol test on sdk integration'
