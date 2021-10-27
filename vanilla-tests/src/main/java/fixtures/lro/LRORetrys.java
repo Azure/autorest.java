@@ -552,7 +552,11 @@ public final class LRORetrys {
         return this.beginPostAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
     }
 
-    private static final class TypeReferenceProduct extends TypeReference<Product> {}
+    private static final class TypeReferenceProduct extends TypeReference<Product> {
+        // empty
+    }
 
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
+        // empty
+    }
 }
