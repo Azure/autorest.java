@@ -22,6 +22,7 @@ import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
@@ -89,6 +90,7 @@ public class FluentManagerTemplate {
                 ChronoUnit.class.getName(),
                 List.class.getName(),
                 ArrayList.class.getName(),
+                Collectors.class.getName(),
                 // azure-core
                 TokenCredential.class.getName(),
                 ClientLogger.class.getName(),
@@ -97,6 +99,7 @@ public class FluentManagerTemplate {
                 HttpPipeline.class.getName(),
                 HttpPipelineBuilder.class.getName(),
                 HttpPipelinePolicy.class.getName(),
+                HttpPipelinePosition.class.getName(),
                 HttpPolicyProviders.class.getName(),
                 RequestIdPolicy.class.getName(),
                 RetryPolicy.class.getName(),
