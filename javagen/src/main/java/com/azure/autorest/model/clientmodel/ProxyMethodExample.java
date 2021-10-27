@@ -13,10 +13,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +30,7 @@ public class ProxyMethodExample {
 
     private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
 
-    // https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md
+    // https://azure.github.io/autorest/extensions/#x-ms-examples
 
     public static class ParameterValue {
         private final Object objectValue;
@@ -45,6 +48,25 @@ public class ProxyMethodExample {
          */
         public Object getObjectValue() {
             return objectValue;
+        }
+
+        /**
+         * Gets the un-escaped query value.
+         *
+         * This is done by heuristic, and not guaranteed to be correct.
+         *
+         * @return the un-escaped query value
+         */
+        public Object getUnescapedQueryValue() {
+            Object unescapedValue = objectValue;
+            if (objectValue instanceof String) {
+                try {
+                    unescapedValue = URLDecoder.decode((String) objectValue, StandardCharsets.UTF_8.name());
+                } catch (UnsupportedEncodingException e) {
+                    // NOOP
+                }
+            }
+            return unescapedValue;
         }
 
         @Override

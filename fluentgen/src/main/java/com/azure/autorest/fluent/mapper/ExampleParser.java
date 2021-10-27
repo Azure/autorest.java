@@ -462,7 +462,10 @@ public class ExampleParser {
                 node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }
         } else {
-            node = parseNodeFromMethodParameter(methodParameter, parameterValue.getObjectValue());
+            Object exampleValue = methodParameter.getClientMethodParameter().getLocation() == RequestParameterLocation.Query
+                    ? parameterValue.getUnescapedQueryValue()
+                    : parameterValue.getObjectValue();
+            node = parseNodeFromMethodParameter(methodParameter, exampleValue);
         }
         return node;
     }
