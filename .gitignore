@@ -72,11 +72,13 @@ fluent-tests/src/main/java/module-info.java
 fluent-tests/src/samples/**
 fluent-tests/pom_generated_*.xml
 
+protocol-tests/src/main/java/module-info.java
+
+protocol-sdk-integration-tests/sdk
+!protocol-sdk-integration-tests/sdk/parents
+
 # Coverage report
 /coverage/
 
 # language server
 postprocessor/jdt-language-server
-
-# Module info
-protocol-tests/src/main/java/module-info.java
