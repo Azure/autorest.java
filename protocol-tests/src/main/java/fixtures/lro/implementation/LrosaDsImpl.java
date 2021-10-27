@@ -4918,5 +4918,7 @@ public final class LrosaDsImpl {
         return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(requestOptions, context).getSyncPoller();
     }
 
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
+        // empty
+    }
 }

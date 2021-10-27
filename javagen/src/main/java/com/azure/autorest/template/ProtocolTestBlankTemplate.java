@@ -99,6 +99,7 @@ public class ProtocolTestBlankTemplate implements IJavaTemplate<ServiceClient, J
 
             classBlock.annotation("Test");
             classBlock.publicMethod("void testClient()", methodBlock -> {
+                methodBlock.line("// use the builder to create client");
             });
         });
     }
