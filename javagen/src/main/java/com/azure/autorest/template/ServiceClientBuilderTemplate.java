@@ -17,6 +17,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.HttpPipelinePosition;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -297,6 +298,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
         imports.add("com.azure.core.http.policy.AddHeadersPolicy");
+        imports.add(HttpPipelinePosition.class.getName());
+        imports.add(Collectors.class.getName());
     }
 
     protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
@@ -331,6 +334,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
+            function.line("policies.addAll(this.pipelinePolicies.stream()" +
+                    ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)" +
+                    ".collect(Collectors.toList()));");
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
             function.line("policies.add(new CookiePolicy());");
@@ -354,7 +360,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
             }
-            function.line("policies.addAll(this.pipelinePolicies);");
+            function.line("policies.addAll(this.pipelinePolicies.stream()" +
+                    ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)" +
+                    ".collect(Collectors.toList()));");
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
