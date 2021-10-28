@@ -242,6 +242,7 @@ public final class AutoRestHeadExceptionTestServiceBuilder {
                 new HttpPipelineBuilder()
                         .policies(policies.toArray(new HttpPipelinePolicy[0]))
                         .httpClient(httpClient)
+                        .clientOptions(clientOptions)
                         .build();
         return httpPipeline;
     }
