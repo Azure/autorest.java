@@ -367,8 +367,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
 
-            function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new "
-                    + "HttpPipelinePolicy[0])).httpClient(httpClient).build();");
+            function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
+                    ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
+                    ".httpClient(httpClient)" +
+                    ".clientOptions(clientOptions)" +
+                    ".build();");
             function.methodReturn("httpPipeline");
         });
     }

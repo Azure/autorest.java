@@ -296,6 +296,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
                 new HttpPipelineBuilder()
                         .policies(policies.toArray(new HttpPipelinePolicy[0]))
                         .httpClient(httpClient)
+                        .clientOptions(clientOptions)
                         .build();
         return httpPipeline;
     }
