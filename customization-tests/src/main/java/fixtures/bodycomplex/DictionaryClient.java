@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.ErrorException;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class DictionaryClient {
-    private final DictionariesImpl serviceClient;
+    @Generated private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of Dictionaries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     DictionaryClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +51,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -62,6 +66,7 @@ public final class DictionaryClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(DictionaryWrapper complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -78,6 +83,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(DictionaryWrapper complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);
@@ -90,6 +96,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmpty() {
         return this.serviceClient.getEmpty();
@@ -104,6 +111,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getEmptyWithResponse(Context context) {
         return this.serviceClient.getEmptyWithResponse(context);
@@ -117,6 +125,7 @@ public final class DictionaryClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(DictionaryWrapper complexBody) {
         this.serviceClient.putEmpty(complexBody);
@@ -132,6 +141,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(DictionaryWrapper complexBody, Context context) {
         return this.serviceClient.putEmptyWithResponse(complexBody, context);
@@ -144,6 +154,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNull() {
         return this.serviceClient.getNull();
@@ -158,6 +169,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNullWithResponse(Context context) {
         return this.serviceClient.getNullWithResponse(context);
@@ -170,6 +182,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvided() {
         return this.serviceClient.getNotProvided();
@@ -184,6 +197,7 @@ public final class DictionaryClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNotProvidedWithResponse(Context context) {
         return this.serviceClient.getNotProvidedWithResponse(context);

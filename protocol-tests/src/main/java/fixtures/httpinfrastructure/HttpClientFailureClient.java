@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.httpinfrastructure.implementation.HttpClientFailuresImpl;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class HttpClientFailureClient {
-    private final HttpClientFailuresImpl serviceClient;
+    @Generated private final HttpClientFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpClientFailures client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpClientFailureClient(HttpClientFailuresImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -36,6 +38,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head400WithResponse(requestOptions, context);
@@ -50,6 +53,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get400WithResponse(requestOptions, context);
@@ -70,6 +74,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put400WithResponse(requestOptions, context);
@@ -90,6 +95,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch400WithResponse(requestOptions, context);
@@ -110,6 +116,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post400WithResponse(requestOptions, context);
@@ -130,6 +137,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete400WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete400WithResponse(requestOptions, context);
@@ -144,6 +152,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head401WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head401WithResponse(requestOptions, context);
@@ -158,6 +167,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get402WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get402WithResponse(requestOptions, context);
@@ -172,6 +182,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get403WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get403WithResponse(requestOptions, context);
@@ -192,6 +203,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put404WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put404WithResponse(requestOptions, context);
@@ -212,6 +224,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch405WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch405WithResponse(requestOptions, context);
@@ -232,6 +245,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post406WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post406WithResponse(requestOptions, context);
@@ -252,6 +266,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete407WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete407WithResponse(requestOptions, context);
@@ -272,6 +287,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put409WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put409WithResponse(requestOptions, context);
@@ -286,6 +302,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head410WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head410WithResponse(requestOptions, context);
@@ -300,6 +317,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get411WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get411WithResponse(requestOptions, context);
@@ -314,6 +332,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get412WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get412WithResponse(requestOptions, context);
@@ -334,6 +353,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put413WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put413WithResponse(requestOptions, context);
@@ -354,6 +374,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch414WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch414WithResponse(requestOptions, context);
@@ -374,6 +395,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post415WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post415WithResponse(requestOptions, context);
@@ -388,6 +410,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get416WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get416WithResponse(requestOptions, context);
@@ -408,6 +431,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete417WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete417WithResponse(requestOptions, context);
@@ -422,6 +446,7 @@ public final class HttpClientFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head429WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head429WithResponse(requestOptions, context);

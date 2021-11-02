@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.MyBaseType;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class FlattencomplexClient {
-    private final FlattencomplexesImpl serviceClient;
+    @Generated private final FlattencomplexesImpl serviceClient;
 
     /**
      * Initializes an instance of Flattencomplexes client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     FlattencomplexClient(FlattencomplexesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -32,6 +34,7 @@ public final class FlattencomplexClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValid() {
         return this.serviceClient.getValid();
@@ -44,6 +47,7 @@ public final class FlattencomplexClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyBaseType> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);

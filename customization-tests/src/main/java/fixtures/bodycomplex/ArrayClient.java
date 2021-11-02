@@ -12,17 +12,20 @@ import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.ArraysImpl;
 import fixtures.bodycomplex.implementation.models.ArrayWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
+import javax.annotation.processing.Generated;
 
 /** The sync client containing Array operations. */
+/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ArrayClient {
-    private final ArraysImpl serviceClient;
+    @Generated private final ArraysImpl serviceClient;
 
     /**
      * Initializes an instance of Arrays client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     ArrayClient(ArraysImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +37,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +52,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArrayWrapper> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -58,15 +63,13 @@ public final class ArrayClient {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      *     jumps over the lazy dog".
-     * @return The ArrayClient itself
-     * @throws RuntimeException RuntimeException RuntimeException RuntimeException all other wrapped checked exceptions
-     *     if the request fails to be sent.
-     * @throws ErrorException ErrorException ErrorException ErrorException thrown if the request is rejected by server.
-     * @throws IllegalArgumentException IllegalArgumentException IllegalArgumentException IllegalArgumentException
-     *     thrown if parameters fail the validation.
-     * @see ArrayAsyncClient#putValid(ArrayWrapper)
-     * @since 1.0.0-beta.1
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+
+    /** @return The ArrayClient itself */
+    @Generated
     ArrayClient putValid(ArrayWrapper complexBody) {
         this.serviceClient.putValid(complexBody);
         return this;
@@ -75,14 +78,19 @@ public final class ArrayClient {
     /**
      * Put complex types with array property.
      *
+     * @param context The context to associate with this operation.
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      *     jumps over the lazy dog".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
+     * @throws RuntimeException RuntimeException RuntimeException all other wrapped checked exceptions if the request
+     *     fails to be sent.
+     * @throws ErrorException ErrorException ErrorException thrown if the request is rejected by server.
+     * @throws IllegalArgumentException IllegalArgumentException IllegalArgumentException thrown if parameters fail the
+     *     validation.
+     * @see ArrayAsyncClient#putValid(ArrayWrapper)
+     * @since 1.0.0-beta.1
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(ArrayWrapper complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);
@@ -95,6 +103,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getEmpty() {
         return this.serviceClient.getEmpty();
@@ -109,6 +118,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArrayWrapper> getEmptyWithResponse(Context context) {
         return this.serviceClient.getEmptyWithResponse(context);
@@ -122,6 +132,7 @@ public final class ArrayClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(ArrayWrapper complexBody) {
         this.serviceClient.putEmpty(complexBody);
@@ -137,6 +148,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(ArrayWrapper complexBody, Context context) {
         return this.serviceClient.putEmptyWithResponse(complexBody, context);
@@ -149,6 +161,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getNotProvided() {
         return this.serviceClient.getNotProvided();
@@ -163,6 +176,7 @@ public final class ArrayClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArrayWrapper> getNotProvidedWithResponse(Context context) {
         return this.serviceClient.getNotProvidedWithResponse(context);

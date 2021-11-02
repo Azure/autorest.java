@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class InheritanceAsyncClient {
-    private final InheritancesImpl serviceClient;
+    @Generated private final InheritancesImpl serviceClient;
 
     /**
      * Initializes an instance of Inheritances client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     InheritanceAsyncClient(InheritancesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -54,6 +56,7 @@ public final class InheritanceAsyncClient {
      *     false.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponseAsync(requestOptions);
@@ -88,6 +91,7 @@ public final class InheritanceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);

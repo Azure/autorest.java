@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.httpinfrastructure.implementation.HttpServerFailuresImpl;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class HttpServerFailureClient {
-    private final HttpServerFailuresImpl serviceClient;
+    @Generated private final HttpServerFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpServerFailures client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpServerFailureClient(HttpServerFailuresImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -36,6 +38,7 @@ public final class HttpServerFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head501WithResponse(requestOptions, context);
@@ -50,6 +53,7 @@ public final class HttpServerFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get501WithResponse(requestOptions, context);
@@ -70,6 +74,7 @@ public final class HttpServerFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post505WithResponse(requestOptions, context);
@@ -90,6 +95,7 @@ public final class HttpServerFailureClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete505WithResponse(requestOptions, context);

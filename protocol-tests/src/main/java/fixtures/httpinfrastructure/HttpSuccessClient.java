@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class HttpSuccessClient {
-    private final HttpSuccessImpl serviceClient;
+    @Generated private final HttpSuccessImpl serviceClient;
 
     /**
      * Initializes an instance of HttpSuccess client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpSuccessClient(HttpSuccessImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -36,6 +38,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head200WithResponse(requestOptions, context);
@@ -56,6 +59,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return 200 success.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> get200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200WithResponse(requestOptions, context);
@@ -76,6 +80,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put200WithResponse(requestOptions, context);
@@ -96,6 +101,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch200WithResponse(requestOptions, context);
@@ -116,6 +122,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post200WithResponse(requestOptions, context);
@@ -136,6 +143,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete200WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete200WithResponse(requestOptions, context);
@@ -156,6 +164,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put201WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put201WithResponse(requestOptions, context);
@@ -176,6 +185,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post201WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post201WithResponse(requestOptions, context);
@@ -196,6 +206,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put202WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put202WithResponse(requestOptions, context);
@@ -216,6 +227,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch202WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch202WithResponse(requestOptions, context);
@@ -236,6 +248,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post202WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post202WithResponse(requestOptions, context);
@@ -256,6 +269,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete202WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete202WithResponse(requestOptions, context);
@@ -270,6 +284,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head204WithResponse(requestOptions, context);
@@ -290,6 +305,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put204WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.put204WithResponse(requestOptions, context);
@@ -310,6 +326,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch204WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.patch204WithResponse(requestOptions, context);
@@ -330,6 +347,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post204WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.post204WithResponse(requestOptions, context);
@@ -350,6 +368,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete204WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.delete204WithResponse(requestOptions, context);
@@ -370,6 +389,7 @@ public final class HttpSuccessClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head404WithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.head404WithResponse(requestOptions, context);

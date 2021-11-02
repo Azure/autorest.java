@@ -4,6 +4,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -18,13 +19,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class, isAsync = true)
 public final class LROsCustomHeaderAsyncClient {
-    private final LROsCustomHeadersImpl serviceClient;
+    @Generated private final LROsCustomHeadersImpl serviceClient;
 
     /**
      * Initializes an instance of LROsCustomHeaders client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LROsCustomHeaderAsyncClient(LROsCustomHeadersImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -76,6 +78,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRetrySucceededWithResponseAsync(requestOptions);
@@ -128,6 +131,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRetrySucceededAsync(requestOptions);
@@ -180,6 +184,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put201CreatingSucceeded200WithResponseAsync(requestOptions);
@@ -232,6 +237,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
         return this.serviceClient.beginPut201CreatingSucceeded200Async(requestOptions);
@@ -265,6 +271,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202Retry200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post202Retry200WithResponseAsync(requestOptions);
@@ -298,6 +305,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
         return this.serviceClient.beginPost202Retry200Async(requestOptions);
@@ -332,6 +340,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRetrySucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRetrySucceededWithResponseAsync(requestOptions);
@@ -366,6 +375,7 @@ public final class LROsCustomHeaderAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginPostAsyncRetrySucceededAsync(requestOptions);

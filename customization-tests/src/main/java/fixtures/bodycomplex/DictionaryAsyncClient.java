@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class DictionaryAsyncClient {
-    private final DictionariesImpl serviceClient;
+    @Generated private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of Dictionaries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     DictionaryAsyncClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponse() {
         return this.serviceClient.getValidWithResponseAsync();
@@ -46,6 +49,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getValid() {
         return this.serviceClient.getValidAsync();
@@ -61,6 +65,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(DictionaryWrapper complexBody) {
         return this.serviceClient.putValidWithResponseAsync(complexBody);
@@ -76,6 +81,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValid(DictionaryWrapper complexBody) {
         return this.serviceClient.putValidAsync(complexBody);
@@ -88,6 +94,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getEmptyWithResponse() {
         return this.serviceClient.getEmptyWithResponseAsync();
@@ -100,6 +107,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getEmpty() {
         return this.serviceClient.getEmptyAsync();
@@ -114,6 +122,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponse(DictionaryWrapper complexBody) {
         return this.serviceClient.putEmptyWithResponseAsync(complexBody);
@@ -128,6 +137,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmpty(DictionaryWrapper complexBody) {
         return this.serviceClient.putEmptyAsync(complexBody);
@@ -140,6 +150,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponse() {
         return this.serviceClient.getNullWithResponseAsync();
@@ -152,6 +163,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNull() {
         return this.serviceClient.getNullAsync();
@@ -164,6 +176,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponse() {
         return this.serviceClient.getNotProvidedWithResponseAsync();
@@ -176,6 +189,7 @@ public final class DictionaryAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvided() {
         return this.serviceClient.getNotProvidedAsync();

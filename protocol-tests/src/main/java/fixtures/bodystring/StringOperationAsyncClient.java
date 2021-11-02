@@ -4,6 +4,7 @@
 
 package fixtures.bodystring;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATService type. */
 @ServiceClient(builder = AutoRestSwaggerBATServiceBuilder.class, isAsync = true)
 public final class StringOperationAsyncClient {
-    private final StringOperationsImpl serviceClient;
+    @Generated private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperations client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     StringOperationAsyncClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -42,6 +44,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return null string value value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponseAsync(requestOptions);
@@ -61,6 +64,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNullWithResponseAsync(requestOptions);
@@ -80,6 +84,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return empty string value value ''.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponseAsync(requestOptions);
@@ -99,6 +104,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putEmptyWithResponseAsync(requestOptions);
@@ -118,6 +124,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getMbcsWithResponseAsync(requestOptions);
@@ -137,6 +144,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putMbcsWithResponseAsync(requestOptions);
@@ -158,6 +166,7 @@ public final class StringOperationAsyncClient {
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getWhitespaceWithResponseAsync(requestOptions);
@@ -178,6 +187,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putWhitespaceWithResponseAsync(requestOptions);
@@ -197,6 +207,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return string value when no string value is sent in response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);
@@ -216,6 +227,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return value that is base64 encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64EncodedWithResponseAsync(requestOptions);
@@ -235,6 +247,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return value that is base64url encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64UrlEncodedWithResponseAsync(requestOptions);
@@ -255,6 +268,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
         return this.serviceClient.putBase64UrlEncodedWithResponseAsync(stringBody, requestOptions);
@@ -274,6 +288,7 @@ public final class StringOperationAsyncClient {
      *     false.
      * @return null value that is expected to be base64url encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponseAsync(requestOptions);

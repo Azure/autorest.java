@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PolymorphismAsyncClient {
-    private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismsImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphisms client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphismAsyncClient(PolymorphismsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -48,6 +50,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponseAsync(requestOptions);
@@ -79,6 +82,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
@@ -100,6 +104,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDotSyntaxWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDotSyntaxWithResponseAsync(requestOptions);
@@ -136,6 +141,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getComposedWithDiscriminatorWithResponseAsync(requestOptions);
@@ -172,6 +178,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getComposedWithoutDiscriminatorWithResponseAsync(requestOptions);
@@ -206,6 +213,7 @@ public final class PolymorphismAsyncClient {
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComplicatedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getComplicatedWithResponseAsync(requestOptions);
@@ -240,6 +248,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putComplicatedWithResponseAsync(complexBody, requestOptions);
@@ -294,6 +303,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putMissingDiscriminatorWithResponse(
             BinaryData complexBody, RequestOptions requestOptions) {
@@ -326,6 +336,7 @@ public final class PolymorphismAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponse(
             BinaryData complexBody, RequestOptions requestOptions) {

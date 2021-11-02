@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -26,13 +27,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PrimitiveAsyncClient {
-    private final PrimitivesImpl serviceClient;
+    @Generated private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of Primitives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PrimitiveAsyncClient(PrimitivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -44,6 +46,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponse() {
         return this.serviceClient.getIntWithResponseAsync();
@@ -56,6 +59,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<IntWrapper> getInt() {
         return this.serviceClient.getIntAsync();
@@ -70,6 +74,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponse(IntWrapper complexBody) {
         return this.serviceClient.putIntWithResponseAsync(complexBody);
@@ -84,6 +89,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putInt(IntWrapper complexBody) {
         return this.serviceClient.putIntAsync(complexBody);
@@ -96,6 +102,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<LongWrapper>> getLongWithResponse() {
         return this.serviceClient.getLongWithResponseAsync();
@@ -108,6 +115,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LongWrapper> getLong() {
         return this.serviceClient.getLongAsync();
@@ -122,6 +130,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponse(LongWrapper complexBody) {
         return this.serviceClient.putLongWithResponseAsync(complexBody);
@@ -136,6 +145,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLong(LongWrapper complexBody) {
         return this.serviceClient.putLongAsync(complexBody);
@@ -148,6 +158,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponse() {
         return this.serviceClient.getFloatWithResponseAsync();
@@ -160,6 +171,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FloatWrapper> getFloat() {
         return this.serviceClient.getFloatAsync();
@@ -174,6 +186,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponse(FloatWrapper complexBody) {
         return this.serviceClient.putFloatWithResponseAsync(complexBody);
@@ -188,6 +201,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloat(FloatWrapper complexBody) {
         return this.serviceClient.putFloatAsync(complexBody);
@@ -200,6 +214,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponse() {
         return this.serviceClient.getDoubleWithResponseAsync();
@@ -212,6 +227,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DoubleWrapper> getDouble() {
         return this.serviceClient.getDoubleAsync();
@@ -226,6 +242,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponse(DoubleWrapper complexBody) {
         return this.serviceClient.putDoubleWithResponseAsync(complexBody);
@@ -240,6 +257,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDouble(DoubleWrapper complexBody) {
         return this.serviceClient.putDoubleAsync(complexBody);
@@ -252,6 +270,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BooleanWrapper>> getBoolWithResponse() {
         return this.serviceClient.getBoolWithResponseAsync();
@@ -264,6 +283,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BooleanWrapper> getBool() {
         return this.serviceClient.getBoolAsync();
@@ -278,6 +298,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponse(BooleanWrapper complexBody) {
         return this.serviceClient.putBoolWithResponseAsync(complexBody);
@@ -292,6 +313,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBool(BooleanWrapper complexBody) {
         return this.serviceClient.putBoolAsync(complexBody);
@@ -304,6 +326,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponse() {
         return this.serviceClient.getStringWithResponseAsync();
@@ -316,6 +339,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StringWrapper> getString() {
         return this.serviceClient.getStringAsync();
@@ -330,6 +354,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponse(StringWrapper complexBody) {
         return this.serviceClient.putStringWithResponseAsync(complexBody);
@@ -344,6 +369,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putString(StringWrapper complexBody) {
         return this.serviceClient.putStringAsync(complexBody);
@@ -356,6 +382,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DateWrapper>> getDateWithResponse() {
         return this.serviceClient.getDateWithResponseAsync();
@@ -368,6 +395,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DateWrapper> getDate() {
         return this.serviceClient.getDateAsync();
@@ -382,6 +410,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponse(DateWrapper complexBody) {
         return this.serviceClient.putDateWithResponseAsync(complexBody);
@@ -396,6 +425,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDate(DateWrapper complexBody) {
         return this.serviceClient.putDateAsync(complexBody);
@@ -408,6 +438,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponse() {
         return this.serviceClient.getDateTimeWithResponseAsync();
@@ -420,6 +451,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DatetimeWrapper> getDateTime() {
         return this.serviceClient.getDateTimeAsync();
@@ -434,6 +466,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponse(DatetimeWrapper complexBody) {
         return this.serviceClient.putDateTimeWithResponseAsync(complexBody);
@@ -448,6 +481,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTime(DatetimeWrapper complexBody) {
         return this.serviceClient.putDateTimeAsync(complexBody);
@@ -460,6 +494,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponse() {
         return this.serviceClient.getDateTimeRfc1123WithResponseAsync();
@@ -472,6 +507,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123() {
         return this.serviceClient.getDateTimeRfc1123Async();
@@ -486,6 +522,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody) {
         return this.serviceClient.putDateTimeRfc1123WithResponseAsync(complexBody);
@@ -500,6 +537,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
         return this.serviceClient.putDateTimeRfc1123Async(complexBody);
@@ -512,6 +550,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponse() {
         return this.serviceClient.getDurationWithResponseAsync();
@@ -524,6 +563,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DurationWrapper> getDuration() {
         return this.serviceClient.getDurationAsync();
@@ -538,6 +578,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponse(DurationWrapper complexBody) {
         return this.serviceClient.putDurationWithResponseAsync(complexBody);
@@ -552,6 +593,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDuration(DurationWrapper complexBody) {
         return this.serviceClient.putDurationAsync(complexBody);
@@ -564,6 +606,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ByteWrapper>> getByteWithResponse() {
         return this.serviceClient.getByteWithResponseAsync();
@@ -576,6 +619,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ByteWrapper> getByte() {
         return this.serviceClient.getByteAsync();
@@ -590,6 +634,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponse(ByteWrapper complexBody) {
         return this.serviceClient.putByteWithResponseAsync(complexBody);
@@ -604,6 +649,7 @@ public final class PrimitiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByte(ByteWrapper complexBody) {
         return this.serviceClient.putByteAsync(complexBody);

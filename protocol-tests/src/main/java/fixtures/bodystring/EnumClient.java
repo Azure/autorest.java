@@ -4,6 +4,7 @@
 
 package fixtures.bodystring;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.bodystring.implementation.EnumsImpl;
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATService type. */
 @ServiceClient(builder = AutoRestSwaggerBATServiceBuilder.class)
 public final class EnumClient {
-    private final EnumsImpl serviceClient;
+    @Generated private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of Enums client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     EnumClient(EnumsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -43,6 +45,7 @@ public final class EnumClient {
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getNotExpandableWithResponse(requestOptions, context);
@@ -64,6 +67,7 @@ public final class EnumClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -85,6 +89,7 @@ public final class EnumClient {
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getReferencedWithResponse(requestOptions, context);
@@ -106,6 +111,7 @@ public final class EnumClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
@@ -130,6 +136,7 @@ public final class EnumClient {
      *     false.
      * @return value 'green-color' from the constant.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getReferencedConstantWithResponse(requestOptions, context);
@@ -154,6 +161,7 @@ public final class EnumClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {

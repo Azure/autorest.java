@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class InheritanceAsyncClient {
-    private final InheritancesImpl serviceClient;
+    @Generated private final InheritancesImpl serviceClient;
 
     /**
      * Initializes an instance of Inheritances client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     InheritanceAsyncClient(InheritancesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class InheritanceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponse() {
         return this.serviceClient.getValidWithResponseAsync();
@@ -46,6 +49,7 @@ public final class InheritanceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Siamese> getValid() {
         return this.serviceClient.getValidAsync();
@@ -62,6 +66,7 @@ public final class InheritanceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(Siamese complexBody) {
         return this.serviceClient.putValidWithResponseAsync(complexBody);
@@ -78,6 +83,7 @@ public final class InheritanceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValid(Siamese complexBody) {
         return this.serviceClient.putValidAsync(complexBody);

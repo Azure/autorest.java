@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.url.implementation.PathItemsImpl;
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class PathItemsClient {
-    private final PathItemsImpl serviceClient;
+    @Generated private final PathItemsImpl serviceClient;
 
     /**
      * Initializes an instance of PathItems client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PathItemsClient(PathItemsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -50,6 +52,7 @@ public final class PathItemsClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getAllWithValuesWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
@@ -80,6 +83,7 @@ public final class PathItemsClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
@@ -110,6 +114,7 @@ public final class PathItemsClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalAndLocalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
@@ -140,6 +145,7 @@ public final class PathItemsClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLocalPathItemQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {

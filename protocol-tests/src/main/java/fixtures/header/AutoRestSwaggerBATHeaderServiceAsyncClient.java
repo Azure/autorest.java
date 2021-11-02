@@ -4,6 +4,7 @@
 
 package fixtures.header;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATHeaderService type. */
 @ServiceClient(builder = AutoRestSwaggerBATHeaderServiceBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
-    private final HeadersImpl serviceClient;
+    @Generated private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of Headers client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     AutoRestSwaggerBATHeaderServiceAsyncClient(HeadersImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -43,6 +45,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramExistingKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramExistingKeyWithResponseAsync(requestOptions);
@@ -56,6 +59,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "User-Agent": "overwrite".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseExistingKeyWithResponseAsync(requestOptions);
@@ -77,6 +81,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramProtectedKeyWithResponseAsync(requestOptions);
@@ -90,6 +95,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "Content-Type": "text/html".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseProtectedKeyWithResponseAsync(requestOptions);
@@ -112,6 +118,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramIntegerWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramIntegerWithResponseAsync(requestOptions);
@@ -133,6 +140,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "value": 1 or -2.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseIntegerWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseIntegerWithResponseAsync(requestOptions);
@@ -156,6 +164,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramLongWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramLongWithResponseAsync(requestOptions);
@@ -177,6 +186,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "value": 105 or -2.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseLongWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseLongWithResponseAsync(requestOptions);
@@ -200,6 +210,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramFloatWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramFloatWithResponseAsync(requestOptions);
@@ -221,6 +232,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "value": 0.07 or -3.0.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseFloatWithResponseAsync(requestOptions);
@@ -244,6 +256,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDoubleWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramDoubleWithResponseAsync(requestOptions);
@@ -265,6 +278,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "value": 7e120 or -3.0.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseDoubleWithResponseAsync(requestOptions);
@@ -287,6 +301,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramBoolWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramBoolWithResponseAsync(requestOptions);
@@ -308,6 +323,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header value "value": true or false.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseBoolWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseBoolWithResponseAsync(requestOptions);
@@ -331,6 +347,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramStringWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramStringWithResponseAsync(requestOptions);
@@ -352,6 +369,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseStringWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseStringWithResponseAsync(requestOptions);
@@ -375,6 +393,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDateWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramDateWithResponseAsync(requestOptions);
@@ -396,6 +415,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "2010-01-01" or "0001-01-01".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDateWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseDateWithResponseAsync(requestOptions);
@@ -419,6 +439,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramDatetimeWithResponseAsync(requestOptions);
@@ -440,6 +461,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseDatetimeWithResponseAsync(requestOptions);
@@ -463,6 +485,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramDatetimeRfc1123WithResponseAsync(requestOptions);
@@ -484,6 +507,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseDatetimeRfc1123WithResponseAsync(requestOptions);
@@ -506,6 +530,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramDurationWithResponseAsync(requestOptions);
@@ -527,6 +552,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "P123DT22H14M12.011S".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseDurationWithResponseAsync(requestOptions);
@@ -549,6 +575,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramByteWithResponseAsync(requestOptions);
@@ -570,6 +597,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseByteWithResponseAsync(requestOptions);
@@ -592,6 +620,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramEnumWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.paramEnumWithResponseAsync(requestOptions);
@@ -613,6 +642,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return a response with header values "GREY" or null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseEnumWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.responseEnumWithResponseAsync(requestOptions);
@@ -626,6 +656,7 @@ public final class AutoRestSwaggerBATHeaderServiceAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.customRequestIdWithResponseAsync(requestOptions);

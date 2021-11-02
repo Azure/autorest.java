@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.httpinfrastructure.implementation.MultipleResponsesImpl;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class MultipleResponsesClient {
-    private final MultipleResponsesImpl serviceClient;
+    @Generated private final MultipleResponsesImpl serviceClient;
 
     /**
      * Initializes an instance of MultipleResponses client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     MultipleResponsesClient(MultipleResponsesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -45,6 +47,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -68,6 +71,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -91,6 +95,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -114,6 +119,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -137,6 +143,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -160,6 +167,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -183,6 +191,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -206,6 +215,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -227,6 +237,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -249,6 +260,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -271,6 +283,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -293,6 +306,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -309,6 +323,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -324,6 +339,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -339,6 +355,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -354,6 +371,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -369,6 +387,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -384,6 +403,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -399,6 +419,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(
             RequestOptions requestOptions, Context context) {
@@ -422,6 +443,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultModelA200ValidWithResponse(requestOptions, context);
@@ -444,6 +466,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultModelA200NoneWithResponse(requestOptions, context);
@@ -458,6 +481,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultModelA400ValidWithResponse(requestOptions, context);
@@ -472,6 +496,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultModelA400NoneWithResponse(requestOptions, context);
@@ -486,6 +511,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultNone200InvalidWithResponse(requestOptions, context);
@@ -500,6 +526,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultNone200NoneWithResponse(requestOptions, context);
@@ -514,6 +541,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultNone400InvalidWithResponse(requestOptions, context);
@@ -528,6 +556,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getDefaultNone400NoneWithResponse(requestOptions, context);
@@ -551,6 +580,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA200NoneWithResponse(requestOptions, context);
@@ -573,6 +603,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA200ValidWithResponse(requestOptions, context);
@@ -595,6 +626,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA200InvalidWithResponse(requestOptions, context);
@@ -617,6 +649,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA400NoneWithResponse(requestOptions, context);
@@ -639,6 +672,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA400ValidWithResponse(requestOptions, context);
@@ -661,6 +695,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA400InvalidWithResponse(requestOptions, context);
@@ -683,6 +718,7 @@ public final class MultipleResponsesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.get200ModelA202ValidWithResponse(requestOptions, context);

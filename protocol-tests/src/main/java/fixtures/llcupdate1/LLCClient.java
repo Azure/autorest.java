@@ -4,6 +4,7 @@
 
 package fixtures.llcupdate1;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.llcupdate1.implementation.ParamsImpl;
 /** Initializes a new instance of the synchronous LLCClient type. */
 @ServiceClient(builder = LLCClientBuilder.class)
 public final class LLCClient {
-    private final ParamsImpl serviceClient;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of Params client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LLCClient(ParamsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -53,6 +55,7 @@ public final class LLCClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getRequiredWithResponse(requestOptions, context);

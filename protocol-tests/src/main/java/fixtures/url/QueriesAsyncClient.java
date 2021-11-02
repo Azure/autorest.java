@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class, isAsync = true)
 public final class QueriesAsyncClient {
-    private final QueriesImpl serviceClient;
+    @Generated private final QueriesImpl serviceClient;
 
     /**
      * Initializes an instance of Queries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     QueriesAsyncClient(QueriesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -43,6 +45,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanTrueWithResponseAsync(requestOptions);
@@ -64,6 +67,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return false Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanFalseWithResponseAsync(requestOptions);
@@ -85,6 +89,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null Boolean value on query (query string should be absent).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanNullWithResponseAsync(requestOptions);
@@ -106,6 +111,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntOneMillionWithResponseAsync(requestOptions);
@@ -127,6 +133,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '-1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntNegativeOneMillionWithResponseAsync(requestOptions);
@@ -148,6 +155,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null integer value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntNullWithResponseAsync(requestOptions);
@@ -169,6 +177,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getTenBillionWithResponseAsync(requestOptions);
@@ -190,6 +199,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '-10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNegativeTenBillionWithResponseAsync(requestOptions);
@@ -211,6 +221,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return 'null 64 bit integer value (no query param in uri).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getLongNullWithResponseAsync(requestOptions);
@@ -232,6 +243,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '1.034E+20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificPositiveWithResponseAsync(requestOptions);
@@ -253,6 +265,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '-1.034E-20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificNegativeWithResponseAsync(requestOptions);
@@ -274,6 +287,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null numeric value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatNullWithResponseAsync(requestOptions);
@@ -295,6 +309,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalPositiveWithResponseAsync(requestOptions);
@@ -316,6 +331,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '-9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalNegativeWithResponseAsync(requestOptions);
@@ -337,6 +353,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null numeric value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleNullWithResponseAsync(requestOptions);
@@ -358,6 +375,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUnicodeWithResponseAsync(requestOptions);
@@ -379,6 +397,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUrlEncodedWithResponseAsync(requestOptions);
@@ -400,6 +419,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return ''.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringEmptyWithResponseAsync(requestOptions);
@@ -421,6 +441,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null (no query parameter in url).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringNullWithResponseAsync(requestOptions);
@@ -442,6 +463,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return using uri with query parameter 'green color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.enumValidWithResponseAsync(requestOptions);
@@ -463,6 +485,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null (no query parameter in url).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.enumNullWithResponseAsync(requestOptions);
@@ -484,6 +507,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteMultiByteWithResponseAsync(requestOptions);
@@ -505,6 +529,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '' as byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteEmptyWithResponseAsync(requestOptions);
@@ -526,6 +551,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null as byte array (no query parameters in uri).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteNullWithResponseAsync(requestOptions);
@@ -547,6 +573,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '2012-01-01' as date.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateValidWithResponseAsync(requestOptions);
@@ -568,6 +595,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null as date - this should result in no query parameters in uri.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateNullWithResponseAsync(requestOptions);
@@ -589,6 +617,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateTimeValidWithResponseAsync(requestOptions);
@@ -610,6 +639,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return null as date-time, should result in no query parameters in uri.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponseAsync(requestOptions);
@@ -632,6 +662,7 @@ public final class QueriesAsyncClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvValidWithResponseAsync(requestOptions);
@@ -653,6 +684,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return a null array of string using the csv-array format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvNullWithResponseAsync(requestOptions);
@@ -674,6 +706,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return an empty array [] of string using the csv-array format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvEmptyWithResponseAsync(requestOptions);
@@ -696,6 +729,7 @@ public final class QueriesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringNoCollectionFormatEmptyWithResponseAsync(requestOptions);
@@ -718,6 +752,7 @@ public final class QueriesAsyncClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringSsvValidWithResponseAsync(requestOptions);
@@ -740,6 +775,7 @@ public final class QueriesAsyncClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringTsvValidWithResponseAsync(requestOptions);
@@ -763,6 +799,7 @@ public final class QueriesAsyncClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringPipesValidWithResponseAsync(requestOptions);

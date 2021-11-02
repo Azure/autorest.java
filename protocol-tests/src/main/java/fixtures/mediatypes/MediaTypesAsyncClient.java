@@ -4,6 +4,7 @@
 
 package fixtures.mediatypes;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous MediaTypesClient type. */
 @ServiceClient(builder = MediaTypesClientBuilder.class, isAsync = true)
 public final class MediaTypesAsyncClient {
-    private final MediaTypesClientImpl serviceClient;
+    @Generated private final MediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MediaTypesClient client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     MediaTypesAsyncClient(MediaTypesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -57,6 +59,7 @@ public final class MediaTypesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> analyzeBodyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.analyzeBodyWithResponseAsync(requestOptions);
@@ -85,6 +88,7 @@ public final class MediaTypesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions);
@@ -110,6 +114,7 @@ public final class MediaTypesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.contentTypeWithEncodingWithResponseAsync(requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.lro.implementation.LRORetrysImpl;
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class LRORetrysClient {
-    private final LRORetrysImpl serviceClient;
+    @Generated private final LRORetrysImpl serviceClient;
 
     /**
      * Initializes an instance of LRORetrys client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LRORetrysClient(LRORetrysImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -75,6 +77,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
             RequestOptions requestOptions, Context context) {
@@ -128,6 +131,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPutAsyncRelativeRetrySucceeded(
             RequestOptions requestOptions, Context context) {
@@ -163,6 +167,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
             RequestOptions requestOptions, Context context) {
@@ -179,6 +184,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginDelete202Retry200(requestOptions, context);
@@ -194,6 +200,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetrySucceeded(
             RequestOptions requestOptions, Context context) {
@@ -228,6 +235,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
         return this.serviceClient.beginPost202Retry200(requestOptions, context);
@@ -262,6 +270,7 @@ public final class LRORetrysClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(
             RequestOptions requestOptions, Context context) {

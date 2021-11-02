@@ -4,6 +4,7 @@
 
 package fixtures.mediatypes;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 /** Initializes a new instance of the synchronous MediaTypesClient type. */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {
-    private final MediaTypesClientImpl serviceClient;
+    @Generated private final MediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MediaTypesClient client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     MediaTypesClient(MediaTypesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -58,6 +60,7 @@ public final class MediaTypesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.analyzeBodyWithResponse(requestOptions, context);
@@ -87,6 +90,7 @@ public final class MediaTypesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.analyzeBodyNoAcceptHeaderWithResponse(requestOptions, context);
@@ -113,6 +117,7 @@ public final class MediaTypesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.contentTypeWithEncodingWithResponse(requestOptions, context);

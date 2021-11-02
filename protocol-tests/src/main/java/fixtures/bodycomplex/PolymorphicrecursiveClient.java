@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PolymorphicrecursiveClient {
-    private final PolymorphicrecursivesImpl serviceClient;
+    @Generated private final PolymorphicrecursivesImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphicrecursives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphicrecursiveClient(PolymorphicrecursivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -49,6 +51,7 @@ public final class PolymorphicrecursiveClient {
      *     false.
      * @return complex types that are polymorphic and have recursive references.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
         return this.serviceClient.getValidWithResponse(requestOptions, context);
@@ -82,6 +85,7 @@ public final class PolymorphicrecursiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, requestOptions, context);

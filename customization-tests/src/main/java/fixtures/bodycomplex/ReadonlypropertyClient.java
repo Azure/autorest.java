@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.ReadonlyObj;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ReadonlypropertyClient {
-    private final ReadonlypropertiesImpl serviceClient;
+    @Generated private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of Readonlyproperties client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     ReadonlypropertyClient(ReadonlypropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class ReadonlypropertyClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ReadonlyObj getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +51,7 @@ public final class ReadonlypropertyClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ReadonlyObj> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -61,6 +65,7 @@ public final class ReadonlypropertyClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(ReadonlyObj complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -76,6 +81,7 @@ public final class ReadonlypropertyClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);
