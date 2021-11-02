@@ -24,6 +24,10 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,14 +67,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
+            imports.add(JsonIgnore.class.getName());
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
         // TODO: Determine whether imports should be added here.
-        imports.add("com.fasterxml.jackson.annotation.JsonCreator");
-        imports.add("com.fasterxml.jackson.annotation.JsonGetter");
-        imports.add("com.fasterxml.jackson.annotation.JsonSetter");
+        imports.add(JsonCreator.class.getName());
+
+        if (settings.isGettersAndSettersAnnotatedForSerialization()) {
+            imports.add(JsonGetter.class.getName());
+            imports.add(JsonSetter.class.getName());
+        }
 
         String lastParentName = model.getName();
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
@@ -232,6 +239,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
                     classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
                             property.getXmlName(), property.getXmlNamespace()));
+                } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+                    classBlock.annotation("JacksonXmlText");
                 } else if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonIgnore");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {

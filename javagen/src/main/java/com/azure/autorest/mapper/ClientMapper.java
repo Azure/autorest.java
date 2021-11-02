@@ -27,6 +27,11 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -216,10 +221,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             xmlSequenceWrapper -> xmlSequenceWrapper.getXmlListElementName().equals(xmlListElementName)
                                 && xmlSequenceWrapper.getXmlRootElementName().equals(xmlRootElementName))) {
                             Set<String> packageImports = new HashSet<>();
-                            packageImports.add("com.fasterxml.jackson.annotation.JsonCreator");
-                            packageImports.add("com.fasterxml.jackson.annotation.JsonProperty");
-                            packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-                            packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+                            packageImports.add(JsonCreator.class.getName());
+                            packageImports.add(JsonProperty.class.getName());
+                            packageImports.add(JacksonXmlProperty.class.getName());
+                            packageImports.add(JacksonXmlRootElement.class.getName());
+                            packageImports.add(JacksonXmlText.class.getName());
 
                             type.addImportsTo(packageImports, true);
                             boolean isCustomType = settings
