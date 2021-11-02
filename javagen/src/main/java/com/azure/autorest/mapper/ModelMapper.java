@@ -21,7 +21,12 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -118,10 +123,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             if (!compositeTypeProperties.isEmpty()) {
                 if (settings.shouldGenerateXmlSerialization()) {
-                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+                    modelImports.add(JacksonXmlRootElement.class.getName());
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
-                        modelImports.add("java.util.ArrayList");
+                        modelImports.add(ArrayList.class.getName());
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> {
@@ -132,22 +137,32 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         XmlSerlializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
                         return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
                     })) {
-                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                        modelImports.add(JacksonXmlProperty.class.getName());
+                    }
+
+                    if (compositeTypeProperties.stream().anyMatch(p -> {
+                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                            return false;
+                        }
+
+                        return p.getSchema().getSerialization().getXml().isText();
+                    })) {
+                        modelImports.add(JacksonXmlText.class.getName());
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null
                         || p.getSchema().getSerialization().getXml() == null || !p.getSchema().getSerialization()
                         .getXml().isAttribute())) {
-                        modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
+                        modelImports.add(JsonProperty.class.getName());
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
                         && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isWrapped())) {
-                        modelImports.add("com.fasterxml.jackson.annotation.JsonCreator");
+                        modelImports.add(JsonCreator.class.getName());
                     }
 
                 } else {
-                    modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
+                    modelImports.add(JsonProperty.class.getName());
                 }
             }
             if (hasAdditionalProperties) {
@@ -223,7 +238,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 if (discriminatorProperty != null) {
                     properties.add(discriminatorProperty);
-                    modelImports.add("com.fasterxml.jackson.annotation.JsonTypeId");
+                    modelImports.add(JsonTypeId.class.getName());
                 }
             }
 

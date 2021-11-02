@@ -1,0 +1,45 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-15",
+    "title": "DefaultValueClient",
+    "x-ms-code-generation-settings": {
+      "name": "DefaultValueClient"
+    },
+    "description": "default value client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/xml"
+  ],
+  "produces": [
+    "application/xml"
+  ],
+  "paths": {
+  },
+  "definitions": {
+    "BlobName": {
+      "type": "object",
+      "properties": {
+        "Encoded": {
+          "xml": {
+            "attribute": true,
+            "name": "Encoded"
+          },
+          "type": "boolean",
+          "description": "Indicates if the blob name is encoded."
+        },
+        "content": {
+          "xml": {
+            "x-ms-text": true
+          },
+          "type": "string",
+          "description": "The name of the blob."
+        }
+      }
+    }
+  }
+}
