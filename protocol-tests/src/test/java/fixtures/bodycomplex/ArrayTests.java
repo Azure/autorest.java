@@ -21,7 +21,7 @@ public class ArrayTests {
 
     @Test
     public void getValid() throws Exception {
-        BinaryData binaryData = client.getValidWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getValidWithResponse(null).getValue();
         List<String> list = (List)binaryData.toObject(Map.class).get("array");
         Assertions.assertEquals(5, list.size());
         Assertions.assertEquals("&S#$(*Y", list.get(3));
@@ -30,12 +30,12 @@ public class ArrayTests {
     @Test
     public void putValid() throws Exception {
         BinaryData binaryData = BinaryData.fromString("{\"array\":[\"1, 2, 3, 4\",\"\",null,\"&S#$(*Y\",\"The quick brown fox jumps over the lazy dog\"]}");
-        client.putValidWithResponse(binaryData, null, null);
+        client.putValidWithResponse(binaryData, null);
     }
 
     @Test
     public void getEmpty() throws Exception {
-        BinaryData binaryData = client.getEmptyWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getEmptyWithResponse(null).getValue();
         List<String> list = (List)binaryData.toObject(Map.class).get("array");
         Assertions.assertEquals(0, list.size());
     }
@@ -48,7 +48,7 @@ public class ArrayTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        BinaryData binaryData = client.getNotProvidedWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getNotProvidedWithResponse(null).getValue();
         List<String> list = (List)binaryData.toObject(Map.class).get("array");
         Assertions.assertNull(list);
     }

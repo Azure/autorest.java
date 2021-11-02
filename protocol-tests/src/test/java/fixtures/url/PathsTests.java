@@ -27,78 +27,78 @@ public class PathsTests {
 
     @Test
     public void getBooleanTrue() {
-        client.getBooleanTrueWithResponse(null, null);
+        client.getBooleanTrueWithResponse(null);
     }
 
     @Test
     public void getBooleanFalse() {
-        client.getBooleanTrueWithResponse(null, null);
+        client.getBooleanTrueWithResponse(null);
     }
 
     @Test
     public void getIntOneMillion() {
-        client.getIntOneMillionWithResponse(null, null);
+        client.getIntOneMillionWithResponse(null);
     }
 
     @Test
     public void getIntNegativeOneMillion() {
-        client.getIntNegativeOneMillionWithResponse(null, null).getValue();
+        client.getIntNegativeOneMillionWithResponse(null).getValue();
     }
 
     @Test
     public void getTenBillion() {
-        client.getTenBillionWithResponse(null, null);
+        client.getTenBillionWithResponse(null);
     }
 
     @Test
     public void getNegativeTenBillion() {
-        client.getNegativeTenBillionWithResponse(null, null);
+        client.getNegativeTenBillionWithResponse(null);
     }
 
     @Test
     public void floatScientificPositive() {
-        client.floatScientificPositiveWithResponse(null, null);
+        client.floatScientificPositiveWithResponse(null);
     }
 
     @Test
     public void floatScientificNegative() {
-        client.floatScientificNegativeWithResponse(null, null);
+        client.floatScientificNegativeWithResponse(null);
     }
 
     @Test
     public void doubleDecimalPositive() {
-        client.doubleDecimalPositiveWithResponse(null, null);
+        client.doubleDecimalPositiveWithResponse(null);
     }
 
     @Test
     public void doubleDecimalNegative() {
-        client.doubleDecimalNegativeWithResponse(null, null);
+        client.doubleDecimalNegativeWithResponse(null);
     }
 
     @Test
     public void stringUnicode() {
-        client.stringUnicodeWithResponse(null, null);
+        client.stringUnicodeWithResponse(null);
     }
 
     @Test
     public void stringUrlEncoded() {
-        client.stringUrlEncodedWithResponse(null, null);
+        client.stringUrlEncodedWithResponse(null);
     }
 
     @Test
     public void stringUrlNonEncoded() {
-        client.stringUrlNonEncodedWithResponse(null, null);
+        client.stringUrlNonEncodedWithResponse(null);
     }
 
     @Test
     public void stringEmpty() {
-        client.stringEmptyWithResponse(null, null);
+        client.stringEmptyWithResponse(null);
     }
 
     @Test
     public void stringNull() {
         try {
-            client.stringNullWithResponse(null, null, null);
+            client.stringNullWithResponse(null, null);
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());
         }
@@ -106,13 +106,13 @@ public class PathsTests {
 
     @Test
     public void enumValid() {
-        client.enumValidWithResponse("green color", null, null);
+        client.enumValidWithResponse("green color", null);
     }
 
     @Test
     public void enumNull() {
         try {
-            client.enumNullWithResponse(null, null, null);
+            client.enumNullWithResponse(null, null);
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());
         }
@@ -120,18 +120,18 @@ public class PathsTests {
 
     @Test
     public void byteMultiByte() {
-        client.byteMultiByteWithResponse(Base64Util.encodeToString("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8)), null, null);
+        client.byteMultiByteWithResponse(Base64Util.encodeToString("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8)), null);
     }
 
     @Test
     public void byteEmpty() {
-        client.byteEmptyWithResponse(null, null).getValue();
+        client.byteEmptyWithResponse(null).getValue();
     }
 
     @Test
     public void byteNull() {
         try {
-            client.byteNullWithResponse(null, null, null);
+            client.byteNullWithResponse(null, null);
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());
         }
@@ -139,13 +139,13 @@ public class PathsTests {
 
     @Test
     public void dateValid() {
-        client.dateValidWithResponse(null, null).getValue();
+        client.dateValidWithResponse(null).getValue();
     }
 
     @Test
     public void dateNull() {
         try {
-            client.dateNullWithResponse(null, null, null);
+            client.dateNullWithResponse(null, null);
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());
         }
@@ -153,13 +153,13 @@ public class PathsTests {
 
     @Test
     public void dateTimeValid() {
-        client.dateTimeValidWithResponse(null, null).getValue();
+        client.dateTimeValidWithResponse(null).getValue();
     }
 
     @Test
     public void dateTimeNull() {
         try {
-            client.dateTimeNullWithResponse(null, null, null);
+            client.dateTimeNullWithResponse(null, null);
         } catch (HttpResponseException e) {
             Assertions.assertEquals(404, e.getResponse().getStatusCode());
         }
@@ -167,7 +167,7 @@ public class PathsTests {
 
     @Test
     public void base64Url() {
-        client.base64UrlWithResponse(Base64Url.encode("lorem".getBytes(StandardCharsets.UTF_8)).toString(), null, null);
+        client.base64UrlWithResponse(Base64Url.encode("lorem".getBytes(StandardCharsets.UTF_8)).toString(), null);
     }
 
     @Test
@@ -179,11 +179,11 @@ public class PathsTests {
         list.add(null);
         list.add("");
         String path = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.CSV);
-        client.arrayCsvInPathWithResponse(path, null, null);
+        client.arrayCsvInPathWithResponse(path, null);
     }
 
     @Test
     public void unixTimeUrl() {
-        client.unixTimeUrlWithResponse(1460505600, null, null);
+        client.unixTimeUrlWithResponse(1460505600, null);
     }
 }

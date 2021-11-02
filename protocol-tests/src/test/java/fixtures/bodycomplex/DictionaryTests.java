@@ -20,7 +20,7 @@ public class DictionaryTests {
 
     @Test
     public void getValid() throws Exception {
-        BinaryData binaryData = client.getValidWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getValidWithResponse(null).getValue();
         Map map = (Map)binaryData.toObject(Map.class).get("defaultProgram");
         Assertions.assertEquals(5, map.size());
         Assertions.assertEquals("", map.get("exe"));
@@ -35,7 +35,7 @@ public class DictionaryTests {
 
     @Test
     public void getEmpty() throws Exception {
-        BinaryData binaryData = client.getEmptyWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getEmptyWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Map program = (Map)map.get("defaultProgram");
         Assertions.assertEquals(0, program.size());
@@ -49,14 +49,14 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        BinaryData binaryData = client.getNullWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getNullWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertNull(map.get("defaultProgram"));
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        BinaryData binaryData = client.getNotProvidedWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getNotProvidedWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(0, map.size());
     }
