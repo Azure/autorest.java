@@ -739,6 +739,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isLowLevelClient()) {
+            /*
+            Rule for LLC
+
+            1. Only generate "WithResponse" method for simple API (hence exclude SimpleAsync and SimpleSync).
+            2. For sync method, Context is included in "RequestOptions", hence do not generate method with Context parameter.
+            3. For async method, Context is not included in the first place (this rule is valid for all clients).
+             */
+
             return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
                     || (methodType == ClientMethodType.PagingSync && hasContextParameter)
                     || (methodType == ClientMethodType.LongRunningBeginSync && hasContextParameter)
