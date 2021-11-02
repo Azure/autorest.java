@@ -1,9 +1,9 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 /** Contans property. */
 @JacksonXmlRootElement(localName = "Data")
@@ -18,8 +18,7 @@ public final class ObjectWithXMsTextProperty {
     /*
      * Returned value should be 'I am text'
      */
-    @JsonProperty(value = "content")
-    private String content;
+    @JacksonXmlText private String content;
 
     /**
      * Get the language property: Returned value should be 'english'.
