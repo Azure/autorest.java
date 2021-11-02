@@ -580,8 +580,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .name(proxyMethod.getSimpleRestResponseMethodName())
                             .returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse))
-                            .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, true));
-                        addClientMethodWithContext(methods, builder, parameters);
+                            .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
+
+                        if (settings.isLowLevelClient()) {
+                            // SimpleSyncRestResponse with RequestOptions but without Context
+                            methods.add(builder.build());
+                        }
+
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, true)),
+                                parameters);
                     }
                 }
             }
@@ -732,8 +740,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isLowLevelClient()) {
             return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
-                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
-                    || (methodType == ClientMethodType.LongRunningBeginSync && !hasContextParameter))
+                    || (methodType == ClientMethodType.PagingSync && hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginSync && hasContextParameter)
+                    || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                     ? NOT_GENERATE
                     : VISIBLE;
         } else {
