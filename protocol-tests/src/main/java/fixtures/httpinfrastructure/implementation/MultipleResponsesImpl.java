@@ -243,15 +243,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError200ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model204NoModelDefaultError200ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -314,15 +312,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError204ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model204NoModelDefaultError204ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -385,15 +381,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError201InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(RequestOptions requestOptions) {
+        return get200Model204NoModelDefaultError201InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -456,15 +450,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError202NoneWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(RequestOptions requestOptions) {
+        return get200Model204NoModelDefaultError202NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -527,15 +519,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model204NoModelDefaultError400ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model204NoModelDefaultError400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -598,15 +588,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError200ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model201ModelDefaultError200ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -669,15 +657,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError201ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model201ModelDefaultError201ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -740,15 +726,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200Model201ModelDefaultError400ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
+        return get200Model201ModelDefaultError400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -806,15 +790,14 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(requestOptions, context).block();
+            RequestOptions requestOptions) {
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -872,15 +855,14 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(requestOptions, context).block();
+            RequestOptions requestOptions) {
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -938,15 +920,14 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(requestOptions, context).block();
+            RequestOptions requestOptions) {
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1004,15 +985,14 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(requestOptions, context).block();
+            RequestOptions requestOptions) {
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1049,15 +1029,13 @@ public final class MultipleResponsesImpl {
      * Send a 202 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultError202NoneWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1094,15 +1072,13 @@ public final class MultipleResponsesImpl {
      * Send a 204 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultError204NoneWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1139,15 +1115,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultError400ValidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1184,15 +1158,13 @@ public final class MultipleResponsesImpl {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1228,15 +1200,13 @@ public final class MultipleResponsesImpl {
      * Send a 204 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1272,15 +1242,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1317,15 +1285,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
+        return get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1385,14 +1351,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA200ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions) {
+        return getDefaultModelA200ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1452,14 +1417,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA200NoneWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions) {
+        return getDefaultModelA200NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1495,14 +1459,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA400ValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
+        return getDefaultModelA400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1538,14 +1501,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultModelA400NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
+        return getDefaultModelA400NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1581,14 +1543,13 @@ public final class MultipleResponsesImpl {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultNone200InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
+        return getDefaultNone200InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1623,14 +1584,13 @@ public final class MultipleResponsesImpl {
      * Send a 200 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultNone200NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
+        return getDefaultNone200NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1666,14 +1626,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultNone400InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
+        return getDefaultNone400InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1708,14 +1667,13 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return getDefaultNone400NoneWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
+        return getDefaultNone400NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1778,14 +1736,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA200NoneWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions) {
+        return get200ModelA200NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1845,14 +1802,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA200ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions) {
+        return get200ModelA200ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1912,14 +1868,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA200InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions) {
+        return get200ModelA200InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1979,14 +1934,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA400NoneWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions) {
+        return get200ModelA400NoneWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2046,14 +2000,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA400ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions) {
+        return get200ModelA400ValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2113,14 +2066,13 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA400InvalidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions) {
+        return get200ModelA400InvalidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2180,13 +2132,12 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions, Context context) {
-        return get200ModelA202ValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
+        return get200ModelA202ValidWithResponseAsync(requestOptions).block();
     }
 }

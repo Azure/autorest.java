@@ -342,15 +342,13 @@ public final class LRORetrysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPut201CreatingSucceeded200Async(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
+        return this.beginPut201CreatingSucceeded200Async(requestOptions).getSyncPoller();
     }
 
     /**
@@ -614,15 +612,13 @@ public final class LRORetrysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRelativeRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPutAsyncRelativeRetrySucceededAsync(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
+        return this.beginPutAsyncRelativeRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
     /**
@@ -800,15 +796,14 @@ public final class LRORetrysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginDeleteProvisioning202Accepted200SucceededAsync(requestOptions, context).getSyncPoller();
+            RequestOptions requestOptions) {
+        return this.beginDeleteProvisioning202Accepted200SucceededAsync(requestOptions).getSyncPoller();
     }
 
     /**
@@ -886,14 +881,13 @@ public final class LRORetrysImpl {
      * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions, Context context) {
-        return this.beginDelete202Retry200Async(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
+        return this.beginDelete202Retry200Async(requestOptions).getSyncPoller();
     }
 
     /**
@@ -973,15 +967,13 @@ public final class LRORetrysImpl {
      * indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginDeleteAsyncRelativeRetrySucceededAsync(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
+        return this.beginDeleteAsyncRelativeRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
     /**
@@ -1148,14 +1140,13 @@ public final class LRORetrysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
-        return this.beginPost202Retry200Async(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
+        return this.beginPost202Retry200Async(requestOptions).getSyncPoller();
     }
 
     /**
@@ -1329,15 +1320,13 @@ public final class LRORetrysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPostAsyncRelativeRetrySucceededAsync(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
+        return this.beginPostAsyncRelativeRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
     private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {

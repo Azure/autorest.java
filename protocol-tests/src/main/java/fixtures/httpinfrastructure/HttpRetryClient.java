@@ -10,7 +10,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.Context;
 import fixtures.httpinfrastructure.implementation.HttpRetriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
@@ -31,14 +30,13 @@ public final class HttpRetryClient {
      * Return 408 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head408WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.head408WithResponse(requestOptions, context);
+    public Response<Void> head408WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.head408WithResponse(requestOptions);
     }
 
     /**
@@ -51,14 +49,13 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put500WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.put500WithResponse(requestOptions, context);
+    public Response<Void> put500WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.put500WithResponse(requestOptions);
     }
 
     /**
@@ -71,28 +68,26 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> patch500WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.patch500WithResponse(requestOptions, context);
+    public Response<Void> patch500WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.patch500WithResponse(requestOptions);
     }
 
     /**
      * Return 502 status code, then 200 after retry.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get502WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.get502WithResponse(requestOptions, context);
+    public Response<Void> get502WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.get502WithResponse(requestOptions);
     }
 
     /**
@@ -105,14 +100,13 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> post503WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.post503WithResponse(requestOptions, context);
+    public Response<Void> post503WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.post503WithResponse(requestOptions);
     }
 
     /**
@@ -125,14 +119,13 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> delete503WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.delete503WithResponse(requestOptions, context);
+    public Response<Void> delete503WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.delete503WithResponse(requestOptions);
     }
 
     /**
@@ -145,14 +138,13 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put504WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.put504WithResponse(requestOptions, context);
+    public Response<Void> put504WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.put504WithResponse(requestOptions);
     }
 
     /**
@@ -165,13 +157,12 @@ public final class HttpRetryClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> patch504WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.patch504WithResponse(requestOptions, context);
+    public Response<Void> patch504WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.patch504WithResponse(requestOptions);
     }
 }

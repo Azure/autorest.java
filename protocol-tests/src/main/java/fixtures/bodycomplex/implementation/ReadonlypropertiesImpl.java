@@ -118,14 +118,13 @@ public final class ReadonlypropertiesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
+        return getValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -191,13 +190,12 @@ public final class ReadonlypropertiesImpl {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putValidWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putValidWithResponseAsync(complexBody, requestOptions).block();
     }
 }

@@ -11,7 +11,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import fixtures.llcinitial.implementation.ParamsImpl;
 
 /** Initializes a new instance of the synchronous LLCClient type. */
@@ -48,13 +47,12 @@ public final class LLCClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getRequiredWithResponse(requestOptions, context);
+    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getRequiredWithResponse(requestOptions);
     }
 }

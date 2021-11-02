@@ -404,14 +404,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getNoItemNamePagesAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getNoItemNamePagesAsync(requestOptions));
     }
 
     /**
@@ -572,14 +571,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getNullNextLinkNamePagesAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getNullNextLinkNamePagesAsync(requestOptions));
     }
 
     /**
@@ -743,14 +741,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getSinglePagesAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getSinglePagesAsync(requestOptions));
     }
 
     /**
@@ -920,14 +917,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(firstResponseEmptyAsync(requestOptions, context));
+    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
+        return new PagedIterable<>(firstResponseEmptyAsync(requestOptions));
     }
 
     /**
@@ -1141,14 +1137,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesAsync(requestOptions));
     }
 
     /**
@@ -1363,14 +1358,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions));
     }
 
     /**
@@ -1680,14 +1674,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getOdataMultiplePagesAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getOdataMultiplePagesAsync(requestOptions));
     }
 
     /**
@@ -1911,15 +1904,13 @@ public final class PagingsImpl {
      *
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(
-            int offset, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, requestOptions));
     }
 
     /**
@@ -2089,14 +2080,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesRetryFirstAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesRetryFirstAsync(requestOptions));
     }
 
     /**
@@ -2266,14 +2256,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesRetrySecondAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesRetrySecondAsync(requestOptions));
     }
 
     /**
@@ -2438,14 +2427,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getSinglePagesFailureAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
+        return new PagedIterable<>(getSinglePagesFailureAsync(requestOptions));
     }
 
     /**
@@ -2610,14 +2598,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFailureAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFailureAsync(requestOptions));
     }
 
     /**
@@ -2782,14 +2769,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFailureUriAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFailureUriAsync(requestOptions));
     }
 
     /**
@@ -3003,15 +2989,13 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions));
     }
 
     /**
@@ -3227,15 +3211,14 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions, context));
+            String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions));
     }
 
     /**
@@ -3450,14 +3433,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesLROAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesLROAsync(requestOptions));
     }
 
     /**
@@ -3829,15 +3811,13 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(
-            RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getPagingModelWithItemNameWithXMSClientNameAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
+        return new PagedIterable<>(getPagingModelWithItemNameWithXMSClientNameAsync(requestOptions));
     }
 
     /**

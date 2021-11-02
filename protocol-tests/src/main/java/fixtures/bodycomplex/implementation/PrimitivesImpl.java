@@ -227,14 +227,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions) {
+        return getIntWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -300,14 +299,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put -1 and 2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putIntWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putIntWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -368,14 +366,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions, Context context) {
-        return getLongWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions) {
+        return getLongWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -441,14 +438,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putLongWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putLongWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -509,14 +505,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions, Context context) {
-        return getFloatWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions) {
+        return getFloatWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -582,14 +577,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putFloatWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putFloatWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -650,14 +644,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions, Context context) {
-        return getDoubleWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions) {
+        return getDoubleWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -723,15 +716,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putDoubleWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putDoubleWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putDoubleWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -792,14 +783,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions, Context context) {
-        return getBoolWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions) {
+        return getBoolWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -865,14 +855,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put true and false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putBoolWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putBoolWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -936,14 +925,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions, Context context) {
-        return getStringWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions) {
+        return getStringWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1012,15 +1000,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putStringWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putStringWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putStringWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1081,14 +1067,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions, Context context) {
-        return getDateWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions) {
+        return getDateWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1154,14 +1139,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putDateWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putDateWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1222,14 +1206,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions, Context context) {
-        return getDateTimeWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions) {
+        return getDateTimeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1295,15 +1278,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putDateTimeWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putDateTimeWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putDateTimeWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1366,14 +1347,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
-        return getDateTimeRfc1123WithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
+        return getDateTimeRfc1123WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1440,15 +1420,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123WithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putDateTimeRfc1123WithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putDateTimeRfc1123WithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1506,14 +1484,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions, Context context) {
-        return getDurationWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions) {
+        return getDurationWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1576,15 +1553,13 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putDurationWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putDurationWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putDurationWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1642,14 +1617,13 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions, Context context) {
-        return getByteWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions) {
+        return getByteWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1712,13 +1686,12 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putByteWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putByteWithResponseAsync(complexBody, requestOptions).block();
     }
 }
