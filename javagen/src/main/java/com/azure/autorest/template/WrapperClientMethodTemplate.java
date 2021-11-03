@@ -41,6 +41,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         }
 
+        typeBlock.annotation("Generated");
         switch (clientMethod.getType()) {
             case PagingSync:
             case PagingAsync:

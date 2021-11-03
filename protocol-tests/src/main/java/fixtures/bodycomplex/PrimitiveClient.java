@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.PrimitivesImpl;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PrimitiveClient {
-    private final PrimitivesImpl serviceClient;
+    @Generated private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of Primitives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PrimitiveClient(PrimitivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -44,6 +46,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntWithResponse(requestOptions);
@@ -67,6 +70,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putIntWithResponse(complexBody, requestOptions);
@@ -89,6 +93,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getLongWithResponse(requestOptions);
@@ -112,6 +117,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putLongWithResponse(complexBody, requestOptions);
@@ -134,6 +140,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getFloatWithResponse(requestOptions);
@@ -157,6 +164,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putFloatWithResponse(complexBody, requestOptions);
@@ -179,6 +187,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDoubleWithResponse(requestOptions);
@@ -202,6 +211,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDoubleWithResponse(complexBody, requestOptions);
@@ -224,6 +234,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBoolWithResponse(requestOptions);
@@ -247,6 +258,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putBoolWithResponse(complexBody, requestOptions);
@@ -270,6 +282,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getStringWithResponse(requestOptions);
@@ -294,6 +307,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putStringWithResponse(complexBody, requestOptions);
@@ -316,6 +330,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateWithResponse(requestOptions);
@@ -339,6 +354,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateWithResponse(complexBody, requestOptions);
@@ -361,6 +377,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeWithResponse(requestOptions);
@@ -384,6 +401,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateTimeWithResponse(complexBody, requestOptions);
@@ -406,6 +424,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeRfc1123WithResponse(requestOptions);
@@ -429,6 +448,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody, requestOptions);
@@ -450,6 +470,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDurationWithResponse(requestOptions);
@@ -472,6 +493,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDurationWithResponse(complexBody, requestOptions);
@@ -493,6 +515,7 @@ public final class PrimitiveClient {
      *     false.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getByteWithResponse(requestOptions);
@@ -515,6 +538,7 @@ public final class PrimitiveClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putByteWithResponse(complexBody, requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class, isAsync = true)
 public final class PathItemsAsyncClient {
-    private final PathItemsImpl serviceClient;
+    @Generated private final PathItemsImpl serviceClient;
 
     /**
      * Initializes an instance of PathItems client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PathItemsAsyncClient(PathItemsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -49,6 +51,7 @@ public final class PathItemsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
@@ -78,6 +81,7 @@ public final class PathItemsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
@@ -107,6 +111,7 @@ public final class PathItemsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
@@ -136,6 +141,7 @@ public final class PathItemsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {

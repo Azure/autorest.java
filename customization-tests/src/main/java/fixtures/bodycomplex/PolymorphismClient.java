@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -19,13 +20,14 @@ import fixtures.bodycomplex.implementation.models.Salmon;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PolymorphismClient {
-    private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismsImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphisms client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphismClient(PolymorphismsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -37,6 +39,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
         return this.serviceClient.getValid();
@@ -51,6 +54,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Fish> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -69,6 +73,7 @@ public final class PolymorphismClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Fish complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -89,6 +94,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);
@@ -101,6 +107,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFish getDotSyntax() {
         return this.serviceClient.getDotSyntax();
@@ -115,6 +122,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFish> getDotSyntaxWithResponse(Context context) {
         return this.serviceClient.getDotSyntaxWithResponse(context);
@@ -129,6 +137,7 @@ public final class PolymorphismClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithDiscriminator() {
         return this.serviceClient.getComposedWithDiscriminator();
@@ -145,6 +154,7 @@ public final class PolymorphismClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithDiscriminatorWithResponse(Context context) {
         return this.serviceClient.getComposedWithDiscriminatorWithResponse(context);
@@ -159,6 +169,7 @@ public final class PolymorphismClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithoutDiscriminator() {
         return this.serviceClient.getComposedWithoutDiscriminator();
@@ -175,6 +186,7 @@ public final class PolymorphismClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithoutDiscriminatorWithResponse(Context context) {
         return this.serviceClient.getComposedWithoutDiscriminatorWithResponse(context);
@@ -188,6 +200,7 @@ public final class PolymorphismClient {
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon getComplicated() {
         return this.serviceClient.getComplicated();
@@ -203,6 +216,7 @@ public final class PolymorphismClient {
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Salmon> getComplicatedWithResponse(Context context) {
         return this.serviceClient.getComplicatedWithResponse(context);
@@ -216,6 +230,7 @@ public final class PolymorphismClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplicated(Salmon complexBody) {
         this.serviceClient.putComplicated(complexBody);
@@ -231,6 +246,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putComplicatedWithResponse(Salmon complexBody, Context context) {
         return this.serviceClient.putComplicatedWithResponse(complexBody, context);
@@ -245,6 +261,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon putMissingDiscriminator(Salmon complexBody) {
         return this.serviceClient.putMissingDiscriminator(complexBody);
@@ -260,6 +277,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Salmon> putMissingDiscriminatorWithResponse(Salmon complexBody, Context context) {
         return this.serviceClient.putMissingDiscriminatorWithResponse(complexBody, context);
@@ -278,6 +296,7 @@ public final class PolymorphismClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidMissingRequired(Fish complexBody) {
         this.serviceClient.putValidMissingRequired(complexBody);
@@ -298,6 +317,7 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidMissingRequiredWithResponse(Fish complexBody, Context context) {
         return this.serviceClient.putValidMissingRequiredWithResponse(complexBody, context);

@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.BasicsImpl;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class BasicClient {
-    private final BasicsImpl serviceClient;
+    @Generated private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of Basics client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     BasicClient(BasicsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -45,6 +47,7 @@ public final class BasicClient {
      *     false.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponse(requestOptions);
@@ -77,6 +80,7 @@ public final class BasicClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
@@ -100,6 +104,7 @@ public final class BasicClient {
      *     false.
      * @return a basic complex type that is invalid for the local strong type.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getInvalidWithResponse(requestOptions);
@@ -123,6 +128,7 @@ public final class BasicClient {
      *     false.
      * @return a basic complex type that is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);
@@ -146,6 +152,7 @@ public final class BasicClient {
      *     false.
      * @return a basic complex type whose properties are null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponse(requestOptions);
@@ -169,6 +176,7 @@ public final class BasicClient {
      *     false.
      * @return a basic complex type while the server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponse(requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class DictionaryAsyncClient {
-    private final DictionariesImpl serviceClient;
+    @Generated private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of Dictionaries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     DictionaryAsyncClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -46,6 +48,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponseAsync(requestOptions);
@@ -71,6 +74,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
@@ -94,6 +98,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponseAsync(requestOptions);
@@ -118,6 +123,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putEmptyWithResponseAsync(complexBody, requestOptions);
@@ -141,6 +147,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponseAsync(requestOptions);
@@ -164,6 +171,7 @@ public final class DictionaryAsyncClient {
      *     false.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);

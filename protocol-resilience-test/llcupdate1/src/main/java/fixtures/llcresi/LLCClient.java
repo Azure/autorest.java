@@ -4,6 +4,7 @@
 
 package fixtures.llcresi;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.llcresi.implementation.ParamsImpl;
 /** Initializes a new instance of the synchronous LLCClient type. */
 @ServiceClient(builder = LLCClientBuilder.class)
 public final class LLCClient {
-    private final ParamsImpl serviceClient;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of Params client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LLCClient(ParamsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -50,6 +52,7 @@ public final class LLCClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getRequiredWithResponse(requestOptions);
@@ -85,6 +88,7 @@ public final class LLCClient {
      *     false.
      * @return any object.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
         return this.serviceClient.postParametersWithResponse(parameter, requestOptions);
@@ -98,6 +102,7 @@ public final class LLCClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteParametersWithResponse(requestOptions);
@@ -117,6 +122,7 @@ public final class LLCClient {
      *     false.
      * @return any object.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNewOperationWithResponse(requestOptions);

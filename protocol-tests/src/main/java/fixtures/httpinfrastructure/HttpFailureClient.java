@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -15,13 +16,14 @@ import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class HttpFailureClient {
-    private final HttpFailuresImpl serviceClient;
+    @Generated private final HttpFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpFailures client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpFailureClient(HttpFailuresImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -40,6 +42,7 @@ public final class HttpFailureClient {
      *     false.
      * @return empty error form server.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyErrorWithResponse(requestOptions);
@@ -59,6 +62,7 @@ public final class HttpFailureClient {
      *     false.
      * @return empty error form server.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelErrorWithResponse(requestOptions);
@@ -78,6 +82,7 @@ public final class HttpFailureClient {
      *     false.
      * @return empty response from server.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelEmptyWithResponse(requestOptions);

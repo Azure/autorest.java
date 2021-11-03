@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.DictionariesImpl;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class DictionaryClient {
-    private final DictionariesImpl serviceClient;
+    @Generated private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of Dictionaries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     DictionaryClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -45,6 +47,7 @@ public final class DictionaryClient {
      *     false.
      * @return complex types with dictionary property.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponse(requestOptions);
@@ -70,6 +73,7 @@ public final class DictionaryClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
@@ -93,6 +97,7 @@ public final class DictionaryClient {
      *     false.
      * @return complex types with dictionary property which is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);
@@ -117,6 +122,7 @@ public final class DictionaryClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putEmptyWithResponse(complexBody, requestOptions);
@@ -140,6 +146,7 @@ public final class DictionaryClient {
      *     false.
      * @return complex types with dictionary property which is null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponse(requestOptions);
@@ -163,6 +170,7 @@ public final class DictionaryClient {
      *     false.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponse(requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -15,13 +16,14 @@ import fixtures.url.implementation.QueriesImpl;
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class QueriesClient {
-    private final QueriesImpl serviceClient;
+    @Generated private final QueriesImpl serviceClient;
 
     /**
      * Initializes an instance of Queries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     QueriesClient(QueriesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -42,6 +44,7 @@ public final class QueriesClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanTrueWithResponse(requestOptions);
@@ -63,6 +66,7 @@ public final class QueriesClient {
      *     false.
      * @return false Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanFalseWithResponse(requestOptions);
@@ -84,6 +88,7 @@ public final class QueriesClient {
      *     false.
      * @return null Boolean value on query (query string should be absent).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanNullWithResponse(requestOptions);
@@ -105,6 +110,7 @@ public final class QueriesClient {
      *     false.
      * @return '1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntOneMillionWithResponse(requestOptions);
@@ -126,6 +132,7 @@ public final class QueriesClient {
      *     false.
      * @return '-1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntNegativeOneMillionWithResponse(requestOptions);
@@ -147,6 +154,7 @@ public final class QueriesClient {
      *     false.
      * @return null integer value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntNullWithResponse(requestOptions);
@@ -168,6 +176,7 @@ public final class QueriesClient {
      *     false.
      * @return '10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getTenBillionWithResponse(requestOptions);
@@ -189,6 +198,7 @@ public final class QueriesClient {
      *     false.
      * @return '-10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNegativeTenBillionWithResponse(requestOptions);
@@ -210,6 +220,7 @@ public final class QueriesClient {
      *     false.
      * @return 'null 64 bit integer value (no query param in uri).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLongNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getLongNullWithResponse(requestOptions);
@@ -231,6 +242,7 @@ public final class QueriesClient {
      *     false.
      * @return '1.034E+20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificPositiveWithResponse(requestOptions);
@@ -252,6 +264,7 @@ public final class QueriesClient {
      *     false.
      * @return '-1.034E-20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificNegativeWithResponse(requestOptions);
@@ -273,6 +286,7 @@ public final class QueriesClient {
      *     false.
      * @return null numeric value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatNullWithResponse(requestOptions);
@@ -294,6 +308,7 @@ public final class QueriesClient {
      *     false.
      * @return '9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalPositiveWithResponse(requestOptions);
@@ -315,6 +330,7 @@ public final class QueriesClient {
      *     false.
      * @return '-9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalNegativeWithResponse(requestOptions);
@@ -336,6 +352,7 @@ public final class QueriesClient {
      *     false.
      * @return null numeric value (no query parameter).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleNullWithResponse(requestOptions);
@@ -357,6 +374,7 @@ public final class QueriesClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUnicodeWithResponse(requestOptions);
@@ -378,6 +396,7 @@ public final class QueriesClient {
      *     false.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUrlEncodedWithResponse(requestOptions);
@@ -399,6 +418,7 @@ public final class QueriesClient {
      *     false.
      * @return ''.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringEmptyWithResponse(requestOptions);
@@ -420,6 +440,7 @@ public final class QueriesClient {
      *     false.
      * @return null (no query parameter in url).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringNullWithResponse(requestOptions);
@@ -441,6 +462,7 @@ public final class QueriesClient {
      *     false.
      * @return using uri with query parameter 'green color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.enumValidWithResponse(requestOptions);
@@ -462,6 +484,7 @@ public final class QueriesClient {
      *     false.
      * @return null (no query parameter in url).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.enumNullWithResponse(requestOptions);
@@ -483,6 +506,7 @@ public final class QueriesClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteMultiByteWithResponse(requestOptions);
@@ -504,6 +528,7 @@ public final class QueriesClient {
      *     false.
      * @return '' as byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteEmptyWithResponse(requestOptions);
@@ -525,6 +550,7 @@ public final class QueriesClient {
      *     false.
      * @return null as byte array (no query parameters in uri).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteNullWithResponse(requestOptions);
@@ -546,6 +572,7 @@ public final class QueriesClient {
      *     false.
      * @return '2012-01-01' as date.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateValidWithResponse(requestOptions);
@@ -567,6 +594,7 @@ public final class QueriesClient {
      *     false.
      * @return null as date - this should result in no query parameters in uri.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateNullWithResponse(requestOptions);
@@ -588,6 +616,7 @@ public final class QueriesClient {
      *     false.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateTimeValidWithResponse(requestOptions);
@@ -609,6 +638,7 @@ public final class QueriesClient {
      *     false.
      * @return null as date-time, should result in no query parameters in uri.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponse(requestOptions);
@@ -631,6 +661,7 @@ public final class QueriesClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvValidWithResponse(requestOptions);
@@ -652,6 +683,7 @@ public final class QueriesClient {
      *     false.
      * @return a null array of string using the csv-array format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvNullWithResponse(requestOptions);
@@ -673,6 +705,7 @@ public final class QueriesClient {
      *     false.
      * @return an empty array [] of string using the csv-array format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringCsvEmptyWithResponse(requestOptions);
@@ -695,6 +728,7 @@ public final class QueriesClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringNoCollectionFormatEmptyWithResponse(requestOptions);
@@ -717,6 +751,7 @@ public final class QueriesClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringSsvValidWithResponse(requestOptions);
@@ -739,6 +774,7 @@ public final class QueriesClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringTsvValidWithResponse(requestOptions);
@@ -762,6 +798,7 @@ public final class QueriesClient {
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringPipesValidWithResponse(requestOptions);

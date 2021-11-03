@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class HttpRetryAsyncClient {
-    private final HttpRetriesImpl serviceClient;
+    @Generated private final HttpRetriesImpl serviceClient;
 
     /**
      * Initializes an instance of HttpRetries client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpRetryAsyncClient(HttpRetriesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -35,6 +37,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head408WithResponseAsync(requestOptions);
@@ -54,6 +57,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put500WithResponseAsync(requestOptions);
@@ -73,6 +77,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch500WithResponseAsync(requestOptions);
@@ -86,6 +91,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get502WithResponseAsync(requestOptions);
@@ -105,6 +111,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post503WithResponseAsync(requestOptions);
@@ -124,6 +131,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete503WithResponseAsync(requestOptions);
@@ -143,6 +151,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put504WithResponseAsync(requestOptions);
@@ -162,6 +171,7 @@ public final class HttpRetryAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch504WithResponseAsync(requestOptions);

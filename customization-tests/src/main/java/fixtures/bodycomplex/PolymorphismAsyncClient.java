@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -19,13 +20,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PolymorphismAsyncClient {
-    private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismsImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphisms client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphismAsyncClient(PolymorphismsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -37,6 +39,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponse() {
         return this.serviceClient.getValidWithResponseAsync();
@@ -49,6 +52,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValid() {
         return this.serviceClient.getValidAsync();
@@ -68,6 +72,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(Fish complexBody) {
         return this.serviceClient.putValidWithResponseAsync(complexBody);
@@ -87,6 +92,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValid(Fish complexBody) {
         return this.serviceClient.putValidAsync(complexBody);
@@ -99,6 +105,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponse() {
         return this.serviceClient.getDotSyntaxWithResponseAsync();
@@ -111,6 +118,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFish> getDotSyntax() {
         return this.serviceClient.getDotSyntaxAsync();
@@ -125,6 +133,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponse() {
         return this.serviceClient.getComposedWithDiscriminatorWithResponseAsync();
@@ -139,6 +148,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminator() {
         return this.serviceClient.getComposedWithDiscriminatorAsync();
@@ -153,6 +163,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponse() {
         return this.serviceClient.getComposedWithoutDiscriminatorWithResponseAsync();
@@ -167,6 +178,7 @@ public final class PolymorphismAsyncClient {
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminator() {
         return this.serviceClient.getComposedWithoutDiscriminatorAsync();
@@ -180,6 +192,7 @@ public final class PolymorphismAsyncClient {
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponse() {
         return this.serviceClient.getComplicatedWithResponseAsync();
@@ -193,6 +206,7 @@ public final class PolymorphismAsyncClient {
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicated() {
         return this.serviceClient.getComplicatedAsync();
@@ -207,6 +221,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponse(Salmon complexBody) {
         return this.serviceClient.putComplicatedWithResponseAsync(complexBody);
@@ -221,6 +236,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplicated(Salmon complexBody) {
         return this.serviceClient.putComplicatedAsync(complexBody);
@@ -235,6 +251,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponse(Salmon complexBody) {
         return this.serviceClient.putMissingDiscriminatorWithResponseAsync(complexBody);
@@ -249,6 +266,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> putMissingDiscriminator(Salmon complexBody) {
         return this.serviceClient.putMissingDiscriminatorAsync(complexBody);
@@ -268,6 +286,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponse(Fish complexBody) {
         return this.serviceClient.putValidMissingRequiredWithResponseAsync(complexBody);
@@ -287,6 +306,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidMissingRequired(Fish complexBody) {
         return this.serviceClient.putValidMissingRequiredAsync(complexBody);

@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.InheritancesImpl;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class InheritanceClient {
-    private final InheritancesImpl serviceClient;
+    @Generated private final InheritancesImpl serviceClient;
 
     /**
      * Initializes an instance of Inheritances client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     InheritanceClient(InheritancesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -53,6 +55,7 @@ public final class InheritanceClient {
      *     false.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponse(requestOptions);
@@ -87,6 +90,7 @@ public final class InheritanceClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponse(complexBody, requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.bodystring;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodystring.implementation.StringOperationsImpl;
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATService type. */
 @ServiceClient(builder = AutoRestSwaggerBATServiceBuilder.class)
 public final class StringOperationClient {
-    private final StringOperationsImpl serviceClient;
+    @Generated private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperations client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     StringOperationClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -41,6 +43,7 @@ public final class StringOperationClient {
      *     false.
      * @return null string value value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponse(requestOptions);
@@ -60,6 +63,7 @@ public final class StringOperationClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNullWithResponse(requestOptions);
@@ -79,6 +83,7 @@ public final class StringOperationClient {
      *     false.
      * @return empty string value value ''.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);
@@ -98,6 +103,7 @@ public final class StringOperationClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putEmptyWithResponse(requestOptions);
@@ -117,6 +123,7 @@ public final class StringOperationClient {
      *     false.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getMbcsWithResponse(requestOptions);
@@ -136,6 +143,7 @@ public final class StringOperationClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putMbcsWithResponse(requestOptions);
@@ -157,6 +165,7 @@ public final class StringOperationClient {
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getWhitespaceWithResponse(requestOptions);
@@ -177,6 +186,7 @@ public final class StringOperationClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putWhitespaceWithResponse(requestOptions);
@@ -196,6 +206,7 @@ public final class StringOperationClient {
      *     false.
      * @return string value when no string value is sent in response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponse(requestOptions);
@@ -215,6 +226,7 @@ public final class StringOperationClient {
      *     false.
      * @return value that is base64 encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64EncodedWithResponse(requestOptions);
@@ -234,6 +246,7 @@ public final class StringOperationClient {
      *     false.
      * @return value that is base64url encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64UrlEncodedWithResponse(requestOptions);
@@ -254,6 +267,7 @@ public final class StringOperationClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
         return this.serviceClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions);
@@ -273,6 +287,7 @@ public final class StringOperationClient {
      *     false.
      * @return null value that is expected to be base64url encoded.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);

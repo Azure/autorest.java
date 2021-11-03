@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class BasicAsyncClient {
-    private final BasicsImpl serviceClient;
+    @Generated private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of Basics client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     BasicAsyncClient(BasicsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -46,6 +48,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getValidWithResponseAsync(requestOptions);
@@ -78,6 +81,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
@@ -101,6 +105,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return a basic complex type that is invalid for the local strong type.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getInvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getInvalidWithResponseAsync(requestOptions);
@@ -124,6 +129,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return a basic complex type that is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponseAsync(requestOptions);
@@ -147,6 +153,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return a basic complex type whose properties are null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullWithResponseAsync(requestOptions);
@@ -170,6 +177,7 @@ public final class BasicAsyncClient {
      *     false.
      * @return a basic complex type while the server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -15,13 +16,14 @@ import fixtures.url.implementation.PathsImpl;
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class PathsClient {
-    private final PathsImpl serviceClient;
+    @Generated private final PathsImpl serviceClient;
 
     /**
      * Initializes an instance of Paths client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PathsClient(PathsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class PathsClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanTrueWithResponse(requestOptions);
@@ -47,6 +50,7 @@ public final class PathsClient {
      *     false.
      * @return false Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBooleanFalseWithResponse(requestOptions);
@@ -60,6 +64,7 @@ public final class PathsClient {
      *     false.
      * @return '1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntOneMillionWithResponse(requestOptions);
@@ -73,6 +78,7 @@ public final class PathsClient {
      *     false.
      * @return '-1000000' integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntNegativeOneMillionWithResponse(requestOptions);
@@ -86,6 +92,7 @@ public final class PathsClient {
      *     false.
      * @return '10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getTenBillionWithResponse(requestOptions);
@@ -99,6 +106,7 @@ public final class PathsClient {
      *     false.
      * @return '-10000000000' 64 bit integer value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNegativeTenBillionWithResponse(requestOptions);
@@ -112,6 +120,7 @@ public final class PathsClient {
      *     false.
      * @return '1.034E+20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificPositiveWithResponse(requestOptions);
@@ -125,6 +134,7 @@ public final class PathsClient {
      *     false.
      * @return '-1.034E-20' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.floatScientificNegativeWithResponse(requestOptions);
@@ -138,6 +148,7 @@ public final class PathsClient {
      *     false.
      * @return '9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalPositiveWithResponse(requestOptions);
@@ -151,6 +162,7 @@ public final class PathsClient {
      *     false.
      * @return '-9999999.999' numeric value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.doubleDecimalNegativeWithResponse(requestOptions);
@@ -164,6 +176,7 @@ public final class PathsClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUnicodeWithResponse(requestOptions);
@@ -177,6 +190,7 @@ public final class PathsClient {
      *     false.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUrlEncodedWithResponse(requestOptions);
@@ -190,6 +204,7 @@ public final class PathsClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlNonEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringUrlNonEncodedWithResponse(requestOptions);
@@ -203,6 +218,7 @@ public final class PathsClient {
      *     false.
      * @return ''.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.stringEmptyWithResponse(requestOptions);
@@ -217,6 +233,7 @@ public final class PathsClient {
      *     false.
      * @return null (should throw).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(String stringPath, RequestOptions requestOptions) {
         return this.serviceClient.stringNullWithResponse(stringPath, requestOptions);
@@ -231,6 +248,7 @@ public final class PathsClient {
      *     false.
      * @return using uri with 'green color' in path parameter.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions) {
         return this.serviceClient.enumValidWithResponse(enumPath, requestOptions);
@@ -245,6 +263,7 @@ public final class PathsClient {
      *     false.
      * @return null (should throw on the client before the request is sent on wire).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(String enumPath, RequestOptions requestOptions) {
         return this.serviceClient.enumNullWithResponse(enumPath, requestOptions);
@@ -259,6 +278,7 @@ public final class PathsClient {
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteMultiByteWithResponse(bytePath, requestOptions);
@@ -272,6 +292,7 @@ public final class PathsClient {
      *     false.
      * @return '' as byte array.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.byteEmptyWithResponse(requestOptions);
@@ -286,6 +307,7 @@ public final class PathsClient {
      *     false.
      * @return null as byte array (should throw).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteNullWithResponse(bytePath, requestOptions);
@@ -299,6 +321,7 @@ public final class PathsClient {
      *     false.
      * @return '2012-01-01' as date.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateValidWithResponse(requestOptions);
@@ -313,6 +336,7 @@ public final class PathsClient {
      *     false.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions) {
         return this.serviceClient.dateNullWithResponse(datePath, requestOptions);
@@ -326,6 +350,7 @@ public final class PathsClient {
      *     false.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.dateTimeValidWithResponse(requestOptions);
@@ -340,6 +365,7 @@ public final class PathsClient {
      *     false.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponse(dateTimePath, requestOptions);
@@ -354,6 +380,7 @@ public final class PathsClient {
      *     false.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
         return this.serviceClient.base64UrlWithResponse(base64UrlPath, requestOptions);
@@ -370,6 +397,7 @@ public final class PathsClient {
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
         return this.serviceClient.arrayCsvInPathWithResponse(arrayPath, requestOptions);
@@ -384,6 +412,7 @@ public final class PathsClient {
      *     false.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimeUrlWithResponse(long unixTimeUrlPath, RequestOptions requestOptions) {
         return this.serviceClient.unixTimeUrlWithResponse(unixTimeUrlPath, requestOptions);

@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PrimitiveAsyncClient {
-    private final PrimitivesImpl serviceClient;
+    @Generated private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of Primitives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PrimitiveAsyncClient(PrimitivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -45,6 +47,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getIntWithResponseAsync(requestOptions);
@@ -68,6 +71,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putIntWithResponseAsync(complexBody, requestOptions);
@@ -90,6 +94,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getLongWithResponseAsync(requestOptions);
@@ -113,6 +118,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putLongWithResponseAsync(complexBody, requestOptions);
@@ -135,6 +141,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getFloatWithResponseAsync(requestOptions);
@@ -158,6 +165,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putFloatWithResponseAsync(complexBody, requestOptions);
@@ -180,6 +188,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDoubleWithResponseAsync(requestOptions);
@@ -203,6 +212,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDoubleWithResponseAsync(complexBody, requestOptions);
@@ -225,6 +235,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBoolWithResponseAsync(requestOptions);
@@ -248,6 +259,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putBoolWithResponseAsync(complexBody, requestOptions);
@@ -271,6 +283,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getStringWithResponseAsync(requestOptions);
@@ -295,6 +308,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putStringWithResponseAsync(complexBody, requestOptions);
@@ -317,6 +331,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateWithResponseAsync(requestOptions);
@@ -340,6 +355,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateWithResponseAsync(complexBody, requestOptions);
@@ -362,6 +378,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeWithResponseAsync(requestOptions);
@@ -385,6 +402,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateTimeWithResponseAsync(complexBody, requestOptions);
@@ -407,6 +425,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDateTimeRfc1123WithResponseAsync(requestOptions);
@@ -430,6 +449,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDateTimeRfc1123WithResponseAsync(complexBody, requestOptions);
@@ -451,6 +471,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDurationWithResponseAsync(requestOptions);
@@ -473,6 +494,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putDurationWithResponseAsync(complexBody, requestOptions);
@@ -494,6 +516,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getByteWithResponseAsync(requestOptions);
@@ -516,6 +539,7 @@ public final class PrimitiveAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putByteWithResponseAsync(complexBody, requestOptions);

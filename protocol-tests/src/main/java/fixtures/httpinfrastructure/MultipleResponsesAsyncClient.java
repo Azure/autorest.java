@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class MultipleResponsesAsyncClient {
-    private final MultipleResponsesImpl serviceClient;
+    @Generated private final MultipleResponsesImpl serviceClient;
 
     /**
      * Initializes an instance of MultipleResponses client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     MultipleResponsesAsyncClient(MultipleResponsesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -44,6 +46,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
@@ -66,6 +69,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError204ValidWithResponse(
             RequestOptions requestOptions) {
@@ -88,6 +92,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError201InvalidWithResponse(
             RequestOptions requestOptions) {
@@ -110,6 +115,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError202NoneWithResponse(
             RequestOptions requestOptions) {
@@ -132,6 +138,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model204NoModelDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
@@ -154,6 +161,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model201ModelDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
@@ -176,6 +184,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model201ModelDefaultError201ValidWithResponse(
             RequestOptions requestOptions) {
@@ -198,6 +207,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200Model201ModelDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
@@ -218,6 +228,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
@@ -238,6 +249,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
             RequestOptions requestOptions) {
@@ -258,6 +270,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
             RequestOptions requestOptions) {
@@ -278,6 +291,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
@@ -292,6 +306,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions);
@@ -305,6 +320,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions);
@@ -318,6 +334,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions);
@@ -331,6 +348,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions);
@@ -344,6 +362,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions);
@@ -357,6 +376,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions);
@@ -370,6 +390,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions);
@@ -391,6 +412,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultModelA200ValidWithResponseAsync(requestOptions);
@@ -412,6 +434,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultModelA200NoneWithResponseAsync(requestOptions);
@@ -425,6 +448,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultModelA400ValidWithResponseAsync(requestOptions);
@@ -438,6 +462,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultModelA400NoneWithResponseAsync(requestOptions);
@@ -451,6 +476,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultNone200InvalidWithResponseAsync(requestOptions);
@@ -464,6 +490,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultNone200NoneWithResponseAsync(requestOptions);
@@ -477,6 +504,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultNone400InvalidWithResponseAsync(requestOptions);
@@ -490,6 +518,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDefaultNone400NoneWithResponseAsync(requestOptions);
@@ -512,6 +541,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA200NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA200NoneWithResponseAsync(requestOptions);
@@ -533,6 +563,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA200ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA200ValidWithResponseAsync(requestOptions);
@@ -554,6 +585,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA200InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA200InvalidWithResponseAsync(requestOptions);
@@ -575,6 +607,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA400NoneWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA400NoneWithResponseAsync(requestOptions);
@@ -596,6 +629,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA400ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA400ValidWithResponseAsync(requestOptions);
@@ -617,6 +651,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA400InvalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA400InvalidWithResponseAsync(requestOptions);
@@ -638,6 +673,7 @@ public final class MultipleResponsesAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200ModelA202ValidWithResponseAsync(requestOptions);
