@@ -232,14 +232,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions, Context context) {
-        return getBooleanTrueWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
+        return getBooleanTrueWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -297,14 +296,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions, Context context) {
-        return getBooleanFalseWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
+        return getBooleanFalseWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -362,14 +360,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getBooleanNullWithResponse(RequestOptions requestOptions, Context context) {
-        return getBooleanNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getBooleanNullWithResponse(RequestOptions requestOptions) {
+        return getBooleanNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -428,14 +425,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntOneMillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
+        return getIntOneMillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -495,14 +491,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
+        return getIntNegativeOneMillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -560,14 +555,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getIntNullWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getIntNullWithResponse(RequestOptions requestOptions) {
+        return getIntNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -625,14 +619,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getTenBillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
+        return getTenBillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -691,14 +684,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
+        return getNegativeTenBillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -756,14 +748,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getLongNullWithResponse(RequestOptions requestOptions, Context context) {
-        return getLongNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getLongNullWithResponse(RequestOptions requestOptions) {
+        return getLongNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -823,14 +814,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions, Context context) {
-        return floatScientificPositiveWithResponseAsync(requestOptions, context).block();
+    public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
+        return floatScientificPositiveWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -890,14 +880,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions, Context context) {
-        return floatScientificNegativeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
+        return floatScientificNegativeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -955,14 +944,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> floatNullWithResponse(RequestOptions requestOptions, Context context) {
-        return floatNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> floatNullWithResponse(RequestOptions requestOptions) {
+        return floatNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1021,14 +1009,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions, Context context) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions, context).block();
+    public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
+        return doubleDecimalPositiveWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1087,14 +1074,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions, Context context) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
+        return doubleDecimalNegativeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1152,14 +1138,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> doubleNullWithResponse(RequestOptions requestOptions, Context context) {
-        return doubleNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> doubleNullWithResponse(RequestOptions requestOptions) {
+        return doubleNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1217,14 +1202,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions, Context context) {
-        return stringUnicodeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
+        return stringUnicodeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1283,14 +1267,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions, Context context) {
-        return stringUrlEncodedWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
+        return stringUrlEncodedWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1348,14 +1331,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return stringEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
+        return stringEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1413,14 +1395,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringNullWithResponse(RequestOptions requestOptions, Context context) {
-        return stringNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringNullWithResponse(RequestOptions requestOptions) {
+        return stringNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1478,14 +1459,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> enumValidWithResponse(RequestOptions requestOptions, Context context) {
-        return enumValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> enumValidWithResponse(RequestOptions requestOptions) {
+        return enumValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1543,14 +1523,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> enumNullWithResponse(RequestOptions requestOptions, Context context) {
-        return enumNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> enumNullWithResponse(RequestOptions requestOptions) {
+        return enumNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1608,14 +1587,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteMultiByteWithResponse(RequestOptions requestOptions, Context context) {
-        return byteMultiByteWithResponseAsync(requestOptions, context).block();
+    public Response<Void> byteMultiByteWithResponse(RequestOptions requestOptions) {
+        return byteMultiByteWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1673,14 +1651,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return byteEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
+        return byteEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1738,14 +1715,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteNullWithResponse(RequestOptions requestOptions, Context context) {
-        return byteNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> byteNullWithResponse(RequestOptions requestOptions) {
+        return byteNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1803,14 +1779,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateValidWithResponse(RequestOptions requestOptions, Context context) {
-        return dateValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
+        return dateValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1868,14 +1843,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateNullWithResponse(RequestOptions requestOptions, Context context) {
-        return dateNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateNullWithResponse(RequestOptions requestOptions) {
+        return dateNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1933,14 +1907,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions, Context context) {
-        return dateTimeValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
+        return dateTimeValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1998,14 +1971,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(RequestOptions requestOptions, Context context) {
-        return dateTimeNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateTimeNullWithResponse(RequestOptions requestOptions) {
+        return dateTimeNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2066,15 +2038,14 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringCsvValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
+        return arrayStringCsvValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2133,14 +2104,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringCsvNullWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringCsvNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringCsvNullWithResponse(RequestOptions requestOptions) {
+        return arrayStringCsvNullWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2199,14 +2169,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringCsvEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions) {
+        return arrayStringCsvEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2269,15 +2238,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return arrayStringNoCollectionFormatEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2338,15 +2305,14 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      *     format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringSsvValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
+        return arrayStringSsvValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2407,15 +2373,14 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      *     format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringTsvValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
+        return arrayStringTsvValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2479,14 +2444,13 @@ public final class QueriesImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      *     format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions, Context context) {
-        return arrayStringPipesValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
+        return arrayStringPipesValidWithResponseAsync(requestOptions).block();
     }
 }

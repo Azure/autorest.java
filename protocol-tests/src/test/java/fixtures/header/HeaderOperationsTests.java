@@ -22,12 +22,12 @@ public class HeaderOperationsTests {
     public void paramExistingKey() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("User-Agent", "overwrite");
-        client.paramExistingKeyWithResponse(requestOptions, null);
+        client.paramExistingKeyWithResponse(requestOptions);
     }
 
     @Test
     public void responseExistingKey() throws Exception {
-        Response<Void> response = client.responseExistingKeyWithResponse(null, null);
+        Response<Void> response = client.responseExistingKeyWithResponse(null);
         Assertions.assertEquals("overwrite", response.getHeaders().getValue("User-Agent"));
     }
 
@@ -40,7 +40,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseProtectedKey() throws Exception {
-        Response<Void> response = client.responseProtectedKeyWithResponse(null, null);
+        Response<Void> response = client.responseProtectedKeyWithResponse(null);
         Assertions.assertTrue(response.getHeaders().getValue("Content-Type").contains("text/html"));
     }
 
@@ -48,23 +48,23 @@ public class HeaderOperationsTests {
     public void paramInteger() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "positive").addHeader("value", "1");
-        client.paramIntegerWithResponse(requestOptions, null);
+        client.paramIntegerWithResponse(requestOptions);
 
         requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "negative").addHeader("value", "-2");
-        client.paramIntegerWithResponse(requestOptions, null);
+        client.paramIntegerWithResponse(requestOptions);
     }
 
     @Test
     public void responseInteger() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "positive");
-        Response<Void> response = client.responseIntegerWithResponse(requestOptions, null);
+        Response<Void> response = client.responseIntegerWithResponse(requestOptions);
         Assertions.assertEquals("1", response.getHeaders().getValue("value"));
 
         requestOptions = new RequestOptions();
         requestOptions.addHeader("scenario", "negative");
-        response = client.responseIntegerWithResponse(requestOptions, null);
+        response = client.responseIntegerWithResponse(requestOptions);
         Assertions.assertEquals("-2", response.getHeaders().getValue("value"));
     }
 
@@ -72,6 +72,6 @@ public class HeaderOperationsTests {
     public void customRequestId() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        client.customRequestIdWithResponse(requestOptions, null);
+        client.customRequestIdWithResponse(requestOptions);
     }
 }

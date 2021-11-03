@@ -144,14 +144,13 @@ public final class InheritancesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
+        return getValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -250,13 +249,12 @@ public final class InheritancesImpl {
      *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putValidWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putValidWithResponseAsync(complexBody, requestOptions).block();
     }
 }

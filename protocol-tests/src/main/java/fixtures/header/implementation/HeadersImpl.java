@@ -211,14 +211,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return paramExistingKeyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
+        return paramExistingKeyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -253,14 +252,13 @@ public final class HeadersImpl {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "User-Agent": "overwrite".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return responseExistingKeyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions) {
+        return responseExistingKeyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -319,14 +317,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return paramProtectedKeyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
+        return paramProtectedKeyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -361,14 +358,13 @@ public final class HeadersImpl {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "Content-Type": "text/html".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return responseProtectedKeyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
+        return responseProtectedKeyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -429,14 +425,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions, Context context) {
-        return paramIntegerWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
+        return paramIntegerWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -494,14 +489,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 1 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions, Context context) {
-        return responseIntegerWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
+        return responseIntegerWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -565,14 +559,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramLongWithResponse(RequestOptions requestOptions, Context context) {
-        return paramLongWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
+        return paramLongWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -630,14 +623,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 105 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseLongWithResponse(RequestOptions requestOptions, Context context) {
-        return responseLongWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
+        return responseLongWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -701,14 +693,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions, Context context) {
-        return paramFloatWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
+        return paramFloatWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -766,14 +757,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 0.07 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions, Context context) {
-        return responseFloatWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
+        return responseFloatWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -837,14 +827,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions, Context context) {
-        return paramDoubleWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
+        return paramDoubleWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -902,14 +891,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 7e120 or -3.0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions, Context context) {
-        return responseDoubleWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
+        return responseDoubleWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -970,14 +958,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions, Context context) {
-        return paramBoolWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
+        return paramBoolWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1035,14 +1022,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": true or false.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions, Context context) {
-        return responseBoolWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
+        return responseBoolWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1106,14 +1092,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramStringWithResponse(RequestOptions requestOptions, Context context) {
-        return paramStringWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
+        return paramStringWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1171,14 +1156,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseStringWithResponse(RequestOptions requestOptions, Context context) {
-        return responseStringWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
+        return responseStringWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1242,14 +1226,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDateWithResponse(RequestOptions requestOptions, Context context) {
-        return paramDateWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
+        return paramDateWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1307,14 +1290,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "2010-01-01" or "0001-01-01".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDateWithResponse(RequestOptions requestOptions, Context context) {
-        return responseDateWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
+        return responseDateWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1378,14 +1360,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions, Context context) {
-        return paramDatetimeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
+        return paramDatetimeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1444,14 +1425,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions, Context context) {
-        return responseDatetimeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
+        return responseDatetimeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1516,14 +1496,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
-        return paramDatetimeRfc1123WithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
+        return paramDatetimeRfc1123WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1583,14 +1562,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
-        return responseDatetimeRfc1123WithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
+        return responseDatetimeRfc1123WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1651,14 +1629,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions, Context context) {
-        return paramDurationWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
+        return paramDurationWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1717,14 +1694,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "P123DT22H14M12.011S".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions, Context context) {
-        return responseDurationWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
+        return responseDurationWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1785,14 +1761,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(RequestOptions requestOptions, Context context) {
-        return paramByteWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
+        return paramByteWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1850,14 +1825,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseByteWithResponse(RequestOptions requestOptions, Context context) {
-        return responseByteWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
+        return responseByteWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1918,14 +1892,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions, Context context) {
-        return paramEnumWithResponseAsync(requestOptions, context).block();
+    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
+        return paramEnumWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1983,14 +1956,13 @@ public final class HeadersImpl {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "GREY" or null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions, Context context) {
-        return responseEnumWithResponseAsync(requestOptions, context).block();
+    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
+        return responseEnumWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -2024,13 +1996,12 @@ public final class HeadersImpl {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions, Context context) {
-        return customRequestIdWithResponseAsync(requestOptions, context).block();
+    public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions) {
+        return customRequestIdWithResponseAsync(requestOptions).block();
     }
 }

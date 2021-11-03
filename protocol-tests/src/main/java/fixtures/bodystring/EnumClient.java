@@ -11,7 +11,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import fixtures.bodystring.implementation.EnumsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATService type. */
@@ -38,14 +37,13 @@ public final class EnumClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getNotExpandableWithResponse(requestOptions, context);
+    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getNotExpandableWithResponse(requestOptions);
     }
 
     /**
@@ -59,15 +57,13 @@ public final class EnumClient {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNotExpandableWithResponse(
-            BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putNotExpandableWithResponse(stringBody, requestOptions, context);
+    public Response<Void> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
+        return this.serviceClient.putNotExpandableWithResponse(stringBody, requestOptions);
     }
 
     /**
@@ -80,14 +76,13 @@ public final class EnumClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getReferencedWithResponse(requestOptions, context);
+    public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getReferencedWithResponse(requestOptions);
     }
 
     /**
@@ -101,15 +96,13 @@ public final class EnumClient {
      *
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedWithResponse(
-            BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putReferencedWithResponse(enumStringBody, requestOptions, context);
+    public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
+        return this.serviceClient.putReferencedWithResponse(enumStringBody, requestOptions);
     }
 
     /**
@@ -125,14 +118,13 @@ public final class EnumClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getReferencedConstantWithResponse(requestOptions, context);
+    public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getReferencedConstantWithResponse(requestOptions);
     }
 
     /**
@@ -149,14 +141,12 @@ public final class EnumClient {
      *
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedConstantWithResponse(
-            BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putReferencedConstantWithResponse(enumStringBody, requestOptions, context);
+    public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
+        return this.serviceClient.putReferencedConstantWithResponse(enumStringBody, requestOptions);
     }
 }

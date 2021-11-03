@@ -219,14 +219,13 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions, Context context) {
-        return analyzeBodyWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions) {
+        return analyzeBodyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -307,14 +306,13 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions, Context context) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions, context).block();
+    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -386,13 +384,12 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions, Context context) {
-        return contentTypeWithEncodingWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
+        return contentTypeWithEncodingWithResponseAsync(requestOptions).block();
     }
 }

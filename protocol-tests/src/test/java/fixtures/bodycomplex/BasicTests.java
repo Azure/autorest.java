@@ -20,7 +20,7 @@ public class BasicTests {
 
     @Test
     public void getValid() throws Exception {
-        BinaryData binaryData = client.getValidWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getValidWithResponse(null).getValue();
         Map<?, ?> map = binaryData.toObject(Map.class);
         Assertions.assertEquals(2, map.get("id"));
         Assertions.assertEquals("abc", map.get("name"));
@@ -35,14 +35,14 @@ public class BasicTests {
 
     @Test
     public void getEmpty() throws Exception {
-        BinaryData binaryData = client.getEmptyWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getEmptyWithResponse(null).getValue();
         Map<?, ?> map = binaryData.toObject(Map.class);
         Assertions.assertTrue(map.isEmpty());
     }
 
     @Test
     public void getNull() throws Exception {
-        BinaryData binaryData = client.getNullWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getNullWithResponse(null).getValue();
         Map<?, ?> map = binaryData.toObject(Map.class);
         Assertions.assertNull(map.get("id"));
         Assertions.assertNull(map.get("name"));
@@ -50,6 +50,6 @@ public class BasicTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        Assertions.assertEquals("", client.getNotProvidedWithResponse(null, null).getValue().toString());
+        Assertions.assertEquals("", client.getNotProvidedWithResponse(null).getValue().toString());
     }
 }

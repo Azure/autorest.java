@@ -92,14 +92,13 @@ public final class HttpServerFailuresImpl {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head501WithResponse(RequestOptions requestOptions, Context context) {
-        return head501WithResponseAsync(requestOptions, context).block();
+    public Response<Void> head501WithResponse(RequestOptions requestOptions) {
+        return head501WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -133,14 +132,13 @@ public final class HttpServerFailuresImpl {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get501WithResponse(RequestOptions requestOptions, Context context) {
-        return get501WithResponseAsync(requestOptions, context).block();
+    public Response<Void> get501WithResponse(RequestOptions requestOptions) {
+        return get501WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -192,14 +190,13 @@ public final class HttpServerFailuresImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> post505WithResponse(RequestOptions requestOptions, Context context) {
-        return post505WithResponseAsync(requestOptions, context).block();
+    public Response<Void> post505WithResponse(RequestOptions requestOptions) {
+        return post505WithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -251,13 +248,12 @@ public final class HttpServerFailuresImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> delete505WithResponse(RequestOptions requestOptions, Context context) {
-        return delete505WithResponseAsync(requestOptions, context).block();
+    public Response<Void> delete505WithResponse(RequestOptions requestOptions) {
+        return delete505WithResponseAsync(requestOptions).block();
     }
 }

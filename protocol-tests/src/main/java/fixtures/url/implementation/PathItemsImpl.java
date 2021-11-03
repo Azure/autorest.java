@@ -175,15 +175,14 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getAllWithValuesWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return getAllWithValuesWithResponseAsync(pathItemStringPath, localStringPath, requestOptions, context).block();
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return getAllWithValuesWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
     }
 
     /**
@@ -275,16 +274,14 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return getGlobalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions, context)
-                .block();
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return getGlobalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
     }
 
     /**
@@ -376,16 +373,14 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalAndLocalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return getGlobalAndLocalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions, context)
-                .block();
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return getGlobalAndLocalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
     }
 
     /**
@@ -477,15 +472,13 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLocalPathItemQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return getLocalPathItemQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions, context)
-                .block();
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return getLocalPathItemQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
     }
 }

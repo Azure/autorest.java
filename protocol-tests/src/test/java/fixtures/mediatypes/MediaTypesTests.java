@@ -21,7 +21,7 @@ public class MediaTypesTests {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("Content-Type", "application/json");
         requestOptions.setBody(BinaryData.fromString("{\"source\": \"source\"}"));
-        client.analyzeBodyWithResponse(requestOptions, null);
+        client.analyzeBodyWithResponse(requestOptions);
     }
 
     @Test
@@ -30,6 +30,6 @@ public class MediaTypesTests {
         requestOptions.addHeader("Content-Type", "application/pdf");
         requestOptions.addHeader("Content-Length", "3");
         requestOptions.setBody(BinaryData.fromString("PDF"));
-        client.analyzeBodyWithResponse(requestOptions, null);
+        client.analyzeBodyWithResponse(requestOptions);
     }
 }

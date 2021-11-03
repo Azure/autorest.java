@@ -163,14 +163,13 @@ public final class PolymorphismsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
+        return getValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -260,14 +259,13 @@ public final class PolymorphismsImpl {
      *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
      *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putValidWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putValidWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -325,14 +323,13 @@ public final class PolymorphismsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions, Context context) {
-        return getDotSyntaxWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions) {
+        return getDotSyntaxWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -436,16 +433,14 @@ public final class PolymorphismsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComposedWithDiscriminatorWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return getComposedWithDiscriminatorWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
+        return getComposedWithDiscriminatorWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -549,16 +544,14 @@ public final class PolymorphismsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return getComposedWithoutDiscriminatorWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
+        return getComposedWithoutDiscriminatorWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -654,15 +647,14 @@ public final class PolymorphismsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions, Context context) {
-        return getComplicatedWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
+        return getComplicatedWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -761,15 +753,13 @@ public final class PolymorphismsImpl {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplicatedWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putComplicatedWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putComplicatedWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -930,15 +920,14 @@ public final class PolymorphismsImpl {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putMissingDiscriminatorWithResponseAsync(complexBody, requestOptions, context).block();
+            BinaryData complexBody, RequestOptions requestOptions) {
+        return putMissingDiscriminatorWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -1030,14 +1019,12 @@ public final class PolymorphismsImpl {
      *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
      *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidMissingRequiredWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putValidMissingRequiredWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putValidMissingRequiredWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putValidMissingRequiredWithResponseAsync(complexBody, requestOptions).block();
     }
 }

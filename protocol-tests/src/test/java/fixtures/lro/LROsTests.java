@@ -27,7 +27,7 @@ public class LROsTests {
     public void beginPut200Succeeded() throws Exception {
         RequestOptions requestOptions = new RequestOptions()
                 .setBody(BinaryData.fromString("{\"location\": \"West US\"}"));
-        SyncPoller<BinaryData, BinaryData> poller =  client.beginPut200Succeeded(requestOptions, Context.NONE);
+        SyncPoller<BinaryData, BinaryData> poller =  client.beginPut200Succeeded(requestOptions);
         PollResponse<BinaryData> pollResponse = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, pollResponse.getStatus());
         Assertions.assertTrue(poller.getFinalResult().toString().contains("\"provisioningState\": \"Succeeded\""));

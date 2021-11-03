@@ -20,7 +20,7 @@ public class PrimitiveTests {
 
     @Test
     public void getInt() throws Exception {
-        BinaryData binaryData = client.getIntWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getIntWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(-1, map.get("field1"));
         Assertions.assertEquals(2, map.get("field2"));
@@ -34,7 +34,7 @@ public class PrimitiveTests {
 
     @Test
     public void getLong() throws Exception {
-        BinaryData binaryData = client.getLongWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getLongWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(1099511627775L, map.get("field1"));
         Assertions.assertEquals(-999511627788L, map.get("field2"));
@@ -48,7 +48,7 @@ public class PrimitiveTests {
 
     @Test
     public void getFloat() throws Exception {
-        BinaryData binaryData = client.getFloatWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getFloatWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(1.05, map.get("field1"));
         Assertions.assertEquals(-0.003, map.get("field2"));
@@ -62,7 +62,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDouble() throws Exception {
-        BinaryData binaryData = client.getDoubleWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getDoubleWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(3e-100, map.get("field1"));
         Assertions.assertEquals(-0.000000000000000000000000000000000000000000000000000000005,
@@ -77,7 +77,7 @@ public class PrimitiveTests {
 
     @Test
     public void getBool() throws Exception {
-        BinaryData binaryData = client.getBoolWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getBoolWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals(true, map.get("field_true"));
         Assertions.assertEquals(false, map.get("field_false"));
@@ -91,7 +91,7 @@ public class PrimitiveTests {
 
     @Test
     public void getString() throws Exception {
-        BinaryData binaryData = client.getStringWithResponse(null, null).getValue();
+        BinaryData binaryData = client.getStringWithResponse(null).getValue();
         Map map = binaryData.toObject(Map.class);
         Assertions.assertEquals("goodrequest", map.get("field"));
         Assertions.assertEquals("", map.get("empty"));
