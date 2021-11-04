@@ -203,7 +203,7 @@ public final class MediaTypesClient {
         @Post("/mediatypes/textAndJson")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putTextAndJsonBody(
+        Mono<Response<String>> putTextAndJsonBodyApplicationJson(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") String message,
                 @HeaderParam("Accept") String accept,
@@ -940,7 +940,7 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(String message) {
+    public Mono<Response<String>> putTextAndJsonBodyApplicationJsonWithResponseAsync(String message) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -948,7 +948,8 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.putTextAndJsonBody(this.getHost(), message, accept, context));
+        return FluxUtil.withContext(
+                context -> service.putTextAndJsonBodyApplicationJson(this.getHost(), message, accept, context));
     }
 
     /**
@@ -961,8 +962,8 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> putTextAndJsonBodyAsync(String message) {
-        return putTextAndJsonBodyWithResponseAsync(message)
+    public Mono<String> putTextAndJsonBodyApplicationJsonAsync(String message) {
+        return putTextAndJsonBodyApplicationJsonWithResponseAsync(message)
                 .flatMap(
                         (Response<String> res) -> {
                             if (res.getValue() != null) {
@@ -983,7 +984,7 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String putTextAndJsonBody(String message) {
-        return putTextAndJsonBodyAsync(message).block();
+    public String putTextAndJsonBodyApplicationJson(String message) {
+        return putTextAndJsonBodyApplicationJsonAsync(message).block();
     }
 }
