@@ -59,6 +59,17 @@ public final class Formdataurlencodeds {
                 @FormParam("name") String name,
                 @FormParam("status") String status,
                 Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/formsdataurlencoded/partialConstantBody")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> partialConstantBody(
+                @HostParam("$host") String host,
+                @FormParam("grant_type") String grantType,
+                @FormParam("service") String service,
+                @FormParam("access_token") String accessToken,
+                Context context);
     }
 
     /**
@@ -169,5 +180,67 @@ public final class Formdataurlencodeds {
         final String name = null;
         final String status = null;
         updatePetWithFormAsync(petId, petType, petFood, petAge, name, status).block();
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> partialConstantBodyWithResponseAsync(String serviceParam, String accessToken) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (serviceParam == null) {
+            return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
+        }
+        if (accessToken == null) {
+            return Mono.error(new IllegalArgumentException("Parameter accessToken is required and cannot be null."));
+        }
+        final String grantType = "access_token";
+        return FluxUtil.withContext(
+                context ->
+                        service.partialConstantBody(
+                                this.client.getHost(), grantType, serviceParam, accessToken, context));
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> partialConstantBodyAsync(String serviceParam, String accessToken) {
+        return partialConstantBodyWithResponseAsync(serviceParam, accessToken)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void partialConstantBody(String serviceParam, String accessToken) {
+        partialConstantBodyAsync(serviceParam, accessToken).block();
     }
 }

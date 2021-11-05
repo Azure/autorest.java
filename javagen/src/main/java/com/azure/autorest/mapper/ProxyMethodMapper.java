@@ -1,11 +1,13 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -17,15 +19,18 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +42,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
+
+    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
+
     private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
         , ClassType.UnixTimeDateTime);
     private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
@@ -59,9 +67,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         JavaSettings settings = JavaSettings.getInstance();
         Map<Request, ProxyMethod> result = new LinkedHashMap<>();
 
+        String operationName = operation.getLanguage().getJava().getName();
         ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
-                .name(operation.getLanguage().getJava().getName())
+                .name(operationName)
                 .isResumable(false);
 
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // "default" could be null for generated method like "listNext"
@@ -155,9 +164,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             requests = Collections.singletonList(requests.get(0));
         }
 
+        // Used to deduplicate method with same signature.
+        // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
+        Set<List<String>> methodSignatures = new HashSet<>();
+
         for (Request request : requests) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
+                continue;
             }
 
             String requestContentType = "application/json";
@@ -194,6 +208,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     parameters.add(proxyMethodParameter);
                 }
             }
+
+            String name = deduplicateMethodName(operationName, parameters, requestContentType, methodSignatures);
+            builder.name(name);
+
             // RequestOptions
             if (settings.isLowLevelClient()) {
                 ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
@@ -394,6 +412,42 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
 
         return exceptionType;
+    }
+
+    private String deduplicateMethodName(String operationName, List<ProxyMethodParameter> parameters,
+                                         String requestContentType,
+                                         Set<List<String>> methodSignatures) {
+        String name = operationName;
+        List<String> methodSignature = new ArrayList<>();
+        methodSignature.add(operationName);
+        methodSignature.addAll(parameters.stream()
+                .map(p -> p.getWireType().toString())   // simple class name should be enough?
+                .collect(Collectors.toList()));
+        if (methodSignatures.contains(methodSignature)) {
+            // got a conflict on method signature
+            String conflictMethodSignature = methodSignature.toString();
+
+            // first try to append media type
+            if (!CoreUtils.isNullOrEmpty(requestContentType)) {
+                methodSignature.set(0,
+                        operationName + CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(requestContentType)));
+            }
+
+            // if not working, then just append increasing index no.
+            int indexNo = 1;
+            while (methodSignatures.contains(methodSignature)) {
+                methodSignature.set(0, operationName + indexNo);
+                ++indexNo;
+            }
+
+            // let's hope the new name does not conflict with name from another operation
+            name = methodSignature.get(0);
+            LOGGER.warn("Rename method to '{}', due to conflict on method signature {}",
+                    name,
+                    conflictMethodSignature);
+        }
+        methodSignatures.add(methodSignature);
+        return name;
     }
 
     protected ClassType getHttpResponseExceptionType() {
