@@ -241,6 +241,9 @@ public class Javagen extends NewPlugin {
 
                     // Blank test case
                     javaPackage.addProtocolTestBlank(client.getServiceClient());
+
+                    // Blank readme sample
+                    javaPackage.addProtocolExamplesBlank();
                 }
             }
 
