@@ -12,6 +12,8 @@ public class ProtocolSampleBlankTemplate implements IJavaTemplate<Void, JavaFile
 
     @Override
     public void write(Void model, JavaFile context) {
+        // the code snippet reference is used in README.md
+        // see ReadmeTemplate
         String snippetReference = JavaSettings.getInstance().getPackage("readme");
 
         context.publicFinalClass("ReadmeSamples", classBlock -> {
