@@ -369,6 +369,7 @@ public final class ClassCustomization extends CodeCustomization {
      * Renames a class in the package.
      *
      * @param newName the new simple name for this class
+     * @return The current ClassCustomization.
      */
     public ClassCustomization rename(String newName) {
         WorkspaceEdit workspaceEdit = languageClient.renameSymbol(fileUri,

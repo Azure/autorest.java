@@ -18,6 +18,7 @@ public abstract class Customization {
     /**
      * Start the customization process. This is called by the post processor in AutoRest.
      * @param files the list of files generated in the previous steps in AutoRest
+     * @param logger the logger
      * @return the list of files after customization
      */
     public final Map<String, String> run(Map<String, String> files, Logger logger) {
@@ -57,6 +58,7 @@ public abstract class Customization {
     /**
      * Override this method to customize the client library.
      * @param libraryCustomization the top level customization object
+     * @param logger the logger
      */
     public abstract void customize(LibraryCustomization libraryCustomization, Logger logger);
 }
