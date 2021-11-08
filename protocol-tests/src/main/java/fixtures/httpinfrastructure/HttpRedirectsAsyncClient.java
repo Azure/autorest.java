@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class HttpRedirectsAsyncClient {
-    private final HttpRedirectsImpl serviceClient;
+    @Generated private final HttpRedirectsImpl serviceClient;
 
     /**
      * Initializes an instance of HttpRedirects client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpRedirectsAsyncClient(HttpRedirectsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -36,6 +38,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head300WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head300WithResponseAsync(requestOptions);
@@ -57,6 +60,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> get300WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get300WithResponseAsync(requestOptions);
@@ -70,6 +74,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head301WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head301WithResponseAsync(requestOptions);
@@ -83,6 +88,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get301WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get301WithResponseAsync(requestOptions);
@@ -103,6 +109,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put301WithResponseAsync(requestOptions);
@@ -116,6 +123,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head302WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head302WithResponseAsync(requestOptions);
@@ -129,6 +137,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get302WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get302WithResponseAsync(requestOptions);
@@ -149,6 +158,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch302WithResponseAsync(requestOptions);
@@ -169,6 +179,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post303WithResponseAsync(requestOptions);
@@ -182,6 +193,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head307WithResponseAsync(requestOptions);
@@ -195,6 +207,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get307WithResponseAsync(requestOptions);
@@ -214,6 +227,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put307WithResponseAsync(requestOptions);
@@ -233,6 +247,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.patch307WithResponseAsync(requestOptions);
@@ -252,6 +267,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post307WithResponseAsync(requestOptions);
@@ -271,6 +287,7 @@ public final class HttpRedirectsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete307WithResponseAsync(requestOptions);

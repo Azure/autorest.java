@@ -4,25 +4,26 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.Context;
 import fixtures.url.implementation.PathItemsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class PathItemsClient {
-    private final PathItemsImpl serviceClient;
+    @Generated private final PathItemsImpl serviceClient;
 
     /**
      * Initializes an instance of PathItems client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PathItemsClient(PathItemsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -45,16 +46,15 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getAllWithValuesWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getAllWithValuesWithResponse(
-                pathItemStringPath, localStringPath, requestOptions, context);
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return this.serviceClient.getAllWithValuesWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -75,16 +75,15 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getGlobalQueryNullWithResponse(
-                pathItemStringPath, localStringPath, requestOptions, context);
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        return this.serviceClient.getGlobalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -105,16 +104,16 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalAndLocalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
         return this.serviceClient.getGlobalAndLocalQueryNullWithResponse(
-                pathItemStringPath, localStringPath, requestOptions, context);
+                pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -135,15 +134,15 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLocalPathItemQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
         return this.serviceClient.getLocalPathItemQueryNullWithResponse(
-                pathItemStringPath, localStringPath, requestOptions, context);
+                pathItemStringPath, localStringPath, requestOptions);
     }
 }

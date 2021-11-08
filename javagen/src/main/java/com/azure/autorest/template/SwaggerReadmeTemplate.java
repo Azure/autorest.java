@@ -32,19 +32,26 @@ public class SwaggerReadmeTemplate {
         newLine();
 
         line("```yaml");
+        // input-files
         for (String jsonPath : settings.getAutorestSettings().getInputFiles()) {
             line(String.format("%s: %s", "input-file", jsonPath));
         }
+        // settings from internal
         for (Map.Entry<String, String> entry : OVERRIDE_SETTINGS.entrySet()) {
             if (entry.getValue() != null) {
                 line(String.format("%s: %s", entry.getKey(), entry.getValue()));
             }
         }
+        // settings from external
         for (Map.Entry<String, String> entry : settings.getSimpleJavaSettings().entrySet()) {
             if (!OVERRIDE_SETTINGS.containsKey(entry.getKey()) && entry.getValue() != null) {
                 line(String.format("%s: %s", entry.getKey(), entry.getValue()));
             }
         }
+        // service-versions
+        line("service-versions:");
+        line(String.format("  - '%s'", project.getApiVersion()));
+
         line("```");
 
         return builder.toString();

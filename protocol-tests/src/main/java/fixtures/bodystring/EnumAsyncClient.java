@@ -4,6 +4,7 @@
 
 package fixtures.bodystring;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATService type. */
 @ServiceClient(builder = AutoRestSwaggerBATServiceBuilder.class, isAsync = true)
 public final class EnumAsyncClient {
-    private final EnumsImpl serviceClient;
+    @Generated private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of Enums client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     EnumAsyncClient(EnumsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -42,6 +44,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotExpandableWithResponseAsync(requestOptions);
@@ -62,6 +65,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
         return this.serviceClient.putNotExpandableWithResponseAsync(stringBody, requestOptions);
@@ -81,6 +85,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getReferencedWithResponseAsync(requestOptions);
@@ -101,6 +106,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
         return this.serviceClient.putReferencedWithResponseAsync(enumStringBody, requestOptions);
@@ -123,6 +129,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return value 'green-color' from the constant.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getReferencedConstantWithResponseAsync(requestOptions);
@@ -146,6 +153,7 @@ public final class EnumAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponse(
             BinaryData enumStringBody, RequestOptions requestOptions) {

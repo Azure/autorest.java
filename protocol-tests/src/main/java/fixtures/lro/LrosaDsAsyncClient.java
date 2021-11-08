@@ -4,6 +4,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -18,13 +19,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class, isAsync = true)
 public final class LrosaDsAsyncClient {
-    private final LrosaDsImpl serviceClient;
+    @Generated private final LrosaDsImpl serviceClient;
 
     /**
      * Initializes an instance of LrosaDs client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LrosaDsAsyncClient(LrosaDsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -73,6 +75,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNonRetry400WithResponseAsync(requestOptions);
@@ -122,6 +125,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutNonRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginPutNonRetry400Async(requestOptions);
@@ -171,6 +175,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNonRetry201Creating400WithResponseAsync(requestOptions);
@@ -220,6 +225,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutNonRetry201Creating400(RequestOptions requestOptions) {
         return this.serviceClient.beginPutNonRetry201Creating400Async(requestOptions);
@@ -269,6 +275,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400InvalidJsonWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNonRetry201Creating400InvalidJsonWithResponseAsync(requestOptions);
@@ -318,6 +325,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutNonRetry201Creating400InvalidJson(RequestOptions requestOptions) {
         return this.serviceClient.beginPutNonRetry201Creating400InvalidJsonAsync(requestOptions);
@@ -368,6 +376,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRelativeRetry400WithResponseAsync(requestOptions);
@@ -418,6 +427,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRelativeRetry400Async(requestOptions);
@@ -431,6 +441,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteNonRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteNonRetry400WithResponseAsync(requestOptions);
@@ -444,6 +455,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteNonRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteNonRetry400Async(requestOptions);
@@ -457,6 +469,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202NonRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete202NonRetry400WithResponseAsync(requestOptions);
@@ -470,6 +483,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete202NonRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginDelete202NonRetry400Async(requestOptions);
@@ -484,6 +498,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteAsyncRelativeRetry400WithResponseAsync(requestOptions);
@@ -498,6 +513,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteAsyncRelativeRetry400Async(requestOptions);
@@ -529,6 +545,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postNonRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postNonRetry400WithResponseAsync(requestOptions);
@@ -560,6 +577,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginPostNonRetry400Async(requestOptions);
@@ -591,6 +609,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NonRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post202NonRetry400WithResponseAsync(requestOptions);
@@ -622,6 +641,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginPost202NonRetry400Async(requestOptions);
@@ -654,6 +674,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetry400WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRelativeRetry400WithResponseAsync(requestOptions);
@@ -686,6 +707,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(RequestOptions requestOptions) {
         return this.serviceClient.beginPostAsyncRelativeRetry400Async(requestOptions);
@@ -735,6 +757,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putError201NoProvisioningStatePayloadWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putError201NoProvisioningStatePayloadWithResponseAsync(requestOptions);
@@ -784,6 +807,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutError201NoProvisioningStatePayload(
             RequestOptions requestOptions) {
@@ -836,6 +860,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions);
@@ -887,6 +912,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetryNoStatus(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRelativeRetryNoStatusAsync(requestOptions);
@@ -938,6 +964,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusPayloadWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(requestOptions);
@@ -989,6 +1016,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetryNoStatusPayload(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRelativeRetryNoStatusPayloadAsync(requestOptions);
@@ -1002,6 +1030,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete204SucceededWithResponseAsync(requestOptions);
@@ -1015,6 +1044,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete204Succeeded(RequestOptions requestOptions) {
         return this.serviceClient.beginDelete204SucceededAsync(requestOptions);
@@ -1029,6 +1059,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryNoStatusWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions);
@@ -1043,6 +1074,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteAsyncRelativeRetryNoStatusAsync(requestOptions);
@@ -1074,6 +1106,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NoLocationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post202NoLocationWithResponseAsync(requestOptions);
@@ -1105,6 +1138,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocation(RequestOptions requestOptions) {
         return this.serviceClient.beginPost202NoLocationAsync(requestOptions);
@@ -1138,6 +1172,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryNoPayloadWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRelativeRetryNoPayloadWithResponseAsync(requestOptions);
@@ -1171,6 +1206,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(RequestOptions requestOptions) {
         return this.serviceClient.beginPostAsyncRelativeRetryNoPayloadAsync(requestOptions);
@@ -1220,6 +1256,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put200InvalidJsonWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put200InvalidJsonWithResponseAsync(requestOptions);
@@ -1269,6 +1306,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPut200InvalidJson(RequestOptions requestOptions) {
         return this.serviceClient.beginPut200InvalidJsonAsync(requestOptions);
@@ -1319,6 +1357,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions);
@@ -1369,6 +1408,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetryInvalidHeader(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRelativeRetryInvalidHeaderAsync(requestOptions);
@@ -1420,6 +1460,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidJsonPollingWithResponse(
             RequestOptions requestOptions) {
@@ -1472,6 +1513,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetryInvalidJsonPolling(
             RequestOptions requestOptions) {
@@ -1487,6 +1529,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202RetryInvalidHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete202RetryInvalidHeaderWithResponseAsync(requestOptions);
@@ -1501,6 +1544,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete202RetryInvalidHeader(RequestOptions requestOptions) {
         return this.serviceClient.beginDelete202RetryInvalidHeaderAsync(requestOptions);
@@ -1515,6 +1559,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions);
@@ -1529,6 +1574,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader(
             RequestOptions requestOptions) {
@@ -1544,6 +1590,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions);
@@ -1558,6 +1605,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling(
             RequestOptions requestOptions) {
@@ -1591,6 +1639,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202RetryInvalidHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post202RetryInvalidHeaderWithResponseAsync(requestOptions);
@@ -1623,6 +1672,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeader(RequestOptions requestOptions) {
         return this.serviceClient.beginPost202RetryInvalidHeaderAsync(requestOptions);
@@ -1655,6 +1705,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidHeaderWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions);
@@ -1687,6 +1738,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(RequestOptions requestOptions) {
         return this.serviceClient.beginPostAsyncRelativeRetryInvalidHeaderAsync(requestOptions);
@@ -1720,6 +1772,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidJsonPollingWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions);
@@ -1753,6 +1806,7 @@ public final class LrosaDsAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(
             RequestOptions requestOptions) {

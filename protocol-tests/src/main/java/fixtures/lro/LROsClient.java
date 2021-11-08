@@ -4,26 +4,27 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LROsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class LROsClient {
-    private final LROsImpl serviceClient;
+    @Generated private final LROsImpl serviceClient;
 
     /**
      * Initializes an instance of LROs client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LROsClient(LROsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -69,14 +70,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut200Succeeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut200Succeeded(requestOptions);
     }
 
     /**
@@ -120,15 +121,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPatch200SucceededIgnoreHeaders(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPatch200SucceededIgnoreHeaders(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPatch200SucceededIgnoreHeaders(RequestOptions requestOptions) {
+        return this.serviceClient.beginPatch200SucceededIgnoreHeaders(requestOptions);
     }
 
     /**
@@ -172,14 +172,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201Succeeded(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut201Succeeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut201Succeeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut201Succeeded(requestOptions);
     }
 
     /**
@@ -207,14 +207,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return array of Product.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202List(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPost202List(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPost202List(RequestOptions requestOptions) {
+        return this.serviceClient.beginPost202List(requestOptions);
     }
 
     /**
@@ -258,15 +258,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut200SucceededNoState(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut200SucceededNoState(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut200SucceededNoState(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut200SucceededNoState(requestOptions);
     }
 
     /**
@@ -310,14 +309,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut202Retry200(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut202Retry200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut202Retry200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut202Retry200(requestOptions);
     }
 
     /**
@@ -362,15 +361,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions);
     }
 
     /**
@@ -415,15 +413,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut200UpdatingSucceeded204(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut200UpdatingSucceeded204(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut200UpdatingSucceeded204(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut200UpdatingSucceeded204(requestOptions);
     }
 
     /**
@@ -468,15 +465,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingFailed200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut201CreatingFailed200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingFailed200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut201CreatingFailed200(requestOptions);
     }
 
     /**
@@ -521,15 +517,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut200Acceptedcanceled200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut200Acceptedcanceled200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut200Acceptedcanceled200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut200Acceptedcanceled200(requestOptions);
     }
 
     /**
@@ -573,14 +568,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutNoHeaderInRetry(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutNoHeaderInRetry(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutNoHeaderInRetry(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutNoHeaderInRetry(requestOptions);
     }
 
     /**
@@ -625,15 +620,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions);
     }
 
     /**
@@ -678,15 +672,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncNoRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncNoRetrySucceeded(requestOptions);
     }
 
     /**
@@ -731,14 +724,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetryFailed(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncRetryFailed(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetryFailed(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncRetryFailed(requestOptions);
     }
 
     /**
@@ -783,15 +776,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoRetrycanceled(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncNoRetrycanceled(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoRetrycanceled(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncNoRetrycanceled(requestOptions);
     }
 
     /**
@@ -835,15 +827,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoHeaderInRetry(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncNoHeaderInRetry(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNoHeaderInRetry(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncNoHeaderInRetry(requestOptions);
     }
 
     /**
@@ -868,14 +859,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutNonResource(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutNonResource(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutNonResource(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutNonResource(requestOptions);
     }
 
     /**
@@ -900,14 +891,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNonResource(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncNonResource(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncNonResource(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncNonResource(requestOptions);
     }
 
     /**
@@ -938,14 +929,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutSubResource(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutSubResource(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutSubResource(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutSubResource(requestOptions);
     }
 
     /**
@@ -976,14 +967,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncSubResource(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncSubResource(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncSubResource(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncSubResource(requestOptions);
     }
 
     /**
@@ -1010,15 +1001,15 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteProvisioning202Accepted200Succeeded(requestOptions, context);
+            RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteProvisioning202Accepted200Succeeded(requestOptions);
     }
 
     /**
@@ -1045,15 +1036,15 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202DeletingFailed200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteProvisioning202DeletingFailed200(requestOptions, context);
+            RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteProvisioning202DeletingFailed200(requestOptions);
     }
 
     /**
@@ -1080,29 +1071,29 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Deletingcanceled200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteProvisioning202Deletingcanceled200(requestOptions, context);
+            RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteProvisioning202Deletingcanceled200(requestOptions);
     }
 
     /**
      * Long running delete succeeds and returns right away.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDelete204Succeeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginDelete204Succeeded(requestOptions);
     }
 
     /**
@@ -1128,14 +1119,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDelete202Retry200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
+        return this.serviceClient.beginDelete202Retry200(requestOptions);
     }
 
     /**
@@ -1161,14 +1152,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202NoRetry204(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDelete202NoRetry204(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDelete202NoRetry204(RequestOptions requestOptions) {
+        return this.serviceClient.beginDelete202NoRetry204(requestOptions);
     }
 
     /**
@@ -1176,15 +1167,14 @@ public final class LROsClient {
      * operation status do not contain location header.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteNoHeaderInRetry(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteNoHeaderInRetry(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteNoHeaderInRetry(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteNoHeaderInRetry(requestOptions);
     }
 
     /**
@@ -1192,15 +1182,14 @@ public final class LROsClient {
      * calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetry(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteAsyncNoHeaderInRetry(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetry(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteAsyncNoHeaderInRetry(requestOptions);
     }
 
     /**
@@ -1208,15 +1197,14 @@ public final class LROsClient {
      * Azure-AsyncOperation header for operation status.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteAsyncRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteAsyncRetrySucceeded(requestOptions);
     }
 
     /**
@@ -1224,15 +1212,14 @@ public final class LROsClient {
      * Azure-AsyncOperation header for operation status.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteAsyncNoRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteAsyncNoRetrySucceeded(requestOptions);
     }
 
     /**
@@ -1240,15 +1227,14 @@ public final class LROsClient {
      * Azure-AsyncOperation header for operation status.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetryFailed(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteAsyncRetryFailed(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetryFailed(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteAsyncRetryFailed(requestOptions);
     }
 
     /**
@@ -1256,15 +1242,14 @@ public final class LROsClient {
      * Azure-AsyncOperation header for operation status.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrycanceled(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginDeleteAsyncRetrycanceled(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrycanceled(RequestOptions requestOptions) {
+        return this.serviceClient.beginDeleteAsyncRetrycanceled(requestOptions);
     }
 
     /**
@@ -1281,14 +1266,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost200WithPayload(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPost200WithPayload(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPost200WithPayload(RequestOptions requestOptions) {
+        return this.serviceClient.beginPost200WithPayload(requestOptions);
     }
 
     /**
@@ -1314,14 +1299,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPost202Retry200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPost202Retry200(requestOptions);
     }
 
     /**
@@ -1365,14 +1350,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202NoRetry204(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPost202NoRetry204(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPost202NoRetry204(RequestOptions requestOptions) {
+        return this.serviceClient.beginPost202NoRetry204(requestOptions);
     }
 
     /**
@@ -1398,15 +1383,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostDoubleHeadersFinalLocationGet(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostDoubleHeadersFinalLocationGet(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostDoubleHeadersFinalLocationGet(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostDoubleHeadersFinalLocationGet(requestOptions);
     }
 
     /**
@@ -1432,15 +1416,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostDoubleHeadersFinalAzureHeaderGet(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostDoubleHeadersFinalAzureHeaderGet(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostDoubleHeadersFinalAzureHeaderGet(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostDoubleHeadersFinalAzureHeaderGet(requestOptions);
     }
 
     /**
@@ -1467,15 +1450,15 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostDoubleHeadersFinalAzureHeaderGetDefault(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostDoubleHeadersFinalAzureHeaderGetDefault(requestOptions, context);
+            RequestOptions requestOptions) {
+        return this.serviceClient.beginPostDoubleHeadersFinalAzureHeaderGetDefault(requestOptions);
     }
 
     /**
@@ -1520,15 +1503,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions);
     }
 
     /**
@@ -1573,15 +1555,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncNoRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostAsyncNoRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncNoRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostAsyncNoRetrySucceeded(requestOptions);
     }
 
     /**
@@ -1608,15 +1589,14 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailed(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostAsyncRetryFailed(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailed(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostAsyncRetryFailed(requestOptions);
     }
 
     /**
@@ -1643,14 +1623,13 @@ public final class LROsClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceled(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostAsyncRetrycanceled(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceled(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostAsyncRetrycanceled(requestOptions);
     }
 }

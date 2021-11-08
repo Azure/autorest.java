@@ -1,22 +1,18 @@
 trigger:
   branches:
     include:
-    - v4*
     - main
-    - llc
 
 pr:
   branches:
     include:
-    - v4
     - main
-    - llc
 
 jobs:
 - job: 'Build'
   timeoutInMinutes: 60
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-latest'
 
   steps:
   - task: NodeTool@0

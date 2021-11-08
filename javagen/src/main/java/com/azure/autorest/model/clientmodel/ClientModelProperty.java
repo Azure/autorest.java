@@ -2,7 +2,18 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.annotation.HeaderCollection;
+import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -83,6 +94,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     private final boolean needsFlatten;
     private final boolean clientFlatten;
     private final boolean polymorphicDiscriminator;
+    private final boolean isXmlText;
 
     /**
      * Create a new ClientModelProperty with the provided properties.
@@ -103,12 +115,13 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      * @param isAdditionalProperties Whether this property contain the additional properties.
      * @param polymorphicDiscriminator Whether this property is a polymorphic discriminator.
+     * @param isXmlText Whether this property uses the value of an XML tag.
      */
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
             String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
             IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities,
             boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties,
-            boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator) {
+            boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator, boolean isXmlText) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -130,6 +143,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.needsFlatten = needsFlatten;
         this.clientFlatten = clientFlatten;
         this.polymorphicDiscriminator = polymorphicDiscriminator;
+        this.isXmlText = isXmlText;
     }
 
     public final String getName() {
@@ -237,6 +251,13 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     }
 
     /**
+     * @return whether this property uses the value of an XML tag.
+     */
+    public final boolean isXmlText() {
+        return isXmlText;
+    }
+
+    /**
      * Add this ServiceModelProperty's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
      */
@@ -244,13 +265,13 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         JavaSettings settings = JavaSettings.getInstance();
 
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty()) {
-            imports.add("com.azure.core.annotation.HeaderCollection");
+            imports.add(HeaderCollection.class.getName());
         }
         if (isAdditionalProperties) {
-            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
-            imports.add("com.fasterxml.jackson.annotation.JsonAnySetter");
-            imports.add("com.fasterxml.jackson.annotation.JsonAnyGetter");
-            imports.add("java.util.HashMap");
+            imports.add(JsonIgnore.class.getName());
+            imports.add(JsonAnySetter.class.getName());
+            imports.add(JsonAnyGetter.class.getName());
+            imports.add(HashMap.class.getName());
         }
 
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && needsFlatten) {
@@ -259,7 +280,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
 
         if (!isAdditionalProperties && getClientType() instanceof MapType) {
             // required for "@JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)"
-            imports.add("com.fasterxml.jackson.annotation.JsonInclude");
+            imports.add(JsonInclude.class.getName());
         }
 
         if (getWireType() != null) {
@@ -268,16 +289,19 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.ByteArray)) {
-            imports.add("com.azure.core.util.CoreUtils");
+            imports.add(CoreUtils.class.getName());
         }
 
         if (shouldGenerateXmlSerialization) {
-            imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+            imports.add(JacksonXmlRootElement.class.getName());
             if (getIsXmlWrapper()) {
-                imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                imports.add(JacksonXmlProperty.class.getName());
+            }
+            if (isXmlText()) {
+                imports.add(JacksonXmlText.class.getName());
             }
         } else {
-            imports.add("com.fasterxml.jackson.annotation.JsonProperty");
+            imports.add(JsonProperty.class.getName());
         }
     }
 
@@ -323,6 +347,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         private boolean needsFlatten = false;
         private boolean clientFlatten = false;
         private boolean polymorphicDiscriminator = false;
+        private boolean isXmlText = false;
 
         /**
          * Sets the name of this property.
@@ -541,6 +566,17 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             return this;
         }
 
+        /**
+         * Sets whether this property uses the value of an XML tag.
+         *
+         * @param isXmlText Whether this property uses the value of an XML tag.
+         * @return the Builder itself
+         */
+        public Builder isXmlText(boolean isXmlText) {
+            this.isXmlText = isXmlText;
+            return this;
+        }
+
         public ClientModelProperty build() {
             return new ClientModelProperty(name,
                     description,
@@ -562,7 +598,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
                     isAdditionalProperties,
                     needsFlatten,
                     clientFlatten,
-                    polymorphicDiscriminator);
+                    polymorphicDiscriminator,
+                    isXmlText);
         }
     }
 }

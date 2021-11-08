@@ -4,25 +4,26 @@
 
 package fixtures.header;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.Context;
 import fixtures.header.implementation.HeadersImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATHeaderService type. */
 @ServiceClient(builder = AutoRestSwaggerBATHeaderServiceBuilder.class)
 public final class AutoRestSwaggerBATHeaderServiceClient {
-    private final HeadersImpl serviceClient;
+    @Generated private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of Headers client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     AutoRestSwaggerBATHeaderServiceClient(HeadersImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -39,28 +40,28 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramExistingKeyWithResponse(requestOptions, context);
+    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramExistingKeyWithResponse(requestOptions);
     }
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "User-Agent": "overwrite".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseExistingKeyWithResponse(requestOptions, context);
+    public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseExistingKeyWithResponse(requestOptions);
     }
 
     /**
@@ -75,28 +76,28 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramProtectedKeyWithResponse(requestOptions, context);
+    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramProtectedKeyWithResponse(requestOptions);
     }
 
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "Content-Type": "text/html".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseProtectedKeyWithResponse(requestOptions, context);
+    public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseProtectedKeyWithResponse(requestOptions);
     }
 
     /**
@@ -112,14 +113,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramIntegerWithResponse(requestOptions, context);
+    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramIntegerWithResponse(requestOptions);
     }
 
     /**
@@ -134,14 +135,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 1 or -2.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseIntegerWithResponse(requestOptions, context);
+    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseIntegerWithResponse(requestOptions);
     }
 
     /**
@@ -158,14 +159,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramLongWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramLongWithResponse(requestOptions, context);
+    public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramLongWithResponse(requestOptions);
     }
 
     /**
@@ -180,14 +181,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 105 or -2.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseLongWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseLongWithResponse(requestOptions, context);
+    public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseLongWithResponse(requestOptions);
     }
 
     /**
@@ -204,14 +205,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramFloatWithResponse(requestOptions, context);
+    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramFloatWithResponse(requestOptions);
     }
 
     /**
@@ -226,14 +227,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 0.07 or -3.0.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseFloatWithResponse(requestOptions, context);
+    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseFloatWithResponse(requestOptions);
     }
 
     /**
@@ -250,14 +251,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramDoubleWithResponse(requestOptions, context);
+    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramDoubleWithResponse(requestOptions);
     }
 
     /**
@@ -272,14 +273,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": 7e120 or -3.0.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseDoubleWithResponse(requestOptions, context);
+    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseDoubleWithResponse(requestOptions);
     }
 
     /**
@@ -295,14 +296,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramBoolWithResponse(requestOptions, context);
+    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramBoolWithResponse(requestOptions);
     }
 
     /**
@@ -317,14 +318,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header value "value": true or false.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseBoolWithResponse(requestOptions, context);
+    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseBoolWithResponse(requestOptions);
     }
 
     /**
@@ -341,14 +342,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramStringWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramStringWithResponse(requestOptions, context);
+    public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramStringWithResponse(requestOptions);
     }
 
     /**
@@ -363,14 +364,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseStringWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseStringWithResponse(requestOptions, context);
+    public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseStringWithResponse(requestOptions);
     }
 
     /**
@@ -387,14 +388,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDateWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramDateWithResponse(requestOptions, context);
+    public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramDateWithResponse(requestOptions);
     }
 
     /**
@@ -409,14 +410,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "2010-01-01" or "0001-01-01".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDateWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseDateWithResponse(requestOptions, context);
+    public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseDateWithResponse(requestOptions);
     }
 
     /**
@@ -433,14 +434,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramDatetimeWithResponse(requestOptions, context);
+    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramDatetimeWithResponse(requestOptions);
     }
 
     /**
@@ -455,14 +456,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseDatetimeWithResponse(requestOptions, context);
+    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseDatetimeWithResponse(requestOptions);
     }
 
     /**
@@ -479,14 +480,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramDatetimeRfc1123WithResponse(requestOptions, context);
+    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramDatetimeRfc1123WithResponse(requestOptions);
     }
 
     /**
@@ -501,14 +502,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseDatetimeRfc1123WithResponse(requestOptions, context);
+    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseDatetimeRfc1123WithResponse(requestOptions);
     }
 
     /**
@@ -524,14 +525,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramDurationWithResponse(requestOptions, context);
+    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramDurationWithResponse(requestOptions);
     }
 
     /**
@@ -546,14 +547,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "P123DT22H14M12.011S".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseDurationWithResponse(requestOptions, context);
+    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseDurationWithResponse(requestOptions);
     }
 
     /**
@@ -569,14 +570,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramByteWithResponse(requestOptions, context);
+    public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramByteWithResponse(requestOptions);
     }
 
     /**
@@ -591,14 +592,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseByteWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseByteWithResponse(requestOptions, context);
+    public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseByteWithResponse(requestOptions);
     }
 
     /**
@@ -614,14 +615,14 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.paramEnumWithResponse(requestOptions, context);
+    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramEnumWithResponse(requestOptions);
     }
 
     /**
@@ -636,27 +637,27 @@ public final class AutoRestSwaggerBATHeaderServiceClient {
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return a response with header values "GREY" or null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.responseEnumWithResponse(requestOptions, context);
+    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.responseEnumWithResponse(requestOptions);
     }
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.customRequestIdWithResponse(requestOptions, context);
+    public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.customRequestIdWithResponse(requestOptions);
     }
 }

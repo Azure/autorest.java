@@ -4,6 +4,7 @@
 
 package fixtures.paging;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.paging.implementation.PagingsImpl;
 /** Initializes a new instance of the asynchronous AutoRestPagingTestService type. */
 @ServiceClient(builder = AutoRestPagingTestServiceBuilder.class, isAsync = true)
 public final class AutoRestPagingTestServiceAsyncClient {
-    private final PagingsImpl serviceClient;
+    @Generated private final PagingsImpl serviceClient;
 
     /**
      * Initializes an instance of Pagings client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     AutoRestPagingTestServiceAsyncClient(PagingsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -51,6 +53,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
         return this.serviceClient.getNoItemNamePagesAsync(requestOptions);
@@ -80,6 +83,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
         return this.serviceClient.getNullNextLinkNamePagesAsync(requestOptions);
@@ -109,6 +113,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePages(RequestOptions requestOptions) {
         return this.serviceClient.getSinglePagesAsync(requestOptions);
@@ -139,6 +144,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
         return this.serviceClient.firstResponseEmptyAsync(requestOptions);
@@ -178,6 +184,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePages(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesAsync(requestOptions);
@@ -217,6 +224,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
         return this.serviceClient.getWithQueryParamsAsync(requestOptions);
@@ -256,6 +264,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
         return this.serviceClient.getOdataMultiplePagesAsync(requestOptions);
@@ -296,6 +305,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesWithOffsetAsync(offset, requestOptions);
@@ -326,6 +336,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesRetryFirstAsync(requestOptions);
@@ -356,6 +367,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesRetrySecondAsync(requestOptions);
@@ -385,6 +397,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
         return this.serviceClient.getSinglePagesFailureAsync(requestOptions);
@@ -414,6 +427,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesFailureAsync(requestOptions);
@@ -443,6 +457,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesFailureUriAsync(requestOptions);
@@ -481,6 +496,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions);
@@ -519,6 +535,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
             String tenant, RequestOptions requestOptions) {
@@ -559,6 +576,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesLROAsync(requestOptions);
@@ -588,6 +606,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
         return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameAsync(requestOptions);

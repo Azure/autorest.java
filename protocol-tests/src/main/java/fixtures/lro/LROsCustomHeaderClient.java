@@ -4,26 +4,27 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LROsCustomHeadersImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class LROsCustomHeaderClient {
-    private final LROsCustomHeadersImpl serviceClient;
+    @Generated private final LROsCustomHeadersImpl serviceClient;
 
     /**
      * Initializes an instance of LROsCustomHeaders client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LROsCustomHeaderClient(LROsCustomHeadersImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -71,15 +72,14 @@ public final class LROsCustomHeaderClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions);
     }
 
     /**
@@ -125,15 +125,14 @@ public final class LROsCustomHeaderClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions);
     }
 
     /**
@@ -160,14 +159,14 @@ public final class LROsCustomHeaderClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPost202Retry200(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
+        return this.serviceClient.beginPost202Retry200(requestOptions);
     }
 
     /**
@@ -195,14 +194,13 @@ public final class LROsCustomHeaderClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions, context);
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions);
     }
 }

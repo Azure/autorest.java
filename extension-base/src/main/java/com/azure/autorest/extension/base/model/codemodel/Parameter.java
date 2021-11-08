@@ -17,6 +17,7 @@ public class Parameter extends Value {
     private Parameter originalParameter;
     private Parameter groupedBy;
     private Property targetProperty;
+    private String origin;
 
     public String getClientDefaultValue() {
         return clientDefaultValue;
@@ -72,6 +73,14 @@ public class Parameter extends Value {
 
     public void setGroupedBy(Parameter groupedBy) {
         this.groupedBy = groupedBy;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public enum ImplementationLocation {

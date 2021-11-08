@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.Fish;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PolymorphicrecursiveClient {
-    private final PolymorphicrecursivesImpl serviceClient;
+    @Generated private final PolymorphicrecursivesImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphicrecursives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphicrecursiveClient(PolymorphicrecursivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class PolymorphicrecursiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +51,7 @@ public final class PolymorphicrecursiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Fish> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -67,6 +71,7 @@ public final class PolymorphicrecursiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Fish complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -88,6 +93,7 @@ public final class PolymorphicrecursiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);

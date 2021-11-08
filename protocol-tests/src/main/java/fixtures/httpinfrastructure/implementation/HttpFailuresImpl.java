@@ -106,14 +106,13 @@ public final class HttpFailuresImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions, Context context) {
-        return getEmptyErrorWithResponseAsync(requestOptions, context).block();
+    public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
+        return getEmptyErrorWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -165,14 +164,13 @@ public final class HttpFailuresImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions, Context context) {
-        return getNoModelErrorWithResponseAsync(requestOptions, context).block();
+    public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
+        return getNoModelErrorWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -224,13 +222,12 @@ public final class HttpFailuresImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return getNoModelEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
+        return getNoModelEmptyWithResponseAsync(requestOptions).block();
     }
 }

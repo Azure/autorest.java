@@ -217,9 +217,9 @@ public class ProxyMethod {
         return getName() + "WithResponseAsync";
     }
 
-        public final String getSimpleRestResponseMethodName() {
-                return getName() + "WithResponse";
-        }
+    public final String getSimpleRestResponseMethodName() {
+        return getName() + "WithResponse";
+    }
 
     public final Set<String> getResponseContentTypes() {
         return responseContentTypes;

@@ -1,16 +1,12 @@
 trigger:
   branches:
     include:
-    - v4
     - main
-    - llc
 
 pr:
   branches:
     include:
-    - v4
     - main
-    - llc
 
 jobs:
   - job: Build
@@ -59,25 +55,6 @@ jobs:
 
       - task: Maven@3
         condition: succeededOrFailed()
-        displayName: 'Run protocol tests'
-        inputs:
-          mavenPomFile: pom.xml
-          goals: 'clean test'
-          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: $(JavaVersion)
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: false
-
-      - task: PublishTestResults@2
-        condition: succeededOrFailed()
-        inputs:
-          mergeTestResults: true
-          testRunTitle: 'protocol-tests'
-          searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
-
-      - task: Maven@3
-        condition: succeededOrFailed()
         displayName: 'Run vanilla tests'
         inputs:
           mavenPomFile: pom.xml
@@ -114,6 +91,25 @@ jobs:
           testRunTitle: 'azure-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
+      - task: Maven@3
+        condition: succeededOrFailed()
+        displayName: 'Run protocol tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          mergeTestResults: true
+          testRunTitle: 'protocol-tests'
+          searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
+
       - script: |
           cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-vanilla.json
           cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-azure.json
@@ -139,3 +135,7 @@ jobs:
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
+
+      - script: |
+          ./protocol-sdk-integration-tests/test.py
+        displayName: 'Run protocol test on sdk integration'

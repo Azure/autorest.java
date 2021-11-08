@@ -4,6 +4,7 @@
 
 package fixtures.llcresi;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -17,13 +18,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous LLCClient type. */
 @ServiceClient(builder = LLCClientBuilder.class, isAsync = true)
 public final class LLCAsyncClient {
-    private final ParamsImpl serviceClient;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of Params client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LLCAsyncClient(ParamsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -50,6 +52,7 @@ public final class LLCAsyncClient {
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getRequiredWithResponseAsync(requestOptions);
@@ -78,6 +81,7 @@ public final class LLCAsyncClient {
      *     false.
      * @return any object.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
         return this.serviceClient.postParametersWithResponseAsync(parameter, requestOptions);

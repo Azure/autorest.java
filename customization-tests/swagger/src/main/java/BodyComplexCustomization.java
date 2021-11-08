@@ -40,13 +40,13 @@ public class BodyComplexCustomization extends Customization {
 
         PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
         ClassCustomization arrayClient = root.getClass("ArrayClient");
-        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this").setModifier(0)
-                .removeAnnotation("ServiceMethod");
         arrayClient.getJavadoc().setDescription("The sync client containing Array operations.");
         arrayClient.getMethod("putValid").getJavadoc()
                 .setReturn("The ArrayClient itself")
                 .setSince("1.0.0-beta.1")
                 .addSee("ArrayAsyncClient#putValid(ArrayWrapper)");
+        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this").setModifier(0)
+                .removeAnnotation("ServiceMethod");
 
         ClassCustomization cat = implementationModels.getClass("Cat");
         cat.getMethod("getColor")

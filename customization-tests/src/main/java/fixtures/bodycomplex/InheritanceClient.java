@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.Siamese;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class InheritanceClient {
-    private final InheritancesImpl serviceClient;
+    @Generated private final InheritancesImpl serviceClient;
 
     /**
      * Initializes an instance of Inheritances client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     InheritanceClient(InheritancesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class InheritanceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Siamese getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +51,7 @@ public final class InheritanceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Siamese> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -63,6 +67,7 @@ public final class InheritanceClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Siamese complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -80,6 +85,7 @@ public final class InheritanceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Siamese complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);

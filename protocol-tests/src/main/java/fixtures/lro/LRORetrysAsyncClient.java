@@ -4,6 +4,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -18,13 +19,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestService type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class, isAsync = true)
 public final class LRORetrysAsyncClient {
-    private final LRORetrysImpl serviceClient;
+    @Generated private final LRORetrysImpl serviceClient;
 
     /**
      * Initializes an instance of LRORetrys client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LRORetrysAsyncClient(LRORetrysImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -75,6 +77,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.put201CreatingSucceeded200WithResponseAsync(requestOptions);
@@ -126,6 +129,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
         return this.serviceClient.beginPut201CreatingSucceeded200Async(requestOptions);
@@ -177,6 +181,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
@@ -228,6 +233,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPutAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginPutAsyncRelativeRetrySucceededAsync(requestOptions);
@@ -261,6 +267,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponse(
             RequestOptions requestOptions) {
@@ -295,6 +302,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
             RequestOptions requestOptions) {
@@ -310,6 +318,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202Retry200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete202Retry200WithResponseAsync(requestOptions);
@@ -324,6 +333,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
         return this.serviceClient.beginDelete202Retry200Async(requestOptions);
@@ -338,6 +348,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.deleteAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
@@ -352,6 +363,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteAsyncRelativeRetrySucceededAsync(requestOptions);
@@ -384,6 +396,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202Retry200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post202Retry200WithResponseAsync(requestOptions);
@@ -416,6 +429,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
         return this.serviceClient.beginPost202Retry200Async(requestOptions);
@@ -449,6 +463,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.postAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
@@ -482,6 +497,7 @@ public final class LRORetrysAsyncClient {
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginPostAsyncRelativeRetrySucceededAsync(requestOptions);

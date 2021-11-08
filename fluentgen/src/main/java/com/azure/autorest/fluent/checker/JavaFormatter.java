@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaFormatter {
-
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
+
+    private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
     private static final boolean ENABLED;
     static {
@@ -82,7 +83,7 @@ public class JavaFormatter {
         final String quote = "\"";
 
         List<String> formattedLines = new ArrayList<>();
-        String[] lines = content.split("\r?\n", -1);
+        String[] lines = NEW_LINE.split(content, -1);
         for (String line : lines) {
             if (line.length() > lengthLimit) {
                 int firstQuote = line.indexOf(quote);

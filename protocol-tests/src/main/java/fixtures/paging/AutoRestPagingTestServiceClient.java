@@ -4,6 +4,7 @@
 
 package fixtures.paging;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -11,19 +12,19 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import fixtures.paging.implementation.PagingsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestPagingTestService type. */
 @ServiceClient(builder = AutoRestPagingTestServiceBuilder.class)
 public final class AutoRestPagingTestServiceClient {
-    private final PagingsImpl serviceClient;
+    @Generated private final PagingsImpl serviceClient;
 
     /**
      * Initializes an instance of Pagings client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     AutoRestPagingTestServiceClient(PagingsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -48,14 +49,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getNoItemNamePages(requestOptions, context);
+    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
+        return this.serviceClient.getNoItemNamePages(requestOptions);
     }
 
     /**
@@ -78,14 +79,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getNullNextLinkNamePages(requestOptions, context);
+    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
+        return this.serviceClient.getNullNextLinkNamePages(requestOptions);
     }
 
     /**
@@ -108,14 +109,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getSinglePages(requestOptions, context);
+    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
+        return this.serviceClient.getSinglePages(requestOptions);
     }
 
     /**
@@ -139,14 +140,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.firstResponseEmpty(requestOptions, context);
+    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
+        return this.serviceClient.firstResponseEmpty(requestOptions);
     }
 
     /**
@@ -179,14 +180,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePages(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePages(requestOptions);
     }
 
     /**
@@ -219,14 +220,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getWithQueryParams(requestOptions, context);
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParams(requestOptions);
     }
 
     /**
@@ -259,14 +260,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getOdataMultiplePages(requestOptions, context);
+    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
+        return this.serviceClient.getOdataMultiplePages(requestOptions);
     }
 
     /**
@@ -300,15 +301,14 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(
-            int offset, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesWithOffset(offset, requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesWithOffset(offset, requestOptions);
     }
 
     /**
@@ -332,14 +332,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesRetryFirst(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesRetryFirst(requestOptions);
     }
 
     /**
@@ -363,14 +363,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesRetrySecond(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesRetrySecond(requestOptions);
     }
 
     /**
@@ -393,14 +393,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getSinglePagesFailure(requestOptions, context);
+    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
+        return this.serviceClient.getSinglePagesFailure(requestOptions);
     }
 
     /**
@@ -423,14 +423,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFailure(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFailure(requestOptions);
     }
 
     /**
@@ -453,14 +453,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFailureUri(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFailureUri(requestOptions);
     }
 
     /**
@@ -492,15 +492,14 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String tenant, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentNextLink(tenant, requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLink(tenant, requestOptions);
     }
 
     /**
@@ -532,15 +531,15 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String tenant, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions, context);
+            String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions);
     }
 
     /**
@@ -573,14 +572,14 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesLRO(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesLRO(requestOptions);
     }
 
     /**
@@ -603,14 +602,13 @@ public final class AutoRestPagingTestServiceClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(requestOptions, context);
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
+        return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(requestOptions);
     }
 }

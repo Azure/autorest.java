@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class XmlFile {
-    private String FilePath;
-    private XmlFileContents Contents;
+    private final String filePath;
+    private final XmlFileContents contents;
 
     public static class Options {
         private int indent = 4;
@@ -33,16 +33,16 @@ public class XmlFile {
     }
 
     public XmlFile(String filePath, String fileContents, Options options) {
-        FilePath = filePath;
-        Contents = new XmlFileContents(fileContents, options);
+        this.filePath = filePath;
+        contents = new XmlFileContents(fileContents, options);
     }
 
     public final String getFilePath() {
-        return FilePath;
+        return filePath;
     }
 
     public final XmlFileContents getContents() {
-        return Contents;
+        return contents;
     }
 
     public final void text(String text) {

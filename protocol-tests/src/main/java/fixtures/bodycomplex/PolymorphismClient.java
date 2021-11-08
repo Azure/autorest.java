@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -11,19 +12,19 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PolymorphismClient {
-    private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismsImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphisms client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphismClient(PolymorphismsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -44,14 +45,14 @@ public final class PolymorphismClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getValidWithResponse(requestOptions, context);
+    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getValidWithResponse(requestOptions);
     }
 
     /**
@@ -76,14 +77,14 @@ public final class PolymorphismClient {
      *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
      *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions, context);
+    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -98,14 +99,14 @@ public final class PolymorphismClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getDotSyntaxWithResponse(requestOptions, context);
+    public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getDotSyntaxWithResponse(requestOptions);
     }
 
     /**
@@ -134,16 +135,15 @@ public final class PolymorphismClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComposedWithDiscriminatorWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getComposedWithDiscriminatorWithResponse(requestOptions, context);
+    public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getComposedWithDiscriminatorWithResponse(requestOptions);
     }
 
     /**
@@ -172,16 +172,15 @@ public final class PolymorphismClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getComposedWithoutDiscriminatorWithResponse(requestOptions, context);
+    public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getComposedWithoutDiscriminatorWithResponse(requestOptions);
     }
 
     /**
@@ -208,15 +207,15 @@ public final class PolymorphismClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
      *     properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getComplicatedWithResponse(requestOptions, context);
+    public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getComplicatedWithResponse(requestOptions);
     }
 
     /**
@@ -244,15 +243,14 @@ public final class PolymorphismClient {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplicatedWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putComplicatedWithResponse(complexBody, requestOptions, context);
+    public Response<Void> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return this.serviceClient.putComplicatedWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -300,15 +298,15 @@ public final class PolymorphismClient {
      *
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions, context);
+            BinaryData complexBody, RequestOptions requestOptions) {
+        return this.serviceClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -333,14 +331,13 @@ public final class PolymorphismClient {
      *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
      *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidMissingRequiredWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putValidMissingRequiredWithResponse(complexBody, requestOptions, context);
+    public Response<Void> putValidMissingRequiredWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return this.serviceClient.putValidMissingRequiredWithResponse(complexBody, requestOptions);
     }
 }

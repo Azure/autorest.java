@@ -335,15 +335,13 @@ public final class LROsCustomHeadersImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPutAsyncRetrySucceededAsync(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.beginPutAsyncRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
     /**
@@ -612,15 +610,13 @@ public final class LROsCustomHeadersImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPut201CreatingSucceeded200Async(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
+        return this.beginPut201CreatingSucceeded200Async(requestOptions).getSyncPoller();
     }
 
     /**
@@ -792,14 +788,13 @@ public final class LROsCustomHeadersImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions, Context context) {
-        return this.beginPost202Retry200Async(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
+        return this.beginPost202Retry200Async(requestOptions).getSyncPoller();
     }
 
     /**
@@ -978,16 +973,16 @@ public final class LROsCustomHeadersImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(
-            RequestOptions requestOptions, Context context) {
-        return this.beginPostAsyncRetrySucceededAsync(requestOptions, context).getSyncPoller();
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
+        return this.beginPostAsyncRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {}
+    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
+        // empty
+    }
 }

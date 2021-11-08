@@ -269,14 +269,13 @@ public final class PathsImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions, Context context) {
-        return getBooleanTrueWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
+        return getBooleanTrueWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -313,14 +312,13 @@ public final class PathsImpl {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions, Context context) {
-        return getBooleanFalseWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
+        return getBooleanFalseWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -357,14 +355,13 @@ public final class PathsImpl {
      * Get '1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntOneMillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
+        return getIntOneMillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -402,14 +399,13 @@ public final class PathsImpl {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
+        return getIntNegativeOneMillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -446,14 +442,13 @@ public final class PathsImpl {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getTenBillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
+        return getTenBillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -490,14 +485,13 @@ public final class PathsImpl {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions, Context context) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions, context).block();
+    public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
+        return getNegativeTenBillionWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -535,14 +529,13 @@ public final class PathsImpl {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions, Context context) {
-        return floatScientificPositiveWithResponseAsync(requestOptions, context).block();
+    public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
+        return floatScientificPositiveWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -580,14 +573,13 @@ public final class PathsImpl {
      * Get '-1.034E-20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions, Context context) {
-        return floatScientificNegativeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
+        return floatScientificNegativeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -624,14 +616,13 @@ public final class PathsImpl {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions, Context context) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions, context).block();
+    public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
+        return doubleDecimalPositiveWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -668,14 +659,13 @@ public final class PathsImpl {
      * Get '-9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions, Context context) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
+        return doubleDecimalNegativeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -712,14 +702,13 @@ public final class PathsImpl {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions, Context context) {
-        return stringUnicodeWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
+        return stringUnicodeWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -756,14 +745,13 @@ public final class PathsImpl {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions, Context context) {
-        return stringUrlEncodedWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
+        return stringUrlEncodedWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -800,14 +788,13 @@ public final class PathsImpl {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringUrlNonEncodedWithResponse(RequestOptions requestOptions, Context context) {
-        return stringUrlNonEncodedWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringUrlNonEncodedWithResponse(RequestOptions requestOptions) {
+        return stringUrlNonEncodedWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -844,14 +831,13 @@ public final class PathsImpl {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return stringEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
+        return stringEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -890,14 +876,13 @@ public final class PathsImpl {
      *
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> stringNullWithResponse(String stringPath, RequestOptions requestOptions, Context context) {
-        return stringNullWithResponseAsync(stringPath, requestOptions, context).block();
+    public Response<Void> stringNullWithResponse(String stringPath, RequestOptions requestOptions) {
+        return stringNullWithResponseAsync(stringPath, requestOptions).block();
     }
 
     /**
@@ -936,14 +921,13 @@ public final class PathsImpl {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions, Context context) {
-        return enumValidWithResponseAsync(enumPath, requestOptions, context).block();
+    public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions) {
+        return enumValidWithResponseAsync(enumPath, requestOptions).block();
     }
 
     /**
@@ -982,14 +966,13 @@ public final class PathsImpl {
      *
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> enumNullWithResponse(String enumPath, RequestOptions requestOptions, Context context) {
-        return enumNullWithResponseAsync(enumPath, requestOptions, context).block();
+    public Response<Void> enumNullWithResponse(String enumPath, RequestOptions requestOptions) {
+        return enumNullWithResponseAsync(enumPath, requestOptions).block();
     }
 
     /**
@@ -1028,14 +1011,13 @@ public final class PathsImpl {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions, Context context) {
-        return byteMultiByteWithResponseAsync(bytePath, requestOptions, context).block();
+    public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+        return byteMultiByteWithResponseAsync(bytePath, requestOptions).block();
     }
 
     /**
@@ -1072,14 +1054,13 @@ public final class PathsImpl {
      * Get '' as byte array.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return byteEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
+        return byteEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1118,14 +1099,13 @@ public final class PathsImpl {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions, Context context) {
-        return byteNullWithResponseAsync(bytePath, requestOptions, context).block();
+    public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+        return byteNullWithResponseAsync(bytePath, requestOptions).block();
     }
 
     /**
@@ -1162,14 +1142,13 @@ public final class PathsImpl {
      * Get '2012-01-01' as date.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateValidWithResponse(RequestOptions requestOptions, Context context) {
-        return dateValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
+        return dateValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1208,14 +1187,13 @@ public final class PathsImpl {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions, Context context) {
-        return dateNullWithResponseAsync(datePath, requestOptions, context).block();
+    public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions) {
+        return dateNullWithResponseAsync(datePath, requestOptions).block();
     }
 
     /**
@@ -1252,14 +1230,13 @@ public final class PathsImpl {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions, Context context) {
-        return dateTimeValidWithResponseAsync(requestOptions, context).block();
+    public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
+        return dateTimeValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -1298,15 +1275,13 @@ public final class PathsImpl {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(
-            String dateTimePath, RequestOptions requestOptions, Context context) {
-        return dateTimeNullWithResponseAsync(dateTimePath, requestOptions, context).block();
+    public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+        return dateTimeNullWithResponseAsync(dateTimePath, requestOptions).block();
     }
 
     /**
@@ -1345,14 +1320,13 @@ public final class PathsImpl {
      *
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions, Context context) {
-        return base64UrlWithResponseAsync(base64UrlPath, requestOptions, context).block();
+    public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+        return base64UrlWithResponseAsync(base64UrlPath, requestOptions).block();
     }
 
     /**
@@ -1396,15 +1370,14 @@ public final class PathsImpl {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions, Context context) {
-        return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions, context).block();
+    public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+        return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions).block();
     }
 
     /**
@@ -1443,14 +1416,12 @@ public final class PathsImpl {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> unixTimeUrlWithResponse(
-            long unixTimeUrlPath, RequestOptions requestOptions, Context context) {
-        return unixTimeUrlWithResponseAsync(unixTimeUrlPath, requestOptions, context).block();
+    public Response<Void> unixTimeUrlWithResponse(long unixTimeUrlPath, RequestOptions requestOptions) {
+        return unixTimeUrlWithResponseAsync(unixTimeUrlPath, requestOptions).block();
     }
 }

@@ -134,14 +134,13 @@ public final class ArraysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions, Context context) {
-        return getValidWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
+        return getValidWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -213,14 +212,13 @@ public final class ArraysImpl {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
      *     fox jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putValidWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putValidWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -284,14 +282,13 @@ public final class ArraysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions, Context context) {
-        return getEmptyWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
+        return getEmptyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -360,14 +357,13 @@ public final class ArraysImpl {
      *
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putEmptyWithResponseAsync(complexBody, requestOptions, context).block();
+    public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
+        return putEmptyWithResponseAsync(complexBody, requestOptions).block();
     }
 
     /**
@@ -431,13 +427,12 @@ public final class ArraysImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions, Context context) {
-        return getNotProvidedWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
+        return getNotProvidedWithResponseAsync(requestOptions).block();
     }
 }

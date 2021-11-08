@@ -1,13 +1,13 @@
 #!/bin/bash --verbose
 
-VANILLA_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
-AZURE_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
-ARM_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
-PROTOCOL_ARGUMENTS='--version=3.4.5 --java --use=./ --output-folder=protocol-tests --low-level-client --generate-samples'
-PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.4.5 --java --use=./ --low-level-client'
+VANILLA_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
+AZURE_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
+ARM_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
+PROTOCOL_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=protocol-tests --low-level-client --generate-samples'
+PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.6.6 --java --use=./ --low-level-client'
 
-# 3.0.37
-TEST_SERVER_COMMIT=c4d01ebca63c339b059a996deaa9ddca5887a099
+# latest
+TEST_SERVER_COMMIT=main
 
 # Vanilla
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
@@ -44,7 +44,7 @@ autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-autorest --version=3.4.5 --use=./ vanilla-tests/swagger/lro.md
+autorest --version=3.6.6 --use=./ vanilla-tests/swagger/lro.md
 
 # local swagger
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
@@ -55,6 +55,7 @@ autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-fla
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.passdiscriminator --pass-discriminator-to-child-deserialization=true
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.clientdefaultvalue --pipeline.modelerfour.flatten-models=false
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
+autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
 
 # Azure
 autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
@@ -89,4 +90,4 @@ rm ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
 rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 
 # customization
-autorest --version=3.4.5 --use:. customization-tests/swagger
+autorest --version=3.6.6 --use:. customization-tests/swagger

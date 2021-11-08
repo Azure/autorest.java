@@ -120,6 +120,11 @@ public class JavaClass implements JavaType {
         contents.blockComment(description);
     }
 
+    public final void lineComment(String description) {
+        addExpectedNewLine();
+        contents.lineComment(description);
+    }
+
     public final void blockComment(Consumer<JavaLineComment> commentAction) {
         addExpectedNewLine();
         contents.blockComment(commentAction);

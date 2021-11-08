@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PolymorphicrecursiveAsyncClient {
-    private final PolymorphicrecursivesImpl serviceClient;
+    @Generated private final PolymorphicrecursivesImpl serviceClient;
 
     /**
      * Initializes an instance of Polymorphicrecursives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PolymorphicrecursiveAsyncClient(PolymorphicrecursivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponse() {
         return this.serviceClient.getValidWithResponseAsync();
@@ -46,6 +49,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValid() {
         return this.serviceClient.getValidAsync();
@@ -66,6 +70,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(Fish complexBody) {
         return this.serviceClient.putValidWithResponseAsync(complexBody);
@@ -86,6 +91,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValid(Fish complexBody) {
         return this.serviceClient.putValidAsync(complexBody);

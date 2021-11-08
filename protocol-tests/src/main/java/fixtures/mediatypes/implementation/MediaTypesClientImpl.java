@@ -4,6 +4,7 @@
 
 package fixtures.mediatypes.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -123,6 +124,27 @@ public final class MediaTypesClientImpl {
         @Post("/mediatypes/contentTypeWithEncoding")
         Mono<Response<BinaryData>> contentTypeWithEncoding(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Post("/mediatypes/binaryBodyTwoContentTypes")
+        Mono<Response<BinaryData>> binaryBodyWithTwoContentTypes(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") BinaryData message,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/binaryBodyThreeContentTypes")
+        Mono<Response<BinaryData>> binaryBodyWithThreeContentTypes(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") BinaryData message,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/textAndJson")
+        Mono<Response<BinaryData>> putTextAndJsonBody(
+                @HostParam("$host") String host,
+                @BodyParam("text/plain") BinaryData message,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -219,14 +241,13 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions, Context context) {
-        return analyzeBodyWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions) {
+        return analyzeBodyWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -307,14 +328,13 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions, Context context) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions, context).block();
+    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -386,13 +406,320 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
+        return contentTypeWithEncodingWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
+     * byte stream of 'hello, world!' for application/octet-stream.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.binaryBodyWithTwoContentTypes(this.getHost(), message, requestOptions, context));
+    }
+
+    /**
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
+     * byte stream of 'hello, world!' for application/octet-stream.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions, Context context) {
-        return contentTypeWithEncodingWithResponseAsync(requestOptions, context).block();
+    public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions, Context context) {
+        return service.binaryBodyWithTwoContentTypes(this.getHost(), message, requestOptions, context);
+    }
+
+    /**
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
+     * byte stream of 'hello, world!' for application/octet-stream.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
+            BinaryData message, RequestOptions requestOptions) {
+        return binaryBodyWithTwoContentTypesWithResponseAsync(message, requestOptions).block();
+    }
+
+    /**
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.binaryBodyWithThreeContentTypes(this.getHost(), message, requestOptions, context));
+    }
+
+    /**
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions, Context context) {
+        return service.binaryBodyWithThreeContentTypes(this.getHost(), message, requestOptions, context);
+    }
+
+    /**
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     *     <tr><td>contentLength</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
+            BinaryData message, RequestOptions requestOptions) {
+        return binaryBodyWithThreeContentTypesWithResponseAsync(message, requestOptions).block();
+    }
+
+    /**
+     * Body that's either text/plain or application/json.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putTextAndJsonBodyWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.putTextAndJsonBody(this.getHost(), message, requestOptions, context));
+    }
+
+    /**
+     * Body that's either text/plain or application/json.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putTextAndJsonBodyWithResponseAsync(
+            BinaryData message, RequestOptions requestOptions, Context context) {
+        return service.putTextAndJsonBody(this.getHost(), message, requestOptions, context);
+    }
+
+    /**
+     * Body that's either text/plain or application/json.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putTextAndJsonBodyWithResponse(BinaryData message, RequestOptions requestOptions) {
+        return putTextAndJsonBodyWithResponseAsync(message, requestOptions).block();
     }
 }

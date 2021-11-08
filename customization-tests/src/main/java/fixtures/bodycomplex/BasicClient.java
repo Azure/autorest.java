@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import fixtures.bodycomplex.implementation.models.ErrorException;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class BasicClient {
-    private final BasicsImpl serviceClient;
+    @Generated private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of Basics client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     BasicClient(BasicsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -34,6 +36,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getValid() {
         return this.serviceClient.getValid();
@@ -48,6 +51,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
@@ -61,6 +65,7 @@ public final class BasicClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Basic complexBody) {
         this.serviceClient.putValid(complexBody);
@@ -76,6 +81,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Basic complexBody, Context context) {
         return this.serviceClient.putValidWithResponse(complexBody, context);
@@ -88,6 +94,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getInvalid() {
         return this.serviceClient.getInvalid();
@@ -102,6 +109,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getInvalidWithResponse(Context context) {
         return this.serviceClient.getInvalidWithResponse(context);
@@ -114,6 +122,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getEmpty() {
         return this.serviceClient.getEmpty();
@@ -128,6 +137,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getEmptyWithResponse(Context context) {
         return this.serviceClient.getEmptyWithResponse(context);
@@ -140,6 +150,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNull() {
         return this.serviceClient.getNull();
@@ -154,6 +165,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getNullWithResponse(Context context) {
         return this.serviceClient.getNullWithResponse(context);
@@ -166,6 +178,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNotProvided() {
         return this.serviceClient.getNotProvided();
@@ -180,6 +193,7 @@ public final class BasicClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getNotProvidedWithResponse(Context context) {
         return this.serviceClient.getNotProvidedWithResponse(context);

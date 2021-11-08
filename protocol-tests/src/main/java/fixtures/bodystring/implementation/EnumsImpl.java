@@ -130,14 +130,13 @@ public final class EnumsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
-        return getNotExpandableWithResponseAsync(requestOptions, context).block();
+    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
+        return getNotExpandableWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -195,15 +194,13 @@ public final class EnumsImpl {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNotExpandableWithResponse(
-            BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        return putNotExpandableWithResponseAsync(stringBody, requestOptions, context).block();
+    public Response<Void> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
+        return putNotExpandableWithResponseAsync(stringBody, requestOptions).block();
     }
 
     /**
@@ -255,14 +252,13 @@ public final class EnumsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
-        return getReferencedWithResponseAsync(requestOptions, context).block();
+    public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
+        return getReferencedWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -320,15 +316,13 @@ public final class EnumsImpl {
      *
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedWithResponse(
-            BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        return putReferencedWithResponseAsync(enumStringBody, requestOptions, context).block();
+    public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
+        return putReferencedWithResponseAsync(enumStringBody, requestOptions).block();
     }
 
     /**
@@ -391,14 +385,13 @@ public final class EnumsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
-        return getReferencedConstantWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions) {
+        return getReferencedConstantWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -466,14 +459,12 @@ public final class EnumsImpl {
      *
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedConstantWithResponse(
-            BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        return putReferencedConstantWithResponseAsync(enumStringBody, requestOptions, context).block();
+    public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
+        return putReferencedConstantWithResponseAsync(enumStringBody, requestOptions).block();
     }
 }

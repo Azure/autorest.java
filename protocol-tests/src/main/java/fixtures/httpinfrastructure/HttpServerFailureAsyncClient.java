@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class HttpServerFailureAsyncClient {
-    private final HttpServerFailuresImpl serviceClient;
+    @Generated private final HttpServerFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpServerFailures client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     HttpServerFailureAsyncClient(HttpServerFailuresImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -35,6 +37,7 @@ public final class HttpServerFailureAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head501WithResponseAsync(requestOptions);
@@ -48,6 +51,7 @@ public final class HttpServerFailureAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get501WithResponseAsync(requestOptions);
@@ -67,6 +71,7 @@ public final class HttpServerFailureAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.post505WithResponseAsync(requestOptions);
@@ -86,6 +91,7 @@ public final class HttpServerFailureAsyncClient {
      *     false.
      * @return the completion.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.delete505WithResponseAsync(requestOptions);

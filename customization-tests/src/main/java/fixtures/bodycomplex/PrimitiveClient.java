@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -26,13 +27,14 @@ import fixtures.bodycomplex.implementation.models.StringWrapper;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class PrimitiveClient {
-    private final PrimitivesImpl serviceClient;
+    @Generated private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of Primitives client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     PrimitiveClient(PrimitivesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -44,6 +46,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public IntWrapper getInt() {
         return this.serviceClient.getInt();
@@ -58,6 +61,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<IntWrapper> getIntWithResponse(Context context) {
         return this.serviceClient.getIntWithResponse(context);
@@ -71,6 +75,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putInt(IntWrapper complexBody) {
         this.serviceClient.putInt(complexBody);
@@ -86,6 +91,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(IntWrapper complexBody, Context context) {
         return this.serviceClient.putIntWithResponse(complexBody, context);
@@ -98,6 +104,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LongWrapper getLong() {
         return this.serviceClient.getLong();
@@ -112,6 +119,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<LongWrapper> getLongWithResponse(Context context) {
         return this.serviceClient.getLongWithResponse(context);
@@ -125,6 +133,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLong(LongWrapper complexBody) {
         this.serviceClient.putLong(complexBody);
@@ -140,6 +149,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(LongWrapper complexBody, Context context) {
         return this.serviceClient.putLongWithResponse(complexBody, context);
@@ -152,6 +162,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatWrapper getFloat() {
         return this.serviceClient.getFloat();
@@ -166,6 +177,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<FloatWrapper> getFloatWithResponse(Context context) {
         return this.serviceClient.getFloatWithResponse(context);
@@ -179,6 +191,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloat(FloatWrapper complexBody) {
         this.serviceClient.putFloat(complexBody);
@@ -194,6 +207,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(FloatWrapper complexBody, Context context) {
         return this.serviceClient.putFloatWithResponse(complexBody, context);
@@ -206,6 +220,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DoubleWrapper getDouble() {
         return this.serviceClient.getDouble();
@@ -220,6 +235,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DoubleWrapper> getDoubleWithResponse(Context context) {
         return this.serviceClient.getDoubleWithResponse(context);
@@ -233,6 +249,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDouble(DoubleWrapper complexBody) {
         this.serviceClient.putDouble(complexBody);
@@ -248,6 +265,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody, Context context) {
         return this.serviceClient.putDoubleWithResponse(complexBody, context);
@@ -260,6 +278,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanWrapper getBool() {
         return this.serviceClient.getBool();
@@ -274,6 +293,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BooleanWrapper> getBoolWithResponse(Context context) {
         return this.serviceClient.getBoolWithResponse(context);
@@ -287,6 +307,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBool(BooleanWrapper complexBody) {
         this.serviceClient.putBool(complexBody);
@@ -302,6 +323,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BooleanWrapper complexBody, Context context) {
         return this.serviceClient.putBoolWithResponse(complexBody, context);
@@ -314,6 +336,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StringWrapper getString() {
         return this.serviceClient.getString();
@@ -328,6 +351,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<StringWrapper> getStringWithResponse(Context context) {
         return this.serviceClient.getStringWithResponse(context);
@@ -341,6 +365,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putString(StringWrapper complexBody) {
         this.serviceClient.putString(complexBody);
@@ -356,6 +381,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(StringWrapper complexBody, Context context) {
         return this.serviceClient.putStringWithResponse(complexBody, context);
@@ -368,6 +394,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DateWrapper getDate() {
         return this.serviceClient.getDate();
@@ -382,6 +409,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DateWrapper> getDateWithResponse(Context context) {
         return this.serviceClient.getDateWithResponse(context);
@@ -395,6 +423,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDate(DateWrapper complexBody) {
         this.serviceClient.putDate(complexBody);
@@ -410,6 +439,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(DateWrapper complexBody, Context context) {
         return this.serviceClient.putDateWithResponse(complexBody, context);
@@ -422,6 +452,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DatetimeWrapper getDateTime() {
         return this.serviceClient.getDateTime();
@@ -436,6 +467,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DatetimeWrapper> getDateTimeWithResponse(Context context) {
         return this.serviceClient.getDateTimeWithResponse(context);
@@ -449,6 +481,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTime(DatetimeWrapper complexBody) {
         this.serviceClient.putDateTime(complexBody);
@@ -464,6 +497,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody, Context context) {
         return this.serviceClient.putDateTimeWithResponse(complexBody, context);
@@ -476,6 +510,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
         return this.serviceClient.getDateTimeRfc1123();
@@ -490,6 +525,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse(Context context) {
         return this.serviceClient.getDateTimeRfc1123WithResponse(context);
@@ -503,6 +539,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
         this.serviceClient.putDateTimeRfc1123(complexBody);
@@ -518,6 +555,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
         return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody, context);
@@ -530,6 +568,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationWrapper getDuration() {
         return this.serviceClient.getDuration();
@@ -544,6 +583,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DurationWrapper> getDurationWithResponse(Context context) {
         return this.serviceClient.getDurationWithResponse(context);
@@ -557,6 +597,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDuration(DurationWrapper complexBody) {
         this.serviceClient.putDuration(complexBody);
@@ -572,6 +613,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(DurationWrapper complexBody, Context context) {
         return this.serviceClient.putDurationWithResponse(complexBody, context);
@@ -584,6 +626,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ByteWrapper getByte() {
         return this.serviceClient.getByte();
@@ -598,6 +641,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ByteWrapper> getByteWithResponse(Context context) {
         return this.serviceClient.getByteWithResponse(context);
@@ -611,6 +655,7 @@ public final class PrimitiveClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(ByteWrapper complexBody) {
         this.serviceClient.putByte(complexBody);
@@ -626,6 +671,7 @@ public final class PrimitiveClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(ByteWrapper complexBody, Context context) {
         return this.serviceClient.putByteWithResponse(complexBody, context);

@@ -4,6 +4,7 @@
 
 package fixtures.llcresi;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
@@ -11,19 +12,19 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import fixtures.llcresi.implementation.ParamsImpl;
 
 /** Initializes a new instance of the synchronous LLCClient type. */
 @ServiceClient(builder = LLCClientBuilder.class)
 public final class LLCClient {
-    private final ParamsImpl serviceClient;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of Params client.
      *
      * @param serviceClient the service client implementation.
      */
+    @Generated
     LLCClient(ParamsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -47,14 +48,14 @@ public final class LLCClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return true Boolean value on path.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getRequiredWithResponse(requestOptions, context);
+    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getRequiredWithResponse(requestOptions);
     }
 
     /**
@@ -83,29 +84,28 @@ public final class LLCClient {
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return any object.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postParametersWithResponse(
-            BinaryData parameter, RequestOptions requestOptions, Context context) {
-        return this.serviceClient.postParametersWithResponse(parameter, requestOptions, context);
+    public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
+        return this.serviceClient.postParametersWithResponse(parameter, requestOptions);
     }
 
     /**
      * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.deleteParametersWithResponse(requestOptions, context);
+    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.deleteParametersWithResponse(requestOptions);
     }
 
     /**
@@ -118,13 +118,13 @@ public final class LLCClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return any object.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getNewOperationWithResponse(requestOptions, context);
+    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getNewOperationWithResponse(requestOptions);
     }
 }

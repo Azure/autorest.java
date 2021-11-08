@@ -22,29 +22,29 @@ public class EnumOperationsTests {
 
     @Test
     public void getNotExpandable() throws Exception {
-        String result = client.getNotExpandableWithResponse(null, null).getValue();
+        String result = client.getNotExpandableWithResponse(null).getValue();
         Assertions.assertEquals("red color", result);
     }
 
     @Test
     public void putNotExpandable() throws Exception {
-        client.putNotExpandableWithResponse(BinaryData.fromObject("red color"), null, null);
+        client.putNotExpandableWithResponse(BinaryData.fromObject("red color"), null);
     }
 
     @Test
     public void getReferenced() throws Exception {
-        String actual = client.getReferencedWithResponse(null, null).getValue();
+        String actual = client.getReferencedWithResponse(null).getValue();
         Assertions.assertEquals("red color", actual);
     }
 
     @Test
     public void putReferenced() throws Exception {
-        client.putReferencedWithResponse(BinaryData.fromObject("red color"), null, null);
+        client.putReferencedWithResponse(BinaryData.fromObject("red color"), null);
     }
 
     @Test
     public void getReferencedConstant() throws Exception {
-        String res = client.getReferencedConstantWithResponse(null, null).getValue().toString();
+        String res = client.getReferencedConstantWithResponse(null).getValue().toString();
         JsonReader jsonReader = Json.createReader(new StringReader(res));
         JsonObject result = jsonReader.readObject();
         Assertions.assertFalse(result.containsKey("ColorConstant"));
@@ -55,6 +55,6 @@ public class EnumOperationsTests {
         JsonObject farm = Json.createObjectBuilder()
                 .add("ColorConstant", "green-color")
                 .build();
-        client.putReferencedConstantWithResponse(BinaryData.fromString(farm.toString()), null, null);
+        client.putReferencedConstantWithResponse(BinaryData.fromString(farm.toString()), null);
     }
 }

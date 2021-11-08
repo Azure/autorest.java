@@ -143,14 +143,13 @@ public final class ParamsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions, Context context) {
-        return getRequiredWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
+        return getRequiredWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -253,15 +252,13 @@ public final class ParamsImpl {
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postParametersWithResponse(
-            BinaryData parameter, RequestOptions requestOptions, Context context) {
-        return postParametersWithResponseAsync(parameter, requestOptions, context).block();
+    public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
+        return postParametersWithResponseAsync(parameter, requestOptions).block();
     }
 
     /**
@@ -296,14 +293,13 @@ public final class ParamsImpl {
      * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions, Context context) {
-        return deleteParametersWithResponseAsync(requestOptions, context).block();
+    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
+        return deleteParametersWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -355,13 +351,12 @@ public final class ParamsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
      *     false.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions, Context context) {
-        return getNewOperationWithResponseAsync(requestOptions, context).block();
+    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
+        return getNewOperationWithResponseAsync(requestOptions).block();
     }
 }
