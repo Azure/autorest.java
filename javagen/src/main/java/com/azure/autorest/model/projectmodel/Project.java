@@ -56,7 +56,7 @@ public class Project {
         private String azureCoreManagementVersion = "1.4.3";
         private String azureCoreHttpNettyVersion = "1.11.2";
         private String azureCoreTestVersion = "1.7.4";
-        private String azureIdentityVersion = "1.4.0";
+        private String azureIdentityVersion = "1.4.1";
         private String junitVersion = "5.7.2";
         private String revapiMavenPlugin = "0.11.2";
 
