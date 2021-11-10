@@ -33,8 +33,9 @@ public class SwaggerReadmeTemplate {
 
         line("```yaml");
         // input-files
+        line("input-file:");
         for (String jsonPath : settings.getAutorestSettings().getInputFiles()) {
-            line(String.format("%s: %s", "input-file", jsonPath));
+            line(String.format("  - %s", jsonPath));
         }
         // settings from internal
         for (Map.Entry<String, String> entry : OVERRIDE_SETTINGS.entrySet()) {
