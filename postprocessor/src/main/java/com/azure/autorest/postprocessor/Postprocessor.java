@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,10 +50,16 @@ public class Postprocessor extends NewPlugin {
     try {
       String readmePath = getReadme();
       if (readmePath != null) {
-        readme = new String(Files.readAllBytes(Paths.get(new URI(getReadme()))));
+        logger.info("README found at: {}", readmePath);
+        readme = new String(Files.readAllBytes(Paths.get(new URI(readmePath))));
       }
-    } catch (IOException | URISyntaxException e) {
+    } catch (IOException | URISyntaxException | IllegalArgumentException e) {
+      logger.warn("Location of README is not valid", e);
       return false;
+    } catch (FileSystemNotFoundException e) {
+      // likely cause is the URI of the README is "https" scheme
+      logger.warn("File system of README not reachable, skip README", e);
+      // continue
     }
 
     if (className == null) {
