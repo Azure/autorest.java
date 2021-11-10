@@ -41,6 +41,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static final ModelMapper INSTANCE = new ModelMapper();
     private final ClientModels serviceModels = ClientModels.Instance;
 
+    private final static String PROPERTY_NAME_ADDITIONAL_PROPERTIES = "additionalProperties";
+
     protected ModelMapper() {
     }
 
@@ -167,8 +169,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             if (hasAdditionalProperties) {
                 for (Property property : compositeTypeProperties) {
-                    if (property.getLanguage().getJava().getName().equals("additionalProperties")) {
-                        property.getLanguage().getJava().setName("additionalPropertiesProperty");
+                    if (property.getLanguage().getJava().getName().equals(PROPERTY_NAME_ADDITIONAL_PROPERTIES)) {
+                        property.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES + "Property");
                     }
                 }
             }
@@ -361,6 +363,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
                     .map(p -> p.getLanguage().getJava().getName())
                     .collect(Collectors.toSet());
+            // additional properties
+            if (compositeType.getParents() != null && compositeType.getParents().getAll() != null
+                    && compositeType.getParents().getAll().stream().anyMatch(s -> s instanceof DictionarySchema)) {
+                propertyNames.add(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
+            }
 
             Set<String> referencePropertyNames = new HashSet<>();
             // properties from the target model
