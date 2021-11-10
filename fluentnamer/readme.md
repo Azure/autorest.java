@@ -19,8 +19,6 @@ pipeline:
     flatten-models: false
     flatten-payloads: false
 
-    include-x-ms-examples-original-file: true
-
     additional-checks: true
     lenient-model-deduplication: false
     remove-empty-child-schemas: false
@@ -52,6 +50,8 @@ pipeline:
         sTag: stag
         tagname: tagName
         tagvalue: tagValue
+
+include-x-ms-examples-original-file: true
 
 license-header: MICROSOFT_MIT_SMALL
 regenerate-pom: true
