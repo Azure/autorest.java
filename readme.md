@@ -75,6 +75,18 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 
+## Settings for minimal clients (low-level clients)
+
+`low-level-client` option enables the generator to generate code for minimal clients.
+
+`low-level-client` option will change the default value for some vanilla options.
+For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
+`polling` is by default enabled as default settings globally (`polling={}`).
+
+`sdk-integration` option can be used for integrating to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/).
+
+`generate-samples` option can be used for generating samples for client.
+
 ## Additional settings for Fluent
 
 `fluent` option enables the generator extension for [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).
@@ -126,20 +138,11 @@ With the fields specified below:
 
 To use default settings globally, use `--polling={}`.
 
-# Protocol clients (low level clients)
+# Minimal clients (low-level clients)
 
-You can generate the output as protocol clients, a.k.a., low level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods). `--low-leve-client` should be used in conjunction with the following settings:
+You can generate the output as minimal clients, a.k.a., low-level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods).
 
-```
-generate-client-interfaces: false
-generate-client-as-impl: true
-generate-sync-async-clients: true
-add-context-parameter: true
-context-client-method-parameter: true
-sync-methods: all
-```
-
-The generated code has the following structure
+The generated code has the following structure:
 
 ```
 - pom.xml
@@ -888,6 +891,9 @@ help-content:
       - key: polling
         type: string
         description: Configures how to generate long running operations. See [Polling Configuration](https://github.com/Azure/autorest.java#polling-configuration) to see more details on how to use this flag.
+      - key: low-level-client
+        type: bool
+        description:  Indicates whether to generate code for minimal clients. Default is false.
 
   javafluent:
     activationScope: fluent
