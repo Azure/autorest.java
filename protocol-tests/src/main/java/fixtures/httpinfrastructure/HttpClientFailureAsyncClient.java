@@ -60,6 +60,20 @@ public final class HttpClientFailureAsyncClient {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options400WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options400WithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -163,6 +177,20 @@ public final class HttpClientFailureAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get402WithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options403WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options403WithResponseAsync(requestOptions);
     }
 
     /**
@@ -305,6 +333,20 @@ public final class HttpClientFailureAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get411WithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options412WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options412WithResponseAsync(requestOptions);
     }
 
     /**

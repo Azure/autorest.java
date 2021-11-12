@@ -8,6 +8,7 @@ import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Options;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -28,14 +29,16 @@ import fixtures.httpinfrastructure.models.HttpRedirectsHead300Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsHead301Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsHead302Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsHead307Response;
+import fixtures.httpinfrastructure.models.HttpRedirectsOptions307Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPatch302Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPatch307Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPost303Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPost307Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut301Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut307Response;
-import java.util.List;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /** An instance of this class provides access to all the operations defined in HttpRedirects. */
 public final class HttpRedirects {
@@ -136,6 +139,12 @@ public final class HttpRedirects {
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsGet307Response> get307(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Options("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<HttpRedirectsOptions307Response> options307(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/307")
@@ -634,6 +643,46 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get307() {
         get307Async().block();
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.options307(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options307Async() {
+        return options307WithResponseAsync().flatMap((HttpRedirectsOptions307Response res) -> Mono.empty());
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void options307() {
+        options307Async().block();
     }
 
     /**

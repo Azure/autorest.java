@@ -9,6 +9,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Options;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -83,6 +84,10 @@ public final class HttpRedirectsImpl {
 
         @Get("/http/redirect/307")
         Mono<Response<Void>> get307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Options("/http/redirect/307")
+        Mono<Response<Void>> options307(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/redirect/307")
         Mono<Response<Void>> put307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
@@ -622,6 +627,46 @@ public final class HttpRedirectsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get307WithResponse(RequestOptions requestOptions) {
         return get307WithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options307WithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.options307(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options307WithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.options307(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> options307WithResponse(RequestOptions requestOptions) {
+        return options307WithResponseAsync(requestOptions).block();
     }
 
     /**

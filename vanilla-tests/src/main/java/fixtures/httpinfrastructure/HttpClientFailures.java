@@ -7,6 +7,7 @@ import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Options;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -58,6 +59,11 @@ public final class HttpClientFailures {
         Mono<Response<Void>> get400(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Options("/http/failure/client/400")
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> options400(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put400(
@@ -98,6 +104,11 @@ public final class HttpClientFailures {
         @Get("/http/failure/client/402")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> get402(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Options("/http/failure/client/403")
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> options403(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/failure/client/403")
@@ -153,6 +164,11 @@ public final class HttpClientFailures {
         @Get("/http/failure/client/411")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> get411(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Options("/http/failure/client/412")
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> options412(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/failure/client/412")
@@ -281,6 +297,46 @@ public final class HttpClientFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get400() {
         get400Async().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.options400(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options400Async() {
+        return options400WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void options400() {
+        options400Async().block();
     }
 
     /**
@@ -525,6 +581,46 @@ public final class HttpClientFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get402() {
         get402Async().block();
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options403WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.options403(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options403Async() {
+        return options403WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void options403() {
+        options403Async().block();
     }
 
     /**
@@ -850,6 +946,46 @@ public final class HttpClientFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get411() {
         get411Async().block();
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options412WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.options412(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options412Async() {
+        return options412WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void options412() {
+        options412Async().block();
     }
 
     /**

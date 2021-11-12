@@ -214,6 +214,20 @@ public final class HttpRedirectsAsyncClient {
     }
 
     /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return the completion.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options307WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options307WithResponseAsync(requestOptions);
+    }
+
+    /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * <p><strong>Request Body Schema</strong>
