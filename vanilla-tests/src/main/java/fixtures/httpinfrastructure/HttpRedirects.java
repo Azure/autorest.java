@@ -36,9 +36,8 @@ import fixtures.httpinfrastructure.models.HttpRedirectsPost303Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPost307Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut301Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut307Response;
-import reactor.core.publisher.Mono;
-
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in HttpRedirects. */
 public final class HttpRedirects {
