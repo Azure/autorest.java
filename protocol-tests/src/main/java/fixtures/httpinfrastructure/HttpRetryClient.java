@@ -97,6 +97,26 @@ public final class HttpRetryClient {
     }
 
     /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return simple boolean.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> options502WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options502WithResponse(requestOptions);
+    }
+
+    /**
      * Return 503 status code, then 200 after retry.
      *
      * <p><strong>Request Body Schema</strong>

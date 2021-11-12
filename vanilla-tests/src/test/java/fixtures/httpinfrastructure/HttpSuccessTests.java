@@ -1,103 +1,56 @@
 package fixtures.httpinfrastructure;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.azure.core.http.rest.Response;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
+
+import java.time.Duration;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HttpSuccessTests {
-  private static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
 
-  @BeforeClass
-  public static void setup() {
-    client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
-  }
+    @BeforeAll
+    public static void setup() {
+        client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
+    }
 
-  @Test
-  public void head200() throws Exception {
-    client.getHttpSuccess().head200();
-  }
+    @ParameterizedTest
+    @MethodSource("httpSuccessSupplier")
+    public void httpSuccess(Mono<Response<?>> call, int expectedStatusCode) {
+        StepVerifier.create(call)
+            .assertNext(response -> assertEquals(expectedStatusCode, response.getStatusCode()))
+            .expectComplete()
+            .verify(Duration.ofSeconds(5));
+    }
 
-  @Test
-  public void get200() throws Exception {
-    client.getHttpSuccess().get200();
-  }
-
-  @Test
-  public void put200() throws Exception {
-    client.getHttpSuccess().put200();
-  }
-
-  @Test
-  public void patch200() throws Exception {
-    client.getHttpSuccess().patch200();
-  }
-
-  @Test
-  public void post200() throws Exception {
-    client.getHttpSuccess().post200();
-  }
-
-  @Test
-  public void delete200() throws Exception {
-    client.getHttpSuccess().delete200();
-  }
-
-  @Test
-  public void put201() throws Exception {
-    client.getHttpSuccess().put201();
-  }
-
-  @Test
-  public void post201() throws Exception {
-    client.getHttpSuccess().post201();
-  }
-
-  @Test
-  public void put202() throws Exception {
-    client.getHttpSuccess().put202();
-  }
-
-  @Test
-  public void patch202() throws Exception {
-    client.getHttpSuccess().patch202();
-  }
-
-  @Test
-  public void post202() throws Exception {
-    client.getHttpSuccess().post202();
-  }
-
-  @Test
-  public void delete202() throws Exception {
-    client.getHttpSuccess().delete202();
-  }
-
-  @Test
-  public void head204() throws Exception {
-    client.getHttpSuccess().head204();
-  }
-
-  @Test
-  public void put204() throws Exception {
-    client.getHttpSuccess().put204();
-  }
-
-  @Test
-  public void patch204() throws Exception {
-    client.getHttpSuccess().patch204();
-  }
-
-  @Test
-  public void post204() throws Exception {
-    client.getHttpSuccess().post204();
-  }
-
-  @Test
-  public void delete204() throws Exception {
-    client.getHttpSuccess().delete204();
-  }
-
-  @Test
-  public void head404() throws Exception {
-    client.getHttpSuccess().head404();
-  }
+    public static Stream<Arguments> httpSuccessSupplier() {
+        return Stream.of(
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().head200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().get200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().options200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().put200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().patch200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().post200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().delete200WithResponseAsync()), 200),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().put201WithResponseAsync()), 201),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().post201WithResponseAsync()), 201),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().put202WithResponseAsync()), 202),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().patch202WithResponseAsync()), 202),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().post202WithResponseAsync()), 202),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().delete202WithResponseAsync()), 202),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().head204WithResponseAsync()), 204),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().put204WithResponseAsync()), 204),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().patch204WithResponseAsync()), 204),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().post204WithResponseAsync()), 204),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().delete204WithResponseAsync()), 204),
+            Arguments.of(Mono.defer(() -> client.getHttpSuccess().head404WithResponseAsync()), 404)
+        );
+    }
 }

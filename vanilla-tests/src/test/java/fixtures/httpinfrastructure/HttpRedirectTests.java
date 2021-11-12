@@ -1,88 +1,53 @@
 package fixtures.httpinfrastructure;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.azure.core.http.rest.Response;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
+
+import java.time.Duration;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HttpRedirectTests {
     private static AutoRestHttpInfrastructureTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
     }
 
-    @Test
-    public void head300() throws Exception {
-        client.getHttpRedirects().head300();
+    @ParameterizedTest
+    @MethodSource("httpRedirectSupplier")
+    public void httpRedirect(Mono<Response<?>> call, int expectedStatusCode) {
+        StepVerifier.create(call)
+            .assertNext(response -> assertEquals(expectedStatusCode, response.getStatusCode()))
+            .expectComplete()
+            .verify(Duration.ofSeconds(10));
     }
 
-    @Test
-    public void get300() throws Exception {
-        client.getHttpRedirects().get300();
-    }
-
-    @Test
-    public void head301() throws Exception {
-        client.getHttpRedirects().head301();
-    }
-
-    @Test
-    public void get301() throws Exception {
-        client.getHttpRedirects().get301();
-    }
-
-    @Test
-    public void put301() throws Exception {
-        client.getHttpRedirects().put301();
-    }
-
-    @Test
-    public void head302() throws Exception {
-        client.getHttpRedirects().head302();
-    }
-
-    @Test
-    public void get302() throws Exception {
-        client.getHttpRedirects().get302();
-    }
-
-    @Test
-    public void patch302() throws Exception {
-        client.getHttpRedirects().patch302();
-    }
-
-    @Test
-    public void post303() throws Exception {
-        client.getHttpRedirects().post303();
-    }
-
-    @Test
-    public void head307() throws Exception {
-        client.getHttpRedirects().head307();
-    }
-
-    @Test
-    public void get307() throws Exception {
-        client.getHttpRedirects().get307();
-    }
-
-    @Test
-    public void put307() throws Exception {
-        client.getHttpRedirects().put307();
-    }
-
-    @Test
-    public void patch307() throws Exception {
-        client.getHttpRedirects().patch307();
-    }
-
-    @Test
-    public void post307() throws Exception {
-        client.getHttpRedirects().post307();
-    }
-
-    @Test
-    public void delete307() throws Exception {
-        client.getHttpRedirects().delete307();
+    public static Stream<Arguments> httpRedirectSupplier() {
+        return Stream.of(
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().head300WithResponseAsync()), 300),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().get300WithResponseAsync()), 300),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().head301WithResponseAsync()), 301),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().get301WithResponseAsync()), 301),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().put301WithResponseAsync()), 301),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().head302WithResponseAsync()), 302),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().get302WithResponseAsync()), 302),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().patch302WithResponseAsync()), 302),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().post303WithResponseAsync()), 303),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().head307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().get307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().options307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().put307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().patch307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().post307WithResponseAsync()), 307),
+            Arguments.of(Mono.defer(() -> client.getHttpRedirects().delete307WithResponseAsync()), 307)
+        );
     }
 }

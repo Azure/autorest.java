@@ -9,6 +9,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Options;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -54,6 +55,10 @@ public final class HttpSuccessImpl {
 
         @Get("/http/success/200")
         Mono<Response<Boolean>> get200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Options("/http/success/200")
+        Mono<Response<Boolean>> options200(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/success/200")
         Mono<Response<Void>> put200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
@@ -201,6 +206,64 @@ public final class HttpSuccessImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
         return get200WithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.options200(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.options200(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
+        return options200WithResponseAsync(requestOptions).block();
     }
 
     /**

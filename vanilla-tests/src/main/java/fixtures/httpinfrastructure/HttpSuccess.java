@@ -8,6 +8,7 @@ import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Options;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -58,6 +59,12 @@ public final class HttpSuccess {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> get200(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Options("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Boolean>> options200(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/success/200")
@@ -286,6 +293,60 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200() {
         Boolean value = get200Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> options200WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.options200(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> options200Async() {
+        return options200WithResponseAsync()
+                .flatMap(
+                        (Response<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean options200() {
+        Boolean value = options200Async().block();
         if (value != null) {
             return value;
         } else {

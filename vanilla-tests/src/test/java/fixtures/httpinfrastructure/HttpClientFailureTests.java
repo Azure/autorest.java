@@ -1,247 +1,64 @@
 package fixtures.httpinfrastructure;
 
 import fixtures.httpinfrastructure.models.ErrorException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.Assert.fail;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HttpClientFailureTests {
-  private static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
 
-  @BeforeClass
-  public static void setup() {
-    client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
-  }
-
-  @Test
-  public void head400() throws Exception {
-    try {
-      client.getHttpClientFailures().head400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
+    @BeforeAll
+    public static void setup() {
+        client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
     }
-  }
 
-  @Test
-  public void get400() throws Exception {
-    try {
-      client.getHttpClientFailures().get400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
+    @ParameterizedTest
+    @MethodSource("httpClientFailureSupplier")
+    public void httpClientFailure(Executable executable, int expectedStatusCode) {
+        ErrorException ex = assertThrows(ErrorException.class, executable);
+        assertEquals(expectedStatusCode, ex.getResponse().getStatusCode());
     }
-  }
 
-  @Test
-  public void put400() throws Exception {
-    try {
-      client.getHttpClientFailures().put400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
+    public static Stream<Arguments> httpClientFailureSupplier() {
+        return Stream.of(
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().head400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().options400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().put400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().patch400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().post400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().delete400()), 400),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().head401()), 401),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get402()), 402),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().options403()), 403),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get403()), 403),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().put404()), 404),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().patch405()), 405),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().post406()), 406),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().delete407()), 407),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().put409()), 409),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().head410()), 410),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get411()), 411),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().options412()), 412),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get412()), 412),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().put413()), 413),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().patch414()), 414),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().post415()), 415),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().get416()), 416),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().delete417()), 417),
+            Arguments.of(createExecution(() -> client.getHttpClientFailures().head429()), 429)
+        );
     }
-  }
 
-  @Test
-  public void patch400() throws Exception {
-    try {
-      client.getHttpClientFailures().patch400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
+    private static Executable createExecution(Runnable runnable) {
+        return runnable::run;
     }
-  }
-
-  @Test
-  public void post400() throws Exception {
-    try {
-      client.getHttpClientFailures().post400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void delete400() throws Exception {
-    try {
-      client.getHttpClientFailures().delete400();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(400, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void head401() throws Exception {
-    try {
-      client.getHttpClientFailures().head401();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(401, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void get402() throws Exception {
-    try {
-      client.getHttpClientFailures().get402();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(402, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void get403() throws Exception {
-    try {
-      client.getHttpClientFailures().get403();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(403, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void put404() throws Exception {
-    try {
-      client.getHttpClientFailures().put404();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(404, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void patch405() throws Exception {
-    try {
-      client.getHttpClientFailures().patch405();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(405, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void post406() throws Exception {
-    try {
-      client.getHttpClientFailures().post406();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(406, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void delete407() throws Exception {
-    try {
-      client.getHttpClientFailures().delete407();
-      fail();
-    } catch (RuntimeException ex) {
-      Assert.assertTrue(ex.getMessage().contains("Status code 407"));
-    }
-  }
-
-  @Test
-  public void put409() throws Exception {
-    try {
-      client.getHttpClientFailures().put409();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(409, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void head410() throws Exception {
-    try {
-      client.getHttpClientFailures().head410();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(410, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void get411() throws Exception {
-    try {
-      client.getHttpClientFailures().get411();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(411, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void get412() throws Exception {
-    try {
-      client.getHttpClientFailures().get412();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(412, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void put413() throws Exception {
-    try {
-      client.getHttpClientFailures().put413();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(413, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void patch414() throws Exception {
-    try {
-      client.getHttpClientFailures().patch414();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(414, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void post415() throws Exception {
-    try {
-      client.getHttpClientFailures().post415();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(415, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void get416() throws Exception {
-    try {
-      client.getHttpClientFailures().get416();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(416, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void delete417() throws Exception {
-    try {
-      client.getHttpClientFailures().delete417();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(417, ex.getResponse().getStatusCode());
-    }
-  }
-
-  @Test
-  public void head429() throws Exception {
-    try {
-      client.getHttpClientFailures().head429();
-      fail();
-    } catch (ErrorException ex) {
-      Assert.assertEquals(429, ex.getResponse().getStatusCode());
-    }
-  }
 }

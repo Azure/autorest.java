@@ -64,6 +64,26 @@ public final class HttpSuccessAsyncClient {
     }
 
     /**
+     * Options 200 success.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
+     *     false.
+     * @return simple boolean.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> options200WithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.options200WithResponseAsync(requestOptions);
+    }
+
+    /**
      * Put boolean value true returning 200 success.
      *
      * <p><strong>Request Body Schema</strong>
