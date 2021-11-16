@@ -120,8 +120,9 @@ public class FluentClientMethodExample implements FluentMethodExample {
         MANAGER_REFERENCE.put("authorization", "accessManagement().roleAssignments()");
         MANAGER_REFERENCE.put("cdn", "cdnProfiles()");
         MANAGER_REFERENCE.put("compute", "virtualMachines()");
-        MANAGER_REFERENCE.put("containerregistry", "containerRegistries()");
         MANAGER_REFERENCE.put("containerinstance", "containerGroups()");
+        MANAGER_REFERENCE.put("containerregistry", "containerRegistries()");
+        MANAGER_REFERENCE.put("containerservice", "kubernetesClusters()");
         MANAGER_REFERENCE.put("cosmos", "cosmosDBAccounts()");
         MANAGER_REFERENCE.put("dns", "dnsZones()");
         MANAGER_REFERENCE.put("eventhubs", "eventHubs()");
