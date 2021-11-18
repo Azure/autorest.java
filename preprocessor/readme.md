@@ -50,6 +50,13 @@ pipeline:
     flatten-payloads: false
     group-parameters: false
     lenient-model-deduplication: true
+
+    naming:
+      choiceValue: upper
+      preserve-uppercase-max-length: 2
+      override:
+        ip: Ip
+        id: Id
 ```
 
 ```yaml $(low-level-client) && $(sdk-integration)
