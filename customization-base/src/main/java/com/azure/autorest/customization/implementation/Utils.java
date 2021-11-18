@@ -48,7 +48,7 @@ public class Utils {
      * This pattern determines the indentation of the passed string. Effectively it creates a group containing all
      * spaces before the first word character.
      */
-    public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*)\\w.*$");
+    public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*).*$");
 
     /**
      * This pattern matches a Java package declaration.

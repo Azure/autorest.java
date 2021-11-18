@@ -1,6 +1,7 @@
 package com.azure.autorest.extension.base.jsonrpc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Connection {
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper()
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     private OutputStream writer;
     private PeekingBinaryReader reader;

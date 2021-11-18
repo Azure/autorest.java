@@ -3,8 +3,8 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public enum CodeActionKind {
     /**
@@ -59,11 +59,14 @@ public enum CodeActionKind {
     SOURCE_ORGANIZEIMPORTS("source.organizeImports");
 
 
-    private static final Map<String, CodeActionKind> STRING_TO_CODE_ACTION_KIND;
+    private static final Map<String, CodeActionKind> STRING_TO_KIND_MAP;
 
     static {
-        STRING_TO_CODE_ACTION_KIND = new ConcurrentHashMap<>();
+        STRING_TO_KIND_MAP = new HashMap<>();
 
+        for (CodeActionKind kind : CodeActionKind.values()) {
+            STRING_TO_KIND_MAP.putIfAbsent(kind.value, kind);
+        }
     }
 
     private final String value;
@@ -74,13 +77,7 @@ public enum CodeActionKind {
 
     @JsonCreator
     public static CodeActionKind fromString(String value) {
-        CodeActionKind[] items = CodeActionKind.values();
-        for (CodeActionKind item : items) {
-            if (item.value.equals(value)) {
-                return item;
-            }
-        }
-        return null;
+        return STRING_TO_KIND_MAP.get(value);
     }
 
     @JsonValue
