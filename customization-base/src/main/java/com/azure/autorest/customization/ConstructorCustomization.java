@@ -7,8 +7,12 @@ import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.lang.reflect.Modifier;
+import java.util.Optional;
 
 /**
  * The constructor level customization for an AutoRest generated constructor.
@@ -62,7 +66,22 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
+        CompilationUnit compilationUnit = StaticJavaParser.parse(editor.getFileContent(fileName));
+        Optional<AnnotationExpr> annotationExpr = compilationUnit.getClassByName(className).get()
+            .getConstructors()
+            .stream()
+            .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
+            .findFirst().get()
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation));
+
+        if (annotationExpr.isPresent()) {
+            annotationExpr.get().remove();
+            editor.replaceFile(fileName, compilationUnit.toString());
+            Utils.sendFilesChangeNotification(languageClient, fileUri);
+            return refreshCustomization(constructorSignature);
+        } else {
+            return this;
+        }
     }
 
     /**

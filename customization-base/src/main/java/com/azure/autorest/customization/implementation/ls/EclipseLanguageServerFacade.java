@@ -8,7 +8,11 @@ import java.nio.file.Paths;
 public class EclipseLanguageServerFacade {
     private final Process server;
 
-    public EclipseLanguageServerFacade(String workspaceDir, int port) {
+    public EclipseLanguageServerFacade(int port) {
+        this(System.getProperty("user.dir"), port);
+    }
+
+    public EclipseLanguageServerFacade(String pathToLanguageServerPlugin, int port) {
         Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
         try {
             String command = "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 " +
@@ -27,7 +31,7 @@ public class EclipseLanguageServerFacade {
                 command += "-configuration ./config_linux";
             }
             server = Runtime.getRuntime().exec(command, new String[]{"CLIENT_PORT=" + port},
-                Paths.get(System.getProperty("user.dir"), "jdt-language-server").toFile());
+                Paths.get(pathToLanguageServerPlugin, "jdt-language-server").toFile());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -309,52 +309,32 @@ public class Utils {
     }
 
     /**
-     * Utility method to remove an annotation from a code block.
+     * Removes the leading {@literal @} in an annotation name, if it exists.
      *
-     * @param annotation The annotation to remove.
-     * @param customization The customization having an annotation removed.
-     * @param refreshedCustomizationSupplier A supplier that returns a refreshed customization after the annotation is
-     * removed.
-     * @param <T> The type of the customization.
-     * @return A refreshed customization after the annotation was removed.
+     * @param annotationName The annotation name.
+     * @return The annotation with any leading {@literal @} removed.
      */
-    public static <T extends CodeCustomization> T removeAnnotation(String annotation, CodeCustomization customization,
-        Supplier<T> refreshedCustomizationSupplier) {
-        SymbolInformation symbol = customization.getSymbol();
-        Editor editor = customization.getEditor();
-        String fileName = customization.getFileName();
-        URI fileUri = customization.getFileUri();
-        EclipseLanguageClient languageClient = customization.getLanguageClient();
+    public static String cleanAnnotationName(String annotationName) {
+        return annotationName.startsWith("@") ? annotationName.substring(1) : annotationName;
+    }
 
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
+    /**
+     * Notifies watchers of a file that it has changed.
+     *
+     * @param languageClient The {@link EclipseLanguageClient} sending the file changed notification.
+     * @param fileUri The URI of the file that was changed.
+     */
+    public static void sendFilesChangeNotification(EclipseLanguageClient languageClient, URI fileUri) {
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+    }
 
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            int annotationLine = -1;
-            String lineContent = editor.getFileLine(fileName, line);
-            while (!lineContent.trim().isEmpty()) {
-                if (lineContent.trim().startsWith(annotation)) {
-                    annotationLine = line;
-                }
-                lineContent = editor.getFileLine(fileName, --line);
-            }
-            if (annotationLine != -1) {
-                Position start = new Position(annotationLine, 0);
-                Position end = new Position(annotationLine + 1, 0);
-                editor.replace(fileName, start, end, "");
-
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                organizeImportsOnRange(languageClient, editor, fileUri, new Range(start, end));
-            }
-        }
-
-        return refreshedCustomizationSupplier.get();
+    public static boolean declarationContainsSymbol(com.github.javaparser.Range declarationRange,
+        Range symbolRange) {
+        return declarationRange.begin.line <= symbolRange.getStart().getLine()
+            && declarationRange.end.line >= symbolRange.getStart().getLine();
     }
 
     /**

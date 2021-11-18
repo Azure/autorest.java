@@ -17,11 +17,16 @@ import java.util.Map;
 public abstract class Customization {
     /**
      * Start the customization process. This is called by the post processor in AutoRest.
+     *
      * @param files the list of files generated in the previous steps in AutoRest
      * @param logger the logger
      * @return the list of files after customization
      */
     public final Map<String, String> run(Map<String, String> files, Logger logger) {
+        return run(null, files, logger);
+    }
+
+    final Map<String, String> run(String pathToLanguageServerPlugin, Map<String, String> files, Logger logger) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -38,9 +43,8 @@ public abstract class Customization {
         }
 
         // Start language client
-        EclipseLanguageClient languageClient = null;
-        try {
-            languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString());
+        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(pathToLanguageServerPlugin,
+            tempDirWithPrefix.toString())) {
             languageClient.initialize();
             customize(new LibraryCustomization(editor, languageClient), logger);
             editor.removeFile("pom.xml");
@@ -49,14 +53,12 @@ public abstract class Customization {
             throw new RuntimeException(e);
         } finally {
             Utils.deleteDirectory(tempDirWithPrefix.toFile());
-            if (languageClient != null) {
-                languageClient.exit();
-            }
         }
     }
 
     /**
      * Override this method to customize the client library.
+     *
      * @param libraryCustomization the top level customization object
      * @param logger the logger
      */

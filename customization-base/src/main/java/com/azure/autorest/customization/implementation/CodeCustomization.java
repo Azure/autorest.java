@@ -69,7 +69,7 @@ public abstract class CodeCustomization {
      *
      * @return The name of the file.
      */
-    String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 }

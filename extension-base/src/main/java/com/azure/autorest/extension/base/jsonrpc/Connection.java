@@ -12,8 +12,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -27,10 +37,10 @@ public class Connection {
     private OutputStream writer;
     private PeekingBinaryReader reader;
     private boolean _isDisposed = false;
-    private AtomicInteger requestId;
+    private final AtomicInteger requestId;
     private final Map<Integer, CallerResponse<?>> tasks = new ConcurrentHashMap<>();
-    private ExecutorService executorService = Executors.newCachedThreadPool();
-    private CompletableFuture<Void> _loop;
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
+    private final CompletableFuture<Void> _loop;
 
     public Connection(OutputStream writer, InputStream input) {
         this.writer = writer;
@@ -41,8 +51,6 @@ public class Connection {
 
     private boolean isAlive = true;
 
-//        => !_cancellationToken.IsCancellationRequested && writer != null && reader != null;
-
     public void stop() {
         isAlive = false;
         _loop.cancel(true);
@@ -51,31 +59,26 @@ public class Connection {
     private JsonNode readJson() {
         String jsonText = "";
         JsonNode json;
-        while (true)
-        {
+        while (true) {
             try {
                 jsonText += reader.readAsciiLine(); // + "\n";
             } catch (IOException e) {
                 throw new RuntimeException("Cannot read JSON input");
             }
-            try
-            {
+            try {
                 json = MAPPER.readTree(jsonText);
                 if (json != null) {
                     return json;
                 }
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 // not enough text?
             }
         }
     }
 
-    private Map<String, Function<JsonNode, String>> _dispatch = new HashMap<>();
+    private final Map<String, Function<JsonNode, String>> _dispatch = new HashMap<>();
 
-    public <T> void dispatch(String path, Supplier<T> method)
-    {
+    public <T> void dispatch(String path, Supplier<T> method) {
         _dispatch.put(path, input -> {
             T result = method.get();
             if (result == null) {
@@ -89,19 +92,7 @@ public class Connection {
         });
     }
 
-//    public void Dispatch(String path, Supplier<String> method)
-//    {
-//        _dispatch.put(path, input -> {
-//            String result = method.get();
-//            if (result == null) {
-//                return "null";
-//            }
-//            return ProtocolUtils.quote(result);
-//        });
-//    }
-
-    private List<JsonNode> readArguments(JsonNode input, int expectedArgs)
-    {
+    private List<JsonNode> readArguments(JsonNode input, int expectedArgs) {
         List<JsonNode> ret = new ArrayList<>();
         if (input instanceof ArrayNode) {
             for (JsonNode jsonNode : input) {
@@ -111,10 +102,8 @@ public class Connection {
             ret.add(input);
         }
 
-        if (expectedArgs == 0)
-        {
-            if (ret.size() == 0)
-            {
+        if (expectedArgs == 0) {
+            if (ret.size() == 0) {
                 // expected zero, received zero
                 return new ArrayList<>();
             }
@@ -122,8 +111,7 @@ public class Connection {
             throw new RuntimeException("Invalid number of arguments");
         }
 
-        if (ret.size() == expectedArgs)
-        {
+        if (ret.size() == expectedArgs) {
             // passed as an array
             return ret;
         }
@@ -131,20 +119,17 @@ public class Connection {
         throw new RuntimeException("Invalid number of arguments");
     }
 
-    public void dispatchNotification(String path, Runnable method)
-    {
+    public void dispatchNotification(String path, Runnable method) {
         _dispatch.put(path, input -> {
             method.run();
             return null;
         });
     }
 
-    public <P1, T> void dispatch(String path, Function<P1, T> method)
-    {
+    public <P1, T> void dispatch(String path, Function<P1, T> method) {
     }
 
-    public <P1, P2, T> void dispatch(String path, BiFunction<P1, P2, T> method, Class<? extends P1> p1Class, Class<? extends P2> p2Class)
-    {
+    public <P1, P2, T> void dispatch(String path, BiFunction<P1, P2, T> method, Class<? extends P1> p1Class, Class<? extends P2> p2Class) {
         _dispatch.put(path, input -> {
             List<JsonNode> args = readArguments(input, 2);
             try {
@@ -162,8 +147,7 @@ public class Connection {
         });
     }
 
-    private JsonNode readJson(int contentLength)
-    {
+    private JsonNode readJson(int contentLength) {
         try {
             byte[] bytes = reader.readBytes(contentLength);
             return MAPPER.readTree(bytes);
@@ -174,21 +158,16 @@ public class Connection {
 
 //    private void Log(String text) => OnDebug?.Invoke(text);
 
-    private boolean listen()
-    {
-        while (isAlive)
-        {
-            try
-            {
+    private boolean listen() {
+        while (isAlive) {
+            try {
                 int ch = reader.peekByte();
-                if (-1 == ch)
-                {
+                if (-1 == ch) {
                     // didn't get anything. start again, it'll know if we're shutting down
                     break;
                 }
 
-                if ('{' == ch || '[' == ch)
-                {
+                if ('{' == ch || '[' == ch) {
                     // looks like a json block or array. let's do this.
                     // don't wait for this to finish!
                     process(readJson());
@@ -201,8 +180,7 @@ public class Connection {
                 Map<String, String> headers = new HashMap<>();
                 String line = reader.readAsciiLine();
 //                System.err.println("Incoming line: " + line);
-                while (line != null && !line.isEmpty())
-                {
+                while (line != null && !line.isEmpty()) {
                     String[] bits = line.split(":", 2);
                     headers.put(bits[0].trim(), bits[1].trim());
                     line = reader.readAsciiLine();
@@ -211,8 +189,7 @@ public class Connection {
 
                 ch = reader.peekByte();
                 // the next character had better be a { or [
-                if ('{' == ch || '[' == ch)
-                {
+                if ('{' == ch || '[' == ch) {
                     if (headers.containsKey("Content-Length")) {
                         String value = headers.get("Content-Length");
                         int contentLength = Integer.parseInt(value);
@@ -230,11 +207,8 @@ public class Connection {
 //                throw new RuntimeException("SHOULD NEVER GET HERE!");
                 return false;
 
-            }
-            catch (Exception e)
-            {
-                if (isAlive)
-                {
+            } catch (Exception e) {
+                if (isAlive) {
 //                    throw new RuntimeException("Error during Listen");
                     continue;
                 } else {
@@ -245,16 +219,13 @@ public class Connection {
         return false;
     }
 
-    public void process(JsonNode content)
-    {
+    public void process(JsonNode content) {
 //        System.err.println("JSON RPC receive: " + content.toString());
-        if (content instanceof ObjectNode)
-        {
+        if (content instanceof ObjectNode) {
             executorService.submit(() -> {
                 ObjectNode jobject = (ObjectNode) content;
 //                System.err.println("receive: " + jobject.toPrettyString());
-                try
-                {
+                try {
                     Iterator<Map.Entry<String, JsonNode>> fieldIterator = jobject.fields();
                     while (fieldIterator.hasNext()) {
                         Map.Entry<String, JsonNode> field = fieldIterator.next();
@@ -266,13 +237,11 @@ public class Connection {
                             }
                             // this is a method call.
                             // pass it to the service that is listening...
-                            if (_dispatch.containsKey(method))
-                            {
+                            if (_dispatch.containsKey(method)) {
                                 Function<JsonNode, String> fn = _dispatch.get(method);
                                 JsonNode parameters = jobject.get("params");
                                 String result = fn.apply(parameters);
-                                if (id != -1)
-                                {
+                                if (id != -1) {
                                     // if this is a request, send the response.
                                     respond(id, result);
                                 }
@@ -281,11 +250,9 @@ public class Connection {
                         }
                         if (field.getKey().equals("result")) {
                             int id = jobject.get("id").asInt(-1);
-                            if (id != -1)
-                            {
+                            if (id != -1) {
                                 CallerResponse<?> f;
-                                synchronized (tasks)
-                                {
+                                synchronized (tasks) {
                                     f = tasks.get(id);
                                     tasks.remove(id);
                                 }
@@ -299,29 +266,23 @@ public class Connection {
                             }
                         }
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
         }
-        if (content instanceof ArrayNode)
-        {
+        if (content instanceof ArrayNode) {
             System.err.println("Unhandled: Batch Request");
         }
     }
 
-    protected void close() throws IOException
-    {
+    protected void close() throws IOException {
         // ensure that we are in a cancelled state.
         isAlive = false;
-        if (!_isDisposed)
-        {
+        if (!_isDisposed) {
             // make sure we can't dispose twice
             _isDisposed = true;
-            for (Map.Entry<Integer, CallerResponse<?>> t : tasks.entrySet())
-            {
+            for (Map.Entry<Integer, CallerResponse<?>> t : tasks.entrySet()) {
                 t.getValue().cancel(true);
             }
 
@@ -335,7 +296,6 @@ public class Connection {
     private final Semaphore streamReady = new Semaphore(1);
 
     private void send(String text) {
-//        System.err.println("JSON RPC send: " + text);
         try {
             synchronized (streamReady) {
                 streamReady.acquire();
@@ -346,7 +306,6 @@ public class Connection {
 
         byte[] buffer = text.getBytes(StandardCharsets.UTF_8);
         try {
-//            System.err.write(("Content-Length: " + buffer.length + "\r\n\r\n").getBytes(StandardCharsets.US_ASCII));
             write(("Content-Length: " + buffer.length + "\r\n\r\n").getBytes(StandardCharsets.US_ASCII));
             write(buffer);
         } catch (IOException e) {
@@ -359,29 +318,26 @@ public class Connection {
     }
 
     private void write(byte[] buffer) throws IOException {
-//        System.err.write("Writing: ".getBytes(StandardCharsets.UTF_8));
-//        System.err.write(buffer);
         writer.write(buffer, 0, buffer.length);
 //        writer.flush();
     }
 
-    public void sendError(int id, int code, String message)
-    {
+    public void sendError(int id, int code, String message) {
         JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("id", id)
-                .put("message", message)
-                .set("error", new ObjectNode(MAPPER.getNodeFactory()).put("code", code));
+            .put("jsonrpc", "2.0")
+            .put("id", id)
+            .put("message", message)
+            .set("error", new ObjectNode(MAPPER.getNodeFactory()).put("code", code));
         send(node.toString());
     }
-    public void respond(int id, String value)
-    {
+
+    public void respond(int id, String value) {
         JsonNode node;
         try {
             node = new ObjectNode(MAPPER.getNodeFactory())
-                    .put("jsonrpc", "2.0")
-                    .put("id", id)
-                    .set("result", MAPPER.readTree(value));
+                .put("jsonrpc", "2.0")
+                .put("id", id)
+                .set("result", MAPPER.readTree(value));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -391,11 +347,11 @@ public class Connection {
     public void notify(String methodName, Object... values) {
 //        System.err.println("JSON-RPC call: " + methodName);
         JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("method", methodName);
-        if (values != null && values.length > 0 ) {
+            .put("jsonrpc", "2.0")
+            .put("method", methodName);
+        if (values != null && values.length > 0) {
             node = ((ObjectNode) node).set("params", new ArrayNode(MAPPER.getNodeFactory(),
-                    Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
+                Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
         }
         send(node.toString());
     }
@@ -403,26 +359,25 @@ public class Connection {
     public void notifyWithObject(String methodName, Object parameter) {
 //        System.err.println("JSON-RPC call: " + methodName);
         JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("method", methodName);
+            .put("jsonrpc", "2.0")
+            .put("method", methodName);
         if (parameter != null) {
             node = ((ObjectNode) node).set("params", MAPPER.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
     }
 
-    public <T> T request(JavaType type, String methodName, Object... values)
-    {
+    public <T> T request(JavaType type, String methodName, Object... values) {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
         tasks.put(id, response);
         JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("method", methodName)
-                .put("id", id);
-        if (values != null && values.length > 0 ) {
+            .put("jsonrpc", "2.0")
+            .put("method", methodName)
+            .put("id", id);
+        if (values != null && values.length > 0) {
             node = ((ObjectNode) node).set("params", new ArrayNode(MAPPER.getNodeFactory(),
-                    Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
+                Arrays.stream(values).map(o -> MAPPER.convertValue(o, JsonNode.class)).collect(Collectors.toList())));
         }
         send(node.toString());
         try {
@@ -432,15 +387,14 @@ public class Connection {
         }
     }
 
-    public <T> T requestWithObject(JavaType type, String methodName, Object parameter)
-    {
+    public <T> T requestWithObject(JavaType type, String methodName, Object parameter) {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
         tasks.put(id, response);
         JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("method", methodName)
-                .put("id", id);
+            .put("jsonrpc", "2.0")
+            .put("method", methodName)
+            .put("id", id);
         if (parameter != null) {
             node = ((ObjectNode) node).set("params", MAPPER.convertValue(parameter, JsonNode.class));
         }
