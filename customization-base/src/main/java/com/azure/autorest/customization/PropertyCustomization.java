@@ -10,9 +10,6 @@ import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
-import com.github.javaparser.StaticJavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.util.List;
 import java.util.Optional;
@@ -101,19 +98,9 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        CompilationUnit compilationUnit = StaticJavaParser.parse(editor.getFileContent(fileName));
-        Optional<AnnotationExpr> annotationExpr = compilationUnit.getClassByName(className).get()
+        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
             .getFieldByName(propertyName).get()
-            .getAnnotationByName(Utils.cleanAnnotationName(annotation));
-
-        if (annotationExpr.isPresent()) {
-            annotationExpr.get().remove();
-            editor.replaceFile(fileName, compilationUnit.toString());
-            Utils.sendFilesChangeNotification(languageClient, fileUri);
-            return refreshCustomization(propertyName);
-        } else {
-            return this;
-        }
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), () -> refreshCustomization(propertyName));
     }
 
     /**

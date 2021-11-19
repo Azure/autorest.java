@@ -10,15 +10,11 @@ import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
-import com.github.javaparser.StaticJavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static com.azure.autorest.customization.implementation.Utils.replaceModifier;
 
@@ -104,22 +100,12 @@ public final class MethodCustomization extends CodeCustomization {
      * @return the current method customization for chaining
      */
     public MethodCustomization removeAnnotation(String annotation) {
-        CompilationUnit compilationUnit = StaticJavaParser.parse(editor.getFileContent(fileName));
-        Optional<AnnotationExpr> annotationExpr = compilationUnit.getClassByName(className).get()
+        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
             .getMethodsByName(methodName)
             .stream()
             .filter(method -> Utils.declarationContainsSymbol(method.getRange().get(), symbol.getLocation().getRange()))
             .findFirst().get()
-            .getAnnotationByName(Utils.cleanAnnotationName(annotation));
-
-        if (annotationExpr.isPresent()) {
-            annotationExpr.get().remove();
-            editor.replaceFile(fileName, compilationUnit.toString());
-            Utils.sendFilesChangeNotification(languageClient, fileUri);
-            return refreshCustomization(methodSignature);
-        } else {
-            return this;
-        }
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), () -> refreshCustomization(methodSignature));
     }
 
     /**

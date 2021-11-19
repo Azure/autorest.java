@@ -12,6 +12,9 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
@@ -316,6 +319,35 @@ public class Utils {
      */
     public static String cleanAnnotationName(String annotationName) {
         return annotationName.startsWith("@") ? annotationName.substring(1) : annotationName;
+    }
+
+    /**
+     * Utility method to remove an annotation from a code block.
+     *
+     * @param codeCustomization The customization having an annotation removed.
+     * @param annotationRetriever Function that retrieves the potential annotation.
+     * @param refreshedCustomizationSupplier Supplier that returns a refreshed customization after the annotation is
+     * removed.
+     * @param <T> The type of the customization.
+     * @return A refreshed customization if the annotation was removed, otherwise the customization as-is.
+     */
+    public static <T extends CodeCustomization> T removeAnnotation(T codeCustomization,
+        Function<CompilationUnit, Optional<AnnotationExpr>> annotationRetriever,
+        Supplier<T> refreshedCustomizationSupplier) {
+        Editor editor = codeCustomization.getEditor();
+        String fileName = codeCustomization.getFileName();
+
+        CompilationUnit compilationUnit = StaticJavaParser.parse(editor.getFileContent(fileName));
+        Optional<AnnotationExpr> potentialAnnotation = annotationRetriever.apply(compilationUnit);
+
+        if (potentialAnnotation.isPresent()) {
+            potentialAnnotation.get().remove();
+            editor.replaceFile(fileName, compilationUnit.toString());
+            Utils.sendFilesChangeNotification(codeCustomization.getLanguageClient(), codeCustomization.getFileUri());
+            return refreshedCustomizationSupplier.get();
+        } else {
+            return codeCustomization;
+        }
     }
 
     /**
