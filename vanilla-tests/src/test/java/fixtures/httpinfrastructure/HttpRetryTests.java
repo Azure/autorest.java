@@ -31,7 +31,7 @@ public class HttpRetryTests {
         StepVerifier.create(call)
             .assertNext(response -> assertEquals(expectedStatusCode, response.getStatusCode()))
             .expectComplete()
-            .verify(Duration.ofSeconds(1));
+            .verify(Duration.ofSeconds(5));
     }
 
     public static Stream<Arguments> httpRetrySupplier() {

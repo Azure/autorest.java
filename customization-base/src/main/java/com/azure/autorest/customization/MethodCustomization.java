@@ -100,7 +100,12 @@ public final class MethodCustomization extends CodeCustomization {
      * @return the current method customization for chaining
      */
     public MethodCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
+        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
+            .getMethodsByName(methodName)
+            .stream()
+            .filter(method -> Utils.declarationContainsSymbol(method.getRange().get(), symbol.getLocation().getRange()))
+            .findFirst().get()
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), () -> refreshCustomization(methodSignature));
     }
 
     /**

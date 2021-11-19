@@ -3,6 +3,9 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum SymbolKind {
     FILE(1),
     MODULE(2),
@@ -31,26 +34,32 @@ public enum SymbolKind {
     OPERATOR(25),
     TYPE_PARAMETER(26);
 
-    private int value;
+    private static final Map<Integer, SymbolKind> INT_TO_KIND_MAP;
+
+    static {
+        INT_TO_KIND_MAP = new HashMap<>();
+
+        for (SymbolKind kind : SymbolKind.values()) {
+            INT_TO_KIND_MAP.putIfAbsent(kind.value, kind);
+        }
+    }
+
+    private final int value;
+    private final String valueString;
 
     SymbolKind(int value) {
         this.value = value;
+        this.valueString = Integer.toString(value);
     }
 
     @JsonCreator
     public static SymbolKind fromInt(int value) {
-        SymbolKind[] items = SymbolKind.values();
-        for (SymbolKind item : items) {
-            if (item.value == value) {
-                return item;
-            }
-        }
-        return null;
+        return INT_TO_KIND_MAP.get(value);
     }
 
     @JsonValue
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return valueString;
     }
 }

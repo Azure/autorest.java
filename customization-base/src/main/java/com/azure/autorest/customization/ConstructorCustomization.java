@@ -62,7 +62,13 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
+        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
+            .getConstructors()
+            .stream()
+            .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
+            .findFirst().get()
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation)),
+            () -> refreshCustomization(constructorSignature));
     }
 
     /**

@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -39,7 +37,7 @@ public final class Editor {
      * @param rootDir the root directory path containing the files
      */
     public Editor(Map<String, String> contents, Path rootDir) {
-        this.contents = contents;
+        this.contents = new HashMap<>(contents);
         this.lines = new HashMap<>();
         this.paths = new HashMap<>();
         this.rootDir = rootDir;
@@ -65,26 +63,40 @@ public final class Editor {
      * @param content the file content
      */
     public void addFile(String name, String content) {
+        addOrReplaceFile(name, content, false);
+    }
+
+    /**
+     * Replaces an existing file with new content.
+     *
+     * @param name The relative path of the file, starting with "src/main/java".
+     * @param content The content of the file.
+     */
+    public void replaceFile(String name, String content) {
+        addOrReplaceFile(name, content, true);
+    }
+
+    private void addOrReplaceFile(String name, String content, boolean isReplace) {
         Path newFilePath = Paths.get(rootDir.toString(), name);
         File newFile = newFilePath.toFile();
         if (!newFile.getParentFile().exists()) {
             newFile.getParentFile().mkdirs();
         }
-        boolean fileCreated;
+
         try {
-            fileCreated = newFile.createNewFile();
+            boolean fileCreated = newFile.createNewFile();
 
             try (BufferedWriter writer = Files.newBufferedWriter(newFile.toPath())) {
                 writer.write(content);
             }
+
+            if (fileCreated || isReplace) {
+                contents.put(name, content);
+                lines.put(name, splitContentIntoLines(content));
+                paths.put(name, newFilePath);
+            }
         } catch (IOException e) {
             throw new RuntimeException();
-        }
-
-        if (fileCreated) {
-            contents.put(name, content);
-            lines.put(name, splitContentIntoLines(content));
-            paths.put(name, newFilePath);
         }
     }
 
