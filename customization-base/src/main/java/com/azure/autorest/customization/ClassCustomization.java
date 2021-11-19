@@ -11,6 +11,8 @@ import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 
 import java.lang.reflect.Modifier;
 import java.net.URI;
@@ -19,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -514,6 +517,24 @@ public final class ClassCustomization extends CodeCustomization {
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             });
         return this;
+    }
+
+    /**
+     * Allows for a fully controlled modification of the abstract syntax tree that represents this class.
+     *
+     * @param astCustomization The abstract syntax tree customization callback.
+     * @return A new ClassCustomization for this class with the abstract syntax tree changes applied.
+     */
+    public ClassCustomization customizeAst(Function<CompilationUnit, CompilationUnit> astCustomization) {
+        CompilationUnit astToEdit = StaticJavaParser.parse(editor.getFileContent(fileName));
+        editor.replaceFile(fileName, astCustomization.apply(astToEdit).toString());
+
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        return refreshSymbol();
     }
 
     private ClassCustomization refreshSymbol() {
