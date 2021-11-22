@@ -33,13 +33,13 @@ import java.util.stream.Collectors;
 @ServiceClientBuilder(
         serviceClients = {
             LROsClient.class,
-            LRORetrysClient.class,
+            LroRetrysClient.class,
             LrosaDsClient.class,
-            LROsCustomHeaderClient.class,
+            LrosCustomHeaderClient.class,
             LROsAsyncClient.class,
-            LRORetrysAsyncClient.class,
+            LroRetrysAsyncClient.class,
             LrosaDsAsyncClient.class,
-            LROsCustomHeaderAsyncClient.class
+            LrosCustomHeaderAsyncClient.class
         })
 public final class AutoRestLongRunningOperationTestServiceBuilder {
     private static final String SDK_NAME = "name";
@@ -253,12 +253,12 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of LRORetrysAsyncClient async client.
+     * Builds an instance of LroRetrysAsyncClient async client.
      *
-     * @return an instance of LRORetrysAsyncClient.
+     * @return an instance of LroRetrysAsyncClient.
      */
-    public LRORetrysAsyncClient buildLRORetrysAsyncClient() {
-        return new LRORetrysAsyncClient(buildInnerClient().getLRORetrys());
+    public LroRetrysAsyncClient buildLroRetrysAsyncClient() {
+        return new LroRetrysAsyncClient(buildInnerClient().getLroRetrys());
     }
 
     /**
@@ -271,12 +271,12 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of LROsCustomHeaderAsyncClient async client.
+     * Builds an instance of LrosCustomHeaderAsyncClient async client.
      *
-     * @return an instance of LROsCustomHeaderAsyncClient.
+     * @return an instance of LrosCustomHeaderAsyncClient.
      */
-    public LROsCustomHeaderAsyncClient buildLROsCustomHeaderAsyncClient() {
-        return new LROsCustomHeaderAsyncClient(buildInnerClient().getLROsCustomHeaders());
+    public LrosCustomHeaderAsyncClient buildLrosCustomHeaderAsyncClient() {
+        return new LrosCustomHeaderAsyncClient(buildInnerClient().getLrosCustomHeaders());
     }
 
     /**
@@ -289,12 +289,12 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of LRORetrysClient sync client.
+     * Builds an instance of LroRetrysClient sync client.
      *
-     * @return an instance of LRORetrysClient.
+     * @return an instance of LroRetrysClient.
      */
-    public LRORetrysClient buildLRORetrysClient() {
-        return new LRORetrysClient(buildInnerClient().getLRORetrys());
+    public LroRetrysClient buildLroRetrysClient() {
+        return new LroRetrysClient(buildInnerClient().getLroRetrys());
     }
 
     /**
@@ -307,11 +307,11 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of LROsCustomHeaderClient sync client.
+     * Builds an instance of LrosCustomHeaderClient sync client.
      *
-     * @return an instance of LROsCustomHeaderClient.
+     * @return an instance of LrosCustomHeaderClient.
      */
-    public LROsCustomHeaderClient buildLROsCustomHeaderClient() {
-        return new LROsCustomHeaderClient(buildInnerClient().getLROsCustomHeaders());
+    public LrosCustomHeaderClient buildLrosCustomHeaderClient() {
+        return new LrosCustomHeaderClient(buildInnerClient().getLrosCustomHeaders());
     }
 }

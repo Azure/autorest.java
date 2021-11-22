@@ -20,8 +20,8 @@ public class StringOperationsTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().buildStringOperationClient();
-        asyncClient = new AutoRestSwaggerBATServiceBuilder().buildStringOperationAsyncClient();
+        client = new AutoRestSwaggerBatServiceBuilder().buildStringOperationClient();
+        asyncClient = new AutoRestSwaggerBatServiceBuilder().buildStringOperationAsyncClient();
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -153,7 +152,7 @@ public class PagingTests {
 
     @Test
     public void getPagingModelWithItemNameWithXMSClientName() {
-        long count = client.getPagingModelWithItemNameWithXMSClientName(null).stream().count();
+        long count = client.getPagingModelWithItemNameWithXmsClientName(null).stream().count();
         Assertions.assertEquals(1, count);
     }
 

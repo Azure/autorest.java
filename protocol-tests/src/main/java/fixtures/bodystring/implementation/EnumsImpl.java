@@ -27,24 +27,24 @@ public final class EnumsImpl {
     private final EnumsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBATServiceImpl client;
+    private final AutoRestSwaggerBatServiceImpl client;
 
     /**
      * Initializes an instance of EnumsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    EnumsImpl(AutoRestSwaggerBATServiceImpl client) {
+    EnumsImpl(AutoRestSwaggerBatServiceImpl client) {
         this.service = RestProxy.create(EnumsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATServiceEnums to be used by the proxy service to
+     * The interface defining all the services for AutoRestSwaggerBatServiceEnums to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATSe")
+    @ServiceInterface(name = "AutoRestSwaggerBatSe")
     private interface EnumsService {
         @Get("/string/enum/notExpandable")
         Mono<Response<String>> getNotExpandable(

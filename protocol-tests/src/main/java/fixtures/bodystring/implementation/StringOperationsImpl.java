@@ -27,14 +27,14 @@ public final class StringOperationsImpl {
     private final StringOperationsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBATServiceImpl client;
+    private final AutoRestSwaggerBatServiceImpl client;
 
     /**
      * Initializes an instance of StringOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    StringOperationsImpl(AutoRestSwaggerBATServiceImpl client) {
+    StringOperationsImpl(AutoRestSwaggerBatServiceImpl client) {
         this.service =
                 RestProxy.create(
                         StringOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -42,11 +42,11 @@ public final class StringOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATServiceStringOperations to be used by the proxy
+     * The interface defining all the services for AutoRestSwaggerBatServiceStringOperations to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATSe")
+    @ServiceInterface(name = "AutoRestSwaggerBatSe")
     private interface StringOperationsService {
         @Get("/string/null")
         Mono<Response<BinaryData>> getNull(

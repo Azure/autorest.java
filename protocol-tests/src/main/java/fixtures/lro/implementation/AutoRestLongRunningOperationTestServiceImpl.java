@@ -62,16 +62,16 @@ public final class AutoRestLongRunningOperationTestServiceImpl {
         return this.lROs;
     }
 
-    /** The LRORetrysImpl object to access its operations. */
-    private final LRORetrysImpl lRORetrys;
+    /** The LroRetrysImpl object to access its operations. */
+    private final LroRetrysImpl lroRetrys;
 
     /**
-     * Gets the LRORetrysImpl object to access its operations.
+     * Gets the LroRetrysImpl object to access its operations.
      *
-     * @return the LRORetrysImpl object.
+     * @return the LroRetrysImpl object.
      */
-    public LRORetrysImpl getLRORetrys() {
-        return this.lRORetrys;
+    public LroRetrysImpl getLroRetrys() {
+        return this.lroRetrys;
     }
 
     /** The LrosaDsImpl object to access its operations. */
@@ -86,16 +86,16 @@ public final class AutoRestLongRunningOperationTestServiceImpl {
         return this.lrosaDs;
     }
 
-    /** The LROsCustomHeadersImpl object to access its operations. */
-    private final LROsCustomHeadersImpl lROsCustomHeaders;
+    /** The LrosCustomHeadersImpl object to access its operations. */
+    private final LrosCustomHeadersImpl lrosCustomHeaders;
 
     /**
-     * Gets the LROsCustomHeadersImpl object to access its operations.
+     * Gets the LrosCustomHeadersImpl object to access its operations.
      *
-     * @return the LROsCustomHeadersImpl object.
+     * @return the LrosCustomHeadersImpl object.
      */
-    public LROsCustomHeadersImpl getLROsCustomHeaders() {
-        return this.lROsCustomHeaders;
+    public LrosCustomHeadersImpl getLrosCustomHeaders() {
+        return this.lrosCustomHeaders;
     }
 
     /**
@@ -135,8 +135,8 @@ public final class AutoRestLongRunningOperationTestServiceImpl {
         this.serializerAdapter = serializerAdapter;
         this.host = host;
         this.lROs = new LROsImpl(this);
-        this.lRORetrys = new LRORetrysImpl(this);
+        this.lroRetrys = new LroRetrysImpl(this);
         this.lrosaDs = new LrosaDsImpl(this);
-        this.lROsCustomHeaders = new LROsCustomHeadersImpl(this);
+        this.lrosCustomHeaders = new LrosCustomHeadersImpl(this);
     }
 }

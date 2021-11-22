@@ -24,24 +24,24 @@ public final class HeadersImpl {
     private final HeadersService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBATHeaderServiceImpl client;
+    private final AutoRestSwaggerBatHeaderServiceImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HeadersImpl(AutoRestSwaggerBATHeaderServiceImpl client) {
+    HeadersImpl(AutoRestSwaggerBatHeaderServiceImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATHeaderServiceHeaders to be used by the proxy
+     * The interface defining all the services for AutoRestSwaggerBatHeaderServiceHeaders to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATHe")
+    @ServiceInterface(name = "AutoRestSwaggerBatHe")
     private interface HeadersService {
         @Post("/header/param/existingkey")
         Mono<Response<Void>> paramExistingKey(

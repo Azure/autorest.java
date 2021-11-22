@@ -578,8 +578,8 @@ public final class AutoRestPagingTestServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesLRO(requestOptions);
+    public PagedIterable<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesLro(requestOptions);
     }
 
     /**
@@ -608,7 +608,7 @@ public final class AutoRestPagingTestServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(requestOptions);
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
+        return this.serviceClient.getPagingModelWithItemNameWithXmsClientName(requestOptions);
     }
 }

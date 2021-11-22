@@ -578,8 +578,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesLROAsync(requestOptions);
+    public PagedFlux<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesLroAsync(requestOptions);
     }
 
     /**
@@ -608,7 +608,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameAsync(requestOptions);
+    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
+        return this.serviceClient.getPagingModelWithItemNameWithXmsClientNameAsync(requestOptions);
     }
 }

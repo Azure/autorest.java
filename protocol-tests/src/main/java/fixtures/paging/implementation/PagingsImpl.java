@@ -127,7 +127,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Post("/paging/multiple/lro")
-        Mono<Response<BinaryData>> getMultiplePagesLRO(
+        Mono<Response<BinaryData>> getMultiplePagesLro(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
@@ -147,7 +147,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("/paging/itemNameWithXMSClientName")
-        Mono<Response<BinaryData>> getPagingModelWithItemNameWithXMSClientName(
+        Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientName(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -228,14 +228,14 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
-        Mono<Response<BinaryData>> getMultiplePagesLRONext(
+        Mono<Response<BinaryData>> getMultiplePagesLroNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
                 RequestOptions requestOptions,
                 Context context);
 
         @Get("{nextLink}")
-        Mono<Response<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNext(
+        Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
                 RequestOptions requestOptions,
@@ -3256,9 +3256,9 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getMultiplePagesLroSinglePageAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesLRO(this.client.getHost(), requestOptions, context))
+                        context -> service.getMultiplePagesLro(this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3306,9 +3306,9 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getMultiplePagesLROSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getMultiplePagesLroSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesLRO(this.client.getHost(), requestOptions, context)
+        return service.getMultiplePagesLro(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3355,10 +3355,10 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getMultiplePagesLroAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getMultiplePagesLROSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null));
+                () -> getMultiplePagesLroSinglePageAsync(requestOptions),
+                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -3397,10 +3397,10 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions, Context context) {
+    public PagedFlux<BinaryData> getMultiplePagesLroAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getMultiplePagesLROSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null, context));
+                () -> getMultiplePagesLroSinglePageAsync(requestOptions, context),
+                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -3438,8 +3438,8 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesLROAsync(requestOptions));
+    public PagedIterable<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesLroAsync(requestOptions));
     }
 
     /**
@@ -3670,11 +3670,11 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(
             RequestOptions requestOptions) {
         return FluxUtil.withContext(
                         context ->
-                                service.getPagingModelWithItemNameWithXMSClientName(
+                                service.getPagingModelWithItemNameWithXmsClientName(
                                         this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
@@ -3713,9 +3713,9 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getPagingModelWithItemNameWithXMSClientName(this.client.getHost(), requestOptions, context)
+        return service.getPagingModelWithItemNameWithXmsClientName(this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3752,10 +3752,10 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientNameAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions),
-                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null));
+                () -> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(requestOptions),
+                nextLink -> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -3784,11 +3784,11 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(
+    public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientNameAsync(
             RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions, context),
-                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null, context));
+                () -> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(requestOptions, context),
+                nextLink -> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -3816,8 +3816,8 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
-        return new PagedIterable<>(getPagingModelWithItemNameWithXMSClientNameAsync(requestOptions));
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
+        return new PagedIterable<>(getPagingModelWithItemNameWithXmsClientNameAsync(requestOptions));
     }
 
     /**
@@ -4837,11 +4837,11 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getMultiplePagesLroNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                         context ->
-                                service.getMultiplePagesLRONext(
+                                service.getMultiplePagesLroNext(
                                         nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
@@ -4891,9 +4891,9 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getMultiplePagesLRONextSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getMultiplePagesLroNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesLRONext(nextLink, this.client.getHost(), requestOptions, context)
+        return service.getMultiplePagesLroNext(nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4931,11 +4931,11 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                         context ->
-                                service.getPagingModelWithItemNameWithXMSClientNameNext(
+                                service.getPagingModelWithItemNameWithXmsClientNameNext(
                                         nextLink, this.client.getHost(), requestOptions, context))
                 .map(
                         res ->
@@ -4975,9 +4975,9 @@ public final class PagingsImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getPagingModelWithItemNameWithXMSClientNameNext(
+        return service.getPagingModelWithItemNameWithXmsClientNameNext(
                         nextLink, this.client.getHost(), requestOptions, context)
                 .map(
                         res ->

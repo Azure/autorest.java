@@ -27,24 +27,24 @@ public final class ParamsImpl {
     private final ParamsService service;
 
     /** The service client containing this operation class. */
-    private final LLCClientImpl client;
+    private final LlcClientImpl client;
 
     /**
      * Initializes an instance of ParamsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ParamsImpl(LLCClientImpl client) {
+    ParamsImpl(LlcClientImpl client) {
         this.service = RestProxy.create(ParamsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for LLCClientParams to be used by the proxy service to perform REST
+     * The interface defining all the services for LlcClientParams to be used by the proxy service to perform REST
      * calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "LLCClientParams")
+    @ServiceInterface(name = "LlcClientParams")
     private interface ParamsService {
         @Get("/servicedriven/parameters")
         Mono<Response<BinaryData>> getRequired(
