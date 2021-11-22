@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class HeaderOperationsTests {
-    private static AutoRestSwaggerBATHeaderServiceAsyncClient asyncClient;
+    private static AutoRestSwaggerBatHeaderServiceAsyncClient asyncClient;
 
-    private static AutoRestSwaggerBATHeaderServiceClient client;
+    private static AutoRestSwaggerBatHeaderServiceClient client;
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestSwaggerBATHeaderServiceBuilder().buildAsyncClient();
-        client = new AutoRestSwaggerBATHeaderServiceBuilder().buildClient();
+        asyncClient = new AutoRestSwaggerBatHeaderServiceBuilder().buildAsyncClient();
+        client = new AutoRestSwaggerBatHeaderServiceBuilder().buildClient();
     }
 
     @Disabled("fail, does not take effect on \"User-Agent\", high-level has same issue")

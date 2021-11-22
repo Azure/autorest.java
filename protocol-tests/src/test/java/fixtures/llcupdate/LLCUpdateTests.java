@@ -1,27 +1,27 @@
 package fixtures.llcupdate;
 
 import com.azure.core.http.rest.RequestOptions;
-import fixtures.llcinitial.LLCAsyncClient;
-import fixtures.llcinitial.LLCClient;
-import fixtures.llcinitial.LLCClientBuilder;
+import fixtures.llcinitial.LlcAsyncClient;
+import fixtures.llcinitial.LlcClient;
+import fixtures.llcinitial.LlcClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 
 public class LLCUpdateTests {
-    private static LLCAsyncClient asyncClient;
+    private static LlcAsyncClient asyncClient;
 
-    private static LLCClient client;
+    private static LlcClient client;
 
-    private static fixtures.llcupdate1.LLCAsyncClient asyncClient2;
+    private static fixtures.llcupdate1.LlcAsyncClient asyncClient2;
 
-    private static fixtures.llcupdate1.LLCClient client2;
+    private static fixtures.llcupdate1.LlcClient client2;
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new LLCClientBuilder().buildAsyncClient();
-        client = new LLCClientBuilder().buildClient();
-        asyncClient2 = new fixtures.llcupdate1.LLCClientBuilder().buildAsyncClient();
-        client2 = new fixtures.llcupdate1.LLCClientBuilder().buildClient();
+        asyncClient = new LlcClientBuilder().buildAsyncClient();
+        client = new LlcClientBuilder().buildClient();
+        asyncClient2 = new fixtures.llcupdate1.LlcClientBuilder().buildAsyncClient();
+        client2 = new fixtures.llcupdate1.LlcClientBuilder().buildClient();
     }
 
     @Disabled
