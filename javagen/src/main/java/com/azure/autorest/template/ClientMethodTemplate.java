@@ -605,7 +605,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
             commentBlock.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
         }
-        generateJavadocExceptions(clientMethod, commentBlock, false);
+        generateJavadocExceptions(clientMethod, commentBlock, useFullClassName);
         commentBlock.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
