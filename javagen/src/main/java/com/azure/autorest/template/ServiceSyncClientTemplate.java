@@ -53,6 +53,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
             serviceClient.getInterfaceName())));
 
+    javaFile.annotation("Generated");
     javaFile.annotation(String.format("ServiceClient(builder = %s.class)", builderClassName));
     javaFile.publicFinalClass(syncClassName, classBlock ->
     {
