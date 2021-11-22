@@ -3,6 +3,9 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum JavaCodeActionKind {
     /**
      * Base kind for "generate" source actions
@@ -79,7 +82,17 @@ public enum JavaCodeActionKind {
      */
     QUICK_ASSIST("quickassist");
 
-    private String value;
+    private static final Map<String, JavaCodeActionKind> STRING_TO_KIND_MAP;
+
+    static {
+        STRING_TO_KIND_MAP = new HashMap<>();
+
+        for (JavaCodeActionKind kind : JavaCodeActionKind.values()) {
+            STRING_TO_KIND_MAP.putIfAbsent(kind.value, kind);
+        }
+    }
+
+    private final String value;
 
     JavaCodeActionKind(String value) {
         this.value = value;
@@ -87,13 +100,7 @@ public enum JavaCodeActionKind {
 
     @JsonCreator
     public static JavaCodeActionKind fromString(String value) {
-        JavaCodeActionKind[] items = JavaCodeActionKind.values();
-        for (JavaCodeActionKind item : items) {
-            if (item.value.equals(value)) {
-                return item;
-            }
-        }
-        return null;
+        return STRING_TO_KIND_MAP.get(value);
     }
 
     @JsonValue

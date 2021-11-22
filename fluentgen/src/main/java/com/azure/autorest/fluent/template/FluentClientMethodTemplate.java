@@ -30,7 +30,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
-        String contextParam = mergeContextParameter ? "context" : "Context.NONE";
+        String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
@@ -240,7 +240,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
-        String contextParam = mergeContextParameter ? "context" : "Context.NONE";
+        String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());;
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {

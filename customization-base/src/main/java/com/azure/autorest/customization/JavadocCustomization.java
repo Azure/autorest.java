@@ -36,9 +36,9 @@ public final class JavadocCustomization {
      * 5. A Javadoc where the closing line contains text
      * 6. An indented Javadoc where the closing line contains text
      */
-    private static final Pattern JAVADOC_LINE_CLEANER = Pattern.compile("^\\s*\\/?\\*{1,2}\\s?(.*?)(?:\\s*\\*\\/)?$");
+    private static final Pattern JAVADOC_LINE_CLEANER = Pattern.compile("^\\s*/?\\*{1,2}\\s?(.*?)(?:\\s*\\*/)?$");
 
-    private static final Pattern EMPTY_JAVADOC_LINE_PATTERN = Pattern.compile("\\s*\\*\\/?\\s*");
+    private static final Pattern EMPTY_JAVADOC_LINE_PATTERN = Pattern.compile("\\s*\\*/?\\s*");
 
     private static final Pattern THROWS_TAG = Pattern.compile(".*@throws ");
     private static final Pattern PARAM_TAG = Pattern.compile(".*@param ");
@@ -76,6 +76,32 @@ public final class JavadocCustomization {
 
         this.indent = Utils.getIndent(editor.getFileLine(fileName, symbolLine));
         parseJavadoc(symbolLine);
+    }
+
+    public JavadocCustomization replace(JavadocCustomization other) {
+        this.descriptionDocs = other.descriptionDocs;
+
+        this.paramDocs.clear();
+        if (other.paramDocs != null) {
+            this.paramDocs.putAll(other.paramDocs);
+        }
+
+        this.returnDoc = other.returnDoc;
+
+        this.throwsDocs.clear();
+        if (other.throwsDocs != null) {
+            this.throwsDocs.putAll(other.throwsDocs);
+        }
+
+        this.seeDocs.clear();
+        if (other.seeDocs != null) {
+            this.seeDocs.addAll(other.seeDocs);
+        }
+
+        this.sinceDoc = other.sinceDoc;
+        this.deprecatedDoc = other.deprecatedDoc;
+        commit();
+        return this;
     }
 
     /**

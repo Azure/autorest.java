@@ -12,6 +12,9 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
@@ -48,7 +51,7 @@ public class Utils {
      * This pattern determines the indentation of the passed string. Effectively it creates a group containing all
      * spaces before the first word character.
      */
-    public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*)\\w.*$");
+    public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*).*$");
 
     /**
      * This pattern matches a Java package declaration.
@@ -309,52 +312,61 @@ public class Utils {
     }
 
     /**
+     * Removes the leading {@literal @} in an annotation name, if it exists.
+     *
+     * @param annotationName The annotation name.
+     * @return The annotation with any leading {@literal @} removed.
+     */
+    public static String cleanAnnotationName(String annotationName) {
+        return annotationName.startsWith("@") ? annotationName.substring(1) : annotationName;
+    }
+
+    /**
      * Utility method to remove an annotation from a code block.
      *
-     * @param annotation The annotation to remove.
-     * @param customization The customization having an annotation removed.
-     * @param refreshedCustomizationSupplier A supplier that returns a refreshed customization after the annotation is
+     * @param codeCustomization The customization having an annotation removed.
+     * @param annotationRetriever Function that retrieves the potential annotation.
+     * @param refreshedCustomizationSupplier Supplier that returns a refreshed customization after the annotation is
      * removed.
      * @param <T> The type of the customization.
-     * @return A refreshed customization after the annotation was removed.
+     * @return A refreshed customization if the annotation was removed, otherwise the customization as-is.
      */
-    public static <T extends CodeCustomization> T removeAnnotation(String annotation, CodeCustomization customization,
+    public static <T extends CodeCustomization> T removeAnnotation(T codeCustomization,
+        Function<CompilationUnit, Optional<AnnotationExpr>> annotationRetriever,
         Supplier<T> refreshedCustomizationSupplier) {
-        SymbolInformation symbol = customization.getSymbol();
-        Editor editor = customization.getEditor();
-        String fileName = customization.getFileName();
-        URI fileUri = customization.getFileUri();
-        EclipseLanguageClient languageClient = customization.getLanguageClient();
+        Editor editor = codeCustomization.getEditor();
+        String fileName = codeCustomization.getFileName();
 
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
+        CompilationUnit compilationUnit = StaticJavaParser.parse(editor.getFileContent(fileName));
+        Optional<AnnotationExpr> potentialAnnotation = annotationRetriever.apply(compilationUnit);
+
+        if (potentialAnnotation.isPresent()) {
+            potentialAnnotation.get().remove();
+            editor.replaceFile(fileName, compilationUnit.toString());
+            Utils.sendFilesChangeNotification(codeCustomization.getLanguageClient(), codeCustomization.getFileUri());
+            return refreshedCustomizationSupplier.get();
+        } else {
+            return codeCustomization;
         }
+    }
 
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            int annotationLine = -1;
-            String lineContent = editor.getFileLine(fileName, line);
-            while (!lineContent.trim().isEmpty()) {
-                if (lineContent.trim().startsWith(annotation)) {
-                    annotationLine = line;
-                }
-                lineContent = editor.getFileLine(fileName, --line);
-            }
-            if (annotationLine != -1) {
-                Position start = new Position(annotationLine, 0);
-                Position end = new Position(annotationLine + 1, 0);
-                editor.replace(fileName, start, end, "");
+    /**
+     * Notifies watchers of a file that it has changed.
+     *
+     * @param languageClient The {@link EclipseLanguageClient} sending the file changed notification.
+     * @param fileUri The URI of the file that was changed.
+     */
+    public static void sendFilesChangeNotification(EclipseLanguageClient languageClient, URI fileUri) {
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+    }
 
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                organizeImportsOnRange(languageClient, editor, fileUri, new Range(start, end));
-            }
-        }
-
-        return refreshedCustomizationSupplier.get();
+    public static boolean declarationContainsSymbol(com.github.javaparser.Range declarationRange,
+        Range symbolRange) {
+        return declarationRange.begin.line <= symbolRange.getStart().getLine()
+            && declarationRange.end.line >= symbolRange.getStart().getLine();
     }
 
     /**

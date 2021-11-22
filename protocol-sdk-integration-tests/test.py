@@ -8,6 +8,7 @@ import logging
 from os import path
 
 
+AUTOREST_CORE_VERSION = '3.6.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 
@@ -21,7 +22,7 @@ def main():
     logging.info(f'delete {purview_output_path}')
 
     # generate code
-    cmd = f'autorest --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json --use=../ --java --low-level-client --output-folder={purview_output_path} --namespace=com.azure.analytics.purview.account --credential-types=tokencredential --credential-scopes=https://purview.azure.net/.default --sdk-integration --generate-samples'.split(' ')
+    cmd = f'autorest --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={purview_output_path} --namespace=com.azure.analytics.purview.account --credential-types=tokencredential --credential-scopes=https://purview.azure.net/.default --sdk-integration --generate-samples'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
     subprocess.check_call(cmd, cwd=script_path)
 

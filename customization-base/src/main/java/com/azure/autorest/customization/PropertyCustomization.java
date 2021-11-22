@@ -36,6 +36,24 @@ public final class PropertyCustomization extends CodeCustomization {
     }
 
     /**
+     * Gets the name of the class that contains this property.
+     *
+     * @return The name of the class that contains this property.
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
+     * Gets the name of this property.
+     *
+     * @return The name of this property.
+     */
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    /**
      * Rename a property in the class. This is a refactor operation. All references of the property will be renamed and
      * the getter and setter method(s) for this property will be renamed accordingly as well.
      *
@@ -80,7 +98,9 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(propertyName));
+        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
+            .getFieldByName(propertyName).get()
+            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), () -> refreshCustomization(propertyName));
     }
 
     /**

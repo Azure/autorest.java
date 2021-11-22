@@ -56,7 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class EclipseLanguageClient {
+public class EclipseLanguageClient implements AutoCloseable {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private final EclipseLanguageServerFacade server;
@@ -67,6 +67,10 @@ public class EclipseLanguageClient {
     private ServerCapabilities serverCapabilities;
 
     public EclipseLanguageClient(String workspaceDir) {
+        this(null, workspaceDir);
+    }
+
+    public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir) {
         this.workspaceDir = new File(workspaceDir).toURI();
         try {
             serverSocket = new ServerSocket(0);
@@ -80,7 +84,11 @@ public class EclipseLanguageClient {
             });
             thread.start();
             Thread.sleep(1000);
-            this.server = new EclipseLanguageServerFacade(workspaceDir, port);
+            if (pathToLanguageServerPlugin == null) {
+                this.server = new EclipseLanguageServerFacade(port);
+            } else {
+                this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin, port);
+            }
             thread.join(10000);
             connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
         } catch (Exception e) {
@@ -126,7 +134,7 @@ public class EclipseLanguageClient {
         serverCapabilities = response.getCapabilities();
         connection.notifyWithObject("initialized", null);
         try {
-            Thread.sleep(10000);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -254,7 +262,7 @@ public class EclipseLanguageClient {
         return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction", codeActionParams);
     }
 
-    public void exit() {
+    public void close() {
         try {
             connection.notifyWithObject("exit", null);
             clientSocket.get().close();
@@ -267,7 +275,7 @@ public class EclipseLanguageClient {
     }
 
     private interface CLibrary extends Library {
-        CLibrary INSTANCE = (CLibrary) Native.loadLibrary("c", CLibrary.class);
+        CLibrary INSTANCE = Native.load("c", CLibrary.class);
 
         int getpid();
     }
