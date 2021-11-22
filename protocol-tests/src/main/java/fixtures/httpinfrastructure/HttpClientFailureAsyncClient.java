@@ -33,8 +33,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -47,8 +46,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -61,8 +59,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -81,8 +78,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -101,8 +97,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -121,8 +116,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -141,8 +135,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -155,8 +148,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -169,8 +161,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -183,8 +174,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -197,8 +187,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -217,8 +206,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -237,8 +225,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -257,8 +244,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -277,8 +263,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -297,8 +282,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -311,8 +295,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -325,8 +308,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -339,8 +321,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -353,8 +334,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -373,8 +353,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -393,8 +372,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -413,8 +391,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -427,8 +404,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -447,8 +423,7 @@ public final class HttpClientFailureAsyncClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -461,8 +436,7 @@ public final class HttpClientFailureAsyncClient {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated

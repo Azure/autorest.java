@@ -32,8 +32,7 @@ public final class HttpSuccessClient {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -52,8 +51,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 200 success.
      */
     @Generated
@@ -72,8 +70,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return simple boolean.
      */
     @Generated
@@ -92,8 +89,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -112,8 +108,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -132,8 +127,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -152,8 +146,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -172,8 +165,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -192,8 +184,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -212,8 +203,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -232,8 +222,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -252,8 +241,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -272,8 +260,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -286,8 +273,7 @@ public final class HttpSuccessClient {
      * Return 204 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -306,8 +292,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -326,8 +311,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -346,8 +330,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -366,8 +349,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -386,8 +368,7 @@ public final class HttpSuccessClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated

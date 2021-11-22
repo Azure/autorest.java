@@ -5,6 +5,7 @@
 package fixtures.bodystring.implementation;
 
 import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -49,17 +50,21 @@ public final class StringOperationsImpl {
     @ServiceInterface(name = "AutoRestSwaggerBatSe")
     private interface StringOperationsService {
         @Get("/string/null")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNull(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/null")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/empty")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getEmpty(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/empty")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
@@ -67,10 +72,12 @@ public final class StringOperationsImpl {
                 Context context);
 
         @Get("/string/mbcs")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMbcs(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/mbcs")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putMbcs(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
@@ -78,10 +85,12 @@ public final class StringOperationsImpl {
                 Context context);
 
         @Get("/string/whitespace")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getWhitespace(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/whitespace")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putWhitespace(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
@@ -89,18 +98,22 @@ public final class StringOperationsImpl {
                 Context context);
 
         @Get("/string/notProvided")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNotProvided(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/base64Encoding")
+        @ExpectedResponses({200})
         Mono<Response<byte[]>> getBase64Encoded(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/string/base64UrlEncoding")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getBase64UrlEncoded(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/string/base64UrlEncoding")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putBase64UrlEncoded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
@@ -108,6 +121,7 @@ public final class StringOperationsImpl {
                 Context context);
 
         @Get("/string/nullBase64UrlEncoding")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNullBase64UrlEncoded(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
@@ -122,8 +136,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -142,8 +155,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -161,8 +173,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -180,8 +191,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -200,8 +210,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -219,8 +228,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -238,8 +246,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -258,8 +265,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -277,8 +283,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -296,8 +301,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -318,8 +322,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -338,8 +341,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -357,8 +359,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -377,8 +378,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -396,8 +396,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -415,8 +414,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -438,8 +436,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -459,8 +456,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -479,8 +475,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
@@ -501,8 +496,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
@@ -522,8 +516,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
@@ -543,8 +536,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -567,8 +559,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -589,8 +580,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -608,8 +598,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -628,8 +617,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -647,8 +635,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -666,8 +653,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -687,8 +673,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -706,8 +691,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -725,8 +709,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -746,8 +729,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -766,8 +748,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -786,8 +767,7 @@ public final class StringOperationsImpl {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -809,8 +789,7 @@ public final class StringOperationsImpl {
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -830,8 +809,7 @@ public final class StringOperationsImpl {
      *
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -849,8 +827,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -870,8 +847,7 @@ public final class StringOperationsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -890,8 +866,7 @@ public final class StringOperationsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -48,10 +49,12 @@ public final class PrimitivesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     private interface PrimitivesService {
         @Get("/complex/primitive/integer")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getInt(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/integer")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putInt(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -59,10 +62,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/long")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getLong(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/long")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putLong(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -70,10 +75,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/float")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getFloat(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/float")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putFloat(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -81,10 +88,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/double")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getDouble(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/double")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putDouble(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -92,10 +101,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/bool")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getBool(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/bool")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putBool(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -103,10 +114,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/string")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getString(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/string")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -114,10 +127,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/date")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getDate(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/date")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putDate(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -125,10 +140,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/datetime")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getDateTime(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/datetime")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -136,10 +153,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getDateTimeRfc1123(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putDateTimeRfc1123(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -147,10 +166,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/duration")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getDuration(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/duration")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putDuration(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -158,10 +179,12 @@ public final class PrimitivesImpl {
                 Context context);
 
         @Get("/complex/primitive/byte")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getByte(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/primitive/byte")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putByte(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -182,8 +205,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -205,8 +227,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -227,8 +248,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -250,8 +270,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put -1 and 2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -275,8 +294,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put -1 and 2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -299,8 +317,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put -1 and 2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -321,8 +338,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -344,8 +360,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -366,8 +381,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -389,8 +403,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -414,8 +427,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -438,8 +450,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -460,8 +471,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -483,8 +493,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -505,8 +514,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -528,8 +536,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -553,8 +560,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 1.05 and -0.003.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -577,8 +583,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -599,8 +604,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -622,8 +626,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -644,8 +647,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -667,8 +669,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -692,8 +693,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -716,8 +716,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -738,8 +737,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -761,8 +759,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -783,8 +780,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -806,8 +802,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put true and false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -831,8 +826,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put true and false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -855,8 +849,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put true and false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -878,8 +871,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -902,8 +894,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -925,8 +916,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -949,8 +939,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -975,8 +964,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1000,8 +988,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1022,8 +1009,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1045,8 +1031,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1067,8 +1052,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1090,8 +1074,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1115,8 +1098,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1139,8 +1121,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1161,8 +1142,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1184,8 +1164,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1206,8 +1185,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1229,8 +1207,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1254,8 +1231,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1278,8 +1254,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1300,8 +1275,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1324,8 +1298,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1347,8 +1320,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1370,8 +1342,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1396,8 +1367,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1420,8 +1390,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1441,8 +1410,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1463,8 +1431,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1484,8 +1451,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1506,8 +1472,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1530,8 +1495,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1553,8 +1517,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1574,8 +1537,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1596,8 +1558,7 @@ public final class PrimitivesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1617,8 +1578,7 @@ public final class PrimitivesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1639,8 +1599,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1663,8 +1622,7 @@ public final class PrimitivesImpl {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1686,8 +1644,7 @@ public final class PrimitivesImpl {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

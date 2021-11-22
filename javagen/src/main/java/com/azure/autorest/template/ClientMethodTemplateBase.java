@@ -7,10 +7,12 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,8 +56,25 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
 
         clientMethod.getParameters().forEach(p -> commentBlock.param(p.getName(), methodParameterDescriptionOrDefault(p)));
-        commentBlock.methodThrows("HttpResponseException", "thrown if status code is 400 or above, if throwOnError in requestOptions is not false");
+        generateJavadocExceptions(clientMethod, commentBlock, false);
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
+    }
+
+    protected static void generateJavadocExceptions(ClientMethod clientMethod, JavaJavadocComment commentBlock, boolean useFullClassName) {
+        ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
+        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+            commentBlock.methodThrows(useFullClassName
+                            ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
+                            : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
+                    "thrown if the request is rejected by server");
+        }
+        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+            for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                commentBlock.methodThrows(exception.getKey().toString(),
+                        String.format("thrown if the request is rejected by server on status code %s",
+                                exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+            }
+        }
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {

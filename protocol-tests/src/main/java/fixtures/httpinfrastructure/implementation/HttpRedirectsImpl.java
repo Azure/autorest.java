@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.implementation;
 
 import com.azure.core.annotation.Delete;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
 import com.azure.core.annotation.Host;
@@ -52,53 +53,69 @@ public final class HttpRedirectsImpl {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpRedirectsService {
         @Head("/http/redirect/300")
+        @ExpectedResponses({200, 300})
         Mono<Response<Void>> head300(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/redirect/300")
+        @ExpectedResponses({200, 300})
         Mono<Response<BinaryData>> get300(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/redirect/301")
+        @ExpectedResponses({200, 301})
         Mono<Response<Void>> head301(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/redirect/301")
+        @ExpectedResponses({200, 301})
         Mono<Response<Void>> get301(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/redirect/301")
+        @ExpectedResponses({301})
         Mono<Response<Void>> put301(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/redirect/302")
+        @ExpectedResponses({200, 302})
         Mono<Response<Void>> head302(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/redirect/302")
+        @ExpectedResponses({200, 302})
         Mono<Response<Void>> get302(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/redirect/302")
+        @ExpectedResponses({302})
         Mono<Response<Void>> patch302(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/redirect/303")
+        @ExpectedResponses({200, 303})
         Mono<Response<Void>> post303(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> head307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> get307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Options("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> options307(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> put307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Patch("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> patch307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Post("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> post307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Delete("/http/redirect/307")
+        @ExpectedResponses({200, 307})
         Mono<Response<Void>> delete307(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
@@ -106,8 +123,7 @@ public final class HttpRedirectsImpl {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -120,8 +136,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -133,8 +148,7 @@ public final class HttpRedirectsImpl {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -154,8 +168,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -176,8 +189,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -197,8 +209,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -210,8 +221,7 @@ public final class HttpRedirectsImpl {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -224,8 +234,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -237,8 +246,7 @@ public final class HttpRedirectsImpl {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -250,8 +258,7 @@ public final class HttpRedirectsImpl {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -264,8 +271,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -277,8 +283,7 @@ public final class HttpRedirectsImpl {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -297,8 +302,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -318,8 +322,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -338,8 +341,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -351,8 +353,7 @@ public final class HttpRedirectsImpl {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -365,8 +366,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -378,8 +378,7 @@ public final class HttpRedirectsImpl {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -391,8 +390,7 @@ public final class HttpRedirectsImpl {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -405,8 +403,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -418,8 +415,7 @@ public final class HttpRedirectsImpl {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -438,8 +434,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -459,8 +454,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -479,8 +473,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -499,8 +492,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -520,8 +512,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -540,8 +531,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -553,8 +543,7 @@ public final class HttpRedirectsImpl {
      * Redirect with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -567,8 +556,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -580,8 +568,7 @@ public final class HttpRedirectsImpl {
      * Redirect with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -593,8 +580,7 @@ public final class HttpRedirectsImpl {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -607,8 +593,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -620,8 +605,7 @@ public final class HttpRedirectsImpl {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -633,8 +617,7 @@ public final class HttpRedirectsImpl {
      * options redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -647,8 +630,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -660,8 +642,7 @@ public final class HttpRedirectsImpl {
      * options redirected with 307, resulting in a 200 after redirect.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -679,8 +660,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -699,8 +679,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -718,8 +697,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -737,8 +715,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -757,8 +734,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -776,8 +752,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -795,8 +770,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -815,8 +789,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -834,8 +807,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -853,8 +825,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -873,8 +844,7 @@ public final class HttpRedirectsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -892,8 +862,7 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -48,10 +49,12 @@ public final class DictionariesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     private interface DictionariesService {
         @Get("/complex/dictionary/typed/valid")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getValid(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/dictionary/typed/valid")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -59,10 +62,12 @@ public final class DictionariesImpl {
                 Context context);
 
         @Get("/complex/dictionary/typed/empty")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getEmpty(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/dictionary/typed/empty")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -70,10 +75,12 @@ public final class DictionariesImpl {
                 Context context);
 
         @Get("/complex/dictionary/typed/null")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNull(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/complex/dictionary/typed/notprovided")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNotProvided(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
@@ -92,8 +99,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -116,8 +122,7 @@ public final class DictionariesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -139,8 +144,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -164,8 +168,7 @@ public final class DictionariesImpl {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      *     "xls":"excel", "exe":"", "":null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -191,8 +194,7 @@ public final class DictionariesImpl {
      *     "xls":"excel", "exe":"", "":null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -217,8 +219,7 @@ public final class DictionariesImpl {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      *     "xls":"excel", "exe":"", "":null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -240,8 +241,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -264,8 +264,7 @@ public final class DictionariesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -287,8 +286,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -311,8 +309,7 @@ public final class DictionariesImpl {
      *
      * @param complexBody Please put an empty dictionary.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -337,8 +334,7 @@ public final class DictionariesImpl {
      * @param complexBody Please put an empty dictionary.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -362,8 +358,7 @@ public final class DictionariesImpl {
      *
      * @param complexBody Please put an empty dictionary.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -385,8 +380,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -409,8 +403,7 @@ public final class DictionariesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -432,8 +425,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -455,8 +447,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -479,8 +470,7 @@ public final class DictionariesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -502,8 +492,7 @@ public final class DictionariesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

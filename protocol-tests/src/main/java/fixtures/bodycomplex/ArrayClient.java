@@ -43,8 +43,7 @@ public final class ArrayClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with array property.
      */
     @Generated
@@ -69,8 +68,7 @@ public final class ArrayClient {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;amp;S#$(*Y", "The quick brown
      *     fox jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -93,8 +91,7 @@ public final class ArrayClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with array property which is empty.
      */
     @Generated
@@ -118,8 +115,7 @@ public final class ArrayClient {
      *
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -142,8 +138,7 @@ public final class ArrayClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types with array property while server doesn't provide a response payload.
      */
     @Generated

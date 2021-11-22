@@ -4,6 +4,7 @@
 
 package fixtures.url.implementation;
 
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -47,6 +48,7 @@ public final class PathItemsImpl {
     private interface PathItemsService {
         @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getAllWithValues(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -57,6 +59,7 @@ public final class PathItemsImpl {
 
         @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getGlobalQueryNull(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -67,6 +70,7 @@ public final class PathItemsImpl {
 
         @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getGlobalAndLocalQueryNull(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -77,6 +81,7 @@ public final class PathItemsImpl {
 
         @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getLocalPathItemQueryNull(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -104,8 +109,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -141,8 +145,7 @@ public final class PathItemsImpl {
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -175,8 +178,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -203,8 +205,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -240,8 +241,7 @@ public final class PathItemsImpl {
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -274,8 +274,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -302,8 +301,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -339,8 +337,7 @@ public final class PathItemsImpl {
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -373,8 +370,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -401,8 +397,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -438,8 +433,7 @@ public final class PathItemsImpl {
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -472,8 +466,7 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

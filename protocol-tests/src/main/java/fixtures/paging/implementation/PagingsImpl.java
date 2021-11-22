@@ -4,6 +4,7 @@
 
 package fixtures.paging.implementation;
 
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -54,38 +55,47 @@ public final class PagingsImpl {
     @ServiceInterface(name = "AutoRestPagingTestSe")
     private interface PagingsService {
         @Get("/paging/noitemname")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNoItemNamePages(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/nullnextlink")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNullNextLinkNamePages(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/single")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getSinglePages(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/firstResponseEmpty/1")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> firstResponseEmpty(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePages(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/getWithQueryParams")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getWithQueryParams(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/nextOperationWithQueryParams")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> nextOperationWithQueryParams(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/odata")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getOdataMultiplePages(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/withpath/{offset}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesWithOffset(
                 @HostParam("$host") String host,
                 @PathParam("offset") int offset,
@@ -93,26 +103,32 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("/paging/multiple/retryfirst")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesRetryFirst(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/retrysecond")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesRetrySecond(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/single/failure")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getSinglePagesFailure(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/failure")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFailure(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/failureuri")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFailureUri(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
                 @PathParam("tenant") String tenant,
@@ -120,6 +136,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
                 @PathParam("tenant") String tenant,
@@ -127,10 +144,12 @@ public final class PagingsImpl {
                 Context context);
 
         @Post("/paging/multiple/lro")
+        @ExpectedResponses({202})
         Mono<Response<BinaryData>> getMultiplePagesLro(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
                 @PathParam("tenant") String tenant,
@@ -139,6 +158,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
                 @PathParam("tenant") String tenant,
@@ -147,10 +167,12 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("/paging/itemNameWithXMSClientName")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientName(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNoItemNamePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -158,6 +180,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getSinglePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -165,6 +188,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> firstResponseEmptyNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -172,6 +196,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -179,6 +204,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getOdataMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -186,6 +212,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesWithOffsetNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -193,6 +220,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesRetryFirstNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -200,6 +228,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesRetrySecondNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -207,6 +236,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getSinglePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -214,6 +244,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -221,6 +252,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getMultiplePagesFailureUriNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -228,6 +260,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({202})
         Mono<Response<BinaryData>> getMultiplePagesLroNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -235,6 +268,7 @@ public final class PagingsImpl {
                 Context context);
 
         @Get("{nextLink}")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
@@ -262,8 +296,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -302,8 +335,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -341,8 +373,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -373,8 +404,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -404,8 +434,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -433,8 +462,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -473,8 +501,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -512,8 +539,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -542,8 +568,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -571,8 +596,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -600,8 +624,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -639,8 +662,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -678,8 +700,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -710,8 +731,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -741,8 +761,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -771,8 +790,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -812,8 +830,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -852,8 +869,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -885,8 +901,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -917,8 +932,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -956,8 +970,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1005,8 +1018,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1054,8 +1066,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1096,8 +1107,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1137,8 +1147,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1176,8 +1185,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1226,8 +1234,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1275,8 +1282,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1317,8 +1323,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1358,8 +1363,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1395,8 +1399,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1443,8 +1446,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1492,8 +1494,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1542,8 +1543,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1591,8 +1591,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1633,8 +1632,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1674,8 +1672,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1714,8 +1711,7 @@ public final class PagingsImpl {
      *
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1768,8 +1764,7 @@ public final class PagingsImpl {
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1818,8 +1813,7 @@ public final class PagingsImpl {
      *
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1861,8 +1855,7 @@ public final class PagingsImpl {
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1904,8 +1897,7 @@ public final class PagingsImpl {
      *
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -1934,8 +1926,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1975,8 +1966,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2015,8 +2005,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2048,8 +2037,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2080,8 +2068,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2110,8 +2097,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2151,8 +2137,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2191,8 +2176,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2224,8 +2208,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2256,8 +2239,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2285,8 +2267,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2325,8 +2306,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2364,8 +2344,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2396,8 +2375,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2427,8 +2405,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2456,8 +2433,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2496,8 +2472,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2535,8 +2510,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2567,8 +2541,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2598,8 +2571,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2627,8 +2599,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2667,8 +2638,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2706,8 +2676,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2738,8 +2707,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2769,8 +2737,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2807,8 +2774,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2859,8 +2825,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2907,8 +2872,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2948,8 +2912,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -2989,8 +2952,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3027,8 +2989,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3079,8 +3040,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3128,8 +3088,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3170,8 +3129,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3211,8 +3169,7 @@ public final class PagingsImpl {
      *
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3251,8 +3208,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3301,8 +3257,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3350,8 +3305,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3392,8 +3346,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3433,8 +3386,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3472,8 +3424,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3524,8 +3475,7 @@ public final class PagingsImpl {
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3573,8 +3523,7 @@ public final class PagingsImpl {
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3626,8 +3575,7 @@ public final class PagingsImpl {
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3665,8 +3613,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3708,8 +3655,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3747,8 +3693,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3779,8 +3724,7 @@ public final class PagingsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3811,8 +3755,7 @@ public final class PagingsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -3841,8 +3784,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3885,8 +3827,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3925,8 +3866,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3967,8 +3907,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4007,8 +3946,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4051,8 +3989,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4101,8 +4038,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4154,8 +4090,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4204,8 +4139,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4258,8 +4192,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4308,8 +4241,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4362,8 +4294,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4402,8 +4333,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4446,8 +4376,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4486,8 +4415,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4530,8 +4458,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4570,8 +4497,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4614,8 +4540,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4654,8 +4579,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4698,8 +4622,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4738,8 +4661,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4782,8 +4704,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4832,8 +4753,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4886,8 +4806,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4926,8 +4845,7 @@ public final class PagingsImpl {
      *
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4970,8 +4888,7 @@ public final class PagingsImpl {
      * @param nextLink The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

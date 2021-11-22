@@ -62,11 +62,11 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
-                    if (!settings.isLowLevelClient()) {
-                        if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
-                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
-                        }
+                    if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
+                        interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
+                    }
 
+                    if (!settings.isLowLevelClient()) {
                         if (restAPIMethod.getReturnValueWireType() != null) {
                             interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
                                     restAPIMethod.getReturnValueWireType()));

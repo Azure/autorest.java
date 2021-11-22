@@ -46,8 +46,7 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -75,8 +74,7 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -104,8 +102,7 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated
@@ -134,8 +131,7 @@ public final class PathItemsClient {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @Generated

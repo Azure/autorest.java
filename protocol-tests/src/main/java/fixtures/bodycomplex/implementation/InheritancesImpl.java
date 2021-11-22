@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -48,10 +49,12 @@ public final class InheritancesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     private interface InheritancesService {
         @Get("/complex/inheritance/valid")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getValid(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/complex/inheritance/valid")
+        @ExpectedResponses({200})
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -81,8 +84,7 @@ public final class InheritancesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -113,8 +115,7 @@ public final class InheritancesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -144,8 +145,7 @@ public final class InheritancesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -178,8 +178,7 @@ public final class InheritancesImpl {
      *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -214,8 +213,7 @@ public final class InheritancesImpl {
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -249,8 +247,7 @@ public final class InheritancesImpl {
      *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
