@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -47,6 +48,7 @@ public final class FlattencomplexesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     private interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
+        @ExpectedResponses({200})
         Mono<Response<BinaryData>> getValid(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
@@ -64,8 +66,7 @@ public final class FlattencomplexesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -87,8 +88,7 @@ public final class FlattencomplexesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -109,8 +109,7 @@ public final class FlattencomplexesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)

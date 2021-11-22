@@ -33,8 +33,7 @@ public final class PathsAsyncClient {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return true Boolean value on path.
      */
     @Generated
@@ -47,8 +46,7 @@ public final class PathsAsyncClient {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return false Boolean value on path.
      */
     @Generated
@@ -61,8 +59,7 @@ public final class PathsAsyncClient {
      * Get '1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1000000' integer value.
      */
     @Generated
@@ -75,8 +72,7 @@ public final class PathsAsyncClient {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1000000' integer value.
      */
     @Generated
@@ -89,8 +85,7 @@ public final class PathsAsyncClient {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '10000000000' 64 bit integer value.
      */
     @Generated
@@ -103,8 +98,7 @@ public final class PathsAsyncClient {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-10000000000' 64 bit integer value.
      */
     @Generated
@@ -117,8 +111,7 @@ public final class PathsAsyncClient {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1.034E+20' numeric value.
      */
     @Generated
@@ -131,8 +124,7 @@ public final class PathsAsyncClient {
      * Get '-1.034E-20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1.034E-20' numeric value.
      */
     @Generated
@@ -145,8 +137,7 @@ public final class PathsAsyncClient {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '9999999.999' numeric value.
      */
     @Generated
@@ -159,8 +150,7 @@ public final class PathsAsyncClient {
      * Get '-9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-9999999.999' numeric value.
      */
     @Generated
@@ -173,8 +163,7 @@ public final class PathsAsyncClient {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @Generated
@@ -187,8 +176,7 @@ public final class PathsAsyncClient {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @Generated
@@ -201,8 +189,7 @@ public final class PathsAsyncClient {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @Generated
@@ -215,8 +202,7 @@ public final class PathsAsyncClient {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return ''.
      */
     @Generated
@@ -230,8 +216,7 @@ public final class PathsAsyncClient {
      *
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw).
      */
     @Generated
@@ -245,8 +230,7 @@ public final class PathsAsyncClient {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return using uri with 'green color' in path parameter.
      */
     @Generated
@@ -260,8 +244,7 @@ public final class PathsAsyncClient {
      *
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @Generated
@@ -275,8 +258,7 @@ public final class PathsAsyncClient {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @Generated
@@ -289,8 +271,7 @@ public final class PathsAsyncClient {
      * Get '' as byte array.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '' as byte array.
      */
     @Generated
@@ -304,8 +285,7 @@ public final class PathsAsyncClient {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as byte array (should throw).
      */
     @Generated
@@ -318,8 +298,7 @@ public final class PathsAsyncClient {
      * Get '2012-01-01' as date.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01' as date.
      */
     @Generated
@@ -333,8 +312,7 @@ public final class PathsAsyncClient {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @Generated
@@ -347,8 +325,7 @@ public final class PathsAsyncClient {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @Generated
@@ -362,8 +339,7 @@ public final class PathsAsyncClient {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @Generated
@@ -377,8 +353,7 @@ public final class PathsAsyncClient {
      *
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @Generated
@@ -393,8 +368,7 @@ public final class PathsAsyncClient {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -409,8 +383,7 @@ public final class PathsAsyncClient {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @Generated

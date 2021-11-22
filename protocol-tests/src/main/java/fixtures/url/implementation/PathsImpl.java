@@ -4,6 +4,7 @@
 
 package fixtures.url.implementation;
 
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -45,6 +46,7 @@ public final class PathsImpl {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     private interface PathsService {
         @Get("/paths/bool/true/{boolPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getBooleanTrue(
                 @HostParam("$host") String host,
                 @PathParam("boolPath") boolean boolPath,
@@ -52,6 +54,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/bool/false/{boolPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getBooleanFalse(
                 @HostParam("$host") String host,
                 @PathParam("boolPath") boolean boolPath,
@@ -59,6 +62,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/int/1000000/{intPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getIntOneMillion(
                 @HostParam("$host") String host,
                 @PathParam("intPath") int intPath,
@@ -66,6 +70,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/int/-1000000/{intPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getIntNegativeOneMillion(
                 @HostParam("$host") String host,
                 @PathParam("intPath") int intPath,
@@ -73,6 +78,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/long/10000000000/{longPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getTenBillion(
                 @HostParam("$host") String host,
                 @PathParam("longPath") long longPath,
@@ -80,6 +86,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/long/-10000000000/{longPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> getNegativeTenBillion(
                 @HostParam("$host") String host,
                 @PathParam("longPath") long longPath,
@@ -87,6 +94,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/float/1.034E+20/{floatPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> floatScientificPositive(
                 @HostParam("$host") String host,
                 @PathParam("floatPath") float floatPath,
@@ -94,6 +102,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/float/-1.034E-20/{floatPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> floatScientificNegative(
                 @HostParam("$host") String host,
                 @PathParam("floatPath") float floatPath,
@@ -101,6 +110,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/double/9999999.999/{doublePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> doubleDecimalPositive(
                 @HostParam("$host") String host,
                 @PathParam("doublePath") double doublePath,
@@ -108,6 +118,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/double/-9999999.999/{doublePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> doubleDecimalNegative(
                 @HostParam("$host") String host,
                 @PathParam("doublePath") double doublePath,
@@ -115,6 +126,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/unicode/{stringPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> stringUnicode(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
@@ -122,6 +134,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> stringUrlEncoded(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
@@ -129,6 +142,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> stringUrlNonEncoded(
                 @HostParam("$host") String host,
                 @PathParam(value = "stringPath", encoded = true) String stringPath,
@@ -136,6 +150,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/empty/{stringPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> stringEmpty(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
@@ -143,6 +158,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/null/{stringPath}")
+        @ExpectedResponses({400})
         Mono<Response<Void>> stringNull(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
@@ -150,6 +166,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/enum/green%20color/{enumPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> enumValid(
                 @HostParam("$host") String host,
                 @PathParam("enumPath") String enumPath,
@@ -157,6 +174,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/null/{enumPath}")
+        @ExpectedResponses({400})
         Mono<Response<Void>> enumNull(
                 @HostParam("$host") String host,
                 @PathParam("enumPath") String enumPath,
@@ -164,6 +182,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/byte/multibyte/{bytePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> byteMultiByte(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
@@ -171,6 +190,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/byte/empty/{bytePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> byteEmpty(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
@@ -178,6 +198,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/byte/null/{bytePath}")
+        @ExpectedResponses({400})
         Mono<Response<Void>> byteNull(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
@@ -185,6 +206,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/date/2012-01-01/{datePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> dateValid(
                 @HostParam("$host") String host,
                 @PathParam("datePath") String datePath,
@@ -192,6 +214,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/date/null/{datePath}")
+        @ExpectedResponses({400})
         Mono<Response<Void>> dateNull(
                 @HostParam("$host") String host,
                 @PathParam("datePath") String datePath,
@@ -199,6 +222,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> dateTimeValid(
                 @HostParam("$host") String host,
                 @PathParam("dateTimePath") String dateTimePath,
@@ -206,6 +230,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/datetime/null/{dateTimePath}")
+        @ExpectedResponses({400})
         Mono<Response<Void>> dateTimeNull(
                 @HostParam("$host") String host,
                 @PathParam("dateTimePath") String dateTimePath,
@@ -213,6 +238,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> base64Url(
                 @HostParam("$host") String host,
                 @PathParam("base64UrlPath") String base64UrlPath,
@@ -221,6 +247,7 @@ public final class PathsImpl {
 
         @Get(
                 "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> arrayCsvInPath(
                 @HostParam("$host") String host,
                 @PathParam("arrayPath") String arrayPath,
@@ -228,6 +255,7 @@ public final class PathsImpl {
                 Context context);
 
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
+        @ExpectedResponses({200})
         Mono<Response<Void>> unixTimeUrl(
                 @HostParam("$host") String host,
                 @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
@@ -239,8 +267,7 @@ public final class PathsImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -255,8 +282,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -269,8 +295,7 @@ public final class PathsImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -282,8 +307,7 @@ public final class PathsImpl {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -298,8 +322,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -312,8 +335,7 @@ public final class PathsImpl {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -325,8 +347,7 @@ public final class PathsImpl {
      * Get '1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -341,8 +362,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -355,8 +375,7 @@ public final class PathsImpl {
      * Get '1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -368,8 +387,7 @@ public final class PathsImpl {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -384,8 +402,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -399,8 +416,7 @@ public final class PathsImpl {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -412,8 +428,7 @@ public final class PathsImpl {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -428,8 +443,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -442,8 +456,7 @@ public final class PathsImpl {
      * Get '10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -455,8 +468,7 @@ public final class PathsImpl {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -471,8 +483,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -485,8 +496,7 @@ public final class PathsImpl {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -498,8 +508,7 @@ public final class PathsImpl {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -514,8 +523,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -529,8 +537,7 @@ public final class PathsImpl {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '1.034E+20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -542,8 +549,7 @@ public final class PathsImpl {
      * Get '-1.034E-20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -558,8 +564,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -573,8 +578,7 @@ public final class PathsImpl {
      * Get '-1.034E-20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-1.034E-20' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -586,8 +590,7 @@ public final class PathsImpl {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -602,8 +605,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -616,8 +618,7 @@ public final class PathsImpl {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -629,8 +630,7 @@ public final class PathsImpl {
      * Get '-9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -645,8 +645,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -659,8 +658,7 @@ public final class PathsImpl {
      * Get '-9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '-9999999.999' numeric value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -672,8 +670,7 @@ public final class PathsImpl {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -688,8 +685,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -702,8 +698,7 @@ public final class PathsImpl {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -715,8 +710,7 @@ public final class PathsImpl {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -731,8 +725,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -745,8 +738,7 @@ public final class PathsImpl {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -758,8 +750,7 @@ public final class PathsImpl {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -774,8 +765,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -788,8 +778,7 @@ public final class PathsImpl {
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -801,8 +790,7 @@ public final class PathsImpl {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -817,8 +805,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -831,8 +818,7 @@ public final class PathsImpl {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -845,8 +831,7 @@ public final class PathsImpl {
      *
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -861,8 +846,7 @@ public final class PathsImpl {
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -876,8 +860,7 @@ public final class PathsImpl {
      *
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -890,8 +873,7 @@ public final class PathsImpl {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -906,8 +888,7 @@ public final class PathsImpl {
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -921,8 +902,7 @@ public final class PathsImpl {
      *
      * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return using uri with 'green color' in path parameter.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -935,8 +915,7 @@ public final class PathsImpl {
      *
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -951,8 +930,7 @@ public final class PathsImpl {
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -966,8 +944,7 @@ public final class PathsImpl {
      *
      * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null (should throw on the client before the request is sent on wire).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -980,8 +957,7 @@ public final class PathsImpl {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -996,8 +972,7 @@ public final class PathsImpl {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1011,8 +986,7 @@ public final class PathsImpl {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1024,8 +998,7 @@ public final class PathsImpl {
      * Get '' as byte array.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1040,8 +1013,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1054,8 +1026,7 @@ public final class PathsImpl {
      * Get '' as byte array.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1068,8 +1039,7 @@ public final class PathsImpl {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1084,8 +1054,7 @@ public final class PathsImpl {
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1099,8 +1068,7 @@ public final class PathsImpl {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as byte array (should throw).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1112,8 +1080,7 @@ public final class PathsImpl {
      * Get '2012-01-01' as date.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1128,8 +1095,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1142,8 +1108,7 @@ public final class PathsImpl {
      * Get '2012-01-01' as date.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1156,8 +1121,7 @@ public final class PathsImpl {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1172,8 +1136,7 @@ public final class PathsImpl {
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1187,8 +1150,7 @@ public final class PathsImpl {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1200,8 +1162,7 @@ public final class PathsImpl {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1216,8 +1177,7 @@ public final class PathsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1230,8 +1190,7 @@ public final class PathsImpl {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1244,8 +1203,7 @@ public final class PathsImpl {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1260,8 +1218,7 @@ public final class PathsImpl {
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1275,8 +1232,7 @@ public final class PathsImpl {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1289,8 +1245,7 @@ public final class PathsImpl {
      *
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1305,8 +1260,7 @@ public final class PathsImpl {
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1320,8 +1274,7 @@ public final class PathsImpl {
      *
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1335,8 +1288,7 @@ public final class PathsImpl {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1353,8 +1305,7 @@ public final class PathsImpl {
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1370,8 +1321,7 @@ public final class PathsImpl {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
      *     format.
      */
@@ -1385,8 +1335,7 @@ public final class PathsImpl {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1401,8 +1350,7 @@ public final class PathsImpl {
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1416,8 +1364,7 @@ public final class PathsImpl {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if status code is 400 or above, if throwOnError in requestOptions is not
-     *     false.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
