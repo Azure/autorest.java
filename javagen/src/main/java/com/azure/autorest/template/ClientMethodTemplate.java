@@ -605,19 +605,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
             commentBlock.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
         }
-        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-            commentBlock.methodThrows(useFullClassName
-                            ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
-                            : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
-                    "thrown if the request is rejected by server");
-        }
-        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
-            for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-                commentBlock.methodThrows(exception.getKey().toString(),
-                        String.format("thrown if the request is rejected by server on status code %s",
-                                exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
-            }
-        }
+        generateJavadocExceptions(clientMethod, commentBlock, false);
         commentBlock.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
