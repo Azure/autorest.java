@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATDictionaryService type. */
+@Generated
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class)
 public final class AutoRestSwaggerBATDictionaryServiceClient {
     @Generated private final DictionariesImpl serviceClient;

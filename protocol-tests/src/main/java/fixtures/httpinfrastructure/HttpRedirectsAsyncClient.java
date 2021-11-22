@@ -16,6 +16,7 @@ import fixtures.httpinfrastructure.implementation.HttpRedirectsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class HttpRedirectsAsyncClient {
     @Generated private final HttpRedirectsImpl serviceClient;

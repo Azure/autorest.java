@@ -15,6 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.llcinitial.implementation.ParamsImpl;
 
 /** Initializes a new instance of the synchronous LlcClient type. */
+@Generated
 @ServiceClient(builder = LlcClientBuilder.class)
 public final class LlcClient {
     @Generated private final ParamsImpl serviceClient;

@@ -16,6 +16,7 @@ import fixtures.bodycomplex.implementation.BasicsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class BasicAsyncClient {
     @Generated private final BasicsImpl serviceClient;

@@ -15,6 +15,7 @@ import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LrosaDsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class LrosaDsClient {
     @Generated private final LrosaDsImpl serviceClient;

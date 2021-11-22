@@ -15,6 +15,7 @@ import fixtures.header.implementation.HeadersImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBatHeaderService type. */
+@Generated
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     @Generated private final HeadersImpl serviceClient;

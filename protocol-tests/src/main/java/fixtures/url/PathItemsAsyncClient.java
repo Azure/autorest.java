@@ -15,6 +15,7 @@ import fixtures.url.implementation.PathItemsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestUrlTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class, isAsync = true)
 public final class PathItemsAsyncClient {
     @Generated private final PathItemsImpl serviceClient;

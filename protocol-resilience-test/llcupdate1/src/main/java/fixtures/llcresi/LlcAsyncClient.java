@@ -16,6 +16,7 @@ import fixtures.llcresi.implementation.ParamsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LlcClient type. */
+@Generated
 @ServiceClient(builder = LlcClientBuilder.class, isAsync = true)
 public final class LlcAsyncClient {
     @Generated private final ParamsImpl serviceClient;

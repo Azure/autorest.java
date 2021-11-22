@@ -14,6 +14,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.QueriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class QueriesClient {
     @Generated private final QueriesImpl serviceClient;

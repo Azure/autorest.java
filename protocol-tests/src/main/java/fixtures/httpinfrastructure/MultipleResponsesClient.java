@@ -15,6 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.MultipleResponsesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class MultipleResponsesClient {
     @Generated private final MultipleResponsesImpl serviceClient;

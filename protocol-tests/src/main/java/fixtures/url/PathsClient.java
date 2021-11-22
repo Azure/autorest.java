@@ -14,6 +14,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.PathsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestUrlTestServiceBuilder.class)
 public final class PathsClient {
     @Generated private final PathsImpl serviceClient;

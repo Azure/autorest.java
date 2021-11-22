@@ -15,6 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpRedirectsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class)
 public final class HttpRedirectsClient {
     @Generated private final HttpRedirectsImpl serviceClient;

@@ -15,6 +15,7 @@ import fixtures.httpinfrastructure.implementation.HttpServerFailuresImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
+@Generated
 @ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
 public final class HttpServerFailureAsyncClient {
     @Generated private final HttpServerFailuresImpl serviceClient;
