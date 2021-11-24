@@ -41,6 +41,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Maps Swagger definition into the interface methods that RestProxy consumes.
+ */
 public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
 
     private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
@@ -52,8 +55,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     private static final Pattern APOSTROPHE = Pattern.compile("'");
 
-//    private static final jdk.nashorn.internal.runtime.regexp.joni.Regex methodTypeLeading = new Regex("^/+");
-//    private static final Regex methodTypeTrailing = new Regex("/+$");
     private Map<Request, ProxyMethod> parsed = new ConcurrentHashMap<>();
     protected ProxyMethodMapper() {
     }
@@ -488,16 +489,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             : createExceptionTypeFromFullyQualifiedClass(defaultHttpExceptionType);
     }
 
-    private static Map<HttpResponseStatus, ClassType> getHttpStatusToExceptionTypeMappingFromSettings(
+    private Map<HttpResponseStatus, ClassType> getHttpStatusToExceptionTypeMappingFromSettings(
         JavaSettings settings) {
         // Use a status code to error type mapping initial so that the custom mapping can override the default mapping,
         // if the default mapping is being used.
         Map<HttpResponseStatus, ClassType> exceptionMapping = new HashMap<>();
 
         if (settings.isUseDefaultHttpStatusCodeToExceptionTypeMapping()) {
-            exceptionMapping.put(HttpResponseStatus.UNAUTHORIZED, ClassType.ClientAuthenticationException);
-            exceptionMapping.put(HttpResponseStatus.NOT_FOUND, ClassType.ResourceNotFoundException);
-            exceptionMapping.put(HttpResponseStatus.CONFLICT, ClassType.ResourceModifiedException);
+            exceptionMapping.putAll(getDefaultHttpStatusCodeToExceptionTypeMapping());
         }
 
         Map<Integer, String> customExceptionMapping = settings.getHttpStatusCodeToExceptionTypeMapping();
@@ -517,6 +516,32 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             .build();
     }
 
+    /**
+     * Gets the default HTTP status code to exception type mapping.
+     * <p>
+     * This is only used when {@link JavaSettings#isUseDefaultHttpStatusCodeToExceptionTypeMapping()} is true. The
+     * values in this mapping may also be overridden if {@link JavaSettings#getHttpStatusCodeToExceptionTypeMapping()}
+     * is configured.
+     *
+     * @return The default HTTP status code to exception type mapping.
+     */
+    protected Map<HttpResponseStatus, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
+        Map<HttpResponseStatus, ClassType> defaultMapping = new HashMap<>();
+        defaultMapping.put(HttpResponseStatus.UNAUTHORIZED, ClassType.ClientAuthenticationException);
+        defaultMapping.put(HttpResponseStatus.NOT_FOUND, ClassType.ResourceNotFoundException);
+        defaultMapping.put(HttpResponseStatus.CONFLICT, ClassType.ResourceModifiedException);
+
+        return defaultMapping;
+    }
+
+    /**
+     * Gets the default HTTP response exception type.
+     * <p>
+     * The returned exception type is used as the default HTTP exception when both the Swagger doesn't define an HTTP
+     * exception type and {@link JavaSettings} doesn't contain {@link JavaSettings#getDefaultHttpExceptionType()}.
+     *
+     * @return The default HTTP response exception type.
+     */
     protected ClassType getHttpResponseExceptionType() {
         return ClassType.HttpResponseException;
     }

@@ -833,7 +833,8 @@ public class JavaSettings {
      * @return A read-only view of the custom error HTTP status code to exception type mapping.
      */
     public Map<Integer, String> getHttpStatusCodeToExceptionTypeMapping() {
-        return Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
+        return httpStatusCodeToExceptionTypeMapping == null
+            ? null : Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",
