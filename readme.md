@@ -75,6 +75,9 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 | `--service-name` | String. Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
+|`--default-http-exception-type`|Indicates the fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
+|`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
+|`--http-status-code-to-exception-type-mapping`|Indicates the HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
 
 ## Settings for minimal clients (low-level clients)
 
@@ -138,6 +141,89 @@ With the fields specified below:
 |poll-interval|integer|false|The default interval in seconds to poll with (can be modified by users in `PollerFlux` and `SyncPoller`. Default is 1.|30|
 
 To use default settings globally, use `--polling={}`.
+
+## HTTP Status Code to Exception Type Handling
+
+By default, Swagger definitions will contain an exception type to be thrown when any error HTTP status code is seen. Swaggers
+may also define the error HTTP status code to exception type mapping, but isn't always the case. Or, it may be needed to change
+the default exception type to a custom type. In these cases it is possible to configure the error HTTP status code to exception
+type handling by using the configurations `--default-http-exception-type`, `--use-default-http-status-code-to-exception-type-mapping`, 
+and `--http-status-code-to-exception-type-mapping`. 
+
+NOTE: Using the configurations on an already shipped library will likely result in runtime breaking changes as most 
+libraries are already using a sub-class type of `HttpResponseException` and changing sub-types is a breaking change.
+
+### Default Http Exception Type
+
+The default exception type is used for all error HTTP response status codes that do not have an explicit exception type
+configured. Generally, there is no error HTTP response status code to exception type mapping, so this will become your
+general exception type. The following is an example of configuring `com.azure.core.exception.HttpResponseException` as
+the default exception type:
+
+`autorest --default-http-exception-type=com.azure.core.exception.HttpResponseException`
+
+or in the Swagger README configuration:
+
+```
+default-http-exception-type: com.azure.core.exception.HttpResponseException
+```
+
+If this configuration isn't used the default exception type will be based on the Swagger definition.
+
+### Use Default HTTP Status Code to Exception Type Mapping
+
+The default error HTTP status code to exception type map is the following:
+
+|Status Code|Exception Type|
+|-----------|--------------|
+|401|com.azure.core.exception.ClientAuthenticationException|
+|404|com.azure.core.exception.ResourceNotFoundException|
+|409|com.azure.core.exception.ResourceModifiedException|
+
+By default, this mapping isn't used, to use it pass the `--use-default-http-status-code-to-exception-type-mapping` to 
+the generator or in the Swagger README configuration:
+
+```
+use-default-http-status-code-to-exception-type-mapping: true
+```
+
+### Custom HTTP Status Code to Exception Type Mapping
+
+If you need to have a custom mapping it is possible to do so by using `--http-status-code-to-exception-type-mapping`. 
+This requires additional configuration in the Swagger README definition as it is a mapping of HTTP status code to 
+exception. The following is an example:
+
+```
+http-status-code-to-exception-type-mapping:
+  404: com.azure.core.exception.ResourceNotFoundException
+  412: com.azure.core.exception.ResourceExistsException
+```
+
+### Example
+
+The HTTP status code to exception type handling configurations can be used together to offer a nice baseline default
+with additional customizations as need. For example, if you wanted to configure the default exception type, use most of
+the default error HTTP status code to exception type, and customize one error HTTP status code exception type the following
+configurations can be used.
+
+```
+default-http-exception-type: com.azure.core.exception.HttpResponseException
+use-default-http-status-code-to-exception-type-mapping: true
+http-status-code-to-exception-type-mapping:
+  404: com.azure.core.exception.ResourceExistsException
+```
+
+This results in the following error HTTP response to exception type mapping:
+
+|Status Code|Exception Type|
+|-----------|--------------|
+|401|com.azure.core.exception.ClientAuthenticationException|
+|404|com.azure.core.exception.ResourceExistsException|
+|409|com.azure.core.exception.ResourceModifiedException|
+|*|com.azure.core.exception.HttpResponseException|
+
+Notices how 404 changes from the default `com.azure.core.exception.ResourceNotFoundException` to
+`com.azure.core.exception.ResourceExistsException`.
 
 # Minimal clients (low-level clients)
 

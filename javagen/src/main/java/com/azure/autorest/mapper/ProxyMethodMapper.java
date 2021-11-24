@@ -308,81 +308,106 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      * @param expectedStatusCodes the expected status codes
      * @param settings the settings
      */
-    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
-                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
-                                                         JavaSettings settings) {
-        ClassType errorType = null;
-        Map<ClassType, List<HttpResponseStatus>> exceptionTypeMap = new HashMap<>();
+    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder, Operation operation,
+        List<HttpResponseStatus> expectedStatusCodes, JavaSettings settings) {
+        SwaggerExceptionDefinitions swaggerExceptionDefinitions = getSwaggerExceptionDefinitions(operation, settings);
+        ClassType settingsDefaultExceptionType = getDefaultHttpExceptionTypeFromSettings(settings);
+
+        // Use the settings defined default exception type over the Swagger defined default exception type.
+        ClassType defaultErrorType = (settingsDefaultExceptionType == null)
+            ? swaggerExceptionDefinitions.defaultExceptionType
+            : settingsDefaultExceptionType;
+
+        if (defaultErrorType != null && !settings.isLowLevelClient()) {
+            builder.unexpectedResponseExceptionType(defaultErrorType);
+        } else {
+            builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
+        }
+
+        Map<HttpResponseStatus, ClassType> settingsExceptionTypeMap =
+            getHttpStatusToExceptionTypeMappingFromSettings(settings);
+
+        // Initialize the merged map with the Swagger defined configurations so that the settings configurations
+        // overrides it.
+        Map<HttpResponseStatus, ClassType> mergedExceptionTypeMapping = new HashMap<>(
+            swaggerExceptionDefinitions.exceptionTypeMapping);
+        mergedExceptionTypeMapping.putAll(settingsExceptionTypeMap);
+
+        // Convert the exception type mapping into what code generation uses elsewhere.
+        Map<ClassType, List<HttpResponseStatus>> processedMapping = new HashMap<>();
+        for (Map.Entry<HttpResponseStatus, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {
+            processedMapping.compute(kvp.getValue(), (errorType, statuses) -> {
+                if (statuses == null) {
+                    List<HttpResponseStatus> statusList = new ArrayList<>();
+                    statusList.add(kvp.getKey());
+                    return statusList;
+                }
+
+                statuses.add(kvp.getKey());
+                return statuses;
+            });
+        }
+
+        if (!processedMapping.isEmpty()) {
+            builder.unexpectedResponseExceptionTypes(processedMapping);
+        }
+    }
+
+    private static SwaggerExceptionDefinitions getSwaggerExceptionDefinitions(Operation operation,
+        JavaSettings settings) {
+        SwaggerExceptionDefinitions exceptionDefinitions = new SwaggerExceptionDefinitions();
+        ClassType swaggerDefaultExceptionType = null;
+        Map<HttpResponseStatus, ClassType> swaggerExceptionTypeMap = new HashMap<>();
 
         /*
         1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
         2. If exception does not have status codes, or have 'default' or invalid number, put the first to unexpectedResponseExceptionType, ignore the rest
         3. After processing, if no model in unexpectedResponseExceptionType, take any from unexpectedResponseExceptionTypes and put it to unexpectedResponseExceptionType
          */
-
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
             for (Response exception : operation.getExceptions()) {
+                // Exception doesn't have HTTP configurations, skip it.
+                if (exception.getProtocol() == null || exception.getProtocol().getHttp() == null) {
+                    continue;
+                }
+
                 boolean isDefaultError = true;
-                if (exception.getProtocol() != null && exception.getProtocol().getHttp() != null) {
-                    List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
-                    if (statusCodes != null && !statusCodes.isEmpty()) {
-                        try {
-                            ClassType exceptionType = getExceptionType(exception, settings);
-                            List<HttpResponseStatus> statusCodeList = statusCodes.stream()
-                                    .map(code -> HttpResponseStatus.valueOf(Integer.parseInt(code)))
-                                    .collect(Collectors.toList());
+                List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
+                if (statusCodes != null && !statusCodes.isEmpty()) {
+                    try {
+                        ClassType exceptionType = getExceptionType(exception, settings);
+                        statusCodes.stream().map(code -> HttpResponseStatus.valueOf(Integer.parseInt(code)))
+                            .forEach(status -> swaggerExceptionTypeMap.put(status, exceptionType));
 
-                            if (exceptionTypeMap.containsKey(exceptionType)) {
-                                exceptionTypeMap.get(exceptionType).addAll(statusCodeList);
-                            } else {
-                                exceptionTypeMap.put(exceptionType, statusCodeList);
-                            }
-
-                            isDefaultError = false;
-                        } catch (NumberFormatException ex) {
-                            // statusCodes can be 'default'
-                            //logger.warn("Failed to parse status code, exception {}", ex.toString());
-                            isDefaultError = true;
-                        }
+                        isDefaultError = false;
+                    } catch (NumberFormatException ex) {
+                        // statusCodes can be 'default'
+                        //logger.warn("Failed to parse status code, exception {}", ex.toString());
                     }
                 }
 
-                if (errorType == null && isDefaultError && exception.getSchema() != null) {
-                    errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
+                if (swaggerDefaultExceptionType == null && isDefaultError && exception.getSchema() != null) {
+                    swaggerDefaultExceptionType = processExceptionClassType(
+                        (ClassType) Mappers.getSchemaMapper().map(exception.getSchema()), settings);
                 }
             }
 
-            if (errorType == null) {
+            if (swaggerDefaultExceptionType == null) {
                 // no default error, use the 1st to keep backward compatibility
-                errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+                swaggerDefaultExceptionType = processExceptionClassType(
+                    (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema()), settings);
             }
         }
 
-        if (errorType != null && !settings.isLowLevelClient()) {
-            String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
-            if (exceptionName == null || exceptionName.isEmpty()) {
-                exceptionName = errorType.getName();
-                exceptionName += "Exception";
-            }
+        exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;
+        exceptionDefinitions.exceptionTypeMapping = swaggerExceptionTypeMap;
 
-            String exceptionPackage;
-            if (settings.isCustomType(exceptionName)) {
-                exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            } else {
-                exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
-            }
+        return exceptionDefinitions;
+    }
 
-            builder.unexpectedResponseExceptionType(new ClassType.Builder()
-                    .packageName(exceptionPackage)
-                    .name(exceptionName)
-                    .build());
-        } else {
-            builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
-        }
-
-        if (!exceptionTypeMap.isEmpty()) {
-            builder.unexpectedResponseExceptionTypes(exceptionTypeMap);
-        }
+    private static final class SwaggerExceptionDefinitions {
+        private ClassType defaultExceptionType;
+        private Map<HttpResponseStatus, ClassType> exceptionTypeMapping;
     }
 
     private static ClassType getExceptionType(Response exception, JavaSettings settings) {
@@ -391,27 +416,32 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         if (exception != null && exception.getSchema() != null) {
             ClassType errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
             if (errorType != null) {
-                String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
-                if (exceptionName == null || exceptionName.isEmpty()) {
-                    exceptionName = errorType.getName();
-                    exceptionName += "Exception";
-                }
-
-                String exceptionPackage;
-                if (settings.isCustomType(exceptionName)) {
-                    exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-                } else {
-                    exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
-                }
-
-                exceptionType = new ClassType.Builder()
-                        .packageName(exceptionPackage)
-                        .name(exceptionName)
-                        .build();
+                exceptionType = processExceptionClassType(errorType, settings);
             }
         }
 
         return exceptionType;
+    }
+
+    private static ClassType processExceptionClassType(ClassType errorType, JavaSettings settings) {
+        if (errorType == null) {
+            return null;
+        }
+
+        String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
+        if (exceptionName == null || exceptionName.isEmpty()) {
+            exceptionName = errorType.getName();
+            exceptionName += "Exception";
+        }
+
+        String exceptionPackage = (settings.isCustomType(exceptionName))
+            ? settings.getPackage(settings.getCustomTypesSubpackage())
+            : settings.getPackage(settings.getModelsSubpackage());
+
+        return new ClassType.Builder()
+            .packageName(exceptionPackage)
+            .name(exceptionName)
+            .build();
     }
 
     private String deduplicateMethodName(String operationName, List<ProxyMethodParameter> parameters,
@@ -448,6 +478,43 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
         methodSignatures.add(methodSignature);
         return name;
+    }
+
+    private static ClassType getDefaultHttpExceptionTypeFromSettings(JavaSettings settings) {
+        String defaultHttpExceptionType = settings.getDefaultHttpExceptionType();
+
+        return CoreUtils.isNullOrEmpty(defaultHttpExceptionType)
+            ? null
+            : createExceptionTypeFromFullyQualifiedClass(defaultHttpExceptionType);
+    }
+
+    private static Map<HttpResponseStatus, ClassType> getHttpStatusToExceptionTypeMappingFromSettings(
+        JavaSettings settings) {
+        // Use a status code to error type mapping initial so that the custom mapping can override the default mapping,
+        // if the default mapping is being used.
+        Map<HttpResponseStatus, ClassType> exceptionMapping = new HashMap<>();
+
+        if (settings.isUseDefaultHttpStatusCodeToExceptionTypeMapping()) {
+            exceptionMapping.put(HttpResponseStatus.UNAUTHORIZED, ClassType.ClientAuthenticationException);
+            exceptionMapping.put(HttpResponseStatus.NOT_FOUND, ClassType.ResourceNotFoundException);
+            exceptionMapping.put(HttpResponseStatus.CONFLICT, ClassType.ResourceModifiedException);
+        }
+
+        Map<Integer, String> customExceptionMapping = settings.getHttpStatusCodeToExceptionTypeMapping();
+        if (!CoreUtils.isNullOrEmpty(customExceptionMapping)) {
+            customExceptionMapping.forEach((key, value) -> exceptionMapping.put(HttpResponseStatus.valueOf(key),
+                createExceptionTypeFromFullyQualifiedClass(value)));
+        }
+
+        return exceptionMapping;
+    }
+
+    private static ClassType createExceptionTypeFromFullyQualifiedClass(String fullyQualifiedClass) {
+        int classStart = fullyQualifiedClass.lastIndexOf(".");
+        return new ClassType.Builder()
+            .packageName(fullyQualifiedClass.substring(0, classStart))
+            .name(fullyQualifiedClass.substring(classStart + 1))
+            .build();
     }
 
     protected ClassType getHttpResponseExceptionType() {
