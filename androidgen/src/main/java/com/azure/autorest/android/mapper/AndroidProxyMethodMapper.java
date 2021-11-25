@@ -8,8 +8,11 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import io.netty.handler.codec.http.HttpResponseStatus;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation.None;
 
@@ -51,6 +54,11 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     @Override
     protected ClassType getContextClass() {
         return ClassType.AndroidContext;
+    }
+
+    @Override
+    protected Map<HttpResponseStatus, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
+        return new HashMap<>();
     }
 
     @Override

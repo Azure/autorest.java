@@ -128,7 +128,11 @@ public class JavaSettings {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
-                getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false));
+                getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
+                getStringValue(host, "default-http-exception-type"),
+                getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
+                host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
+                    "http-status-code-to-exception-type-mapping"));
         }
         return _instance;
     }
@@ -159,6 +163,13 @@ public class JavaSettings {
      * @param annotateGettersAndSettersForSerialization If set to true, Jackson JsonGetter and JsonSetter will annotate
      * getters and setters in generated models to handle serialization and deserialization. For now, fields will
      * continue being annotated to ensure that there are no backwards compatibility breaks.
+     * @param defaultHttpExceptionType The fully-qualified class that should be used as the default exception type. This
+     * class must extend from HttpResponseException.
+     * @param useDefaultHttpStatusCodeToExceptionTypeMapping Determines whether a well-known HTTP status code to exception type mapping
+     * should be used if an HTTP status code-exception mapping isn't provided.
+     * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
+     * thrown if that status code is seen. All exception types must be fully-qualified and extend from
+     * HttpResponseException.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -207,7 +218,10 @@ public class JavaSettings {
         Map<String, PollingDetails> pollingConfig,
         boolean generateSamples,
         boolean passDiscriminatorToChildDeserialization,
-        boolean annotateGettersAndSettersForSerialization) {
+        boolean annotateGettersAndSettersForSerialization,
+        String defaultHttpExceptionType,
+        boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
+        Map<Integer, String> httpStatusCodeToExceptionTypeMapping) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -282,6 +296,11 @@ public class JavaSettings {
         this.generateSamples = generateSamples;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
+
+        // Error HTTP status code exception type handling.
+        this.defaultHttpExceptionType = defaultHttpExceptionType;
+        this.useDefaultHttpStatusCodeToExceptionTypeMapping = useDefaultHttpStatusCodeToExceptionTypeMapping;
+        this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
     }
 
     private String keyCredentialHeaderName;
@@ -782,6 +801,40 @@ public class JavaSettings {
      */
     public boolean isGettersAndSettersAnnotatedForSerialization() {
         return annotateGettersAndSettersForSerialization;
+    }
+
+    private final String defaultHttpExceptionType;
+
+    /**
+     * Gets the fully-qualified exception type that is used for error HTTP status codes.
+     *
+     * @return The fully-qualified exception type.
+     */
+    public String getDefaultHttpExceptionType() {
+        return defaultHttpExceptionType;
+    }
+
+    private final boolean useDefaultHttpStatusCodeToExceptionTypeMapping;
+
+    /**
+     * Whether to use the default error HTTP status code to exception type mapping.
+     *
+     * @return Whether to use the default error HTTP status code to exception type mapping.
+     */
+    public boolean isUseDefaultHttpStatusCodeToExceptionTypeMapping() {
+        return useDefaultHttpStatusCodeToExceptionTypeMapping;
+    }
+
+    private final Map<Integer, String> httpStatusCodeToExceptionTypeMapping;
+
+    /**
+     * Gets a read-only view of the custom error HTTP status code to exception type mapping.
+     *
+     * @return A read-only view of the custom error HTTP status code to exception type mapping.
+     */
+    public Map<Integer, String> getHttpStatusCodeToExceptionTypeMapping() {
+        return httpStatusCodeToExceptionTypeMapping == null
+            ? null : Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",
