@@ -38,7 +38,6 @@ public class ClassType implements IType {
     public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
-    public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
     public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
     public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
@@ -71,12 +70,19 @@ public class ClassType implements IType {
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
     public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
-    public static final ClassType JsonPatchDocument =
-            new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
+    public static final ClassType JsonPatchDocument = new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
     public static final ClassType RequestOptions = new Builder().knownClass(com.azure.core.http.rest.RequestOptions.class).build();
     public static final ClassType ClientOptions = new Builder().knownClass(com.azure.core.util.ClientOptions.class).build();
     public static final ClassType HttpHeaders = new Builder().knownClass(com.azure.core.http.HttpHeaders.class).build();
+
+    // Java exception types
+    public static final ClassType HttpResponseException = new Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
+    public static final ClassType ClientAuthenticationException = new Builder().knownClass(com.azure.core.exception.ClientAuthenticationException.class).build();
+    public static final ClassType ResourceExistsException = new Builder().knownClass(com.azure.core.exception.ResourceExistsException.class).build();
+    public static final ClassType ResourceModifiedException = new Builder().knownClass(com.azure.core.exception.ResourceModifiedException.class).build();
+    public static final ClassType ResourceNotFoundException = new Builder().knownClass(com.azure.core.exception.ResourceNotFoundException.class).build();
+    public static final ClassType TooManyRedirectsException = new Builder().knownClass(com.azure.core.exception.TooManyRedirectsException.class).build();
 
     private final String packageName;
     private final String name;

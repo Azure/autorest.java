@@ -129,6 +129,10 @@ public class JavaSettings {
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
+                getStringValue(host, "default-http-exception-type"),
+                getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
+                host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
+                    "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "defer-strongly-typed-header-deserialization", false));
         }
         return _instance;
@@ -137,13 +141,6 @@ public class JavaSettings {
     /**
      * Create a new JavaSettings object with the provided properties.
      *
-     * @param azure
-     * @param fluent
-     * @param regeneratePom
-     * @param fileHeaderText
-     * @param maximumJavadocCommentWidth
-     * @param serviceName
-     * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
@@ -160,6 +157,13 @@ public class JavaSettings {
      * @param annotateGettersAndSettersForSerialization If set to true, Jackson JsonGetter and JsonSetter will annotate
      * getters and setters in generated models to handle serialization and deserialization. For now, fields will
      * continue being annotated to ensure that there are no backwards compatibility breaks.
+     * @param defaultHttpExceptionType The fully-qualified class that should be used as the default exception type. This
+     * class must extend from HttpResponseException.
+     * @param useDefaultHttpStatusCodeToExceptionTypeMapping Determines whether a well-known HTTP status code to exception type mapping
+     * should be used if an HTTP status code-exception mapping isn't provided.
+     * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
+     * thrown if that status code is seen. All exception types must be fully-qualified and extend from
+     * HttpResponseException.
      * @param deferStronglyTypedHeaderDeserialization If set to true, strongly-typed HTTP header objects will lazily
      * deserialize properties as they are accessed.
      */
@@ -211,6 +215,9 @@ public class JavaSettings {
         boolean generateSamples,
         boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization,
+        String defaultHttpExceptionType,
+        boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
+        Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean deferStronglyTypedHeaderDeserialization) {
 
         this.autorestSettings = autorestSettings;
@@ -287,10 +294,15 @@ public class JavaSettings {
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
+        // Error HTTP status code exception type handling.
+        this.defaultHttpExceptionType = defaultHttpExceptionType;
+        this.useDefaultHttpStatusCodeToExceptionTypeMapping = useDefaultHttpStatusCodeToExceptionTypeMapping;
+        this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
+
         this.deferStronglyTypedHeaderDeserialization = deferStronglyTypedHeaderDeserialization;
     }
 
-    private String keyCredentialHeaderName;
+    private final String keyCredentialHeaderName;
 
     public String getKeyCredentialHeaderName() {
         return this.keyCredentialHeaderName;
@@ -308,13 +320,13 @@ public class JavaSettings {
         return credentialScopes;
     }
 
-    private boolean azure;
+    private final boolean azure;
 
     public final boolean isAzure() {
         return azure;
     }
 
-    private String artifactId;
+    private final String artifactId;
 
     public String getArtifactId() {
         return artifactId;
@@ -358,7 +370,7 @@ public class JavaSettings {
     }
 
     public static class ModelerSettings {
-        private Map<String, Object> settings;
+        private final Map<String, Object> settings;
 
         public ModelerSettings(Map<String, Object> settings) {
             this.settings = settings == null ? Collections.emptyMap() : settings;
@@ -407,31 +419,31 @@ public class JavaSettings {
         return sdkIntegration;
     }
 
-    private boolean regeneratePom;
+    private final boolean regeneratePom;
 
     public final boolean shouldRegeneratePom() {
         return regeneratePom;
     }
 
-    private String fileHeaderText;
+    private final String fileHeaderText;
 
     public final String getFileHeaderText() {
         return fileHeaderText;
     }
 
-    private int maximumJavadocCommentWidth;
+    private final int maximumJavadocCommentWidth;
 
     public final int getMaximumJavadocCommentWidth() {
         return maximumJavadocCommentWidth;
     }
 
-    private String serviceName;
+    private final String serviceName;
 
     public final String getServiceName() {
         return serviceName;
     }
 
-    private String packageName;
+    private final String packageName;
 
     public final String getPackage() {
         return packageName;
@@ -453,7 +465,7 @@ public class JavaSettings {
         return packageBuilder.toString();
     }
 
-    private boolean shouldGenerateXmlSerialization;
+    private final boolean shouldGenerateXmlSerialization;
 
     public final boolean shouldGenerateXmlSerialization() {
         return shouldGenerateXmlSerialization;
@@ -462,13 +474,13 @@ public class JavaSettings {
     /**
      * Whether to add the @NotNull annotation to required parameters in client methods.
      */
-    private boolean nonNullAnnotations;
+    private final boolean nonNullAnnotations;
 
     public final boolean shouldNonNullAnnotations() {
         return nonNullAnnotations;
     }
 
-    private boolean clientSideValidations;
+    private final boolean clientSideValidations;
 
     public final boolean shouldClientSideValidations() {
         return clientSideValidations;
@@ -477,7 +489,7 @@ public class JavaSettings {
     /**
      * The prefix that will be added to each generated client type.
      */
-    private String clientTypePrefix;
+    private final String clientTypePrefix;
 
     public final String getClientTypePrefix() {
         return clientTypePrefix;
@@ -486,7 +498,7 @@ public class JavaSettings {
     /**
      * Whether interfaces will be generated for Service and Method Group clients.
      */
-    private boolean generateClientInterfaces;
+    private final boolean generateClientInterfaces;
 
     public final boolean shouldGenerateClientInterfaces() {
         return generateClientInterfaces;
@@ -495,7 +507,7 @@ public class JavaSettings {
     /**
      * Whether interfaces will be generated for Service and Method Group clients.
      */
-    private boolean generateClientAsImpl;
+    private final boolean generateClientAsImpl;
 
     public final boolean shouldGenerateClientAsImpl() {
         return generateClientAsImpl;
@@ -504,7 +516,7 @@ public class JavaSettings {
     /**
      * The sub-package that the Service and Method Group client implementation classes will be put into.
      */
-    private String implementationSubpackage;
+    private final String implementationSubpackage;
 
     public final String getImplementationSubpackage() {
         return implementationSubpackage;
@@ -513,13 +525,13 @@ public class JavaSettings {
     /**
      * The sub-package that Enums, Exceptions, and Model types will be put into.
      */
-    private String modelsSubpackage;
+    private final String modelsSubpackage;
 
     public final String getModelsSubpackage() {
         return modelsSubpackage;
     }
 
-    private String fluentSubpackage;
+    private final String fluentSubpackage;
 
     /**
      * @return The sub-package for Fluent SDK, that contains Client and Builder types, which is not recommended to be
@@ -544,7 +556,7 @@ public class JavaSettings {
     /**
      * Whether Service and Method Group client method overloads that omit optional parameters will be created.
      */
-    private boolean requiredParameterClientMethods;
+    private final boolean requiredParameterClientMethods;
 
     public final boolean getRequiredParameterClientMethods() {
         return requiredParameterClientMethods;
@@ -553,19 +565,19 @@ public class JavaSettings {
     /**
      * Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
      */
-    private boolean addContextParameter;
+    private final boolean addContextParameter;
 
     public final boolean getAddContextParameter() {
         return addContextParameter;
     }
 
-    private boolean contextClientMethodParameter;
+    private final boolean contextClientMethodParameter;
 
     public final boolean isContextClientMethodParameter() {
         return contextClientMethodParameter;
     }
 
-    private boolean generateSyncAsyncClients;
+    private final boolean generateSyncAsyncClients;
 
     public final boolean shouldGenerateSyncAsyncClients() {
         return generateSyncAsyncClients;
@@ -577,13 +589,13 @@ public class JavaSettings {
         return syncMethods;
     }
 
-    private boolean requiredFieldsAsConstructorArgs;
+    private final boolean requiredFieldsAsConstructorArgs;
 
     public boolean isRequiredFieldsAsConstructorArgs() {
         return requiredFieldsAsConstructorArgs;
     }
 
-    private boolean serviceInterfaceAsPublic;
+    private final boolean serviceInterfaceAsPublic;
 
     public boolean isServiceInterfaceAsPublic() {
         return serviceInterfaceAsPublic;
@@ -608,7 +620,7 @@ public class JavaSettings {
         }
     }
 
-    private List<String> customTypes;
+    private final List<String> customTypes;
 
     public List<String> getCustomTypes() {
         return customTypes;
@@ -618,7 +630,7 @@ public class JavaSettings {
         return customTypes.contains(typeName);
     }
 
-    private String customTypesSubpackage;
+    private final String customTypesSubpackage;
 
     public final String getCustomTypesSubpackage() {
         return customTypesSubpackage;
@@ -643,19 +655,19 @@ public class JavaSettings {
         }
     }
 
-    private boolean clientLogger;
+    private final boolean clientLogger;
 
     public final boolean shouldClientLogger() {
         return clientLogger;
     }
 
-    private String customizationJarPath;
+    private final String customizationJarPath;
 
     public final String getCustomizationJarPath() {
         return customizationJarPath;
     }
 
-    private String customizationClass;
+    private final String customizationClass;
 
     public final String getCustomizationClass() {
         return customizationClass;
@@ -788,6 +800,40 @@ public class JavaSettings {
      */
     public boolean isGettersAndSettersAnnotatedForSerialization() {
         return annotateGettersAndSettersForSerialization;
+    }
+
+    private final String defaultHttpExceptionType;
+
+    /**
+     * Gets the fully-qualified exception type that is used for error HTTP status codes.
+     *
+     * @return The fully-qualified exception type.
+     */
+    public String getDefaultHttpExceptionType() {
+        return defaultHttpExceptionType;
+    }
+
+    private final boolean useDefaultHttpStatusCodeToExceptionTypeMapping;
+
+    /**
+     * Whether to use the default error HTTP status code to exception type mapping.
+     *
+     * @return Whether to use the default error HTTP status code to exception type mapping.
+     */
+    public boolean isUseDefaultHttpStatusCodeToExceptionTypeMapping() {
+        return useDefaultHttpStatusCodeToExceptionTypeMapping;
+    }
+
+    private final Map<Integer, String> httpStatusCodeToExceptionTypeMapping;
+
+    /**
+     * Gets a read-only view of the custom error HTTP status code to exception type mapping.
+     *
+     * @return A read-only view of the custom error HTTP status code to exception type mapping.
+     */
+    public Map<Integer, String> getHttpStatusCodeToExceptionTypeMapping() {
+        return httpStatusCodeToExceptionTypeMapping == null
+            ? null : Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
     }
 
     private final boolean deferStronglyTypedHeaderDeserialization;
