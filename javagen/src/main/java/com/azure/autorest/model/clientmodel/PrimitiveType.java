@@ -1,7 +1,5 @@
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-
 import java.util.Set;
 import java.util.function.Function;
 
@@ -45,7 +43,7 @@ public class PrimitiveType implements IType {
     private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String, String> defaultValueExpressionConverter, String defaultValue) {
         this.name = name;
         this.nullableType = nullableType;
-        this.defaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+        this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.defaultValue = defaultValue;
     }
 

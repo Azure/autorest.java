@@ -128,7 +128,8 @@ public class JavaSettings {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
-                getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false));
+                getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
+                getBooleanValue(host, "defer-strongly-typed-header-deserialization", false));
         }
         return _instance;
     }
@@ -159,6 +160,8 @@ public class JavaSettings {
      * @param annotateGettersAndSettersForSerialization If set to true, Jackson JsonGetter and JsonSetter will annotate
      * getters and setters in generated models to handle serialization and deserialization. For now, fields will
      * continue being annotated to ensure that there are no backwards compatibility breaks.
+     * @param deferStronglyTypedHeaderDeserialization If set to true, strongly-typed HTTP header objects will lazily
+     * deserialize properties as they are accessed.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -207,7 +210,8 @@ public class JavaSettings {
         Map<String, PollingDetails> pollingConfig,
         boolean generateSamples,
         boolean passDiscriminatorToChildDeserialization,
-        boolean annotateGettersAndSettersForSerialization) {
+        boolean annotateGettersAndSettersForSerialization,
+        boolean deferStronglyTypedHeaderDeserialization) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -282,6 +286,8 @@ public class JavaSettings {
         this.generateSamples = generateSamples;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
+
+        this.deferStronglyTypedHeaderDeserialization = deferStronglyTypedHeaderDeserialization;
     }
 
     private String keyCredentialHeaderName;
@@ -782,6 +788,17 @@ public class JavaSettings {
      */
     public boolean isGettersAndSettersAnnotatedForSerialization() {
         return annotateGettersAndSettersForSerialization;
+    }
+
+    private final boolean deferStronglyTypedHeaderDeserialization;
+
+    /**
+     * Whether strongly-typed HTTP header objects will be generated with lazy deserialization for properties.
+     *
+     * @return Whether strongly-typed HTTP header objects will be generated with lazy deserialization for properties.
+     */
+    public boolean isDeferStronglyTypedHeaderDeserialization() {
+        return deferStronglyTypedHeaderDeserialization;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",

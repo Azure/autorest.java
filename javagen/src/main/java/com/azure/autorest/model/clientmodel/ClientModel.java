@@ -31,7 +31,7 @@ public class ClientModel {
      */
     private String description;
     /**
-     * Get whether or not this model has model types that derive from it.
+     * Get whether this model has model types that derive from it.
      */
     private boolean isPolymorphic;
     /**
@@ -43,7 +43,7 @@ public class ClientModel {
      */
     private String serializedName;
     /**
-     * Get whether or not this model needs serialization flattening.
+     * Get whether this model needs serialization flattening.
      */
     private boolean needsFlatten;
     /**
@@ -74,26 +74,32 @@ public class ClientModel {
     private IType modelType;
 
     /**
+     * Whether this model is a strongly-typed HTTP headers class.
+     */
+    private final boolean stronglyTypedHeader;
+
+    /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
      * @param imports The imports for this model.
      * @param description The description of this model.
-     * @param isPolymorphic Whether or not this model has model types that derive from it.
+     * @param isPolymorphic Whether this model has model types that derive from it.
      * @param polymorphicDiscriminator The name of the property that determines which polymorphic model type to create.
      * @param serializedName The name that is used for this model when it is serialized.
-     * @param needsFlatten Whether or not this model needs serialization flattening.
+     * @param needsFlatten Whether this model needs serialization flattening.
      * @param parentModelName The parent model of this model.
      * @param derivedModels The models that derive from this model.
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
      * @param propertyReferences
      * @param modelType the type of the model.
+     * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
      */
     protected ClientModel(String package_Keyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-            IType modelType) {
+            IType modelType, boolean stronglyTypedHeader) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -109,6 +115,7 @@ public class ClientModel {
         this.properties = properties;
         this.propertyReferences = propertyReferences;
         this.modelType = modelType;
+        this.stronglyTypedHeader = stronglyTypedHeader;
     }
 
     public final String getPackage() {
@@ -176,6 +183,15 @@ public class ClientModel {
 
     public List<ClientModelPropertyReference> getPropertyReferences() {
         return propertyReferences == null ? Collections.emptyList() : propertyReferences;
+    }
+
+    /**
+     * Whether this model is a strongly-typed HTTP headers class.
+     *
+     * @return Whether this model is a strongly-typed HTTP headers class.
+     */
+    public boolean isStronglyTypedHeader() {
+        return stronglyTypedHeader;
     }
 
     /**
@@ -257,6 +273,7 @@ public class ClientModel {
         protected String xmlNamespace;
         protected List<ClientModelPropertyReference> propertyReferences;
         protected IType modelType;
+        protected boolean stronglyTypedHeader;
 
         /**
          * Sets the package that this model class belongs to.
@@ -299,8 +316,8 @@ public class ClientModel {
         }
 
         /**
-         * Sets whether or not this model has model types that derive from it.
-         * @param isPolymorphic whether or not this model has model types that derive from it
+         * Sets whether this model has model types that derive from it.
+         * @param isPolymorphic whether this model has model types that derive from it
          * @return the Builder itself
          */
         public Builder isPolymorphic(boolean isPolymorphic) {
@@ -329,8 +346,8 @@ public class ClientModel {
         }
 
         /**
-         * Sets whether or not this model needs serialization flattening.
-         * @param needsFlatten whether or not this model needs serialization flattening
+         * Sets whether this model needs serialization flattening.
+         * @param needsFlatten whether this model needs serialization flattening
          * @return the Builder itself
          */
         public Builder needsFlatten(boolean needsFlatten) {
@@ -409,6 +426,17 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets whether this model is a strongly-typed HTTP headers class.
+         *
+         * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
+         * @return the Builder itself
+         */
+        public Builder isStronglyTypedHeader(boolean stronglyTypedHeader) {
+            this.stronglyTypedHeader = stronglyTypedHeader;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -424,7 +452,8 @@ public class ClientModel {
                     xmlNamespace,
                     properties,
                     propertyReferences,
-                    modelType);
+                    modelType,
+                    stronglyTypedHeader);
         }
     }
 }

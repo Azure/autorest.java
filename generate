@@ -22,6 +22,7 @@ autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/head.json --namespace=fixtures.head
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/head-exceptions.json --namespace=fixtures.headexceptions
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/header.json --namespace=fixtures.header --context-client-method-parameter
+autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/header.json --namespace=fixtures.deferredheaderdeserialization --context-client-method-parameter --defer-strongly-typed-header-deserialization
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-duration.json --namespace=fixtures.bodyduration
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/body-integer.json --namespace=fixtures.bodyinteger

@@ -74,8 +74,9 @@ public class ClassType implements IType {
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
-    public static final ClassType RequestOptions = new Builder().packageName("com.azure.core.http.rest").name("RequestOptions").build();
+    public static final ClassType RequestOptions = new Builder().knownClass(com.azure.core.http.rest.RequestOptions.class).build();
     public static final ClassType ClientOptions = new Builder().knownClass(com.azure.core.util.ClientOptions.class).build();
+    public static final ClassType HttpHeaders = new Builder().knownClass(com.azure.core.http.HttpHeaders.class).build();
 
     private final String packageName;
     private final String name;
@@ -160,9 +161,7 @@ public class ClassType implements IType {
         }
 
         if (includeImplementationImports && getImplementationImports() != null) {
-            for (String implementationImport : getImplementationImports()) {
-                imports.add(implementationImport);
-            }
+            imports.addAll(getImplementationImports());
         }
     }
 
@@ -172,7 +171,7 @@ public class ClassType implements IType {
             if (getDefaultValueExpressionConverter() != null) {
                 result = defaultValueExpressionConverter.apply(sourceExpression);
             } else {
-                result = java.lang.String.format("new %1$s()", toString());
+                result = java.lang.String.format("new %1$s()", getName());
             }
         }
         return result;

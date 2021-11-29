@@ -11,11 +11,14 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
@@ -30,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -79,6 +83,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             imports.add(JsonSetter.class.getName());
         }
 
+        // Add HttpHeaders as an import when strongly-typed HTTP header objects are lazily deserialized.
+        if (settings.isDeferStronglyTypedHeaderDeserialization() && model.isStronglyTypedHeader()) {
+            ClassType.HttpHeaders.addImportsTo(imports, false);
+
+            // Also add any potential imports needed to convert the header to the strong type.
+            imports.add(Base64.class.getName());
+        }
+
         String lastParentName = model.getName();
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
@@ -107,54 +119,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             comment.description(model.getDescription()));
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        if (model.getIsPolymorphic()) {
-            StringBuilder jsonTypeInfo = new StringBuilder("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = ");
-
-            // If the discriminator isn't being passed to child models or this model has derived, children, models
-            // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
-            // property using the property attribute of the annotation instead of looking for a @JsonProperty.
-            if (!settings.isDiscriminatorPassedToChildDeserialization() || hasDerivedModels) {
-                jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
-            } else {
-                // Otherwise, serialize the discriminator property with an existing property on the class.
-                jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
-            }
-
-            jsonTypeInfo.append(model.getPolymorphicDiscriminator())
-                .append("\"");
-
-            // If the class has derived models add itself as a default implementation.
-            if (hasDerivedModels) {
-                jsonTypeInfo.append(", defaultImpl = ")
-                    .append(model.getName())
-                    .append(".class");
-            }
-
-            // If the discriminator is passed to child models the discriminator property needs to be set to visible.
-            if (settings.isDiscriminatorPassedToChildDeserialization()) {
-                jsonTypeInfo.append(", visible = true");
-            }
-
-            javaFile.annotation(jsonTypeInfo.append(")").toString());
-            javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
-
-            if (hasDerivedModels) {
-                javaFile.line("@JsonSubTypes({");
-                javaFile.indent(() -> {
-                    Function<ClientModel, String> getDerivedTypeAnnotation = (ClientModel derivedType) ->
-                        String.format("@JsonSubTypes.Type(name = \"%1$s\", value = %2$s.class)",
-                            derivedType.getSerializedName(), derivedType.getName());
-
-                    for (int i = 0; i != model.getDerivedModels().size() - 1; i++) {
-                        ClientModel derivedModel = model.getDerivedModels().get(i);
-                        javaFile.line(getDerivedTypeAnnotation.apply(derivedModel) + ',');
-                    }
-                    javaFile.line(getDerivedTypeAnnotation.apply(model.getDerivedModels()
-                        .get(model.getDerivedModels().size() - 1)));
-                });
-                javaFile.line("})");
-            }
-        }
+        handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
 
         if (settings.shouldGenerateXmlSerialization()) {
             if (model.getXmlNamespace() != null && !model.getXmlNamespace().isEmpty()) {
@@ -193,87 +158,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
             }
 
-            Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
-
-            for (ClientModelProperty property : model.getProperties()) {
-                String xmlWrapperClassName = propertyXmlWrapperClassName.apply(property);
-                if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                    classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass ->
-                    {
-                        IType propertyClientType = property.getWireType().getClientType();
-
-                        String listElementName = property.getXmlListElementName();
-                        String jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName);
-                        if (property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                            jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = " +
-                                            "\"%2$s\")", listElementName, property.getXmlNamespace());
-                        }
-                        innerClass.annotation(jacksonAnnotation);
-                        innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
-
-                        innerClass.annotation("JsonCreator");
-                        innerClass.privateConstructor(String.format("%1$s(@%2$s %3$s items)", xmlWrapperClassName, jacksonAnnotation, propertyClientType), constructor -> constructor.line("this.items = items;"));
-                    });
-                }
-
-                classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                    comment.line(property.getDescription()));
-
-                if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
-                    classBlock.annotation("JsonFlatten");
-                }
-
-                // If the property is a polymorphic discriminator for the class add the annotation @JsonTypeId.
-                // This will indicate to Jackson that the discriminator serialization is determined by the property
-                // instead of the class level @JsonTypeName annotation. This prevents the discriminator property from
-                // being serialized twice, once for the class level annotation and again for the property annotation.
-                if (property.isPolymorphicDiscriminator()) {
-                    classBlock.annotation("JsonTypeId");
-                }
-
-                if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
-                    classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-                } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
-                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
-                            property.getXmlName()));
-                } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
-                            property.getXmlName(), property.getXmlNamespace()));
-                } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
-                    classBlock.annotation("JacksonXmlText");
-                } else if (property.isAdditionalProperties()) {
-                    classBlock.annotation("JsonIgnore");
-                } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
-                    classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
-                } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
-                    classBlock.annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
-                }
-
-                if (settings.shouldGenerateXmlSerialization()) {
-                    if (property.getIsXmlWrapper()) {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", xmlWrapperClassName, property.getName()));
-                    } else if (property.getWireType() instanceof ListType) {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s = new ArrayList<>()", property.getWireType(), property.getName()));
-                    } else {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
-                    }
-                } else {
-                    if (!property.isAdditionalProperties() && property.getClientType() instanceof MapType && settings.isFluent()) {
-                        classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
-                    }
-                    if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
-                        // if the property of flattened model is required, initialize it
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
-                    } else {
-                        // handle x-ms-client-default
-                        if (property.getDefaultValue() != null) {
-                            classBlock.privateMemberVariable(String.format("%1$s %2$s = %3$s", property.getWireType(), property.getName(), property.getDefaultValue()));
-                        } else {
-                            classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
-                        }
-                    }
-                }
-            }
+            addProperties(model, classBlock, settings);
 
             List<ClientModelProperty> constantProperties = model.getProperties().stream()
                     .filter(clientModelProperty -> clientModelProperty.getIsConstant() && clientModelProperty.isRequired())
@@ -296,40 +181,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (!property.getIsReadOnly()) {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
-                classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
-                {
-                    String sourceTypeName = propertyType.toString();
-                    String targetTypeName = propertyClientType.toString();
-                    String expression = String.format("this.%s", property.getName());
-                    if (propertyType.equals(ArrayType.ByteArray)) {
-                        expression = String.format("CoreUtils.clone(%s)", expression);
-                    }
-                    if (sourceTypeName.equals(targetTypeName)) {
-                        if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof ListType) {
-                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
-                                            property.getName(),
-                                            propertyXmlWrapperClassName.apply(property),
-                                            ((ListType) property.getWireType()).getElementType()));
-                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
-                        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof IterableType) {
-                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
-                                            property.getName(),
-                                            propertyXmlWrapperClassName.apply(property),
-                                            ((IterableType) property.getWireType()).getElementType()));
-                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
-                        } else {
-                            methodBlock.methodReturn(expression);
-                        }
-                    } else {
-                        methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
 
-                        String propertyConversion = propertyType.convertToClientType(expression);
-
-                        methodBlock.methodReturn(propertyConversion);
-                    }
-                });
+                classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType,
+                    getGetterName(model, property)), methodBlock -> addGetterMethod(propertyType, propertyClientType,
+                    property, model.isStronglyTypedHeader(), settings, methodBlock));
 
                 if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
@@ -353,7 +208,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             } else {
                                 if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
                                     methodBlock.line("this.%s = new %s(%s);", property.getName(),
-                                        propertyXmlWrapperClassName.apply(property), expression);
+                                        getPropertyXmlWrapperClassName(property), expression);
                                 } else {
                                     methodBlock.line("this.%s = %s;", property.getName(), expression);
                                 }
@@ -436,7 +291,171 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,
+    /**
+     * Handles setting up Jackson polymorphism annotations.
+     *
+     * @param model The client model.
+     * @param hasDerivedModels Whether this model has children types.
+     * @param isDiscriminatorPassedToChildDeserialization Whether the deserialization discrimination type is passed to
+     * children types during deserialization.
+     * @param javaFile The JavaFile being generated.
+     */
+    private static void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
+        boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
+        if (!model.getIsPolymorphic()) {
+            return;
+        }
+
+        StringBuilder jsonTypeInfo = new StringBuilder("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = ");
+
+        // If the discriminator isn't being passed to child models or this model has derived, children, models
+        // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
+        // property using the property attribute of the annotation instead of looking for a @JsonProperty.
+        if (!isDiscriminatorPassedToChildDeserialization || hasDerivedModels) {
+            jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
+        } else {
+            // Otherwise, serialize the discriminator property with an existing property on the class.
+            jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
+        }
+
+        jsonTypeInfo.append(model.getPolymorphicDiscriminator())
+            .append("\"");
+
+        // If the class has derived models add itself as a default implementation.
+        if (hasDerivedModels) {
+            jsonTypeInfo.append(", defaultImpl = ")
+                .append(model.getName())
+                .append(".class");
+        }
+
+        // If the discriminator is passed to child models the discriminator property needs to be set to visible.
+        if (isDiscriminatorPassedToChildDeserialization) {
+            jsonTypeInfo.append(", visible = true");
+        }
+
+        javaFile.annotation(jsonTypeInfo.append(")").toString());
+        javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
+
+        if (hasDerivedModels) {
+            javaFile.line("@JsonSubTypes({");
+            javaFile.indent(() -> {
+                Function<ClientModel, String> getDerivedTypeAnnotation = (ClientModel derivedType) ->
+                    String.format("@JsonSubTypes.Type(name = \"%1$s\", value = %2$s.class)",
+                        derivedType.getSerializedName(), derivedType.getName());
+
+                for (int i = 0; i != model.getDerivedModels().size() - 1; i++) {
+                    ClientModel derivedModel = model.getDerivedModels().get(i);
+                    javaFile.line(getDerivedTypeAnnotation.apply(derivedModel) + ',');
+                }
+                javaFile.line(getDerivedTypeAnnotation.apply(model.getDerivedModels()
+                    .get(model.getDerivedModels().size() - 1)));
+            });
+            javaFile.line("})");
+        }
+    }
+
+    /**
+     * Adds the property fields to a class.
+     *
+     * @param model The client model.
+     * @param classBlock The Java class.
+     * @param settings AutoRest configuration settings.
+     */
+    private static void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
+        for (ClientModelProperty property : model.getProperties()) {
+            String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+
+            // Generates a private class that is used to wrap XML collection types.
+            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass -> {
+                    IType propertyClientType = property.getWireType().getClientType();
+
+                    String listElementName = property.getXmlListElementName();
+                    String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
+                        ? String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName)
+                        : String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
+                            listElementName, property.getXmlNamespace());
+                    innerClass.annotation(jacksonAnnotation);
+                    innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+
+                    innerClass.annotation("JsonCreator");
+                    innerClass.privateConstructor(String.format("%1$s(@%2$s %3$s items)", xmlWrapperClassName,
+                        jacksonAnnotation, propertyClientType), constructor -> constructor.line("this.items = items;"));
+                });
+            }
+
+            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+                comment.line(property.getDescription()));
+
+            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
+                classBlock.annotation("JsonFlatten");
+            }
+
+            // If the property is a polymorphic discriminator for the class add the annotation @JsonTypeId.
+            // This will indicate to Jackson that the discriminator serialization is determined by the property
+            // instead of the class level @JsonTypeName annotation. This prevents the discriminator property from
+            // being serialized twice, once for the class level annotation and again for the property annotation.
+            if (property.isPolymorphicDiscriminator()) {
+                classBlock.annotation("JsonTypeId");
+            }
+
+            if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
+                classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
+            } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
+                classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
+                    property.getXmlName()));
+            } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+                classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
+                    property.getXmlName(), property.getXmlNamespace()));
+            } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+                classBlock.annotation("JacksonXmlText");
+            } else if (property.isAdditionalProperties()) {
+                classBlock.annotation("JsonIgnore");
+            } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
+                classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
+            } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
+                classBlock.annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
+            }
+
+            if (settings.shouldGenerateXmlSerialization()) {
+                if (property.getIsXmlWrapper()) {
+                    classBlock.privateMemberVariable(String.format("%1$s %2$s", xmlWrapperClassName, property.getName()));
+                } else if (property.getWireType() instanceof ListType) {
+                    classBlock.privateMemberVariable(String.format("%1$s %2$s = new ArrayList<>()", property.getWireType(), property.getName()));
+                } else {
+                    classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                }
+            } else {
+                if (!property.isAdditionalProperties() && property.getClientType() instanceof MapType && settings.isFluent()) {
+                    classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
+                }
+                if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
+                    // if the property of flattened model is required, initialize it
+                    classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
+                } else {
+                    // handle x-ms-client-default
+                    if (property.getDefaultValue() != null) {
+                        classBlock.privateMemberVariable(String.format("%1$s %2$s = %3$s", property.getWireType(), property.getName(), property.getDefaultValue()));
+                    } else {
+                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                    }
+                }
+            }
+
+            // If the class is a strongly-typed HTTP headers object and its properties are being lazily deserialized
+            // during runtime each property needs a corresponding boolean to determine if it has been deserialized
+            // already. This resolves the problem with checking for null if the value is nullable and doesn't exist,
+            // it is also more efficient as it prevents the need for multiple deserializations or the use of heap types
+            // to manage deserialization status.
+            if (settings.isDeferStronglyTypedHeaderDeserialization() && model.isStronglyTypedHeader()) {
+                classBlock.lineComment(String.format("Maintains deserialization status for %1$s.", property.getName()));
+                classBlock.privateMemberVariable(String.format("boolean %1$s",
+                    getHeaderDeserializationStatusPropertyName(property)));
+            }
+        }
+    }
+
+    private static void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,
         List<ClientModelProperty> constantProperties, List<ClientModelProperty> allRequiredProperties) {
 
         List<ClientModelProperty> requiredProperties =
@@ -458,8 +477,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
         }
 
-        if (settings.isRequiredFieldsAsConstructorArgs() && (!requiredProperties.isEmpty() || !requiredParentProperties
-            .isEmpty())) {
+        if (settings.isRequiredFieldsAsConstructorArgs()
+            && (!requiredProperties.isEmpty() || !requiredParentProperties.isEmpty())) {
 
             String requiredCtorArgs = requiredProperties.stream()
                 .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
@@ -524,6 +543,115 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         String.format("%1$s = %2$s;", constantProperty.getName(), constantProperty.getDefaultValue()));
                 }
             });
+        } else if (model.isStronglyTypedHeader() && settings.isDeferStronglyTypedHeaderDeserialization()) {
+            classBlock.lineComment("HttpHeaders containing the raw property values.");
+            classBlock.privateFinalMemberVariable("HttpHeaders", "rawHeaders");
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName())));
+            classBlock.packagePrivateConstructor(String.format("%1$s(HttpHeaders rawHeaders)", model.getName()),
+                constructor -> constructor.line("this.rawHeaders = rawHeaders;"));
+        }
+    }
+
+    /**
+     * Adds a getter method.
+     *
+     * @param propertyType The property type.
+     * @param propertyClientType The client property type.
+     * @param property The property.
+     * @param settings AutoRest configuration settings.
+     * @param methodBlock Where the getter method is being added.
+     */
+    private static void addGetterMethod(IType propertyType, IType propertyClientType, ClientModelProperty property,
+        boolean stronglyTypedHeaderClass, JavaSettings settings, JavaBlock methodBlock) {
+        String sourceTypeName = propertyType.toString();
+        String targetTypeName = propertyClientType.toString();
+        String expression = String.format("this.%s", property.getName());
+        if (propertyType.equals(ArrayType.ByteArray)) {
+            expression = String.format("CoreUtils.clone(%s)", expression);
+        }
+
+        if (sourceTypeName.equals(targetTypeName)) {
+            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()
+                && (property.getWireType() instanceof IterableType || property.getWireType() instanceof ListType)) {
+                methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
+                        getPropertyXmlWrapperClassName(property),
+                        ((GenericType) property.getWireType()).getTypeArguments()[0]));
+                methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+            } else {
+                if (settings.isDeferStronglyTypedHeaderDeserialization() && stronglyTypedHeaderClass) {
+                    methodBlock.ifBlock(String.format("!this.%s", getHeaderDeserializationStatusPropertyName(property)),
+                        ifBlock -> {
+                            ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
+                            ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
+                        });
+                }
+                methodBlock.methodReturn(expression);
+            }
+        } else {
+            if (settings.isDeferStronglyTypedHeaderDeserialization() && stronglyTypedHeaderClass) {
+                methodBlock.ifBlock(String.format("!this.%s", getHeaderDeserializationStatusPropertyName(property)),
+                    ifBlock -> {
+                        ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
+                        ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
+                    });
+            }
+
+            // If the wire type was null, return null as the returned conversion could, and most likely would, result
+            // in a NullPointerException.
+            methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+
+            // Return the conversion of the wire type to the client type. An example would be a wire type of
+            // DateTimeRfc1123 and a client type of OffsetDateTime (type a consumer would use), this makes the return
+            // "this.value.getDateTime()".
+            methodBlock.methodReturn(propertyType.convertToClientType(expression));
+        }
+    }
+
+    private static String generateHeaderDeserializationFunction(ClientModelProperty property) {
+        IType wireType = property.getWireType();
+
+        // No matter the wire type the rawHeaders will need to be accessed.
+        String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
+
+        if (wireType == PrimitiveType.Boolean) {
+            return String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Boolean) {
+            return String.format("Boolean.valueOf(%s)", rawHeaderAccess);
+        } else if (wireType == PrimitiveType.Double) {
+            return String.format("Double.parseDouble(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Double) {
+            return String.format("Double.valueOf(%s)", rawHeaderAccess);
+        } else if (wireType == PrimitiveType.Float) {
+            return String.format("Float.parseFloat(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Float) {
+            return String.format("Float.valueOf(%s)", rawHeaderAccess);
+        } else if (wireType == PrimitiveType.Int) {
+            return String.format("Integer.parseInt(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Integer) {
+            return String.format("Integer.valueOf(%s)", rawHeaderAccess);
+        } else if (wireType == PrimitiveType.Long) {
+            return String.format("Long.parseLong(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Long) {
+            return String.format("Long.valueOf(%s)", rawHeaderAccess);
+        } else if (wireType == ArrayType.ByteArray) {
+            return String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.String) {
+            return rawHeaderAccess;
+        } else if (wireType == ClassType.DateTimeRfc1123) {
+            return String.format("new DateTimeRfc1123(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.DateTime) {
+            return String.format("OffsetDateTime.parse(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.LocalDate) {
+            return String.format("LocalDate.parse(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.Duration) {
+            return String.format("Duration.parse(%s)", rawHeaderAccess);
+        } else if (wireType instanceof EnumType) {
+            EnumType enumType = (EnumType) wireType;
+            return String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
+        } else {
+            return rawHeaderAccess; // TODO: replace this with a call to JacksonAdapter
         }
     }
 
@@ -570,6 +698,27 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             });
         }
+    }
+
+    /**
+     * Gets the property XML wrapper class name.
+     *
+     * @param property The property that is getting its XML wrapper class name.
+     * @return The property XML wrapper class name.
+     */
+    private static String getPropertyXmlWrapperClassName(ClientModelProperty property) {
+        return property.getXmlName() + "Wrapper";
+    }
+
+    /**
+     * Gets the name of the boolean property that tracks the lazy deserialization status of a strongly-typed HTTP header
+     * object property.
+     *
+     * @param property The HTTP header property that is getting its lazy deserialization status property name.
+     * @return The lazy deserialization status property name.
+     */
+    private static String getHeaderDeserializationStatusPropertyName(ClientModelProperty property) {
+        return property.getName() + "HasBeenDeserialized";
     }
 
     /**

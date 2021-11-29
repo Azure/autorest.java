@@ -35,17 +35,17 @@ public interface IType {
     IType asNullable();
 
     /**
-     * Get whether or not this IType contains (or is) the provided type.
+     * Get whether this IType contains (or is) the provided type.
      * @param type The type to search for.
      *
-     * @return Whether or not this IType contains (or is) the provided type.
+     * @return Whether this IType contains (or is) the provided type.
      */
     boolean contains(IType type);
 
     /**
      * Add this type's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
      */
     void addImportsTo(Set<String> imports, boolean includeImplementationImports);
 

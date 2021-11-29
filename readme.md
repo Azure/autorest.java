@@ -75,6 +75,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 | `--service-name` | String. Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
+|`--defer-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header object will lazily deserialize its properties when accessed.|
 
 ## Settings for minimal clients (low-level clients)
 

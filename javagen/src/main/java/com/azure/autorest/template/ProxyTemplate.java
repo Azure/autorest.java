@@ -83,7 +83,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     ArrayList<String> parameterDeclarationList = new ArrayList<String>();
                     if (restAPIMethod.isResumable()) {
-                        interfaceBlock.annotation(String.format("ResumeOperation"));
+                        interfaceBlock.annotation("ResumeOperation");
                     }
 
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {

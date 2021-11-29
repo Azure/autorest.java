@@ -1,0 +1,66 @@
+package fixtures.deferredheaderdeserialization.models;
+
+import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
+import com.azure.core.util.DateTimeRfc1123;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+
+/** The HeadersResponseDatetimeRfc1123Headers model. */
+@Fluent
+public final class HeadersResponseDatetimeRfc1123Headers {
+    /*
+     * The value property.
+     */
+    @JsonProperty(value = "value")
+    private DateTimeRfc1123 value;
+
+    // Maintains deserialization status for value.
+    private boolean valueHasBeenDeserialized;
+
+    // HttpHeaders containing the raw property values.
+    private final HttpHeaders rawHeaders;
+
+    /** Creates an instance of HeadersResponseDatetimeRfc1123Headers class. */
+    HeadersResponseDatetimeRfc1123Headers(HttpHeaders rawHeaders) {
+        this.rawHeaders = rawHeaders;
+    }
+
+    /**
+     * Get the value property: The value property.
+     *
+     * @return the value value.
+     */
+    public OffsetDateTime getValue() {
+        if (!this.valueHasBeenDeserialized) {
+            this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+            this.valueHasBeenDeserialized = true;
+        }
+        if (this.value == null) {
+            return null;
+        }
+        return this.value.getDateTime();
+    }
+
+    /**
+     * Set the value property: The value property.
+     *
+     * @param value the value value to set.
+     * @return the HeadersResponseDatetimeRfc1123Headers object itself.
+     */
+    public HeadersResponseDatetimeRfc1123Headers setValue(OffsetDateTime value) {
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = new DateTimeRfc1123(value);
+        }
+        return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {}
+}

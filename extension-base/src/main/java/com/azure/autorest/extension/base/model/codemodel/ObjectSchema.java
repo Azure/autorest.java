@@ -7,28 +7,28 @@ import java.util.List;
 
 /**
  * a schema that represents a type with child properties.
- * 
+ *
  */
 public class ObjectSchema extends ComplexSchema {
 
     /**
      * a property is a child value in an object
-     * 
+     *
      */
     private Discriminator discriminator;
     /**
      * the collection of properties that are in this object
-     * 
+     *
      */
     private List<Property> properties = new ArrayList<Property>();
     /**
      * maximum number of properties permitted
-     * 
+     *
      */
     private double maxProperties;
     /**
      * minimum number of properties permitted
-     * 
+     *
      */
     private double minProperties;
 
@@ -41,9 +41,12 @@ public class ObjectSchema extends ComplexSchema {
     // internal use, not from modelerfour
     private boolean flattenedSchema;
 
+    // internal use, not from modelerfour
+    private boolean stronglyTypedHeader;
+
     /**
      * a property is a child value in an object
-     * 
+     *
      */
     public Discriminator getDiscriminator() {
         return discriminator;
@@ -51,7 +54,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * a property is a child value in an object
-     * 
+     *
      */
     public void setDiscriminator(Discriminator discriminator) {
         this.discriminator = discriminator;
@@ -59,7 +62,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * the collection of properties that are in this object
-     * 
+     *
      */
     public List<Property> getProperties() {
         return properties;
@@ -67,7 +70,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * the collection of properties that are in this object
-     * 
+     *
      */
     public void setProperties(List<Property> properties) {
         this.properties = properties;
@@ -75,7 +78,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * maximum number of properties permitted
-     * 
+     *
      */
     public double getMaxProperties() {
         return maxProperties;
@@ -83,7 +86,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * maximum number of properties permitted
-     * 
+     *
      */
     public void setMaxProperties(double maxProperties) {
         this.maxProperties = maxProperties;
@@ -91,7 +94,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * minimum number of properties permitted
-     * 
+     *
      */
     public double getMinProperties() {
         return minProperties;
@@ -99,7 +102,7 @@ public class ObjectSchema extends ComplexSchema {
 
     /**
      * minimum number of properties permitted
-     * 
+     *
      */
     public void setMinProperties(double minProperties) {
         this.minProperties = minProperties;
@@ -135,5 +138,23 @@ public class ObjectSchema extends ComplexSchema {
 
     public void setFlattenedSchema(boolean flattenedSchema) {
         this.flattenedSchema = flattenedSchema;
+    }
+
+    /**
+     * Whether this schema represents a strongly-typed HTTP headers object.
+     *
+     * @return Whether this schema represents a strongly-typed HTTP headers object.
+     */
+    public boolean isStronglyTypedHeader() {
+        return stronglyTypedHeader;
+    }
+
+    /**
+     * Sets whether this schema represents a strongly-typed HTTP headers object.
+     *
+     * @param stronglyTypedHeader Whether this schema represents a strongly-typed HTTP headers object.
+     */
+    public void setStronglyTypedHeader(boolean stronglyTypedHeader) {
+        this.stronglyTypedHeader = stronglyTypedHeader;
     }
 }

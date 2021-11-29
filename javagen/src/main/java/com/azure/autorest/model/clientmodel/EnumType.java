@@ -16,26 +16,26 @@ public class EnumType implements IType {
     /**
      * The name of the new Enum.
      */
-    private String name;
+    private final String name;
     /**
      * The package that this enumeration belongs to.
      */
-    private String packageName;
+    private final String packageName;
     /**
-     * Whether or not this will be an ExpandableStringEnum type.
+     * Whether this will be an ExpandableStringEnum type.
      */
-    private boolean expandable;
+    private final boolean expandable;
     /**
      * The values of the Enum.
      */
-    private List<ClientEnumValue> values;
+    private final List<ClientEnumValue> values;
 
-    private IType elementType;
+    private final IType elementType;
 
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
-     * @param expandable Whether or not this will be an ExpandableStringEnum type.
+     * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
     private EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
@@ -97,6 +97,14 @@ public class EnumType implements IType {
             }
             return null;
         }
+    }
+
+    public final String getFromJsonMethodName() {
+        return "from" + CodeNamer.toPascalCase(elementType.getClientType().toString());
+    }
+
+    public final String getToJsonMethodName() {
+        return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
     @Override
