@@ -58,6 +58,8 @@ public final class StringOperationClient {
     }
 
     /**
+     * 2. manually update method signature
+     *
      * Set string value null.
      *
      * <p><strong>Request Body Schema</strong>
@@ -70,13 +72,14 @@ public final class StringOperationClient {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
-    // 2. manually update method signature
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, String test) {
         return this.serviceClient.putNullWithResponse(requestOptions);
     }
 
     /**
+     * 3. manually update method access from public to private
+     *
      * Get empty string value value ''.
      *
      * <p><strong>Response Body Schema</strong>
@@ -89,7 +92,6 @@ public final class StringOperationClient {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return empty string value value ''.
      */
-    // 3. manually update method access from public to private
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);

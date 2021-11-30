@@ -17,7 +17,6 @@
     </properties>
 
     <modules>
-        <module>existing</module>
         <module>generated</module>
     </modules>
 
