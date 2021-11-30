@@ -99,4 +99,3 @@ call autorest --use:. docs/samples/specification/management/readme.md
 
 rem partial update tests
 call autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md
-call autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README_updated.md

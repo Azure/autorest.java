@@ -18,8 +18,7 @@
 
     <modules>
         <module>existing</module>
-        <module>generated/swaggerupdate</module>
-        <module>generated/codeupdate</module>
+        <module>generated</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -224,6 +224,25 @@ public final class StringOperationAsyncClient {
     }
 
     /**
+     * This is an added method.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getStringAddedWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getStringAddedWithResponseAsync(requestOptions);
+    }
+
+    /**
      * Get value that is base64url encoded.
      *
      * <p><strong>Response Body Schema</strong>

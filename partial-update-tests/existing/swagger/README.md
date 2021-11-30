@@ -1,11 +1,11 @@
 ## Generate code
 ```yaml
-input-file: ./specification/bodystring.json
+input-file: ./specification/bodystring_updated.json
 java: true
-output-folder: ../../generated/codeupdate
+output-folder: ../../generated
 required-parameter-client-methods: true
 generate-client-as-impl: true
-namespace: fixtures.bodystring.codeupdate
+namespace: fixtures.bodystring
 generate-client-interfaces: false
 sync-methods: all
 generate-sync-async-clients: true

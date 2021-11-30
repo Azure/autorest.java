@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.azure</groupId>
-  <artifactId>fixtures-bodystring-codeupdate</artifactId>
-  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure:fixtures-bodystring-codeupdate;current} -->
+  <artifactId>fixtures-bodystring</artifactId>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure:fixtures-bodystring;current} -->
   <packaging>jar</packaging>
 
   <name>Microsoft Azure SDK for AutoRestSwaggerBatService Management</name>

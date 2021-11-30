@@ -95,4 +95,3 @@ autorest --version=3.6.6 --use:. customization-tests/swagger
 
 # partial update tests
 autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md
-autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README_updated.md
