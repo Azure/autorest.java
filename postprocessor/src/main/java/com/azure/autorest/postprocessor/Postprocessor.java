@@ -256,7 +256,7 @@ public class Postprocessor extends NewPlugin {
         fileContents.replaceAll((path, generatedFileContent) -> {
             if (path.endsWith(".java")) { // only handle for .java file
                 // get existing file path
-                String projectBaseDirectoryPath = new File(getBaseDirectory()).getParent(); // e.g. C:\workspace\azure-sdk-for-java\sdk\deviceupdate\azure-iot-deviceupdate\
+                String projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
                 URI existingFilePath = Paths.get(projectBaseDirectoryPath, path).toUri();
                 // check if existingFile exists, if not, no need to handle partial update
                 if (Files.exists(Paths.get(existingFilePath))) {
