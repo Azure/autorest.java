@@ -26,7 +26,9 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.serializer.JacksonAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -89,6 +92,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             // Also add any potential imports needed to convert the header to the strong type.
             imports.add(Base64.class.getName());
+            imports.add(JacksonAdapter.class.getName());
+            imports.add(HashMap.class.getName());
+            imports.add(HttpHeader.class.getName());
         }
 
         String lastParentName = model.getName();
@@ -580,23 +586,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         ((GenericType) property.getWireType()).getTypeArguments()[0]));
                 methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
             } else {
-                if (settings.isDeferStronglyTypedHeaderDeserialization() && stronglyTypedHeaderClass) {
-                    methodBlock.ifBlock(String.format("!this.%s", getHeaderDeserializationStatusPropertyName(property)),
-                        ifBlock -> {
-                            ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
-                            ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
-                        });
-                }
+                addDeferredDeserialization(settings, stronglyTypedHeaderClass, methodBlock, property);
                 methodBlock.methodReturn(expression);
             }
         } else {
-            if (settings.isDeferStronglyTypedHeaderDeserialization() && stronglyTypedHeaderClass) {
-                methodBlock.ifBlock(String.format("!this.%s", getHeaderDeserializationStatusPropertyName(property)),
-                    ifBlock -> {
-                        ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
-                        ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
-                    });
-            }
+            addDeferredDeserialization(settings, stronglyTypedHeaderClass, methodBlock, property);
 
             // If the wire type was null, return null as the returned conversion could, and most likely would, result
             // in a NullPointerException.
@@ -607,6 +601,39 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // "this.value.getDateTime()".
             methodBlock.methodReturn(propertyType.convertToClientType(expression));
         }
+    }
+
+    private static void addDeferredDeserialization(JavaSettings settings, boolean stronglyTypedHeaderClass,
+        JavaBlock methodBlock, ClientModelProperty property) {
+        if (settings.isDeferStronglyTypedHeaderDeserialization() && stronglyTypedHeaderClass) {
+            methodBlock.ifBlock(String.format("!this.%s", getHeaderDeserializationStatusPropertyName(property)),
+                ifBlock -> {
+                    // HeaderCollections need special handling as they may have multiple values that need to be
+                    // retrieved from the raw headers.
+                    if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+                        generateHeaderCollectionDeserialization(property, ifBlock);
+                    } else {
+                        ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
+                    }
+                    ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
+                });
+        }
+
+    }
+
+    private static void generateHeaderCollectionDeserialization(ClientModelProperty property, JavaBlock block) {
+        int headerPrefixLength = property.getHeaderCollectionPrefix().length();
+        // HeaderCollections are always Maps that use String as the key.
+        MapType wireType = (MapType) property.getWireType();
+        IType wireValueType = wireType.getValueType();
+        block.line("%s headerCollection = new HashMap<String, %s>();", wireType, wireValueType);
+        block.line();
+        block.block("for (HttpHeader header : rawHeaders)", body -> {
+            body.ifBlock(String.format("!header.getName().startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
+                ifBlock -> ifBlock.line("continue;"));
+            body.line("headerCollection.put(header.getName().substring(%d), header.getValue());", headerPrefixLength);
+        });
+        block.line("this.%s = headerCollection;", property.getName());
     }
 
     private static String generateHeaderDeserializationFunction(ClientModelProperty property) {
@@ -651,7 +678,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             EnumType enumType = (EnumType) wireType;
             return String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
-            return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s);",
+            return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
                 property.getSerializedName(), getWireTypeJavaType(wireType));
         }
     }

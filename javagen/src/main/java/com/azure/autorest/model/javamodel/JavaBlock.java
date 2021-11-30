@@ -29,6 +29,9 @@ public class JavaBlock implements JavaContext {
         contents.line(text, formattedArguments);
     }
 
+    /**
+     * Inserts an empty line.
+     */
     public final void line() {
         contents.line();
     }

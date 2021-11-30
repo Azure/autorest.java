@@ -75,13 +75,10 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 | `--service-name` | String. Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
-<<<<<<< HEAD
-|`--defer-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header object will lazily deserialize its properties when accessed.|
-=======
 |`--default-http-exception-type`|Indicates the fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|Indicates the HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
->>>>>>> b2c0b01a5f8163f5c0fc47bf9559880b4557616b
+|`--defer-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header object will lazily deserialize its properties when accessed.|
 
 ## Settings for minimal clients (low-level clients)
 
