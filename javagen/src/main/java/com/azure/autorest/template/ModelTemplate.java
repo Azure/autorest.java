@@ -651,7 +651,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             EnumType enumType = (EnumType) wireType;
             return String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
-            return rawHeaderAccess; // TODO: replace this with a call to JacksonAdapter
+            return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s);",
+                property.getSerializedName(), getWireTypeJavaType(wireType));
+        }
+    }
+
+    private static String getWireTypeJavaType(IType iType) {
+        if (iType instanceof ArrayType || iType instanceof ClassType) {
+            // Both ArrayType and ClassType have toString methods that return the text representation of the type,
+            // for example "int[]" or "HttpHeaders". These support adding ".class" to get the Java runtime Class.
+            return iType + ".class";
+        } else {
+            // All other types are GenericTypes. GenericType's toString returns the Java code generic representation,
+            // such as "List<Integer>" or "Map<String, Object>".
+            //
+            // Use a new TypeReference to get the representing Type for the wire type.
+            return "new TypeReference<" + iType + ">() {}.getJavaType()";
         }
     }
 
