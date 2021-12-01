@@ -1,8 +1,6 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
@@ -16,15 +14,13 @@ public final class AppleBarrel {
      * The GoodApples property.
      */
     @JacksonXmlElementWrapper(localName = "GoodApples")
-    @JsonSetter(nulls = Nulls.AS_EMPTY)
-    private List<String> goodApples = new ArrayList<>();
+    private List<String> goodApples;
 
     /*
      * The BadApples property.
      */
     @JacksonXmlElementWrapper(localName = "BadApples")
-    @JsonSetter(nulls = Nulls.AS_EMPTY)
-    private List<String> badApples = new ArrayList<>();
+    private List<String> badApples;
 
     /**
      * Get the goodApples property: The GoodApples property.
@@ -32,6 +28,9 @@ public final class AppleBarrel {
      * @return the goodApples value.
      */
     public List<String> getGoodApples() {
+        if (this.goodApples == null) {
+            this.goodApples = new ArrayList<String>();
+        }
         return this.goodApples;
     }
 
@@ -52,6 +51,9 @@ public final class AppleBarrel {
      * @return the badApples value.
      */
     public List<String> getBadApples() {
+        if (this.badApples == null) {
+            this.badApples = new ArrayList<String>();
+        }
         return this.badApples;
     }
 

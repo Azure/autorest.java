@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -27,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -77,11 +77,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         imports.add(JsonCreator.class.getName());
         imports.add(JacksonXmlElementWrapper.class.getName());
         imports.add(JacksonXmlProperty.class.getName());
-        imports.add(JsonSetter.class.getName());
-        imports.add(Nulls.class.getName());
 
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
             imports.add(JsonGetter.class.getName());
+            imports.add(JsonSetter.class.getName());
         }
 
         String lastParentName = model.getName();
@@ -238,10 +237,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // Use JacksonXmlElementWrapper to indicate to Jackson that the current node contains a list
                     // of values to be used as the property value.
                     classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\")", property.getXmlName()));
-
-                    // Due to how the private inner class previously worked a JsonSetter annotation is also required
-                    // to configure Jackson to deserialize null into an empty collection.
-                    classBlock.annotation("JsonSetter(nulls = Nulls.AS_EMPTY)");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType) {
                     // The property is a list, but it isn't an XML wrapper. Use the XML node with no special
                     // handling.
@@ -252,7 +247,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 if (settings.shouldGenerateXmlSerialization()) {
-                    if (property.getWireType() instanceof ListType) {
+                    // XML wrappers will handle instantiating the empty collection in the getter.
+                    if (!property.getIsXmlWrapper() && property.getWireType() instanceof ListType) {
                         classBlock.privateMemberVariable(String.format("%1$s %2$s = new ArrayList<>()", property.getWireType(), property.getName()));
                     } else {
                         classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
@@ -305,6 +301,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         expression = String.format("CoreUtils.clone(%s)", expression);
                     }
                     if (sourceTypeName.equals(targetTypeName)) {
+                        if (property.getIsXmlWrapper()) {
+                            // XML wrappers are always lists, or iterables, so use the first type argument.
+                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                                ifBlock.line("this.%s = new ArrayList<%s>();", property.getName(),
+                                    ((GenericType) property.getWireType()).getTypeArguments()[0]));
+                        }
                         methodBlock.methodReturn(expression);
                     } else {
                         methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
