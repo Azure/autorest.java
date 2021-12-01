@@ -1,8 +1,8 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
@@ -36,21 +36,11 @@ public final class ListContainersResponse {
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
-    private static final class ContainersWrapper {
-        @JacksonXmlProperty(localName = "Container")
-        private final List<Container> items;
-
-        @JsonCreator
-        private ContainersWrapper(@JacksonXmlProperty(localName = "Container") List<Container> items) {
-            this.items = items;
-        }
-    }
-
     /*
      * The Containers property.
      */
-    @JsonProperty(value = "Containers")
-    private ContainersWrapper containers;
+    @JacksonXmlElementWrapper(localName = "Containers")
+    private List<Container> containers = new ArrayList<>();
 
     /*
      * The NextMarker property.
@@ -144,10 +134,7 @@ public final class ListContainersResponse {
      * @return the containers value.
      */
     public List<Container> getContainers() {
-        if (this.containers == null) {
-            this.containers = new ContainersWrapper(new ArrayList<Container>());
-        }
-        return this.containers.items;
+        return this.containers;
     }
 
     /**
@@ -157,7 +144,7 @@ public final class ListContainersResponse {
      * @return the ListContainersResponse object itself.
      */
     public ListContainersResponse setContainers(List<Container> containers) {
-        this.containers = new ContainersWrapper(containers);
+        this.containers = containers;
         return this;
     }
 
