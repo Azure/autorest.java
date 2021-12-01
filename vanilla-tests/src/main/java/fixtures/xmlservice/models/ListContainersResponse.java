@@ -2,6 +2,8 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -40,6 +42,7 @@ public final class ListContainersResponse {
      * The Containers property.
      */
     @JacksonXmlElementWrapper(localName = "Containers")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
     private List<Container> containers = new ArrayList<>();
 
     /*

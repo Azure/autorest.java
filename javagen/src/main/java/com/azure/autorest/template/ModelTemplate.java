@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -76,10 +77,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         imports.add(JsonCreator.class.getName());
         imports.add(JacksonXmlElementWrapper.class.getName());
         imports.add(JacksonXmlProperty.class.getName());
+        imports.add(JsonSetter.class.getName());
+        imports.add(Nulls.class.getName());
 
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
             imports.add(JsonGetter.class.getName());
-            imports.add(JsonSetter.class.getName());
         }
 
         String lastParentName = model.getName();
@@ -236,6 +238,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // Use JacksonXmlElementWrapper to indicate to Jackson that the current node contains a list
                     // of values to be used as the property value.
                     classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\")", property.getXmlName()));
+
+                    // Due to how the private inner class previously worked a JsonSetter annotation is also required
+                    // to configure Jackson to deserialize null into an empty collection.
+                    classBlock.annotation("JsonSetter(nulls = Nulls.AS_EMPTY)");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType) {
                     // The property is a list, but it isn't an XML wrapper. Use the XML node with no special
                     // handling.

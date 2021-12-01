@@ -1,6 +1,8 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
@@ -14,12 +16,14 @@ public final class AppleBarrel {
      * The GoodApples property.
      */
     @JacksonXmlElementWrapper(localName = "GoodApples")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
     private List<String> goodApples = new ArrayList<>();
 
     /*
      * The BadApples property.
      */
     @JacksonXmlElementWrapper(localName = "BadApples")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
     private List<String> badApples = new ArrayList<>();
 
     /**
