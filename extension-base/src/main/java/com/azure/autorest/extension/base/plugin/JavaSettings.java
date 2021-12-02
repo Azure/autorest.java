@@ -132,7 +132,9 @@ public class JavaSettings {
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
-                    "http-status-code-to-exception-type-mapping"));
+                    "http-status-code-to-exception-type-mapping"),
+                getBooleanValue(host, "handle-partial-update",  false)
+            );
         }
         return _instance;
     }
@@ -221,7 +223,8 @@ public class JavaSettings {
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
-        Map<Integer, String> httpStatusCodeToExceptionTypeMapping) {
+        Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
+        boolean handlePartialUpdate) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -301,6 +304,8 @@ public class JavaSettings {
         this.defaultHttpExceptionType = defaultHttpExceptionType;
         this.useDefaultHttpStatusCodeToExceptionTypeMapping = useDefaultHttpStatusCodeToExceptionTypeMapping;
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
+
+        this.handlePartialUpdate = handlePartialUpdate;
     }
 
     private String keyCredentialHeaderName;
@@ -835,6 +840,12 @@ public class JavaSettings {
     public Map<Integer, String> getHttpStatusCodeToExceptionTypeMapping() {
         return httpStatusCodeToExceptionTypeMapping == null
             ? null : Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
+    }
+
+    private final boolean handlePartialUpdate;
+
+    public boolean isHandlePartialUpdate() {
+        return handlePartialUpdate;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",
