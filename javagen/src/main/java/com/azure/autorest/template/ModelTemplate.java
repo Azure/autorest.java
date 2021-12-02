@@ -198,6 +198,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             for (ClientModelProperty property : model.getProperties()) {
                 String xmlWrapperClassName = propertyXmlWrapperClassName.apply(property);
                 if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                    // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
+                    // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
+                    // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
+                    // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
+                    // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
+                    // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
+                    // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
+                    // XML node name if the class doesn't have a root name annotation which results in an addition XML level
+                    // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
+                    // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
+                    // the element name but this breaks down in cases where the same element name is used in two different
+                    // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
+                    // block lists.
                     classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass ->
                     {
                         IType propertyClientType = property.getWireType().getClientType();
