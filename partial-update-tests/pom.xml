@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>azure-autorest-parent</artifactId>
-        <groupId>com.azure.tools</groupId>
-        <version>1.0.0-beta.1</version>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>partial-update-tests</artifactId>
+    <parent>
+        <groupId>com.azure.tools</groupId>
+        <artifactId>azure-autorest-parent</artifactId>
+        <version>1.0.0-beta.1</version>
+    </parent>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
+    <groupId>com.azure.tools</groupId>
+    <artifactId>partial-update-tests</artifactId>
+    <version>1.0.0-beta.1</version>
+    <packaging>pom</packaging>
+
 
     <modules>
+        <module>existing</module>
         <module>generated</module>
     </modules>
 
-    <packaging>pom</packaging>
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>${azure-core.version}</version> <!-- {x-version-update;com.azure:azure-core;dependency} -->
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-identity</artifactId>
+            <version>${azure-identity.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
