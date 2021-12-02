@@ -236,31 +236,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // Property is an XML wrapper, or simply put a node that contains a list of XML nodes.
                     // Use JacksonXmlElementWrapper to indicate to Jackson that the current node contains a list
                     // of values to be used as the property value.
-                    if (!CoreUtils.isNullOrEmpty(property.getXmlNamespace())) {
-                        classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\", namespace = \"%2$s\")",
-                            property.getXmlName(), property.getXmlNamespace()));
-                    } else {
-                        classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\")",
-                            property.getXmlName()));
-                    }
-
+                    //
                     // JacksonXmlElementWrapper will also implicitly use the property name as the XML node name for
                     // each element it is wrapping, it doesn't infer this from the type, so an additional
                     // JacksonXmlProperty needs to be added as an annotation.
-
-                    // Get the ClientModel representing the enumeration type.
-                    // Anything using JacksonXmlElementWrapper will be either an Iterable or List type, so it will be
-                    // a GenericType with one type argument, that is a class, that represents the element type.
-                    IType enumerationType = ((GenericType) property.getWireType()).getTypeArguments()[0];
-                    ClientModel elementModel = ClientModels.Instance.getModel(((ClassType) enumerationType).getName());
-
-                    // Use the class-level JacksonXmlRootElement XML name as the property local name.
-                    if (!CoreUtils.isNullOrEmpty(elementModel.getXmlNamespace())) {
+                    if (!CoreUtils.isNullOrEmpty(property.getXmlNamespace())) {
+                        classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\", namespace = \"%2$s\")",
+                            property.getXmlName(), property.getXmlNamespace()));
                         classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
-                            elementModel.getXmlName(), elementModel.getXmlNamespace()));
+                            property.getXmlListElementName(), property.getXmlNamespace()));
                     } else {
+                        classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\")",
+                            property.getXmlName()));
                         classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")",
-                            elementModel.getXmlName()));
+                            property.getXmlListElementName()));
                     }
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType) {
                     // The property is a list, but it isn't an XML wrapper. Use the XML node with no special

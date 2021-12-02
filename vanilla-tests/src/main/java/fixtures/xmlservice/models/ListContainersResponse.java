@@ -40,6 +40,7 @@ public final class ListContainersResponse {
      * The Containers property.
      */
     @JacksonXmlElementWrapper(localName = "Containers")
+    @JacksonXmlProperty(localName = "Container")
     private List<Container> containers;
 
     /*

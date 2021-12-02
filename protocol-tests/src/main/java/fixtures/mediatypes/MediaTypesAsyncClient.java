@@ -93,7 +93,7 @@ public final class MediaTypesAsyncClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * <p><strong>Request Body Schema</strong>
      *

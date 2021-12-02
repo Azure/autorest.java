@@ -3,6 +3,7 @@ package fixtures.xmlservice.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public final class StorageServiceProperties {
      * The set of CORS rules.
      */
     @JacksonXmlElementWrapper(localName = "Cors")
+    @JacksonXmlProperty(localName = "CorsRule")
     private List<CorsRule> cors;
 
     /*

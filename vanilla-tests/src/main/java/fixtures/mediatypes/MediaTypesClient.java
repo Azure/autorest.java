@@ -25,9 +25,10 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.mediatypes.models.ContentType;
 import fixtures.mediatypes.models.ContentType1;
 import fixtures.mediatypes.models.SourcePath;
-import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.nio.ByteBuffer;
 
 /** Initializes a new instance of the MediaTypesClient type. */
 public final class MediaTypesClient {
@@ -156,7 +157,7 @@ public final class MediaTypesClient {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> contentTypeWithEncoding(
                 @HostParam("$host") String host,
-                @BodyParam("text/plain") String input,
+                @BodyParam("text/plain; charset=UTF-8") String input,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -575,7 +576,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -593,7 +594,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -615,7 +616,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -636,7 +637,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -650,7 +651,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
