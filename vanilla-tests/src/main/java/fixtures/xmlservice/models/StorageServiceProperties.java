@@ -1,9 +1,8 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,21 +31,11 @@ public final class StorageServiceProperties {
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
 
-    private static final class CorsWrapper {
-        @JacksonXmlProperty(localName = "CorsRule")
-        private final List<CorsRule> items;
-
-        @JsonCreator
-        private CorsWrapper(@JacksonXmlProperty(localName = "CorsRule") List<CorsRule> items) {
-            this.items = items;
-        }
-    }
-
     /*
      * The set of CORS rules.
      */
-    @JsonProperty(value = "Cors")
-    private CorsWrapper cors;
+    @JacksonXmlElementWrapper(localName = "Cors")
+    private List<CorsRule> cors;
 
     /*
      * The default version to use for requests to the Blob service if an
@@ -129,9 +118,9 @@ public final class StorageServiceProperties {
      */
     public List<CorsRule> getCors() {
         if (this.cors == null) {
-            this.cors = new CorsWrapper(new ArrayList<CorsRule>());
+            this.cors = new ArrayList<CorsRule>();
         }
-        return this.cors.items;
+        return this.cors;
     }
 
     /**
@@ -141,7 +130,7 @@ public final class StorageServiceProperties {
      * @return the StorageServiceProperties object itself.
      */
     public StorageServiceProperties setCors(List<CorsRule> cors) {
-        this.cors = new CorsWrapper(cors);
+        this.cors = cors;
         return this;
     }
 

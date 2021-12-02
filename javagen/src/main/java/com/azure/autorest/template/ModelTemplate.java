@@ -11,8 +11,8 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -28,6 +28,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +75,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         // TODO: Determine whether imports should be added here.
         imports.add(JsonCreator.class.getName());
+        imports.add(JacksonXmlElementWrapper.class.getName());
+        imports.add(JacksonXmlProperty.class.getName());
 
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
             imports.add(JsonGetter.class.getName());
@@ -159,7 +163,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.shouldGenerateXmlSerialization()) {
             if (model.getXmlNamespace() != null && !model.getXmlNamespace().isEmpty()) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
-                        model.getXmlName(), model.getXmlNamespace()));
+                    model.getXmlName(), model.getXmlNamespace()));
             } else {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
             }
@@ -181,7 +185,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
         }
         if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-                || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
+            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
             javaFile.annotation("Fluent");
         } else {
             javaFile.annotation("Immutable");
@@ -193,29 +197,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
             }
 
-            Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
-
             for (ClientModelProperty property : model.getProperties()) {
-                String xmlWrapperClassName = propertyXmlWrapperClassName.apply(property);
-                if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                    classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass ->
-                    {
-                        IType propertyClientType = property.getWireType().getClientType();
-
-                        String listElementName = property.getXmlListElementName();
-                        String jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName);
-                        if (property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                            jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = " +
-                                            "\"%2$s\")", listElementName, property.getXmlNamespace());
-                        }
-                        innerClass.annotation(jacksonAnnotation);
-                        innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
-
-                        innerClass.annotation("JsonCreator");
-                        innerClass.privateConstructor(String.format("%1$s(@%2$s %3$s items)", xmlWrapperClassName, jacksonAnnotation, propertyClientType), constructor -> constructor.line("this.items = items;"));
-                    });
-                }
-
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
                     comment.line(property.getDescription()));
 
@@ -232,27 +214,41 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
+                    // If the property is a header collection use @HeaderCollection. azure-core will handle this
+                    // separately from other deserialization as it requires packing multiple HTTP headers into a map.
                     classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-                } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
-                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
-                            property.getXmlName()));
-                } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
-                            property.getXmlName(), property.getXmlNamespace()));
-                } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
-                    classBlock.annotation("JacksonXmlText");
                 } else if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonIgnore");
-                } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
+                } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
+                    // Property is an attribute on the current XML node. Indicate to Jackson that it needs to
+                    // inspect the XML node attributes for the property value.
+                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
+                        property.getXmlName()));
+                } else if (settings.shouldGenerateXmlSerialization() && !CoreUtils.isNullOrEmpty(property.getXmlNamespace())) {
+                    // Property has a namespace, include it in the JacksonXmlProperty.
+                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
+                        property.getXmlName(), property.getXmlNamespace()));
+                } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+                    // Property is the raw text value of the XML node containing it. Use JacksonXmlText to indicate
+                    // to Jackson to extract the current XML node's value as the property value.
+                    classBlock.annotation("JacksonXmlText");
+                } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                    // Property is an XML wrapper, or simply put a node that contains a list of XML nodes.
+                    // Use JacksonXmlElementWrapper to indicate to Jackson that the current node contains a list
+                    // of values to be used as the property value.
+                    classBlock.annotation(String.format("JacksonXmlElementWrapper(localName = \"%1$s\")", property.getXmlName()));
+                } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType) {
+                    // The property is a list, but it isn't an XML wrapper. Use the XML node with no special
+                    // handling.
                     classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
-                } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
+                } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
+                    // Otherwise, use the basic Jackson annotation.
                     classBlock.annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
                 }
 
                 if (settings.shouldGenerateXmlSerialization()) {
-                    if (property.getIsXmlWrapper()) {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", xmlWrapperClassName, property.getName()));
-                    } else if (property.getWireType() instanceof ListType) {
+                    // XML wrappers will handle instantiating the empty collection in the getter.
+                    if (!property.getIsXmlWrapper() && property.getWireType() instanceof ListType) {
                         classBlock.privateMemberVariable(String.format("%1$s %2$s = new ArrayList<>()", property.getWireType(), property.getName()));
                     } else {
                         classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
@@ -276,8 +272,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             List<ClientModelProperty> constantProperties = model.getProperties().stream()
-                    .filter(clientModelProperty -> clientModelProperty.getIsConstant() && clientModelProperty.isRequired())
-                    .collect(Collectors.toList());
+                .filter(clientModelProperty -> clientModelProperty.getIsConstant() && clientModelProperty.isRequired())
+                .collect(Collectors.toList());
             List<ClientModelProperty> requiredProperties =
                 model.getProperties().stream().filter(ClientModelProperty::isRequired).collect(Collectors.toList());
 
@@ -305,23 +301,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         expression = String.format("CoreUtils.clone(%s)", expression);
                     }
                     if (sourceTypeName.equals(targetTypeName)) {
-                        if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof ListType) {
+                        if (property.getIsXmlWrapper()) {
+                            // XML wrappers are always lists, or iterables, so use the first type argument.
                             methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
-                                            property.getName(),
-                                            propertyXmlWrapperClassName.apply(property),
-                                            ((ListType) property.getWireType()).getElementType()));
-                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
-                        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof IterableType) {
-                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
-                                            property.getName(),
-                                            propertyXmlWrapperClassName.apply(property),
-                                            ((IterableType) property.getWireType()).getElementType()));
-                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
-                        } else {
-                            methodBlock.methodReturn(expression);
+                                ifBlock.line("this.%s = new ArrayList<%s>();", property.getName(),
+                                    ((GenericType) property.getWireType()).getTypeArguments()[0]));
                         }
+                        methodBlock.methodReturn(expression);
                     } else {
                         methodBlock.ifBlock(String.format("%s == null", expression), (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
 
@@ -331,11 +317,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     }
                 });
 
-                if(!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
+                if (!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
-                        model.getName(), property.getSetterName(), propertyClientType, property.getName()),
+                            model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
                             String expression;
                             if (propertyClientType.equals(ArrayType.ByteArray)) {
@@ -345,18 +331,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             }
                             if (propertyClientType != propertyType) {
                                 methodBlock.ifBlock(String.format("%s == null", property.getName()),
-                                    (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
+                                        (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
                                     .elseBlock((elseBlock) -> {
                                         String propertyConversion = propertyType.convertFromClientType(expression);
                                         elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
                                     });
                             } else {
-                                if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                                    methodBlock.line("this.%s = new %s(%s);", property.getName(),
-                                        propertyXmlWrapperClassName.apply(property), expression);
-                                } else {
-                                    methodBlock.line("this.%s = %s;", property.getName(), expression);
-                                }
+                                methodBlock.line("this.%s = %s;", property.getName(), expression);
                             }
                             methodBlock.methodReturn("this");
                         });
@@ -385,10 +366,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                 parentProperty.getSetterName(),
                                 parentProperty.getClientType(),
                                 parentProperty.getName()),
-                                methodBlock -> {
-                                    methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
-                                    methodBlock.methodReturn("this");
-                                });
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
                     }
                 }
             }
@@ -440,7 +421,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelProperty> constantProperties, List<ClientModelProperty> allRequiredProperties) {
 
         List<ClientModelProperty> requiredProperties =
-                allRequiredProperties.stream().filter(property -> !property.getIsConstant()).collect(Collectors.toList());
+            allRequiredProperties.stream().filter(property -> !property.getIsConstant()).collect(Collectors.toList());
         String lastParentName = model.getName();
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
@@ -487,9 +468,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
 
                 requiredParentProperties.forEach(property -> comment
-                        .param(property.getName(), String.format("the %s value to set", property.getName())));
+                    .param(property.getName(), String.format("the %s value to set", property.getName())));
                 requiredProperties.forEach(property -> comment
-                        .param(property.getName(), String.format("the %s value to set", property.getName())));
+                    .param(property.getName(), String.format("the %s value to set", property.getName())));
             });
 
 
@@ -552,12 +533,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.shouldClientLogger()) {
                                 ifBlock.line(String.format(
-                                        "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
-                                        errorMessage));
+                                    "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
+                                    errorMessage));
                             } else {
                                 ifBlock.line(String.format(
-                                        "throw new IllegalArgumentException(%s);",
-                                        errorMessage));
+                                    "throw new IllegalArgumentException(%s);",
+                                    errorMessage));
                             }
                         });
                         if (validation != null) {
@@ -608,16 +589,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (parentModel != null) {
                 if (parentModel.getProperties() != null) {
                     propertyReferences.addAll(parentModel.getProperties().stream()
-                            .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
-                            .map(ClientModelPropertyReference::ofParentProperty)
-                            .collect(Collectors.toList()));
+                        .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
+                        .map(ClientModelPropertyReference::ofParentProperty)
+                        .collect(Collectors.toList()));
                 }
 
                 if (parentModel.getPropertyReferences() != null) {
                     propertyReferences.addAll(parentModel.getPropertyReferences().stream()
-                            .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                            .map(ClientModelPropertyReference::ofParentProperty)
-                            .collect(Collectors.toList()));
+                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                        .map(ClientModelPropertyReference::ofParentProperty)
+                        .collect(Collectors.toList()));
                 }
             }
 
