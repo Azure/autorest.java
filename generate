@@ -94,5 +94,5 @@ rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 autorest --version=3.6.6 --use:. customization-tests/swagger
 
 # partial update tests
-autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md --handle-partial-update
+autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md
 rm ./partial-update-tests/generated/src/main/java/module-info.java

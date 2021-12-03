@@ -35,6 +35,7 @@ public final class StringOperationWithAddedMemberGeneratedClient {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the response.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNullWithResponse(requestOptions);

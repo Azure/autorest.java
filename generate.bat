@@ -98,5 +98,5 @@ call autorest --use:. docs/samples/specification/basic/readme.md
 call autorest --use:. docs/samples/specification/management/readme.md
 
 rem partial update tests
-call autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md --handle-partial-update
+call autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md
 del partial-update-tests\generated\src\main\java\module-info.java

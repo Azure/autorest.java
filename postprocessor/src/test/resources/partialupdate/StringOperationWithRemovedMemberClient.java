@@ -29,5 +29,4 @@ public final class StringOperationWithRemovedMemberClient {
         this.serviceClient = serviceClient;
     }
 
-
 }
