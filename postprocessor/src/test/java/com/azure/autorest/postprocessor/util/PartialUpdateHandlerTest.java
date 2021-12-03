@@ -119,6 +119,7 @@ public class PartialUpdateHandlerTest extends TestCase {
         assertEquals(1, compilationUnit.getTypes().get(0).getMethods().size());
         assertEquals(1, compilationUnit.getTypes().get(0).getMethodsByName("putNullWithResponse").size());
         assertEquals("test", compilationUnit.getTypes().get(0).getMethodsByName("putNullWithResponse").get(0).getParameter(1).getName().asString());
+        assertEquals(AccessSpecifier.PACKAGE_PRIVATE, compilationUnit.getTypes().get(0).getMethodsByName("putNullWithResponse").get(0).getAccessSpecifier());
     }
 
     @Test
