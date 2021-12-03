@@ -31,7 +31,9 @@ public final class HeadersResponseEnumHeaders {
      */
     public GreyscaleColors getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = GreyscaleColors.fromString(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = GreyscaleColors.fromString(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

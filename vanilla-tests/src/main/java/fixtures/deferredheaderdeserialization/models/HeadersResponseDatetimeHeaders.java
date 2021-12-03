@@ -32,7 +32,9 @@ public final class HeadersResponseDatetimeHeaders {
      */
     public OffsetDateTime getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = OffsetDateTime.parse(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = OffsetDateTime.parse(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

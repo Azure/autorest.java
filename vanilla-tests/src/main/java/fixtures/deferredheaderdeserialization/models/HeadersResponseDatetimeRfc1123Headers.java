@@ -33,7 +33,9 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      */
     public OffsetDateTime getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         if (this.value == null) {

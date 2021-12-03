@@ -32,7 +32,9 @@ public final class HeadersResponseDurationHeaders {
      */
     public Duration getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = Duration.parse(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = Duration.parse(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

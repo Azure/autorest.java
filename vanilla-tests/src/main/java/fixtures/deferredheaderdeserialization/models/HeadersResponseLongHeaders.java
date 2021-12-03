@@ -31,7 +31,9 @@ public final class HeadersResponseLongHeaders {
      */
     public Long getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = Long.valueOf(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = Long.valueOf(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

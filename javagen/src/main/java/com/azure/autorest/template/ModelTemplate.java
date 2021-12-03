@@ -626,7 +626,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
                         generateHeaderCollectionDeserialization(property, ifBlock);
                     } else {
-                        ifBlock.line("this.%s = %s;", property.getName(), generateHeaderDeserializationFunction(property));
+                        generateHeaderDeserializationFunction(property, ifBlock);
                     }
                     ifBlock.line("this.%s = true;", getHeaderDeserializationStatusPropertyName(property));
                 });
@@ -649,50 +649,70 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         block.line("this.%s = headerCollection;", property.getName());
     }
 
-    private static String generateHeaderDeserializationFunction(ClientModelProperty property) {
+    private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
 
+        boolean needsToBeGuardedAgainstNull = false;
+        String setter;
         if (wireType == PrimitiveType.Boolean) {
-            return String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
+            setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Boolean) {
-            return String.format("Boolean.valueOf(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Boolean.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Double) {
-            return String.format("Double.parseDouble(%s)", rawHeaderAccess);
+            setter = String.format("Double.parseDouble(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Double) {
-            return String.format("Double.valueOf(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Double.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Float) {
-            return String.format("Float.parseFloat(%s)", rawHeaderAccess);
+            setter = String.format("Float.parseFloat(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Float) {
-            return String.format("Float.valueOf(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Float.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Int) {
-            return String.format("Integer.parseInt(%s)", rawHeaderAccess);
+            setter = String.format("Integer.parseInt(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Integer) {
-            return String.format("Integer.valueOf(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Integer.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Long) {
-            return String.format("Long.parseLong(%s)", rawHeaderAccess);
+            setter = String.format("Long.parseLong(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Long) {
-            return String.format("Long.valueOf(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Long.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == ArrayType.ByteArray) {
-            return String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.String) {
-            return rawHeaderAccess;
+            setter = rawHeaderAccess;
         } else if (wireType == ClassType.DateTimeRfc1123) {
-            return String.format("new DateTimeRfc1123(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("new DateTimeRfc1123(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.DateTime) {
-            return String.format("OffsetDateTime.parse(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("OffsetDateTime.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.LocalDate) {
-            return String.format("LocalDate.parse(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("LocalDate.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Duration) {
-            return String.format("Duration.parse(%s)", rawHeaderAccess);
+            needsToBeGuardedAgainstNull = true;
+            setter = String.format("Duration.parse(%s)", rawHeaderAccess);
         } else if (wireType instanceof EnumType) {
+            needsToBeGuardedAgainstNull = true;
             EnumType enumType = (EnumType) wireType;
-            return String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
+            setter = String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
-            return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
+            setter = String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
                 property.getSerializedName(), getWireTypeJavaType(wireType));
+        }
+
+        if (needsToBeGuardedAgainstNull) {
+            javaBlock.ifBlock(String.format("%s != null", rawHeaderAccess),
+                ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
+        } else {
+            javaBlock.line("this.%s = %s;", property.getName(), setter);
         }
     }
 

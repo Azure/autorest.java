@@ -31,7 +31,9 @@ public final class HeadersResponseIntegerHeaders {
      */
     public Integer getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = Integer.valueOf(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = Integer.valueOf(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

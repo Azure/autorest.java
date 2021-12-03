@@ -32,7 +32,9 @@ public final class HeadersResponseDateHeaders {
      */
     public LocalDate getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = LocalDate.parse(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = LocalDate.parse(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;

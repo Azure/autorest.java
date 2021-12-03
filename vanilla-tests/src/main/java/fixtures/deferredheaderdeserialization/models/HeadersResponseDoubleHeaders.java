@@ -31,7 +31,9 @@ public final class HeadersResponseDoubleHeaders {
      */
     public Double getValue() {
         if (!this.valueHasBeenDeserialized) {
-            this.value = Double.valueOf(rawHeaders.getValue("value"));
+            if (rawHeaders.getValue("value") != null) {
+                this.value = Double.valueOf(rawHeaders.getValue("value"));
+            }
             this.valueHasBeenDeserialized = true;
         }
         return this.value;
