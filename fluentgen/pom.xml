@@ -116,9 +116,6 @@
             <version>0.8.6</version>
             <configuration>
               <excludes>
-                <exclude>com/azure/autorest/fluent/template/**/*</exclude>
-                <exclude>com/azure/autorest/fluent/FluentGen.*</exclude>
-                <exclude>com/azure/autorest/fluent/Main.*</exclude>
               </excludes>
             </configuration>
             <executions>
