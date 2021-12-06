@@ -116,7 +116,7 @@ public class Transformer {
               contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
             }
           }
-          deduplicateParameterNames(request.getParameters());
+          deduplicateParameterNames(request);
         }
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -401,7 +401,22 @@ public class Transformer {
     return contentType;
   }
 
-  private static void deduplicateParameterNames(List<Parameter> parameters) {
+  private static void deduplicateParameterNames(Request request) {
+    if (request == null || request.getParameters() == null || request.getParameters().isEmpty()) {
+      return;
+    }
+
+    List<Parameter> parameters = request.getParameters();
+    // remove duplicate item
+    List<Parameter> deduplicatedParameters = parameters.stream()
+        .distinct()
+        .collect(Collectors.toList());
+    if (deduplicatedParameters.size() != parameters.size()) {
+      parameters = deduplicatedParameters;
+      request.setParameters(parameters);
+    }
+
+    // rename if name conflict
     Set<String> parameterNames = new HashSet<>();
     ListIterator<Parameter> iter = parameters.listIterator();
     while (iter.hasNext()) {
