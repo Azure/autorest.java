@@ -16,11 +16,14 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * Utilities for client model.
  */
 public class ClientModelUtil {
+
+    private static final Pattern SPACE = Pattern.compile("\\s");
 
     /**
      * Prepare async/sync clients for service client.
@@ -94,6 +97,78 @@ public class ClientModelUtil {
         }
     }
 
+    /**
+     * @param codeModel the code model
+     * @return the interface name of service client.
+     */
+    public static String getClientInterfaceName(CodeModel codeModel) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
+                + codeModel.getLanguage().getJava().getName();
+        if (settings.isLowLevelClient()) {
+            // mandate ending Client for LLC
+            if (!serviceClientInterfaceName.endsWith("Client")) {
+                String serviceName = settings.getServiceName();
+                if (serviceName != null) {
+                    serviceName = SPACE.matcher(serviceName).replaceAll("");
+                    serviceClientInterfaceName = serviceName.endsWith("Client") ? serviceName : (serviceName + "Client");
+                } else {
+                    serviceClientInterfaceName += "Client";
+                }
+            }
+        }
+        return serviceClientInterfaceName;
+    }
+
+    /**
+     * @param codeModel the code model
+     * @return the class name of service client implementation.
+     */
+    public static String getClientImplementClassName(CodeModel codeModel) {
+        String serviceClientInterfaceName = getClientInterfaceName(codeModel);
+        return getClientImplementClassName(serviceClientInterfaceName);
+    }
+
+    /**
+     * @param serviceClientInterfaceName the interface name of service client
+     * @return the class name of service client implementation.
+     */
+    public static String getClientImplementClassName(String serviceClientInterfaceName) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String serviceClientClassName = serviceClientInterfaceName;
+        if (settings.shouldGenerateClientAsImpl()) {
+            serviceClientClassName += "Impl";
+        }
+        return serviceClientClassName;
+    }
+
+    /**
+     * @param serviceClientInterfaceName the interface name of service client
+     * @return the class name of service version.
+     */
+    public static String getServiceVersionClassName(String serviceClientInterfaceName) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String serviceName;
+        if (settings.getServiceName() == null) {
+            if (serviceClientInterfaceName.endsWith("Client")) {
+                // remove ending Client
+                serviceName = serviceClientInterfaceName.substring(0, serviceClientInterfaceName.length() - "Client".length());
+            } else {
+                serviceName = serviceClientInterfaceName;
+            }
+        } else {
+            serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
+        }
+        return serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+    }
+
+    /**
+     * Gets the suffix of the builder class.
+     *
+     * The class name of the Builder is usually the service client interface name + builder suffix.
+     *
+     * @return the suffix of the builder class.
+     */
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
