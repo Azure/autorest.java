@@ -32,3 +32,10 @@ jobs:
       testResultsFiles: '**/TEST-*.xml'
       goals: 'verify'
       options: '-P local,testFluent --no-transfer-progress'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'JaCoCo'
+      summaryFileLocation: fluentgen/target/site/test-coverage/jacoco.xml
+      reportDirectory: fluentgen/target/site/test-coverage/
+      failIfCoverageEmpty: false

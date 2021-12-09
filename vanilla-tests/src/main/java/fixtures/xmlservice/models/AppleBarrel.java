@@ -1,7 +1,9 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,37 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "AppleBarrel")
 @Fluent
 public final class AppleBarrel {
+    private static final class GoodApplesWrapper {
+        @JacksonXmlProperty(localName = "Apple")
+        private final List<String> items;
+
+        @JsonCreator
+        private GoodApplesWrapper(@JacksonXmlProperty(localName = "Apple") List<String> items) {
+            this.items = items;
+        }
+    }
+
     /*
      * The GoodApples property.
      */
-    @JacksonXmlElementWrapper(localName = "GoodApples")
-    private List<String> goodApples;
+    @JsonProperty(value = "GoodApples")
+    private GoodApplesWrapper goodApples;
+
+    private static final class BadApplesWrapper {
+        @JacksonXmlProperty(localName = "Apple")
+        private final List<String> items;
+
+        @JsonCreator
+        private BadApplesWrapper(@JacksonXmlProperty(localName = "Apple") List<String> items) {
+            this.items = items;
+        }
+    }
 
     /*
      * The BadApples property.
      */
-    @JacksonXmlElementWrapper(localName = "BadApples")
-    private List<String> badApples;
+    @JsonProperty(value = "BadApples")
+    private BadApplesWrapper badApples;
 
     /**
      * Get the goodApples property: The GoodApples property.
@@ -29,9 +51,9 @@ public final class AppleBarrel {
      */
     public List<String> getGoodApples() {
         if (this.goodApples == null) {
-            this.goodApples = new ArrayList<String>();
+            this.goodApples = new GoodApplesWrapper(new ArrayList<String>());
         }
-        return this.goodApples;
+        return this.goodApples.items;
     }
 
     /**
@@ -41,7 +63,7 @@ public final class AppleBarrel {
      * @return the AppleBarrel object itself.
      */
     public AppleBarrel setGoodApples(List<String> goodApples) {
-        this.goodApples = goodApples;
+        this.goodApples = new GoodApplesWrapper(goodApples);
         return this;
     }
 
@@ -52,9 +74,9 @@ public final class AppleBarrel {
      */
     public List<String> getBadApples() {
         if (this.badApples == null) {
-            this.badApples = new ArrayList<String>();
+            this.badApples = new BadApplesWrapper(new ArrayList<String>());
         }
-        return this.badApples;
+        return this.badApples.items;
     }
 
     /**
@@ -64,7 +86,7 @@ public final class AppleBarrel {
      * @return the AppleBarrel object itself.
      */
     public AppleBarrel setBadApples(List<String> badApples) {
-        this.badApples = badApples;
+        this.badApples = new BadApplesWrapper(badApples);
         return this;
     }
 
