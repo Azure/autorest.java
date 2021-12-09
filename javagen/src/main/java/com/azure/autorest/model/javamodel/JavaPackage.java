@@ -107,11 +107,9 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceVersion(String package_Keyword, String serviceName, String className,
-                                        List<String> serviceVersions, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, className);
-        Templates.getServiceVersionTemplate().serviceName(serviceName).className(className)
-                .serviceVersions(serviceVersions).write(model, javaFile);
+    public final void addServiceVersion(String package_Keyword, ServiceVersion serviceVersion) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, serviceVersion.getClassName());
+        Templates.getServiceVersionTemplate().write(serviceVersion, javaFile);
         addJavaFile(javaFile);
     }
 

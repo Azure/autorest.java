@@ -14,8 +14,8 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestSwaggerBatService type. */
-@ServiceClient(builder = AutoRestSwaggerBatServiceBuilder.class)
+/** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
+@ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class StringOperationClient {
 
     @Generated private final StringOperationsImpl serviceClient;

@@ -11,7 +11,7 @@ public class PathItemsTests {
 
     @BeforeAll
     public static void setup() {
-        AutoRestUrlTestServiceBuilder builder = new AutoRestUrlTestServiceBuilder();
+        AutoRestUrlTestServiceClientBuilder builder = new AutoRestUrlTestServiceClientBuilder();
         builder.globalStringPath("globalStringPath");
         asyncClient = builder.buildPathItemsAsyncClient();
         client = builder.buildPathItemsClient();

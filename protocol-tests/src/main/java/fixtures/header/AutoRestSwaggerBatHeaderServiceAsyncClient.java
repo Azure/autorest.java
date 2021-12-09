@@ -14,8 +14,8 @@ import com.azure.core.http.rest.Response;
 import fixtures.header.implementation.HeadersImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestSwaggerBatHeaderService type. */
-@ServiceClient(builder = AutoRestSwaggerBatHeaderServiceBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous AutoRestSwaggerBatHeaderServiceClient type. */
+@ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     @Generated private final HeadersImpl serviceClient;
 

@@ -15,8 +15,8 @@ public class ArrayTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestComplexTestServiceBuilder().buildArrayAsyncClient();
-        client = new AutoRestComplexTestServiceBuilder().buildArrayClient();
+        asyncClient = new AutoRestComplexTestServiceClientBuilder().buildArrayAsyncClient();
+        client = new AutoRestComplexTestServiceClientBuilder().buildArrayClient();
     }
 
     @Test

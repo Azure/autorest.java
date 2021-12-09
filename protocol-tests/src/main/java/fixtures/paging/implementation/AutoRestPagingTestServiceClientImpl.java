@@ -12,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AutoRestPagingTestService type. */
-public final class AutoRestPagingTestServiceImpl {
+/** Initializes a new instance of the AutoRestPagingTestServiceClient type. */
+public final class AutoRestPagingTestServiceClientImpl {
     /** server parameter. */
     private final String host;
 
@@ -63,11 +63,11 @@ public final class AutoRestPagingTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestPagingTestService client.
+     * Initializes an instance of AutoRestPagingTestServiceClient client.
      *
      * @param host server parameter.
      */
-    public AutoRestPagingTestServiceImpl(String host) {
+    public AutoRestPagingTestServiceClientImpl(String host) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -77,23 +77,24 @@ public final class AutoRestPagingTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestPagingTestService client.
+     * Initializes an instance of AutoRestPagingTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
-    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline, String host) {
+    public AutoRestPagingTestServiceClientImpl(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
     /**
-     * Initializes an instance of AutoRestPagingTestService client.
+     * Initializes an instance of AutoRestPagingTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
      */
-    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public AutoRestPagingTestServiceClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;

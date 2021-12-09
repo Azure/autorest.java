@@ -28,14 +28,14 @@ public final class PrimitivesImpl {
     private final PrimitivesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of PrimitivesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
+    PrimitivesImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(PrimitivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

@@ -1,6 +1,6 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.HashSet;
@@ -8,30 +8,27 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, JavaFile> {
     private static final ServiceVersionTemplate _instance = new ServiceVersionTemplate();
     private static final Pattern VERSION_TO_ENUM = Pattern.compile("[-.]");
-
-    private String serviceName;
-
-    private String className;
-
-    private List<String> serviceVersions;
 
     public static ServiceVersionTemplate getInstance() {
         return _instance;
     }
 
     @Override
-    public void write(ServiceClient model, JavaFile javaFile) {
+    public void write(ServiceVersion serviceVersion, JavaFile javaFile) {
         // imports
         Set<String> imports = new HashSet<>();
         imports.add("com.azure.core.util.ServiceVersion");
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
-            comment.description("Service version of " + serviceName);
+            comment.description("Service version of " + serviceVersion.getServiceName());
         });
+
+        String className = serviceVersion.getClassName();
+        List<String> serviceVersions = serviceVersion.getServiceVersions();
 
         javaFile.publicEnum(className + " implements ServiceVersion", classBlock -> {
             serviceVersions.forEach(v -> classBlock.value(getVersionIdentifier(v), v));
@@ -59,21 +56,6 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceClient, Java
                             getVersionIdentifier(serviceVersions.get(serviceVersions.size() - 1)))
             );
         });
-    }
-
-    public ServiceVersionTemplate serviceName(String serviceName) {
-        this.serviceName = serviceName;
-        return this;
-    }
-
-    public ServiceVersionTemplate className(String className) {
-        this.className = className;
-        return this;
-    }
-
-    public ServiceVersionTemplate serviceVersions(List<String> serviceVersions) {
-        this.serviceVersions = serviceVersions;
-        return this;
     }
 
     private String getVersionIdentifier(String version) {

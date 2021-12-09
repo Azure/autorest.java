@@ -13,8 +13,8 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
 
-/** Initializes a new instance of the AutoRestComplexTestService type. */
-public final class AutoRestComplexTestServiceImpl {
+/** Initializes a new instance of the AutoRestComplexTestServiceClient type. */
+public final class AutoRestComplexTestServiceClientImpl {
     /** server parameter. */
     private final String host;
 
@@ -172,12 +172,12 @@ public final class AutoRestComplexTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestComplexTestService client.
+     * Initializes an instance of AutoRestComplexTestServiceClient client.
      *
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(String host, AutoRestComplexTestServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceClientImpl(String host, AutoRestComplexTestServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -188,26 +188,26 @@ public final class AutoRestComplexTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestComplexTestService client.
+     * Initializes an instance of AutoRestComplexTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(
+    public AutoRestComplexTestServiceClientImpl(
             HttpPipeline httpPipeline, String host, AutoRestComplexTestServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
-     * Initializes an instance of AutoRestComplexTestService client.
+     * Initializes an instance of AutoRestComplexTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceImpl(
+    public AutoRestComplexTestServiceClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String host,

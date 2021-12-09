@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
+import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -46,13 +47,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
 public class Javagen extends NewPlugin {
-    private static final Pattern SPACE = Pattern.compile("\\s");
-
     private final Logger logger = new PluginLogger(this, Javagen.class);
     protected static Javagen instance;
 
@@ -179,10 +177,10 @@ public class Javagen extends NewPlugin {
                 if (settings.getServiceName() == null) {
                     serviceName = client.getServiceClient().getInterfaceName();
                 } else {
-                    serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
+                    serviceName = settings.getServiceName();
                 }
-                String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
-                javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
+                String className = ClientModelUtil.getServiceVersionClassName(client.getServiceClient().getInterfaceName());
+                javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
             }
 
             if (!settings.isLowLevelClient()) {

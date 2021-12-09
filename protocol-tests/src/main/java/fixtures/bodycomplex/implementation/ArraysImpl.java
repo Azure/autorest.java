@@ -28,14 +28,14 @@ public final class ArraysImpl {
     private final ArraysService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of ArraysImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ArraysImpl(AutoRestComplexTestServiceImpl client) {
+    ArraysImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service = RestProxy.create(ArraysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }

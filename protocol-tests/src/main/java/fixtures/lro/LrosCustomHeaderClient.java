@@ -14,8 +14,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LrosCustomHeadersImpl;
 
-/** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestService type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
+/** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
+@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class)
 public final class LrosCustomHeaderClient {
     @Generated private final LrosCustomHeadersImpl serviceClient;
 

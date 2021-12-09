@@ -32,14 +32,14 @@ public final class LrosCustomHeadersImpl {
     private final LrosCustomHeadersService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestLongRunningOperationTestServiceImpl client;
+    private final AutoRestLongRunningOperationTestServiceClientImpl client;
 
     /**
      * Initializes an instance of LrosCustomHeadersImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    LrosCustomHeadersImpl(AutoRestLongRunningOperationTestServiceImpl client) {
+    LrosCustomHeadersImpl(AutoRestLongRunningOperationTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         LrosCustomHeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());

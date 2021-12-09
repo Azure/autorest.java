@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -82,9 +83,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         proxyBuilder.methods(restAPIMethods);
 
-        if (settings.shouldGenerateClientAsImpl()) {
-            serviceClientName += "Impl";
-        }
+        serviceClientName = ClientModelUtil.getClientImplementClassName(methodGroup.getCodeModel());
 
         builder.proxy(proxyBuilder.build())
             .serviceClientName(serviceClientName);

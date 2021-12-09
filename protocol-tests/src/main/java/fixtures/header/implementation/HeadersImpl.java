@@ -25,14 +25,14 @@ public final class HeadersImpl {
     private final HeadersService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBatHeaderServiceImpl client;
+    private final AutoRestSwaggerBatHeaderServiceClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HeadersImpl(AutoRestSwaggerBatHeaderServiceImpl client) {
+    HeadersImpl(AutoRestSwaggerBatHeaderServiceClientImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }

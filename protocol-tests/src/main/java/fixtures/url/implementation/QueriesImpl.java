@@ -25,14 +25,14 @@ public final class QueriesImpl {
     private final QueriesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestUrlTestServiceImpl client;
+    private final AutoRestUrlTestServiceClientImpl client;
 
     /**
      * Initializes an instance of QueriesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    QueriesImpl(AutoRestUrlTestServiceImpl client) {
+    QueriesImpl(AutoRestUrlTestServiceClientImpl client) {
         this.service = RestProxy.create(QueriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }

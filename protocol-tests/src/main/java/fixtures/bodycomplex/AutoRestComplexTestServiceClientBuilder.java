@@ -22,14 +22,14 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the AutoRestComplexTestService type. */
+/** A builder for creating a new instance of the AutoRestComplexTestServiceClient type. */
 @ServiceClientBuilder(
         serviceClients = {
             BasicClient.class,
@@ -51,15 +51,15 @@ import java.util.stream.Collectors;
             ReadonlypropertyAsyncClient.class,
             FlattencomplexAsyncClient.class
         })
-public final class AutoRestComplexTestServiceBuilder {
+public final class AutoRestComplexTestServiceClientBuilder {
     private static final String SDK_NAME = "name";
 
     private static final String SDK_VERSION = "version";
 
     private final Map<String, String> properties = new HashMap<>();
 
-    /** Create an instance of the AutoRestComplexTestServiceBuilder. */
-    public AutoRestComplexTestServiceBuilder() {
+    /** Create an instance of the AutoRestComplexTestServiceClientBuilder. */
+    public AutoRestComplexTestServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -72,9 +72,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder host(String host) {
+    public AutoRestComplexTestServiceClientBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -88,9 +88,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder serviceVersion(AutoRestComplexTestServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceClientBuilder serviceVersion(AutoRestComplexTestServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -104,9 +104,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestComplexTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -120,9 +120,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder httpClient(HttpClient httpClient) {
+    public AutoRestComplexTestServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -137,9 +137,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder configuration(Configuration configuration) {
+    public AutoRestComplexTestServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -153,9 +153,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public AutoRestComplexTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -170,9 +170,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public AutoRestComplexTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -192,9 +192,9 @@ public final class AutoRestComplexTestServiceBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder clientOptions(ClientOptions clientOptions) {
+    public AutoRestComplexTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -203,19 +203,19 @@ public final class AutoRestComplexTestServiceBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestComplexTestServiceBuilder.
+     * @return the AutoRestComplexTestServiceClientBuilder.
      */
-    public AutoRestComplexTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public AutoRestComplexTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestComplexTestServiceImpl with the provided parameters.
+     * Builds an instance of AutoRestComplexTestServiceClientImpl with the provided parameters.
      *
-     * @return an instance of AutoRestComplexTestServiceImpl.
+     * @return an instance of AutoRestComplexTestServiceClientImpl.
      */
-    private AutoRestComplexTestServiceImpl buildInnerClient() {
+    private AutoRestComplexTestServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
@@ -225,8 +225,8 @@ public final class AutoRestComplexTestServiceBuilder {
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
-        AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(
+        AutoRestComplexTestServiceClientImpl client =
+                new AutoRestComplexTestServiceClientImpl(
                         pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
         return client;
     }

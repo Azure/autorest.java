@@ -26,14 +26,14 @@ public final class FlattencomplexesImpl {
     private final FlattencomplexesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of FlattencomplexesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    FlattencomplexesImpl(AutoRestComplexTestServiceImpl client) {
+    FlattencomplexesImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());

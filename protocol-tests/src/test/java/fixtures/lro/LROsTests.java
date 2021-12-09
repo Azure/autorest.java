@@ -20,7 +20,7 @@ public class LROsTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceBuilder().buildLROsClient();
+        client = new AutoRestLongRunningOperationTestServiceClientBuilder().buildLROsClient();
     }
 
     @Test

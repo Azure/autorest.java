@@ -53,13 +53,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         ServiceClient.Builder builder = createClientBuilder();
         builder.builderDisabled(JavaSettings.getInstance().clientBuilderDisabled());
 
-        String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
-                + codeModel.getLanguage().getJava().getName();
-
-        String serviceClientClassName = serviceClientInterfaceName;
-        if (settings.shouldGenerateClientAsImpl()) {
-            serviceClientClassName += "Impl";
-        }
+        String serviceClientInterfaceName = ClientModelUtil.getClientInterfaceName(codeModel);
+        String serviceClientClassName = ClientModelUtil.getClientImplementClassName(serviceClientInterfaceName);
         String packageName = ClientModelUtil.getServiceClientPackageName(serviceClientClassName);
         builder.interfaceName(serviceClientInterfaceName)
                 .className(serviceClientClassName)
@@ -133,13 +128,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             boolean serviceClientPropertyRequired = p.isRequired();
 
             if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
-                String serviceName;
-                if (settings.getServiceName() == null) {
-                    serviceName = serviceClientInterfaceName;
-                } else {
-                    serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
-                }
-                String enumTypeName = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+                String enumTypeName = ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()
                         .name(enumTypeName)

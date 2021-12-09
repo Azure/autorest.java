@@ -6,13 +6,13 @@ package fixtures.bodystring.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.bodystring.AutoRestSwaggerBatServiceBuilder;
+import fixtures.bodystring.AutoRestSwaggerBatServiceClientBuilder;
 import fixtures.bodystring.StringOperationClient;
 
 public class StringPutNull {
     public static void main(String[] args) {
         StringOperationClient client =
-                new AutoRestSwaggerBatServiceBuilder().host("http://localhost:3000").buildStringOperationClient();
+                new AutoRestSwaggerBatServiceClientBuilder().host("http://localhost:3000").buildStringOperationClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.putNullWithResponse(requestOptions);
     }

@@ -13,8 +13,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.header.implementation.HeadersImpl;
 
-/** Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderService type. */
-@ServiceClient(builder = AutoRestSwaggerBatHeaderServiceBuilder.class)
+/** Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderServiceClient type. */
+@ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class)
 public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated private final HeadersImpl serviceClient;
 

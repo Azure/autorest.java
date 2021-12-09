@@ -22,14 +22,14 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
-import fixtures.bodystring.implementation.AutoRestSwaggerBatServiceImpl;
+import fixtures.bodystring.implementation.AutoRestSwaggerBatServiceClientImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the AutoRestSwaggerBatService type. */
+/** A builder for creating a new instance of the AutoRestSwaggerBatServiceClient type. */
 @ServiceClientBuilder(
         serviceClients = {
             StringOperationClient.class,
@@ -37,15 +37,15 @@ import java.util.stream.Collectors;
             StringOperationAsyncClient.class,
             EnumAsyncClient.class
         })
-public final class AutoRestSwaggerBatServiceBuilder {
+public final class AutoRestSwaggerBatServiceClientBuilder {
     private static final String SDK_NAME = "name";
 
     private static final String SDK_VERSION = "version";
 
     private final Map<String, String> properties = new HashMap<>();
 
-    /** Create an instance of the AutoRestSwaggerBatServiceBuilder. */
-    public AutoRestSwaggerBatServiceBuilder() {
+    /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
+    public AutoRestSwaggerBatServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -58,9 +58,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder host(String host) {
+    public AutoRestSwaggerBatServiceClientBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -74,9 +74,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBatServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -90,9 +90,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder httpClient(HttpClient httpClient) {
+    public AutoRestSwaggerBatServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -107,9 +107,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder configuration(Configuration configuration) {
+    public AutoRestSwaggerBatServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -123,9 +123,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public AutoRestSwaggerBatServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -140,9 +140,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public AutoRestSwaggerBatServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -162,9 +162,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder clientOptions(ClientOptions clientOptions) {
+    public AutoRestSwaggerBatServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -173,27 +173,28 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public AutoRestSwaggerBatServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatServiceImpl with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBatServiceClientImpl with the provided parameters.
      *
-     * @return an instance of AutoRestSwaggerBatServiceImpl.
+     * @return an instance of AutoRestSwaggerBatServiceClientImpl.
      */
-    private AutoRestSwaggerBatServiceImpl buildInnerClient() {
+    private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
-        AutoRestSwaggerBatServiceImpl client =
-                new AutoRestSwaggerBatServiceImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+        AutoRestSwaggerBatServiceClientImpl client =
+                new AutoRestSwaggerBatServiceClientImpl(
+                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
         return client;
     }
 

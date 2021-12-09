@@ -28,14 +28,14 @@ public final class ReadonlypropertiesImpl {
     private final ReadonlypropertiesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of ReadonlypropertiesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ReadonlypropertiesImpl(AutoRestComplexTestServiceImpl client) {
+    ReadonlypropertiesImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         ReadonlypropertiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
