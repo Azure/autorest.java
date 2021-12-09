@@ -8,9 +8,11 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.Head;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -48,12 +50,22 @@ public final class ParamsImpl {
     @Host("{$host}")
     @ServiceInterface(name = "LlcClientParams")
     private interface ParamsService {
-        @Get("/servicedriven/parameters")
+        @Head("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        Mono<Response<BinaryData>> headNoParams(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/serviceDriven/parameters")
         @ExpectedResponses({200})
         Mono<Response<BinaryData>> getRequired(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
-        @Post("/servicedriven/parameters")
+        @Put("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        Mono<Response<BinaryData>> putRequiredOptional(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Post("/serviceDriven/parameters")
         @ExpectedResponses({200})
         Mono<Response<BinaryData>> postParameters(
                 @HostParam("$host") String host,
@@ -61,15 +73,99 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Delete("/servicedriven/parameters")
+        @Delete("/serviceDriven/parameters")
         @ExpectedResponses({204})
         Mono<Response<Void>> deleteParameters(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
-        @Get("/servicedriven/newpath")
+        @Get("/serviceDriven/moreParameters")
+        @ExpectedResponses({200})
+        Mono<Response<BinaryData>> getOptional(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/serviceDriven/newPath")
         @ExpectedResponses({200})
         Mono<Response<BinaryData>> getNewOperation(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+    }
+
+    /**
+     * Head request, no params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> headNoParamsWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.headNoParams(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Head request, no params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> headNoParamsWithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.headNoParams(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Head request, no params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> headNoParamsWithResponse(RequestOptions requestOptions) {
+        return headNoParamsWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -152,6 +248,93 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
         return getRequiredWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * Put, has both required and optional params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredParam</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putRequiredOptionalWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+                context -> service.putRequiredOptional(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Put, has both required and optional params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredParam</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putRequiredOptionalWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        return service.putRequiredOptional(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Put, has both required and optional params.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>requiredParam</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
+        return putRequiredOptionalWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -296,6 +479,88 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
         return deleteParametersWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return true Boolean value on path.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.getOptional(this.client.getHost(), requestOptions, context));
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return true Boolean value on path.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions, Context context) {
+        return service.getOptional(this.client.getHost(), requestOptions, context);
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>newParameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * </table>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return true Boolean value on path.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
+        return getOptionalWithResponseAsync(requestOptions).block();
     }
 
     /**
