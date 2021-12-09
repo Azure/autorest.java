@@ -28,14 +28,14 @@ public final class StringOperationsImpl {
     private final StringOperationsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBatServiceImpl client;
+    private final AutoRestSwaggerBatServiceClientImpl client;
 
     /**
      * Initializes an instance of StringOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    StringOperationsImpl(AutoRestSwaggerBatServiceImpl client) {
+    StringOperationsImpl(AutoRestSwaggerBatServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         StringOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());

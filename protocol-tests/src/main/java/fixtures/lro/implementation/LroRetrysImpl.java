@@ -33,14 +33,14 @@ public final class LroRetrysImpl {
     private final LroRetrysService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestLongRunningOperationTestServiceImpl client;
+    private final AutoRestLongRunningOperationTestServiceClientImpl client;
 
     /**
      * Initializes an instance of LroRetrysImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    LroRetrysImpl(AutoRestLongRunningOperationTestServiceImpl client) {
+    LroRetrysImpl(AutoRestLongRunningOperationTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(LroRetrysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

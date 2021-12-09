@@ -31,14 +31,14 @@ public final class HttpRetriesImpl {
     private final HttpRetriesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestHttpInfrastructureTestServiceImpl client;
+    private final AutoRestHttpInfrastructureTestServiceClientImpl client;
 
     /**
      * Initializes an instance of HttpRetriesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HttpRetriesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    HttpRetriesImpl(AutoRestHttpInfrastructureTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(HttpRetriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

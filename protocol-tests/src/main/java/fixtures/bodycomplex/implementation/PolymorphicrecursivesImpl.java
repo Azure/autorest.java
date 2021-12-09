@@ -28,14 +28,14 @@ public final class PolymorphicrecursivesImpl {
     private final PolymorphicrecursivesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of PolymorphicrecursivesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
+    PolymorphicrecursivesImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         PolymorphicrecursivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());

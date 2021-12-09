@@ -27,14 +27,14 @@ public final class HttpServerFailuresImpl {
     private final HttpServerFailuresService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestHttpInfrastructureTestServiceImpl client;
+    private final AutoRestHttpInfrastructureTestServiceClientImpl client;
 
     /**
      * Initializes an instance of HttpServerFailuresImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HttpServerFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    HttpServerFailuresImpl(AutoRestHttpInfrastructureTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         HttpServerFailuresService.class, client.getHttpPipeline(), client.getSerializerAdapter());

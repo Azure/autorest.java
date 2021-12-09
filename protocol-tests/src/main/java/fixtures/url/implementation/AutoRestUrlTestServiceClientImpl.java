@@ -12,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AutoRestUrlTestService type. */
-public final class AutoRestUrlTestServiceImpl {
+/** Initializes a new instance of the AutoRestUrlTestServiceClient type. */
+public final class AutoRestUrlTestServiceClientImpl {
     /** A string value 'globalItemStringPath' that appears in the path. */
     private final String globalStringPath;
 
@@ -111,13 +111,13 @@ public final class AutoRestUrlTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestUrlTestService client.
+     * Initializes an instance of AutoRestUrlTestServiceClient client.
      *
      * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
      */
-    public AutoRestUrlTestServiceImpl(String globalStringPath, String globalStringQuery, String host) {
+    public AutoRestUrlTestServiceClientImpl(String globalStringPath, String globalStringQuery, String host) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -129,20 +129,20 @@ public final class AutoRestUrlTestServiceImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestUrlTestService client.
+     * Initializes an instance of AutoRestUrlTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
      */
-    public AutoRestUrlTestServiceImpl(
+    public AutoRestUrlTestServiceClientImpl(
             HttpPipeline httpPipeline, String globalStringPath, String globalStringQuery, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host);
     }
 
     /**
-     * Initializes an instance of AutoRestUrlTestService client.
+     * Initializes an instance of AutoRestUrlTestServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
@@ -150,7 +150,7 @@ public final class AutoRestUrlTestServiceImpl {
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
      */
-    public AutoRestUrlTestServiceImpl(
+    public AutoRestUrlTestServiceClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String globalStringPath,

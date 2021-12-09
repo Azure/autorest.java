@@ -22,8 +22,8 @@ public class PagingTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestPagingTestServiceBuilder().buildAsyncClient();
-        client = new AutoRestPagingTestServiceBuilder().buildClient();
+        asyncClient = new AutoRestPagingTestServiceClientBuilder().buildAsyncClient();
+        client = new AutoRestPagingTestServiceClientBuilder().buildClient();
     }
 
     @Test

@@ -32,14 +32,14 @@ public final class HttpRedirectsImpl {
     private final HttpRedirectsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestHttpInfrastructureTestServiceImpl client;
+    private final AutoRestHttpInfrastructureTestServiceClientImpl client;
 
     /**
      * Initializes an instance of HttpRedirectsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HttpRedirectsImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    HttpRedirectsImpl(AutoRestHttpInfrastructureTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(HttpRedirectsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

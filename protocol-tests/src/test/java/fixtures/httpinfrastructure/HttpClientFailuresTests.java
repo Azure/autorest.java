@@ -12,8 +12,8 @@ public class HttpClientFailuresTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestHttpInfrastructureTestServiceBuilder().buildHttpClientFailureAsyncClient();
-        client = new AutoRestHttpInfrastructureTestServiceBuilder().buildHttpClientFailureClient();
+        asyncClient = new AutoRestHttpInfrastructureTestServiceClientBuilder().buildHttpClientFailureAsyncClient();
+        client = new AutoRestHttpInfrastructureTestServiceClientBuilder().buildHttpClientFailureClient();
     }
 
     @Test

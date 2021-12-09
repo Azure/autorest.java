@@ -15,8 +15,8 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ArraysImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
-@ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
+@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
 public final class ArrayAsyncClient {
     @Generated private final ArraysImpl serviceClient;
 

@@ -14,8 +14,8 @@ import com.azure.core.http.rest.Response;
 import fixtures.httpinfrastructure.implementation.HttpClientFailuresImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestService type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type. */
+@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class, isAsync = true)
 public final class HttpClientFailureAsyncClient {
     @Generated private final HttpClientFailuresImpl serviceClient;
 

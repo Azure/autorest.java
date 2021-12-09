@@ -21,8 +21,8 @@ public class PathsTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestUrlTestServiceBuilder().buildPathsAsyncClient();
-        client = new AutoRestUrlTestServiceBuilder().buildPathsClient();
+        asyncClient = new AutoRestUrlTestServiceClientBuilder().buildPathsAsyncClient();
+        client = new AutoRestUrlTestServiceClientBuilder().buildPathsClient();
     }
 
     @Test

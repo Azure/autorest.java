@@ -31,14 +31,14 @@ public final class HttpSuccessImpl {
     private final HttpSuccessService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestHttpInfrastructureTestServiceImpl client;
+    private final AutoRestHttpInfrastructureTestServiceClientImpl client;
 
     /**
      * Initializes an instance of HttpSuccessImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(HttpSuccessService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

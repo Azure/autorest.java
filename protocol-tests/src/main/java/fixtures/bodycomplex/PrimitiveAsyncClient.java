@@ -15,8 +15,8 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PrimitivesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
-@ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
+@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
 public final class PrimitiveAsyncClient {
     @Generated private final PrimitivesImpl serviceClient;
 

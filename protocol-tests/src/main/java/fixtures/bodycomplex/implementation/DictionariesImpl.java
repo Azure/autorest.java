@@ -28,14 +28,14 @@ public final class DictionariesImpl {
     private final DictionariesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestComplexTestServiceImpl client;
+    private final AutoRestComplexTestServiceClientImpl client;
 
     /**
      * Initializes an instance of DictionariesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DictionariesImpl(AutoRestComplexTestServiceImpl client) {
+    DictionariesImpl(AutoRestComplexTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(DictionariesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;

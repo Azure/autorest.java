@@ -26,14 +26,14 @@ public final class PathsImpl {
     private final PathsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestUrlTestServiceImpl client;
+    private final AutoRestUrlTestServiceClientImpl client;
 
     /**
      * Initializes an instance of PathsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    PathsImpl(AutoRestUrlTestServiceImpl client) {
+    PathsImpl(AutoRestUrlTestServiceClientImpl client) {
         this.service = RestProxy.create(PathsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }

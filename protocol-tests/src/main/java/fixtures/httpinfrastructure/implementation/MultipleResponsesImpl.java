@@ -26,14 +26,14 @@ public final class MultipleResponsesImpl {
     private final MultipleResponsesService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestHttpInfrastructureTestServiceImpl client;
+    private final AutoRestHttpInfrastructureTestServiceClientImpl client;
 
     /**
      * Initializes an instance of MultipleResponsesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceClientImpl client) {
         this.service =
                 RestProxy.create(
                         MultipleResponsesService.class, client.getHttpPipeline(), client.getSerializerAdapter());

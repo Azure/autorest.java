@@ -35,14 +35,14 @@ public final class PagingsImpl {
     private final PagingsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestPagingTestServiceImpl client;
+    private final AutoRestPagingTestServiceClientImpl client;
 
     /**
      * Initializes an instance of PagingsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    PagingsImpl(AutoRestPagingTestServiceImpl client) {
+    PagingsImpl(AutoRestPagingTestServiceClientImpl client) {
         this.service = RestProxy.create(PagingsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }

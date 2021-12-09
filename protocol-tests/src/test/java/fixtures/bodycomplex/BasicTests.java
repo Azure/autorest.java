@@ -14,8 +14,8 @@ public class BasicTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestComplexTestServiceBuilder().buildBasicAsyncClient();
-        client = new AutoRestComplexTestServiceBuilder().buildBasicClient();
+        asyncClient = new AutoRestComplexTestServiceClientBuilder().buildBasicAsyncClient();
+        client = new AutoRestComplexTestServiceClientBuilder().buildBasicClient();
     }
 
     @Test

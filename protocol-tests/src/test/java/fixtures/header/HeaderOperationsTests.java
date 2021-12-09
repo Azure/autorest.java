@@ -14,8 +14,8 @@ public class HeaderOperationsTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestSwaggerBatHeaderServiceBuilder().buildAsyncClient();
-        client = new AutoRestSwaggerBatHeaderServiceBuilder().buildClient();
+        asyncClient = new AutoRestSwaggerBatHeaderServiceClientBuilder().buildAsyncClient();
+        client = new AutoRestSwaggerBatHeaderServiceClientBuilder().buildClient();
     }
 
     @Disabled("fail, does not take effect on \"User-Agent\", high-level has same issue")

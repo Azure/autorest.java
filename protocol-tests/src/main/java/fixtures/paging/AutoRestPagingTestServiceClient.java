@@ -14,8 +14,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import fixtures.paging.implementation.PagingsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestPagingTestService type. */
-@ServiceClient(builder = AutoRestPagingTestServiceBuilder.class)
+/** Initializes a new instance of the synchronous AutoRestPagingTestServiceClient type. */
+@ServiceClient(builder = AutoRestPagingTestServiceClientBuilder.class)
 public final class AutoRestPagingTestServiceClient {
     @Generated private final PagingsImpl serviceClient;
 

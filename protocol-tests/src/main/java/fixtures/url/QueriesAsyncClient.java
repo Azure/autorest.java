@@ -14,8 +14,8 @@ import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.QueriesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestUrlTestService type. */
-@ServiceClient(builder = AutoRestUrlTestServiceBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous AutoRestUrlTestServiceClient type. */
+@ServiceClient(builder = AutoRestUrlTestServiceClientBuilder.class, isAsync = true)
 public final class QueriesAsyncClient {
     @Generated private final QueriesImpl serviceClient;
 
