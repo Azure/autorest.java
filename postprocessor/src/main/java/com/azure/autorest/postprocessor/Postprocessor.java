@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.postprocessor.util.PartialUpdateHandler;
 import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
@@ -95,7 +96,7 @@ public class Postprocessor extends NewPlugin {
                 }
                 if (jarUrl == null || !new File(jarUrl.getFile()).exists()) {
                     new PluginLogger(this, Postprocessor.class, "LoadCustomizationJar")
-                        .warn("Customization JAR {} not found. Customization skipped.", jarPath);
+                            .warn("Customization JAR {} not found. Customization skipped.", jarPath);
                     return true;
                 }
                 URLClassLoader loader = URLClassLoader.newInstance(new URL[]{jarUrl}, ClassLoader.getSystemClassLoader());
@@ -103,7 +104,8 @@ public class Postprocessor extends NewPlugin {
                     customizationClass = (Class<? extends Customization>) Class.forName(className, true, loader);
                 } catch (Exception e) {
                     new PluginLogger(this, Postprocessor.class, "LoadCustomizationClass")
-                        .warn("Customization class " + className + " not found in customization jar. Customization skipped.", e);
+                            .warn("Customization class " + className +
+                                    " not found in customization jar. Customization skipped.", e);
                     return true;
                 }
             } else if (className.startsWith("src") && className.endsWith(".java")) {
@@ -132,6 +134,9 @@ public class Postprocessor extends NewPlugin {
 
     private void writeToFiles(Map<String, String> fileContents) throws FormatterException {
         JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isHandlePartialUpdate()) {
+            handlePartialUpdate(fileContents);
+        }
         Formatter formatter = new Formatter();
         for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
             String formattedSource = javaFile.getValue();
@@ -220,8 +225,8 @@ public class Postprocessor extends NewPlugin {
         try (EclipseLanguageClient languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString())) {
             languageClient.initialize();
             SymbolInformation classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
-                .findFirst().get();
+                    .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
+                    .findFirst().get();
             URI fileUri = classSymbol.getLocation().getUri();
             Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
             BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
@@ -237,4 +242,31 @@ public class Postprocessor extends NewPlugin {
             Utils.deleteDirectory(tempDirWithPrefix.toFile());
         }
     }
+
+    private void handlePartialUpdate(Map<String, String> fileContents) {
+        logger.info("Begin handle partial update...");
+        // handle partial update
+        // currently only support add additional interface or overload a generated method in sync and async client
+        fileContents.replaceAll((path, generatedFileContent) -> {
+            if (path.endsWith(".java")) { // only handle for .java file
+                // get existing file path
+                String projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
+                Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
+                // check if existingFile exists, if not, no need to handle partial update
+                if (Files.exists(existingFilePath)) {
+                    try {
+                        String existingFileContent = new String(Files.readAllBytes(existingFilePath));
+                        String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+                        return updatedContent;
+                    } catch (Exception e) {
+                        logger.error("Unable to get content from file path", e);
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            return generatedFileContent;
+        });
+        logger.info("Finish handle partial update.");
+    }
+
 }

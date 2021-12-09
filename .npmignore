@@ -8,6 +8,7 @@ customization-tests
 protocol-tests
 protocol-resilience-test
 protocol-sdk-integration-tests
+partial-update-tests
 logs
 generate
 generate.bat
