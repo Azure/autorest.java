@@ -133,7 +133,7 @@ public class JavaSettings {
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
-                getBooleanValue(host, "handle-partial-update", false)
+                getBooleanValue(host, "partial-update", false)
             );
         }
         return _instance;

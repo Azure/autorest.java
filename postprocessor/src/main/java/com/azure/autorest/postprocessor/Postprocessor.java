@@ -251,15 +251,16 @@ public class Postprocessor extends NewPlugin {
             if (path.endsWith(".java")) { // only handle for .java file
                 // get existing file path
                 String projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
-                URI existingFilePath = Paths.get(projectBaseDirectoryPath, path).toUri();
+                Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
                 // check if existingFile exists, if not, no need to handle partial update
-                if (Files.exists(Paths.get(existingFilePath))) {
+                if (Files.exists(existingFilePath)) {
                     try {
-                        String existingFileContent = new String(Files.readAllBytes(Paths.get(existingFilePath)));
+                        String existingFileContent = new String(Files.readAllBytes(existingFilePath));
                         String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
                         return updatedContent;
                     } catch (Exception e) {
                         logger.error("Unable to get content from file path", e);
+                        throw new RuntimeException(e);
                     }
                 }
             }

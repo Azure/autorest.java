@@ -272,6 +272,12 @@ public final class StringOperationClient {
         return this.serviceClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions);
     }
 
+    /**
+     *
+     * Manually added method to test partial update
+     *
+     * @return a string
+     */
     public String manuallyAddedMethod() {
         return "manuallyAddedMethod";
     }
