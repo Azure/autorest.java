@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -30,6 +31,7 @@ import java.io.IOException;
 public class PreprocessorTest {
 
     @Test
+    @Ignore("no validation")
     public void processTest() throws Exception {
         MockPreprocessor preprocessor = new MockPreprocessor(new Connection(System.out, System.in), "dummy", "dummy");
         // This file can be obtained by calling generate commands from `generate` or `generate.bat`, it will appear under this project
