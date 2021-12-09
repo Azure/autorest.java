@@ -14,8 +14,8 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestSwaggerBatService type. */
-@ServiceClient(builder = AutoRestSwaggerBatServiceBuilder.class)
+/** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
+@ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class StringOperationClient {
 
     @Generated private final StringOperationsImpl serviceClient;
@@ -273,7 +273,6 @@ public final class StringOperationClient {
     }
 
     /**
-     *
      * Manually added method to test partial update
      *
      * @return a string
@@ -300,5 +299,4 @@ public final class StringOperationClient {
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
     }
-
 }

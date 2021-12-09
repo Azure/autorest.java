@@ -28,14 +28,14 @@ public final class EnumsImpl {
     private final EnumsService service;
 
     /** The service client containing this operation class. */
-    private final AutoRestSwaggerBatServiceImpl client;
+    private final AutoRestSwaggerBatServiceClientImpl client;
 
     /**
      * Initializes an instance of EnumsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    EnumsImpl(AutoRestSwaggerBatServiceImpl client) {
+    EnumsImpl(AutoRestSwaggerBatServiceClientImpl client) {
         this.service = RestProxy.create(EnumsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
