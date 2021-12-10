@@ -49,12 +49,12 @@ jobs:
           path: wiki
       - name: Push report
         run: |
-          cp ./fluent-tests/report.md ./wiki/fluent-codegen-report.md
+          cp ./fluent-tests/report.md ./wiki/Fluent-Codegen-Report.md
           cd wiki
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
           {
-            git add ./fluent-codegen-report.md && \
-            git commit -m '[Automation] Fluent Codegen Report' && \
-            git push
+            git add ./Fluent-Codegen-Report.md && \
+            git commit -m '[Automation] Fluent Codegen Report'
           } || true
+          git push
