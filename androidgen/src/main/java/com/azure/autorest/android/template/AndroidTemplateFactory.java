@@ -11,6 +11,7 @@ import com.azure.autorest.template.ServiceAsyncClientTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
+import com.azure.autorest.template.WrapperClientMethodTemplate;
 
 public class AndroidTemplateFactory extends DefaultTemplateFactory {
 
@@ -64,4 +65,8 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
         return AndroidResponseTemplate.getInstance();
     }
 
+    @Override
+    public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
+        return AndroidWrapperClientMethodTemplate.getInstance();
+    }
 }
