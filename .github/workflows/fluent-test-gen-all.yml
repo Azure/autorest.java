@@ -14,7 +14,7 @@ jobs:
       - name: Checkout azure-rest-api-specs
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/azure/azure-rest-api-specs
+          repository: azure/azure-rest-api-specs
           path: azure-rest-api-specs
 
       - name: Setup node.js 16
