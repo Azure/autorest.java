@@ -10,25 +10,26 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Clone azure-rest-api-specs
-        run: git clone --depth 1 https://github.com/azure/azure-rest-api-specs
-
-      - name: Setup node 14.x
-        uses: actions/setup-node@v1
+      - name: Checkout azure-rest-api-specs
+        uses: actions/checkout@v2
         with:
-          node-version: '14.x'
+          repository: https://github.com/azure/azure-rest-api-specs
+          path: azure-rest-api-specs
+
+      - name: Setup node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - name: Install autorest
         run: |
           npm install -g autorest
           npm install --no-bin-links
 
       - name: Setup jdk 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.11
+          java-version: '11'
       - name: Build and Package
         run: mvn package -f pom.xml -P local --no-transfer-progress
 
@@ -40,12 +41,11 @@ jobs:
         run: |
           ./fluent-tests/gen_all.py -u . -s ./azure-rest-api-specs -r ./fluent-tests
 
-      - name: Clone wiki
+      - name: Checkout wiki
         uses: actions/checkout@v2
         with:
           repository: ${{github.repository}}.wiki
           path: wiki
-
       - name: Push report
         run: |
           cp ./fluent-tests/report.md ./wiki/fluent-codegen-report.md

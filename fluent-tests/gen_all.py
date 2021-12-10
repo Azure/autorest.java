@@ -116,7 +116,7 @@ def report_markdown(report_dir: str, results: List[CodegenResult]) -> None:
         logging.error(f'failure at build for PRs: {sdks_failure_build}')
 
     lines = []
-    lines.append('# Java Codegen Report')
+    lines.append('# Fluent Codegen Report')
     lines.append('Generated at ' + datetime.datetime.now().isoformat())
     lines.append('## Success')
     lines.append('<details>')
@@ -201,7 +201,6 @@ def main():
                 cause = 'codegen'
             results.append(CodegenResult(sdk=sdk, success=False, failure_cause=cause,
                                          stdout=codegen_result.stdout, stderr=error_log))
-        break
 
     report_markdown(report_dir, results)
 
