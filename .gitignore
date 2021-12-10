@@ -61,7 +61,6 @@ package-lock.json
 preprocessor/*.yaml
 fluentnamer/*.yaml
 fluentgen/*.yaml
-javagen/*.yaml
 /*.yaml
 *.log
 *.log.gz
