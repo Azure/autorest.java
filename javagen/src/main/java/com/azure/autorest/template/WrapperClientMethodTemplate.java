@@ -21,7 +21,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static final WrapperClientMethodTemplate instance = new WrapperClientMethodTemplate();
 
-    private WrapperClientMethodTemplate() {
+    protected WrapperClientMethodTemplate() {
     }
 
     public static WrapperClientMethodTemplate getInstance() {
@@ -41,7 +41,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         }
 
-        typeBlock.annotation("Generated");
+        addGeneratedAnnotation(typeBlock);
         switch (clientMethod.getType()) {
             case PagingSync:
             case PagingAsync:
@@ -95,5 +95,9 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
+    }
+
+    protected void addGeneratedAnnotation(JavaType typeBlock) {
+        typeBlock.annotation("Generated");
     }
 }

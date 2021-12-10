@@ -5,6 +5,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
@@ -58,7 +59,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     javaFile.publicFinalClass(asyncClassName, classBlock ->
     {
       // Add service client member variable
-      classBlock.annotation("Generated");
+      addGeneratedAnnotation(classBlock);
       if (wrapServiceClient) {
         classBlock.privateFinalMemberVariable(serviceClient.getClassName(), "serviceClient");
       } else {
@@ -70,8 +71,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
         comment.description(String.format("Initializes an instance of %1$s client.", wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()));
         comment.param("serviceClient", "the service client implementation.");
       });
-      classBlock.annotation("Generated");
-
+      addGeneratedAnnotation(classBlock);
       if (wrapServiceClient) {
         classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", asyncClassName,
             serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
@@ -112,5 +112,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   protected void addServiceClientAnnotationImports(Set<String> imports) {
     imports.add("com.azure.core.annotation.ServiceClient");
     imports.add("com.azure.core.annotation.Generated");
+  }
+
+  protected void addGeneratedAnnotation(JavaContext classBlock) {
+    classBlock.annotation("Generated");
   }
 }
