@@ -22,6 +22,8 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,8 +108,8 @@ public class MockPreprocessor extends Preprocessor {
     @Override
     public String readFile(String filename) {
         try {
-            FileReader fileReader = new FileReader(filename);
-            BufferedReader reader = new BufferedReader(fileReader);
+            InputStream fis = MockPreprocessor.class.getClassLoader().getResourceAsStream(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {

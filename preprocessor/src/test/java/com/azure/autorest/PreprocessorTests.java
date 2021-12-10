@@ -16,7 +16,7 @@ import org.junit.Test;
 public class PreprocessorTests {
 
     @Test
-    public void processTest() throws Exception {
+    public void processTest() {
         MockPreprocessor preprocessor = new MockPreprocessor(new Connection(System.out, System.in), "dummy", "dummy");
         // SOURCE SWAGGER URL: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerregistry/data-plane/Azure.ContainerRegistry/stable/2021-07-01/containerregistry.json
         // It's a debug file from the output of modelerfour during the generate process where it converts swagger definition into code model.
