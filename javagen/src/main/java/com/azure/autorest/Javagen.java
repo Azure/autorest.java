@@ -76,176 +76,15 @@ public class Javagen extends NewPlugin {
         }
 
         try {
+            String filename = files.get(0);
             // Step 1: Parse input yaml as CodeModel
-            String file = readFile(files.get(0));
-            Representer representer = new Representer() {
-                @Override
-                protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
-                    Tag customTag) {
-                    // if value of property is null, ignore it.
-                    if (propertyValue == null) {
-                        return null;
-                    }
-                    else {
-                        return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-                    }
-                }
-            };
-
-            LoaderOptions loaderOptions = new LoaderOptions();
-            loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-            Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-            CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+            CodeModel codeModel = loadCodeModel(filename);
 
             // Step 2: Map
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
-            JavaPackage javaPackage = new JavaPackage(this);
-            // Service client
-            javaPackage
-                    .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                            client.getServiceClient());
-
-            if (settings.shouldGenerateClientInterfaces()) {
-                javaPackage
-                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
-            }
-
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
-            if (!client.getServiceClient().builderDisabled()) {
-                // Service client builder
-                String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-                javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
-            }
-
-            List<AsyncSyncClient> syncClients = new ArrayList<>();
-            if (settings.shouldGenerateSyncAsyncClients()) {
-                List<AsyncSyncClient> asyncClients = new ArrayList<>();
-                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
-                }
-
-                for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
-                }
-            }
-
-            // Method group
-            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-                if (settings.shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
-                }
-            }
-
-            // Sample
-            if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
-                Set<String> protocolExampleNameSet = new HashSet<>();
-
-                syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
-                        .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
-                        .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
-                        .forEach(m -> {
-                            if (m.getProxyMethod().getExamples() != null) {
-                                m.getProxyMethod().getExamples().forEach((name, example) -> {
-                                    String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-                                    if (!protocolExampleNameSet.contains(filename)) {
-                                        ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, filename, example);
-                                        javaPackage.addProtocolExamples(protocolExample);
-                                        protocolExampleNameSet.add(filename);
-                                    }
-                                });
-                            }
-                        }));
-            }
-
-            // Service version
-            if (settings.isLowLevelClient()) {
-                List<String> serviceVersions = settings.getServiceVersions();
-                if (serviceVersions == null) {
-                    String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
-                    if (apiVersion == null) {
-                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
-                    }
-                    serviceVersions = Collections.singletonList(apiVersion);
-                }
-
-                String packageName = settings.getPackage();
-                String serviceName;
-                if (settings.getServiceName() == null) {
-                    serviceName = client.getServiceClient().getInterfaceName();
-                } else {
-                    serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
-                }
-                String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
-                javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
-            }
-
-            if (!settings.isLowLevelClient()) {
-                // Response
-                for (ClientResponse response : client.getResponseModels()) {
-                    javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-                }
-
-                // Client model
-                for (ClientModel model : client.getModels()) {
-                    javaPackage.addModel(model.getPackage(), model.getName(), model);
-                }
-
-                // Enum
-                for (EnumType enumType : client.getEnums()) {
-                    javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-                }
-
-                // Exception
-                for (ClientException exception : client.getExceptions()) {
-                    javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-                }
-
-                // XML sequence wrapper
-                for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
-                    javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                            xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
-                }
-            }
-
-            // Package-info
-            for (PackageInfo packageInfo : client.getPackageInfos()) {
-                javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
-            }
-
-            if (settings.isLowLevelClient()) {
-                Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
-                if (settings.isSdkIntegration()) {
-                    project.integrateWithSdk();
-                }
-
-                // Module-info
-                javaPackage.addModuleInfo(client.getModuleInfo());
-
-                // POM
-                if (settings.shouldRegeneratePom()) {
-                    Pom pom = new PomMapper().map(project);
-                    javaPackage.addPom("pom.xml", pom);
-                }
-
-                // Readme, Changelog
-                if (settings.isSdkIntegration()) {
-                    javaPackage.addReadmeMarkdown(project);
-                    javaPackage.addSwaggerReadmeMarkdown(project);
-                    javaPackage.addChangelogMarkdown(project);
-
-                    // Blank test case
-                    javaPackage.addProtocolTestBlank(client.getServiceClient());
-
-                    // Blank readme sample
-                    javaPackage.addProtocolExamplesBlank();
-                }
-            }
+            JavaPackage javaPackage = writeToTemplates(settings, codeModel, client);
 
             //Step 4: Print to files
             Formatter formatter = new Formatter();
@@ -278,5 +117,177 @@ public class Javagen extends NewPlugin {
             return false;
         }
         return true;
+    }
+
+    CodeModel loadCodeModel(String filename) {
+        String file = readFile(filename);
+        Representer representer = new Representer() {
+            @Override
+            protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
+                Tag customTag) {
+                // if value of property is null, ignore it.
+                if (propertyValue == null) {
+                    return null;
+                }
+                else {
+                    return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+                }
+            }
+        };
+
+        LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
+        CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+        return codeModel;
+    }
+
+    JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
+        JavaPackage javaPackage = new JavaPackage(this);
+        // Service client
+        javaPackage
+                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                        client.getServiceClient());
+
+        if (settings.shouldGenerateClientInterfaces()) {
+            javaPackage
+                    .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+        }
+
+        String builderSuffix = ClientModelUtil.getBuilderSuffix();
+        String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+        if (!client.getServiceClient().builderDisabled()) {
+            // Service client builder
+            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+            javaPackage.addServiceClientBuilder(builderPackage, builderName, client.getServiceClient());
+        }
+
+        List<AsyncSyncClient> syncClients = new ArrayList<>();
+        if (settings.shouldGenerateSyncAsyncClients()) {
+            List<AsyncSyncClient> asyncClients = new ArrayList<>();
+            ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+            for (AsyncSyncClient asyncClient : asyncClients) {
+                javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
+            }
+
+            for (AsyncSyncClient syncClient : syncClients) {
+                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
+            }
+        }
+
+        // Method group
+        for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+            if (settings.shouldGenerateClientInterfaces()) {
+                javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+            }
+        }
+
+        // Sample
+        if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
+            Set<String> protocolExampleNameSet = new HashSet<>();
+
+            syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
+                    .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
+                    .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
+                    .forEach(m -> {
+                        if (m.getProxyMethod().getExamples() != null) {
+                            m.getProxyMethod().getExamples().forEach((name, example) -> {
+                                String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                                if (!protocolExampleNameSet.contains(filename)) {
+                                    ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, filename, example);
+                                    javaPackage.addProtocolExamples(protocolExample);
+                                    protocolExampleNameSet.add(filename);
+                                }
+                            });
+                        }
+                    }));
+        }
+
+        // Service version
+        if (settings.isLowLevelClient()) {
+            List<String> serviceVersions = settings.getServiceVersions();
+            if (serviceVersions == null) {
+                String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
+                if (apiVersion == null) {
+                    throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+                }
+                serviceVersions = Collections.singletonList(apiVersion);
+            }
+
+            String packageName = settings.getPackage();
+            String serviceName;
+            if (settings.getServiceName() == null) {
+                serviceName = client.getServiceClient().getInterfaceName();
+            } else {
+                serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
+            }
+            String className = serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
+            javaPackage.addServiceVersion(packageName, serviceName, className, serviceVersions, client.getServiceClient());
+        }
+
+        if (!settings.isLowLevelClient()) {
+            // Response
+            for (ClientResponse response : client.getResponseModels()) {
+                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+            }
+
+            // Client model
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModel(model.getPackage(), model.getName(), model);
+            }
+
+            // Enum
+            for (EnumType enumType : client.getEnums()) {
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
+
+            // Exception
+            for (ClientException exception : client.getExceptions()) {
+                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+            }
+
+            // XML sequence wrapper
+            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+            }
+        }
+
+        // Package-info
+        for (PackageInfo packageInfo : client.getPackageInfos()) {
+            javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+        }
+
+        if (settings.isLowLevelClient()) {
+            Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
+            if (settings.isSdkIntegration()) {
+                project.integrateWithSdk();
+            }
+
+            // Module-info
+            javaPackage.addModuleInfo(client.getModuleInfo());
+
+            // POM
+            if (settings.shouldRegeneratePom()) {
+                Pom pom = new PomMapper().map(project);
+                javaPackage.addPom("pom.xml", pom);
+            }
+
+            // Readme, Changelog
+            if (settings.isSdkIntegration()) {
+                javaPackage.addReadmeMarkdown(project);
+                javaPackage.addSwaggerReadmeMarkdown(project);
+                javaPackage.addChangelogMarkdown(project);
+
+                // Blank test case
+                javaPackage.addProtocolTestBlank(client.getServiceClient());
+
+                // Blank readme sample
+                javaPackage.addProtocolExamplesBlank();
+            }
+        }
+        return javaPackage;
     }
 }
