@@ -120,10 +120,6 @@ public class MockPreprocessor extends Preprocessor {
         }
     }
 
-    public Yaml getYaml() {
-        return yamlMapper;
-    }
-
     public  CodeModel performPosttransformUpdates(CodeModel codeModel) {
         if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
             return convertOptionalConstantsToEnum(codeModel);
