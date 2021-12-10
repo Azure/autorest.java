@@ -13,10 +13,12 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
 import org.slf4j.Logger;
 
@@ -452,5 +454,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         return settings.shouldGenerateSyncAsyncClients()
                 ? "buildInnerClient"
                 : "buildClient";
+    }
+
+    protected void addGeneratedImport(Set<String> imports) {
+        imports.add(Generated.class.getName());
+    }
+
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
+        classBlock.annotation("Generated");
     }
 }
