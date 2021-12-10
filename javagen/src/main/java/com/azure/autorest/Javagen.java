@@ -140,7 +140,7 @@ public class Javagen extends NewPlugin {
         return codeModel;
     }
 
-    private JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
+    JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         javaPackage
