@@ -53,7 +53,7 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
           {
-            git add ./fluent-codegen-report/report.md && \
+            git add ./fluent-codegen-report.md && \
             git commit -m '[Automation] Fluent Codegen Report' && \
             git push
           } || true
