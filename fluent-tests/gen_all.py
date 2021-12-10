@@ -201,6 +201,7 @@ def main():
                 cause = 'codegen'
             results.append(CodegenResult(sdk=sdk, success=False, failure_cause=cause,
                                          stdout=codegen_result.stdout, stderr=error_log))
+        break
 
     report_markdown(report_dir, results)
 
