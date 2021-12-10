@@ -13,10 +13,9 @@ import org.junit.Test;
 /**
  * test entry for preprocessor
  */
-public class PreprocessorTest {
+public class PreprocessorTests {
 
     @Test
-    @Ignore("no validation")
     public void processTest() throws Exception {
         MockPreprocessor preprocessor = new MockPreprocessor(new Connection(System.out, System.in), "dummy", "dummy");
         // SOURCE SWAGGER URL: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerregistry/data-plane/Azure.ContainerRegistry/stable/2021-07-01/containerregistry.json
