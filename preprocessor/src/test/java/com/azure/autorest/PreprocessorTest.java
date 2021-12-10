@@ -7,23 +7,8 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.preprocessor.tranformer.Transformer;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.LoaderOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.Tag;
-import org.yaml.snakeyaml.representer.Representer;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * test entry for preprocessor
@@ -34,9 +19,10 @@ public class PreprocessorTest {
     @Ignore("no validation")
     public void processTest() throws Exception {
         MockPreprocessor preprocessor = new MockPreprocessor(new Connection(System.out, System.in), "dummy", "dummy");
-        // This file can be obtained by calling generate commands from `generate` or `generate.bat`, it will appear under this project
-        // It's a debug file from the output of modelerfour during the generate process
-        String codeModelFileName = "code-model.yaml";
+        // SOURCE SWAGGER URL: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerregistry/data-plane/Azure.ContainerRegistry/stable/2021-07-01/containerregistry.json
+        // It's a debug file from the output of modelerfour during the generate process where it converts swagger definition into code model.
+        // This file can be obtained by calling generate commands from `generate` or `generate.bat` on the swagger json, it will appear under this project by the name 'code-model.yaml'.
+        String codeModelFileName = "containerregistry-code-model.yaml";
 
         CodeModel codeModel = preprocessor.loadCodeModel(codeModelFileName);
         codeModel = preprocessor.transform(codeModel);
