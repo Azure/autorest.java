@@ -72,6 +72,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
         addSerializerImport(imports, settings);
+        addGeneratedImport(imports);
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -328,6 +329,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
     }
 
     protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
+        addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
