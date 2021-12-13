@@ -116,19 +116,33 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
             if (!settings.isAzureOrFluent()) {
+                // sdk name
+                addGeneratedAnnotation(classBlock);
                 classBlock.privateStaticFinalVariable("String SDK_NAME = \"name\"");
+
+                // sdk version
+                addGeneratedAnnotation(classBlock);
                 classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
+
+                // default scope
                 Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
                 if (scopes != null && !scopes.isEmpty()) {
+                    addGeneratedAnnotation(classBlock);
                     classBlock.packagePrivateStaticFinalVariable(String.format("String[] DEFAULT_SCOPES = new String[] {%s}",
                             String.join(", ", scopes)));
                 }
+
+                // properties for sdk name and version
                 String propertiesValue = "new HashMap<>()";
                 if (!settings.getArtifactId().isEmpty()) {
                     propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
                 }
+                addGeneratedAnnotation(classBlock);
                 classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+
+                // constructor
                 classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                addGeneratedAnnotation(classBlock);
                 classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                     javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                 });
@@ -144,6 +158,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 {
                     comment.line(serviceClientProperty.getDescription());
                 });
+                addGeneratedAnnotation(classBlock);
                 classBlock.privateMemberVariable(String.format("%1$s%2$s %3$s",
                         serviceClientProperty.isReadOnly() ? "final " : "",
                         serviceClientProperty.getType(),
@@ -156,7 +171,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         comment.param(serviceClientProperty.getName(), String.format("the %1$s value.", serviceClientProperty.getName()));
                         comment.methodReturns(String.format("the %1$s", serviceClientBuilderName));
                     });
-
+                    addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
                             CodeNamer.toCamelCase(serviceClientProperty.getAccessorMethodSuffix()), serviceClientProperty.getType(),
                             serviceClientProperty.getName()), function ->
@@ -174,6 +189,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     comment.param("customPolicy", "The custom Http pipeline policy to add.");
                     comment.methodReturns(String.format("the %1$s", serviceClientBuilderName));
                 });
+                addGeneratedAnnotation(classBlock);
                 classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
                         "addPolicy", "HttpPipelinePolicy", "customPolicy"), function -> {
                     function.line("pipelinePolicies.add(customPolicy);");
@@ -191,6 +207,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
             });
+            addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
                 for (ServiceClientProperty serviceClientProperty : clientProperties) {
@@ -246,6 +263,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                     .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
+                        addGeneratedAnnotation(classBlock);
                         classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
                                 function -> {
                                     if (wrapServiceClient) {
@@ -267,6 +285,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                 .format("Builds an instance of %1$s sync client", syncClient.getClassName()));
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
+                    addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
                             function -> {
                                 if (wrapServiceClient) {
