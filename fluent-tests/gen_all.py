@@ -116,9 +116,9 @@ def report_markdown(report_dir: str, results: List[CodegenResult]) -> None:
         logging.error(f'failure at build for PRs: {sdks_failure_build}')
 
     lines = []
-    lines.append('# Java Codegen Report')
     lines.append('Generated at ' + datetime.datetime.now().isoformat())
-    lines.append('## Success')
+    lines.append('')
+    lines.append(f'## Success ({len(sdks_success)})')
     lines.append('<details>')
     lines.append(f'<summary>RP count: {len(sdks_success)}</summary>')
     lines.append('')
@@ -127,12 +127,12 @@ def report_markdown(report_dir: str, results: List[CodegenResult]) -> None:
     lines.append('</details>')
     lines.append('')
 
-    lines.append('## Failure at Codegen')
+    lines.append(f'## Failure at Codegen ({len(sdks_failure_codegen_java)})')
     for sdk in sdks_failure_codegen_java:
         lines.append('- ' + sdk)
     lines.append('')
 
-    lines.append('## Failure at Build')
+    lines.append(f'## Failure at Build ({len(sdks_failure_build)})')
     for sdk in sdks_failure_build:
         lines.append('- ' + sdk)
     lines.append('')
