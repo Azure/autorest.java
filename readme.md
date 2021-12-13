@@ -73,7 +73,8 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. Default is false.|
 |`--skip-formatting`|Indicates whether to skip formatting Java file. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
-| `--service-name` | String. Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
+|`--service-name`|Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).|
+|`--partial-update`|Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.|
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 |`--default-http-exception-type`|Indicates the fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
@@ -980,7 +981,10 @@ help-content:
         description: Configures how to generate long running operations. See [Polling Configuration](https://github.com/Azure/autorest.java#polling-configuration) to see more details on how to use this flag.
       - key: service-name
         type: string
-        description: String. Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).
+        description: Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).
+      - key: partial-update
+        type: bool
+        description: Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.
       - key: low-level-client
         type: bool
         description:  Indicates whether to generate code for minimal clients. Default is false.
