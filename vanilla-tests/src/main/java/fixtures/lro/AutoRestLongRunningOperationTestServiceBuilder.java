@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -28,13 +29,14 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the AutoRestLongRunningOperationTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestLongRunningOperationTestService.class})
 public final class AutoRestLongRunningOperationTestServiceBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestLongRunningOperationTestServiceBuilder. */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -42,7 +44,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -50,6 +52,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param host the host value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder host(String host) {
         this.host = host;
         return this;
@@ -58,7 +61,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -66,6 +69,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -74,7 +78,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * The serializer to serialize an object into a string
      */
-    private SerializerAdapter serializerAdapter;
+    @Generated private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
@@ -82,6 +86,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
@@ -90,7 +95,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -98,6 +103,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -107,7 +113,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -115,6 +121,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -123,7 +130,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -131,6 +138,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -140,7 +148,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -148,6 +156,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -156,13 +165,13 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -170,6 +179,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -181,6 +191,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -191,6 +202,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      *
      * @return an instance of AutoRestLongRunningOperationTestService.
      */
+    @Generated
     public AutoRestLongRunningOperationTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -206,6 +218,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;

@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -28,13 +29,14 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the AutoRestAzureSpecialParametersTestClient type. */
 @ServiceClientBuilder(serviceClients = {AutoRestAzureSpecialParametersTestClient.class})
 public final class AutoRestAzureSpecialParametersTestClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestAzureSpecialParametersTestClientBuilder. */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -43,7 +45,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * The subscription id, which appears in the path, always modeled in
      * credentials. The value is always '1234-5678-9012-3456'
      */
-    private String subscriptionId;
+    @Generated private String subscriptionId;
 
     /**
      * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always
@@ -52,6 +54,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param subscriptionId the subscriptionId value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder subscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
@@ -60,7 +63,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -68,6 +71,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param host the host value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -76,7 +80,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * Api Version
      */
-    private String apiVersion;
+    @Generated private String apiVersion;
 
     /**
      * Sets Api Version.
@@ -84,6 +88,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param apiVersion the apiVersion value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder apiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
@@ -92,7 +97,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -100,6 +105,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -108,7 +114,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * The serializer to serialize an object into a string
      */
-    private SerializerAdapter serializerAdapter;
+    @Generated private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
@@ -116,6 +122,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
@@ -124,7 +131,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -132,6 +139,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -141,7 +149,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -149,6 +157,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -157,7 +166,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -165,6 +174,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -174,7 +184,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -182,6 +192,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -190,13 +201,13 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -204,6 +215,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -215,6 +227,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -225,6 +238,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
      *
      * @return an instance of AutoRestAzureSpecialParametersTestClient.
      */
+    @Generated
     public AutoRestAzureSpecialParametersTestClient buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -244,6 +258,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;

@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
 import java.util.ArrayList;
@@ -117,5 +118,13 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
                     + "HttpPipelinePolicy[0])).httpClient(httpClient).build();");
             function.methodReturn("httpPipeline");
         });
+    }
+
+    @Override
+    protected void addGeneratedImport(Set<String> imports) {
+    }
+
+    @Override
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
 }

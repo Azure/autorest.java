@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -48,13 +49,14 @@ import java.util.stream.Collectors;
             MultipleResponsesAsyncClient.class
         })
 public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestHttpInfrastructureTestServiceClientBuilder. */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -62,7 +64,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -70,6 +72,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param host the host value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -78,7 +81,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -86,6 +89,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -94,7 +98,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -102,6 +106,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -111,7 +116,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -119,6 +124,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -127,7 +133,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -135,6 +141,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -144,7 +151,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -152,6 +159,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -160,13 +168,13 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -174,6 +182,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -185,6 +194,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestHttpInfrastructureTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -195,6 +205,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of AutoRestHttpInfrastructureTestServiceClientImpl.
      */
+    @Generated
     private AutoRestHttpInfrastructureTestServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -208,6 +219,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -254,6 +266,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpFailureAsyncClient.
      */
+    @Generated
     public HttpFailureAsyncClient buildHttpFailureAsyncClient() {
         return new HttpFailureAsyncClient(buildInnerClient().getHttpFailures());
     }
@@ -263,6 +276,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpSuccessAsyncClient.
      */
+    @Generated
     public HttpSuccessAsyncClient buildHttpSuccessAsyncClient() {
         return new HttpSuccessAsyncClient(buildInnerClient().getHttpSuccess());
     }
@@ -272,6 +286,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpRedirectsAsyncClient.
      */
+    @Generated
     public HttpRedirectsAsyncClient buildHttpRedirectsAsyncClient() {
         return new HttpRedirectsAsyncClient(buildInnerClient().getHttpRedirects());
     }
@@ -281,6 +296,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpClientFailureAsyncClient.
      */
+    @Generated
     public HttpClientFailureAsyncClient buildHttpClientFailureAsyncClient() {
         return new HttpClientFailureAsyncClient(buildInnerClient().getHttpClientFailures());
     }
@@ -290,6 +306,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpServerFailureAsyncClient.
      */
+    @Generated
     public HttpServerFailureAsyncClient buildHttpServerFailureAsyncClient() {
         return new HttpServerFailureAsyncClient(buildInnerClient().getHttpServerFailures());
     }
@@ -299,6 +316,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpRetryAsyncClient.
      */
+    @Generated
     public HttpRetryAsyncClient buildHttpRetryAsyncClient() {
         return new HttpRetryAsyncClient(buildInnerClient().getHttpRetries());
     }
@@ -308,6 +326,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of MultipleResponsesAsyncClient.
      */
+    @Generated
     public MultipleResponsesAsyncClient buildMultipleResponsesAsyncClient() {
         return new MultipleResponsesAsyncClient(buildInnerClient().getMultipleResponses());
     }
@@ -317,6 +336,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpFailureClient.
      */
+    @Generated
     public HttpFailureClient buildHttpFailureClient() {
         return new HttpFailureClient(buildInnerClient().getHttpFailures());
     }
@@ -326,6 +346,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpSuccessClient.
      */
+    @Generated
     public HttpSuccessClient buildHttpSuccessClient() {
         return new HttpSuccessClient(buildInnerClient().getHttpSuccess());
     }
@@ -335,6 +356,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpRedirectsClient.
      */
+    @Generated
     public HttpRedirectsClient buildHttpRedirectsClient() {
         return new HttpRedirectsClient(buildInnerClient().getHttpRedirects());
     }
@@ -344,6 +366,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpClientFailureClient.
      */
+    @Generated
     public HttpClientFailureClient buildHttpClientFailureClient() {
         return new HttpClientFailureClient(buildInnerClient().getHttpClientFailures());
     }
@@ -353,6 +376,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpServerFailureClient.
      */
+    @Generated
     public HttpServerFailureClient buildHttpServerFailureClient() {
         return new HttpServerFailureClient(buildInnerClient().getHttpServerFailures());
     }
@@ -362,6 +386,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of HttpRetryClient.
      */
+    @Generated
     public HttpRetryClient buildHttpRetryClient() {
         return new HttpRetryClient(buildInnerClient().getHttpRetries());
     }
@@ -371,6 +396,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      *
      * @return an instance of MultipleResponsesClient.
      */
+    @Generated
     public MultipleResponsesClient buildMultipleResponsesClient() {
         return new MultipleResponsesClient(buildInnerClient().getMultipleResponses());
     }

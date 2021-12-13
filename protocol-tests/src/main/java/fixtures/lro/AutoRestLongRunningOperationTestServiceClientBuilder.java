@@ -4,6 +4,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -42,13 +43,14 @@ import java.util.stream.Collectors;
             LrosCustomHeaderAsyncClient.class
         })
 public final class AutoRestLongRunningOperationTestServiceClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestLongRunningOperationTestServiceClientBuilder. */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -56,7 +58,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -64,6 +66,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param host the host value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -72,7 +75,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -80,6 +83,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -88,7 +92,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -96,6 +100,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -105,7 +110,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -113,6 +118,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -121,7 +127,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -129,6 +135,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -138,7 +145,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -146,6 +153,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -154,13 +162,13 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -168,6 +176,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -179,6 +188,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestLongRunningOperationTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -189,6 +199,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of AutoRestLongRunningOperationTestServiceClientImpl.
      */
+    @Generated
     private AutoRestLongRunningOperationTestServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -202,6 +213,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -248,6 +260,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LROsAsyncClient.
      */
+    @Generated
     public LROsAsyncClient buildLROsAsyncClient() {
         return new LROsAsyncClient(buildInnerClient().getLROs());
     }
@@ -257,6 +270,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LroRetrysAsyncClient.
      */
+    @Generated
     public LroRetrysAsyncClient buildLroRetrysAsyncClient() {
         return new LroRetrysAsyncClient(buildInnerClient().getLroRetrys());
     }
@@ -266,6 +280,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LrosaDsAsyncClient.
      */
+    @Generated
     public LrosaDsAsyncClient buildLrosaDsAsyncClient() {
         return new LrosaDsAsyncClient(buildInnerClient().getLrosaDs());
     }
@@ -275,6 +290,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LrosCustomHeaderAsyncClient.
      */
+    @Generated
     public LrosCustomHeaderAsyncClient buildLrosCustomHeaderAsyncClient() {
         return new LrosCustomHeaderAsyncClient(buildInnerClient().getLrosCustomHeaders());
     }
@@ -284,6 +300,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LROsClient.
      */
+    @Generated
     public LROsClient buildLROsClient() {
         return new LROsClient(buildInnerClient().getLROs());
     }
@@ -293,6 +310,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LroRetrysClient.
      */
+    @Generated
     public LroRetrysClient buildLroRetrysClient() {
         return new LroRetrysClient(buildInnerClient().getLroRetrys());
     }
@@ -302,6 +320,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LrosaDsClient.
      */
+    @Generated
     public LrosaDsClient buildLrosaDsClient() {
         return new LrosaDsClient(buildInnerClient().getLrosaDs());
     }
@@ -311,6 +330,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder {
      *
      * @return an instance of LrosCustomHeaderClient.
      */
+    @Generated
     public LrosCustomHeaderClient buildLrosCustomHeaderClient() {
         return new LrosCustomHeaderClient(buildInnerClient().getLrosCustomHeaders());
     }

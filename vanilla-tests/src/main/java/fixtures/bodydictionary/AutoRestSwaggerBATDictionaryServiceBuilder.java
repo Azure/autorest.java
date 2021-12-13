@@ -1,5 +1,6 @@
 package fixtures.bodydictionary;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -33,13 +34,14 @@ import java.util.stream.Collectors;
             AutoRestSwaggerBATDictionaryServiceAsyncClient.class
         })
 public final class AutoRestSwaggerBATDictionaryServiceBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestSwaggerBATDictionaryServiceBuilder. */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -47,7 +49,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -55,6 +57,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param host the host value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder host(String host) {
         this.host = host;
         return this;
@@ -63,7 +66,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -71,6 +74,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -79,7 +83,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * The serializer to serialize an object into a string
      */
-    private SerializerAdapter serializerAdapter;
+    @Generated private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
@@ -87,6 +91,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
@@ -95,7 +100,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -103,6 +108,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -112,7 +118,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -120,6 +126,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -128,7 +135,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -136,6 +143,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -145,7 +153,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -153,6 +161,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -161,13 +170,13 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -175,6 +184,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -186,6 +196,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -196,6 +207,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      *
      * @return an instance of AutoRestSwaggerBATDictionaryServiceImpl.
      */
+    @Generated
     private AutoRestSwaggerBATDictionaryServiceImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -211,6 +223,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -257,6 +270,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      *
      * @return an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceAsyncClient buildAsyncClient() {
         return new AutoRestSwaggerBATDictionaryServiceAsyncClient(buildInnerClient().getDictionaries());
     }
@@ -266,6 +280,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      *
      * @return an instance of AutoRestSwaggerBATDictionaryServiceClient.
      */
+    @Generated
     public AutoRestSwaggerBATDictionaryServiceClient buildClient() {
         return new AutoRestSwaggerBATDictionaryServiceClient(buildInnerClient().getDictionaries());
     }
