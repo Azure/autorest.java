@@ -25,7 +25,7 @@ public class NamingConflictResolver {
     private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), NamingConflictResolver.class);
 
     public CodeModel process(CodeModel codeModel) {
-        // conform to lowercase, to avoid problem on Windows system, where file name is case insensitive
+        // conform to lowercase, to avoid problem on Windows system, where file name is case-insensitive
         Set<String> methodGroupNamesLowerCase = new HashSet<>();
         Set<String> objectNamesLowerCase = codeModel.getSchemas().getObjects().stream()
                 .map(Utils::getJavaName)
@@ -72,6 +72,7 @@ public class NamingConflictResolver {
         // deduplicate enums from objects
         codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNamesLowerCase));
         codeModel.getSchemas().getSealedChoices().forEach(c -> validateChoiceName(c, objectNamesLowerCase));
+
         return codeModel;
     }
 

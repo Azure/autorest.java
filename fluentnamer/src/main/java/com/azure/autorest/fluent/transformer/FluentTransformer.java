@@ -22,7 +22,9 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FluentTransformer {
@@ -36,6 +38,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
+        codeModel = deduplicateOperations(codeModel);
         codeModel = normalizeParameterLocation(codeModel);
         codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings);
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
@@ -56,6 +59,28 @@ public class FluentTransformer {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
         codeModel = new SchemaCleanup(fluentJavaSettings.getJavaNamesForPreserveModel()).process(codeModel);
+        return codeModel;
+    }
+
+    protected CodeModel deduplicateOperations(CodeModel codeModel) {
+        // avoid duplicate Operations_List, which is common in management-plane
+        codeModel.getOperationGroups().stream()
+                .filter(og -> "Operations".equalsIgnoreCase(Utils.getDefaultName(og)))
+                .findFirst().ifPresent(og -> {
+                    List<Operation> deduplicatedOperations = og.getOperations().stream()
+                            .filter(o -> Utils.getDefaultName(o) != null)
+                            .collect(Collectors.toMap(Utils::getDefaultName, Function.identity(), (p, q) -> p)).values()
+                            .stream().filter(Objects::nonNull).distinct().collect(Collectors.toList());
+                    deduplicatedOperations.addAll(og.getOperations().stream()
+                            .filter(o -> Utils.getDefaultName(o) == null)
+                            .collect(Collectors.toList()));
+
+                    if (deduplicatedOperations.size() < og.getOperations().size()) {
+                        logger.warn("Duplicate operations found in operation group 'Operations'");
+                        og.setOperations(deduplicatedOperations);
+                    }
+                });
+
         return codeModel;
     }
 
