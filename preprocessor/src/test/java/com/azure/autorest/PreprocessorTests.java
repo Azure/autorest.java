@@ -26,8 +26,6 @@ public class PreprocessorTests {
         CodeModel codeModel = preprocessor.loadCodeModel(codeModelFileName);
         codeModel = preprocessor.transform(codeModel);
         String output = preprocessor.dump(codeModel);
-
-        System.out.println(output);
     }
 
 }
