@@ -25,7 +25,7 @@ public class Utils {
     }
 
     public static String getJavaName(Metadata m) {
-        if (m.getLanguage() == null || m.getLanguage().getDefault() == null) {
+        if (m.getLanguage() == null || m.getLanguage().getJava() == null) {
             return null;
         }
         return m.getLanguage().getJava().getName();
