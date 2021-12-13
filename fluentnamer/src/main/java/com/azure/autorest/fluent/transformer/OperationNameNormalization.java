@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -67,7 +68,9 @@ class OperationNameNormalization {
     private static Optional<Set<String>> checkConflict(OperationGroup operationGroup, Map<String, String> renamePlan) {
         List<String> names = operationGroup.getOperations().stream()
                 .map(Utils::getJavaName)
-                .map(name -> renamePlan.getOrDefault(name, name)).collect(Collectors.toList());
+                .map(name -> renamePlan.getOrDefault(name, name))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         Set<String> namesWithConflict = names.stream()
                 .collect(Collectors.groupingBy(Function.identity()))
