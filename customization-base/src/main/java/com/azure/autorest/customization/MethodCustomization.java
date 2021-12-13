@@ -74,7 +74,7 @@ public final class MethodCustomization extends CodeCustomization {
      * library will be automatically modified.
      *
      * @param newName the new name for the method
-     * @return the current class customization for chaining
+     * @return the current method customization for chaining
      */
     public MethodCustomization rename(String newName) {
         WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
@@ -87,7 +87,7 @@ public final class MethodCustomization extends CodeCustomization {
      * Add an annotation to a method in the class.
      *
      * @param annotation the annotation to add. The leading @ can be omitted.
-     * @return the current class customization for chaining
+     * @return the current method customization for chaining
      */
     public MethodCustomization addAnnotation(String annotation) {
         return Utils.addAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
@@ -161,7 +161,7 @@ public final class MethodCustomization extends CodeCustomization {
      *
      * @param newReturnType the simple name of the new return type
      * @param returnValueFormatter the return value String formatter as described above
-     * @return the current class customization for chaining
+     * @return the current method customization for chaining
      */
     public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
         return setReturnType(newReturnType, returnValueFormatter, false);
@@ -182,7 +182,7 @@ public final class MethodCustomization extends CodeCustomization {
      * @param replaceReturnStatement if set to {@code true}, the return statement will be replaced by the provided
      * returnValueFormatter text with exactly one instance of {@code %s}. If set to true, appropriate semi-colons,
      * parentheses, opening and closing of code blocks have to be taken care of in the {@code returnValueFormatter}.
-     * @return the current class customization for chaining
+     * @return the current method customization for chaining
      */
     public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter, boolean replaceReturnStatement) {
         List<TextEdit> edits = new ArrayList<>();
