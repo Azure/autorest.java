@@ -1,5 +1,6 @@
 package fixtures.custombaseuri.moreoptions;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -28,13 +29,14 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the AutoRestParameterizedCustomHostTestClient type. */
 @ServiceClientBuilder(serviceClients = {AutoRestParameterizedCustomHostTestClient.class})
 public final class AutoRestParameterizedCustomHostTestClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestParameterizedCustomHostTestClientBuilder. */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -42,7 +44,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The subscription id with value 'test12'.
      */
-    private String subscriptionId;
+    @Generated private String subscriptionId;
 
     /**
      * Sets The subscription id with value 'test12'.
@@ -50,6 +52,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param subscriptionId the subscriptionId value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder subscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
@@ -59,7 +62,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * A string value that is used as a global part of the parameterized host.
      * Default value 'host'.
      */
-    private String dnsSuffix;
+    @Generated private String dnsSuffix;
 
     /**
      * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
@@ -67,6 +70,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param dnsSuffix the dnsSuffix value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder dnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
         return this;
@@ -75,7 +79,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -83,6 +87,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -91,7 +96,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The serializer to serialize an object into a string
      */
-    private SerializerAdapter serializerAdapter;
+    @Generated private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
@@ -99,6 +104,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
@@ -107,7 +113,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -115,6 +121,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -124,7 +131,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -132,6 +139,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -140,7 +148,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -148,6 +156,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -157,7 +166,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -165,6 +174,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -173,13 +183,13 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -187,6 +197,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -198,6 +209,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestParameterizedCustomHostTestClientBuilder.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -208,6 +220,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      *
      * @return an instance of AutoRestParameterizedCustomHostTestClient.
      */
+    @Generated
     public AutoRestParameterizedCustomHostTestClient buildClient() {
         if (dnsSuffix == null) {
             this.dnsSuffix = "host";
@@ -223,6 +236,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;

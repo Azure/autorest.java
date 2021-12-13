@@ -4,6 +4,7 @@
 
 package fixtures.llcupdate1;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -32,13 +33,14 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the LlcClient type. */
 @ServiceClientBuilder(serviceClients = {LlcClient.class, LlcAsyncClient.class})
 public final class LlcClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the LlcClientBuilder. */
+    @Generated
     public LlcClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -46,7 +48,7 @@ public final class LlcClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -54,6 +56,7 @@ public final class LlcClientBuilder {
      * @param host the host value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -62,7 +65,7 @@ public final class LlcClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -70,6 +73,7 @@ public final class LlcClientBuilder {
      * @param pipeline the pipeline value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -78,7 +82,7 @@ public final class LlcClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -86,6 +90,7 @@ public final class LlcClientBuilder {
      * @param httpClient the httpClient value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -95,7 +100,7 @@ public final class LlcClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -103,6 +108,7 @@ public final class LlcClientBuilder {
      * @param configuration the configuration value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -111,7 +117,7 @@ public final class LlcClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -119,6 +125,7 @@ public final class LlcClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -128,7 +135,7 @@ public final class LlcClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -136,6 +143,7 @@ public final class LlcClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -144,13 +152,13 @@ public final class LlcClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -158,6 +166,7 @@ public final class LlcClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -169,6 +178,7 @@ public final class LlcClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the LlcClientBuilder.
      */
+    @Generated
     public LlcClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -179,6 +189,7 @@ public final class LlcClientBuilder {
      *
      * @return an instance of LlcClientImpl.
      */
+    @Generated
     private LlcClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -190,6 +201,7 @@ public final class LlcClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -236,6 +248,7 @@ public final class LlcClientBuilder {
      *
      * @return an instance of LlcAsyncClient.
      */
+    @Generated
     public LlcAsyncClient buildAsyncClient() {
         return new LlcAsyncClient(buildInnerClient().getParams());
     }
@@ -245,6 +258,7 @@ public final class LlcClientBuilder {
      *
      * @return an instance of LlcClient.
      */
+    @Generated
     public LlcClient buildClient() {
         return new LlcClient(buildInnerClient().getParams());
     }
