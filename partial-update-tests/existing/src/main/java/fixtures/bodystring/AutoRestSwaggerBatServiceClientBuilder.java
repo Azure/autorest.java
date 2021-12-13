@@ -6,6 +6,7 @@ package fixtures.bodystring;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AutoRestSwaggerBatServiceClient type. */
@@ -55,6 +57,15 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
      * server parameter
      */
     @Generated private String host;
+
+    private String connectionString;
+
+    private AzureKeyCredential keyCredential;
+
+    public AutoRestSwaggerBatServiceClientBuilder connectionString(String host) {
+        this.connectionString = connectionString;
+        return this;
+    }
 
     /**
      * Sets server parameter.
@@ -195,10 +206,13 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
      *
      * @return an instance of AutoRestSwaggerBatServiceClientImpl.
      */
-    @Generated
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
+        }
+        if (connectionString != null) {
+            this.host = connectionString.split(Pattern.quote(";"))[0];
+            this.keyCredential = new AzureKeyCredential(connectionString.split(Pattern.quote(";"))[1]);
         }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
