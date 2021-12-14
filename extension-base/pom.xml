@@ -22,17 +22,17 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.7</version>
     </dependency>
     <dependency>
       <groupId>com.thetransactioncompany</groupId>
       <artifactId>jsonrpc2-base</artifactId>
-      <version>1.38.1</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
-      <version>1.28</version>
+      <version>1.29</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -43,11 +43,6 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.12.2</version>
-    </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-codec-http</artifactId>
-      <version>4.1.71.Final</version>
     </dependency>
   </dependencies>
 </project>
