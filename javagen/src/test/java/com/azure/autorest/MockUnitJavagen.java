@@ -6,12 +6,13 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import org.junit.Assert;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 
 public class MockUnitJavagen extends Javagen{
 
@@ -22,19 +23,18 @@ public class MockUnitJavagen extends Javagen{
 
     @Override
     public String readFile(String fileName) {
-        try {
-            InputStream fis = this.getClass().getClassLoader().getResourceAsStream(fileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
+        InputStream fis = this.getClass().getClassLoader().getResourceAsStream(fileName);
+        StringBuilder sb = new StringBuilder();
+        char[] buffer = new char[1024];
+        try (InputStreamReader reader = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
+            int charsRead;
+            while ((charsRead = reader.read(buffer, 0, buffer.length)) > 0) {
+                sb.append(buffer, 0, charsRead);
             }
-            return sb.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return sb.toString();
     }
 
     @Override
