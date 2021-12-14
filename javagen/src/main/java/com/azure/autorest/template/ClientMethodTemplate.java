@@ -29,7 +29,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -289,9 +288,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             }
                         } else {
                             expression = String.format("Optional.ofNullable(%s).map(Collection::stream)" +
-                                    ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" + 
+                                    ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" +
                                     ".collect(Collectors.toList())",
-                                    parameterName);                            
+                                    parameterName);
                         }
                         function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;

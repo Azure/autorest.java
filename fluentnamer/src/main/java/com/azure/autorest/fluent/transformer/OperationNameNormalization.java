@@ -18,7 +18,6 @@ import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.http.HttpMethod;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.Arrays;
@@ -40,6 +39,8 @@ import java.util.stream.Collectors;
 class OperationNameNormalization {
 
     private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
+
+    private static final Pattern TRIM_LEADING_AND_TRAILING_FORWARD_SLASH = Pattern.compile("^/*(.*?)/*$");
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);
@@ -103,7 +104,7 @@ class OperationNameNormalization {
 
         for (Operation operation : operationGroup.getOperations()) {
             String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath();
-            path = StringUtils.strip(path.trim(), "/");
+            path = TRIM_LEADING_AND_TRAILING_FORWARD_SLASH.matcher(path.trim()).group(1);
             String[] urlSegments = path.split(Pattern.quote("/"));
 
             String newName = null;

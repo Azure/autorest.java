@@ -7,12 +7,10 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +23,7 @@ public class ProxyMethod {
     /**
      * Get the Content-Type of the request.
      */
-    private String requestContentType;
+    private final String requestContentType;
     /**
      * The value that is returned from this method.
      */
@@ -33,29 +31,29 @@ public class ProxyMethod {
     /**
      * Get the HTTP method that will be used for this method.
      */
-    private HttpMethod httpMethod;
+    private final HttpMethod httpMethod;
     /**
      * Get the base URL that will be used for each REST API method.
      */
-    private String baseUrl;
+    private final String baseUrl;
     /**
      * Get the path of this method's request URL.
      */
-    private String urlPath;
+    private final String urlPath;
     /**
      * Get the status codes that are expected in the response.
      */
-    private List<HttpResponseStatus> responseExpectedStatusCodes;
+    private final List<Integer> responseExpectedStatusCodes;
 
-    private Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
+    private final Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes;
     /**
      * Get the exception type to throw if this method receives and unexpected response status code.
      */
-    private ClassType unexpectedResponseExceptionType;
+    private final ClassType unexpectedResponseExceptionType;
     /**
      * Get the name of this Rest API method.
      */
-    private String name;
+    private final String name;
     /**
      * Get the parameters that are provided to this method.
      */
@@ -67,7 +65,7 @@ public class ProxyMethod {
     /**
      * Get the description of this method.
      */
-    private String description;
+    private final String description;
     /**
      * The value of the ReturnValueWireType annotation for this method.
      */
@@ -75,23 +73,23 @@ public class ProxyMethod {
     /**
      * The response body type.
      */
-    private IType responseBodyType;
+    private final IType responseBodyType;
     /**
      * The raw response body type. responseBodyType is set to BinaryData in low-level mode. We need raw type.
      */
-    private IType rawResponseBodyType;
+    private final IType rawResponseBodyType;
     /**
-     * Get whether or not this method resumes polling of an LRO.
+     * Get whether this method resumes polling of an LRO.
      */
-    private boolean isResumable;
+    private final boolean isResumable;
     /**
      * The media-types in response.
      */
-    private Set<String> responseContentTypes;
+    private final Set<String> responseContentTypes;
 
-    private Map<String, ProxyMethodExample> examples;
+    private final Map<String, ProxyMethodExample> examples;
 
-    private String operationId;
+    private final String operationId;
 
     /**
      * Create a new RestAPIMethod with the provided properties.
@@ -106,15 +104,15 @@ public class ProxyMethod {
      * @param name The name of this REST API method.
      * @param parameters The parameters that are provided to this method.
      * @param description The description of this method.
-     * @param isResumable Whether or not this method is resumable.
-     * @param responseContentTypes The metia-types in response.
+     * @param isResumable Whether this method is resumable.
+     * @param responseContentTypes The media-types in response.
      * @param operationId the operation ID
      * @param examples the examples for the method.
      */
     protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
-                          String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
+                          String urlPath, List<Integer> responseExpectedStatusCodes,
                           ClassType unexpectedResponseExceptionType,
-                          Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
+                          Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes,
                           String name, List<ProxyMethodParameter> parameters,
                           List<ProxyMethodParameter> allParameters, String description,
                           IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
@@ -161,7 +159,7 @@ public class ProxyMethod {
         return urlPath;
     }
 
-    public final List<HttpResponseStatus> getResponseExpectedStatusCodes() {
+    public final List<Integer> getResponseExpectedStatusCodes() {
         return responseExpectedStatusCodes;
     }
 
@@ -169,7 +167,7 @@ public class ProxyMethod {
         return unexpectedResponseExceptionType;
     }
 
-    public final Map<ClassType, List<HttpResponseStatus>> getUnexpectedResponseExceptionTypes() {
+    public final Map<ClassType, List<Integer>> getUnexpectedResponseExceptionTypes() {
         return unexpectedResponseExceptionTypes;
     }
 
@@ -332,9 +330,9 @@ public class ProxyMethod {
         protected HttpMethod httpMethod;
         protected String baseUrl;
         protected String urlPath;
-        protected List<HttpResponseStatus> responseExpectedStatusCodes;
+        protected List<Integer> responseExpectedStatusCodes;
         protected ClassType unexpectedResponseExceptionType;
-        protected Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
+        protected Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes;
         protected String name;
         protected List<ProxyMethodParameter> parameters;
         protected List<ProxyMethodParameter> allParameters;
@@ -401,7 +399,7 @@ public class ProxyMethod {
          * @param responseExpectedStatusCodes the status codes that are expected in the response
          * @return the Builder itself
          */
-        public Builder responseExpectedStatusCodes(List<HttpResponseStatus> responseExpectedStatusCodes) {
+        public Builder responseExpectedStatusCodes(List<Integer> responseExpectedStatusCodes) {
             this.responseExpectedStatusCodes = responseExpectedStatusCodes;
             return this;
         }
@@ -421,7 +419,7 @@ public class ProxyMethod {
          * @param unexpectedResponseExceptionTypes the exception type to throw if this method receives certain unexpected response status code
          * @return the Builder itself
          */
-        public Builder unexpectedResponseExceptionTypes(Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes) {
+        public Builder unexpectedResponseExceptionTypes(Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes) {
             this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
             return this;
         }

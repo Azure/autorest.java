@@ -3,19 +3,18 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.javamodel.JavaInterface;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaInterface;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
-                        interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
+                        interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(String::valueOf).collect(Collectors.joining(", "))));
                     }
 
                     if (!settings.isLowLevelClient()) {
@@ -81,9 +80,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         }
                     }
 
-                    ArrayList<String> parameterDeclarationList = new ArrayList<String>();
+                    ArrayList<String> parameterDeclarationList = new ArrayList<>();
                     if (restAPIMethod.isResumable()) {
-                        interfaceBlock.annotation(String.format("ResumeOperation"));
+                        interfaceBlock.annotation("ResumeOperation");
                     }
 
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
@@ -138,7 +137,8 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
                         }
 
-                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameter.getName());
+                        parameterDeclarationBuilder.append(parameter.getWireType()).append(" ")
+                            .append(parameter.getName());
                         parameterDeclarationList.add(parameterDeclarationBuilder.toString());
                     }
 
@@ -149,9 +149,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
     }
 
     protected void writeUnexpectedExceptions(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
-        for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+        for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
             interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
-                    exception.getKey(), exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+                    exception.getKey(), exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
         }
     }
 
