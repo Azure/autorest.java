@@ -533,26 +533,36 @@ public class ExampleParser {
     @SuppressWarnings("unchecked")
     private static ExampleNode parseNode(IType type, Object objectValue) {
         ExampleNode node;
-        if (type instanceof ListType && objectValue instanceof List) {
+        if (type instanceof ListType) {
             IType elementType = ((ListType) type).getElementType();
-            ListNode listNode = new ListNode(elementType, objectValue);
-            node = listNode;
+            if (objectValue instanceof List) {
+                ListNode listNode = new ListNode(elementType, objectValue);
+                node = listNode;
 
-            List<Object> elements = (List<Object>) objectValue;
-            for (Object childObjectValue : elements) {
-                ExampleNode childNode = parseNode(elementType, childObjectValue);
-                node.getChildNodes().add(childNode);
+                List<Object> elements = (List<Object>) objectValue;
+                for (Object childObjectValue : elements) {
+                    ExampleNode childNode = parseNode(elementType, childObjectValue);
+                    node.getChildNodes().add(childNode);
+                }
+            } else {
+                logger.error("Example value is not List type: {}", objectValue);
+                node = new ListNode(elementType, null);
             }
-        } else if (type instanceof MapType && objectValue instanceof Map) {
+        } else if (type instanceof MapType) {
             IType elementType = ((MapType) type).getValueType();
-            MapNode mapNode = new MapNode(elementType, objectValue);
-            node = mapNode;
+            if (objectValue instanceof Map) {
+                MapNode mapNode = new MapNode(elementType, objectValue);
+                node = mapNode;
 
-            Map<String, Object> dict = (Map<String, Object>) objectValue;
-            for (Map.Entry<String, Object> entry : dict.entrySet()) {
-                ExampleNode childNode = parseNode(elementType, entry.getValue());
-                node.getChildNodes().add(childNode);
-                mapNode.getKeys().add(entry.getKey());
+                Map<String, Object> dict = (Map<String, Object>) objectValue;
+                for (Map.Entry<String, Object> entry : dict.entrySet()) {
+                    ExampleNode childNode = parseNode(elementType, entry.getValue());
+                    node.getChildNodes().add(childNode);
+                    mapNode.getKeys().add(entry.getKey());
+                }
+            } else {
+                logger.error("Example value is not Map type: {}", objectValue);
+                node = new MapNode(elementType, null);
             }
         } else if (type == ClassType.Object) {
             node = new ObjectNode(type, objectValue);
@@ -617,7 +627,7 @@ public class ExampleParser {
                     clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
                 }
             } else {
-                throw new IllegalStateException("model type not found for type " + type + " and value " + objectValue);
+                throw new IllegalStateException("Model type not found for type " + type + " and value " + objectValue);
             }
         } else if (objectValue == null) {
             node = null;

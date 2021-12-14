@@ -4,6 +4,7 @@
 
 package fixtures.url;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,13 +41,14 @@ import java.util.stream.Collectors;
             PathItemsAsyncClient.class
         })
 public final class AutoRestUrlTestServiceClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestUrlTestServiceClientBuilder. */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -54,7 +56,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * A string value 'globalItemStringPath' that appears in the path
      */
-    private String globalStringPath;
+    @Generated private String globalStringPath;
 
     /**
      * Sets A string value 'globalItemStringPath' that appears in the path.
@@ -62,6 +64,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param globalStringPath the globalStringPath value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder globalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
         return this;
@@ -70,7 +73,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * should contain value null
      */
-    private String globalStringQuery;
+    @Generated private String globalStringQuery;
 
     /**
      * Sets should contain value null.
@@ -78,6 +81,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param globalStringQuery the globalStringQuery value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder globalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;
         return this;
@@ -86,7 +90,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -94,6 +98,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param host the host value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -102,7 +107,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -110,6 +115,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -118,7 +124,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -126,6 +132,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -135,7 +142,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -143,6 +150,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -151,7 +159,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -159,6 +167,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -168,7 +177,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -176,6 +185,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -184,13 +194,13 @@ public final class AutoRestUrlTestServiceClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -198,6 +208,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -209,6 +220,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestUrlTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestUrlTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -219,6 +231,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of AutoRestUrlTestServiceClientImpl.
      */
+    @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -236,6 +249,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -282,6 +296,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of PathsAsyncClient.
      */
+    @Generated
     public PathsAsyncClient buildPathsAsyncClient() {
         return new PathsAsyncClient(buildInnerClient().getPaths());
     }
@@ -291,6 +306,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of QueriesAsyncClient.
      */
+    @Generated
     public QueriesAsyncClient buildQueriesAsyncClient() {
         return new QueriesAsyncClient(buildInnerClient().getQueries());
     }
@@ -300,6 +316,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of PathItemsAsyncClient.
      */
+    @Generated
     public PathItemsAsyncClient buildPathItemsAsyncClient() {
         return new PathItemsAsyncClient(buildInnerClient().getPathItems());
     }
@@ -309,6 +326,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of PathsClient.
      */
+    @Generated
     public PathsClient buildPathsClient() {
         return new PathsClient(buildInnerClient().getPaths());
     }
@@ -318,6 +336,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of QueriesClient.
      */
+    @Generated
     public QueriesClient buildQueriesClient() {
         return new QueriesClient(buildInnerClient().getQueries());
     }
@@ -327,6 +346,7 @@ public final class AutoRestUrlTestServiceClientBuilder {
      *
      * @return an instance of PathItemsClient.
      */
+    @Generated
     public PathItemsClient buildPathItemsClient() {
         return new PathItemsClient(buildInnerClient().getPathItems());
     }

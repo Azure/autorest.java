@@ -4,6 +4,7 @@
 
 package fixtures.paging;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -33,13 +34,14 @@ import java.util.stream.Collectors;
 @ServiceClientBuilder(
         serviceClients = {AutoRestPagingTestServiceClient.class, AutoRestPagingTestServiceAsyncClient.class})
 public final class AutoRestPagingTestServiceClientBuilder {
-    private static final String SDK_NAME = "name";
+    @Generated private static final String SDK_NAME = "name";
 
-    private static final String SDK_VERSION = "version";
+    @Generated private static final String SDK_VERSION = "version";
 
-    private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestPagingTestServiceClientBuilder. */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -47,7 +49,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
     /*
      * server parameter
      */
-    private String host;
+    @Generated private String host;
 
     /**
      * Sets server parameter.
@@ -55,6 +57,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param host the host value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder host(String host) {
         this.host = host;
         return this;
@@ -63,7 +66,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
     /*
      * The HTTP pipeline to send requests through
      */
-    private HttpPipeline pipeline;
+    @Generated private HttpPipeline pipeline;
 
     /**
      * Sets The HTTP pipeline to send requests through.
@@ -71,6 +74,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param pipeline the pipeline value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
@@ -79,7 +83,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
     /*
      * The HTTP client used to send the request.
      */
-    private HttpClient httpClient;
+    @Generated private HttpClient httpClient;
 
     /**
      * Sets The HTTP client used to send the request.
@@ -87,6 +91,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param httpClient the httpClient value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
@@ -96,7 +101,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * The configuration store that is used during construction of the service
      * client.
      */
-    private Configuration configuration;
+    @Generated private Configuration configuration;
 
     /**
      * Sets The configuration store that is used during construction of the service client.
@@ -104,6 +109,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param configuration the configuration value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
@@ -112,7 +118,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    private HttpLogOptions httpLogOptions;
+    @Generated private HttpLogOptions httpLogOptions;
 
     /**
      * Sets The logging configuration for HTTP requests and responses.
@@ -120,6 +126,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param httpLogOptions the httpLogOptions value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
@@ -129,7 +136,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
-    private RetryPolicy retryPolicy;
+    @Generated private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
@@ -137,6 +144,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
@@ -145,13 +153,13 @@ public final class AutoRestPagingTestServiceClientBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /*
      * The client options such as application ID and custom headers to set on a
      * request.
      */
-    private ClientOptions clientOptions;
+    @Generated private ClientOptions clientOptions;
 
     /**
      * Sets The client options such as application ID and custom headers to set on a request.
@@ -159,6 +167,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param clientOptions the clientOptions value.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
@@ -170,6 +179,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      * @param customPolicy The custom Http pipeline policy to add.
      * @return the AutoRestPagingTestServiceClientBuilder.
      */
+    @Generated
     public AutoRestPagingTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
@@ -180,6 +190,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      *
      * @return an instance of AutoRestPagingTestServiceClientImpl.
      */
+    @Generated
     private AutoRestPagingTestServiceClientImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
@@ -193,6 +204,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
         return client;
     }
 
+    @Generated
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
@@ -239,6 +251,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      *
      * @return an instance of AutoRestPagingTestServiceAsyncClient.
      */
+    @Generated
     public AutoRestPagingTestServiceAsyncClient buildAsyncClient() {
         return new AutoRestPagingTestServiceAsyncClient(buildInnerClient().getPagings());
     }
@@ -248,6 +261,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      *
      * @return an instance of AutoRestPagingTestServiceClient.
      */
+    @Generated
     public AutoRestPagingTestServiceClient buildClient() {
         return new AutoRestPagingTestServiceClient(buildInnerClient().getPagings());
     }

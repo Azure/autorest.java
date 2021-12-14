@@ -42,10 +42,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azure-core.version>1.22.0</azure-core.version>
-    <azure-core-management.version>1.4.3</azure-core-management.version>
-    <azure-core-http-netty.version>1.11.2</azure-core-http-netty.version>
-    <azure-identity.version>1.4.1</azure-identity.version>
+    <azure-core.version>1.23.1</azure-core.version>
+    <azure-core-management.version>1.4.4</azure-core-management.version>
+    <azure-core-http-netty.version>1.11.4</azure-core-http-netty.version>
+    <azure-identity.version>1.4.2</azure-identity.version>
   </properties>
 
   <dependencyManagement>
@@ -111,6 +111,27 @@
               <goal>jar</goal>
             </goals>
             <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- This plugin adds sample code as tests for easier editing in IDEs -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version> <!-- {x-version-update;org.codehaus.mojo:build-helper-maven-plugin;external_dependency} -->
+        <executions>
+          <execution>
+            <id>compile-samples-source</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/samples/java</source>
+              </sources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
