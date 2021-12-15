@@ -152,6 +152,7 @@ public class FluentJavaSettings {
         if (autorestSettings == null) {
             autorestSettings = new AutorestSettings();
 
+            loadStringSetting("title", autorestSettings::setTitle);
             loadStringSetting("tag", autorestSettings::setTag);
 
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);

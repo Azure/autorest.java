@@ -11,11 +11,16 @@ import java.util.Optional;
 
 public class AutorestSettings {
 
+    private String title;
     private String tag;
     private String baseFolder;
     private String outputFolder;
     private String azureLibrariesForJavaFolder;
     private final List<String> inputFiles = new ArrayList<>();
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public void setTag(String tag) {
         this.tag = tag;
@@ -31,6 +36,10 @@ public class AutorestSettings {
 
     public void setAzureLibrariesForJavaFolder(String azureLibrariesForJavaFolder) {
         this.azureLibrariesForJavaFolder = azureLibrariesForJavaFolder;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getTag() {

@@ -29,6 +29,10 @@ public class SwaggerReadmeTemplate {
     public String write(Project project) {
         JavaSettings settings = JavaSettings.getInstance();
 
+        if (!OVERRIDE_SETTINGS.containsKey("title")) {
+            OVERRIDE_SETTINGS.put("title", settings.getAutorestSettings().getTitle());
+        }
+
         line("## Generate autorest code");
         newLine();
 
