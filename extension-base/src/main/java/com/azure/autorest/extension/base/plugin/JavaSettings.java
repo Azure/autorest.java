@@ -67,6 +67,7 @@ public class JavaSettings {
     public static JavaSettings getInstance() {
         if (_instance == null) {
             AutorestSettings autorestSettings = new AutorestSettings();
+            loadStringSetting("title", autorestSettings::setTitle);
             loadStringSetting("tag", autorestSettings::setTag);
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
