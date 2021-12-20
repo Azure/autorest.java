@@ -40,7 +40,7 @@ class OperationNameNormalization {
 
     private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
 
-    private static final Pattern TRIM_LEADING_AND_TRAILING_FORWARD_SLASH = Pattern.compile("^/*(.*?)/*$");
+    private static final Pattern TRIM_LEADING_AND_TRAILING_FORWARD_SLASH = Pattern.compile("^(?:/*)?(.*?)(?:/*)?$");
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);
