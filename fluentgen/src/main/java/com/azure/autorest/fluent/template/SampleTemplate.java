@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.model.javamodel.JavaFile;
-import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -97,8 +96,10 @@ public class SampleTemplate {
     }
 
     private void heading(String text, int level) {
-        builder.append(StringUtils.repeat('#', level)).append(' ').append(text)
-                .append(NEW_LINE).append(NEW_LINE);
+        for (int i = 0; i < level; i++) {
+            builder.append('#');
+        }
+        builder.append(' ').append(text).append(NEW_LINE).append(NEW_LINE);
     }
 
     private void unorderedList(String text) {

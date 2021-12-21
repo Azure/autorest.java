@@ -12,7 +12,6 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
     @Override
     protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
-                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
+                                                         Operation operation, List<Integer> expectedStatusCodes,
                                                          JavaSettings settings) {
         ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {

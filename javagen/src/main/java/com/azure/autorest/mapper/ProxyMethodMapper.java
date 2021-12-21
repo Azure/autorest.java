@@ -23,7 +23,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     private static final Pattern APOSTROPHE = Pattern.compile("'");
 
-    private Map<Request, ProxyMethod> parsed = new ConcurrentHashMap<>();
+    private final Map<Request, ProxyMethod> parsed = new ConcurrentHashMap<>();
     protected ProxyMethodMapper() {
     }
 
@@ -89,10 +88,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.operationId(operationId);
         }
 
-        List<HttpResponseStatus> expectedStatusCodes = operation.getResponses().stream()
+        List<Integer> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
                 .map(s -> APOSTROPHE.matcher(s).replaceAll(""))
-                .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
+                .map(Integer::parseInt)
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
@@ -310,7 +309,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      * @param settings the settings
      */
     protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder, Operation operation,
-        List<HttpResponseStatus> expectedStatusCodes, JavaSettings settings) {
+        List<Integer> expectedStatusCodes, JavaSettings settings) {
         SwaggerExceptionDefinitions swaggerExceptionDefinitions = getSwaggerExceptionDefinitions(operation, settings);
         ClassType settingsDefaultExceptionType = getDefaultHttpExceptionTypeFromSettings(settings);
 
@@ -325,21 +324,21 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
         }
 
-        Map<HttpResponseStatus, ClassType> settingsExceptionTypeMap =
+        Map<Integer, ClassType> settingsExceptionTypeMap =
             getHttpStatusToExceptionTypeMappingFromSettings(settings);
 
         // Initialize the merged map with the Swagger defined configurations so that the settings configurations
         // overrides it.
-        Map<HttpResponseStatus, ClassType> mergedExceptionTypeMapping = new HashMap<>(
+        Map<Integer, ClassType> mergedExceptionTypeMapping = new HashMap<>(
             swaggerExceptionDefinitions.exceptionTypeMapping);
         mergedExceptionTypeMapping.putAll(settingsExceptionTypeMap);
 
         // Convert the exception type mapping into what code generation uses elsewhere.
-        Map<ClassType, List<HttpResponseStatus>> processedMapping = new HashMap<>();
-        for (Map.Entry<HttpResponseStatus, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {
+        Map<ClassType, List<Integer>> processedMapping = new HashMap<>();
+        for (Map.Entry<Integer, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {
             processedMapping.compute(kvp.getValue(), (errorType, statuses) -> {
                 if (statuses == null) {
-                    List<HttpResponseStatus> statusList = new ArrayList<>();
+                    List<Integer> statusList = new ArrayList<>();
                     statusList.add(kvp.getKey());
                     return statusList;
                 }
@@ -358,7 +357,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         JavaSettings settings) {
         SwaggerExceptionDefinitions exceptionDefinitions = new SwaggerExceptionDefinitions();
         ClassType swaggerDefaultExceptionType = null;
-        Map<HttpResponseStatus, ClassType> swaggerExceptionTypeMap = new HashMap<>();
+        Map<Integer, ClassType> swaggerExceptionTypeMap = new HashMap<>();
 
         /*
         1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
@@ -377,7 +376,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 if (statusCodes != null && !statusCodes.isEmpty()) {
                     try {
                         ClassType exceptionType = getExceptionType(exception, settings);
-                        statusCodes.stream().map(code -> HttpResponseStatus.valueOf(Integer.parseInt(code)))
+                        statusCodes.stream().map(Integer::parseInt)
                             .forEach(status -> swaggerExceptionTypeMap.put(status, exceptionType));
 
                         isDefaultError = false;
@@ -408,7 +407,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     private static final class SwaggerExceptionDefinitions {
         private ClassType defaultExceptionType;
-        private Map<HttpResponseStatus, ClassType> exceptionTypeMapping;
+        private Map<Integer, ClassType> exceptionTypeMapping;
     }
 
     private static ClassType getExceptionType(Response exception, JavaSettings settings) {
@@ -489,11 +488,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             : createExceptionTypeFromFullyQualifiedClass(defaultHttpExceptionType);
     }
 
-    private Map<HttpResponseStatus, ClassType> getHttpStatusToExceptionTypeMappingFromSettings(
+    private Map<Integer, ClassType> getHttpStatusToExceptionTypeMappingFromSettings(
         JavaSettings settings) {
         // Use a status code to error type mapping initial so that the custom mapping can override the default mapping,
         // if the default mapping is being used.
-        Map<HttpResponseStatus, ClassType> exceptionMapping = new HashMap<>();
+        Map<Integer, ClassType> exceptionMapping = new HashMap<>();
 
         if (settings.isUseDefaultHttpStatusCodeToExceptionTypeMapping()) {
             exceptionMapping.putAll(getDefaultHttpStatusCodeToExceptionTypeMapping());
@@ -501,8 +500,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         Map<Integer, String> customExceptionMapping = settings.getHttpStatusCodeToExceptionTypeMapping();
         if (!CoreUtils.isNullOrEmpty(customExceptionMapping)) {
-            customExceptionMapping.forEach((key, value) -> exceptionMapping.put(HttpResponseStatus.valueOf(key),
-                createExceptionTypeFromFullyQualifiedClass(value)));
+            customExceptionMapping.forEach((key, value) ->
+                exceptionMapping.put(key, createExceptionTypeFromFullyQualifiedClass(value)));
         }
 
         return exceptionMapping;
@@ -525,11 +524,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      *
      * @return The default HTTP status code to exception type mapping.
      */
-    protected Map<HttpResponseStatus, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
-        Map<HttpResponseStatus, ClassType> defaultMapping = new HashMap<>();
-        defaultMapping.put(HttpResponseStatus.UNAUTHORIZED, ClassType.ClientAuthenticationException);
-        defaultMapping.put(HttpResponseStatus.NOT_FOUND, ClassType.ResourceNotFoundException);
-        defaultMapping.put(HttpResponseStatus.CONFLICT, ClassType.ResourceModifiedException);
+    protected Map<Integer, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
+        Map<Integer, ClassType> defaultMapping = new HashMap<>();
+        defaultMapping.put(401, ClassType.ClientAuthenticationException);
+        defaultMapping.put(404, ClassType.ResourceNotFoundException);
+        defaultMapping.put(409, ClassType.ResourceModifiedException);
 
         return defaultMapping;
     }

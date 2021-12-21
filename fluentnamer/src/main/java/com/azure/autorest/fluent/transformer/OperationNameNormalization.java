@@ -18,7 +18,6 @@ import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.http.HttpMethod;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.Arrays;
@@ -31,6 +30,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -40,6 +40,8 @@ import java.util.stream.Collectors;
 class OperationNameNormalization {
 
     private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
+
+    private static final Pattern TRIM_LEADING_AND_TRAILING_FORWARD_SLASH = Pattern.compile("^(?:/*)?(.*?)(?:/*)?$");
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);
@@ -102,8 +104,11 @@ class OperationNameNormalization {
         Map<String, String> renamePlan = new HashMap<>();
 
         for (Operation operation : operationGroup.getOperations()) {
-            String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath();
-            path = StringUtils.strip(path.trim(), "/");
+            String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath().trim();
+            Matcher matcher = TRIM_LEADING_AND_TRAILING_FORWARD_SLASH.matcher(path);
+            if (matcher.matches()) {
+                path = matcher.group(1);
+            }
             String[] urlSegments = path.split(Pattern.quote("/"));
 
             String newName = null;

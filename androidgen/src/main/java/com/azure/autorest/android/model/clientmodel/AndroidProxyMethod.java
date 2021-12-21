@@ -7,7 +7,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.core.http.HttpMethod;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -27,13 +26,13 @@ public class AndroidProxyMethod extends ProxyMethod {
      * @param name The name of this REST API method.
      * @param parameters The parameters that are provided to this method.
      * @param description The description of this method.
-     * @param isResumable Whether or not this method is resumable.
+     * @param isResumable Whether this method is resumable.
      * @param responseContentTypes The metia-types in response.
      */
     protected AndroidProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
-                                 String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
+                                 String urlPath, List<Integer> responseExpectedStatusCodes,
                                  ClassType unexpectedResponseExceptionType,
-                                 Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
+                                 Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes,
                                  String name, List<ProxyMethodParameter> parameters, String description,
                                  IType returnValueWireType, IType responseBodyType, boolean isResumable, Set<String> responseContentTypes,
                                  String operationId, Map<String, ProxyMethodExample> examples) {

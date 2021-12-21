@@ -8,7 +8,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +56,7 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     }
 
     @Override
-    protected Map<HttpResponseStatus, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
+    protected Map<Integer, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
         return new HashMap<>();
     }
 
