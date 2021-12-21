@@ -30,6 +30,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -103,8 +104,11 @@ class OperationNameNormalization {
         Map<String, String> renamePlan = new HashMap<>();
 
         for (Operation operation : operationGroup.getOperations()) {
-            String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath();
-            path = TRIM_LEADING_AND_TRAILING_FORWARD_SLASH.matcher(path.trim()).group(1);
+            String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath().trim();
+            Matcher matcher = TRIM_LEADING_AND_TRAILING_FORWARD_SLASH.matcher(path);
+            if (matcher.matches()) {
+                path = matcher.group(1);
+            }
             String[] urlSegments = path.split(Pattern.quote("/"));
 
             String newName = null;
