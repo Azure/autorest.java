@@ -1,5 +1,7 @@
 #!/bin/bash --verbose
 
+set -e
+
 VANILLA_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
 AZURE_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
 ARM_ARGUMENTS='--version=3.6.6 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
@@ -8,6 +10,8 @@ PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.6.6 --java --use=./ --low-level-clien
 
 # latest
 TEST_SERVER_COMMIT=main
+
+autorest --version=3.6.6 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/validation1.json --namespace=fixtures.validation1
 
 # Vanilla
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
