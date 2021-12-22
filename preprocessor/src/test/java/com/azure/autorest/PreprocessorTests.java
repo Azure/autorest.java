@@ -24,14 +24,31 @@ public class PreprocessorTests {
         // This file can be obtained by calling generate commands from `generate` or `generate.bat` on the swagger json, it will appear under this project by the name 'code-model.yaml'.
         String codeModelFileName = "containerregistry-code-model.yaml";
 
+        //1.
         CodeModel codeModel = preprocessor.loadCodeModel(codeModelFileName);
+
         Assert.assertEquals(codeModel.getOperationGroups().size(), 3);
+        Assert.assertTrue(
+            codeModel.getOperationGroups().stream().anyMatch(operationGroup -> operationGroup.get$key().equals("ContainerRegistryBlob"))
+            && codeModel.getOperationGroups().stream().anyMatch(operationGroup -> operationGroup.get$key().equals("ContainerRegistry"))
+            && codeModel.getOperationGroups().stream().anyMatch(operationGroup -> operationGroup.get$key().equals("Authentication"))
+        );
         Assert.assertEquals(codeModel.getOperationGroups().get(0).getOperations().size(), 15);
         Assert.assertEquals(codeModel.getOperationGroups().get(1).getOperations().size(), 11);
         Assert.assertEquals(codeModel.getOperationGroups().get(2).getOperations().size(), 3);
-        codeModel = preprocessor.transform(codeModel);
-        Assert.assertEquals(codeModel.getOperationGroups().get(0).getOperations().size(), 18); // additional 3 pagination operations
 
+        //2.
+        codeModel = preprocessor.transform(codeModel);
+
+        // additional 3 pagination operations
+        Assert.assertEquals(codeModel.getOperationGroups().get(0).getOperations().size(), 18);
+        Assert.assertTrue(
+            codeModel.getOperationGroups().stream().flatMap(operationGroup -> operationGroup.getOperations().stream()).anyMatch(operation -> "getRepositoriesNext".equals(operation.get$key()))
+                && codeModel.getOperationGroups().stream().flatMap(operationGroup -> operationGroup.getOperations().stream()).anyMatch(operation -> "getTagsNext".equals(operation.get$key()))
+                && codeModel.getOperationGroups().stream().flatMap(operationGroup -> operationGroup.getOperations().stream()).anyMatch(operation -> "getManifestsNext".equals(operation.get$key()))
+        );
+
+        //3.
         String output = preprocessor.dump(codeModel);
     }
 
