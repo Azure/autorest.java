@@ -7,6 +7,7 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,7 +25,13 @@ public class PreprocessorTests {
         String codeModelFileName = "containerregistry-code-model.yaml";
 
         CodeModel codeModel = preprocessor.loadCodeModel(codeModelFileName);
+        Assert.assertEquals(codeModel.getOperationGroups().size(), 3);
+        Assert.assertEquals(codeModel.getOperationGroups().get(0).getOperations().size(), 15);
+        Assert.assertEquals(codeModel.getOperationGroups().get(1).getOperations().size(), 11);
+        Assert.assertEquals(codeModel.getOperationGroups().get(2).getOperations().size(), 3);
         codeModel = preprocessor.transform(codeModel);
+        Assert.assertEquals(codeModel.getOperationGroups().get(0).getOperations().size(), 18); // additional 3 pagination operations
+
         String output = preprocessor.dump(codeModel);
     }
 
