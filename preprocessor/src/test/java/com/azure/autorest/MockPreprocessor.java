@@ -33,15 +33,6 @@ public class MockPreprocessor extends Preprocessor {
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
 
-    static {
-        SETTINGS_MAP.put("generate-client-interfaces", false);
-        SETTINGS_MAP.put("generate-client-as-impl", true);
-        SETTINGS_MAP.put("generate-sync-async-clients", true);
-        SETTINGS_MAP.put("add-context-parameter", true);
-        SETTINGS_MAP.put("context-client-method-parameter", true);
-        SETTINGS_MAP.put("sync-methods", "all");
-    }
-
     public MockPreprocessor(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
 
