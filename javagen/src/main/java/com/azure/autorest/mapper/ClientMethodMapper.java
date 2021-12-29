@@ -33,8 +33,10 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.returntype.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -894,20 +896,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            if (description == null) {
-                if (baseType == PrimitiveType.Void) {
-                    // Mono<Void>
-                    description = "the completion";
-                }
-                if (baseType == PrimitiveType.Boolean
-                        && operation.getRequests() != null && !operation.getRequests().isEmpty()
-                        && operation.getRequests().get(0).getProtocol() != null
-                        && operation.getRequests().get(0).getProtocol().getHttp() != null
-                        && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                    // Mono<Boolean> of HEAD method
-                    description = "whether resource exists";
-                }
+            if (description == null
+                && baseType == PrimitiveType.Boolean
+                && operation.getRequests() != null && !operation.getRequests().isEmpty()
+                && operation.getRequests().get(0).getProtocol() != null
+                && operation.getRequests().get(0).getProtocol().getHttp() != null
+                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                // Mono<Boolean> of HEAD method
+                description = "whether resource exists";
+                return description;
             }
+
+            description = ReturnTypeDescriptionAssembler.assemble(description, returnType, baseType);
 
             if (description == null) {
                 description = "the response";
