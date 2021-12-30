@@ -40,15 +40,15 @@ public class ReturnTypeDescriptionAssembler {
     private static class MonoDescriptionHandler implements GenericReturnTypeDescriptionHandler {
 
         /*
-        Mono<Void> - A {@link Mono} that completes when a successful response is received.
-        Mono<T> - Return "something" on successful completion of {@link Mono} (something here is the description in the operation)
-        Mono<OtherType> - Returns the response body on successful completion of {@link Mono}
+        Mono<Void> - A {@link Mono} that completes when a successful response is received
+        Mono<T> - "something" on successful completion of {@link Mono} (something here is the description in the operation)
+        Mono<OtherType> - the response body on successful completion of {@link Mono}
          */
         @Override
         public String handle(String description, GenericType returnType, IType baseType) {
             if (description == null) {
                 if (ClassType.Void == baseType) {
-                    return "A {@link Mono} that completes when a successful response is received.";
+                    return "A {@link Mono} that completes when a successful response is received";
                 } else {
                     return "the response body on successful completion of {@link Mono}";
                 }
@@ -61,9 +61,9 @@ public class ReturnTypeDescriptionAssembler {
     private static class ResponseDescriptionHandler implements GenericReturnTypeDescriptionHandler {
 
         /*
-        Response<Void> - Returns the {@link Response}
-        Response<T> - Returns "something" along with {@link Response}
-        Response<OtherType> - Returns the response body along with {@link Response}
+        Response<Void> - the {@link Response}
+        Response<T> - "something" along with {@link Response}
+        Response<OtherType> - the response body along with {@link Response}
          */
         @Override
         public String handle(String description, GenericType returnType, IType baseType) {

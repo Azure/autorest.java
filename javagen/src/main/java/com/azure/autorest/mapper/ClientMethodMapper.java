@@ -874,6 +874,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
         String description = null;
         if (returnType != PrimitiveType.Void) {
+            // try the description of the operation
             if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
                 String operationDescription = operation.getLanguage().getDefault().getDescription();
                 if (!CoreUtils.isNullOrEmpty(operationDescription)) {
@@ -884,6 +885,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
+            // try the description on the schema of return type
             if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
                 Schema responseSchema = operation.getResponses().get(0).getSchema();
                 if (responseSchema != null && !CoreUtils.isNullOrEmpty(responseSchema.getSummary())) {
@@ -896,15 +898,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
+            // Mono<Boolean> of HEAD method
             if (description == null
                 && baseType == PrimitiveType.Boolean
                 && operation.getRequests() != null && !operation.getRequests().isEmpty()
                 && operation.getRequests().get(0).getProtocol() != null
                 && operation.getRequests().get(0).getProtocol().getHttp() != null
                 && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                // Mono<Boolean> of HEAD method
                 description = "whether resource exists";
-                return description;
             }
 
             description = ReturnTypeDescriptionAssembler.assemble(description, returnType, baseType);
