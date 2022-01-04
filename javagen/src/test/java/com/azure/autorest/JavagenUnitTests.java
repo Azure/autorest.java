@@ -60,7 +60,7 @@ public class JavagenUnitTests {
         expectedDescription = String.format("%s on successful completion of {@link Mono}", operationDesc);
 
         // Mono<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         Assert.assertEquals(expectedDescription, description);        // Mono<Boolean>
@@ -72,7 +72,7 @@ public class JavagenUnitTests {
         operation = operationWithDescOnOperationAndResponseSchema(operationDesc, responseSchemaDesc);
         expectedDescription = String.format("%s along with {@link Response}", operationDesc);
         // Response<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Response(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         Assert.assertEquals(expectedDescription, description);        // Response<Boolean>
@@ -86,7 +86,7 @@ public class JavagenUnitTests {
         operation = operationWithDescOnResponseSchema(responseSchemaDesc);
         expectedDescription = String.format("%s on successful completion of {@link Mono}", responseSchemaDesc);
         // Mono<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         Assert.assertEquals(expectedDescription, description);        // Mono<Boolean>
@@ -103,7 +103,7 @@ public class JavagenUnitTests {
         operation = operationWithDescOnResponseSchema(responseSchemaDesc);
         expectedDescription = String.format("%s along with {@link Response}", responseSchemaDesc);
         // Response<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Response(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         Assert.assertEquals(expectedDescription, description);
@@ -123,7 +123,7 @@ public class JavagenUnitTests {
         // Mono
         operation = operationWithNoDesc();
         // Mono<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         expectedDescription = "A {@link Mono} that completes when a successful response is received";
@@ -144,7 +144,7 @@ public class JavagenUnitTests {
         // Response
         operation = operationWithNoDesc();
         // Response<Void>
-        baseType = ClassType.Void;
+        baseType = PrimitiveType.Void;
         returnType = GenericType.Response(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         expectedDescription = "the {@link Response}";

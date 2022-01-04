@@ -9,6 +9,7 @@ package com.azure.autorest.util.returntype;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.rest.Response;
 import reactor.core.publisher.Mono;
 
@@ -53,7 +54,7 @@ public class ReturnTypeDescriptionAssembler {
         @Override
         public String handle(String description, GenericType returnType, IType baseType) {
             if (description == null) {
-                if (ClassType.Void == baseType) {
+                if (PrimitiveType.Void == baseType) {
                     return "A {@link Mono} that completes when a successful response is received";
                 } else {
                     return "the response body on successful completion of {@link Mono}";
@@ -74,7 +75,7 @@ public class ReturnTypeDescriptionAssembler {
         @Override
         public String handle(String description, GenericType returnType, IType baseType) {
             if (description == null) {
-                if (ClassType.Void == baseType) {
+                if (PrimitiveType.Void == baseType) {
                     return "the {@link Response}";
                 } else {
                     return "the response body along with {@link Response}";
