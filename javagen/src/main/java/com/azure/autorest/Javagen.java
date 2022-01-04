@@ -186,6 +186,8 @@ public class Javagen extends NewPlugin {
         if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
             Set<String> protocolExampleNameSet = new HashSet<>();
 
+            final boolean singleBuilder = syncClients.size() == 1;
+
             syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
                 .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
                     .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
@@ -194,7 +196,12 @@ public class Javagen extends NewPlugin {
                             m.getProxyMethod().getExamples().forEach((name, example) -> {
                                 String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
                                 if (!protocolExampleNameSet.contains(filename)) {
-                                    ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, filename, example);
+                                    // see code in ServiceClientBuilderTemplate
+                                    final String buildMethodName = (settings.shouldGenerateSyncAsyncClients() && !singleBuilder)
+                                            ? ("build" + c.getClassName())
+                                            : "buildClient";
+
+                                    ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, buildMethodName, filename, example);
                                     javaPackage.addProtocolExamples(protocolExample);
                                     protocolExampleNameSet.add(filename);
                                 }

@@ -165,12 +165,13 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 String clientInit = "%1$s client = new %2$s()" +
                         "%3$s" +  // credentials
                         "%4$s" +  // client properties
-                        ".build%1$s();";
+                        ".%5$s();";
                 methodBlock.line(
                         String.format(clientInit,
                                 client.getClassName(), builderName,
                                 credentialExpr,
-                                clientParameterExpr));
+                                clientParameterExpr,
+                                protocolExample.getBuildMethodName()));
 
                 // binaryData
                 if (binaryDataStmt.length() > 0) {
