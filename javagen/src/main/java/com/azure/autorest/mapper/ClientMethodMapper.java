@@ -36,7 +36,6 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.returntype.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collections;
