@@ -442,9 +442,15 @@ public class ExampleParser {
     }
 
     private static MethodParameter findMethodParameter(List<MethodParameter> methodParameters, ClientMethodParameter clientMethodParameter) {
-        return methodParameters.stream()
+        MethodParameter parameter = methodParameters.stream()
                 .filter(p -> p.getClientMethodParameter() == clientMethodParameter)
                 .findFirst().orElse(null);
+        if (parameter == null) {
+            parameter = methodParameters.stream()
+                    .filter(p -> p.getClientMethodParameter().getName().equals(clientMethodParameter.getName()))
+                    .findFirst().orElse(null);
+        }
+        return parameter;
     }
 
     private static ExampleNode parseNodeFromParameter(ProxyMethodExample example, MethodParameter methodParameter) {
