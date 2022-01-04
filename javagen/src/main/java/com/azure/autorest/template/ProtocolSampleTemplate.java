@@ -20,6 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, JavaFile> {
     private static final ProtocolSampleTemplate _instance = new ProtocolSampleTemplate();
@@ -37,6 +39,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         return _instance;
     }
 
+    @SuppressWarnings("unchecked")
     public void write(ProtocolExample protocolExample, JavaFile javaFile) {
         ClientMethod method = protocolExample.getClientMethod();
         AsyncSyncClient client = protocolExample.getClient();
@@ -78,6 +81,8 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 ClientMethodParameter p = method.getParameters().get(i);
                 if (p.getName().equalsIgnoreCase(parameterName)) {
                     if (p.getClientType() != ClassType.BinaryData) {
+                        // TODO: handle query with array
+
                         String exampleValue = p.getLocation() == RequestParameterLocation.Query
                                 ? parameterValue.getUnescapedQueryValue().toString()
                                 : parameterValue.getObjectValue().toString();
@@ -98,10 +103,33 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
                         case Query:
-                            requestOptionsStmts.add(
-                                    String.format("requestOptions.addQueryParam(\"%s\", %s);",
-                                            parameterName,
-                                            p.getClientType().defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
+                            if (parameterValue.getUnescapedQueryValue() instanceof List && p.getCollectionFormat() != null) {
+                                List<Object> elements = (List<Object>) parameterValue.getUnescapedQueryValue();
+                                if (p.getExplode()) {
+                                    // collectionFormat: multi
+                                    for (Object element : elements) {
+                                        requestOptionsStmts.add(
+                                                String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                                        parameterName,
+                                                        p.getClientType().defaultValueExpression(element.toString())));
+                                    }
+                                } else {
+                                    // collectionFormat: csv, ssv, tsv, pipes
+                                    String delimiter = p.getCollectionFormat().getDelimiter();
+                                    String exampleValue = elements.stream()
+                                            .map(Object::toString)
+                                            .collect(Collectors.joining(delimiter));
+                                    requestOptionsStmts.add(
+                                            String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                                    parameterName,
+                                                    p.getClientType().defaultValueExpression(exampleValue)));
+                                }
+                            } else {
+                                requestOptionsStmts.add(
+                                        String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                                parameterName,
+                                                p.getClientType().defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
+                            }
                             break;
 
                         case Header:
