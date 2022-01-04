@@ -12,7 +12,7 @@ AUTOREST_CORE_VERSION = '3.6.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 
-def run(script_path: str, output_folder: str, json_path: str, namespace: str, credential_types, credential_scopes: str = None):
+def run(script_path: str, output_folder: str, json_path: str, namespace: str, credential_scopes: str = None):
     logging.info(f'SDK for {json_path}')
 
     package_relative_path = namespace.replace('.', '/')
@@ -22,6 +22,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, cr
     logging.info(f'delete {output_folder}')
 
     # generate code
+    credential_types = 'tokencredential'
     credential_scopes_str = f'--credential-types={credential_types}'
     if credential_scopes:
         credential_scopes_str += f' --credential-scopes={credential_scopes}'
@@ -65,12 +66,12 @@ def main():
     purview_json_path = 'https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json'
     purview_output_path = path.join(script_path, 'sdk/purview/azure-analytics-purview-account')
 
-    run(script_path, purview_output_path, purview_json_path, 'com.azure.analytics.purview.account', 'tokencredential', 'https://purview.azure.net/.default')
+    run(script_path, purview_output_path, purview_json_path, 'com.azure.analytics.purview.account', 'https://purview.azure.net/.default')
 
     translator_json_path = 'https://github.com/Azure/azure-rest-api-specs/blob/main/specification/cognitiveservices/data-plane/TranslatorText/stable/v1.0/TranslatorBatch.json'
-    translator_output_path = path.join(script_path, 'sdk/purview/azure-ai-translator')
+    translator_output_path = path.join(script_path, 'sdk/ai/azure-ai-translator')
 
-    run(script_path, translator_output_path, translator_json_path, 'com.azure.ai.translator', 'azurekeycredential')
+    run(script_path, translator_output_path, translator_json_path, 'com.azure.ai.translator', 'https://noop.azure.net/.default')
 
 
 if __name__ == "__main__":
