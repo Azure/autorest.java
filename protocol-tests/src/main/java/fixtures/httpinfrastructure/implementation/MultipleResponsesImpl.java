@@ -1027,7 +1027,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
@@ -1067,7 +1067,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
@@ -1107,7 +1107,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
@@ -1147,7 +1147,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
@@ -1186,7 +1186,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
@@ -1225,7 +1225,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
@@ -1265,7 +1265,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
@@ -1430,7 +1430,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
@@ -1469,7 +1469,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
@@ -1508,7 +1508,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
@@ -1546,7 +1546,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
@@ -1585,7 +1585,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
@@ -1623,7 +1623,7 @@ public final class MultipleResponsesImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
