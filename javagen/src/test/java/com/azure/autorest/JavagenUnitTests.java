@@ -97,6 +97,7 @@ public class JavagenUnitTests {
         baseType = GenericType.Response(ClassType.String);
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
+        expectedDescription = "desc from response schema along with {@link Response} on successful completion of {@link Mono}";
         Assert.assertEquals(expectedDescription, description);
 
         // Response
@@ -138,7 +139,7 @@ public class JavagenUnitTests {
         baseType = GenericType.Response(ClassType.String);
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
-        expectedDescription = "the response body on successful completion of {@link Mono}";
+        expectedDescription = "the response body along with {@link Response} on successful completion of {@link Mono}";
         Assert.assertEquals(expectedDescription, description);
 
         // Response
@@ -156,7 +157,7 @@ public class JavagenUnitTests {
         expectedDescription = String.format("%s along with {@link Response}", "whether resource exists");
         Assert.assertEquals(expectedDescription, description);
         // Response<T>
-        baseType = GenericType.Mono(ClassType.String);
+        baseType = ClassType.String;
         returnType = GenericType.Response(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         expectedDescription = "the response body along with {@link Response}";

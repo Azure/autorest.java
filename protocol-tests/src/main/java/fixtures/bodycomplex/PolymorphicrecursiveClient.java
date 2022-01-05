@@ -46,7 +46,7 @@ public final class PolymorphicrecursiveClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return complex types that are polymorphic and have recursive references.
+     * @return complex types that are polymorphic and have recursive references along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -78,7 +78,7 @@ public final class PolymorphicrecursiveClient {
      *     "species": "dangerous", "length": 10, "age": 105 } ] }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
