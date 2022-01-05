@@ -90,8 +90,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse) {
-        return new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse, syncReturnWithResponse), syncReturnWithResponse);
+    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse, syncReturnType), syncReturnWithResponse);
     }
 
     @Override

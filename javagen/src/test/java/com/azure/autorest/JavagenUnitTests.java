@@ -14,6 +14,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.core.http.HttpMethod;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -90,11 +91,13 @@ public class JavagenUnitTests {
         baseType = PrimitiveType.Void;
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
-        Assert.assertEquals(expectedDescription, description);        // Mono<Boolean>
+        // Mono<Boolean>
+        Assert.assertEquals(expectedDescription, description);
         baseType = PrimitiveType.Boolean;
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
-        Assert.assertEquals(expectedDescription, description);        // Mono<T>
+        // Mono<T>
+        Assert.assertEquals(expectedDescription, description);
         baseType = GenericType.Response(ClassType.String);
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
@@ -136,7 +139,7 @@ public class JavagenUnitTests {
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);
         expectedDescription = String.format("%s on successful completion of {@link Mono}", "whether resource exists");
         Assert.assertEquals(expectedDescription, description);
-        // Mono<OtherType>
+        // Mono<Response>
         baseType = GenericType.Response(ClassType.String);
         returnType = GenericType.Mono(baseType);
         description = ClientMethodMapperAccessor.getDescription(operation, returnType, baseType);

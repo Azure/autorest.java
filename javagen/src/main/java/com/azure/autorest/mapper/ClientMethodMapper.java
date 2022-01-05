@@ -582,9 +582,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder.type(ClientMethodType.SimpleSyncRestResponse)
                             .onlyRequiredParameters(false)
                             .name(proxyMethod.getSimpleRestResponseMethodName())
-                            .returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse))
                             .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
-
+                        if (syncReturnWithResponse instanceof GenericType) {
+                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnType));
+                        } else { // if not generic type, returnType and baseType are the same
+                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
+                        }
                         if (settings.isLowLevelClient()) {
                             // SimpleSyncRestResponse with RequestOptions but without Context
                             methods.add(builder.build());
@@ -613,9 +616,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 GenericType.Response(syncReturnType);
     }
 
-    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse) {
+    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse, IType syncReturnType) {
         return new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
-                syncReturnWithResponse), syncReturnWithResponse);
+                syncReturnType), syncReturnWithResponse);
     }
 
     protected ReturnValue createSimpleAsyncRestResponseReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
@@ -905,7 +908,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 && operation.getRequests() != null && !operation.getRequests().isEmpty()
                 && operation.getRequests().get(0).getProtocol() != null
                 && operation.getRequests().get(0).getProtocol().getHttp() != null
-                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())
+            ) {
                 description = "whether resource exists";
             }
 

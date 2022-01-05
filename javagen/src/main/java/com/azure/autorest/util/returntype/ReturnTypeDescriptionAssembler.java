@@ -100,7 +100,7 @@ public class ReturnTypeDescriptionAssembler {
         public String handle(String description, GenericType returnType, IType baseType) {
             String assembledDesc;
             if (description == null) {
-                if (PrimitiveType.Void == baseType || PrimitiveType.Void == returnType.getTypeArguments()[0]) { // Response<Void>
+                if (PrimitiveType.Void == baseType) { // Response<Void>
                     assembledDesc = String.format("the {@link %s}", returnType.getName());
                 } else { // Response<OtherType>
                     assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());
