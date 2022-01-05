@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -56,6 +57,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
 
     private final Map<Operation, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     protected ClientMethodMapper() {
     }
@@ -907,7 +909,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 description = "whether resource exists";
             }
 
-            description = ReturnTypeDescriptionAssembler.assemble(description, returnType, baseType);
+            description = DESCRIPTION_ASSEMBLER.assemble(description, returnType, baseType);
 
             if (description == null) {
                 description = "the response";

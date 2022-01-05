@@ -6,26 +6,26 @@
 
 package com.azure.autorest.util.returntype;
 
+import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.logging.ClientLogger;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReturnTypeDescriptionAssembler {
-    private static final ClientLogger LOGGER = new ClientLogger(ReturnTypeDescriptionAssembler.class);
+    private final PluginLogger logger;
+    private final ReturnTypeDescriptionHandlerRegistry handlerRegistry;
 
-    // generic returnType description handler registry
-    private static final ReturnTypeDescriptionHandlerRegistry HANDLER_REGISTRY = new ReturnTypeDescriptionHandlerRegistry();
-
-    static {
-        // register generic description handlers
-        HANDLER_REGISTRY.addFirst(new MonoDescriptionHandler());
-        HANDLER_REGISTRY.addFirst(new ResponseDescriptionHandler());
+    public ReturnTypeDescriptionAssembler(NewPlugin host) {
+        logger = new PluginLogger(host, ReturnTypeDescriptionAssembler.class);
+        handlerRegistry = new ReturnTypeDescriptionHandlerRegistry();
+        handlerRegistry.addFirst(new MonoDescriptionHandler());
+        handlerRegistry.addFirst(new ResponseDescriptionHandler());
     }
 
     /**
@@ -35,15 +35,15 @@ public class ReturnTypeDescriptionAssembler {
      * @param baseType      baseType of the returnType
      * @return  assembled description
      */
-    public static String assemble(String description, IType returnType, IType baseType) {
-        ReturnTypeDescriptionHandler<IType> handler = HANDLER_REGISTRY.getHandler(returnType);
+    public String assemble(String description, IType returnType, IType baseType) {
+        ReturnTypeDescriptionHandler<IType> handler = handlerRegistry.getHandler(returnType);
         if (handler != null) {
             return handler.handle(description, returnType, baseType);
         }
         return description;
     }
 
-    private static class MonoDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
+    private class MonoDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
 
         @Override
         public boolean accept(IType returnType) {
@@ -52,26 +52,26 @@ public class ReturnTypeDescriptionAssembler {
 
         /*
         Mono<Void> - A {@link Mono} that completes when a successful response is received
-        Mono<Response> - "Response return type description" on successful completion of {@link Mono}
+        Mono<Response<?>> - "Response return type description" on successful completion of {@link Mono}
         Mono<T> - "something" on successful completion of {@link Mono} (something here is the description in the operation)
         Mono<OtherType> - the response body on successful completion of {@link Mono}
          */
         @Override
         public String handle(String description, GenericType returnType, IType baseType) {
             String assembledDesc;
-            if (isTypeResponse(returnType.getTypeArguments()[0])) {
+            if (isTypeResponse(returnType.getTypeArguments()[0])) { // Mono<Response<?>>
                 assembledDesc = String.format(
                     "%s on successful completion of {@link Mono}",
-                    HANDLER_REGISTRY.getHandler(returnType.getTypeArguments()[0]).handle(description, returnType.getTypeArguments()[0], baseType)
+                    handlerRegistry.getHandler(returnType.getTypeArguments()[0]).handle(description, returnType.getTypeArguments()[0], baseType)
                 );
             } else {
                 if (description == null) {
-                    if (PrimitiveType.Void == baseType) {
+                    if (PrimitiveType.Void == baseType) { // Mono<Void>
                         assembledDesc = String.format("A {@link %s} that completes when a successful response is received", returnType.getName());
-                    } else {
+                    } else { // Mono<OtherType>
                         assembledDesc = String.format("the response body on successful completion of {@link %s}", returnType.getName());
                     }
-                } else {
+                } else { // Mono<T>
                     assembledDesc = String.format("%s on successful completion of {@link %s}", description, returnType.getName());
                 }
             }
@@ -84,7 +84,7 @@ public class ReturnTypeDescriptionAssembler {
         }
     }
 
-    private static class ResponseDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
+    private class ResponseDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
 
         @Override
         public boolean accept(IType returnType) {
@@ -100,24 +100,25 @@ public class ReturnTypeDescriptionAssembler {
         public String handle(String description, GenericType returnType, IType baseType) {
             String assembledDesc;
             if (description == null) {
-                if (PrimitiveType.Void == baseType) {
+                if (PrimitiveType.Void == baseType) { // Response<Void>
                     assembledDesc = String.format("the {@link %s}", returnType.getName());
-                } else {
+                } else { // Response<OtherType>
                     assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());
                 }
-            } else {
+            } else { // Response<T>
                 assembledDesc = String.format("%s along with {@link %s}", description, returnType.getName());
             }
             return assembledDesc;
         }
     }
 
-
-    private static Class<?> getGenericClass(GenericType type) {
+    private Class<?> getGenericClass(GenericType type) {
+        String className = String.format("%s.%s", type.getPackage(), type.getName());
         try {
-            return Class.forName(String.format("%s.%s", type.getPackage(), type.getName()));
+            return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            throw LOGGER.logExceptionAsError(new RuntimeException(e));
+            logger.error(String.format("class %s not found!", className), e);
+            throw new RuntimeException(e);
         }
     }
 

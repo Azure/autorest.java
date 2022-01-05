@@ -43,6 +43,7 @@ public class JavagenUnitTests {
      */
     @Test
     public void returnTypeDescTest(){
+        MockUnitJavagen javagen = new MockUnitJavagen(); // set NewPlugin host
 
         Operation operation;
         IType returnType;
