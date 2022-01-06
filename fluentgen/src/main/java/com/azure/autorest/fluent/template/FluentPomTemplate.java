@@ -30,35 +30,10 @@ public class FluentPomTemplate extends PomTemplate {
 
     @Override
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
-        projectBlock.block("build", buildBlock -> {
-            buildBlock.block("plugins", pluginsBlock -> {
-                if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
-                    // revapi-maven-plugin
-                    pluginsBlock.block("plugin", pluginBlock -> {
-                        pluginBlock.tag("groupId", "org.revapi");
-                        pluginBlock.tag("artifactId", "revapi-maven-plugin");
-                        pluginBlock.tagWithInlineComment("version", project.getPackageVersions().getRevapiMavenPlugin(),
-                                "{x-version-update;org.revapi:revapi-maven-plugin;external_dependency}");
-                        pluginBlock.block("configuration", configurationBlock -> {
-                            configurationBlock.block("analysisConfiguration", analysisConfigurationBlock -> {
-                                analysisConfigurationBlock.block("revapi.ignore", ignoreBlock -> {
-                                    ignoreBlock.block("item", itemBlock -> {
-                                        itemBlock.tag("code", "java.method.addedToInterface");
-                                    });
-
-                                    ignoreBlock.block("item", itemBlock -> {
-                                        itemBlock.tag("regex", "true");
-                                        itemBlock.tag("code", ".*");
-                                        itemBlock.tag("package", "com\\.azure\\.resourcemanager(\\.[^.]+)+\\.fluent(\\.[^.]+)*");
-                                    });
-                                });
-                            });
-                        });
-                    });
-                } else {
-                    writeStandAlonePlugins(pluginsBlock);
-                }
-            });
-        });
+        projectBlock.block("build", buildBlock -> buildBlock.block("plugins", pluginsBlock -> {
+            if (!FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
+                writeStandAlonePlugins(pluginsBlock);
+            }
+        }));
     }
 }
