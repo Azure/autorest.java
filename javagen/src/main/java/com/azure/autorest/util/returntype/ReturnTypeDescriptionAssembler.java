@@ -8,9 +8,9 @@ package com.azure.autorest.util.returntype;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.rest.Response;
 import reactor.core.publisher.Mono;
 
@@ -47,7 +47,7 @@ public class ReturnTypeDescriptionAssembler {
 
         @Override
         public boolean accept(IType returnType) {
-            return returnType instanceof GenericType && Mono.class.isAssignableFrom(getGenericClass((GenericType) returnType));
+            return isGenericTypeClassSubclassOf(returnType, Mono.class);
         }
 
         /*
@@ -66,7 +66,7 @@ public class ReturnTypeDescriptionAssembler {
                 );
             } else {
                 if (description == null) {
-                    if (PrimitiveType.Void == baseType) { // Mono<Void>
+                    if (ClassType.Void == baseType.asNullable()) { // Mono<Void>
                         assembledDesc = String.format("A {@link %s} that completes when a successful response is received", returnType.getName());
                     } else { // Mono<OtherType>
                         assembledDesc = String.format("the response body on successful completion of {@link %s}", returnType.getName());
@@ -79,8 +79,7 @@ public class ReturnTypeDescriptionAssembler {
         }
 
         private boolean isTypeResponse(IType type) {
-            return type instanceof GenericType &&
-                Response.class.isAssignableFrom(getGenericClass((GenericType) type));
+            return isGenericTypeClassSubclassOf(type, Response.class);
         }
     }
 
@@ -88,7 +87,7 @@ public class ReturnTypeDescriptionAssembler {
 
         @Override
         public boolean accept(IType returnType) {
-            return returnType instanceof GenericType && Response.class.isAssignableFrom(getGenericClass((GenericType) returnType));
+            return isGenericTypeClassSubclassOf(returnType, Response.class);
         }
 
         /*
@@ -100,7 +99,7 @@ public class ReturnTypeDescriptionAssembler {
         public String handle(String description, GenericType returnType, IType baseType) {
             String assembledDesc;
             if (description == null) {
-                if (PrimitiveType.Void == baseType) { // Response<Void>
+                if (ClassType.Void == baseType.asNullable()) { // Response<Void>
                     assembledDesc = String.format("the {@link %s}", returnType.getName());
                 } else { // Response<OtherType>
                     assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());
@@ -112,13 +111,19 @@ public class ReturnTypeDescriptionAssembler {
         }
     }
 
+    private boolean isGenericTypeClassSubclassOf(IType type, Class<?> parent) {
+        if (!(type instanceof GenericType)) return false;
+        Class<?> genericClass = getGenericClass((GenericType) type);
+        return genericClass != null && parent.isAssignableFrom(genericClass);
+    }
+
     private Class<?> getGenericClass(GenericType type) {
         String className = String.format("%s.%s", type.getPackage(), type.getName());
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            logger.error(String.format("class %s not found!", className), e);
-            throw new RuntimeException(e);
+            logger.warn(String.format("class %s not found!", className), e);
+            return null;
         }
     }
 

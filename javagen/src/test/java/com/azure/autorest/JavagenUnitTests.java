@@ -5,16 +5,27 @@
 
 package com.azure.autorest;
 
-import com.azure.autorest.extension.base.model.codemodel.*;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.Language;
+import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Protocol;
+import com.azure.autorest.extension.base.model.codemodel.Protocols;
+import com.azure.autorest.extension.base.model.codemodel.Request;
+import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapperAccessor;
 import com.azure.autorest.mapper.Mappers;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.core.http.HttpMethod;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

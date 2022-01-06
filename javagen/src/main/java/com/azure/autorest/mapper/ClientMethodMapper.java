@@ -585,7 +585,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
                         if (syncReturnWithResponse instanceof GenericType) {
                             builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnType));
-                        } else { // if not generic type, returnType and baseType are the same
+                        } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
                             builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
                         }
                         if (settings.isLowLevelClient()) {
