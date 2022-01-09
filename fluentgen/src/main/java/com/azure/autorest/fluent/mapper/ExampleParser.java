@@ -586,13 +586,11 @@ public class ExampleParser {
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
                     if (childObjectValue instanceof String) {
                         String discriminatorValue = (String) childObjectValue;
-                        ClientModel directiveModel = model.getDerivedModels().stream()
-                                .filter(m -> discriminatorValue.equalsIgnoreCase(m.getSerializedName()))
-                                .findFirst().orElse(null);
-                        if (directiveModel != null) {
+                        ClientModel derivedModel = getDerivedModel(model, discriminatorValue);
+                        if (derivedModel != null) {
                             // use the subclass
-                            type = directiveModel.getType();
-                            model = directiveModel;
+                            type = derivedModel.getType();
+                            model = derivedModel;
                         } else {
                             logger.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
                         }
@@ -733,6 +731,28 @@ public class ExampleParser {
         return properties.stream()
                 .filter(p -> !p.isReadOnly() && !p.isConstant())
                 .collect(Collectors.toList());
+    }
+
+    private static ClientModel getDerivedModel(ClientModel model, String discriminatorValue) {
+        // depth first search
+
+        if (model.getDerivedModels() != null) {
+            for (ClientModel childModel : model.getDerivedModels()) {
+                if (discriminatorValue.equalsIgnoreCase(childModel.getSerializedName())) {
+                    // found
+                    return childModel;
+                } else if (childModel.getDerivedModels() != null) {
+                    // recursive
+                    ClientModel childModel2 = getDerivedModel(childModel, discriminatorValue);
+                    if (childModel2 != null) {
+                        return childModel2;
+                    }
+                }
+            }
+        }
+
+        // not found
+        return null;
     }
 
     private static boolean requiresExample(ClientMethod clientMethod) {
