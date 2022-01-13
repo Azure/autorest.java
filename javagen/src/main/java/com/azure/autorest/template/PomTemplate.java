@@ -94,10 +94,6 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
                 // skip jacoco coverage check
                 propertiesBlock.tag("jacoco.skip", "true");
-                // use new code snippet tooling
-                propertiesBlock.tag("codesnippet.skip", "false");
-                propertiesBlock.tag("javadocDoclet", "");
-                propertiesBlock.tag("javadocDocletOptions", "");
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
