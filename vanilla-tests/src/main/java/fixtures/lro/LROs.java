@@ -38,6 +38,8 @@ import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse
 import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
 import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
 import fixtures.lro.models.LROsPatch200SucceededIgnoreHeadersResponse;
+import fixtures.lro.models.LROsPatch201RetryWithAsyncHeaderResponse;
+import fixtures.lro.models.LROsPatch202RetryWithAsyncAndLocationHeaderResponse;
 import fixtures.lro.models.LROsPost202ListResponse;
 import fixtures.lro.models.LROsPost202NoRetry204Response;
 import fixtures.lro.models.LROsPost202Retry200Response;
@@ -96,6 +98,24 @@ public final class LROs {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LROsPatch200SucceededIgnoreHeadersResponse> patch200SucceededIgnoreHeaders(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Product product,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Patch("/lro/patch/201/retry/onlyAsyncHeader")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeader(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Product product,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Patch("/lro/patch/202/retry/asyncAndLocationHeader")
+        @ExpectedResponses({200, 202})
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse> patch202RetryWithAsyncAndLocationHeader(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -538,6 +558,132 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPatch200SucceededIgnoreHeaders(Product product) {
         return this.beginPatch200SucceededIgnoreHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeaderWithResponseAsync(
+            Product product) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch201RetryWithAsyncHeader(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch201RetryWithAsyncHeaderAsync(Product product) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch201RetryWithAsyncHeader(Product product) {
+        return this.beginPatch201RetryWithAsyncHeaderAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
+            patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.patch202RetryWithAsyncAndLocationHeader(
+                                this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch202RetryWithAsyncAndLocationHeaderAsync(Product product) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch202RetryWithAsyncAndLocationHeader(Product product) {
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderAsync(product).getSyncPoller();
     }
 
     /**
