@@ -232,6 +232,204 @@ public final class LROsAsyncClient {
     }
 
     /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.patch201RetryWithAsyncHeaderWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPatch201RetryWithAsyncHeader(RequestOptions requestOptions) {
+        return this.serviceClient.beginPatch201RetryWithAsyncHeaderAsync(requestOptions);
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponse(
+            RequestOptions requestOptions) {
+        return this.serviceClient.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String
+     *     type: String
+     *     tags: {
+     *         String: String
+     *     }
+     *     location: String
+     *     name: String
+     *     properties: {
+     *         provisioningState: String
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPatch202RetryWithAsyncAndLocationHeader(
+            RequestOptions requestOptions) {
+        return this.serviceClient.beginPatch202RetryWithAsyncAndLocationHeaderAsync(requestOptions);
+    }
+
+    /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
