@@ -1,0 +1,3381 @@
+&id003 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+globalParameters:
+- &id005
+  apiVersions: []
+  extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+    xmsLongRunningOperation: false, xmsSkipUrlEncoding: true}
+  flattened: false
+  implementation: CLIENT
+  language:
+    default: {description: HTTP or HTTPS endpoint for the Web PubSub service instance.,
+      name: Endpoint, serializedName: Endpoint}
+    java: {description: HTTP or HTTPS endpoint for the Web PubSub service instance.,
+      name: endpoint, serializedName: Endpoint}
+  nullable: false
+  operation: &id008
+    apiVersions:
+    - {version: '2021-10-01'}
+    exceptions:
+    - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+        xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+      language:
+        default: {description: Error response, name: ''}
+      protocol:
+        http:
+          explode: false
+          headers:
+          - header: x-ms-error-code
+            schema: &id118 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: String}
+              maxLength: 0.0
+              minLength: 0.0
+              protocol: {}
+              type: STRING
+          knownMediaType: JSON
+          mediaTypes: [application/json, text/json]
+          statusCodes: [default]
+      schema: &id001 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+        apiVersions:
+        - {version: '2021-10-01'}
+        flattenedSchema: false
+        language:
+          default: {description: The error object., name: ErrorDetail}
+          java: {description: The error object., name: ErrorDetail}
+        maxProperties: 0.0
+        minProperties: 0.0
+        properties:
+        - apiVersions: []
+          isDiscriminator: false
+          language:
+            default: {description: One of a server-defined set of error codes., name: code}
+            java: {description: One of a server-defined set of error codes., name: code}
+          nullable: false
+          protocol: {}
+          readOnly: false
+          required: false
+          schema: &id140 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: One of a server-defined set of error codes.,
+                name: ErrorDetailCode}
+            maxLength: 0.0
+            minLength: 0.0
+            protocol: {}
+            type: STRING
+          serializedName: code
+        - apiVersions: []
+          isDiscriminator: false
+          language:
+            default: {description: A human-readable representation of the error.,
+              name: message}
+            java: {description: A human-readable representation of the error., name: message}
+          nullable: false
+          protocol: {}
+          readOnly: false
+          required: false
+          schema: &id141 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: A human-readable representation of the error.,
+                name: ErrorDetailMessage}
+            maxLength: 0.0
+            minLength: 0.0
+            protocol: {}
+            type: STRING
+          serializedName: message
+        - apiVersions: []
+          isDiscriminator: false
+          language:
+            default: {description: The target of the error., name: target}
+            java: {description: The target of the error., name: target}
+          nullable: false
+          protocol: {}
+          readOnly: false
+          required: false
+          schema: &id142 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: The target of the error., name: ErrorDetailTarget}
+            maxLength: 0.0
+            minLength: 0.0
+            protocol: {}
+            type: STRING
+          serializedName: target
+        - apiVersions: []
+          isDiscriminator: false
+          language:
+            default: {description: An array of details about specific errors that
+                led to this reported error., name: details}
+            java: {description: An array of details about specific errors that led
+                to this reported error., name: details}
+          nullable: false
+          protocol: {}
+          readOnly: false
+          required: false
+          schema: &id125 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: *id001
+            language:
+              default: {description: An array of details about specific errors that
+                  led to this reported error., name: ErrorDetailDetails}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+          serializedName: details
+        - apiVersions: []
+          isDiscriminator: false
+          language:
+            default: {description: '', name: inner}
+            java: {description: '', name: inner}
+          nullable: false
+          protocol: {}
+          readOnly: false
+          required: false
+          schema: &id002 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            flattenedSchema: false
+            language:
+              default: {description: '', name: InnerError}
+              java: {description: '', name: InnerError}
+            maxProperties: 0.0
+            minProperties: 0.0
+            properties:
+            - apiVersions: []
+              isDiscriminator: false
+              language:
+                default: {description: A more specific error code than was provided
+                    by the containing error., name: code}
+                java: {description: A more specific error code than was provided by
+                    the containing error., name: code}
+              nullable: false
+              protocol: {}
+              readOnly: false
+              required: false
+              schema: &id143 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                apiVersions:
+                - {version: '2021-10-01'}
+                language:
+                  default: {description: A more specific error code than was provided
+                      by the containing error., name: InnerErrorCode}
+                maxLength: 0.0
+                minLength: 0.0
+                protocol: {}
+                type: STRING
+              serializedName: code
+            - apiVersions: []
+              isDiscriminator: false
+              language:
+                default: {description: '', name: inner}
+                java: {description: '', name: inner}
+              nullable: false
+              protocol: {}
+              readOnly: false
+              required: false
+              schema: *id002
+              serializedName: inner
+            protocol: {}
+            type: OBJECT
+          serializedName: inner
+        protocol: {}
+        type: OBJECT
+    language:
+      default: {description: Check if a connection has permission to the specified
+          action., name: CheckPermission}
+      java: {description: Check if a connection has permission to the specified action.,
+        name: checkPermission}
+    operationGroup: &id004
+      $key: WebPubSub
+      codeModel: *id003
+      language:
+        default: {description: '', name: WebPubSub}
+        java: {description: '', name: WebPubSub}
+      operations:
+      - &id006
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id007 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Generate token for the client to connect Azure Web
+              PubSub service., name: GenerateClientToken}
+          java: {description: Generate token for the client to connect Azure Web PubSub
+              service., name: generateClientToken}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id009
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id006
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: &id016 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: '', name: String}
+            maxLength: 0.0
+            minLength: 0.0
+            pattern: ^[A-Za-z][A-Za-z0-9_`,.[\]]{0,127}$
+            protocol: {}
+            type: STRING
+        - &id010
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: User Id., name: userId, serializedName: userId}
+            java: {description: User Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id006
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id007
+        - &id011
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Roles that the connection with the generated token
+                will have., name: role, serializedName: role}
+            java: {description: Roles that the connection with the generated token
+                will have., name: role, serializedName: role}
+          nullable: false
+          operation: *id006
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id124 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: &id138 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: Post2ItemsItem}
+              maxLength: 0.0
+              minLength: 0.0
+              protocol: {}
+              type: STRING
+            language:
+              default: {description: Array of Post2ItemsItem, name: ArrayOfPost2ItemsItem}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - &id012
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The expire time of the generated token., name: minutesToExpire,
+              serializedName: minutesToExpire}
+            java: {description: The expire time of the generated token., name: minutesToExpire,
+              serializedName: minutesToExpire}
+          nullable: false
+          operation: *id006
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: &id136 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            defaultValue: 60
+            exclusiveMaximum: false
+            exclusiveMinimum: false
+            language:
+              default: {description: '', name: Integer}
+            maximum: 0.0
+            minimum: 0.0
+            multipleOf: 0.0
+            precision: 32.0
+            protocol: {}
+            type: INTEGER
+        - &id013
+          apiVersions: []
+          flattened: false
+          implementation: CLIENT
+          language:
+            default: {description: Api Version, name: apiVersion, serializedName: api-version}
+            java: {description: Api Version, name: apiVersion, serializedName: api-version}
+          nullable: false
+          operation: *id008
+          origin: modelerfour:synthesized/api-version
+          protocol:
+            http: {explode: false, in: Query}
+          required: true
+          schema: &id135 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+            apiVersions: []
+            language:
+              default: {description: Api Version (2021-10-01), name: ApiVersion20211001}
+            protocol: {}
+            type: CONSTANT
+            value: {value: '2021-10-01'}
+            valueType: &id014 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              apiVersions: []
+              language:
+                default: {description: simple string, name: String}
+              maxLength: 0.0
+              minLength: 0.0
+              protocol: {}
+              type: STRING
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id009
+          - *id010
+          - *id011
+          - *id012
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id006
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: &id021 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+              apiVersions: []
+              language:
+                default: {description: 'Accept: application/json, text/json', name: Accept}
+              protocol: {}
+              type: CONSTANT
+              value: {value: 'application/json, text/json'}
+              valueType: *id014
+          protocol:
+            http: {explode: false, method: post, path: '/api/hubs/{hub}/:generateToken',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id009
+          - *id010
+          - *id011
+          - *id012
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: ['200']
+          schema: &id137 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            flattenedSchema: false
+            language:
+              default: {description: The response object containing the token for
+                  the client, name: ClientTokenResponse}
+              java: {description: The response object containing the token for the
+                  client, name: ClientTokenResponse}
+            maxProperties: 0.0
+            minProperties: 0.0
+            properties:
+            - apiVersions: []
+              isDiscriminator: false
+              language:
+                default: {description: The token value for the WebSocket client to
+                    connect to the service, name: token}
+                java: {description: The token value for the WebSocket client to connect
+                    to the service, name: token}
+              nullable: false
+              protocol: {}
+              readOnly: false
+              required: false
+              schema: &id139 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                apiVersions:
+                - {version: '2021-10-01'}
+                language:
+                  default: {description: The token value for the WebSocket client
+                      to connect to the service, name: ClientTokenResponseToken}
+                maxLength: 0.0
+                minLength: 0.0
+                protocol: {}
+                type: STRING
+              serializedName: token
+            protocol: {}
+            type: OBJECT
+        signatureParameters:
+        - *id009
+        - *id010
+        - *id011
+        - *id012
+      - &id015
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id017 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Close the connections in the hub., name: CloseAllConnections}
+          java: {description: Close the connections in the hub., name: closeAllConnections}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id018
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id015
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id019
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Exclude these connectionIds when closing the connections
+                in the hub., name: excluded, serializedName: excluded}
+            java: {description: Exclude these connectionIds when closing the connections
+                in the hub., name: excluded, serializedName: excluded}
+          nullable: false
+          operation: *id015
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id126 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: &id144 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: Post1ItemsItem}
+              maxLength: 0.0
+              minLength: 0.0
+              protocol: {}
+              type: STRING
+            language:
+              default: {description: Array of Post1ItemsItem, name: ArrayOfPost1ItemsItem}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - &id020
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+            java: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+          nullable: false
+          operation: *id015
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id017
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id018
+          - *id019
+          - *id020
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id015
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: post, path: '/api/hubs/{hub}/:closeConnections',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id018
+          - *id019
+          - *id020
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id018
+        - *id019
+        - *id020
+      - &id022
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id023 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Broadcast content inside request body to all the
+              connected client connections., name: SendToAll}
+          java: {description: Broadcast content inside request body to all the connected
+              client connections., name: sendToAll}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id024
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id022
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id025
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Excluded connection Ids., name: excluded, serializedName: excluded}
+            java: {description: Excluded connection Ids., name: excluded, serializedName: excluded}
+          nullable: false
+          operation: *id022
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id127 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: *id023
+            language:
+              default: {description: Array of String, name: ArrayOfString}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id024
+          - *id025
+          - *id013
+          - &id027
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Upload file type, name: contentType, serializedName: Content-Type}
+              java: {description: Upload file type, name: contentType, serializedName: Content-Type}
+            nullable: false
+            operation: *id022
+            origin: modelerfour:synthesized/content-type
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: &id043 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
+              apiVersions: []
+              choiceType: *id014
+              choices:
+              - language:
+                  default: {description: Content Type 'application/json', name: APPLICATION_JSON}
+                value: application/json
+              - language:
+                  default: {description: Content Type 'application/octet-stream',
+                    name: APPLICATION_OCTET_STREAM}
+                value: application/octet-stream
+              language:
+                default: {description: Content type for upload, name: ContentType}
+                java: {description: Content type for upload, name: ContentType}
+              protocol: {}
+              type: SEALED_CHOICE
+          - &id028
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id022
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: &id131 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: binary}
+              protocol: {}
+              type: BINARY
+          - &id029
+            apiVersions: []
+            description: The Content-Length header for the request
+            flattened: false
+            implementation: METHOD
+            language:
+              default: &id026 {name: contentLength, serializedName: Content-Length}
+              java: *id026
+            nullable: false
+            operation: *id022
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+              apiVersions: []
+              exclusiveMaximum: false
+              exclusiveMinimum: false
+              maximum: 0.0
+              minimum: 0.0
+              multipleOf: 0.0
+              precision: 64.0
+              type: INTEGER
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id022
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: BINARY
+              mediaTypes: [application/json, application/octet-stream]
+              method: post
+              path: /api/hubs/{hub}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id024
+          - *id025
+          - *id027
+          - *id028
+          - *id029
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id024
+          - *id025
+          - *id013
+          - &id030
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id022
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: *id014
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id022
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: TEXT
+              mediaTypes: [text/plain]
+              method: post
+              path: /api/hubs/{hub}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id024
+          - *id025
+          - *id030
+        responses:
+        - language:
+            default: {description: The message is accepted. The service follows fire-and-forget
+                pattern when sending messages., name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['202']
+        signatureParameters:
+        - *id024
+        - *id025
+      - &id031
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id145 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Check if the connection with the given connectionId
+              exists., name: ConnectionExists}
+          java: {description: Check if the connection with the given connectionId
+              exists., name: connectionExists}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id032
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id031
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id033
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: The connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id031
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: &id035 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: '', name: String}
+            maxLength: 0.0
+            minLength: 1.0
+            protocol: {}
+            type: STRING
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id032
+          - *id033
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id031
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: head, path: '/api/hubs/{hub}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id032
+          - *id033
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        - language:
+            default: {description: Not Found, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['404']
+        signatureParameters:
+        - *id032
+        - *id033
+      - &id034
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id036 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Close the client connection., name: CloseConnection}
+          java: {description: Close the client connection., name: closeConnection}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id037
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id034
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id038
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id034
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - &id039
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+            java: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+          nullable: false
+          operation: *id034
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id036
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id037
+          - *id038
+          - *id039
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id034
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: delete, path: '/api/hubs/{hub}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id037
+          - *id038
+          - *id039
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id037
+        - *id038
+        - *id039
+      - &id040
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id146 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Send content inside request body to the specific
+              connection., name: SendToConnection}
+          java: {description: Send content inside request body to the specific connection.,
+            name: sendToConnection}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id041
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id040
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id042
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: The connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id040
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id041
+          - *id042
+          - *id013
+          - &id045
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Upload file type, name: contentType, serializedName: Content-Type}
+              java: {description: Upload file type, name: contentType, serializedName: Content-Type}
+            nullable: false
+            operation: *id040
+            origin: modelerfour:synthesized/content-type
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id043
+          - &id046
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id040
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: &id132 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: binary}
+              protocol: {}
+              type: BINARY
+          - &id047
+            apiVersions: []
+            description: The Content-Length header for the request
+            flattened: false
+            implementation: METHOD
+            language:
+              default: &id044 {name: contentLength, serializedName: Content-Length}
+              java: *id044
+            nullable: false
+            operation: *id040
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+              apiVersions: []
+              exclusiveMaximum: false
+              exclusiveMinimum: false
+              maximum: 0.0
+              minimum: 0.0
+              multipleOf: 0.0
+              precision: 64.0
+              type: INTEGER
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id040
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: BINARY
+              mediaTypes: [application/json, application/octet-stream]
+              method: post
+              path: /api/hubs/{hub}/connections/{connectionId}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id041
+          - *id042
+          - *id045
+          - *id046
+          - *id047
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id041
+          - *id042
+          - *id013
+          - &id048
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id040
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: *id014
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id040
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: TEXT
+              mediaTypes: [text/plain]
+              method: post
+              path: /api/hubs/{hub}/connections/{connectionId}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id041
+          - *id042
+          - *id048
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['202']
+        signatureParameters:
+        - *id041
+        - *id042
+      - &id049
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id147 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Check if there are any client connections inside
+              the given group, name: GroupExists}
+          java: {description: Check if there are any client connections inside the
+              given group, name: groupExists}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id050
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id049
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id051
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id049
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: &id053 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            language:
+              default: {description: '', name: String}
+            maxLength: 1024.0
+            minLength: 1.0
+            protocol: {}
+            type: STRING
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id050
+          - *id051
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id049
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: head, path: '/api/hubs/{hub}/groups/{group}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id050
+          - *id051
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        - language:
+            default: {description: Not Found, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['404']
+        signatureParameters:
+        - *id050
+        - *id051
+      - &id052
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id054 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Close connections in the specific group., name: CloseGroupConnections}
+          java: {description: Close connections in the specific group., name: closeGroupConnections}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id055
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id052
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id056
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id052
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id057
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Exclude these connectionIds when closing the connections
+                in the group., name: excluded, serializedName: excluded}
+            java: {description: Exclude these connectionIds when closing the connections
+                in the group., name: excluded, serializedName: excluded}
+          nullable: false
+          operation: *id052
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id128 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: *id054
+            language:
+              default: {description: Array of String, name: ArrayOfString}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - &id058
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+            java: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+          nullable: false
+          operation: *id052
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id054
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id055
+          - *id056
+          - *id057
+          - *id058
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id052
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: post, path: '/api/hubs/{hub}/groups/{group}/:closeConnections',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id055
+          - *id056
+          - *id057
+          - *id058
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id055
+        - *id056
+        - *id057
+        - *id058
+      - &id059
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id060 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Send content inside request body to a group of connections.,
+            name: SendToGroup}
+          java: {description: Send content inside request body to a group of connections.,
+            name: sendToGroup}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id061
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id059
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id062
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id059
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id063
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Excluded connection Ids, name: excluded, serializedName: excluded}
+            java: {description: Excluded connection Ids, name: excluded, serializedName: excluded}
+          nullable: false
+          operation: *id059
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id129 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: *id060
+            language:
+              default: {description: Array of String, name: ArrayOfString}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id061
+          - *id062
+          - *id063
+          - *id013
+          - &id065
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Upload file type, name: contentType, serializedName: Content-Type}
+              java: {description: Upload file type, name: contentType, serializedName: Content-Type}
+            nullable: false
+            operation: *id059
+            origin: modelerfour:synthesized/content-type
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id043
+          - &id066
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id059
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: &id133 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: binary}
+              protocol: {}
+              type: BINARY
+          - &id067
+            apiVersions: []
+            description: The Content-Length header for the request
+            flattened: false
+            implementation: METHOD
+            language:
+              default: &id064 {name: contentLength, serializedName: Content-Length}
+              java: *id064
+            nullable: false
+            operation: *id059
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+              apiVersions: []
+              exclusiveMaximum: false
+              exclusiveMinimum: false
+              maximum: 0.0
+              minimum: 0.0
+              multipleOf: 0.0
+              precision: 64.0
+              type: INTEGER
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id059
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: BINARY
+              mediaTypes: [application/json, application/octet-stream]
+              method: post
+              path: /api/hubs/{hub}/groups/{group}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id061
+          - *id062
+          - *id063
+          - *id065
+          - *id066
+          - *id067
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id061
+          - *id062
+          - *id063
+          - *id013
+          - &id068
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id059
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: *id014
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id059
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: TEXT
+              mediaTypes: [text/plain]
+              method: post
+              path: /api/hubs/{hub}/groups/{group}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id061
+          - *id062
+          - *id063
+          - *id068
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['202']
+        signatureParameters:
+        - *id061
+        - *id062
+        - *id063
+      - &id069
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id148 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Add a connection to the target group., name: AddConnectionToGroup}
+          java: {description: Add a connection to the target group., name: addConnectionToGroup}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id070
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id069
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id071
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id069
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id072
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target connection Id, name: connectionId, serializedName: connectionId}
+            java: {description: Target connection Id, name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id069
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id070
+          - *id071
+          - *id072
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id069
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: put, path: '/api/hubs/{hub}/groups/{group}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id070
+          - *id071
+          - *id072
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        signatureParameters:
+        - *id070
+        - *id071
+        - *id072
+      - &id073
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id149 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Remove a connection from the target group., name: RemoveConnectionFromGroup}
+          java: {description: Remove a connection from the target group., name: removeConnectionFromGroup}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id074
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id073
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id075
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id073
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id076
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id073
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id074
+          - *id075
+          - *id076
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id073
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: delete, path: '/api/hubs/{hub}/groups/{group}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id074
+          - *id075
+          - *id076
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id074
+        - *id075
+        - *id076
+      - &id077
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id150 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Check if there are any client connections connected
+              for the given user., name: UserExists}
+          java: {description: Check if there are any client connections connected
+              for the given user., name: userExists}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id078
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id077
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id079
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target user Id., name: userId, serializedName: userId}
+            java: {description: Target user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id077
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id078
+          - *id079
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id077
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: head, path: '/api/hubs/{hub}/users/{userId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id078
+          - *id079
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        - language:
+            default: {description: Not Found, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['404']
+        signatureParameters:
+        - *id078
+        - *id079
+      - &id080
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id081 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Close connections for the specific user., name: CloseUserConnections}
+          java: {description: Close connections for the specific user., name: closeUserConnections}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id082
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id080
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id083
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The user Id., name: userId, serializedName: userId}
+            java: {description: The user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id080
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - &id084
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Exclude these connectionIds when closing the connections
+                for the user., name: excluded, serializedName: excluded}
+            java: {description: Exclude these connectionIds when closing the connections
+                for the user., name: excluded, serializedName: excluded}
+          nullable: false
+          operation: *id080
+          protocol:
+            http: {explode: true, in: Query, style: FORM}
+          required: false
+          schema: &id130 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            elementType: *id081
+            language:
+              default: {description: Array of String, name: ArrayOfString}
+            maxItems: 0.0
+            minItems: 0.0
+            protocol: {}
+            type: ARRAY
+            uniqueItems: false
+        - &id085
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+            java: {description: The reason closing the client connection., name: reason,
+              serializedName: reason}
+          nullable: false
+          operation: *id080
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id081
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id082
+          - *id083
+          - *id084
+          - *id085
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id080
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: post, path: '/api/hubs/{hub}/users/{userId}/:closeConnections',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id082
+          - *id083
+          - *id084
+          - *id085
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id082
+        - *id083
+        - *id084
+        - *id085
+      - &id086
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id151 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Send content inside request body to the specific
+              user., name: SendToUser}
+          java: {description: Send content inside request body to the specific user.,
+            name: sendToUser}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id087
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id086
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id088
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: The user Id., name: userId, serializedName: userId}
+            java: {description: The user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id086
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id087
+          - *id088
+          - *id013
+          - &id090
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Upload file type, name: contentType, serializedName: Content-Type}
+              java: {description: Upload file type, name: contentType, serializedName: Content-Type}
+            nullable: false
+            operation: *id086
+            origin: modelerfour:synthesized/content-type
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id043
+          - &id091
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id086
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: &id134 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+              apiVersions:
+              - {version: '2021-10-01'}
+              language:
+                default: {description: '', name: binary}
+              protocol: {}
+              type: BINARY
+          - &id092
+            apiVersions: []
+            description: The Content-Length header for the request
+            flattened: false
+            implementation: METHOD
+            language:
+              default: &id089 {name: contentLength, serializedName: Content-Length}
+              java: *id089
+            nullable: false
+            operation: *id086
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+              apiVersions: []
+              exclusiveMaximum: false
+              exclusiveMinimum: false
+              maximum: 0.0
+              minimum: 0.0
+              multipleOf: 0.0
+              precision: 64.0
+              type: INTEGER
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id086
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: BINARY
+              mediaTypes: [application/json, application/octet-stream]
+              method: post
+              path: /api/hubs/{hub}/users/{userId}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id087
+          - *id088
+          - *id090
+          - *id091
+          - *id092
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id087
+          - *id088
+          - *id013
+          - &id093
+            apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: The payload body., name: message}
+              java: {description: The payload body., name: message}
+            nullable: false
+            operation: *id086
+            protocol:
+              http: {explode: false, in: Body, style: BINARY}
+            required: true
+            schema: *id014
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id086
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http:
+              explode: false
+              knownMediaType: TEXT
+              mediaTypes: [text/plain]
+              method: post
+              path: /api/hubs/{hub}/users/{userId}/:send
+              uri: '{Endpoint}'
+          signatureParameters:
+          - *id087
+          - *id088
+          - *id093
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['202']
+        signatureParameters:
+        - *id087
+        - *id088
+      - &id094
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id152 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Add a user to the target group., name: AddUserToGroup}
+          java: {description: Add a user to the target group., name: addUserToGroup}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id095
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id094
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id096
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id094
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id097
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target user Id., name: userId, serializedName: userId}
+            java: {description: Target user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id094
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id095
+          - *id096
+          - *id097
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id094
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: put, path: '/api/hubs/{hub}/users/{userId}/groups/{group}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id095
+          - *id096
+          - *id097
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        signatureParameters:
+        - *id095
+        - *id096
+        - *id097
+      - &id098
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id153 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Remove a user from the target group., name: RemoveUserFromGroup}
+          java: {description: Remove a user from the target group., name: removeUserFromGroup}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id099
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id098
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id100
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+            java: {description: 'Target group name, which length should be greater
+                than 0 and less than 1025.', name: group, serializedName: group}
+          nullable: false
+          operation: *id098
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id053
+        - &id101
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target user Id., name: userId, serializedName: userId}
+            java: {description: Target user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id098
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id099
+          - *id100
+          - *id101
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id098
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: delete, path: '/api/hubs/{hub}/users/{userId}/groups/{group}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id099
+          - *id100
+          - *id101
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id099
+        - *id100
+        - *id101
+      - &id102
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id154 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Remove a user from all groups., name: RemoveUserFromAllGroups}
+          java: {description: Remove a user from all groups., name: removeUserFromAllGroups}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id103
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id102
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id104
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target user Id., name: userId, serializedName: userId}
+            java: {description: Target user Id., name: userId, serializedName: userId}
+          nullable: false
+          operation: *id102
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id103
+          - *id104
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id102
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: delete, path: '/api/hubs/{hub}/users/{userId}/groups',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id103
+          - *id104
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id103
+        - *id104
+      - &id105
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id106 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Grant permission to the connection., name: GrantPermission}
+          java: {description: Grant permission to the connection., name: grantPermission}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id107
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id105
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id108
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'The permission: current supported actions are
+                joinLeaveGroup and sendToGroup.', name: permission, serializedName: permission}
+            java: {description: 'The permission: current supported actions are joinLeaveGroup
+                and sendToGroup.', name: permission, serializedName: permission}
+          nullable: false
+          operation: *id105
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: &id112 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+            apiVersions:
+            - {version: '2021-10-01'}
+            choiceType: *id014
+            choices:
+            - language:
+                default: {description: '', name: SEND_TO_GROUP}
+              value: sendToGroup
+            - language:
+                default: {description: '', name: JOIN_LEAVE_GROUP}
+              value: joinLeaveGroup
+            language:
+              default: {description: '', name: WebPubSubPermission}
+              java: {description: '', name: WebPubSubPermission}
+            protocol: {}
+            type: CHOICE
+        - &id109
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id105
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - &id110
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'The meaning of the target depends on the specific
+                permission. For joinLeaveGroup and sendToGroup, targetName is a required
+                parameter standing for the group name.', name: targetName, serializedName: targetName}
+            java: {description: 'The meaning of the target depends on the specific
+                permission. For joinLeaveGroup and sendToGroup, targetName is a required
+                parameter standing for the group name.', name: targetName, serializedName: targetName}
+          nullable: false
+          operation: *id105
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id106
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id107
+          - *id108
+          - *id109
+          - *id110
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id105
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: put, path: '/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id107
+          - *id108
+          - *id109
+          - *id110
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['200']
+        signatureParameters:
+        - *id107
+        - *id108
+        - *id109
+        - *id110
+      - &id111
+        apiVersions:
+        - {version: '2021-10-01'}
+        exceptions:
+        - extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
+            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
+          language:
+            default: {description: Error response, name: ''}
+          protocol:
+            http:
+              explode: false
+              headers:
+              - header: x-ms-error-code
+                schema: &id113 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  apiVersions:
+                  - {version: '2021-10-01'}
+                  language:
+                    default: {description: '', name: String}
+                  maxLength: 0.0
+                  minLength: 0.0
+                  protocol: {}
+                  type: STRING
+              knownMediaType: JSON
+              mediaTypes: [application/json, text/json]
+              statusCodes: [default]
+          schema: *id001
+        language:
+          default: {description: Revoke permission for the connection., name: RevokePermission}
+          java: {description: Revoke permission for the connection., name: revokePermission}
+        operationGroup: *id004
+        parameters:
+        - *id005
+        - &id114
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+            java: {description: 'Target hub name, which should start with alphabetic
+                characters and only contain alpha-numeric characters or underscore.',
+              name: hub, serializedName: hub}
+          nullable: false
+          operation: *id111
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id016
+        - &id115
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'The permission: current supported actions are
+                joinLeaveGroup and sendToGroup.', name: permission, serializedName: permission}
+            java: {description: 'The permission: current supported actions are joinLeaveGroup
+                and sendToGroup.', name: permission, serializedName: permission}
+          nullable: false
+          operation: *id111
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id112
+        - &id116
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+            java: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+          nullable: false
+          operation: *id111
+          protocol:
+            http: {explode: false, in: Path}
+          required: true
+          schema: *id035
+        - &id117
+          apiVersions: []
+          flattened: false
+          implementation: METHOD
+          language:
+            default: {description: 'The meaning of the target depends on the specific
+                permission. For joinLeaveGroup and sendToGroup, targetName is a required
+                parameter standing for the group name.', name: targetName, serializedName: targetName}
+            java: {description: 'The meaning of the target depends on the specific
+                permission. For joinLeaveGroup and sendToGroup, targetName is a required
+                parameter standing for the group name.', name: targetName, serializedName: targetName}
+          nullable: false
+          operation: *id111
+          protocol:
+            http: {explode: false, in: Query}
+          required: false
+          schema: *id113
+        - *id013
+        protocol: {}
+        requests:
+        - language:
+            default: {description: '', name: ''}
+          parameters:
+          - *id005
+          - *id114
+          - *id115
+          - *id116
+          - *id117
+          - *id013
+          - apiVersions: []
+            flattened: false
+            implementation: METHOD
+            language:
+              default: {description: Accept header, name: accept, serializedName: Accept}
+              java: {description: Accept header, name: accept, serializedName: Accept}
+            nullable: false
+            operation: *id111
+            origin: modelerfour:synthesized/accept
+            protocol:
+              http: {explode: false, in: Header}
+            required: true
+            schema: *id021
+          protocol:
+            http: {explode: false, method: delete, path: '/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}',
+              uri: '{Endpoint}'}
+          signatureParameters:
+          - *id114
+          - *id115
+          - *id116
+          - *id117
+        responses:
+        - language:
+            default: {description: Success, name: ''}
+          protocol:
+            http:
+              explode: false
+              statusCodes: ['204']
+        signatureParameters:
+        - *id114
+        - *id115
+        - *id116
+        - *id117
+      - *id008
+      protocol: {}
+    parameters:
+    - *id005
+    - &id119
+      apiVersions: []
+      flattened: false
+      implementation: METHOD
+      language:
+        default: {description: 'Target hub name, which should start with alphabetic
+            characters and only contain alpha-numeric characters or underscore.',
+          name: hub, serializedName: hub}
+        java: {description: 'Target hub name, which should start with alphabetic characters
+            and only contain alpha-numeric characters or underscore.', name: hub,
+          serializedName: hub}
+      nullable: false
+      operation: *id008
+      protocol:
+        http: {explode: false, in: Path}
+      required: true
+      schema: *id016
+    - &id120
+      apiVersions: []
+      flattened: false
+      implementation: METHOD
+      language:
+        default: {description: 'The permission: current supported actions are joinLeaveGroup
+            and sendToGroup.', name: permission, serializedName: permission}
+        java: {description: 'The permission: current supported actions are joinLeaveGroup
+            and sendToGroup.', name: permission, serializedName: permission}
+      nullable: false
+      operation: *id008
+      protocol:
+        http: {explode: false, in: Path}
+      required: true
+      schema: *id112
+    - &id121
+      apiVersions: []
+      flattened: false
+      implementation: METHOD
+      language:
+        default: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+        java: {description: Target connection Id., name: connectionId, serializedName: connectionId}
+      nullable: false
+      operation: *id008
+      protocol:
+        http: {explode: false, in: Path}
+      required: true
+      schema: *id035
+    - &id122
+      apiVersions: []
+      flattened: false
+      implementation: METHOD
+      language:
+        default: {description: 'The meaning of the target depends on the specific
+            permission. For joinLeaveGroup and sendToGroup, targetName is a required
+            parameter standing for the group name.', name: targetName, serializedName: targetName}
+        java: {description: 'The meaning of the target depends on the specific permission.
+            For joinLeaveGroup and sendToGroup, targetName is a required parameter
+            standing for the group name.', name: targetName, serializedName: targetName}
+      nullable: false
+      operation: *id008
+      protocol:
+        http: {explode: false, in: Query}
+      required: false
+      schema: *id118
+    - *id013
+    protocol: {}
+    requests:
+    - language:
+        default: {description: '', name: ''}
+      parameters:
+      - *id005
+      - *id119
+      - *id120
+      - *id121
+      - *id122
+      - *id013
+      - apiVersions: []
+        flattened: false
+        implementation: METHOD
+        language:
+          default: {description: Accept header, name: accept, serializedName: Accept}
+          java: {description: Accept header, name: accept, serializedName: Accept}
+        nullable: false
+        operation: *id008
+        origin: modelerfour:synthesized/accept
+        protocol:
+          http: {explode: false, in: Header}
+        required: true
+        schema: *id021
+      protocol:
+        http: {explode: false, method: head, path: '/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}',
+          uri: '{Endpoint}'}
+      signatureParameters:
+      - *id119
+      - *id120
+      - *id121
+      - *id122
+    responses:
+    - language:
+        default: {description: Success, name: ''}
+      protocol:
+        http:
+          explode: false
+          statusCodes: ['200']
+    - language:
+        default: {description: Not Found, name: ''}
+      protocol:
+        http:
+          explode: false
+          statusCodes: ['404']
+    signatureParameters:
+    - *id119
+    - *id120
+    - *id121
+    - *id122
+  protocol:
+    http: {explode: false, in: Uri}
+  required: true
+  schema: *id014
+- *id013
+info: {title: Azure Web PubSub Service REST API}
+language:
+  default: {description: '', name: AzureWebPubSubServiceRestApi}
+  java: {description: '', name: AzureWebPubSubServiceRestApi}
+operationGroups:
+- &id123
+  $key: HealthApi
+  codeModel: *id003
+  language:
+    default: {description: '', name: HealthApi}
+    java: {description: '', name: HealthApi}
+  operations:
+  - apiVersions:
+    - {version: '2021-10-01'}
+    exceptions:
+    - language:
+        default: {description: Error response, name: ''}
+      protocol:
+        http:
+          explode: false
+          statusCodes: [default]
+    language:
+      default: {description: Get service health status., name: GetServiceStatus}
+      java: {description: Get service health status., name: getServiceStatus}
+    operationGroup: *id123
+    parameters:
+    - *id005
+    - *id013
+    protocol: {}
+    requests:
+    - language:
+        default: {description: '', name: ''}
+      parameters:
+      - *id005
+      - *id013
+      protocol:
+        http: {explode: false, method: head, path: /api/health, uri: '{Endpoint}'}
+      signatureParameters: []
+    responses:
+    - language:
+        default: {description: The service is healthy, name: ''}
+      protocol:
+        http:
+          explode: false
+          statusCodes: ['200']
+    signatureParameters: []
+  protocol: {}
+- *id004
+protocol:
+  http: {explode: false}
+schemas:
+  ands: []
+  arrays:
+  - *id124
+  - *id125
+  - *id126
+  - *id127
+  - *id128
+  - *id129
+  - *id130
+  binaries:
+  - *id131
+  - *id132
+  - *id133
+  - *id134
+  booleans: []
+  byteArrays: []
+  chars: []
+  choices:
+  - *id112
+  constants:
+  - *id135
+  - *id021
+  credentials: []
+  dateTimes: []
+  dates: []
+  dictionaries: []
+  durations: []
+  flags: []
+  groups: []
+  numbers:
+  - *id136
+  objects:
+  - *id137
+  - *id001
+  - *id002
+  odataQueries: []
+  ors: []
+  parameterGroups: []
+  sealedChoices:
+  - *id043
+  streams: []
+  strings:
+  - *id014
+  - *id016
+  - *id007
+  - *id138
+  - *id139
+  - *id140
+  - *id141
+  - *id142
+  - *id143
+  - *id144
+  - *id017
+  - *id023
+  - *id035
+  - *id145
+  - *id036
+  - *id146
+  - *id053
+  - *id147
+  - *id054
+  - *id060
+  - *id148
+  - *id149
+  - *id150
+  - *id081
+  - *id151
+  - *id152
+  - *id153
+  - *id154
+  - *id106
+  - *id113
+  - *id118
+  - apiVersions:
+    - {version: '2021-10-01'}
+    language:
+      default: {description: '', name: String}
+    maxLength: 0.0
+    minLength: 0.0
+    protocol: {}
+    type: STRING
+  unixtimes: []
+  unknowns: []
+  uris: []
+  uuids: []
+  xors: []

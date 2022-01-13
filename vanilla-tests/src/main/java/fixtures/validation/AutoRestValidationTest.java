@@ -206,7 +206,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> validationOfMethodParametersWithResponseAsync(String resourceGroupName, int id) {
@@ -242,7 +242,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
@@ -281,7 +281,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> validationOfBodyWithResponseAsync(String resourceGroupName, int id, Product body) {
@@ -322,7 +322,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
@@ -345,7 +345,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id) {
@@ -396,7 +396,7 @@ public final class AutoRestValidationTest {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithConstantInPathWithResponseAsync() {
@@ -410,7 +410,7 @@ public final class AutoRestValidationTest {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getWithConstantInPathAsync() {
@@ -431,7 +431,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> postWithConstantInBodyWithResponseAsync(Product body) {
@@ -452,7 +452,7 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> postWithConstantInBodyAsync(Product body) {
@@ -470,7 +470,7 @@ public final class AutoRestValidationTest {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the product documentation.
+     * @return the product documentation on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> postWithConstantInBodyAsync() {

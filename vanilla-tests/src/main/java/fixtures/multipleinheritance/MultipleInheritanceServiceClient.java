@@ -200,7 +200,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a horse with name 'Fred' and isAShowHorse true.
+     * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Horse>> getHorseWithResponseAsync() {
@@ -216,7 +217,7 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a horse with name 'Fred' and isAShowHorse true.
+     * @return a horse with name 'Fred' and isAShowHorse true on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Horse> getHorseAsync() {
@@ -250,7 +251,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putHorseWithResponseAsync(Horse horse) {
@@ -273,7 +274,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putHorseAsync(Horse horse) {
@@ -307,7 +308,7 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a pet with name 'Peanut'.
+     * @return a pet with name 'Peanut' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getPetWithResponseAsync() {
@@ -323,7 +324,7 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a pet with name 'Peanut'.
+     * @return a pet with name 'Peanut' on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getPetAsync() {
@@ -357,7 +358,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putPetWithResponseAsync(Pet pet) {
@@ -380,7 +381,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putPetAsync(Pet pet) {
@@ -414,7 +415,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a feline where meows and hisses are true.
+     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Feline>> getFelineWithResponseAsync() {
@@ -430,7 +432,7 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a feline where meows and hisses are true.
+     * @return a feline where meows and hisses are true on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Feline> getFelineAsync() {
@@ -464,7 +466,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putFelineWithResponseAsync(Feline feline) {
@@ -487,7 +489,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putFelineAsync(Feline feline) {
@@ -521,7 +523,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response} on
+     *     successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Cat>> getCatWithResponseAsync() {
@@ -537,7 +540,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Cat> getCatAsync() {
@@ -571,7 +575,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putCatWithResponseAsync(Cat cat) {
@@ -594,7 +598,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putCatAsync(Cat cat) {
@@ -628,7 +632,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
+     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
+     *     with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Kitten>> getKittenWithResponseAsync() {
@@ -644,7 +649,8 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
+     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false on
+     *     successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Kitten> getKittenAsync() {
@@ -678,7 +684,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putKittenWithResponseAsync(Kitten kitten) {
@@ -701,7 +707,7 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putKittenAsync(Kitten kitten) {

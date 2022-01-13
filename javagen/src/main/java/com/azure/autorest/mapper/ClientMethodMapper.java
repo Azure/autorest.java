@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -33,6 +34,7 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.returntype.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -55,6 +57,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
 
     private final Map<Operation, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     protected ClientMethodMapper() {
     }
@@ -579,9 +582,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder.type(ClientMethodType.SimpleSyncRestResponse)
                             .onlyRequiredParameters(false)
                             .name(proxyMethod.getSimpleRestResponseMethodName())
-                            .returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse))
                             .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
-
+                        if (syncReturnWithResponse instanceof GenericType) {
+                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnType));
+                        } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
+                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
+                        }
                         if (settings.isLowLevelClient()) {
                             // SimpleSyncRestResponse with RequestOptions but without Context
                             methods.add(builder.build());
@@ -610,9 +616,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 GenericType.Response(syncReturnType);
     }
 
-    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse) {
+    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse, IType syncReturnType) {
         return new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
-                syncReturnWithResponse), syncReturnWithResponse);
+                syncReturnType), syncReturnWithResponse);
     }
 
     protected ReturnValue createSimpleAsyncRestResponseReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
@@ -872,6 +878,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
         String description = null;
         if (returnType != PrimitiveType.Void) {
+            // try the description of the operation
             if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
                 String operationDescription = operation.getLanguage().getDefault().getDescription();
                 if (!CoreUtils.isNullOrEmpty(operationDescription)) {
@@ -882,6 +889,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
+            // try the description on the schema of return type
             if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
                 Schema responseSchema = operation.getResponses().get(0).getSchema();
                 if (responseSchema != null && !CoreUtils.isNullOrEmpty(responseSchema.getSummary())) {
@@ -894,20 +902,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            if (description == null) {
-                if (baseType == PrimitiveType.Void) {
-                    // Mono<Void>
-                    description = "the completion";
-                }
-                if (baseType == PrimitiveType.Boolean
-                        && operation.getRequests() != null && !operation.getRequests().isEmpty()
-                        && operation.getRequests().get(0).getProtocol() != null
-                        && operation.getRequests().get(0).getProtocol().getHttp() != null
-                        && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                    // Mono<Boolean> of HEAD method
-                    description = "whether resource exists";
-                }
+            // Mono<Boolean> of HEAD method
+            if (description == null
+                && baseType == PrimitiveType.Boolean
+                && operation.getRequests() != null && !operation.getRequests().isEmpty()
+                && operation.getRequests().get(0).getProtocol() != null
+                && operation.getRequests().get(0).getProtocol().getHttp() != null
+                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())
+            ) {
+                description = "whether resource exists";
             }
+
+            description = DESCRIPTION_ASSEMBLER.assemble(description, returnType, baseType);
 
             if (description == null) {
                 description = "the response";
