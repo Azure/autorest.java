@@ -52,13 +52,13 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.23.1";
-        private String azureCoreManagementVersion = "1.4.4";
-        private String azureCoreHttpNettyVersion = "1.11.4";
-        private String azureCoreTestVersion = "1.7.5";
-        private String azureIdentityVersion = "1.4.2";
-        private String junitVersion = "5.8.1";
-        private String revapiMavenPlugin = "0.11.2";
+        private String azureCoreVersion = "1.24.1";
+        private String azureCoreManagementVersion = "1.5.1";
+        private String azureCoreHttpNettyVersion = "1.11.6";
+        private String azureCoreTestVersion = "1.7.7";
+        private String azureIdentityVersion = "1.4.3";
+        private String junitVersion = "5.8.2";
+        private String revapiMavenPlugin = "0.14.6";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;

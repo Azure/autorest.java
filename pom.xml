@@ -42,10 +42,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azure-core.version>1.23.1</azure-core.version>
-    <azure-core-management.version>1.4.4</azure-core-management.version>
-    <azure-core-http-netty.version>1.11.4</azure-core-http-netty.version>
-    <azure-identity.version>1.4.2</azure-identity.version>
+    <azure-core.version>1.24.1</azure-core.version>
+    <azure-core-management.version>1.5.1</azure-core-management.version>
+    <azure-core-http-netty.version>1.11.6</azure-core-http-netty.version>
+    <azure-identity.version>1.4.3</azure-identity.version>
   </properties>
 
   <dependencyManagement>
