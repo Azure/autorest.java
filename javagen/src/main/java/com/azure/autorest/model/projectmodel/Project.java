@@ -214,6 +214,7 @@ public class Project {
     private void findPackageVersions(Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
+                checkArtifact(line, "org.junit.jupiter:junit-jupiter-engine").ifPresent(v -> packageVersions.junitVersion = v);
                 checkArtifact(line, "org.revapi:revapi-maven-plugin").ifPresent(v -> packageVersions.revapiMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
