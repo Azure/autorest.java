@@ -93,7 +93,7 @@ public class FluentProject extends Project {
 
     @Override
     public void integrateWithSdk() {
-        FluentPomTemplate.setProject(this);
+//        FluentPomTemplate.setProject(this);
 
         findPackageVersions();
 
