@@ -208,7 +208,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                             && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header
                             && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query;
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
-                            && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion"));
+                            && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion");
                     if (parameterIsRequiredAndPathOrBody || parameterIsClientOrApiVersion) {
                         parameters.add(proxyMethodParameter);
                     }

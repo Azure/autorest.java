@@ -79,6 +79,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
             boolean matchRequiredParameter = false;
             for (int i = 0; i < numParam; i++) {
                 ClientMethodParameter p = method.getParameters().get(i);
+                // TODO: should use getRequestParameterName from proxy method parameter, instead of getName from client method parameter
                 if (p.getName().equalsIgnoreCase(parameterName)) {
                     if (p.getClientType() != ClassType.BinaryData) {
                         // TODO: handle query with array
@@ -100,7 +101,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                 }
             }
             if (!matchRequiredParameter) {
-                method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
+                method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
                         case Query:
                             if (parameterValue.getUnescapedQueryValue() instanceof List && p.getCollectionFormat() != null) {
@@ -223,5 +224,13 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                         String.join(", ", params)));
             });
         });
+    }
+
+    private static String getSerializedName(ProxyMethodParameter parameter) {
+        String serializedName = parameter.getRequestParameterName();
+        if (serializedName == null && parameter.getRequestParameterLocation() == RequestParameterLocation.Body) {
+            serializedName = parameter.getName();
+        }
+        return serializedName;
     }
 }
