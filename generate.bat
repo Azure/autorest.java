@@ -77,6 +77,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.co
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/media_types.json --namespace=fixtures.mediatypes
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/url.json --namespace=fixtures.url
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/url-multi-collectionFormat.json --namespace=fixtures.url.multi
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/lro.json --namespace=fixtures.lro
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/llc_update1.json --namespace=fixtures.llcupdate1
