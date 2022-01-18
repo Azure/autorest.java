@@ -38,6 +38,11 @@ public class CodeModel extends Metadata {
     private List<Parameter> globalParameters = new ArrayList<Parameter>();
 
     /**
+     * test model definition
+     */
+    private TestModel testModel;
+
+    /**
      * code model information
      * (Required)
      * 
@@ -105,5 +110,13 @@ public class CodeModel extends Metadata {
      */
     public void setGlobalParameters(List<Parameter> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public TestModel getTestModel() {
+        return testModel;
+    }
+
+    public void setTestModel(TestModel testModel) {
+        this.testModel = testModel;
     }
 }
