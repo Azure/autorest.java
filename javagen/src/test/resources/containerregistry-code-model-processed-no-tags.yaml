@@ -126,7 +126,7 @@ globalParameters:
             operation: *id005
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: &id009 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
               apiVersions: []
@@ -214,7 +214,7 @@ globalParameters:
             nullable: false
             operation: *id007
             protocol:
-              http: {explode: false, in: Body, style: JSON}
+              http: {explode: false, in: BODY, style: JSON}
             required: true
             schema: *id008
           - apiVersions: []
@@ -227,7 +227,7 @@ globalParameters:
             operation: *id007
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id009
           protocol:
@@ -285,7 +285,7 @@ globalParameters:
             operation: *id011
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id009
           protocol:
@@ -323,7 +323,7 @@ globalParameters:
         nullable: false
         operation: *id012
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: true
         schema: *id008
       - apiVersions: []
@@ -336,7 +336,7 @@ globalParameters:
         operation: *id012
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -359,7 +359,7 @@ globalParameters:
     signatureParameters: []
   origin: modelerfour:synthesized/host
   protocol:
-    http: {explode: false, in: Uri}
+    http: {explode: false, in: URI}
   required: true
   schema: *id006
 info: {description: Test Infrastructure for AutoRest Swagger BAT, title: AutoRest
@@ -410,7 +410,7 @@ operationGroups:
         operation: *id015
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -470,7 +470,7 @@ operationGroups:
         nullable: true
         operation: *id016
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: false
         schema: *id017
       - apiVersions: []
@@ -483,7 +483,7 @@ operationGroups:
         operation: *id016
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -539,7 +539,7 @@ operationGroups:
         operation: *id019
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -590,7 +590,7 @@ operationGroups:
         nullable: false
         operation: *id020
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: true
         schema: &id036 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
           apiVersions:
@@ -611,7 +611,7 @@ operationGroups:
         operation: *id020
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -668,7 +668,7 @@ operationGroups:
         operation: *id021
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -721,7 +721,7 @@ operationGroups:
         nullable: false
         operation: *id022
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: true
         schema: &id037 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
           apiVersions:
@@ -742,7 +742,7 @@ operationGroups:
         operation: *id022
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -801,7 +801,7 @@ operationGroups:
         operation: *id023
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -858,7 +858,7 @@ operationGroups:
         nullable: false
         operation: *id024
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: true
         schema: &id038 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
           apiVersions:
@@ -880,7 +880,7 @@ operationGroups:
         operation: *id024
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -937,7 +937,7 @@ operationGroups:
         operation: *id025
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -989,7 +989,7 @@ operationGroups:
         operation: *id026
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -1048,7 +1048,7 @@ operationGroups:
         operation: *id027
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -1100,7 +1100,7 @@ operationGroups:
         operation: *id028
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -1159,7 +1159,7 @@ operationGroups:
         nullable: false
         operation: *id029
         protocol:
-          http: {explode: false, in: Body, style: JSON}
+          http: {explode: false, in: BODY, style: JSON}
         required: true
         schema: &id034 !!com.azure.autorest.extension.base.model.codemodel.ByteArraySchema
           apiVersions:
@@ -1179,7 +1179,7 @@ operationGroups:
         operation: *id029
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:
@@ -1237,7 +1237,7 @@ operationGroups:
         operation: *id031
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id009
       protocol:

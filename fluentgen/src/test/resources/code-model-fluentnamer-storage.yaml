@@ -243,7 +243,7 @@ globalParameters:
                       nullable: false
                       operation: *id008
                       protocol:
-                        http: {in: Uri}
+                        http: {in: URI}
                       required: true
                       schema: &id010 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -267,7 +267,7 @@ globalParameters:
                       nullable: false
                       operation: *id009
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: &id019 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions:
@@ -295,7 +295,7 @@ globalParameters:
                       nullable: false
                       operation: *id009
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: &id020 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions:
@@ -317,7 +317,7 @@ globalParameters:
                       nullable: false
                       operation: *id008
                       protocol:
-                        http: {in: Query}
+                        http: {in: QUERY}
                       required: true
                       schema: &id637 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                         apiVersions: []
@@ -344,7 +344,7 @@ globalParameters:
                       nullable: false
                       operation: *id009
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: &id021 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions:
@@ -377,7 +377,7 @@ globalParameters:
                           nullable: false
                           operation: *id009
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: &id025 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                             apiVersions: []
@@ -510,7 +510,7 @@ globalParameters:
                       nullable: false
                       operation: *id018
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id019
                     - &id023
@@ -529,7 +529,7 @@ globalParameters:
                       nullable: false
                       operation: *id018
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id020
                     - *id015
@@ -550,7 +550,7 @@ globalParameters:
                       nullable: false
                       operation: *id018
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id021
                   protocol: {}
@@ -574,7 +574,7 @@ globalParameters:
                           nullable: false
                           operation: *id018
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id025
                       protocol:
@@ -652,7 +652,7 @@ globalParameters:
                       nullable: false
                       operation: *id027
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id019
                     - &id029
@@ -671,7 +671,7 @@ globalParameters:
                       nullable: false
                       operation: *id027
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id020
                     - *id015
@@ -692,7 +692,7 @@ globalParameters:
                       nullable: false
                       operation: *id027
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id021
                   protocol: {}
@@ -716,7 +716,7 @@ globalParameters:
                           nullable: false
                           operation: *id027
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id025
                       protocol:
@@ -789,7 +789,7 @@ globalParameters:
                       nullable: false
                       operation: *id031
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id019
                     - &id033
@@ -808,7 +808,7 @@ globalParameters:
                       nullable: false
                       operation: *id031
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id020
                     - *id015
@@ -829,7 +829,7 @@ globalParameters:
                       nullable: false
                       operation: *id031
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id021
                   protocol: {}
@@ -853,7 +853,7 @@ globalParameters:
                           nullable: false
                           operation: *id031
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id025
                       protocol:
@@ -898,7 +898,7 @@ globalParameters:
                     nullable: false
                     operation: *id035
                     protocol:
-                      http: {in: Path}
+                      http: {in: PATH}
                     required: true
                     schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                       apiVersions: []
@@ -917,7 +917,7 @@ globalParameters:
                     nullable: false
                     operation: *id008
                     protocol:
-                      http: {in: Header}
+                      http: {in: HEADER}
                     required: true
                     schema: *id025
                 protocol:
@@ -1007,7 +1007,7 @@ globalParameters:
           nullable: false
           operation: *id008
           protocol:
-            http: {in: Path}
+            http: {in: PATH}
           required: true
           schema: *id019
         - &id040
@@ -1025,7 +1025,7 @@ globalParameters:
           nullable: false
           operation: *id008
           protocol:
-            http: {in: Path}
+            http: {in: PATH}
           required: true
           schema: *id020
         - *id015
@@ -1052,7 +1052,7 @@ globalParameters:
         - *id039
         - *id040
     protocol:
-      http: {in: Path}
+      http: {in: PATH}
     required: true
     schema: &id787 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
       apiVersions:
@@ -1351,7 +1351,7 @@ operationGroups:
                 nullable: false
                 operation: *id044
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -4539,7 +4539,7 @@ operationGroups:
                 nullable: false
                 operation: *id046
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -5065,7 +5065,7 @@ operationGroups:
                 nullable: false
                 operation: *id048
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id692 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -5131,7 +5131,7 @@ operationGroups:
                 nullable: false
                 operation: *id048
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -5463,7 +5463,7 @@ operationGroups:
             nullable: false
             operation: *id050
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id052
@@ -5481,7 +5481,7 @@ operationGroups:
             nullable: false
             operation: *id050
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -5508,7 +5508,7 @@ operationGroups:
                 nullable: false
                 operation: *id050
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id694 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -7305,7 +7305,7 @@ operationGroups:
                 nullable: false
                 operation: *id050
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -11021,7 +11021,7 @@ operationGroups:
             nullable: false
             operation: *id121
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id123
@@ -11039,7 +11039,7 @@ operationGroups:
             nullable: false
             operation: *id121
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -11224,7 +11224,7 @@ operationGroups:
             nullable: false
             operation: *id124
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id126
@@ -11242,7 +11242,7 @@ operationGroups:
             nullable: false
             operation: *id124
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -11263,7 +11263,7 @@ operationGroups:
             nullable: false
             operation: *id124
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id767 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
               apiVersions:
@@ -11302,7 +11302,7 @@ operationGroups:
                 nullable: false
                 operation: *id124
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -11605,7 +11605,7 @@ operationGroups:
             nullable: false
             operation: *id128
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id130
@@ -11623,7 +11623,7 @@ operationGroups:
             nullable: false
             operation: *id128
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -11650,7 +11650,7 @@ operationGroups:
                 nullable: false
                 operation: *id128
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id709 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -11921,7 +11921,7 @@ operationGroups:
                 nullable: false
                 operation: *id128
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -12172,7 +12172,7 @@ operationGroups:
                       nullable: false
                       operation: *id137
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -12191,7 +12191,7 @@ operationGroups:
                       nullable: false
                       operation: *id138
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -12382,7 +12382,7 @@ operationGroups:
                       nullable: false
                       operation: *id147
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -12401,7 +12401,7 @@ operationGroups:
                       nullable: false
                       operation: *id148
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -12436,7 +12436,7 @@ operationGroups:
             nullable: false
             operation: *id148
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - *id015
@@ -12500,7 +12500,7 @@ operationGroups:
             nullable: false
             operation: *id155
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id157
@@ -12518,7 +12518,7 @@ operationGroups:
             nullable: false
             operation: *id155
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -12535,7 +12535,7 @@ operationGroups:
             nullable: false
             operation: *id155
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id771 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
               apiVersions: []
@@ -12567,7 +12567,7 @@ operationGroups:
                 nullable: false
                 operation: *id155
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -12764,7 +12764,7 @@ operationGroups:
             nullable: false
             operation: *id159
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id161
@@ -12782,7 +12782,7 @@ operationGroups:
             nullable: false
             operation: *id159
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -12809,7 +12809,7 @@ operationGroups:
                 nullable: false
                 operation: *id159
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id712 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -12856,7 +12856,7 @@ operationGroups:
                 nullable: false
                 operation: *id159
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -12925,7 +12925,7 @@ operationGroups:
             nullable: false
             operation: *id164
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id166
@@ -12943,7 +12943,7 @@ operationGroups:
             nullable: false
             operation: *id164
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -12970,7 +12970,7 @@ operationGroups:
                 nullable: false
                 operation: *id164
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id716 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -13243,7 +13243,7 @@ operationGroups:
                 nullable: false
                 operation: *id164
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -13342,7 +13342,7 @@ operationGroups:
             nullable: false
             operation: *id168
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id170
@@ -13360,7 +13360,7 @@ operationGroups:
             nullable: false
             operation: *id168
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -13387,7 +13387,7 @@ operationGroups:
                 nullable: false
                 operation: *id168
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id718 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -13793,7 +13793,7 @@ operationGroups:
                 nullable: false
                 operation: *id168
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -13897,7 +13897,7 @@ operationGroups:
             nullable: false
             operation: *id174
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id176
@@ -13915,7 +13915,7 @@ operationGroups:
             nullable: false
             operation: *id174
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -14013,7 +14013,7 @@ operationGroups:
             nullable: false
             operation: *id177
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id179
@@ -14031,7 +14031,7 @@ operationGroups:
             nullable: false
             operation: *id177
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -14058,7 +14058,7 @@ operationGroups:
                 nullable: false
                 operation: *id177
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id180
               - apiVersions: []
@@ -14071,7 +14071,7 @@ operationGroups:
                 nullable: false
                 operation: *id177
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -14142,7 +14142,7 @@ operationGroups:
             nullable: false
             operation: *id183
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id185
@@ -14160,7 +14160,7 @@ operationGroups:
             nullable: false
             operation: *id183
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -14349,7 +14349,7 @@ operationGroups:
                       nullable: false
                       operation: *id191
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -14368,7 +14368,7 @@ operationGroups:
                       nullable: false
                       operation: *id192
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -14521,7 +14521,7 @@ operationGroups:
             nullable: false
             operation: *id198
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id200
@@ -14536,7 +14536,7 @@ operationGroups:
             nullable: false
             operation: *id198
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id065
           - *id015
@@ -14561,7 +14561,7 @@ operationGroups:
                 nullable: false
                 operation: *id198
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -14638,7 +14638,7 @@ operationGroups:
             nullable: false
             operation: *id202
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id065
         protocol: {}
@@ -14660,7 +14660,7 @@ operationGroups:
                 nullable: false
                 operation: *id202
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -14946,7 +14946,7 @@ operationGroups:
             nullable: false
             operation: *id205
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id207
@@ -14964,7 +14964,7 @@ operationGroups:
             nullable: false
             operation: *id205
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -14981,7 +14981,7 @@ operationGroups:
             nullable: false
             operation: *id205
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id212 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
               apiVersions: []
@@ -15016,7 +15016,7 @@ operationGroups:
                 nullable: false
                 operation: *id205
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -16091,7 +16091,7 @@ operationGroups:
             nullable: false
             operation: *id211
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id214
@@ -16109,7 +16109,7 @@ operationGroups:
             nullable: false
             operation: *id211
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -16126,7 +16126,7 @@ operationGroups:
             nullable: false
             operation: *id211
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id212
         protocol: {}
@@ -16150,7 +16150,7 @@ operationGroups:
                 nullable: false
                 operation: *id211
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id216
               - apiVersions: []
@@ -16163,7 +16163,7 @@ operationGroups:
                 nullable: false
                 operation: *id211
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -16229,7 +16229,7 @@ operationGroups:
             nullable: false
             operation: *id218
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id220
@@ -16247,7 +16247,7 @@ operationGroups:
             nullable: false
             operation: *id218
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -16264,7 +16264,7 @@ operationGroups:
             nullable: false
             operation: *id218
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id212
         protocol: {}
@@ -16374,7 +16374,7 @@ operationGroups:
             nullable: false
             operation: *id223
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id225
@@ -16392,7 +16392,7 @@ operationGroups:
             nullable: false
             operation: *id223
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -16409,7 +16409,7 @@ operationGroups:
             nullable: false
             operation: *id223
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id229 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
               apiVersions: []
@@ -16444,7 +16444,7 @@ operationGroups:
                 nullable: false
                 operation: *id223
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17069,7 +17069,7 @@ operationGroups:
             nullable: false
             operation: *id228
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id231
@@ -17087,7 +17087,7 @@ operationGroups:
             nullable: false
             operation: *id228
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17104,7 +17104,7 @@ operationGroups:
             nullable: false
             operation: *id228
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id229
         protocol: {}
@@ -17130,7 +17130,7 @@ operationGroups:
                 nullable: false
                 operation: *id228
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id233
               - apiVersions: []
@@ -17143,7 +17143,7 @@ operationGroups:
                 nullable: false
                 operation: *id228
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17218,7 +17218,7 @@ operationGroups:
             nullable: false
             operation: *id235
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id237
@@ -17236,7 +17236,7 @@ operationGroups:
             nullable: false
             operation: *id235
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17253,7 +17253,7 @@ operationGroups:
             nullable: false
             operation: *id235
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id229
         protocol: {}
@@ -17277,7 +17277,7 @@ operationGroups:
                 nullable: false
                 operation: *id235
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17371,7 +17371,7 @@ operationGroups:
             nullable: false
             operation: *id239
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id241
@@ -17389,7 +17389,7 @@ operationGroups:
             nullable: false
             operation: *id239
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17414,7 +17414,7 @@ operationGroups:
                 nullable: false
                 operation: *id239
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17531,7 +17531,7 @@ operationGroups:
             nullable: false
             operation: *id243
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id245
@@ -17549,7 +17549,7 @@ operationGroups:
             nullable: false
             operation: *id243
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17574,7 +17574,7 @@ operationGroups:
                 nullable: false
                 operation: *id243
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17685,7 +17685,7 @@ operationGroups:
             nullable: false
             operation: *id247
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id249
@@ -17703,7 +17703,7 @@ operationGroups:
             nullable: false
             operation: *id247
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17720,7 +17720,7 @@ operationGroups:
             nullable: false
             operation: *id247
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id252 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -17752,7 +17752,7 @@ operationGroups:
                 nullable: false
                 operation: *id247
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17840,7 +17840,7 @@ operationGroups:
             nullable: false
             operation: *id251
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id254
@@ -17858,7 +17858,7 @@ operationGroups:
             nullable: false
             operation: *id251
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -17875,7 +17875,7 @@ operationGroups:
             nullable: false
             operation: *id251
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id252
         protocol: {}
@@ -17899,7 +17899,7 @@ operationGroups:
                 nullable: false
                 operation: *id251
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id246
               - apiVersions: []
@@ -17912,7 +17912,7 @@ operationGroups:
                 nullable: false
                 operation: *id251
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -17989,7 +17989,7 @@ operationGroups:
             nullable: false
             operation: *id257
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id259
@@ -18007,7 +18007,7 @@ operationGroups:
             nullable: false
             operation: *id257
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -18024,7 +18024,7 @@ operationGroups:
             nullable: false
             operation: *id257
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id252
         protocol: {}
@@ -18048,7 +18048,7 @@ operationGroups:
                 nullable: false
                 operation: *id257
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -18164,7 +18164,7 @@ operationGroups:
             nullable: false
             operation: *id262
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id264
@@ -18182,7 +18182,7 @@ operationGroups:
             nullable: false
             operation: *id262
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -18207,7 +18207,7 @@ operationGroups:
                 nullable: false
                 operation: *id262
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -18425,7 +18425,7 @@ operationGroups:
             nullable: false
             operation: *id266
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id268
@@ -18443,7 +18443,7 @@ operationGroups:
             nullable: false
             operation: *id266
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -18468,7 +18468,7 @@ operationGroups:
                 nullable: false
                 operation: *id266
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -18890,7 +18890,7 @@ operationGroups:
             nullable: false
             operation: *id269
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id271
@@ -18908,7 +18908,7 @@ operationGroups:
             nullable: false
             operation: *id269
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -18925,7 +18925,7 @@ operationGroups:
             nullable: false
             operation: *id269
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id275 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -18957,7 +18957,7 @@ operationGroups:
                 nullable: false
                 operation: *id269
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -19168,7 +19168,7 @@ operationGroups:
             nullable: false
             operation: *id274
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id277
@@ -19186,7 +19186,7 @@ operationGroups:
             nullable: false
             operation: *id274
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -19203,7 +19203,7 @@ operationGroups:
             nullable: false
             operation: *id274
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id275
         protocol: {}
@@ -19229,7 +19229,7 @@ operationGroups:
                 nullable: false
                 operation: *id274
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id273
               - apiVersions: []
@@ -19242,7 +19242,7 @@ operationGroups:
                 nullable: false
                 operation: *id274
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -19319,7 +19319,7 @@ operationGroups:
             nullable: false
             operation: *id280
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id282
@@ -19337,7 +19337,7 @@ operationGroups:
             nullable: false
             operation: *id280
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -19354,7 +19354,7 @@ operationGroups:
             nullable: false
             operation: *id280
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id275
         protocol: {}
@@ -19378,7 +19378,7 @@ operationGroups:
                 nullable: false
                 operation: *id280
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -19509,7 +19509,7 @@ operationGroups:
             nullable: false
             operation: *id285
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id287
@@ -19527,7 +19527,7 @@ operationGroups:
             nullable: false
             operation: *id285
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -19550,7 +19550,7 @@ operationGroups:
             nullable: false
             operation: *id285
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id292 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -19584,7 +19584,7 @@ operationGroups:
                 nullable: false
                 operation: *id285
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id290 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -19846,7 +19846,7 @@ operationGroups:
                 nullable: false
                 operation: *id285
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -19953,7 +19953,7 @@ operationGroups:
             nullable: false
             operation: *id291
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id294
@@ -19971,7 +19971,7 @@ operationGroups:
             nullable: false
             operation: *id291
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -19994,7 +19994,7 @@ operationGroups:
             nullable: false
             operation: *id291
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
         protocol: {}
@@ -20020,7 +20020,7 @@ operationGroups:
                 nullable: false
                 operation: *id291
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id290
               - apiVersions: []
@@ -20033,7 +20033,7 @@ operationGroups:
                 nullable: false
                 operation: *id291
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -20115,7 +20115,7 @@ operationGroups:
             nullable: false
             operation: *id297
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id299
@@ -20133,7 +20133,7 @@ operationGroups:
             nullable: false
             operation: *id297
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -20156,7 +20156,7 @@ operationGroups:
             nullable: false
             operation: *id297
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
         protocol: {}
@@ -20180,7 +20180,7 @@ operationGroups:
                 nullable: false
                 operation: *id297
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -20269,7 +20269,7 @@ operationGroups:
                       nullable: false
                       operation: *id305
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -20288,7 +20288,7 @@ operationGroups:
                       nullable: false
                       operation: *id306
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -20382,7 +20382,7 @@ operationGroups:
             nullable: false
             operation: *id306
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id310
@@ -20400,7 +20400,7 @@ operationGroups:
             nullable: false
             operation: *id306
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -20501,7 +20501,7 @@ operationGroups:
             nullable: false
             operation: *id314
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id316
@@ -20519,7 +20519,7 @@ operationGroups:
             nullable: false
             operation: *id314
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -20544,7 +20544,7 @@ operationGroups:
                 nullable: false
                 operation: *id314
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -21489,7 +21489,7 @@ operationGroups:
             nullable: false
             operation: *id318
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id320
@@ -21507,7 +21507,7 @@ operationGroups:
             nullable: false
             operation: *id318
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -21527,7 +21527,7 @@ operationGroups:
             nullable: false
             operation: *id318
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id325 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
               apiVersions: []
@@ -21562,7 +21562,7 @@ operationGroups:
                 nullable: false
                 operation: *id318
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id322
               - apiVersions: []
@@ -21575,7 +21575,7 @@ operationGroups:
                 nullable: false
                 operation: *id318
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -21668,7 +21668,7 @@ operationGroups:
             nullable: false
             operation: *id324
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id327
@@ -21686,7 +21686,7 @@ operationGroups:
             nullable: false
             operation: *id324
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -21706,7 +21706,7 @@ operationGroups:
             nullable: false
             operation: *id324
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -21730,7 +21730,7 @@ operationGroups:
                 nullable: false
                 operation: *id324
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -21849,7 +21849,7 @@ operationGroups:
                       nullable: false
                       operation: *id334
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -21868,7 +21868,7 @@ operationGroups:
                       nullable: false
                       operation: *id335
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -21963,7 +21963,7 @@ operationGroups:
             nullable: false
             operation: *id335
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id339
@@ -21981,7 +21981,7 @@ operationGroups:
             nullable: false
             operation: *id335
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -21998,7 +21998,7 @@ operationGroups:
             nullable: false
             operation: *id335
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id065
           - &id341
@@ -22013,7 +22013,7 @@ operationGroups:
             nullable: false
             operation: *id335
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id065
           - &id342
@@ -22028,7 +22028,7 @@ operationGroups:
             nullable: false
             operation: *id335
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id632 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
               apiVersions:
@@ -22148,7 +22148,7 @@ operationGroups:
             nullable: false
             operation: *id345
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id347
@@ -22166,7 +22166,7 @@ operationGroups:
             nullable: false
             operation: *id345
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id348
@@ -22187,7 +22187,7 @@ operationGroups:
             nullable: false
             operation: *id345
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -22213,7 +22213,7 @@ operationGroups:
                 nullable: false
                 operation: *id345
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id084
               - apiVersions: []
@@ -22226,7 +22226,7 @@ operationGroups:
                 nullable: false
                 operation: *id345
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -22320,7 +22320,7 @@ operationGroups:
             nullable: false
             operation: *id350
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id352
@@ -22338,7 +22338,7 @@ operationGroups:
             nullable: false
             operation: *id350
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id353
@@ -22359,7 +22359,7 @@ operationGroups:
             nullable: false
             operation: *id350
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -22385,7 +22385,7 @@ operationGroups:
                 nullable: false
                 operation: *id350
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id084
               - apiVersions: []
@@ -22398,7 +22398,7 @@ operationGroups:
                 nullable: false
                 operation: *id350
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -22496,7 +22496,7 @@ operationGroups:
             nullable: false
             operation: *id355
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id357
@@ -22514,7 +22514,7 @@ operationGroups:
             nullable: false
             operation: *id355
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id358
@@ -22535,7 +22535,7 @@ operationGroups:
             nullable: false
             operation: *id355
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -22561,7 +22561,7 @@ operationGroups:
                 nullable: false
                 operation: *id355
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -22621,7 +22621,7 @@ operationGroups:
             nullable: false
             operation: *id359
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id361
@@ -22639,7 +22639,7 @@ operationGroups:
             nullable: false
             operation: *id359
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id362
@@ -22660,7 +22660,7 @@ operationGroups:
             nullable: false
             operation: *id359
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -22749,7 +22749,7 @@ operationGroups:
             nullable: false
             operation: *id363
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id365
@@ -22767,7 +22767,7 @@ operationGroups:
             nullable: false
             operation: *id363
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id366
@@ -22788,7 +22788,7 @@ operationGroups:
             nullable: false
             operation: *id363
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -22816,7 +22816,7 @@ operationGroups:
                 nullable: false
                 operation: *id363
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id368 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -22890,7 +22890,7 @@ operationGroups:
                 nullable: false
                 operation: *id363
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -22968,7 +22968,7 @@ operationGroups:
             nullable: false
             operation: *id369
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id371
@@ -22986,7 +22986,7 @@ operationGroups:
             nullable: false
             operation: *id369
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id372
@@ -23007,7 +23007,7 @@ operationGroups:
             nullable: false
             operation: *id369
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -23035,7 +23035,7 @@ operationGroups:
                 nullable: false
                 operation: *id369
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id368
               - apiVersions: []
@@ -23048,7 +23048,7 @@ operationGroups:
                 nullable: false
                 operation: *id369
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -23129,7 +23129,7 @@ operationGroups:
             nullable: false
             operation: *id374
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id376
@@ -23147,7 +23147,7 @@ operationGroups:
             nullable: false
             operation: *id374
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id377
@@ -23168,7 +23168,7 @@ operationGroups:
             nullable: false
             operation: *id374
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - &id378
@@ -23186,7 +23186,7 @@ operationGroups:
             nullable: false
             operation: *id374
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
           - *id015
@@ -23207,7 +23207,7 @@ operationGroups:
             nullable: false
             operation: *id374
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: false
             schema: *id065
         protocol: {}
@@ -23235,7 +23235,7 @@ operationGroups:
                 nullable: false
                 operation: *id374
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: false
                 schema: *id085
               - apiVersions: []
@@ -23248,7 +23248,7 @@ operationGroups:
                 nullable: false
                 operation: *id374
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -23327,7 +23327,7 @@ operationGroups:
             nullable: false
             operation: *id381
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id383
@@ -23345,7 +23345,7 @@ operationGroups:
             nullable: false
             operation: *id381
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id384
@@ -23366,7 +23366,7 @@ operationGroups:
             nullable: false
             operation: *id381
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - &id385
@@ -23384,7 +23384,7 @@ operationGroups:
             nullable: false
             operation: *id381
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
           - *id015
@@ -23405,7 +23405,7 @@ operationGroups:
             nullable: false
             operation: *id381
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: false
             schema: &id387 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -23439,7 +23439,7 @@ operationGroups:
                 nullable: false
                 operation: *id381
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -23518,7 +23518,7 @@ operationGroups:
             nullable: false
             operation: *id388
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id390
@@ -23536,7 +23536,7 @@ operationGroups:
             nullable: false
             operation: *id388
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id391
@@ -23557,7 +23557,7 @@ operationGroups:
             nullable: false
             operation: *id388
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - &id392
@@ -23575,7 +23575,7 @@ operationGroups:
             nullable: false
             operation: *id388
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
           - *id015
@@ -23596,7 +23596,7 @@ operationGroups:
             nullable: false
             operation: *id388
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: true
             schema: &id394 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -23630,7 +23630,7 @@ operationGroups:
                 nullable: false
                 operation: *id388
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -23705,7 +23705,7 @@ operationGroups:
             nullable: false
             operation: *id395
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id397
@@ -23723,7 +23723,7 @@ operationGroups:
             nullable: false
             operation: *id395
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id398
@@ -23744,7 +23744,7 @@ operationGroups:
             nullable: false
             operation: *id395
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -23765,7 +23765,7 @@ operationGroups:
             nullable: false
             operation: *id395
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: true
             schema: &id400 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -23798,7 +23798,7 @@ operationGroups:
                 nullable: false
                 operation: *id395
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -23880,7 +23880,7 @@ operationGroups:
             nullable: false
             operation: *id401
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id403
@@ -23898,7 +23898,7 @@ operationGroups:
             nullable: false
             operation: *id401
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id404
@@ -23919,7 +23919,7 @@ operationGroups:
             nullable: false
             operation: *id401
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -23940,7 +23940,7 @@ operationGroups:
             nullable: false
             operation: *id401
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: true
             schema: &id407 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -23975,7 +23975,7 @@ operationGroups:
                 nullable: false
                 operation: *id401
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: false
                 schema: *id085
               - apiVersions: []
@@ -23988,7 +23988,7 @@ operationGroups:
                 nullable: false
                 operation: *id401
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -24082,7 +24082,7 @@ operationGroups:
             nullable: false
             operation: *id408
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id410
@@ -24100,7 +24100,7 @@ operationGroups:
             nullable: false
             operation: *id408
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id411
@@ -24121,7 +24121,7 @@ operationGroups:
             nullable: false
             operation: *id408
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -24147,7 +24147,7 @@ operationGroups:
                 nullable: false
                 operation: *id408
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: false
                 schema: &id751 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -24309,7 +24309,7 @@ operationGroups:
                 nullable: false
                 operation: *id408
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -24472,7 +24472,7 @@ operationGroups:
             nullable: false
             operation: *id414
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id416
@@ -24490,7 +24490,7 @@ operationGroups:
             nullable: false
             operation: *id414
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -24515,7 +24515,7 @@ operationGroups:
                 nullable: false
                 operation: *id414
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -24963,7 +24963,7 @@ operationGroups:
             nullable: false
             operation: *id418
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id420
@@ -24981,7 +24981,7 @@ operationGroups:
             nullable: false
             operation: *id418
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -25001,7 +25001,7 @@ operationGroups:
             nullable: false
             operation: *id418
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -25027,7 +25027,7 @@ operationGroups:
                 nullable: false
                 operation: *id418
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id422
               - apiVersions: []
@@ -25040,7 +25040,7 @@ operationGroups:
                 nullable: false
                 operation: *id418
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -25136,7 +25136,7 @@ operationGroups:
             nullable: false
             operation: *id424
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id426
@@ -25154,7 +25154,7 @@ operationGroups:
             nullable: false
             operation: *id424
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -25174,7 +25174,7 @@ operationGroups:
             nullable: false
             operation: *id424
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -25198,7 +25198,7 @@ operationGroups:
                 nullable: false
                 operation: *id424
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -25334,7 +25334,7 @@ operationGroups:
                       nullable: false
                       operation: *id433
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -25353,7 +25353,7 @@ operationGroups:
                       nullable: false
                       operation: *id434
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -25448,7 +25448,7 @@ operationGroups:
             nullable: false
             operation: *id434
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id439
@@ -25466,7 +25466,7 @@ operationGroups:
             nullable: false
             operation: *id434
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -25483,7 +25483,7 @@ operationGroups:
             nullable: false
             operation: *id434
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id437
           - &id441
@@ -25498,7 +25498,7 @@ operationGroups:
             nullable: false
             operation: *id434
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id437
           - &id442
@@ -25513,7 +25513,7 @@ operationGroups:
             nullable: false
             operation: *id434
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id635 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
               apiVersions:
@@ -25668,7 +25668,7 @@ operationGroups:
             nullable: false
             operation: *id445
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id447
@@ -25686,7 +25686,7 @@ operationGroups:
             nullable: false
             operation: *id445
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id448
@@ -25707,7 +25707,7 @@ operationGroups:
             nullable: false
             operation: *id445
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - &id449
@@ -25722,7 +25722,7 @@ operationGroups:
             nullable: false
             operation: *id445
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id636 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
               apiVersions:
@@ -25761,7 +25761,7 @@ operationGroups:
                 nullable: false
                 operation: *id445
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id087
               - apiVersions: []
@@ -25774,7 +25774,7 @@ operationGroups:
                 nullable: false
                 operation: *id445
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -25875,7 +25875,7 @@ operationGroups:
             nullable: false
             operation: *id451
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id453
@@ -25893,7 +25893,7 @@ operationGroups:
             nullable: false
             operation: *id451
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id454
@@ -25914,7 +25914,7 @@ operationGroups:
             nullable: false
             operation: *id451
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -25940,7 +25940,7 @@ operationGroups:
                 nullable: false
                 operation: *id451
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id087
               - apiVersions: []
@@ -25953,7 +25953,7 @@ operationGroups:
                 nullable: false
                 operation: *id451
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -26044,7 +26044,7 @@ operationGroups:
             nullable: false
             operation: *id456
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id458
@@ -26062,7 +26062,7 @@ operationGroups:
             nullable: false
             operation: *id456
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id459
@@ -26083,7 +26083,7 @@ operationGroups:
             nullable: false
             operation: *id456
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -26100,7 +26100,7 @@ operationGroups:
             nullable: false
             operation: *id456
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: &id770 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
               apiVersions: []
@@ -26123,7 +26123,7 @@ operationGroups:
             nullable: false
             operation: *id456
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: false
             schema: *id437
         protocol: {}
@@ -26149,7 +26149,7 @@ operationGroups:
                 nullable: false
                 operation: *id456
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -26222,7 +26222,7 @@ operationGroups:
             nullable: false
             operation: *id462
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id464
@@ -26240,7 +26240,7 @@ operationGroups:
             nullable: false
             operation: *id462
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id465
@@ -26261,7 +26261,7 @@ operationGroups:
             nullable: false
             operation: *id462
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -26278,7 +26278,7 @@ operationGroups:
             nullable: false
             operation: *id462
             protocol:
-              http: {in: Header}
+              http: {in: HEADER}
             required: false
             schema: *id437
         protocol: {}
@@ -26303,7 +26303,7 @@ operationGroups:
                 nullable: false
                 operation: *id462
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -26383,7 +26383,7 @@ operationGroups:
             nullable: false
             operation: *id467
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id469
@@ -26401,7 +26401,7 @@ operationGroups:
             nullable: false
             operation: *id467
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - &id470
@@ -26422,7 +26422,7 @@ operationGroups:
             nullable: false
             operation: *id467
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id292
           - *id015
@@ -26448,7 +26448,7 @@ operationGroups:
                 nullable: false
                 operation: *id467
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id758 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -26515,7 +26515,7 @@ operationGroups:
                 nullable: false
                 operation: *id467
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -26616,7 +26616,7 @@ operationGroups:
             nullable: false
             operation: *id473
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id475
@@ -26634,7 +26634,7 @@ operationGroups:
             nullable: false
             operation: *id473
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -26659,7 +26659,7 @@ operationGroups:
                 nullable: false
                 operation: *id473
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -26843,7 +26843,7 @@ operationGroups:
             nullable: false
             operation: *id476
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id478
@@ -26861,7 +26861,7 @@ operationGroups:
             nullable: false
             operation: *id476
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -26881,7 +26881,7 @@ operationGroups:
             nullable: false
             operation: *id476
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -26909,7 +26909,7 @@ operationGroups:
                 nullable: false
                 operation: *id476
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id480
               - apiVersions: []
@@ -26922,7 +26922,7 @@ operationGroups:
                 nullable: false
                 operation: *id476
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27019,7 +27019,7 @@ operationGroups:
             nullable: false
             operation: *id482
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id484
@@ -27037,7 +27037,7 @@ operationGroups:
             nullable: false
             operation: *id482
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -27057,7 +27057,7 @@ operationGroups:
             nullable: false
             operation: *id482
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -27081,7 +27081,7 @@ operationGroups:
                 nullable: false
                 operation: *id482
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27184,7 +27184,7 @@ operationGroups:
             nullable: false
             operation: *id487
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id489
@@ -27202,7 +27202,7 @@ operationGroups:
             nullable: false
             operation: *id487
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -27225,7 +27225,7 @@ operationGroups:
             nullable: false
             operation: *id487
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: &id494 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
               apiVersions:
@@ -27259,7 +27259,7 @@ operationGroups:
                 nullable: false
                 operation: *id487
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: &id492 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
@@ -27339,7 +27339,7 @@ operationGroups:
                 nullable: false
                 operation: *id487
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27422,7 +27422,7 @@ operationGroups:
             nullable: false
             operation: *id493
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id496
@@ -27440,7 +27440,7 @@ operationGroups:
             nullable: false
             operation: *id493
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -27463,7 +27463,7 @@ operationGroups:
             nullable: false
             operation: *id493
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id494
         protocol: {}
@@ -27488,7 +27488,7 @@ operationGroups:
                 nullable: false
                 operation: *id493
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id492
               - apiVersions: []
@@ -27501,7 +27501,7 @@ operationGroups:
                 nullable: false
                 operation: *id493
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27582,7 +27582,7 @@ operationGroups:
             nullable: false
             operation: *id499
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id501
@@ -27600,7 +27600,7 @@ operationGroups:
             nullable: false
             operation: *id499
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -27623,7 +27623,7 @@ operationGroups:
             nullable: false
             operation: *id499
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id494
         protocol: {}
@@ -27647,7 +27647,7 @@ operationGroups:
                 nullable: false
                 operation: *id499
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27717,7 +27717,7 @@ operationGroups:
             nullable: false
             operation: *id503
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id505
@@ -27735,7 +27735,7 @@ operationGroups:
             nullable: false
             operation: *id503
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -27758,7 +27758,7 @@ operationGroups:
             nullable: false
             operation: *id503
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id494
         protocol: {}
@@ -27782,7 +27782,7 @@ operationGroups:
                 nullable: false
                 operation: *id503
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -27873,7 +27873,7 @@ operationGroups:
                       nullable: false
                       operation: *id511
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -27892,7 +27892,7 @@ operationGroups:
                       nullable: false
                       operation: *id512
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id025
                   protocol:
@@ -28020,7 +28020,7 @@ operationGroups:
             nullable: false
             operation: *id512
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id516
@@ -28038,7 +28038,7 @@ operationGroups:
             nullable: false
             operation: *id512
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -28055,7 +28055,7 @@ operationGroups:
             nullable: false
             operation: *id512
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id437
           - &id518
@@ -28070,7 +28070,7 @@ operationGroups:
             nullable: false
             operation: *id512
             protocol:
-              http: {in: Query}
+              http: {in: QUERY}
             required: false
             schema: *id437
         protocol: {}
@@ -28176,7 +28176,7 @@ operationGroups:
             nullable: false
             operation: *id522
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id524
@@ -28194,7 +28194,7 @@ operationGroups:
             nullable: false
             operation: *id522
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -28219,7 +28219,7 @@ operationGroups:
                 nullable: false
                 operation: *id522
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -28403,7 +28403,7 @@ operationGroups:
             nullable: false
             operation: *id525
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id527
@@ -28421,7 +28421,7 @@ operationGroups:
             nullable: false
             operation: *id525
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -28441,7 +28441,7 @@ operationGroups:
             nullable: false
             operation: *id525
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -28469,7 +28469,7 @@ operationGroups:
                 nullable: false
                 operation: *id525
                 protocol:
-                  http: {in: Body, style: JSON}
+                  http: {in: BODY, style: JSON}
                 required: true
                 schema: *id529
               - apiVersions: []
@@ -28482,7 +28482,7 @@ operationGroups:
                 nullable: false
                 operation: *id525
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
@@ -28579,7 +28579,7 @@ operationGroups:
             nullable: false
             operation: *id531
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id019
           - &id533
@@ -28597,7 +28597,7 @@ operationGroups:
             nullable: false
             operation: *id531
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id020
           - *id015
@@ -28617,7 +28617,7 @@ operationGroups:
             nullable: false
             operation: *id531
             protocol:
-              http: {in: Path}
+              http: {in: PATH}
             required: true
             schema: *id325
         protocol: {}
@@ -28641,7 +28641,7 @@ operationGroups:
                 nullable: false
                 operation: *id531
                 protocol:
-                  http: {in: Header}
+                  http: {in: HEADER}
                 required: true
                 schema: *id025
             protocol:
