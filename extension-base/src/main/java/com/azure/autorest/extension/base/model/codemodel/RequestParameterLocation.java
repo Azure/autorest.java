@@ -1,7 +1,7 @@
-package com.azure.autorest.extension.base.model.codemodel;
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+
+package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,20 +11,19 @@ import java.util.Map;
 */
 public enum RequestParameterLocation
 {
-    Body("body"),
+    BODY("body"),
 
-    Cookie("cookie"),
+    COOKIE("cookie"),
 
-    Uri("uri"),
+    URI("uri"),
 
-    Path("path"),
+    PATH("path"),
 
-    Header("header"),
+    HEADER("header"),
 
-    None("none"),
+    NONE("none"),
 
-    Query("query");
-
+    QUERY("query");
 
     private final String value;
     private final static Map<String, RequestParameterLocation> CONSTANTS = new HashMap<>();
@@ -39,8 +38,7 @@ public enum RequestParameterLocation
         return this.ordinal();
     }
 
-
-    private RequestParameterLocation(String value) {
+    RequestParameterLocation(String value) {
         this.value = value;
     }
 

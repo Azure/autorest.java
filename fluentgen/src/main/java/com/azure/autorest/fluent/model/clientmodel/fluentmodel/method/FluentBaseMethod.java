@@ -77,7 +77,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
                 .method(block -> {
                     if (initLocalVariables) {
                         for (LocalVariable var : resourceLocalVariables.getLocalVariablesMap().values()) {
-                            if (var.getParameterLocation() == RequestParameterLocation.Query) {
+                            if (var.getParameterLocation() == RequestParameterLocation.QUERY) {
                                 block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), var.getInitializeExpression()));
                             }
                         }

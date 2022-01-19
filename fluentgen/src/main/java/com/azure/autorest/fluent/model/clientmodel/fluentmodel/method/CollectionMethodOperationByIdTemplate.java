@@ -132,7 +132,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                     if (!includeContextParameter) {
                         // init local variables to default value
                         for (LocalVariable var : localVariables.getLocalVariablesMap().values()) {
-                            if (var.getParameterLocation() == RequestParameterLocation.Query) {
+                            if (var.getParameterLocation() == RequestParameterLocation.QUERY) {
                                 block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), var.getInitializeExpression()));
                             }
                         }

@@ -33,7 +33,7 @@ public class FluentProxyTemplate extends ProxyTemplate {
         headers.put("Accept", String.join(",", restAPIMethod.getResponseContentTypes()));
 
         Set<String> headerParameterNames = restAPIMethod.getParameters().stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Header)
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER)
                 .map(ProxyMethodParameter::getRequestParameterName)
                 .map(String::toLowerCase)
                 .collect(Collectors.toSet());

@@ -266,7 +266,7 @@ public class ExampleParser {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ClientModel requestBodyClientModel = resourceCreate.getRequestBodyParameterModel();
                 MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.Body)
+                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
                         .findFirst().orElse(null);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
@@ -375,7 +375,7 @@ public class ExampleParser {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ClientModel requestBodyClientModel = resourceUpdate.getRequestBodyParameterModel();
                 MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.Body)
+                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
                         .findFirst().orElse(null);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
@@ -455,7 +455,7 @@ public class ExampleParser {
 
     private static ExampleNode parseNodeFromParameter(ProxyMethodExample example, MethodParameter methodParameter) {
         String serializedName = methodParameter.getSerializedName();
-        if (serializedName == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.Body) {
+        if (serializedName == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
             serializedName = methodParameter.getProxyMethodParameter().getName();
         }
 
@@ -468,7 +468,7 @@ public class ExampleParser {
                 node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }
         } else {
-            Object exampleValue = methodParameter.getClientMethodParameter().getLocation() == RequestParameterLocation.Query
+            Object exampleValue = methodParameter.getClientMethodParameter().getLocation() == RequestParameterLocation.QUERY
                     ? parameterValue.getUnescapedQueryValue()
                     : parameterValue.getObjectValue();
             node = parseNodeFromMethodParameter(methodParameter, exampleValue);

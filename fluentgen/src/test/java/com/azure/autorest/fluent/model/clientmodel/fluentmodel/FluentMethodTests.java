@@ -36,7 +36,6 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -219,7 +218,7 @@ public class FluentMethodTests {
         DefinitionStageCreate nextStage = new DefinitionStageCreate();
         stage.setNextStage(nextStage);
 
-        LocalVariable variable = new LocalVariable("lockName", ClassType.String, RequestParameterLocation.Path, lockParameter);
+        LocalVariable variable = new LocalVariable("lockName", ClassType.String, RequestParameterLocation.PATH, lockParameter);
 
         FluentMethodParameterMethod parameterMethod = new FluentMethodParameterMethod(lockModel, FluentMethodType.CREATE_WITH, stage, lockParameter, variable);
         Assertions.assertEquals("WithCreate withLockName(String lockName)", parameterMethod.getInterfaceMethodSignature());

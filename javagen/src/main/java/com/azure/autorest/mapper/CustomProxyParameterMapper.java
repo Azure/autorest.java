@@ -68,7 +68,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
         builder.fromClient(parameterIsServiceClientProperty);
 
-        if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.Body){
+        if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = CodeNamer
                     .toPascalCase(parameterJvWireType.getSerialization().getXml().getName() +
@@ -78,10 +78,10 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
                     .name(parameterTypeName)
                     .build();
         } else if (wireType == ArrayType.ByteArray) {
-            if (parameterRequestLocation != RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
+            if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }
-        } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
+        } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             if (parameter.getProtocol().getHttp().getExplode()) {
                 wireType = new ListType(ClassType.String);
             } else {

@@ -45,7 +45,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.rawType(wireType);
         if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
-            if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Body) {
+            if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY) {
                 wireType = ClassType.BinaryData;
             } else {
                 wireType = ClassType.String;

@@ -90,20 +90,20 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         RequestParameterLocation location = parameter.getRequestParameterLocation();
 
                         switch (location) {
-                            case Uri:
-                            case Path:
-                            case Query:
-                            case Header:
+                            case URI:
+                            case PATH:
+                            case QUERY:
+                            case HEADER:
                                 parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(location.toString())));
-                                if (location == RequestParameterLocation.Query && parameter.getAlreadyEncoded() && parameter.getExplode()) {
+                                if (location == RequestParameterLocation.QUERY && parameter.getAlreadyEncoded() && parameter.getExplode()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true, multipleQueryParams = true", parameter.getRequestParameterName()));
-                                } else if (location == RequestParameterLocation.Query && parameter.getExplode()) {
+                                } else if (location == RequestParameterLocation.QUERY && parameter.getExplode()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", multipleQueryParams = true", parameter.getRequestParameterName()));
-                                } else if ((location == RequestParameterLocation.Path ||
-                                            location == RequestParameterLocation.Query)
+                                } else if ((location == RequestParameterLocation.PATH ||
+                                            location == RequestParameterLocation.QUERY)
                                         && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
-                                } else if (location == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null
+                                } else if (location == RequestParameterLocation.HEADER && parameter.getHeaderCollectionPrefix() != null
                                         && !parameter.getHeaderCollectionPrefix().isEmpty()) {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
                                 } else {
@@ -113,7 +113,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                                 break;
 
-                            case Body:
+                            case BODY:
                                 if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(restAPIMethod.getRequestContentType())) {
                                     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
                                             parameter.getRequestParameterName()));
@@ -126,7 +126,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                            //     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
                            //     break;
 
-                            case None:
+                            case NONE:
                                 break;
 
                             default:

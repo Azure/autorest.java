@@ -34,14 +34,14 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         commentBlock.description(clientMethod.getDescription());
 
         List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
+                .stream().filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
         if (!queryParameters.isEmpty()) {
             optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
         }
 
         List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
+                .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
         if (!headerParameters.isEmpty()) {
             optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
@@ -51,7 +51,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         Set<IType> typesInJavadoc = new HashSet<>();
 
         clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> RequestParameterLocation.Body.equals(p.getRequestParameterLocation()))
+                .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
                 .map(ProxyMethodParameter::getRawType)
                 .findFirst()
                 .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc));

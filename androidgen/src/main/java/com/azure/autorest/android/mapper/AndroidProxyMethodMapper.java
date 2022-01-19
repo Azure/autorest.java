@@ -1,6 +1,7 @@
 package com.azure.autorest.android.mapper;
 
 import com.azure.autorest.android.model.clientmodel.AndroidProxyMethod;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -12,8 +13,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation.None;
 
 public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     private static ProxyMethodMapper instance = new AndroidProxyMethodMapper();
@@ -72,7 +71,7 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
                 .wireType(GenericType.AndroidCallback(GenericType.AndroidResponse(responseBodyType)))
                 .clientType(GenericType.AndroidCallback(GenericType.AndroidResponse(responseBodyType)))
                 .name("callback")
-                .requestParameterLocation(None)
+                .requestParameterLocation(RequestParameterLocation.NONE)
                 .requestParameterName("callback")
                 .alreadyEncoded(true)
                 .isConstant(false)
