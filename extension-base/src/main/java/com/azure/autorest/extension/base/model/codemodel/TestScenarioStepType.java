@@ -1,5 +1,8 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  */
 public enum TestScenarioStepType {
@@ -13,15 +16,38 @@ public enum TestScenarioStepType {
      * If the operation is DELETE, then after the operation, the runner should automatically insert a GET to verify resource cannot be found.
      * Rest call step could be defined either by an example file, or by resourceName tracking and update.
      */
-    restCall,
+    REST_CALL("restCall"),
     /**
      * Step to deploy ARM template to the scope.
      */
-    stepArmTemplate,
+    STEP_ARM_TEMPLATE("stepArmTemplate"),
     /**
      * Step to deploy ARM deployment script to the scope.
      */
-    stepArmDeploymentScript
+    STEP_ARM_DEPLOYMENT_SCRIPT("stepArmDeploymentScript")
+
+    ;
+
+    private final String value;
+    private static final Map<String, TestScenarioStepType> CONSTANTS = new HashMap<>();
+
+    static {
+        for (TestScenarioStepType stepType : TestScenarioStepType.values()) {
+            CONSTANTS.put(stepType.value, stepType);
+        }
+    }
+
+    TestScenarioStepType(String value) {
+        this.value = value;
+    }
+
+    public static TestScenarioStepType fromValue(String value) {
+        TestScenarioStepType stepType = CONSTANTS.get(value);
+        if (stepType == null) {
+            throw new IllegalArgumentException(value);
+        }
+        return stepType;
+    }
 
 
 }
