@@ -20,7 +20,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
-import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -84,7 +83,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                     if (p.getClientType() != ClassType.BinaryData) {
                         // TODO: handle query with array
 
-                        String exampleValue = p.getLocation() == RequestParameterLocation.Query
+                        String exampleValue = p.getLocation() == RequestParameterLocation.QUERY
                                 ? parameterValue.getUnescapedQueryValue().toString()
                                 : parameterValue.getObjectValue().toString();
                         params.set(i, p.getClientType().defaultValueExpression(exampleValue));
@@ -103,7 +102,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
             if (!matchRequiredParameter) {
                 method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
-                        case Query:
+                        case QUERY:
                             if (parameterValue.getUnescapedQueryValue() instanceof List && p.getCollectionFormat() != null) {
                                 List<Object> elements = (List<Object>) parameterValue.getUnescapedQueryValue();
                                 if (p.getExplode()) {
@@ -133,14 +132,14 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                             }
                             break;
 
-                        case Header:
+                        case HEADER:
                             requestOptionsStmts.add(
                                     String.format("requestOptions.addHeader(\"%s\", %s);",
                                             parameterName,
                                             p.getClientType().defaultValueExpression(parameterValue.getObjectValue().toString())));
                             break;
 
-                        case Body:
+                        case BODY:
                             requestOptionsStmts.add(
                                     String.format("requestOptions.setBody(BinaryData.fromString(%s));",
                                             ClassType.String.defaultValueExpression(parameterValue.getJsonString())));
@@ -228,7 +227,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
     private static String getSerializedName(ProxyMethodParameter parameter) {
         String serializedName = parameter.getRequestParameterName();
-        if (serializedName == null && parameter.getRequestParameterLocation() == RequestParameterLocation.Body) {
+        if (serializedName == null && parameter.getRequestParameterLocation() == RequestParameterLocation.BODY) {
             serializedName = parameter.getName();
         }
         return serializedName;

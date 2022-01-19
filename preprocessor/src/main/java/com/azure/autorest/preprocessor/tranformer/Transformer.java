@@ -97,7 +97,7 @@ public class Transformer {
             if (parameter.getSchema() instanceof BinarySchema) {
               if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
                       && p.getProtocol().getHttp() != null
-                      && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Header
+                      && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER
                       && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
                 Parameter contentLength = createContentLengthParameter(operation, parameter);
                 request.getParameters().add(++i, contentLength);
@@ -111,7 +111,7 @@ public class Transformer {
             if (contentType.isPresent()) {
               Protocols protocols = new Protocols();
               protocols.setHttp(new Protocol());
-              protocols.getHttp().setIn(RequestParameterLocation.Header);
+              protocols.getHttp().setIn(RequestParameterLocation.HEADER);
               contentType.get().setProtocol(protocols);
               contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
             }
@@ -265,7 +265,7 @@ public class Transformer {
       nextLink.getLanguage().setDefault(nextLink.getLanguage().getJava());
       nextLink.setProtocol(new Protocols());
       nextLink.getProtocol().setHttp(new Protocol());
-      nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.Path);
+      nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.PATH);
       nextLink.setExtensions(new XmsExtensions());
       nextLink.getExtensions().setXmsSkipUrlEncoding(true);
       List<Parameter> requestParams = new ArrayList<>();
@@ -290,8 +290,8 @@ public class Transformer {
                 .filter(parameter -> {
                   return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
                           || (parameter.getProtocol().getHttp().getIn() != null
-                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Header)
-                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Uri)));
+                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
+                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
                 })
                 .forEach(param -> {
                   nextOperation.getRequests().get(0).getParameters().add(param);
@@ -301,8 +301,8 @@ public class Transformer {
                 .filter(parameter -> {
                   return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
                           || (parameter.getProtocol().getHttp().getIn() != null
-                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Header)
-                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Uri)));
+                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
+                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
                 })
                 .forEach(param -> {
                   nextOperation.getRequests().get(0).getSignatureParameters().add(param);
@@ -391,7 +391,7 @@ public class Transformer {
     contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
     contentType.setProtocol(new Protocols());
     contentType.getProtocol().setHttp(new Protocol());
-    contentType.getProtocol().getHttp().setIn(RequestParameterLocation.Header);
+    contentType.getProtocol().getHttp().setIn(RequestParameterLocation.HEADER);
     Language language = new Language();
     language.setName("contentLength");
     language.setSerializedName("Content-Length");

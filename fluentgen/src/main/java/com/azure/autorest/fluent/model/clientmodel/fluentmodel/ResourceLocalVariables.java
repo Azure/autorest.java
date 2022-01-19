@@ -32,18 +32,18 @@ public class ResourceLocalVariables {
         String prefix = resourceOperation.getLocalVariablePrefix();
 
         List<ClientMethodParameter> pathParameters = resourceOperation.getPathParameters().stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList());
-        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.Path, p)));
+        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.PATH, p)));
 
         List<ClientMethodParameter> miscParameters = resourceOperation.getMiscParameters();
         miscParameters.forEach(p -> {
-            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(p.getName()), p.getClientType(), RequestParameterLocation.Query, p);
+            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(p.getName()), p.getClientType(), RequestParameterLocation.QUERY, p);
             var.setInitializeExpression("null");
             localVariablesMap.put(p, var);
         });
 
         ClientMethodParameter bodyParameter = resourceOperation.getBodyParameter();
         if (bodyParameter != null && !bodyParameter.getClientType().toString().equals(resourceOperation.getResourceModel().getInnerModel().getName())) {
-            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(bodyParameter.getName()), bodyParameter.getClientType(), RequestParameterLocation.Body, bodyParameter);
+            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(bodyParameter.getName()), bodyParameter.getClientType(), RequestParameterLocation.BODY, bodyParameter);
             var.setInitializeExpression(String.format("new %1$s()", bodyParameter.getClientType().toString()));
             localVariablesMap.put(bodyParameter, var);
         }
@@ -51,12 +51,12 @@ public class ResourceLocalVariables {
 
     public ResourceLocalVariables(ClientMethod clientMethod) {
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.PATH)
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         List<ClientMethodParameter> pathParameters =  clientMethod.getParameters().stream()
                 .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
                 .collect(Collectors.toList());
-        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.Path, p)));
+        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.PATH, p)));
     }
 
     private ResourceLocalVariables() {

@@ -105,7 +105,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             IType parameterClientType = parameter.getClientType();
 
             if (parameterWireType != ClassType.Base64Url &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.BODY &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
@@ -231,7 +231,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             IType parameterClientType = parameter.getClientType();
 
             if (parameterWireType != ClassType.Base64Url &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.BODY &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 if (parameter.getExplode() == false) {
@@ -249,7 +249,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
                 RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
-                if (parameterLocation != RequestParameterLocation.Body &&
+                if (parameterLocation != RequestParameterLocation.BODY &&
                         //parameterLocation != RequestParameterLocation.FormData &&
                         (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                     String parameterWireTypeName = parameterWireType.toString();
@@ -299,7 +299,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
                 if (settings.shouldGenerateXmlSerialization() &&
                         parameterClientType instanceof ListType &&
-                        (parameterLocation == RequestParameterLocation.Body /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
+                        (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                     function.line("%s %s = new %s(%s);",
                             parameter.getWireType(),
                             parameterWireName,

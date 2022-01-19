@@ -161,7 +161,7 @@ globalParameters:
                                       nullable: false
                                       operation: *id010
                                       protocol:
-                                        http: {in: Path}
+                                        http: {in: PATH}
                                       required: true
                                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                         apiVersions: []
@@ -181,7 +181,7 @@ globalParameters:
                                       nullable: false
                                       operation: *id012
                                       protocol:
-                                        http: {in: Header}
+                                        http: {in: HEADER}
                                       required: true
                                       schema: &id028 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                                         apiVersions: []
@@ -456,7 +456,7 @@ globalParameters:
                             nullable: false
                             operation: *id012
                             protocol:
-                              http: {in: Path}
+                              http: {in: PATH}
                             required: true
                             schema: &id017 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                               apiVersions:
@@ -479,7 +479,7 @@ globalParameters:
                             nullable: false
                             operation: *id012
                             protocol:
-                              http: {in: Query}
+                              http: {in: QUERY}
                             required: false
                             schema: *id017
                           - &id020
@@ -493,7 +493,7 @@ globalParameters:
                             nullable: false
                             operation: *id012
                             protocol:
-                              http: {in: Query}
+                              http: {in: QUERY}
                             required: true
                             schema: &id128 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                               apiVersions: []
@@ -524,7 +524,7 @@ globalParameters:
                           - *id018
                           - *id019
                       protocol:
-                        http: {in: Uri}
+                        http: {in: URI}
                       required: true
                       schema: *id015
                     - &id025
@@ -539,7 +539,7 @@ globalParameters:
                       nullable: false
                       operation: *id023
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: &id031 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions:
@@ -565,7 +565,7 @@ globalParameters:
                       nullable: false
                       operation: *id023
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -590,7 +590,7 @@ globalParameters:
                           nullable: false
                           operation: *id023
                           protocol:
-                            http: {in: Body, style: JSON}
+                            http: {in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
@@ -603,7 +603,7 @@ globalParameters:
                           nullable: false
                           operation: *id023
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -681,7 +681,7 @@ globalParameters:
                       nullable: false
                       operation: *id030
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id033
@@ -696,7 +696,7 @@ globalParameters:
                       nullable: false
                       operation: *id030
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -773,7 +773,7 @@ globalParameters:
                       nullable: false
                       operation: *id034
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id036
@@ -788,7 +788,7 @@ globalParameters:
                       nullable: false
                       operation: *id034
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -813,7 +813,7 @@ globalParameters:
                           nullable: false
                           operation: *id034
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -893,7 +893,7 @@ globalParameters:
                       nullable: false
                       operation: *id037
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id039
@@ -906,7 +906,7 @@ globalParameters:
                       nullable: false
                       operation: *id037
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -931,7 +931,7 @@ globalParameters:
                           nullable: false
                           operation: *id037
                           protocol:
-                            http: {in: Body, style: JSON}
+                            http: {in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
@@ -944,7 +944,7 @@ globalParameters:
                           nullable: false
                           operation: *id037
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -1013,7 +1013,7 @@ globalParameters:
                       nullable: false
                       operation: *id041
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id043
@@ -1026,7 +1026,7 @@ globalParameters:
                       nullable: false
                       operation: *id041
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1098,7 +1098,7 @@ globalParameters:
                       nullable: false
                       operation: *id044
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id046
@@ -1111,7 +1111,7 @@ globalParameters:
                       nullable: false
                       operation: *id044
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1134,7 +1134,7 @@ globalParameters:
                           nullable: false
                           operation: *id044
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -1218,7 +1218,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id049
@@ -1233,7 +1233,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id050
@@ -1250,7 +1250,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id051
@@ -1267,7 +1267,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id052
@@ -1282,7 +1282,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id053
@@ -1299,7 +1299,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1330,7 +1330,7 @@ globalParameters:
                           nullable: false
                           operation: *id047
                           protocol:
-                            http: {in: Body, style: JSON}
+                            http: {in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
@@ -1343,7 +1343,7 @@ globalParameters:
                           nullable: false
                           operation: *id047
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -1433,7 +1433,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id057
@@ -1448,7 +1448,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id058
@@ -1465,7 +1465,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id059
@@ -1482,7 +1482,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id060
@@ -1497,7 +1497,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id061
@@ -1512,7 +1512,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1603,7 +1603,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id064
@@ -1618,7 +1618,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id065
@@ -1635,7 +1635,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id066
@@ -1652,7 +1652,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id067
@@ -1667,7 +1667,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id068
@@ -1680,7 +1680,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1709,7 +1709,7 @@ globalParameters:
                           nullable: false
                           operation: *id062
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -1798,7 +1798,7 @@ globalParameters:
                       nullable: false
                       operation: *id069
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1822,7 +1822,7 @@ globalParameters:
                           nullable: false
                           operation: *id069
                           protocol:
-                            http: {in: Body, style: JSON}
+                            http: {in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
@@ -1835,7 +1835,7 @@ globalParameters:
                           nullable: false
                           operation: *id069
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -1911,7 +1911,7 @@ globalParameters:
                       nullable: false
                       operation: *id072
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1985,7 +1985,7 @@ globalParameters:
                       nullable: false
                       operation: *id074
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -2009,7 +2009,7 @@ globalParameters:
                           nullable: false
                           operation: *id074
                           protocol:
-                            http: {in: Header}
+                            http: {in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
@@ -2083,7 +2083,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id080
                                 protocol:
-                                  http: {in: Path}
+                                  http: {in: PATH}
                                 required: true
                                 schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                   apiVersions: []
@@ -2102,7 +2102,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id081
                                 protocol:
-                                  http: {in: Header}
+                                  http: {in: HEADER}
                                 required: true
                                 schema: *id028
                             protocol:
@@ -2137,7 +2137,7 @@ globalParameters:
                       nullable: false
                       operation: *id081
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id086
@@ -2152,7 +2152,7 @@ globalParameters:
                       nullable: false
                       operation: *id081
                       protocol:
-                        http: {in: Query}
+                        http: {in: QUERY}
                       required: false
                       schema: *id017
                     - *id020
@@ -2234,7 +2234,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id093
                                 protocol:
-                                  http: {in: Path}
+                                  http: {in: PATH}
                                 required: true
                                 schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                   apiVersions: []
@@ -2253,7 +2253,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id094
                                 protocol:
-                                  http: {in: Header}
+                                  http: {in: HEADER}
                                 required: true
                                 schema: *id028
                             protocol:
@@ -2290,7 +2290,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id031
                     - &id098
@@ -2305,7 +2305,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id099
@@ -2322,7 +2322,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id100
@@ -2339,7 +2339,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id101
@@ -2354,7 +2354,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: *id017
                     - &id102
@@ -2369,7 +2369,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: Query}
+                        http: {in: QUERY}
                       required: false
                       schema: *id017
                     - *id020
@@ -2435,7 +2435,7 @@ globalParameters:
                     nullable: false
                     operation: *id106
                     protocol:
-                      http: {in: Path}
+                      http: {in: PATH}
                     required: true
                     schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                       apiVersions: []
@@ -2454,7 +2454,7 @@ globalParameters:
                     nullable: false
                     operation: *id105
                     protocol:
-                      http: {in: Header}
+                      http: {in: HEADER}
                     required: true
                     schema: *id028
                 protocol:
@@ -2487,7 +2487,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {in: Query}
+            http: {in: QUERY}
           required: false
           schema: *id017
         - *id020
@@ -2511,7 +2511,7 @@ globalParameters:
       signatureParameters:
         - *id110
     protocol:
-      http: {in: Path}
+      http: {in: PATH}
     required: true
     schema: *id017
   - *id011
@@ -2581,7 +2581,7 @@ operationGroups:
                       nullable: false
                       operation: *id118
                       protocol:
-                        http: {in: Path}
+                        http: {in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -2600,7 +2600,7 @@ operationGroups:
                       nullable: false
                       operation: *id119
                       protocol:
-                        http: {in: Header}
+                        http: {in: HEADER}
                       required: true
                       schema: *id028
                   protocol:

@@ -174,8 +174,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (settings.isLowLevelClient()) {
                 // Required path and body parameters are allowed
                 codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
-                        (p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path ||
-                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.Body))
+                        (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
+                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY))
                     .collect(Collectors.toList());
             } else {
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
@@ -271,7 +271,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .description("The options to configure the HTTP request before HTTP client sends it")
                     .wireType(ClassType.RequestOptions)
                     .name("requestOptions")
-                    .location(RequestParameterLocation.None)
+                    .location(RequestParameterLocation.NONE)
                     .isConstant(false)
                     .isRequired(false)
                     .fromClient(false)

@@ -89,8 +89,8 @@ public class FluentTransformer {
         codeModel.getGlobalParameters().stream().filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT
                 && p.getProtocol() != null && p.getProtocol().getHttp() != null).forEach(p -> {
                     String serializedName = p.getLanguage().getDefault().getSerializedName();
-                    if ((p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path && !"subscriptionId".equalsIgnoreCase(serializedName))
-                            || (p.getProtocol().getHttp().getIn() == RequestParameterLocation.Query && !"api-version".equalsIgnoreCase(serializedName))) {
+                    if ((p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH && !"subscriptionId".equalsIgnoreCase(serializedName))
+                            || (p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY && !"api-version".equalsIgnoreCase(serializedName))) {
                         logger.warn("Modify parameter '{}' implementation from CLIENT to METHOD", serializedName);
                         p.setImplementation(Parameter.ImplementationLocation.METHOD);
                         modifiedGlobalParameters.add(p);

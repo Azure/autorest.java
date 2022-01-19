@@ -205,8 +205,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 } else {
                     // LLC move most query and header parameters to RequestOptions
                     final boolean parameterIsRequiredAndPathOrBody = parameter.isRequired()
-                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header
-                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query;
+                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.HEADER
+                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.QUERY;
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion");
                     if (parameterIsRequiredAndPathOrBody || parameterIsClientOrApiVersion) {
@@ -225,7 +225,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .wireType(ClassType.RequestOptions)
                         .clientType(ClassType.RequestOptions)
                         .name("requestOptions")
-                        .requestParameterLocation(RequestParameterLocation.None)
+                        .requestParameterLocation(RequestParameterLocation.NONE)
                         .requestParameterName("requestOptions")
                         .alreadyEncoded(true)
                         .isConstant(false)
@@ -245,7 +245,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .wireType(contextClassType)
                         .clientType(contextClassType)
                         .name("context")
-                        .requestParameterLocation(RequestParameterLocation.None)
+                        .requestParameterLocation(RequestParameterLocation.NONE)
                         .requestParameterName("context")
                         .alreadyEncoded(true)
                         .isConstant(false)
