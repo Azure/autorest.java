@@ -248,7 +248,7 @@ globalParameters:
           nullable: false
           operation: *id006
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: &id016 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
@@ -270,7 +270,7 @@ globalParameters:
           nullable: false
           operation: *id006
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id007
         - &id011
@@ -285,7 +285,7 @@ globalParameters:
           nullable: false
           operation: *id006
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id124 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -318,7 +318,7 @@ globalParameters:
           nullable: false
           operation: *id006
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: &id136 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
             apiVersions:
@@ -345,7 +345,7 @@ globalParameters:
           operation: *id008
           origin: modelerfour:synthesized/api-version
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: true
           schema: &id135 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
             apiVersions: []
@@ -383,7 +383,7 @@ globalParameters:
             operation: *id006
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: &id021 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
               apiVersions: []
@@ -497,7 +497,7 @@ globalParameters:
           nullable: false
           operation: *id015
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id019
@@ -512,7 +512,7 @@ globalParameters:
           nullable: false
           operation: *id015
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id126 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -545,7 +545,7 @@ globalParameters:
           nullable: false
           operation: *id015
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id017
         - *id013
@@ -569,7 +569,7 @@ globalParameters:
             operation: *id015
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -638,7 +638,7 @@ globalParameters:
           nullable: false
           operation: *id022
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id025
@@ -651,7 +651,7 @@ globalParameters:
           nullable: false
           operation: *id022
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id127 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -685,7 +685,7 @@ globalParameters:
             operation: *id022
             origin: modelerfour:synthesized/content-type
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: &id043 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
               apiVersions: []
@@ -713,7 +713,7 @@ globalParameters:
             nullable: false
             operation: *id022
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: &id131 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
               apiVersions:
@@ -733,7 +733,7 @@ globalParameters:
             nullable: false
             operation: *id022
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
               apiVersions: []
@@ -754,7 +754,7 @@ globalParameters:
             operation: *id022
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -788,7 +788,7 @@ globalParameters:
             nullable: false
             operation: *id022
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: *id014
           - apiVersions: []
@@ -801,7 +801,7 @@ globalParameters:
             operation: *id022
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -875,7 +875,7 @@ globalParameters:
           nullable: false
           operation: *id031
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id033
@@ -888,7 +888,7 @@ globalParameters:
           nullable: false
           operation: *id031
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: &id035 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
@@ -919,7 +919,7 @@ globalParameters:
             operation: *id031
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -990,7 +990,7 @@ globalParameters:
           nullable: false
           operation: *id034
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id038
@@ -1003,7 +1003,7 @@ globalParameters:
           nullable: false
           operation: *id034
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - &id039
@@ -1018,7 +1018,7 @@ globalParameters:
           nullable: false
           operation: *id034
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id036
         - *id013
@@ -1042,7 +1042,7 @@ globalParameters:
             operation: *id034
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1111,7 +1111,7 @@ globalParameters:
           nullable: false
           operation: *id040
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id042
@@ -1124,7 +1124,7 @@ globalParameters:
           nullable: false
           operation: *id040
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -1148,7 +1148,7 @@ globalParameters:
             operation: *id040
             origin: modelerfour:synthesized/content-type
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id043
           - &id046
@@ -1161,7 +1161,7 @@ globalParameters:
             nullable: false
             operation: *id040
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: &id132 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
               apiVersions:
@@ -1181,7 +1181,7 @@ globalParameters:
             nullable: false
             operation: *id040
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
               apiVersions: []
@@ -1202,7 +1202,7 @@ globalParameters:
             operation: *id040
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1236,7 +1236,7 @@ globalParameters:
             nullable: false
             operation: *id040
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: *id014
           - apiVersions: []
@@ -1249,7 +1249,7 @@ globalParameters:
             operation: *id040
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1322,7 +1322,7 @@ globalParameters:
           nullable: false
           operation: *id049
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id051
@@ -1337,7 +1337,7 @@ globalParameters:
           nullable: false
           operation: *id049
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: &id053 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
@@ -1368,7 +1368,7 @@ globalParameters:
             operation: *id049
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1439,7 +1439,7 @@ globalParameters:
           nullable: false
           operation: *id052
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id056
@@ -1454,7 +1454,7 @@ globalParameters:
           nullable: false
           operation: *id052
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id057
@@ -1469,7 +1469,7 @@ globalParameters:
           nullable: false
           operation: *id052
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id128 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -1494,7 +1494,7 @@ globalParameters:
           nullable: false
           operation: *id052
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id054
         - *id013
@@ -1519,7 +1519,7 @@ globalParameters:
             operation: *id052
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1590,7 +1590,7 @@ globalParameters:
           nullable: false
           operation: *id059
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id062
@@ -1605,7 +1605,7 @@ globalParameters:
           nullable: false
           operation: *id059
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id063
@@ -1618,7 +1618,7 @@ globalParameters:
           nullable: false
           operation: *id059
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id129 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -1653,7 +1653,7 @@ globalParameters:
             operation: *id059
             origin: modelerfour:synthesized/content-type
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id043
           - &id066
@@ -1666,7 +1666,7 @@ globalParameters:
             nullable: false
             operation: *id059
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: &id133 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
               apiVersions:
@@ -1686,7 +1686,7 @@ globalParameters:
             nullable: false
             operation: *id059
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
               apiVersions: []
@@ -1707,7 +1707,7 @@ globalParameters:
             operation: *id059
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1743,7 +1743,7 @@ globalParameters:
             nullable: false
             operation: *id059
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: *id014
           - apiVersions: []
@@ -1756,7 +1756,7 @@ globalParameters:
             operation: *id059
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1829,7 +1829,7 @@ globalParameters:
           nullable: false
           operation: *id069
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id071
@@ -1844,7 +1844,7 @@ globalParameters:
           nullable: false
           operation: *id069
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id072
@@ -1857,7 +1857,7 @@ globalParameters:
           nullable: false
           operation: *id069
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -1881,7 +1881,7 @@ globalParameters:
             operation: *id069
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -1948,7 +1948,7 @@ globalParameters:
           nullable: false
           operation: *id073
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id075
@@ -1963,7 +1963,7 @@ globalParameters:
           nullable: false
           operation: *id073
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id076
@@ -1976,7 +1976,7 @@ globalParameters:
           nullable: false
           operation: *id073
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2000,7 +2000,7 @@ globalParameters:
             operation: *id073
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2069,7 +2069,7 @@ globalParameters:
           nullable: false
           operation: *id077
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id079
@@ -2082,7 +2082,7 @@ globalParameters:
           nullable: false
           operation: *id077
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2105,7 +2105,7 @@ globalParameters:
             operation: *id077
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2176,7 +2176,7 @@ globalParameters:
           nullable: false
           operation: *id080
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id083
@@ -2189,7 +2189,7 @@ globalParameters:
           nullable: false
           operation: *id080
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - &id084
@@ -2204,7 +2204,7 @@ globalParameters:
           nullable: false
           operation: *id080
           protocol:
-            http: {explode: true, in: Query, style: FORM}
+            http: {explode: true, in: QUERY, style: FORM}
           required: false
           schema: &id130 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
             apiVersions:
@@ -2229,7 +2229,7 @@ globalParameters:
           nullable: false
           operation: *id080
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id081
         - *id013
@@ -2254,7 +2254,7 @@ globalParameters:
             operation: *id080
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2325,7 +2325,7 @@ globalParameters:
           nullable: false
           operation: *id086
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id088
@@ -2338,7 +2338,7 @@ globalParameters:
           nullable: false
           operation: *id086
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2362,7 +2362,7 @@ globalParameters:
             operation: *id086
             origin: modelerfour:synthesized/content-type
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id043
           - &id091
@@ -2375,7 +2375,7 @@ globalParameters:
             nullable: false
             operation: *id086
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: &id134 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
               apiVersions:
@@ -2395,7 +2395,7 @@ globalParameters:
             nullable: false
             operation: *id086
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
               apiVersions: []
@@ -2416,7 +2416,7 @@ globalParameters:
             operation: *id086
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2450,7 +2450,7 @@ globalParameters:
             nullable: false
             operation: *id086
             protocol:
-              http: {explode: false, in: Body, style: BINARY}
+              http: {explode: false, in: BODY, style: BINARY}
             required: true
             schema: *id014
           - apiVersions: []
@@ -2463,7 +2463,7 @@ globalParameters:
             operation: *id086
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2534,7 +2534,7 @@ globalParameters:
           nullable: false
           operation: *id094
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id096
@@ -2549,7 +2549,7 @@ globalParameters:
           nullable: false
           operation: *id094
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id097
@@ -2562,7 +2562,7 @@ globalParameters:
           nullable: false
           operation: *id094
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2586,7 +2586,7 @@ globalParameters:
             operation: *id094
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2653,7 +2653,7 @@ globalParameters:
           nullable: false
           operation: *id098
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id100
@@ -2668,7 +2668,7 @@ globalParameters:
           nullable: false
           operation: *id098
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id053
         - &id101
@@ -2681,7 +2681,7 @@ globalParameters:
           nullable: false
           operation: *id098
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2705,7 +2705,7 @@ globalParameters:
             operation: *id098
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2772,7 +2772,7 @@ globalParameters:
           nullable: false
           operation: *id102
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id104
@@ -2785,7 +2785,7 @@ globalParameters:
           nullable: false
           operation: *id102
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - *id013
@@ -2808,7 +2808,7 @@ globalParameters:
             operation: *id102
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -2873,7 +2873,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id108
@@ -2888,7 +2888,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: &id112 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
             apiVersions:
@@ -2916,7 +2916,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - &id110
@@ -2933,7 +2933,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id106
         - *id013
@@ -2958,7 +2958,7 @@ globalParameters:
             operation: *id105
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -3027,7 +3027,7 @@ globalParameters:
           nullable: false
           operation: *id111
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id016
         - &id115
@@ -3042,7 +3042,7 @@ globalParameters:
           nullable: false
           operation: *id111
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id112
         - &id116
@@ -3055,7 +3055,7 @@ globalParameters:
           nullable: false
           operation: *id111
           protocol:
-            http: {explode: false, in: Path}
+            http: {explode: false, in: PATH}
           required: true
           schema: *id035
         - &id117
@@ -3072,7 +3072,7 @@ globalParameters:
           nullable: false
           operation: *id111
           protocol:
-            http: {explode: false, in: Query}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id113
         - *id013
@@ -3097,7 +3097,7 @@ globalParameters:
             operation: *id111
             origin: modelerfour:synthesized/accept
             protocol:
-              http: {explode: false, in: Header}
+              http: {explode: false, in: HEADER}
             required: true
             schema: *id021
           protocol:
@@ -3138,7 +3138,7 @@ globalParameters:
       nullable: false
       operation: *id008
       protocol:
-        http: {explode: false, in: Path}
+        http: {explode: false, in: PATH}
       required: true
       schema: *id016
     - &id120
@@ -3153,7 +3153,7 @@ globalParameters:
       nullable: false
       operation: *id008
       protocol:
-        http: {explode: false, in: Path}
+        http: {explode: false, in: PATH}
       required: true
       schema: *id112
     - &id121
@@ -3166,7 +3166,7 @@ globalParameters:
       nullable: false
       operation: *id008
       protocol:
-        http: {explode: false, in: Path}
+        http: {explode: false, in: PATH}
       required: true
       schema: *id035
     - &id122
@@ -3183,7 +3183,7 @@ globalParameters:
       nullable: false
       operation: *id008
       protocol:
-        http: {explode: false, in: Query}
+        http: {explode: false, in: QUERY}
       required: false
       schema: *id118
     - *id013
@@ -3208,7 +3208,7 @@ globalParameters:
         operation: *id008
         origin: modelerfour:synthesized/accept
         protocol:
-          http: {explode: false, in: Header}
+          http: {explode: false, in: HEADER}
         required: true
         schema: *id021
       protocol:
@@ -3238,7 +3238,7 @@ globalParameters:
     - *id121
     - *id122
   protocol:
-    http: {explode: false, in: Uri}
+    http: {explode: false, in: URI}
   required: true
   schema: *id014
 - *id013

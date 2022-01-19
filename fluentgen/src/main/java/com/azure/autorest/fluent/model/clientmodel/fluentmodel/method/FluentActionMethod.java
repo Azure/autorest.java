@@ -59,7 +59,7 @@ public class FluentActionMethod extends FluentMethod {
         List<ClientMethodParameter> parameters = method.getMethodInputParameters();
         ResourceLocalVariables resourceLocalVariables = new ResourceLocalVariables(collectionMethod.getInnerClientMethod());
         parameters.removeAll(resourceLocalVariables.getLocalVariablesMap().entrySet().stream()
-                .filter(e -> e.getValue().getParameterLocation() == RequestParameterLocation.Path)
+                .filter(e -> e.getValue().getParameterLocation() == RequestParameterLocation.PATH)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList()));
         this.parameters = parameters;

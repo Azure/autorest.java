@@ -210,7 +210,7 @@ class OperationNameNormalization {
         return parameter.getImplementation() == Parameter.ImplementationLocation.METHOD
                 && parameter.getProtocol() != null
                 && parameter.getProtocol().getHttp() != null
-                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Path;
+                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH;
     }
 
     private static String parameterSerializedName(String parameterNameInUrl) {

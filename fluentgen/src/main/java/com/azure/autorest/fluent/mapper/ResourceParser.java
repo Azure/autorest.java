@@ -270,10 +270,10 @@ public class ResourceParser {
                     if (method.getInnerProxyMethod().getParameters().stream()
                             .allMatch(p -> p.getFromClient()
                                     || !p.getIsRequired()
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsConstant())     // usually 'api-version' query parameter
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Header && p.getIsConstant())    // usually 'accept' header
-                                    || p.getRequestParameterLocation() == RequestParameterLocation.Path
-                                    || p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.QUERY && p.getIsConstant())     // usually 'api-version' query parameter
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.HEADER && p.getIsConstant())    // usually 'accept' header
+                                    || p.getRequestParameterLocation() == RequestParameterLocation.PATH
+                                    || p.getRequestParameterLocation() == RequestParameterLocation.BODY)) {
                         actionMethods.add(method);
                     }
                 }
@@ -307,7 +307,7 @@ public class ResourceParser {
                 String methodNameLowerCase = m.getInnerClientMethod().getName().toLowerCase(Locale.ROOT);
                 if (!(methodNameLowerCase.contains("update") && !methodNameLowerCase.contains("create"))) {
                     // body in request
-                    if (m.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
+                    if (m.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY)) {
                         String returnTypeName = m.getFluentReturnType().toString();
                         FluentResourceModel fluentModel = fluentModelMapByName.get(returnTypeName);
                         // at present, cannot handle derived models
@@ -400,7 +400,7 @@ public class ResourceParser {
     private static ClientModel getBodyClientModel(FluentCollectionMethod method, List<ClientModel> availableModels) {
         Optional<String> bodyTypeNameOpt = method.getInnerClientMethod().getProxyMethod().getParameters()
                 .stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY)
                 .map(p -> p.getClientType().toString())
                 .findAny();
 
@@ -439,15 +439,15 @@ public class ResourceParser {
                         if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
                             boolean hasBodyParam = methodHasBodyParameter(method);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
-                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
                                             && p.getIsRequired()
                                             && !p.getFromClient() && !p.getIsConstant());
                             boolean hasNewNonConstantPathParam = method.getInnerProxyMethod().getParameters().stream()
-                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.PATH
                                             && !p.getIsConstant() && !p.getFromClient()
                                             && resourceCreate.getMethodReferences().stream().allMatch(
                                                     m -> m.getInnerProxyMethod().getParameters().stream().anyMatch(
-                                                            p1 -> p1.getRequestParameterLocation() == RequestParameterLocation.Path
+                                                            p1 -> p1.getRequestParameterLocation() == RequestParameterLocation.PATH
                                                                     && p1.getRequestParameterName().equals(p.getRequestParameterName())
                                                                     && p1.getIsConstant() && !p1.getFromClient())));
                             // if for update, need a body parameter
@@ -477,7 +477,7 @@ public class ResourceParser {
     private static boolean methodHasBodyParameter(FluentCollectionMethod method) {
         return method.getInnerProxyMethod().getParameters().stream()
                 .filter(p -> nonSimpleJavaType(p.getClientType()))
-                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
+                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY);
     }
 
     private static boolean nonSimpleJavaType(IType type) {

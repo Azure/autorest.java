@@ -146,17 +146,17 @@ public abstract class ResourceOperation {
     }
 
     public ClientMethodParameter getBodyParameter() {
-        List<MethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
+        List<MethodParameter> parameters = getParametersByLocation(RequestParameterLocation.BODY);
         return parameters.isEmpty() ? null : parameters.iterator().next().getClientMethodParameter();
     }
 
     public List<MethodParameter> getPathParameters() {
-        return getParametersByLocation(RequestParameterLocation.Path);
+        return getParametersByLocation(RequestParameterLocation.PATH);
     }
 
     public List<ClientMethodParameter> getMiscParameters() {
         // header or query
-        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)))
+        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.HEADER, RequestParameterLocation.QUERY)))
                 .stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList());
     }
 

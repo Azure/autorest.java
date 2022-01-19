@@ -229,7 +229,7 @@ public class SchemaNameNormalization {
             og.getOperations().forEach(operation -> {
                 operation.getRequests().forEach(request -> {
                     Optional<Schema> bodySchemaOpt = request.getParameters().stream()
-                            .filter(p -> p.getSchema() != null && p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Body)
+                            .filter(p -> p.getSchema() != null && p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY)
                             .map(Value::getSchema)
                             .findFirst();
                     if (bodySchemaOpt.isPresent()) {
