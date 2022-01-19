@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class ScenarioTest {
 
-    private String _filePath;
+    private String filePath;
     private List<String> requiredVariables;
     private Map<String, String> requiredVariablesDefault;
     /**
@@ -20,12 +20,12 @@ public class ScenarioTest {
     private ScenarioTestScope scope;
     private Boolean useArmTemplate;
 
-    public String get_filePath() {
-        return _filePath;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void set_filePath(String _filePath) {
-        this._filePath = _filePath;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public List<String> getRequiredVariables() {

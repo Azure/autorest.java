@@ -22,7 +22,7 @@ public class TestScenario {
      * Whether to share the scope and prepareSteps with other scenarios
      */
     private Boolean shareScope;
-    private List<ScenarioStep> _resolvedSteps;
+    private List<ScenarioStep> resolvedSteps;
 
     public String getDescription() {
         return description;
@@ -64,11 +64,11 @@ public class TestScenario {
         this.shareScope = shareScope;
     }
 
-    public List<ScenarioStep> get_resolvedSteps() {
-        return _resolvedSteps;
+    public List<ScenarioStep> getResolvedSteps() {
+        return resolvedSteps;
     }
 
-    public void set_resolvedSteps(List<ScenarioStep> _resolvedSteps) {
-        this._resolvedSteps = _resolvedSteps;
+    public void setResolvedSteps(List<ScenarioStep> resolvedSteps) {
+        this.resolvedSteps = resolvedSteps;
     }
 }

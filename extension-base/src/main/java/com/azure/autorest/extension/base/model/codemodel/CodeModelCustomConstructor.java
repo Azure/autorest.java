@@ -12,6 +12,7 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,9 @@ public class CodeModelCustomConstructor extends Constructor {
         @Override
         public Object construct(Node node) {
             MappingNode mappingNode = (MappingNode) node;
-            for (NodeTuple tuple :  ((MappingNode) node).getValue()) {
+            NodeTuple resolvedStepsNode = null;
+            NodeTuple filePathNode = null;
+            for (NodeTuple tuple :  mappingNode.getValue()) {
                 ScalarNode key = (ScalarNode) tuple.getKeyNode();
                 switch (key.getValue()) {
                     case "arrays": {
@@ -323,10 +326,44 @@ public class CodeModelCustomConstructor extends Constructor {
                         }
                         value.setValue(actualValues);
                         break;
+                    } case "_resolvedSteps": {
+                        resolvedStepsNode = tuple;
+                        break;
+                    } case "_filePath":{
+                        filePathNode = tuple;
+                        break;
                     }
                 }
             }
+            // replace "_resolvedSteps" with "resolvedSteps"
+            if (resolvedStepsNode != null) {
+                findAndRemove(mappingNode, resolvedStepsNode);
+                SequenceNode sequenceNode = (SequenceNode) resolvedStepsNode.getValueNode();
+                sequenceNode.setListType(ScenarioStep.class);
+                ScalarNode keyNode = (ScalarNode) resolvedStepsNode.getKeyNode();
+                mappingNode.getValue().add(new NodeTuple(new ScalarNode(
+                    keyNode.getTag(),
+                    "resolvedSteps",
+                    keyNode.getStartMark(),
+                    keyNode.getEndMark(),
+                    keyNode.getScalarStyle()
+                ), resolvedStepsNode.getValueNode()));
+            } else if (filePathNode != null) { // replace "_filePath" with "filePath"
+                findAndRemove(mappingNode, filePathNode);
+                ScalarNode keyNode = (ScalarNode) filePathNode.getKeyNode();
+                mappingNode.getValue().add(new NodeTuple(new ScalarNode(
+                    keyNode.getTag(),
+                    "filePath",
+                    keyNode.getStartMark(),
+                    keyNode.getEndMark(),
+                    keyNode.getScalarStyle()
+                ), filePathNode.getValueNode()));
+            }
             return super.construct(mappingNode);
+        }
+
+        private void findAndRemove(MappingNode parentNode, NodeTuple nodeToRemove) {
+            parentNode.getValue().removeIf(node -> node == nodeToRemove);
         }
 
         @Override
