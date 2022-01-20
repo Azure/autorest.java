@@ -1,4 +1,12 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package com.azure.autorest.extension.base.model.codemodel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  */
@@ -13,6 +21,27 @@ public enum ScenarioTestScope {
      *  - resourceGroupName
      *  - location
      */
-    ResourceGroup
+    RESOURCE_GROUP("ResourceGroup")
+    ;
 
+    private final String value;
+    private static final Map<String, ScenarioTestScope> CONSTANTS = new HashMap<>();
+
+    static {
+        for (ScenarioTestScope stepType : ScenarioTestScope.values()) {
+            CONSTANTS.put(stepType.value, stepType);
+        }
+    }
+
+    ScenarioTestScope(String value) {
+        this.value = value;
+    }
+
+    public static ScenarioTestScope fromValue(String value) {
+        ScenarioTestScope stepType = CONSTANTS.get(value);
+        if (stepType == null) {
+            throw new IllegalArgumentException(value);
+        }
+        return stepType;
+    }
 }

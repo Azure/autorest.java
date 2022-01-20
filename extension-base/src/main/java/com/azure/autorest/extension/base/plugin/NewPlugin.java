@@ -3,6 +3,7 @@ package com.azure.autorest.extension.base.plugin;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.MessageChannel;
+import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -18,12 +19,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class NewPlugin {
     protected final ObjectMapper jsonMapper;
@@ -193,6 +189,7 @@ public abstract class NewPlugin {
                 .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
                 .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
         Representer representer = new Representer();
+        representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);

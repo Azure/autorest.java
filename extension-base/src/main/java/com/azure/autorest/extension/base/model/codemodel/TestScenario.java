@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.List;
@@ -22,6 +27,7 @@ public class TestScenario {
      * Whether to share the scope and prepareSteps with other scenarios
      */
     private Boolean shareScope;
+
     private List<ScenarioStep> resolvedSteps;
 
     public String getDescription() {
@@ -64,6 +70,7 @@ public class TestScenario {
         this.shareScope = shareScope;
     }
 
+    @YamlProperty("_resolvedSteps")
     public List<ScenarioStep> getResolvedSteps() {
         return resolvedSteps;
     }

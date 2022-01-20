@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.List;
@@ -20,6 +25,7 @@ public class ScenarioTest {
     private ScenarioTestScope scope;
     private Boolean useArmTemplate;
 
+    @YamlProperty("_filePath")
     public String getFilePath() {
         return filePath;
     }
