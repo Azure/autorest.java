@@ -129,7 +129,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
                 if (scopes != null && !scopes.isEmpty()) {
                     addGeneratedAnnotation(classBlock);
-                    classBlock.packagePrivateStaticFinalVariable(String.format("String[] DEFAULT_SCOPES = new String[] {%s}",
+                    classBlock.privateStaticFinalVariable(String.format("String[] DEFAULT_SCOPES = new String[] {%s}",
                             String.join(", ", scopes)));
                 }
 
