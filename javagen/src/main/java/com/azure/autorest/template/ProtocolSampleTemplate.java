@@ -3,39 +3,49 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, JavaFile> {
-    private static final ProtocolSampleTemplate _instance = new ProtocolSampleTemplate();
+
+    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProtocolSampleTemplate.class);
+
+    private static final ProtocolSampleTemplate INSTANCE = new ProtocolSampleTemplate();
 
     protected ProtocolSampleTemplate() {}
 
     public static ProtocolSampleTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     @SuppressWarnings("unchecked")
@@ -74,32 +84,39 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         List<String> clientParameterLines = new ArrayList<>();
         Set<ServiceClientProperty> processedServiceClientProperties = new HashSet<>();
 
+        List<ProxyMethodParameter> proxyMethodParameters = getProxyMethodParameters(method.getProxyMethod(), method.getParameters());
+
         example.getParameters().forEach((parameterName, parameterValue) -> {
             boolean matchRequiredParameter = false;
             for (int i = 0; i < numParam; i++) {
-                ClientMethodParameter p = method.getParameters().get(i);
-                // TODO: should use getRequestParameterName from proxy method parameter, instead of getName from client method parameter
-                if (p.getName().equalsIgnoreCase(parameterName)) {
-                    if (p.getClientType() != ClassType.BinaryData) {
-                        // TODO: handle query with array
+                ProxyMethodParameter proxyMethodParameter = proxyMethodParameters.get(i);
+                if (proxyMethodParameter != null) {
+                    if (getSerializedName(proxyMethodParameter).equalsIgnoreCase(parameterName)) {
+                        // parameter in example found in method signature
 
-                        String exampleValue = p.getLocation() == RequestParameterLocation.QUERY
-                                ? parameterValue.getUnescapedQueryValue().toString()
-                                : parameterValue.getObjectValue().toString();
-                        params.set(i, p.getClientType().defaultValueExpression(exampleValue));
-                    } else {
-                        // BinaryData
-                        String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
-                        binaryDataStmt.append(
-                                String.format("BinaryData %s = BinaryData.fromString(%s);",
-                                        parameterName, binaryDataValue));
-                        params.set(i, parameterName);
+                        if (proxyMethodParameter.getClientType() != ClassType.BinaryData) {
+                            // ignore query with array, query parameter is not included in LLC method signature
+
+                            String exampleValue = proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
+                                    ? parameterValue.getUnescapedQueryValue().toString()
+                                    : parameterValue.getObjectValue().toString();
+                            params.set(i, proxyMethodParameter.getClientType().defaultValueExpression(exampleValue));
+                        } else {
+                            // BinaryData
+                            String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
+                            binaryDataStmt.append(
+                                    String.format("BinaryData %s = BinaryData.fromString(%s);",
+                                            parameterName, binaryDataValue));
+                            params.set(i, parameterName);
+                        }
+                        matchRequiredParameter = true;
+                        break;
                     }
-                    matchRequiredParameter = true;
-                    break;
                 }
             }
             if (!matchRequiredParameter) {
+                // parameter in example not found in method signature, check those parameters defined in spec but was left out of method signature
+
                 method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
                         case QUERY:
@@ -231,5 +248,25 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
             serializedName = parameter.getName();
         }
         return serializedName;
+    }
+
+    private List<ProxyMethodParameter> getProxyMethodParameters(
+            ProxyMethod proxyMethod,
+            List<ClientMethodParameter> clientMethodParameters) {
+        // the list of proxy method parameters will be 1-1 with list of client method parameters
+
+        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = proxyMethod.getParameters().stream()
+                .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
+        List<ProxyMethodParameter> proxyMethodParameters = new ArrayList<>();
+        for (ClientMethodParameter clientMethodParameter : clientMethodParameters) {
+            ProxyMethodParameter proxyMethodParameter = proxyMethodParameterByClientParameterName.get(clientMethodParameter.getName());
+            proxyMethodParameters.add(proxyMethodParameter);
+
+            if (proxyMethodParameter == null) {
+                // this should not happen unless we changed the naming of client method parameter from proxy method parameter
+                LOGGER.warn("Failed to find proxy method parameter for client method parameter with name '{}'", clientMethodParameter.getName());
+            }
+        }
+        return proxyMethodParameters;
     }
 }
