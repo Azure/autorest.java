@@ -18,6 +18,7 @@ import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.core.util.CoreUtils;
 import com.google.common.collect.Lists;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.yaml.snakeyaml.DumperOptions;
@@ -45,7 +46,7 @@ public class DeduplicateSetterTest {
     /**
      * Issue: https://github.com/Azure/autorest.java/issues/1320
      * Remove duplicate setter methods from child schema when parent schema contains same property
-     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(JavaSettings, List)}
+     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
      */
     @Test
     public void deduplicateTest(){
@@ -67,7 +68,10 @@ public class DeduplicateSetterTest {
         }
         javaFile.publicClass(Lists.newArrayList(), classNameWithBaseType, classBlock -> {
             // real test here
-            for (ClientModelPropertyAccess parentProperty : templateAccessor.getParentSettersToOverride(settings, propertyReferences)) {
+            List<ClientModelPropertyAccess> toOverride = templateAccessor.getParentSettersToOverride(model, settings, propertyReferences);
+            Assertions.assertEquals(toOverride.size(), 1);
+
+            for (ClientModelPropertyAccess parentProperty : toOverride) {
                 classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                 classBlock.annotation("Override");
                 classBlock.publicMethod(String.format("%s %s(%s %s)",
@@ -82,8 +86,6 @@ public class DeduplicateSetterTest {
             }
         });
 
-        //TODO remove
-        System.out.println(javaFile.getContents().toString());
     }
 
     private ObjectSchema loadSiteSchemaParent() {
@@ -111,8 +113,8 @@ public class DeduplicateSetterTest {
             return super.getClientModelPropertyReferences(model);
         }
 
-        public List<ClientModelPropertyAccess> getParentSettersToOverride(JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
-            return super.getParentSettersToOverride(settings, propertyReferences);
+        public List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+            return super.getParentSettersToOverride(model, settings, propertyReferences);
         }
 
     }

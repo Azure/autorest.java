@@ -387,7 +387,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (settings.isOverrideSetterFromSuperclass()) {
-                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(settings, propertyReferences);
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings, propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     classBlock.annotation("Override");
@@ -449,20 +449,24 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Override parent setters if:
      * 1. parent property is not readOnly or required
-     * TODO 2. child does not contain property that shadow this parent property
-     * @param settings
-     * @param propertyReferences
-     * @return
+     * 2. child does not contain property that shadow this parent property, otherwise overridden parent setter methods will collide with child setter methods
+     * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
      */
-    protected List<ClientModelPropertyAccess> getParentSettersToOverride(JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
-        // reference to properties from parent model
+    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
-            .filter(parentProperty ->
-                !parentProperty.getIsReadOnly() &&
-                    !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())
-            ).collect(Collectors.toList());
+            .filter(parentProperty -> {
+                // parent property is not readOnly or required
+                if (parentProperty.getIsReadOnly() ||
+                    (settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    return false;
+                }
+                // child does not contain property that shadow this parent property
+                Set<String> modelProperties = model.getProperties().stream().map(ClientModelProperty::getName).collect(Collectors.toSet());
+                return !modelProperties.contains(parentProperty.getName());
+            }
+        ).collect(Collectors.toList());
     }
 
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,
