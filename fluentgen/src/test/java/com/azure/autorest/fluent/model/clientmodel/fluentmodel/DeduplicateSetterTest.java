@@ -14,11 +14,8 @@ import com.azure.autorest.mapper.ModelMapper;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaFileFactory;
-import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.core.util.CoreUtils;
-import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -41,7 +38,6 @@ public class DeduplicateSetterTest {
     @BeforeAll
     public static void init(){
         TestUtils.MockFluentGen fluentgen = new TestUtils.MockFluentGen();
-        fluentgen.setValue("model-override-setter-from-superclass", true);
     }
 
     /**
