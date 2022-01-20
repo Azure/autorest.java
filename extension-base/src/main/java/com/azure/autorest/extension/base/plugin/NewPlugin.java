@@ -19,7 +19,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public abstract class NewPlugin {
     protected final ObjectMapper jsonMapper;
@@ -133,10 +138,10 @@ public abstract class NewPlugin {
     }
 
     public String getConfigurationFile(String fileName) {
-        Map<String,String> configurations = getValue(new ParameterizedType() {
+        Map<String, String> configurations = getValue(new ParameterizedType() {
             @Override
             public Type[] getActualTypeArguments() {
-                return new Type[] { String.class, String.class };
+                return new Type[]{String.class, String.class};
             }
 
             @Override
@@ -172,22 +177,21 @@ public abstract class NewPlugin {
         connection.notify("Message", sessionId, message);
     }
 
-    public NewPlugin(Connection connection, String plugin, String sessionId)
-    {
+    public NewPlugin(Connection connection, String plugin, String sessionId) {
         this.connection = connection;
         this.plugin = plugin;
         this.sessionId = sessionId;
         this.jsonMapper = new ObjectMapper()
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+            .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         this.jsonMapper.setVisibility(jsonMapper.getSerializationConfig().getDefaultVisibilityChecker()
-                .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-                .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
+            .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+            .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+            .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+            .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
         Representer representer = new Representer();
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
@@ -202,7 +206,8 @@ public abstract class NewPlugin {
             JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
-            message(MessageChannel.FATAL, "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
+            message(MessageChannel.FATAL,
+                "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
             return false;
         }
     }
