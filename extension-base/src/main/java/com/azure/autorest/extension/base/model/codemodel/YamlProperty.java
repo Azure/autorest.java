@@ -5,7 +5,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import java.lang.annotation.*;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Customize a property mapping between a yaml property and a java property
