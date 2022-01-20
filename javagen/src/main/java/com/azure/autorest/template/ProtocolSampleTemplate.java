@@ -88,8 +88,8 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         example.getParameters().forEach((parameterName, parameterValue) -> {
             boolean matchRequiredParameter = false;
-            for (int i = 0; i < numParam; i++) {
-                ProxyMethodParameter proxyMethodParameter = proxyMethodParameters.get(i);
+            for (int parameterIndex = 0; parameterIndex < numParam; parameterIndex++) {
+                ProxyMethodParameter proxyMethodParameter = proxyMethodParameters.get(parameterIndex);
                 if (proxyMethodParameter != null) {
                     if (getSerializedName(proxyMethodParameter).equalsIgnoreCase(parameterName)) {
                         // parameter in example found in method signature
@@ -100,14 +100,14 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                             String exampleValue = proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
                                     ? parameterValue.getUnescapedQueryValue().toString()
                                     : parameterValue.getObjectValue().toString();
-                            params.set(i, proxyMethodParameter.getClientType().defaultValueExpression(exampleValue));
+                            params.set(parameterIndex, proxyMethodParameter.getClientType().defaultValueExpression(exampleValue));
                         } else {
                             // BinaryData
                             String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
                             binaryDataStmt.append(
                                     String.format("BinaryData %s = BinaryData.fromString(%s);",
                                             parameterName, binaryDataValue));
-                            params.set(i, parameterName);
+                            params.set(parameterIndex, parameterName);
                         }
                         matchRequiredParameter = true;
                         break;
