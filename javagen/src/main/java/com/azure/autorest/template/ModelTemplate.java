@@ -453,6 +453,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
      */
     protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+        Set<String> modelProperties = model.getProperties().stream().map(ClientModelProperty::getName).collect(Collectors.toSet());
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
@@ -463,7 +464,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     return false;
                 }
                 // child does not contain property that shadow this parent property
-                Set<String> modelProperties = model.getProperties().stream().map(ClientModelProperty::getName).collect(Collectors.toSet());
                 return !modelProperties.contains(parentProperty.getName());
             }
         ).collect(Collectors.toList());

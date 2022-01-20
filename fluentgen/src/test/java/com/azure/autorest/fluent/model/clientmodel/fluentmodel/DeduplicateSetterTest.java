@@ -4,10 +4,11 @@
  */
 
 
-package com.azure.autorest.fluent;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.template.FluentModelTemplate;
 import com.azure.autorest.mapper.ModelMapper;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -60,32 +61,9 @@ public class DeduplicateSetterTest {
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             propertyReferences.addAll(model.getPropertyReferences());
         }
-        // reference to properties from parent model
-        JavaFile javaFile = javaFileFactory.createSourceFile("com.azure.site", "Test");
-        String classNameWithBaseType = model.getName();
-        if (model.getParentModelName() != null) {
-            classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
-        }
-        javaFile.publicClass(Lists.newArrayList(), classNameWithBaseType, classBlock -> {
-            // real test here
-            List<ClientModelPropertyAccess> toOverride = templateAccessor.getParentSettersToOverride(model, settings, propertyReferences);
-            Assertions.assertEquals(toOverride.size(), 1);
-
-            for (ClientModelPropertyAccess parentProperty : toOverride) {
-                classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%s %s(%s %s)",
-                        model.getName(),
-                        parentProperty.getSetterName(),
-                        parentProperty.getClientType(),
-                        parentProperty.getName()),
-                    methodBlock -> {
-                        methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
-                        methodBlock.methodReturn("this");
-                    });
-            }
-        });
-
+        // real test here
+        List<ClientModelPropertyAccess> toOverride = templateAccessor.getParentSettersToOverride(model, settings, propertyReferences);
+        Assertions.assertEquals(toOverride.size(), 1);
     }
 
     private ObjectSchema loadSiteSchemaParent() {
