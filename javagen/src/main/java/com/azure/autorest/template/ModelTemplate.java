@@ -387,22 +387,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (settings.isOverrideSetterFromSuperclass()) {
-                // reference to properties from parent model
-                for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromParentModel).collect(Collectors.toList())) {
-                    ClientModelPropertyAccess parentProperty = propertyReference.getReferenceProperty();
-                    if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
-                        classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                        classBlock.annotation("Override");
-                        classBlock.publicMethod(String.format("%s %s(%s %s)",
-                                model.getName(),
-                                parentProperty.getSetterName(),
-                                parentProperty.getClientType(),
-                                parentProperty.getName()),
-                                methodBlock -> {
-                                    methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
-                                    methodBlock.methodReturn("this");
-                                });
-                    }
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(settings, propertyReferences);
+                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                            model.getName(),
+                            parentProperty.getSetterName(),
+                            parentProperty.getClientType(),
+                            parentProperty.getName()),
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
                 }
             }
 
@@ -447,6 +444,25 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
         });
+    }
+
+    /**
+     * Override parent setters if:
+     * 1. parent property is not readOnly or required
+     * TODO 2. child does not contain property that shadow this parent property
+     * @param settings
+     * @param propertyReferences
+     * @return
+     */
+    protected List<ClientModelPropertyAccess> getParentSettersToOverride(JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+        // reference to properties from parent model
+        return propertyReferences.stream()
+            .filter(ClientModelPropertyReference::isFromParentModel)
+            .map(ClientModelPropertyReference::getReferenceProperty)
+            .filter(parentProperty ->
+                !parentProperty.getIsReadOnly() &&
+                    !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())
+            ).collect(Collectors.toList());
     }
 
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,

@@ -72,6 +72,10 @@ public class TestUtils {
             return (T) DEFAULT_SETTINGS.get(key);
         }
 
+        public void setValue(String key, Object value) {
+            DEFAULT_SETTINGS.put(key, value);
+        }
+
         @Override
         public void message(Message message) {
 //            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
