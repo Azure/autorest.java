@@ -6,10 +6,12 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.TestUtils;
+import com.azure.autorest.mapper.ClientMapper;
 import com.azure.autorest.mapper.ModelMapper;
+import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
@@ -46,13 +48,11 @@ public class ModelTemplateTests {
      */
     @Test
     public void deduplicateTest(){
-        //construct parent schema
-        ObjectSchema siteSchemaParent = loadSiteSchemaParent();
-        ClientModel modelParent = ModelMapper.getInstance().map(siteSchemaParent);
-        //get child schema
-        ClientModel model = modelParent.getDerivedModels().get(0);
+        CodeModel codeModel = loadCodeModel();
+        Client client = ClientMapper.getInstance().map(codeModel);
+        ClientModel model = client.getModels().stream().filter(clientModel -> clientModel.getName().equals("Site")).findAny().get();
         ModelTemplateAccessor templateAccessor = new ModelTemplateAccessor();
-        List<ClientModelPropertyReference> propertyReferences = templateAccessor.getClientModelPropertyReferences0(modelParent.getDerivedModels().get(0));
+        List<ClientModelPropertyReference> propertyReferences = templateAccessor.getClientModelPropertyReferences0(model);
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             propertyReferences.addAll(model.getPropertyReferences());
         }
@@ -61,7 +61,7 @@ public class ModelTemplateTests {
         Assertions.assertEquals(toOverride.size(), 1);
     }
 
-    private ObjectSchema loadSiteSchemaParent() {
+    private CodeModel loadCodeModel() {
         Representer representer = new Representer() {
             @Override
             protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
@@ -77,7 +77,7 @@ public class ModelTemplateTests {
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         Yaml yaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        return yaml.loadAs(getClass().getClassLoader().getResourceAsStream("site-schema.yaml"), ObjectSchema.class);
+        return yaml.loadAs(getClass().getClassLoader().getResourceAsStream("code-model-fluentnamer-botservice.yaml"), CodeModel.class);
     }
 
     private static class ModelTemplateAccessor extends FluentModelTemplate {
