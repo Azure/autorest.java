@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.mapper.ClientMapper;
 import com.azure.autorest.mapper.ModelMapper;
@@ -34,11 +35,12 @@ import java.util.List;
 public class ModelTemplateTests {
 
     private final JavaSettings settings = JavaSettings.getInstance();
-    private final JavaFileFactory javaFileFactory = new JavaFileFactory(settings);
+    private static FluentGenAccessor fluentGenAccessor;
 
     @BeforeAll
     public static void init(){
         TestUtils.MockFluentGen fluentgen = new TestUtils.MockFluentGen();
+        fluentGenAccessor = new FluentGenAccessor(fluentgen);
     }
 
     /**
@@ -48,7 +50,7 @@ public class ModelTemplateTests {
      */
     @Test
     public void deduplicateTest(){
-        CodeModel codeModel = loadCodeModel();
+        CodeModel codeModel = TestUtils.loadCodeModel(fluentGenAccessor, "code-model-fluentnamer-botservice.yaml");
         Client client = ClientMapper.getInstance().map(codeModel);
         ClientModel model = client.getModels().stream().filter(clientModel -> clientModel.getName().equals("Site")).findAny().get();
         ModelTemplateAccessor templateAccessor = new ModelTemplateAccessor();
@@ -59,25 +61,6 @@ public class ModelTemplateTests {
         // real test here
         List<ClientModelPropertyAccess> toOverride = templateAccessor.getParentSettersToOverride(model, settings, propertyReferences);
         Assertions.assertEquals(toOverride.size(), 1);
-    }
-
-    private CodeModel loadCodeModel() {
-        Representer representer = new Representer() {
-            @Override
-            protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
-                // if value of property is null, ignore it.
-                if (propertyValue == null) {
-                    return null;
-                }
-                else {
-                    return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-                }
-            }
-        };
-        LoaderOptions loaderOptions = new LoaderOptions();
-        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-        Yaml yaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        return yaml.loadAs(getClass().getClassLoader().getResourceAsStream("code-model-fluentnamer-botservice.yaml"), CodeModel.class);
     }
 
     private static class ModelTemplateAccessor extends FluentModelTemplate {

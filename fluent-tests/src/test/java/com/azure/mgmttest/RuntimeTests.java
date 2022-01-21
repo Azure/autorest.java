@@ -150,10 +150,15 @@ public class RuntimeTests {
     }
 
     @Test
-    public void testBotservice(){
+    public void testBotservice() throws IOException {
         String siteName = "testSiteName";
         Site site = new Site().withSiteName(siteName);
         Assertions.assertEquals(siteName, site.siteName());
+
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+        String json = serializerAdapter.serialize(site, SerializerEncoding.JSON);
+        Site siteFromJson = serializerAdapter.deserialize(json, Site.class, SerializerEncoding.JSON);
+        Assertions.assertEquals(siteName, siteFromJson.siteName());
     }
 
     @Test
