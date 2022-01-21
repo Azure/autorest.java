@@ -11,24 +11,14 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.mapper.ClientMapper;
-import com.azure.autorest.mapper.ModelMapper;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.core.util.CoreUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.LoaderOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.Tag;
-import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.List;
 
