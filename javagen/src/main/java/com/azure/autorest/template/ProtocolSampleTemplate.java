@@ -55,7 +55,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         ServiceClient serviceClient = protocolExample.getServiceClient();
         String builderName = protocolExample.getBuilderName();
         String filename = protocolExample.getFilename();
-        ProxyMethodExample example = protocolExample.getProxyMethodExample();
+        ProxyMethodExample proxyMethodExample = protocolExample.getProxyMethodExample();
 
         // Import
         List<String> imports = new ArrayList<>();
@@ -86,7 +86,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         List<ProxyMethodParameter> proxyMethodParameters = getProxyMethodParameters(method.getProxyMethod(), method.getParameters());
 
-        example.getParameters().forEach((parameterName, parameterValue) -> {
+        proxyMethodExample.getParameters().forEach((parameterName, parameterValue) -> {
             boolean matchRequiredParameter = false;
             for (int parameterIndex = 0; parameterIndex < numParam; parameterIndex++) {
                 ProxyMethodParameter proxyMethodParameter = proxyMethodParameters.get(parameterIndex);
