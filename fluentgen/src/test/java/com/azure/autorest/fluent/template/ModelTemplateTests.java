@@ -4,12 +4,11 @@
  */
 
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.TestUtils;
-import com.azure.autorest.fluent.template.FluentModelTemplate;
 import com.azure.autorest.mapper.ModelMapper;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
@@ -30,7 +29,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.List;
 
-public class DeduplicateSetterTest {
+public class ModelTemplateTests {
 
     private final JavaSettings settings = JavaSettings.getInstance();
     private final JavaFileFactory javaFileFactory = new JavaFileFactory(settings);

@@ -10,7 +10,4 @@ public class JavaSettingsAccessor {
     public static void setHost(NewPlugin host) {
         JavaSettings.setHost(host);
     }
-
-
-
 }
