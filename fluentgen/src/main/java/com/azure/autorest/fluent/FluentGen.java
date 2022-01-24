@@ -82,6 +82,7 @@ public class FluentGen extends Javagen {
 
     @Override
     public boolean processInternal() {
+        this.clear();
         JavaSettings settings = JavaSettings.getInstance();
 
         List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
@@ -350,6 +351,13 @@ public class FluentGen extends Javagen {
         }
 
         return fluentClient;
+    }
+
+    private void clear() {
+        JavaSettings.clear();
+        fluentJavaSettings = null;
+        fluentMapper = null;
+        fluentPremiumExamples.clear();
     }
 
     private FluentJavaSettings getFluentJavaSettings() {

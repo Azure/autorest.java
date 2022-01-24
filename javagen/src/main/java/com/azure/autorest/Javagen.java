@@ -65,6 +65,7 @@ public class Javagen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        this.clear();
         JavaSettings settings = JavaSettings.getInstance();
 
         List<String> allFiles = listInputs();
@@ -294,5 +295,9 @@ public class Javagen extends NewPlugin {
             }
         }
         return javaPackage;
+    }
+
+    private void clear() {
+        JavaSettings.clear();
     }
 }
