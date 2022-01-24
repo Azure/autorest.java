@@ -358,7 +358,7 @@ public class FluentGen extends Javagen {
         JavaSettings.clear();
         fluentJavaSettings = null;
         fluentMapper = null;
-        fluentPremiumExamples.clear();
+        fluentPremiumExamples = null;
     }
 
     private FluentJavaSettings getFluentJavaSettings() {
