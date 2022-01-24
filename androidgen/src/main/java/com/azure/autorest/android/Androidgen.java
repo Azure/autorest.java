@@ -52,6 +52,8 @@ public class Androidgen extends Javagen {
 
     @Override
     public boolean processInternal() {
+        this.clear();
+
         JavaSettings settings = JavaSettings.getInstance();
 
         List<String> allFiles = listInputs();
@@ -186,5 +188,9 @@ public class Androidgen extends Javagen {
             return false;
         }
         return true;
+    }
+
+    private void clear() {
+        JavaSettings.clear();
     }
 }
