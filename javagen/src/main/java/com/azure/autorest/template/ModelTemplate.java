@@ -387,22 +387,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (settings.isOverrideSetterFromSuperclass()) {
-                // reference to properties from parent model
-                for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromParentModel).collect(Collectors.toList())) {
-                    ClientModelPropertyAccess parentProperty = propertyReference.getReferenceProperty();
-                    if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
-                        classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                        classBlock.annotation("Override");
-                        classBlock.publicMethod(String.format("%s %s(%s %s)",
-                                model.getName(),
-                                parentProperty.getSetterName(),
-                                parentProperty.getClientType(),
-                                parentProperty.getName()),
-                                methodBlock -> {
-                                    methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
-                                    methodBlock.methodReturn("this");
-                                });
-                    }
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings, propertyReferences);
+                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                            model.getName(),
+                            parentProperty.getSetterName(),
+                            parentProperty.getClientType(),
+                            parentProperty.getName()),
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
                 }
             }
 
@@ -447,6 +444,29 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
         });
+    }
+
+    /**
+     * Override parent setters if:
+     * 1. parent property is not readOnly or required
+     * 2. child does not contain property that shadow this parent property, otherwise overridden parent setter methods will collide with child setter methods
+     * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
+     */
+    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName).collect(Collectors.toSet());
+        return propertyReferences.stream()
+            .filter(ClientModelPropertyReference::isFromParentModel)
+            .map(ClientModelPropertyReference::getReferenceProperty)
+            .filter(parentProperty -> {
+                // parent property is not readOnly or required
+                if (parentProperty.getIsReadOnly() ||
+                    (settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    return false;
+                }
+                // child does not contain property that shadow this parent property
+                return !modelPropertyNames.contains(parentProperty.getName());
+            }
+        ).collect(Collectors.toList());
     }
 
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,

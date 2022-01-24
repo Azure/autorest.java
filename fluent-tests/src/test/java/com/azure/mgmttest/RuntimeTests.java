@@ -24,6 +24,7 @@ import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
+import com.azure.mgmtlitetest.botservice.models.Site;
 import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
@@ -146,6 +147,18 @@ public class RuntimeTests {
 
         Assertions.assertTrue(rootTags.containsKey("name"));
         Assertions.assertTrue(rootTags.get("name").contains("Azure SDK"));
+    }
+
+    @Test
+    public void testBotservice() throws IOException {
+        String siteName = "testSiteName";
+        Site site = new Site().withSiteName(siteName);
+        Assertions.assertEquals(siteName, site.siteName());
+
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+        String json = serializerAdapter.serialize(site, SerializerEncoding.JSON);
+        Site siteFromJson = serializerAdapter.deserialize(json, Site.class, SerializerEncoding.JSON);
+        Assertions.assertEquals(siteName, siteFromJson.siteName());
     }
 
     @Test
