@@ -12,6 +12,7 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,10 @@ public class CodeModelCustomConstructor extends Constructor {
                 return SerializationStyle.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(KnownMediaType.class)) {
                 return KnownMediaType.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(TestScenarioStepType.class)) {
+                return TestScenarioStepType.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(ScenarioTestScope.class)) {
+                return ScenarioTestScope.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -61,7 +66,7 @@ public class CodeModelCustomConstructor extends Constructor {
         @Override
         public Object construct(Node node) {
             MappingNode mappingNode = (MappingNode) node;
-            for (NodeTuple tuple :  ((MappingNode) node).getValue()) {
+            for (NodeTuple tuple :  mappingNode.getValue()) {
                 ScalarNode key = (ScalarNode) tuple.getKeyNode();
                 switch (key.getValue()) {
                     case "arrays": {
