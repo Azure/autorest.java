@@ -1,6 +1,5 @@
 package com.azure.autorest.extension.base.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum MessageChannel {
