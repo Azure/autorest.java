@@ -1,7 +1,6 @@
 package com.azure.autorest.extension.base.model.extensionmodel;
 
 import java.util.List;
-import java.util.Map;
 
 public class XmsExtensions {
     private XmsEnum xmsEnum;

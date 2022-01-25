@@ -28,7 +28,6 @@ import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FluentJavaPackage extends JavaPackage {

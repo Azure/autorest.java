@@ -5,7 +5,6 @@
 
 package com.azure.autorest.fluent;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 
 import java.util.Collections;
