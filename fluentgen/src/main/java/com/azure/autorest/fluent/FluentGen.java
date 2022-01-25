@@ -82,14 +82,16 @@ public class FluentGen extends Javagen {
 
     @Override
     public boolean processInternal() {
-        JavaSettings settings = JavaSettings.getInstance();
-
-        List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-        if (files.size() != 1) {
-            throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-        }
+        this.clear();
 
         try {
+            JavaSettings settings = JavaSettings.getInstance();
+
+            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+            if (files.size() != 1) {
+                throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
+            }
+
             logger.info("Read YAML");
             String fileContent = readFile(files.get(0));
             createInputCodeModelFile(fileContent);
@@ -350,6 +352,13 @@ public class FluentGen extends Javagen {
         }
 
         return fluentClient;
+    }
+
+    private void clear() {
+        JavaSettings.clear();
+        fluentJavaSettings = null;
+        fluentMapper = null;
+        fluentPremiumExamples = null;
     }
 
     private FluentJavaSettings getFluentJavaSettings() {

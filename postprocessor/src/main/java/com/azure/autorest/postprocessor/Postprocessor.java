@@ -42,6 +42,8 @@ public class Postprocessor extends NewPlugin {
     @SuppressWarnings("unchecked")
     @Override
     public boolean processInternal() {
+        this.clear();
+
         List<String> files = listInputs();
         Map<String, String> fileContents = files.stream().collect(Collectors.toMap(f -> f, this::readFile));
 
@@ -269,4 +271,7 @@ public class Postprocessor extends NewPlugin {
         logger.info("Finish handle partial update.");
     }
 
+    private void clear() {
+        JavaSettings.clear();
+    }
 }
