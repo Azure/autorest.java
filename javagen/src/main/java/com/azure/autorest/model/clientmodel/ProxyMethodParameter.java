@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
@@ -6,10 +9,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.Set;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 /**
  * A parameter for a ProxyMethod.
@@ -82,7 +81,7 @@ public class ProxyMethodParameter {
     /**
      * The explode if the parameter is a list type.
      */
-    private boolean explode;	
+    private boolean explode;
 
     /**
      * Create a new RestAPIParameter based on the provided properties.

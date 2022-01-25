@@ -5,7 +5,6 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.template.PomTemplate;
 
 public class FluentPomTemplate extends PomTemplate {

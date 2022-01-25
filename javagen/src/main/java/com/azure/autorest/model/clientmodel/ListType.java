@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import java.util.Set;
 
 /**
@@ -19,16 +18,10 @@ public class ListType extends GenericType {
     }
 
     private static String getTypePackage() {
-        // if (JavaSettings.getInstance().shouldUseIterable()) {
-        //     return "java.lang";
-        // }
         return "java.util";
     }
 
     private static String getType() {
-        // if (JavaSettings.getInstance().shouldUseIterable()) {
-        //     return "Iterable";
-        // }
         return "List";
     }
 
