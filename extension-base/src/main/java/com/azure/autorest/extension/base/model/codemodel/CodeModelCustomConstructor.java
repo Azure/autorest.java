@@ -50,6 +50,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return SerializationStyle.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(KnownMediaType.class)) {
                 return KnownMediaType.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(Scheme.SecuritySchemeType.class)) {
+                return Scheme.SecuritySchemeType.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -61,7 +63,7 @@ public class CodeModelCustomConstructor extends Constructor {
         @Override
         public Object construct(Node node) {
             MappingNode mappingNode = (MappingNode) node;
-            for (NodeTuple tuple :  ((MappingNode) node).getValue()) {
+            for (NodeTuple tuple : ((MappingNode) node).getValue()) {
                 ScalarNode key = (ScalarNode) tuple.getKeyNode();
                 switch (key.getValue()) {
                     case "arrays": {
@@ -350,37 +352,69 @@ public class CodeModelCustomConstructor extends Constructor {
         for (NodeTuple schemaProps : value.getValue()) {
             if (((ScalarNode) schemaProps.getKeyNode()).getValue().equals("type")) {
                 switch (((ScalarNode) schemaProps.getValueNode()).getValue()) {
-                    case "any-object": case "any": return AnySchema.class;
-                    case "and": return AndSchema.class;
-                    case "array": return ArraySchema.class;
-                    case "boolean": return BooleanSchema.class;
-                    case "binary": return BinarySchema.class;
-                    case "byte-array": return ByteArraySchema.class;
-                    case "char": return CharSchema.class;
-                    case "choice": return ChoiceSchema.class;
-                    case "constant": return ConstantSchema.class;
-                    case "credential": return CredentialSchema.class;
-                    case "date": return DateSchema.class;
-                    case "date-time": return DateTimeSchema.class;
-                    case "dictionary": return DictionarySchema.class;
-                    case "duration": return DurationSchema.class;
-                    case "flag": return FlagSchema.class;
-                    case "group": return ObjectSchema.class;
-                    case "integer": return NumberSchema.class;
-                    case "not": return NotSchema.class;
-                    case "number": return NumberSchema.class;
-                    case "object": return ObjectSchema.class;
-                    case "odata-query": return ODataQuerySchema.class;
-                    case "or": return OrSchema.class;
-                    case "parameter-group": return ParameterGroupSchema.class;
-                    case "sealed-choice": return SealedChoiceSchema.class;
-                    case "string": return StringSchema.class;
-                    case "time": return TimeSchema.class;
-                    case "unixtime": return UnixTimeSchema.class;
-                    case "uri": return UriSchema.class;
-                    case "uuid": return UuidSchema.class;
-                    case "xor": return XorSchema.class;
-                    default: return Schema.class;
+                    case "any-object":
+                    case "any":
+                        return AnySchema.class;
+                    case "and":
+                        return AndSchema.class;
+                    case "array":
+                        return ArraySchema.class;
+                    case "boolean":
+                        return BooleanSchema.class;
+                    case "binary":
+                        return BinarySchema.class;
+                    case "byte-array":
+                        return ByteArraySchema.class;
+                    case "char":
+                        return CharSchema.class;
+                    case "choice":
+                        return ChoiceSchema.class;
+                    case "constant":
+                        return ConstantSchema.class;
+                    case "credential":
+                        return CredentialSchema.class;
+                    case "date":
+                        return DateSchema.class;
+                    case "date-time":
+                        return DateTimeSchema.class;
+                    case "dictionary":
+                        return DictionarySchema.class;
+                    case "duration":
+                        return DurationSchema.class;
+                    case "flag":
+                        return FlagSchema.class;
+                    case "group":
+                        return ObjectSchema.class;
+                    case "integer":
+                        return NumberSchema.class;
+                    case "not":
+                        return NotSchema.class;
+                    case "number":
+                        return NumberSchema.class;
+                    case "object":
+                        return ObjectSchema.class;
+                    case "odata-query":
+                        return ODataQuerySchema.class;
+                    case "or":
+                        return OrSchema.class;
+                    case "parameter-group":
+                        return ParameterGroupSchema.class;
+                    case "sealed-choice":
+                        return SealedChoiceSchema.class;
+                    case "string":
+                        return StringSchema.class;
+                    case "time":
+                        return TimeSchema.class;
+                    case "unixtime":
+                        return UnixTimeSchema.class;
+                    case "uri":
+                        return UriSchema.class;
+                    case "uuid":
+                        return UuidSchema.class;
+                    case "xor":
+                        return XorSchema.class;
+                    default:
+                        return Schema.class;
                 }
             }
         }

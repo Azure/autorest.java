@@ -36,6 +36,12 @@ public class CodeModel extends Metadata {
      * 
      */
     private List<Parameter> globalParameters = new ArrayList<Parameter>();
+    /**
+     * Security Configuration
+     * (Optional)
+     *
+     */
+    private Security security;
 
     /**
      * code model information
@@ -106,4 +112,23 @@ public class CodeModel extends Metadata {
     public void setGlobalParameters(List<Parameter> globalParameters) {
         this.globalParameters = globalParameters;
     }
+
+    /**
+     * Security Configuration
+     * (Optional)
+     *
+     */
+    public Security getSecurity() {
+        return security;
+    }
+
+    /**
+     * Security Configuration
+     * (Optional)
+     *
+     */
+    public void setSecurity(Security security) {
+        this.security = security;
+    }
+
 }
