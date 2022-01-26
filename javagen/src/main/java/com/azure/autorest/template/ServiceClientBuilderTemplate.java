@@ -4,12 +4,14 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.Javagen;
+import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -51,7 +53,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
 
-        ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings);
+        ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings, serviceClient.getSecurityInfo());
 
         String buildReturnType;
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
@@ -126,7 +128,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
 
                 // default scope
-                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+                Set<String> scopes = serviceClient.getSecurityInfo() != null ? serviceClient.getSecurityInfo().getScopes() : null;
                 if (scopes != null && !scopes.isEmpty()) {
                     addGeneratedAnnotation(classBlock);
                     classBlock.privateStaticFinalVariable(String.format("String[] DEFAULT_SCOPES = new String[] {%s}",
@@ -250,7 +252,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes());
+                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo());
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
@@ -328,7 +330,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes, SecurityInfo securityInfo) {
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
@@ -364,9 +366,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
             function.line("policies.add(new CookiePolicy());");
 
-            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
-                if (JavaSettings.getInstance().getKeyCredentialHeaderName() == null
-                    || JavaSettings.getInstance().getKeyCredentialHeaderName().isEmpty()) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+                if (securityInfo.getHeaderName() == null
+                    || securityInfo.getHeaderName().isEmpty()) {
                     LOGGER.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
@@ -374,11 +376,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
                 function.ifBlock("azureKeyCredential != null", action -> {
                     function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                            + JavaSettings.getInstance().getKeyCredentialHeaderName()
+                            + securityInfo.getHeaderName()
                             + "\", azureKeyCredential));");
                 });
             }
-            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
                 function.ifBlock("tokenCredential != null", action -> {
                     function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
@@ -399,7 +401,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         });
     }
 
-    protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings) {
+    protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings, SecurityInfo securityInfo) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
@@ -427,7 +429,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             commonProperties.add(new ServiceClientProperty("The configuration store that is used during "
                     + "construction of the service client.", ClassType.Configuration, "configuration", false, null));
 
-            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
                 commonProperties.add(new ServiceClientProperty.Builder()
                         .description("The Azure Key Credential used for authentication.")
                         .type(ClassType.AzureKeyCredential)
@@ -436,7 +438,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         .readOnly(false)
                         .build());
             }
-            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
                 commonProperties.add(new ServiceClientProperty.Builder()
                         .description("The TokenCredential used for authentication.")
                         .type(ClassType.TokenCredential)
