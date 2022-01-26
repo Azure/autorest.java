@@ -9,7 +9,6 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
-import com.azure.core.annotation.Immutable;
 
 import java.util.HashSet;
 import java.util.Set;

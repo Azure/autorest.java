@@ -8,6 +8,7 @@ package com.azure.autorest.fluentnamer;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
@@ -49,6 +50,8 @@ public class FluentNamer extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        this.clear();
+
         try {
             List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
             if (files.size() != 1) {
@@ -132,5 +135,9 @@ public class FluentNamer extends NewPlugin {
         codeModel = transformer.postTransform(codeModel);
 
         return codeModel;
+    }
+
+    private void clear() {
+        JavaSettings.clear();
     }
 }

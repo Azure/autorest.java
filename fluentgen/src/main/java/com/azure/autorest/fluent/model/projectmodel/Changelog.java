@@ -24,8 +24,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static java.time.temporal.ChronoField.*;
+import java.time.temporal.ChronoField;
 
 public class Changelog {
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Changelog.class);
@@ -129,11 +128,11 @@ public class Changelog {
     }
 
     private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
             .appendLiteral('-')
-            .appendValue(MONTH_OF_YEAR, 2)
+            .appendValue(ChronoField.MONTH_OF_YEAR, 2)
             .appendLiteral('-')
-            .appendValue(DAY_OF_MONTH, 2)
+            .appendValue(ChronoField.DAY_OF_MONTH, 2)
             .toFormatter(Locale.ROOT);
 
     static String getDateUtc() {

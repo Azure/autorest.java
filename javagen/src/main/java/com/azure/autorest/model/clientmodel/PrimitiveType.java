@@ -1,13 +1,10 @@
-package com.azure.autorest.model.clientmodel;
-
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-
-import java.util.Set;
-import java.util.function.Function;
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+package com.azure.autorest.model.clientmodel;
+
+import java.util.Set;
+import java.util.function.Function;
 
 /**
  * A basic type used by a client.

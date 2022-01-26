@@ -3,6 +3,7 @@ package com.azure.autorest.extension.base.plugin;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.MessageChannel;
+import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -137,10 +138,10 @@ public abstract class NewPlugin {
     }
 
     public String getConfigurationFile(String fileName) {
-        Map<String,String> configurations = getValue(new ParameterizedType() {
+        Map<String, String> configurations = getValue(new ParameterizedType() {
             @Override
             public Type[] getActualTypeArguments() {
-                return new Type[] { String.class, String.class };
+                return new Type[]{String.class, String.class};
             }
 
             @Override
@@ -176,23 +177,23 @@ public abstract class NewPlugin {
         connection.notify("Message", sessionId, message);
     }
 
-    public NewPlugin(Connection connection, String plugin, String sessionId)
-    {
+    public NewPlugin(Connection connection, String plugin, String sessionId) {
         this.connection = connection;
         this.plugin = plugin;
         this.sessionId = sessionId;
         this.jsonMapper = new ObjectMapper()
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+            .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         this.jsonMapper.setVisibility(jsonMapper.getSerializationConfig().getDefaultVisibilityChecker()
-                .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-                .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
+            .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+            .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+            .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+            .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
         Representer representer = new Representer();
+        representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
@@ -205,7 +206,8 @@ public abstract class NewPlugin {
             JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
-            message(MessageChannel.FATAL, "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
+            message(MessageChannel.FATAL,
+                "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
             return false;
         }
     }

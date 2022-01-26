@@ -522,7 +522,7 @@ public class ExampleParser {
                     elements = Arrays.asList(value.split(Pattern.quote("\t")));
                     break;
                 default:
-                    // TODO CollectionFormat.MULTI
+                    // TODO (weidxu): CollectionFormat.MULTI
                     elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
                     logger.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
             }

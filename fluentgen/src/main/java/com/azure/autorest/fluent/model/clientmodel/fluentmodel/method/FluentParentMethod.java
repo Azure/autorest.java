@@ -10,7 +10,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceSt
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;

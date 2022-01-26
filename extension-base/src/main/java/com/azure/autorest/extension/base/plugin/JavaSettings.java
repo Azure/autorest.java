@@ -64,6 +64,10 @@ public class JavaSettings {
         JavaSettings.host = host;
     }
 
+    public static void clear() {
+        _instance = null;
+    }
+
     public static JavaSettings getInstance() {
         if (_instance == null) {
             AutorestSettings autorestSettings = new AutorestSettings();

@@ -44,6 +44,11 @@ public class CodeModel extends Metadata {
     private Security security;
 
     /**
+     * test model definition
+     */
+    private TestModel testModel;
+
+    /**
      * code model information
      * (Required)
      * 
@@ -131,4 +136,11 @@ public class CodeModel extends Metadata {
         this.security = security;
     }
 
+    public TestModel getTestModel() {
+        return testModel;
+    }
+
+    public void setTestModel(TestModel testModel) {
+        this.testModel = testModel;
+    }
 }

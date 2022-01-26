@@ -41,6 +41,8 @@ public class Preprocessor extends NewPlugin {
 
   @Override
   public boolean processInternal() {
+    this.clear();
+
     List<String> allFiles = listInputs();
     List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
     if (files.size() != 1) {
@@ -195,5 +197,9 @@ public class Preprocessor extends NewPlugin {
     choice.setLanguage(constantSchema.getValue().getLanguage());
     sealedChoiceSchema.setChoices(Collections.singletonList(choice));
     return sealedChoiceSchema;
+  }
+
+  private void clear() {
+    JavaSettings.clear();
   }
 }

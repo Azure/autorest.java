@@ -14,7 +14,6 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ModelNamer;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
