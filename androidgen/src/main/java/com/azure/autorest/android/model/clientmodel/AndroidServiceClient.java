@@ -5,6 +5,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
+import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
@@ -27,7 +28,8 @@ public class AndroidServiceClient extends ServiceClient {
                                    ClientMethodParameter serializerAdapterParameter,
                                    ClientMethodParameter defaultPollIntervalParameter,
                                    String defaultCredentialScopes,
-                                   boolean builderDisabled) {
+                                   boolean builderDisabled,
+                                   SecurityInfo securityInfo) {
         super(packageName,
                 className,
                 interfaceName,
@@ -42,7 +44,8 @@ public class AndroidServiceClient extends ServiceClient {
                 serializerAdapterParameter,
                 defaultPollIntervalParameter,
                 defaultCredentialScopes,
-                builderDisabled);
+                builderDisabled,
+                securityInfo);
     }
 
     @Override
@@ -79,7 +82,8 @@ public class AndroidServiceClient extends ServiceClient {
                     serializerAdapterParameter,
                     defaultPollIntervalParameter,
                     defaultCredentialScopes,
-                    builderDisabled);
+                    builderDisabled,
+                    securityInfo);
         }
     }
 }
