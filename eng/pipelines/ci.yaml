@@ -25,11 +25,12 @@ jobs:
           versionSpec: '$(NodeVersion)'
 
       - task: Maven@3
+        retryCountOnTaskFailure: 3
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'install package'
-          options: '-Dlocal -T 1C --no-transfer-progress'
+          goals: 'clean verify package install'
+          options: '-P local -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
