@@ -233,7 +233,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
 
         // overwrite securityInfo using JavaSettings
-
         if (settings.getCredentialTypes() != null && !settings.getCredentialTypes().isEmpty() &&
                 !settings.getCredentialTypes().contains(JavaSettings.CredentialType.NONE)) {
             SecurityInfo securityInfoInJavaSettings = new SecurityInfo();
