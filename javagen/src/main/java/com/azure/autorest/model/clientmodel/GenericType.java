@@ -1,12 +1,11 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.model.clientmodel;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 /**
  * A generic type that is used by the client.

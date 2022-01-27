@@ -20,11 +20,11 @@ page at http://checkstyle.sourceforge.net/config.html -->
     <property name="optional" value="true"/>
   </module>
 
-<!--  <module name="Header">-->
-<!--    <property name="header"-->
-<!--              value="// Copyright (c) Microsoft Corporation. All rights reserved.\n// Licensed under the MIT License."/>-->
-<!--    <property name="fileExtensions" value="java"/>-->
-<!--  </module>-->
+  <module name="Header">
+    <property name="header"
+              value="// Copyright (c) Microsoft Corporation. All rights reserved.\n// Licensed under the MIT License."/>
+    <property name="fileExtensions" value="java"/>
+  </module>
 
   <!-- Checks that there are no tab characters in the file. -->
   <module name="FileTabCharacter" />

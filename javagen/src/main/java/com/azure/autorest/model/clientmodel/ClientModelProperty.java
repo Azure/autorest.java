@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -16,10 +19,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 /**
  * A property that exists within a model defined by the client.

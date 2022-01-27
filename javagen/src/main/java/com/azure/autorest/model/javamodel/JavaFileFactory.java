@@ -1,13 +1,12 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.io.File;
 import java.nio.file.Paths;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 public class JavaFileFactory {
     private JavaSettings settings;

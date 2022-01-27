@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 //====================================================================================================
 //The Free Edition of C# to Java Converter limits conversion output to 100 lines per file.
 
