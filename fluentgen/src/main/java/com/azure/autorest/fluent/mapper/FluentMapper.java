@@ -65,14 +65,6 @@ public class FluentMapper {
                     .sorted()
                     .collect(Collectors.toList());
             fluentClient.getExamples().addAll(examples);
-
-            if (fluentJavaSettings.isGenerateSamplesForSpecs()) {
-                ExampleParser exampleParserForSpecs = new ExampleParser(false);
-                examples = fluentClient.getResourceCollections().stream()
-                        .flatMap(rc -> exampleParserForSpecs.parseResourceCollection(rc).stream())
-                        .collect(Collectors.toList());
-                fluentClient.getExamplesForSpecs().addAll(examples);
-            }
         }
 
         return fluentClient;
