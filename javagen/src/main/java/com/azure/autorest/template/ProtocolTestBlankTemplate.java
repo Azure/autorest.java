@@ -4,7 +4,6 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
