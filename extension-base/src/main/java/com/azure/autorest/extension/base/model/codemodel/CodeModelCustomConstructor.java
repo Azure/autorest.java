@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.extension.base.model.codemodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExamples;
@@ -12,7 +15,6 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

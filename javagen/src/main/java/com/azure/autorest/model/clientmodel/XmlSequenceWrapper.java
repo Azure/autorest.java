@@ -1,11 +1,10 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.util.CodeNamer;
 import java.util.Set;
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 
 /**
  * The details needed to create an XML sequence wrapper class for the client.
