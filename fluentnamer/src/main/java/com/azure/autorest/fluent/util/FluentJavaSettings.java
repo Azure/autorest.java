@@ -76,8 +76,7 @@ public class FluentJavaSettings {
 
     private enum SampleGeneration {
         NONE,
-        AGGREGATED,
-        REST_API_SPECS
+        AGGREGATED
     }
 
     public FluentJavaSettings(NewPlugin host) {
@@ -135,10 +134,6 @@ public class FluentJavaSettings {
 
     public boolean isGenerateSamples() {
         return generateSamples != SampleGeneration.NONE;
-    }
-
-    public boolean isGenerateSamplesForSpecs() {
-        return generateSamples == SampleGeneration.REST_API_SPECS;
     }
 
     public boolean isSdkIntegration() {

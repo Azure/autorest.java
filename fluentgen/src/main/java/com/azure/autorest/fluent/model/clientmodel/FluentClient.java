@@ -62,8 +62,4 @@ public class FluentClient {
     public List<FluentExample> getExamples() {
         return examples;
     }
-
-    public List<FluentExample> getExamplesForSpecs() {
-        return examplesForSpecs;
-    }
 }
