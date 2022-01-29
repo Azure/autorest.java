@@ -12,18 +12,11 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.core.http.rest.Response;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ReturnTypeDescriptionAssembler {
     private final PluginLogger logger;
-    private final ReturnTypeDescriptionHandlerRegistry handlerRegistry;
 
     public ReturnTypeDescriptionAssembler(NewPlugin host) {
         logger = new PluginLogger(host, ReturnTypeDescriptionAssembler.class);
-        handlerRegistry = new ReturnTypeDescriptionHandlerRegistry();
-        handlerRegistry.addFirst(new MonoDescriptionHandler());
-        handlerRegistry.addFirst(new ResponseDescriptionHandler());
     }
 
     /**
@@ -34,79 +27,55 @@ public class ReturnTypeDescriptionAssembler {
      * @return  assembled description
      */
     public String assemble(String description, IType returnType, IType baseType) {
-        ReturnTypeDescriptionHandler<IType> handler = handlerRegistry.getHandler(returnType);
-        if (handler != null) {
-            return handler.handle(description, returnType, baseType);
+        if (returnType instanceof GenericType) {
+            description = assembleForGeneric(description, (GenericType) returnType, baseType);
         }
         return description;
     }
 
-    private class MonoDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
-
-        @Override
-        public boolean accept(IType returnType) {
-            return isGenericTypeClassSubclassOf(returnType, Mono.class);
+    private String assembleForGeneric(String description, GenericType returnType, IType baseType) {
+        String assembledDesc = description;
+        if (isGenericTypeClassSubclassOf(returnType, Mono.class)) {
+            assembledDesc = assembleForMono(description, returnType, baseType);
+        } else if (isGenericTypeClassSubclassOf(returnType, Response.class)) {
+            assembledDesc = assembleForResponse(description, returnType, baseType);
         }
-
-        /*
-        Mono<Void> - A {@link Mono} that completes when a successful response is received
-        Mono<Response<?>> - "Response return type description" on successful completion of {@link Mono}
-        Mono<T> - "something" on successful completion of {@link Mono} (something here is the description in the operation)
-        Mono<OtherType> - the response body on successful completion of {@link Mono}
-         */
-        @Override
-        public String handle(String description, GenericType returnType, IType baseType) {
-            String assembledDesc;
-            if (isTypeResponse(returnType.getTypeArguments()[0])) { // Mono<Response<?>>
-                assembledDesc = String.format(
-                    "%s on successful completion of {@link Mono}",
-                    handlerRegistry.getHandler(returnType.getTypeArguments()[0]).handle(description, returnType.getTypeArguments()[0], baseType)
-                );
-            } else {
-                if (description == null) {
-                    if (ClassType.Void == baseType.asNullable()) { // Mono<Void>
-                        assembledDesc = String.format("A {@link %s} that completes when a successful response is received", returnType.getName());
-                    } else { // Mono<OtherType>
-                        assembledDesc = String.format("the response body on successful completion of {@link %s}", returnType.getName());
-                    }
-                } else { // Mono<T>
-                    assembledDesc = String.format("%s on successful completion of {@link %s}", description, returnType.getName());
-                }
-            }
-            return assembledDesc;
-        }
-
-        private boolean isTypeResponse(IType type) {
-            return isGenericTypeClassSubclassOf(type, Response.class);
-        }
+        return assembledDesc;
     }
 
-    private class ResponseDescriptionHandler implements ReturnTypeDescriptionHandler<GenericType> {
-
-        @Override
-        public boolean accept(IType returnType) {
-            return isGenericTypeClassSubclassOf(returnType, Response.class);
-        }
-
-        /*
-        Response<Void> - the {@link Response}
-        Response<T> - "something" along with {@link Response}
-        Response<OtherType> - the response body along with {@link Response}
-         */
-        @Override
-        public String handle(String description, GenericType returnType, IType baseType) {
-            String assembledDesc;
+    private String assembleForMono(String description, GenericType returnType, IType baseType) {
+        String assembledDesc;
+        if (isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], Response.class)) { // Mono<Response<?>>
+            assembledDesc = String.format(
+                    "%s on successful completion of {@link Mono}",
+                    assembleForResponse(description, (GenericType) returnType.getTypeArguments()[0], baseType)
+            );
+        } else {
             if (description == null) {
-                if (ClassType.Void == baseType.asNullable()) { // Response<Void>
-                    assembledDesc = String.format("the {@link %s}", returnType.getName());
-                } else { // Response<OtherType>
-                    assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());
+                if (ClassType.Void == baseType.asNullable()) { // Mono<Void>
+                    assembledDesc = String.format("A {@link %s} that completes when a successful response is received", returnType.getName());
+                } else { // Mono<OtherType>
+                    assembledDesc = String.format("the response body on successful completion of {@link %s}", returnType.getName());
                 }
-            } else { // Response<T>
-                assembledDesc = String.format("%s along with {@link %s}", description, returnType.getName());
+            } else { // Mono<T>
+                assembledDesc = String.format("%s on successful completion of {@link %s}", description, returnType.getName());
             }
-            return assembledDesc;
         }
+        return assembledDesc;
+    }
+
+    private String assembleForResponse(String description, GenericType returnType, IType baseType) {
+        String assembledDesc;
+        if (description == null) {
+            if (ClassType.Void == baseType.asNullable()) { // Response<Void>
+                assembledDesc = String.format("the {@link %s}", returnType.getName());
+            } else { // Response<OtherType>
+                assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());
+            }
+        } else { // Response<T>
+            assembledDesc = String.format("%s along with {@link %s}", description, returnType.getName());
+        }
+        return assembledDesc;
     }
 
     private boolean isGenericTypeClassSubclassOf(IType type, Class<?> parent) {
@@ -122,24 +91,6 @@ public class ReturnTypeDescriptionAssembler {
         } catch (ClassNotFoundException e) {
             logger.warn(String.format("class %s not found!", className), e);
             return null;
-        }
-    }
-
-    private interface ReturnTypeDescriptionHandler<T extends IType> {
-        boolean accept(IType returnType);
-        String handle(String description, T returnType, IType baseType);
-    }
-    
-    private static class ReturnTypeDescriptionHandlerRegistry {
-
-        private final List<ReturnTypeDescriptionHandler<?>> handlers = new ArrayList<>();
-
-        <T extends IType> ReturnTypeDescriptionHandler<T> getHandler(T type) {
-            return (ReturnTypeDescriptionHandler<T>) handlers.stream().filter(handler -> handler.accept(type)).findFirst().orElse(null);
-        }
-
-        public <T extends IType> void addFirst(ReturnTypeDescriptionHandler<T> descriptionHandler) {
-            handlers.add(0, descriptionHandler);
         }
     }
 
