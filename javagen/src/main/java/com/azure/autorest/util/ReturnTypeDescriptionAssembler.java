@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 
-package com.azure.autorest.util.returntype;
+package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -43,6 +43,12 @@ public class ReturnTypeDescriptionAssembler {
         return assembledDesc;
     }
 
+    /*
+    Mono<Void> - A {@link Mono} that completes when a successful response is received
+    Mono<Response<?>> - "Response return type description" on successful completion of {@link Mono}
+    Mono<T> - "something" on successful completion of {@link Mono} (something here is the description in the operation)
+    Mono<OtherType> - the response body on successful completion of {@link Mono}
+     */
     private String assembleForMono(String description, GenericType returnType, IType baseType) {
         String assembledDesc;
         if (isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], Response.class)) { // Mono<Response<?>>
@@ -64,6 +70,11 @@ public class ReturnTypeDescriptionAssembler {
         return assembledDesc;
     }
 
+    /*
+    Response<Void> - the {@link Response}
+    Response<T> - "something" along with {@link Response}
+    Response<OtherType> - the response body along with {@link Response}
+     */
     private String assembleForResponse(String description, GenericType returnType, IType baseType) {
         String assembledDesc;
         if (description == null) {

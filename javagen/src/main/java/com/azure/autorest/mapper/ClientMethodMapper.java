@@ -37,7 +37,7 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.autorest.util.returntype.ReturnTypeDescriptionAssembler;
+import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
