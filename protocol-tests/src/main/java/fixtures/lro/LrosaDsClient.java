@@ -10,11 +10,9 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LrosaDsImpl;
-import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class)
@@ -72,7 +70,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -121,7 +119,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -170,7 +168,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -220,7 +218,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -233,7 +231,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -246,7 +244,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -260,7 +258,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -291,7 +289,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -322,7 +320,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -354,7 +352,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -403,7 +401,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -455,7 +453,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -506,7 +504,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -519,7 +517,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -533,7 +531,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -564,7 +562,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -597,7 +595,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -646,7 +644,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -696,7 +694,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -747,7 +745,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -762,7 +760,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -776,7 +774,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -791,7 +789,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -824,7 +822,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -856,7 +854,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -889,7 +887,7 @@ public final class LrosaDsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
