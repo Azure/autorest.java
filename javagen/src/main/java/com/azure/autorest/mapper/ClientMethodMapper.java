@@ -37,7 +37,7 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.autorest.util.returntype.ReturnTypeDescriptionAssembler;
+import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -651,21 +651,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private ReturnValue createLongRunningBeginSyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType, MethodPollingDetails pollingDetails) {
         if (JavaSettings.getInstance().isFluent()) {
-            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                    GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+            IType returnType = GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable());
+            return new ReturnValue(returnTypeDescription(operation, returnType, syncReturnType), returnType);
         } else {
-            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), pollingDetails.getFinalType()),
-                    GenericType.SyncPoller(pollingDetails.getIntermediateType(), pollingDetails.getFinalType()));
+            IType returnType = GenericType.SyncPoller(pollingDetails.getIntermediateType(), pollingDetails.getFinalType());
+            return new ReturnValue(returnTypeDescription(operation, returnType, pollingDetails.getFinalType()), returnType);
         }
     }
 
     protected ReturnValue createLongRunningBeginAsyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType, MethodPollingDetails pollingDetails) {
         if (JavaSettings.getInstance().isFluent()) {
-            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                    GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+            IType returnType = GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable());
+            return new ReturnValue(returnTypeDescription(operation, returnType, syncReturnType), returnType);
         } else {
-            return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), pollingDetails.getFinalType()),
-                    GenericType.PollerFlux(pollingDetails.getIntermediateType(), pollingDetails.getFinalType()));
+            IType returnType = GenericType.PollerFlux(pollingDetails.getIntermediateType(), pollingDetails.getFinalType());
+            return new ReturnValue(returnTypeDescription(operation, returnType, pollingDetails.getFinalType()), returnType);
         }
     }
 
