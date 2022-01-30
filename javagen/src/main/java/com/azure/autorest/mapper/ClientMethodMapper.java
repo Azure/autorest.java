@@ -684,11 +684,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncRestResponseReturnType);
     }
 
-    protected ReturnValue createProtocolSimpleAsyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
-        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                proxyMethod.getReturnType().getClientType());
-    }
-
     protected boolean shouldGeneratePagingMethods() {
         return true;
     }

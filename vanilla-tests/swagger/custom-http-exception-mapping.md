@@ -5,6 +5,7 @@ java: true
 input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/head-exceptions.json
 output-folder: ..
 namespace: fixtures.customhttpexceptionmapping
+license-header: MICROSOFT_MIT_SMALL
 required-parameter-client-methods: true
 sync-methods: all
 client-side-validations: true
