@@ -69,6 +69,10 @@ public class ServiceClient {
     private String defaultCredentialScopes;
 
     private boolean builderDisabled;
+    /**
+     * The security configuration information.
+     */
+    private SecurityInfo securityInfo;
 
     /**
      * Create a new ServiceClient with the provided properties.
@@ -88,7 +92,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled) {
+                            boolean builderDisabled, SecurityInfo securityInfo) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -105,6 +109,7 @@ public class ServiceClient {
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
         this.defaultCredentialScopes = defaultCredentialScopes;
         this.builderDisabled = builderDisabled;
+        this.securityInfo = securityInfo;
     }
 
     public final String getPackage() {
@@ -169,6 +174,10 @@ public class ServiceClient {
 
     public final boolean builderDisabled() {
         return builderDisabled;
+    }
+
+    public SecurityInfo getSecurityInfo() {
+        return securityInfo;
     }
 
     /**
@@ -264,6 +273,7 @@ public class ServiceClient {
         protected ClientMethodParameter defaultPollIntervalParameter;
         protected String defaultCredentialScopes;
         protected boolean builderDisabled;
+        protected SecurityInfo securityInfo;
 
         /**
          * Sets the package that this service client belongs to.
@@ -415,6 +425,16 @@ public class ServiceClient {
             return this;
         }
 
+        /**
+         * Sets the security configuration information.
+         * @param securityInfo the security configuration information
+         * @return the Builder itself
+         */
+        public Builder securityInfo(SecurityInfo securityInfo) {
+            this.securityInfo = securityInfo;
+            return this;
+        }
+
         public ServiceClient build() {
             return new ServiceClient(packageName,
                     className,
@@ -430,7 +450,8 @@ public class ServiceClient {
                     serializerAdapterParameter,
                     defaultPollIntervalParameter,
                     defaultCredentialScopes,
-                    builderDisabled);
+                    builderDisabled,
+                    securityInfo);
         }
     }
 }

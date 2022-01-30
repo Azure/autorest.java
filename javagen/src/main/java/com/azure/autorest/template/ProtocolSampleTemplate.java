@@ -5,7 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -195,10 +195,9 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         // credentials
         String credentialExpr;
-        Set<JavaSettings.CredentialType> credentialTypes = JavaSettings.getInstance().getCredentialTypes();
-        if (credentialTypes.contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
+        if (serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
             credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
-        } else if (credentialTypes.contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
+        } else if (serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
             credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
         } else {
             credentialExpr = "";

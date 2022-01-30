@@ -6,6 +6,7 @@ package com.azure.autorest.android.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
@@ -29,7 +30,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
     }
 
     @Override
-    protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings) {
+    protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings, SecurityInfo securityInfo) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
 
 
@@ -89,7 +90,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
     @Override
     protected void addCreateHttpPipelineMethod(com.azure.autorest.extension.base.plugin.JavaSettings settings,
                                                com.azure.autorest.model.javamodel.JavaClass classBlock,
-                                               String defaultCredentialScopes) {
+                                               String defaultCredentialScopes, SecurityInfo securityInfo) {
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
 
             function.ifBlock("httpLogOptions == null", action -> {

@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -16,6 +17,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -61,7 +63,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .packageName(packageName);
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
+                .filter(og -> og.getLanguage().getJava().getName() == null ||
+                        og.getLanguage().getJava().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
 
@@ -72,10 +75,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .name(serviceClientInterfaceName + "Service")
                     .clientTypeName(serviceClientInterfaceName)
                     .baseURL(codeModel.getOperationGroups().stream()
-                        .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
-                        .map(og -> og.getOperations().get(0))
-                        .findFirst().get().getRequests().get(0)
-                        .getProtocol().getHttp().getUri());
+                            .filter(og -> og.getLanguage().getJava().getName() == null ||
+                                    og.getLanguage().getJava().getName().isEmpty())
+                            .map(og -> og.getOperations().get(0))
+                            .findFirst().get().getRequests().get(0)
+                            .getProtocol().getHttp().getUri());
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
@@ -92,7 +96,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         List<MethodGroupClient> serviceClientMethodGroupClients = new ArrayList<>();
         List<OperationGroup> codeModelMethodGroups = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getJava().getName() != null && !og.getLanguage().getJava().getName().isEmpty())
+                .filter(og -> og.getLanguage().getJava().getName() != null &&
+                        !og.getLanguage().getJava().getName().isEmpty())
                 .collect(Collectors.toList());
         for (OperationGroup codeModelMethodGroup : codeModelMethodGroups) {
             serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup));
@@ -111,7 +116,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .distinct()
                 .collect(Collectors.toList());
         for (Parameter p : clientParameters) {
-            String serviceClientPropertyDescription = p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
+            String serviceClientPropertyDescription =
+                    p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
@@ -201,8 +207,49 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         ClientMethodParameter serializerAdapterParameter = createSerializerAdapterParameter();
 
-        if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
-            Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+        // map security information in code model to ServiceClient.SecurityInfo
+        SecurityInfo securityInfo = new SecurityInfo();
+        if (codeModel != null && codeModel.getSecurity() != null &&
+                codeModel.getSecurity().getSchemes() != null &&
+                codeModel.getSecurity().isAuthenticationRequired()) {
+            SecurityInfo securityInfoInCodeModel = new SecurityInfo();
+            codeModel.getSecurity().getSchemes().stream().forEach(securityScheme -> {
+                securityInfoInCodeModel.getSecurityTypes().add(securityScheme.getType());
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AADTOKEN)) {
+                    Set<String> credentialScopes = securityScheme.getScopes().stream().map(scope -> {
+                        if (!scope.startsWith("\"")) {
+                            return "\"" + scope + "\"";
+                        } else {
+                            return scope;
+                        }
+                    }).collect(Collectors.toSet());
+                    securityInfoInCodeModel.setScopes(credentialScopes);
+                }
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AZUREKEY)) {
+                    securityInfoInCodeModel.setHeaderName(securityScheme.getHeaderName());
+                }
+            });
+            securityInfo = securityInfoInCodeModel;
+        }
+
+        // overwrite securityInfo using JavaSettings
+        if (settings.getCredentialTypes() != null && !settings.getCredentialTypes().isEmpty() &&
+                !settings.getCredentialTypes().contains(JavaSettings.CredentialType.NONE)) {
+            SecurityInfo securityInfoInJavaSettings = new SecurityInfo();
+            if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AADTOKEN);
+                securityInfoInJavaSettings.setScopes(settings.getCredentialScopes());
+            }
+            if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AZUREKEY);
+                securityInfoInJavaSettings.setHeaderName(settings.getKeyCredentialHeaderName());
+            }
+            securityInfo = securityInfoInJavaSettings;
+        }
+        builder.securityInfo(securityInfo);
+
+        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+            Set<String> scopes = securityInfo.getScopes();
             String scopeParams;
             if (scopes != null && !scopes.isEmpty()) {
                 scopeParams = "DEFAULT_SCOPES";
@@ -290,7 +337,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     }
 
     protected ClientMethodParameter createSerializerAdapterParameter() {
-        return  new ClientMethodParameter.Builder()
+        return new ClientMethodParameter.Builder()
                 .description("The serializer to serialize an object into a string")
                 .isFinal(false)
                 .wireType(ClassType.SerializerAdapter)
