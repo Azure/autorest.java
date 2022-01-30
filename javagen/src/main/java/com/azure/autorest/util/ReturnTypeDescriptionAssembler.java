@@ -9,8 +9,14 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncPoller;
 import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
 
 public class ReturnTypeDescriptionAssembler {
     private final PluginLogger logger;
@@ -39,6 +45,10 @@ public class ReturnTypeDescriptionAssembler {
             assembledDesc = assembleForMono(description, returnType, baseType);
         } else if (isGenericTypeClassSubclassOf(returnType, Response.class)) {
             assembledDesc = assembleForResponse(description, returnType, baseType);
+        } else if (isGenericTypeClassSubclassOf(returnType, PagedIterable.class, PagedFlux.class)) {
+            assembledDesc = assembleForPagination(description, returnType, baseType);
+        } else if (isGenericTypeClassSubclassOf(returnType, SyncPoller.class, PollerFlux.class)) {
+            assembledDesc = assembleForPoller(description, returnType, baseType);
         }
         return assembledDesc;
     }
@@ -89,10 +99,38 @@ public class ReturnTypeDescriptionAssembler {
         return assembledDesc;
     }
 
-    private boolean isGenericTypeClassSubclassOf(IType type, Class<?> parent) {
+    /*
+    PagedIterable<T> - "something" as paginated response with {@link PagedIterable}
+    PagedIterable<OtherType> - the paginated response with {@link PagedIterable}
+     */
+    private String assembleForPagination(String description, GenericType returnType, IType baseType) {
+        String assembledDesc;
+        if (description == null) {
+            assembledDesc = String.format("the paginated response with {@link %s}", returnType.getName());
+        } else { // Response<T>
+            assembledDesc = String.format("%s as paginated response with {@link %s}", description, returnType.getName());
+        }
+        return assembledDesc;
+    }
+
+    /*
+    SyncPoller<S, T> - the {@link SyncPoller} for polling of "something"
+    SyncPoller<S, OtherType> - the {@link SyncPoller} for polling of long-running operation
+     */
+    private String assembleForPoller(String description, GenericType returnType, IType baseType) {
+        String assembledDesc;
+        if (description == null) {
+            assembledDesc = String.format("the {@link %s} for polling of long-running operation", returnType.getName());
+        } else { // Response<T>
+            assembledDesc = String.format("the {@link %2$s} for polling of %1$s", description, returnType.getName());
+        }
+        return assembledDesc;
+    }
+
+    private boolean isGenericTypeClassSubclassOf(IType type, Class<?>... parentClasses) {
         if (!(type instanceof GenericType)) return false;
         Class<?> genericClass = getGenericClass((GenericType) type);
-        return genericClass != null && parent.isAssignableFrom(genericClass);
+        return genericClass != null && Arrays.stream(parentClasses).anyMatch(p -> p.isAssignableFrom(genericClass));
     }
 
     private Class<?> getGenericClass(GenericType type) {
