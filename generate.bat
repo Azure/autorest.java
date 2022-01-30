@@ -1,5 +1,5 @@
-set VANILLA_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set AZURE_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set VANILLA_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
+set AZURE_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
 set ARM_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
 set PROTOCOL_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=protocol-tests --low-level-client --generate-samples
 set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.6.6 --java --use=. --low-level-client
