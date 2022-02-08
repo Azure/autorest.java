@@ -103,13 +103,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         builderTypes.append("}");
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(comment ->
-        {
-            String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
-            comment.description(String.format("A builder for creating a new instance of the %1$s type.", serviceClientTypeName));
+        javaFile.javadocComment(comment -> {
+            String clientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
+            if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
+                clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
+            }
+            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName));
         });
 
-        javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
+        javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
 
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
