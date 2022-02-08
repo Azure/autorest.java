@@ -45,8 +45,10 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -169,6 +171,7 @@ public class Javagen extends NewPlugin {
             }
         }
 
+        Map<AsyncSyncClient, ClientBuilder> syncClientBuilderMap = new HashMap<>();
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
         String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
         if (!client.getServiceClient().builderDisabled()) {
@@ -177,21 +180,29 @@ public class Javagen extends NewPlugin {
                 // builder per client
                 for (int i = 0; i < asyncClients.size(); ++i) {
                     AsyncSyncClient asyncClient = asyncClients.get(i);
-                    AsyncSyncClient sync = (i > syncClients.size()) ? null : syncClients.get(i);
-                    String clientName = ((sync != null)
-                            ? sync.getClassName()
+                    AsyncSyncClient syncClient = (i > syncClients.size()) ? null : syncClients.get(i);
+                    String clientName = ((syncClient != null)
+                            ? syncClient.getClassName()
                             : asyncClient.getClassName().replace("AsyncClient", "Client"));
                     String clientBuilderName = clientName + builderSuffix;
                     ClientBuilder builder = new ClientBuilder(
                             clientBuilderName, client.getServiceClient(),
-                            (sync == null) ? Collections.emptyList() : Collections.singletonList(sync),
+                            (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
                             Collections.singletonList(asyncClient));
                     javaPackage.addServiceClientBuilder(builderPackage, clientBuilderName, builder);
+
+                    if (syncClient != null) {
+                        syncClientBuilderMap.put(syncClient, builder);
+                    }
                 }
             } else {
                 // Service client builder
                 ClientBuilder builder = new ClientBuilder(builderName, client.getServiceClient(), syncClients, asyncClients);
                 javaPackage.addServiceClientBuilder(builderPackage, builderName, builder);
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    syncClientBuilderMap.put(syncClient, builder);
+                }
             }
         }
 
@@ -207,22 +218,16 @@ public class Javagen extends NewPlugin {
         if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
             Set<String> protocolExampleNameSet = new HashSet<>();
 
-            final boolean singleBuilder = syncClients.size() == 1;
-
             syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
                 .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
-                    .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync)
+                    .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync || m.getType() == ClientMethodType.LongRunningBeginSync)
                     .forEach(m -> {
-                        if (m.getProxyMethod().getExamples() != null) {
+                        ClientBuilder builder = syncClientBuilderMap.get(c);
+                        if (builder != null && m.getProxyMethod().getExamples() != null) {
                             m.getProxyMethod().getExamples().forEach((name, example) -> {
                                 String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
                                 if (!protocolExampleNameSet.contains(filename)) {
-                                    // see code in ServiceClientBuilderTemplate
-                                    final String buildMethodName = (settings.shouldGenerateSyncAsyncClients() && !singleBuilder)
-                                            ? ("build" + c.getClassName())
-                                            : "buildClient";
-
-                                    ProtocolExample protocolExample = new ProtocolExample(m, c, client.getServiceClient(), builderName, buildMethodName, filename, example);
+                                    ProtocolExample protocolExample = new ProtocolExample(m, c, builder, filename, example);
                                     javaPackage.addProtocolExamples(protocolExample);
                                     protocolExampleNameSet.add(filename);
                                 }

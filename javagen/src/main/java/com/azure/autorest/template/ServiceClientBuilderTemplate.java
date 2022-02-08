@@ -18,7 +18,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
@@ -79,7 +78,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
         List<AsyncSyncClient> asyncClients = clientBuilder.getAsyncClients();
         List<AsyncSyncClient> syncClients = clientBuilder.getSyncClients();
-        final boolean singleBuilder = asyncClients.size() == 1;
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
@@ -264,7 +262,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
                         addGeneratedAnnotation(classBlock);
-                        classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
+                        classBlock.publicMethod(String.format("%1$s %2$s()", asyncClient.getClassName(), clientBuilder.getBuilderMethodNameForAsyncClient(asyncClient)),
                                 function -> {
                                     if (wrapServiceClient) {
                                         function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
@@ -286,7 +284,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
                     addGeneratedAnnotation(classBlock);
-                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
+                    classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
                             function -> {
                                 if (wrapServiceClient) {
                                     function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);

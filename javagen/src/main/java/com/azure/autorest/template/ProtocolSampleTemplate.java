@@ -51,16 +51,16 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
     @SuppressWarnings("unchecked")
     public void write(ProtocolExample protocolExample, JavaFile javaFile) {
         ClientMethod method = protocolExample.getClientMethod();
-        AsyncSyncClient client = protocolExample.getClient();
-        ServiceClient serviceClient = protocolExample.getServiceClient();
-        String builderName = protocolExample.getBuilderName();
+        AsyncSyncClient syncClient = protocolExample.getSyncClient();
+        ServiceClient serviceClient = protocolExample.getClientBuilder().getServiceClient();
+        String builderName = protocolExample.getClientBuilder().getClassName();
         String filename = protocolExample.getFilename();
         ProxyMethodExample proxyMethodExample = protocolExample.getProxyMethodExample();
 
         // Import
         List<String> imports = new ArrayList<>();
-        imports.add(client.getPackageName() + "." + client.getClassName());
-        imports.add(client.getPackageName() + "." + builderName);
+        imports.add(syncClient.getPackageName() + "." + syncClient.getClassName());
+        imports.add(syncClient.getPackageName() + "." + builderName);
         imports.add(PagedIterable.class.getName());
         imports.add(Response.class.getName());
         imports.add(BinaryData.class.getName());
@@ -212,10 +212,10 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                         ".%5$s();";
                 methodBlock.line(
                         String.format(clientInit,
-                                client.getClassName(), builderName,
+                                syncClient.getClassName(), builderName,
                                 credentialExpr,
                                 clientParameterExpr,
-                                protocolExample.getBuildMethodName()));
+                                protocolExample.getClientBuilder().getBuilderMethodNameForSyncClient(syncClient)));
 
                 // binaryData
                 if (binaryDataStmt.length() > 0) {

@@ -7,13 +7,9 @@ public class ProtocolExample {
 
     private final ClientMethod clientMethod;
 
-    private final AsyncSyncClient client;
+    private final AsyncSyncClient syncClient;
 
-    private final ServiceClient serviceClient;
-
-    private final String builderName;
-
-    private final String buildMethodName;
+    private final ClientBuilder clientBuilder;
 
     private final String filename;
 
@@ -22,16 +18,12 @@ public class ProtocolExample {
     public ProtocolExample(
             ClientMethod clientMethod,
             AsyncSyncClient client,
-            ServiceClient serviceClient,
-            String builderName,
-            String buildMethodName,
+            ClientBuilder clientBuilder,
             String filename,
             ProxyMethodExample proxyMethodExample) {
         this.clientMethod = clientMethod;
-        this.client = client;
-        this.serviceClient = serviceClient;
-        this.builderName = builderName;
-        this.buildMethodName = buildMethodName;
+        this.syncClient = client;
+        this.clientBuilder = clientBuilder;
         this.filename = filename;
         this.proxyMethodExample = proxyMethodExample;
     }
@@ -40,20 +32,12 @@ public class ProtocolExample {
         return clientMethod;
     }
 
-    public AsyncSyncClient getClient() {
-        return client;
+    public AsyncSyncClient getSyncClient() {
+        return syncClient;
     }
 
-    public ServiceClient getServiceClient() {
-        return serviceClient;
-    }
-
-    public String getBuilderName() {
-        return builderName;
-    }
-
-    public String getBuildMethodName() {
-        return buildMethodName;
+    public ClientBuilder getClientBuilder() {
+        return clientBuilder;
     }
 
     public String getFilename() {
