@@ -45,10 +45,8 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -157,21 +155,14 @@ public class Javagen extends NewPlugin {
                 .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
 
+        // prepare async/sync clients
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         if (settings.shouldGenerateSyncAsyncClients()) {
             ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-            for (AsyncSyncClient asyncClient : asyncClients) {
-                javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
-            }
-
-            for (AsyncSyncClient syncClient : syncClients) {
-                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
-            }
         }
 
-        Map<AsyncSyncClient, ClientBuilder> syncClientBuilderMap = new HashMap<>();
+        // client builder
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
         String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
         if (!client.getServiceClient().builderDisabled()) {
@@ -191,8 +182,9 @@ public class Javagen extends NewPlugin {
                             Collections.singletonList(asyncClient));
                     javaPackage.addServiceClientBuilder(builderPackage, clientBuilderName, builder);
 
+                    asyncClient.setClientBuilder(builder);
                     if (syncClient != null) {
-                        syncClientBuilderMap.put(syncClient, builder);
+                        syncClient.setClientBuilder(builder);
                     }
                 }
             } else {
@@ -200,10 +192,17 @@ public class Javagen extends NewPlugin {
                 ClientBuilder builder = new ClientBuilder(builderName, client.getServiceClient(), syncClients, asyncClients);
                 javaPackage.addServiceClientBuilder(builderPackage, builderName, builder);
 
-                for (AsyncSyncClient syncClient : syncClients) {
-                    syncClientBuilderMap.put(syncClient, builder);
-                }
+                asyncClients.forEach(c -> c.setClientBuilder(builder));
+                syncClients.forEach(c -> c.setClientBuilder(builder));
             }
+        }
+
+        // async/sync clients
+        for (AsyncSyncClient asyncClient : asyncClients) {
+            javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
+        }
+        for (AsyncSyncClient syncClient : syncClients) {
+            javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
         }
 
         // Method group
@@ -222,7 +221,7 @@ public class Javagen extends NewPlugin {
                 .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
                     .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync || m.getType() == ClientMethodType.LongRunningBeginSync)
                     .forEach(m -> {
-                        ClientBuilder builder = syncClientBuilderMap.get(c);
+                        ClientBuilder builder = c.getClientBuilder();
                         if (builder != null && m.getProxyMethod().getExamples() != null) {
                             m.getProxyMethod().getExamples().forEach((name, example) -> {
                                 String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));

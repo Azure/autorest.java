@@ -208,13 +208,16 @@ public class FluentGen extends Javagen {
         String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
         String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
-        javaPackage.addServiceClientBuilder(builderPackage,
-                builderName, new ClientBuilder(builderName, client.getServiceClient()));
+        ClientBuilder clientBuilder = new ClientBuilder(builderName, client.getServiceClient());
+        javaPackage.addServiceClientBuilder(builderPackage, builderName, clientBuilder);
 
         if (javaSettings.shouldGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> asyncClients = new ArrayList<>();
             List<AsyncSyncClient> syncClients = new ArrayList<>();
             ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+            asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+            syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
 
             if (!javaSettings.isFluentLite()) {
                 // fluent lite only expose sync client
@@ -222,7 +225,6 @@ public class FluentGen extends Javagen {
                     javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                 }
             }
-
             for (AsyncSyncClient syncClient : syncClients) {
                 javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
             }
