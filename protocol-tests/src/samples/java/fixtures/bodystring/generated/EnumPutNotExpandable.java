@@ -7,13 +7,12 @@ package fixtures.bodystring.generated;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodystring.AutoRestSwaggerBatServiceClientBuilder;
 import fixtures.bodystring.EnumClient;
+import fixtures.bodystring.EnumClientBuilder;
 
 public class EnumPutNotExpandable {
     public static void main(String[] args) {
-        EnumClient client =
-                new AutoRestSwaggerBatServiceClientBuilder().host("http://localhost:3000").buildEnumClient();
+        EnumClient client = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         BinaryData stringBody = BinaryData.fromString("\"red color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.putNotExpandableWithResponse(stringBody, requestOptions);
