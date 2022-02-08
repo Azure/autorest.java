@@ -11,10 +11,10 @@ public class PathItemsTests {
 
     @BeforeAll
     public static void setup() {
-        AutoRestUrlTestServiceClientBuilder builder = new AutoRestUrlTestServiceClientBuilder();
+        PathItemsClientBuilder builder = new PathItemsClientBuilder();
         builder.globalStringPath("globalStringPath");
-        asyncClient = builder.buildPathItemsAsyncClient();
-        client = builder.buildPathItemsClient();
+        asyncClient = builder.buildAsyncClient();
+        client = builder.buildClient();
     }
 
     @Test

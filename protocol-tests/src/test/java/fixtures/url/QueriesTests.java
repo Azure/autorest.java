@@ -19,8 +19,8 @@ public class QueriesTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestUrlTestServiceClientBuilder().buildQueriesAsyncClient();
-        client = new AutoRestUrlTestServiceClientBuilder().buildQueriesClient();
+        asyncClient = new QueriesClientBuilder().buildAsyncClient();
+        client = new QueriesClientBuilder().buildClient();
     }
 
     @Test

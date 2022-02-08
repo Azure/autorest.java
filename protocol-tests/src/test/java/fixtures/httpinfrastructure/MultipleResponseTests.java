@@ -9,8 +9,5 @@ public class MultipleResponseTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestHttpInfrastructureTestServiceClientBuilder().buildMultipleResponsesAsyncClient();
-        client = new AutoRestHttpInfrastructureTestServiceClientBuilder().buildMultipleResponsesClient();
     }
-
 }

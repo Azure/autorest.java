@@ -14,8 +14,8 @@ public class DictionaryTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestComplexTestServiceClientBuilder().buildDictionaryAsyncClient();
-        client = new AutoRestComplexTestServiceClientBuilder().buildDictionaryClient();
+        asyncClient = new DictionaryClientBuilder().buildAsyncClient();
+        client = new DictionaryClientBuilder().buildClient();
     }
 
     @Test
