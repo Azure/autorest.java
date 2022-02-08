@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -109,13 +110,7 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceClientBuilder(String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
-        Templates.getServiceClientBuilderTemplate().write(model, javaFile);
-        addJavaFile(javaFile);
-    }
-
-    public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
+    public final void addServiceClientBuilder(String package_Keyword, String name, ClientBuilder model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         addJavaFile(javaFile);

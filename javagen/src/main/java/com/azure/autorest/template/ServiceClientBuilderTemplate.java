@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -33,7 +34,7 @@ import java.util.stream.Stream;
 /**
  * Writes a ServiceClient to a JavaFile.
  */
-public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder, JavaFile> {
 
     private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
@@ -48,9 +49,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         return _instance;
     }
 
-    public final void write(ServiceClient serviceClient, JavaFile javaFile) {
+    public final void write(ClientBuilder clientBuilder, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+        ServiceClient serviceClient = clientBuilder.getServiceClient();
+        String serviceClientBuilderName = clientBuilder.getClassName();
 
         ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings, serviceClient.getSecurityInfo());
 
@@ -75,17 +77,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         addSerializerImport(imports, settings);
         addGeneratedImport(imports);
 
-        List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        List<AsyncSyncClient> syncClients = new ArrayList<>();
-        if (settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
-            ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
-        }
+        List<AsyncSyncClient> asyncClients = clientBuilder.getAsyncClients();
+        List<AsyncSyncClient> syncClients = clientBuilder.getSyncClients();
         final boolean singleBuilder = asyncClients.size() == 1;
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()
-                || JavaSettings.getInstance().isLowLevelClient()) {
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
             if (!settings.isFluentLite()) {
                 clients.addAll(asyncClients);

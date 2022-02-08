@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -206,8 +207,9 @@ public class FluentGen extends Javagen {
         // Service client builder
         String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
+        String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
         javaPackage.addServiceClientBuilder(builderPackage,
-                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+                builderName, new ClientBuilder(builderName, client.getServiceClient()));
 
         if (javaSettings.shouldGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> asyncClients = new ArrayList<>();

@@ -13,6 +13,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -108,8 +109,9 @@ public class Androidgen extends Javagen {
                 // Service client builder
                 String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
                 String builderSuffix = ClientModelUtil.getBuilderSuffix();
-                javaPackage.addServiceClientBuilder(builderPackage,
-                        client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+                String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+                javaPackage.addServiceClientBuilder(builderPackage, builderName
+                        , new ClientBuilder(builderName, client.getServiceClient()));
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
