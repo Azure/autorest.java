@@ -17,7 +17,7 @@ import fixtures.lro.implementation.LrosaDsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = LrosaDsClientBuilder.class, isAsync = true)
 public final class LrosaDsAsyncClient {
     @Generated private final LrosaDsImpl serviceClient;
 

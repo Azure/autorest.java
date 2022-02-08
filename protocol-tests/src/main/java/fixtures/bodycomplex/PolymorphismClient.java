@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = PolymorphismClientBuilder.class)
 public final class PolymorphismClient {
     @Generated private final PolymorphismsImpl serviceClient;
 

@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.DictionariesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class DictionaryClient {
     @Generated private final DictionariesImpl serviceClient;
 

@@ -16,7 +16,7 @@ import fixtures.bodycomplex.implementation.InheritancesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = InheritanceClientBuilder.class, isAsync = true)
 public final class InheritanceAsyncClient {
     @Generated private final InheritancesImpl serviceClient;
 

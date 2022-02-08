@@ -14,7 +14,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.httpinfrastructure.implementation.HttpRetriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class)
+@ServiceClient(builder = HttpRetryClientBuilder.class)
 public final class HttpRetryClient {
     @Generated private final HttpRetriesImpl serviceClient;
 

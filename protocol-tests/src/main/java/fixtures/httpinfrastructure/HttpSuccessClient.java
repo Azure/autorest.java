@@ -14,7 +14,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class)
+@ServiceClient(builder = HttpSuccessClientBuilder.class)
 public final class HttpSuccessClient {
     @Generated private final HttpSuccessImpl serviceClient;
 

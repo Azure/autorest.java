@@ -16,7 +16,7 @@ import fixtures.httpinfrastructure.implementation.MultipleResponsesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = MultipleResponsesClientBuilder.class, isAsync = true)
 public final class MultipleResponsesAsyncClient {
     @Generated private final MultipleResponsesImpl serviceClient;
 

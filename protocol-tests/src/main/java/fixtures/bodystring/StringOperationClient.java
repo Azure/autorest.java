@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
-@ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
+@ServiceClient(builder = StringOperationClientBuilder.class)
 public final class StringOperationClient {
     @Generated private final StringOperationsImpl serviceClient;
 

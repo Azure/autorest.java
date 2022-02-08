@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = PolymorphicrecursiveClientBuilder.class)
 public final class PolymorphicrecursiveClient {
     @Generated private final PolymorphicrecursivesImpl serviceClient;
 

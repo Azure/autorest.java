@@ -14,7 +14,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.httpinfrastructure.implementation.HttpClientFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class)
+@ServiceClient(builder = HttpClientFailureClientBuilder.class)
 public final class HttpClientFailureClient {
     @Generated private final HttpClientFailuresImpl serviceClient;
 
