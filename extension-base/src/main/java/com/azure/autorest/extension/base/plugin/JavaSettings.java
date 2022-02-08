@@ -110,6 +110,7 @@ public class JavaSettings {
                 getBooleanValue(host, "add-context-parameter", false),
                 getBooleanValue(host, "context-client-method-parameter", false),
                 getBooleanValue(host, "generate-sync-async-clients", false),
+                getBooleanValue(host, "generate-builder-per-client", false),
                 getStringValue(host, "sync-methods", "essential"),
                 getBooleanValue(host, "client-logger", false),
                 getBooleanValue(host, "required-fields-as-ctor-args", false),
@@ -203,6 +204,7 @@ public class JavaSettings {
         boolean addContextParameter,
         boolean contextClientMethodParameter,
         boolean generateSyncAsyncClients,
+        boolean generateBuilderPerClient,
         String syncMethods,
         boolean clientLogger,
         boolean requiredFieldsAsConstructorArgs,
@@ -256,6 +258,7 @@ public class JavaSettings {
         this.addContextParameter = addContextParameter || contextClientMethodParameter;
         this.contextClientMethodParameter = contextClientMethodParameter;
         this.generateSyncAsyncClients = generateSyncAsyncClients;
+        this.generateBuilderPerClient = generateBuilderPerClient;
         this.syncMethods = SyncMethodsGeneration.fromValue(syncMethods);
         this.clientLogger = clientLogger;
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
@@ -845,6 +848,12 @@ public class JavaSettings {
     public Map<Integer, String> getHttpStatusCodeToExceptionTypeMapping() {
         return httpStatusCodeToExceptionTypeMapping == null
             ? null : Collections.unmodifiableMap(httpStatusCodeToExceptionTypeMapping);
+    }
+
+    private final boolean generateBuilderPerClient;
+
+    public boolean isGenerateBuilderPerClient() {
+        return generateBuilderPerClient;
     }
 
     private final boolean handlePartialUpdate;
