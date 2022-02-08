@@ -20,11 +20,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.Context;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
