@@ -11,6 +11,9 @@ public class ClientBuilder {
 
     private final String className;
     private final ServiceClient serviceClient;
+
+    // There is naturally ClientBuilder to Client reference, via "buildClient" method and via "@ServiceClientBuilder(serviceClients = {Client.class, AsyncClient.class})"
+    // syncClients and asyncClients can be empty. In this case, ClientBuilder build serviceClient directly. Note this usually is only used for internal implementation, as this pattern does not match Java guidelines.
     private final List<AsyncSyncClient> syncClients;
     private final List<AsyncSyncClient> asyncClients;
 
