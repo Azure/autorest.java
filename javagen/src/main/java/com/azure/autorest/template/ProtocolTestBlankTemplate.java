@@ -86,7 +86,7 @@ public class ProtocolTestBlankTemplate implements IJavaTemplate<TestContext, Jav
                         methodBlock.line(".%1$s(%2$s)", serviceClientProperty.getAccessorMethodSuffix(), expr);
                     });
                     methodBlock.line(".httpClient(HttpClient.createDefault())");
-                    methodBlock.line(".httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS));");
+                    methodBlock.line(".httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));");
                     methodBlock.decreaseIndent();
 
                     JavaIfBlock codeBlock = methodBlock.ifBlock("getTestMode() == TestMode.PLAYBACK", ifBlock -> {
