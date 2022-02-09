@@ -57,6 +57,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generate-client-as-impl`|Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.|
 |`--generate-client-interfaces`|Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.|
 |`--generate-sync-async-clients`|Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.|
+|`--generate-builder-per-client`| Requires `--generate-sync-async-clients`, and generates one ClientBuilder for each Client. Default is false.|
 |`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
 |`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
 |`--add-context-parameter`|Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.|
@@ -85,7 +86,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 `low-level-client` option enables the generator to generate code for minimal clients.
 
 `low-level-client` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
+For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
 `polling` is by default enabled as default settings globally (`polling={}`).
 
 `sdk-integration` option can be used for integrating to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/).
@@ -325,6 +326,9 @@ help-content:
       - key: generate-sync-async-clients
         type: bool
         description: Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.
+      - key: generate-builder-per-client
+        type: bool
+        description: Requires `--generate-sync-async-clients`, and generates one ClientBuilder for each Client. Default is false.
       - key: implementation-subpackage=STRING
         type: string
         description: The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.
