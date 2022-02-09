@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
+import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -177,7 +178,7 @@ public class Javagen extends NewPlugin {
                             : asyncClient.getClassName().replace("AsyncClient", "Client"));
                     String clientBuilderName = clientName + builderSuffix;
                     ClientBuilder builder = new ClientBuilder(
-                            clientBuilderName, client.getServiceClient(),
+                            builderPackage, clientBuilderName, client.getServiceClient(),
                             (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
                             Collections.singletonList(asyncClient));
                     javaPackage.addServiceClientBuilder(builderPackage, clientBuilderName, builder);
@@ -189,7 +190,8 @@ public class Javagen extends NewPlugin {
                 }
             } else {
                 // Service client builder
-                ClientBuilder builder = new ClientBuilder(builderName, client.getServiceClient(), syncClients, asyncClients);
+                ClientBuilder builder = new ClientBuilder(builderPackage, builderName,
+                        client.getServiceClient(), syncClients, asyncClients);
                 javaPackage.addServiceClientBuilder(builderPackage, builderName, builder);
 
                 asyncClients.forEach(c -> c.setClientBuilder(builder));
@@ -311,8 +313,10 @@ public class Javagen extends NewPlugin {
                 javaPackage.addSwaggerReadmeMarkdown(project);
                 javaPackage.addChangelogMarkdown(project);
 
-                // Blank test case
-                javaPackage.addProtocolTestBlank(client.getServiceClient());
+                if (!syncClients.isEmpty() && syncClients.iterator().next().getClientBuilder() != null) {
+                    // Blank test case
+                    javaPackage.addProtocolTestBlank(new TestContext(client.getServiceClient(), syncClients));
+                }
 
                 // Blank readme sample
                 javaPackage.addProtocolExamplesBlank();

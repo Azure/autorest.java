@@ -208,7 +208,7 @@ public class FluentGen extends Javagen {
         String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
         String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
-        ClientBuilder clientBuilder = new ClientBuilder(builderName, client.getServiceClient());
+        ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName, client.getServiceClient());
         javaPackage.addServiceClientBuilder(builderPackage, builderName, clientBuilder);
 
         if (javaSettings.shouldGenerateSyncAsyncClients()) {

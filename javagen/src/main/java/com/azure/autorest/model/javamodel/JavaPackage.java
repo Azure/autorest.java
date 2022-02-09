@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
+import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -213,9 +214,9 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTestBlank(ServiceClient serviceClient) {
+    public void addProtocolTestBlank(TestContext testContext) {
         JavaFile javaFile = javaFileFactory.createTestFile(settings.getPackage(), "ClientTests");
-        new ProtocolTestBlankTemplate().write(serviceClient, javaFile);
+        new ProtocolTestBlankTemplate().write(testContext, javaFile);
         javaFiles.add(javaFile);
     }
 

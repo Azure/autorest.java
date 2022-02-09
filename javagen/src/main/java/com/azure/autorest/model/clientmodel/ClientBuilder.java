@@ -3,12 +3,16 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class ClientBuilder {
 
+    private final String packageName;
     private final String className;
     private final ServiceClient serviceClient;
 
@@ -17,19 +21,26 @@ public class ClientBuilder {
     private final List<AsyncSyncClient> syncClients;
     private final List<AsyncSyncClient> asyncClients;
 
-    public ClientBuilder(String className, ServiceClient serviceClient) {
-        this.className = className;
-        this.serviceClient = serviceClient;
+    public ClientBuilder(String packageName, String className, ServiceClient serviceClient) {
+        this.packageName = Objects.requireNonNull(packageName);
+        this.className = Objects.requireNonNull(className);
+        this.serviceClient = Objects.requireNonNull(serviceClient);
         this.syncClients = Collections.emptyList();
         this.asyncClients = Collections.emptyList();
     }
 
-    public ClientBuilder(String className, ServiceClient serviceClient,
+    public ClientBuilder(String packageName, String className,
+                         ServiceClient serviceClient,
                          List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients) {
-        this.className = className;
+        this.packageName = Objects.requireNonNull(packageName);
+        this.className = Objects.requireNonNull(className);
         this.serviceClient = Objects.requireNonNull(serviceClient);
         this.syncClients = Objects.requireNonNull(syncClients);
         this.asyncClients = Objects.requireNonNull(asyncClients);
+    }
+
+    public String getPackageName() {
+        return packageName;
     }
 
     public String getClassName() {
@@ -60,5 +71,13 @@ public class ClientBuilder {
         return singleClient
                 ? "buildAsyncClient"
                 : ("build" + asyncClient.getClassName());
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        JavaSettings settings = JavaSettings.getInstance();
+        imports.add(String.format("%1$s.%2$s", getPackageName(), getClassName()));
+        serviceClient.addImportsTo(imports, includeImplementationImports, true, settings);
+        getSyncClients().forEach(c -> c.addImportsTo(imports, includeImplementationImports));
+        getAsyncClients().forEach(c -> c.addImportsTo(imports, includeImplementationImports));
     }
 }
