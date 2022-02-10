@@ -87,21 +87,6 @@
         <groupId>org.codehaus.mojo</groupId>
         <version>1.5.0</version>
         <executions>
-<!--          <execution>-->
-<!--            <id>run-server</id>-->
-<!--            <phase>test-compile</phase>-->
-<!--            <goals>-->
-<!--              <goal>exec</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <executable>npm.cmd</executable>-->
-<!--              <workingDirectory>${project.basedir}/..</workingDirectory>-->
-<!--              <arguments>-->
-<!--                <argument>run testserver-run</argument>-->
-<!--              </arguments>-->
-<!--              <async>true</async>-->
-<!--            </configuration>-->
-<!--          </execution>-->
           <execution>
             <id>report-coverage</id>
             <phase>test</phase>
