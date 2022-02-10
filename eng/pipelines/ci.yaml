@@ -55,7 +55,7 @@ jobs:
         displayName: 'Check no diff in generated files'
 
       - script: |
-          npm run testserver-run
+          npm run testserver-run &
         displayName: 'Start testserver'
 
       - task: Maven@3
