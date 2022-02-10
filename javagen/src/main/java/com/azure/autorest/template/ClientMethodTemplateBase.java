@@ -100,7 +100,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         for (ProxyMethodParameter parameter : parameters) {
             commentBlock.line(String.format(
                     "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                    parameter.getName(),
+                    parameter.getRequestParameterName(),
                     CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
                     parameter.getIsRequired() ? "Yes" : "No",
                     parameterDescriptionOrDefault(parameter)));
@@ -202,7 +202,18 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
-        return CodeNamer.escapeXmlComment(paramJavadoc);
+        String description = CodeNamer.escapeXmlComment(paramJavadoc);
+        // query with array, add additional description
+        if (parameter.getRequestParameterLocation() == RequestParameterLocation.QUERY && parameter.getCollectionFormat() != null) {
+            if (parameter.getExplode()) {
+                // collectionFormat: multi
+                description += " Call {@link RequestOptions#addQueryParam} to add string to array";
+            } else {
+                // collectionFormat: csv, ssv, tsv, pipes
+                description += String.format(" In the form of \"%s\" separated string.", parameter.getCollectionFormat().getDelimiter());
+            }
+        }
+        return description;
     }
 
     private static String methodParameterDescriptionOrDefault(ClientMethodParameter p) {
