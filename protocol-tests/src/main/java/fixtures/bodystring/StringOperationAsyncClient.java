@@ -16,7 +16,7 @@ import fixtures.bodystring.implementation.StringOperationsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBatServiceClient type. */
-@ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = StringOperationClientBuilder.class, isAsync = true)
 public final class StringOperationAsyncClient {
     @Generated private final StringOperationsImpl serviceClient;
 

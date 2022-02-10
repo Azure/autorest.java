@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PrimitivesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = PrimitiveClientBuilder.class)
 public final class PrimitiveClient {
     @Generated private final PrimitivesImpl serviceClient;
 

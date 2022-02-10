@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ArraysImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = ArrayClientBuilder.class)
 public final class ArrayClient {
     @Generated private final ArraysImpl serviceClient;
 

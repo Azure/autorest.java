@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -17,7 +18,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 /**
  * Writes a ServiceClient to a JavaFile.
  */
-public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder, JavaFile> {
 
     private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
@@ -48,9 +48,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         return _instance;
     }
 
-    public final void write(ServiceClient serviceClient, JavaFile javaFile) {
+    public final void write(ClientBuilder clientBuilder, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+        ServiceClient serviceClient = clientBuilder.getServiceClient();
+        String serviceClientBuilderName = clientBuilder.getClassName();
 
         ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings, serviceClient.getSecurityInfo());
 
@@ -75,17 +76,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         addSerializerImport(imports, settings);
         addGeneratedImport(imports);
 
-        List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        List<AsyncSyncClient> syncClients = new ArrayList<>();
-        if (settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
-            ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
-        }
-        final boolean singleBuilder = asyncClients.size() == 1;
+        List<AsyncSyncClient> asyncClients = clientBuilder.getAsyncClients();
+        List<AsyncSyncClient> syncClients = clientBuilder.getSyncClients();
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()
-                || JavaSettings.getInstance().isLowLevelClient()) {
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
             if (!settings.isFluentLite()) {
                 clients.addAll(asyncClients);
@@ -107,13 +103,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         builderTypes.append("}");
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(comment ->
-        {
-            String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
-            comment.description(String.format("A builder for creating a new instance of the %1$s type.", serviceClientTypeName));
+        javaFile.javadocComment(comment -> {
+            String clientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
+            if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
+                clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
+            }
+            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName));
         });
 
-        javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
+        javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
 
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
@@ -266,7 +264,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
                         addGeneratedAnnotation(classBlock);
-                        classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
+                        classBlock.publicMethod(String.format("%1$s %2$s()", asyncClient.getClassName(), clientBuilder.getBuilderMethodNameForAsyncClient(asyncClient)),
                                 function -> {
                                     if (wrapServiceClient) {
                                         function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
@@ -288,7 +286,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
                     addGeneratedAnnotation(classBlock);
-                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
+                    classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
                             function -> {
                                 if (wrapServiceClient) {
                                     function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);

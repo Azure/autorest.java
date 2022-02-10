@@ -16,7 +16,7 @@ import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ReadonlypropertyClientBuilder.class, isAsync = true)
 public final class ReadonlypropertyAsyncClient {
     @Generated private final ReadonlypropertiesImpl serviceClient;
 

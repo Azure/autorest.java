@@ -30,34 +30,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            HttpFailureClient.class,
-            HttpSuccessClient.class,
-            HttpRedirectsClient.class,
-            HttpClientFailureClient.class,
-            HttpServerFailureClient.class,
-            HttpRetryClient.class,
-            MultipleResponsesClient.class,
-            HttpFailureAsyncClient.class,
-            HttpSuccessAsyncClient.class,
-            HttpRedirectsAsyncClient.class,
-            HttpClientFailureAsyncClient.class,
-            HttpServerFailureAsyncClient.class,
-            HttpRetryAsyncClient.class,
-            MultipleResponsesAsyncClient.class
-        })
-public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
+/** A builder for creating a new instance of the HttpRedirectsClient type. */
+@ServiceClientBuilder(serviceClients = {HttpRedirectsClient.class, HttpRedirectsAsyncClient.class})
+public final class HttpRedirectsClientBuilder {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated private final Map<String, String> properties = new HashMap<>();
 
-    /** Create an instance of the AutoRestHttpInfrastructureTestServiceClientBuilder. */
+    /** Create an instance of the HttpRedirectsClientBuilder. */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder() {
+    public HttpRedirectsClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -70,10 +54,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder host(String host) {
+    public HttpRedirectsClientBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -87,10 +71,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
+    public HttpRedirectsClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -104,10 +88,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder httpClient(HttpClient httpClient) {
+    public HttpRedirectsClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -122,10 +106,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder configuration(Configuration configuration) {
+    public HttpRedirectsClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -139,10 +123,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public HttpRedirectsClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -157,10 +141,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public HttpRedirectsClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -180,10 +164,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
+    public HttpRedirectsClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -192,10 +176,10 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestHttpInfrastructureTestServiceClientBuilder.
+     * @return the HttpRedirectsClientBuilder.
      */
     @Generated
-    public AutoRestHttpInfrastructureTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public HttpRedirectsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -262,93 +246,13 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpFailureAsyncClient async client.
-     *
-     * @return an instance of HttpFailureAsyncClient.
-     */
-    @Generated
-    public HttpFailureAsyncClient buildHttpFailureAsyncClient() {
-        return new HttpFailureAsyncClient(buildInnerClient().getHttpFailures());
-    }
-
-    /**
-     * Builds an instance of HttpSuccessAsyncClient async client.
-     *
-     * @return an instance of HttpSuccessAsyncClient.
-     */
-    @Generated
-    public HttpSuccessAsyncClient buildHttpSuccessAsyncClient() {
-        return new HttpSuccessAsyncClient(buildInnerClient().getHttpSuccess());
-    }
-
-    /**
      * Builds an instance of HttpRedirectsAsyncClient async client.
      *
      * @return an instance of HttpRedirectsAsyncClient.
      */
     @Generated
-    public HttpRedirectsAsyncClient buildHttpRedirectsAsyncClient() {
+    public HttpRedirectsAsyncClient buildAsyncClient() {
         return new HttpRedirectsAsyncClient(buildInnerClient().getHttpRedirects());
-    }
-
-    /**
-     * Builds an instance of HttpClientFailureAsyncClient async client.
-     *
-     * @return an instance of HttpClientFailureAsyncClient.
-     */
-    @Generated
-    public HttpClientFailureAsyncClient buildHttpClientFailureAsyncClient() {
-        return new HttpClientFailureAsyncClient(buildInnerClient().getHttpClientFailures());
-    }
-
-    /**
-     * Builds an instance of HttpServerFailureAsyncClient async client.
-     *
-     * @return an instance of HttpServerFailureAsyncClient.
-     */
-    @Generated
-    public HttpServerFailureAsyncClient buildHttpServerFailureAsyncClient() {
-        return new HttpServerFailureAsyncClient(buildInnerClient().getHttpServerFailures());
-    }
-
-    /**
-     * Builds an instance of HttpRetryAsyncClient async client.
-     *
-     * @return an instance of HttpRetryAsyncClient.
-     */
-    @Generated
-    public HttpRetryAsyncClient buildHttpRetryAsyncClient() {
-        return new HttpRetryAsyncClient(buildInnerClient().getHttpRetries());
-    }
-
-    /**
-     * Builds an instance of MultipleResponsesAsyncClient async client.
-     *
-     * @return an instance of MultipleResponsesAsyncClient.
-     */
-    @Generated
-    public MultipleResponsesAsyncClient buildMultipleResponsesAsyncClient() {
-        return new MultipleResponsesAsyncClient(buildInnerClient().getMultipleResponses());
-    }
-
-    /**
-     * Builds an instance of HttpFailureClient sync client.
-     *
-     * @return an instance of HttpFailureClient.
-     */
-    @Generated
-    public HttpFailureClient buildHttpFailureClient() {
-        return new HttpFailureClient(buildInnerClient().getHttpFailures());
-    }
-
-    /**
-     * Builds an instance of HttpSuccessClient sync client.
-     *
-     * @return an instance of HttpSuccessClient.
-     */
-    @Generated
-    public HttpSuccessClient buildHttpSuccessClient() {
-        return new HttpSuccessClient(buildInnerClient().getHttpSuccess());
     }
 
     /**
@@ -357,47 +261,7 @@ public final class AutoRestHttpInfrastructureTestServiceClientBuilder {
      * @return an instance of HttpRedirectsClient.
      */
     @Generated
-    public HttpRedirectsClient buildHttpRedirectsClient() {
+    public HttpRedirectsClient buildClient() {
         return new HttpRedirectsClient(buildInnerClient().getHttpRedirects());
-    }
-
-    /**
-     * Builds an instance of HttpClientFailureClient sync client.
-     *
-     * @return an instance of HttpClientFailureClient.
-     */
-    @Generated
-    public HttpClientFailureClient buildHttpClientFailureClient() {
-        return new HttpClientFailureClient(buildInnerClient().getHttpClientFailures());
-    }
-
-    /**
-     * Builds an instance of HttpServerFailureClient sync client.
-     *
-     * @return an instance of HttpServerFailureClient.
-     */
-    @Generated
-    public HttpServerFailureClient buildHttpServerFailureClient() {
-        return new HttpServerFailureClient(buildInnerClient().getHttpServerFailures());
-    }
-
-    /**
-     * Builds an instance of HttpRetryClient sync client.
-     *
-     * @return an instance of HttpRetryClient.
-     */
-    @Generated
-    public HttpRetryClient buildHttpRetryClient() {
-        return new HttpRetryClient(buildInnerClient().getHttpRetries());
-    }
-
-    /**
-     * Builds an instance of MultipleResponsesClient sync client.
-     *
-     * @return an instance of MultipleResponsesClient.
-     */
-    @Generated
-    public MultipleResponsesClient buildMultipleResponsesClient() {
-        return new MultipleResponsesClient(buildInnerClient().getMultipleResponses());
     }
 }

@@ -30,38 +30,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the AutoRestComplexTestServiceClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            BasicClient.class,
-            PrimitiveClient.class,
-            ArrayClient.class,
-            DictionaryClient.class,
-            InheritanceClient.class,
-            PolymorphismClient.class,
-            PolymorphicrecursiveClient.class,
-            ReadonlypropertyClient.class,
-            FlattencomplexClient.class,
-            BasicAsyncClient.class,
-            PrimitiveAsyncClient.class,
-            ArrayAsyncClient.class,
-            DictionaryAsyncClient.class,
-            InheritanceAsyncClient.class,
-            PolymorphismAsyncClient.class,
-            PolymorphicrecursiveAsyncClient.class,
-            ReadonlypropertyAsyncClient.class,
-            FlattencomplexAsyncClient.class
-        })
-public final class AutoRestComplexTestServiceClientBuilder {
+/** A builder for creating a new instance of the PrimitiveClient type. */
+@ServiceClientBuilder(serviceClients = {PrimitiveClient.class, PrimitiveAsyncClient.class})
+public final class PrimitiveClientBuilder {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated private final Map<String, String> properties = new HashMap<>();
 
-    /** Create an instance of the AutoRestComplexTestServiceClientBuilder. */
+    /** Create an instance of the PrimitiveClientBuilder. */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder() {
+    public PrimitiveClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -74,10 +54,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder host(String host) {
+    public PrimitiveClientBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -91,10 +71,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder serviceVersion(AutoRestComplexTestServiceVersion serviceVersion) {
+    public PrimitiveClientBuilder serviceVersion(AutoRestComplexTestServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -108,10 +88,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
+    public PrimitiveClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -125,10 +105,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder httpClient(HttpClient httpClient) {
+    public PrimitiveClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -143,10 +123,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder configuration(Configuration configuration) {
+    public PrimitiveClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -160,10 +140,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public PrimitiveClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -178,10 +158,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public PrimitiveClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -201,10 +181,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
+    public PrimitiveClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -213,10 +193,10 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestComplexTestServiceClientBuilder.
+     * @return the PrimitiveClientBuilder.
      */
     @Generated
-    public AutoRestComplexTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public PrimitiveClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -286,103 +266,13 @@ public final class AutoRestComplexTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of BasicAsyncClient async client.
-     *
-     * @return an instance of BasicAsyncClient.
-     */
-    @Generated
-    public BasicAsyncClient buildBasicAsyncClient() {
-        return new BasicAsyncClient(buildInnerClient().getBasics());
-    }
-
-    /**
      * Builds an instance of PrimitiveAsyncClient async client.
      *
      * @return an instance of PrimitiveAsyncClient.
      */
     @Generated
-    public PrimitiveAsyncClient buildPrimitiveAsyncClient() {
+    public PrimitiveAsyncClient buildAsyncClient() {
         return new PrimitiveAsyncClient(buildInnerClient().getPrimitives());
-    }
-
-    /**
-     * Builds an instance of ArrayAsyncClient async client.
-     *
-     * @return an instance of ArrayAsyncClient.
-     */
-    @Generated
-    public ArrayAsyncClient buildArrayAsyncClient() {
-        return new ArrayAsyncClient(buildInnerClient().getArrays());
-    }
-
-    /**
-     * Builds an instance of DictionaryAsyncClient async client.
-     *
-     * @return an instance of DictionaryAsyncClient.
-     */
-    @Generated
-    public DictionaryAsyncClient buildDictionaryAsyncClient() {
-        return new DictionaryAsyncClient(buildInnerClient().getDictionaries());
-    }
-
-    /**
-     * Builds an instance of InheritanceAsyncClient async client.
-     *
-     * @return an instance of InheritanceAsyncClient.
-     */
-    @Generated
-    public InheritanceAsyncClient buildInheritanceAsyncClient() {
-        return new InheritanceAsyncClient(buildInnerClient().getInheritances());
-    }
-
-    /**
-     * Builds an instance of PolymorphismAsyncClient async client.
-     *
-     * @return an instance of PolymorphismAsyncClient.
-     */
-    @Generated
-    public PolymorphismAsyncClient buildPolymorphismAsyncClient() {
-        return new PolymorphismAsyncClient(buildInnerClient().getPolymorphisms());
-    }
-
-    /**
-     * Builds an instance of PolymorphicrecursiveAsyncClient async client.
-     *
-     * @return an instance of PolymorphicrecursiveAsyncClient.
-     */
-    @Generated
-    public PolymorphicrecursiveAsyncClient buildPolymorphicrecursiveAsyncClient() {
-        return new PolymorphicrecursiveAsyncClient(buildInnerClient().getPolymorphicrecursives());
-    }
-
-    /**
-     * Builds an instance of ReadonlypropertyAsyncClient async client.
-     *
-     * @return an instance of ReadonlypropertyAsyncClient.
-     */
-    @Generated
-    public ReadonlypropertyAsyncClient buildReadonlypropertyAsyncClient() {
-        return new ReadonlypropertyAsyncClient(buildInnerClient().getReadonlyproperties());
-    }
-
-    /**
-     * Builds an instance of FlattencomplexAsyncClient async client.
-     *
-     * @return an instance of FlattencomplexAsyncClient.
-     */
-    @Generated
-    public FlattencomplexAsyncClient buildFlattencomplexAsyncClient() {
-        return new FlattencomplexAsyncClient(buildInnerClient().getFlattencomplexes());
-    }
-
-    /**
-     * Builds an instance of BasicClient sync client.
-     *
-     * @return an instance of BasicClient.
-     */
-    @Generated
-    public BasicClient buildBasicClient() {
-        return new BasicClient(buildInnerClient().getBasics());
     }
 
     /**
@@ -391,77 +281,7 @@ public final class AutoRestComplexTestServiceClientBuilder {
      * @return an instance of PrimitiveClient.
      */
     @Generated
-    public PrimitiveClient buildPrimitiveClient() {
+    public PrimitiveClient buildClient() {
         return new PrimitiveClient(buildInnerClient().getPrimitives());
-    }
-
-    /**
-     * Builds an instance of ArrayClient sync client.
-     *
-     * @return an instance of ArrayClient.
-     */
-    @Generated
-    public ArrayClient buildArrayClient() {
-        return new ArrayClient(buildInnerClient().getArrays());
-    }
-
-    /**
-     * Builds an instance of DictionaryClient sync client.
-     *
-     * @return an instance of DictionaryClient.
-     */
-    @Generated
-    public DictionaryClient buildDictionaryClient() {
-        return new DictionaryClient(buildInnerClient().getDictionaries());
-    }
-
-    /**
-     * Builds an instance of InheritanceClient sync client.
-     *
-     * @return an instance of InheritanceClient.
-     */
-    @Generated
-    public InheritanceClient buildInheritanceClient() {
-        return new InheritanceClient(buildInnerClient().getInheritances());
-    }
-
-    /**
-     * Builds an instance of PolymorphismClient sync client.
-     *
-     * @return an instance of PolymorphismClient.
-     */
-    @Generated
-    public PolymorphismClient buildPolymorphismClient() {
-        return new PolymorphismClient(buildInnerClient().getPolymorphisms());
-    }
-
-    /**
-     * Builds an instance of PolymorphicrecursiveClient sync client.
-     *
-     * @return an instance of PolymorphicrecursiveClient.
-     */
-    @Generated
-    public PolymorphicrecursiveClient buildPolymorphicrecursiveClient() {
-        return new PolymorphicrecursiveClient(buildInnerClient().getPolymorphicrecursives());
-    }
-
-    /**
-     * Builds an instance of ReadonlypropertyClient sync client.
-     *
-     * @return an instance of ReadonlypropertyClient.
-     */
-    @Generated
-    public ReadonlypropertyClient buildReadonlypropertyClient() {
-        return new ReadonlypropertyClient(buildInnerClient().getReadonlyproperties());
-    }
-
-    /**
-     * Builds an instance of FlattencomplexClient sync client.
-     *
-     * @return an instance of FlattencomplexClient.
-     */
-    @Generated
-    public FlattencomplexClient buildFlattencomplexClient() {
-        return new FlattencomplexClient(buildInnerClient().getFlattencomplexes());
     }
 }

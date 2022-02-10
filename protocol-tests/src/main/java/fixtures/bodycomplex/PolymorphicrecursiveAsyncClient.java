@@ -16,7 +16,7 @@ import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = PolymorphicrecursiveClientBuilder.class, isAsync = true)
 public final class PolymorphicrecursiveAsyncClient {
     @Generated private final PolymorphicrecursivesImpl serviceClient;
 

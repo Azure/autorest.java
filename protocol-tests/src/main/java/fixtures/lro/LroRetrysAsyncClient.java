@@ -17,7 +17,7 @@ import fixtures.lro.implementation.LroRetrysImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = LroRetrysClientBuilder.class, isAsync = true)
 public final class LroRetrysAsyncClient {
     @Generated private final LroRetrysImpl serviceClient;
 

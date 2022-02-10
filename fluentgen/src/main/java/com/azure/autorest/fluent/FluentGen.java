@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -206,13 +207,17 @@ public class FluentGen extends Javagen {
         // Service client builder
         String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
         String builderSuffix = ClientModelUtil.getBuilderSuffix();
-        javaPackage.addServiceClientBuilder(builderPackage,
-                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+        String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
+        ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName, client.getServiceClient());
+        javaPackage.addServiceClientBuilder(builderPackage, builderName, clientBuilder);
 
         if (javaSettings.shouldGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> asyncClients = new ArrayList<>();
             List<AsyncSyncClient> syncClients = new ArrayList<>();
             ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+            asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+            syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
 
             if (!javaSettings.isFluentLite()) {
                 // fluent lite only expose sync client
@@ -220,7 +225,6 @@ public class FluentGen extends Javagen {
                     javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                 }
             }
-
             for (AsyncSyncClient syncClient : syncClients) {
                 javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
             }

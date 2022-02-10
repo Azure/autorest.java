@@ -15,7 +15,7 @@ import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.implementation.LroRetrysImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class)
+@ServiceClient(builder = LroRetrysClientBuilder.class)
 public final class LroRetrysClient {
     @Generated private final LroRetrysImpl serviceClient;
 

@@ -15,7 +15,7 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class)
+@ServiceClient(builder = FlattencomplexClientBuilder.class)
 public final class FlattencomplexClient {
     @Generated private final FlattencomplexesImpl serviceClient;
 

@@ -16,7 +16,7 @@ import fixtures.bodycomplex.implementation.DictionariesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class DictionaryAsyncClient {
     @Generated private final DictionariesImpl serviceClient;
 

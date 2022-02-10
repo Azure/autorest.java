@@ -17,7 +17,7 @@ public class EnumOperationsTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestSwaggerBatServiceClientBuilder().buildEnumClient();
+        client = new EnumClientBuilder().buildClient();
     }
 
     @Test

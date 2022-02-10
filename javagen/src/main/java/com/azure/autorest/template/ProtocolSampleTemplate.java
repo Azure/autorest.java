@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -19,11 +20,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.Context;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -50,24 +47,22 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
     @SuppressWarnings("unchecked")
     public void write(ProtocolExample protocolExample, JavaFile javaFile) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         ClientMethod method = protocolExample.getClientMethod();
-        AsyncSyncClient client = protocolExample.getClient();
-        ServiceClient serviceClient = protocolExample.getServiceClient();
-        String builderName = protocolExample.getBuilderName();
+        AsyncSyncClient syncClient = protocolExample.getSyncClient();
+        ServiceClient serviceClient = protocolExample.getClientBuilder().getServiceClient();
+        String builderName = protocolExample.getClientBuilder().getClassName();
         String filename = protocolExample.getFilename();
         ProxyMethodExample proxyMethodExample = protocolExample.getProxyMethodExample();
 
         // Import
-        List<String> imports = new ArrayList<>();
-        imports.add(client.getPackageName() + "." + client.getClassName());
-        imports.add(client.getPackageName() + "." + builderName);
-        imports.add(PagedIterable.class.getName());
-        imports.add(Response.class.getName());
-        imports.add(BinaryData.class.getName());
-        imports.add(Context.class.getName());
+        Set<String> imports = new HashSet<>();
+        imports.add(syncClient.getPackageName() + "." + syncClient.getClassName());
+        imports.add(syncClient.getPackageName() + "." + builderName);
         imports.add(Configuration.class.getName());
-        imports.add(ClassType.RequestOptions.getFullName());
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
+        method.addImportsTo(imports, false, settings);
         javaFile.declareImport(imports);
 
         int numParam = method.getParameters().size();
@@ -212,10 +207,10 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                         ".%5$s();";
                 methodBlock.line(
                         String.format(clientInit,
-                                client.getClassName(), builderName,
+                                syncClient.getClassName(), builderName,
                                 credentialExpr,
                                 clientParameterExpr,
-                                protocolExample.getBuildMethodName()));
+                                protocolExample.getClientBuilder().getBuilderMethodNameForSyncClient(syncClient)));
 
                 // binaryData
                 if (binaryDataStmt.length() > 0) {

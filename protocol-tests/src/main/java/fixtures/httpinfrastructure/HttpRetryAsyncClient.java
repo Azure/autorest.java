@@ -15,7 +15,7 @@ import fixtures.httpinfrastructure.implementation.HttpRetriesImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type. */
-@ServiceClient(builder = AutoRestHttpInfrastructureTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = HttpRetryClientBuilder.class, isAsync = true)
 public final class HttpRetryAsyncClient {
     @Generated private final HttpRetriesImpl serviceClient;
 

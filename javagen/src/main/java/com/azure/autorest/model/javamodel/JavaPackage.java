@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -20,6 +21,7 @@ import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
+import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -109,13 +111,7 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceClientBuilder(String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
-        Templates.getServiceClientBuilderTemplate().write(model, javaFile);
-        addJavaFile(javaFile);
-    }
-
-    public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
+    public final void addServiceClientBuilder(String package_Keyword, String name, ClientBuilder model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         addJavaFile(javaFile);
@@ -218,9 +214,9 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTestBlank(ServiceClient serviceClient) {
+    public void addProtocolTestBlank(TestContext testContext) {
         JavaFile javaFile = javaFileFactory.createTestFile(settings.getPackage(), "ClientTests");
-        new ProtocolTestBlankTemplate().write(serviceClient, javaFile);
+        new ProtocolTestBlankTemplate().write(testContext, javaFile);
         javaFiles.add(javaFile);
     }
 

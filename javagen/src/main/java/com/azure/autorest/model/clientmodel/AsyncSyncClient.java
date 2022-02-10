@@ -14,6 +14,10 @@ public class AsyncSyncClient {
 
     private final ServiceClient serviceClient;
 
+    // There is also reference from Client to ClientBuilder via "@ServiceClient(builder = ClientBuilder.class)"
+    // clientBuilder can be null, if builder is disabled via "disable-client-builder"
+    private ClientBuilder clientBuilder;
+
     private AsyncSyncClient(String packageName, String className, MethodGroupClient methodGroupClient, ServiceClient serviceClient) {
         this.packageName = packageName;
         this.className = className;
@@ -55,6 +59,14 @@ public class AsyncSyncClient {
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(String.format("%1$s.%2$s", getPackageName(), getClassName()));
+    }
+
+    public ClientBuilder getClientBuilder() {
+        return clientBuilder;
+    }
+
+    public void setClientBuilder(ClientBuilder clientBuilder) {
+        this.clientBuilder = clientBuilder;
     }
 
     public static class Builder {

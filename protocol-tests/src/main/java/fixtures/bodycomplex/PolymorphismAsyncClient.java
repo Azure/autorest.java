@@ -16,7 +16,7 @@ import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
-@ServiceClient(builder = AutoRestComplexTestServiceClientBuilder.class, isAsync = true)
+@ServiceClient(builder = PolymorphismClientBuilder.class, isAsync = true)
 public final class PolymorphismAsyncClient {
     @Generated private final PolymorphismsImpl serviceClient;
 
