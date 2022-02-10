@@ -5,7 +5,7 @@ import fixtures.llcinitial.LlcAsyncClient;
 import fixtures.llcinitial.LlcClient;
 import fixtures.llcinitial.LlcClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class LLCUpdateTests {
     private static LlcAsyncClient asyncClient;
@@ -24,7 +24,7 @@ public class LLCUpdateTests {
         client2 = new fixtures.llcupdate1.LlcClientBuilder().buildClient();
     }
 
-    @Disabled
+    @Test
     public void getRequired() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addHeader("parameter1", "1");
@@ -32,6 +32,6 @@ public class LLCUpdateTests {
         requestOptions.addHeader("parameter3", "3");
 
         client.getRequiredWithResponse(requestOptions);
-        client2.getRequiredWithResponse(requestOptions);
+        //client2.getRequiredWithResponse(requestOptions);
     }
 }

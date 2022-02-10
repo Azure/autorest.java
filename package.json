@@ -6,9 +6,11 @@
     "autorest": "autorest",
     "start": "java -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
     "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
-    "build": "mvn package -Dlocal",
+    "build": "mvn package -P local",
     "generate": "./generate",
-    "clean": "rm -rf tests/src/test/java/fixtures"
+    "testserver-run": "autorest-testserver run",
+    "testserver-stop": "autorest-testserver stop",
+    "testserver-coverage-publish": "autorest-testserver-coverage publish"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,6 @@
   "homepage": "https://github.com/Azure/autorest.java/blob/main/readme.md",
   "devDependencies": {
     "autorest": "^3.0.0",
-    "@microsoft.azure/autorest.testserver": "^3.1.6"
+    "@microsoft.azure/autorest.testserver": "^3.1.13"
   }
 }
