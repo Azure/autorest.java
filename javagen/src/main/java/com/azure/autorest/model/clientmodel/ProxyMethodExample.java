@@ -92,6 +92,7 @@ public class ProxyMethodExample {
     private final Map<String, ParameterValue> parameters = new HashMap<>();
     private final String originalFile;
     private String relativeOriginalFileName;
+    private String codeSnippetIdentifier;
 
     /**
      * @return the map of parameter name to parameter object values
@@ -166,7 +167,16 @@ public class ProxyMethodExample {
         return relativeOriginalFileName;
     }
 
-    // response is ignored for now
+    /**
+     * identifier of the codesnippet label from codesnippet-maven-plugin
+     * @see <a href="https://github.com/Azure/azure-sdk-tools/blob/main/packages/java-packages/codesnippet-maven-plugin/README.md">codesnippet-maven-plugin</a>
+     * @return the identifier of the codesnippet label that wraps around the example code
+     */
+    public String getCodeSnippetIdentifier() {
+        return codeSnippetIdentifier;
+    }
+
+// response is ignored for now
 
     private ProxyMethodExample(String originalFile) {
         this.originalFile = originalFile;
@@ -182,6 +192,7 @@ public class ProxyMethodExample {
     public static final class Builder {
         private final Map<String, ParameterValue> parameters = new HashMap<>();
         private String originalFile;
+        private String codeSnippetIdentifier;
 
         public Builder() {
         }
@@ -198,9 +209,15 @@ public class ProxyMethodExample {
             return this;
         }
 
+        public Builder codeSnippetIdentifier(String identifier) {
+            this.codeSnippetIdentifier = identifier;
+            return this;
+        }
+
         public ProxyMethodExample build() {
             ProxyMethodExample proxyMethodExample = new ProxyMethodExample(originalFile);
             proxyMethodExample.parameters.putAll(this.parameters);
+            proxyMethodExample.codeSnippetIdentifier = this.codeSnippetIdentifier;
             return proxyMethodExample;
         }
     }
