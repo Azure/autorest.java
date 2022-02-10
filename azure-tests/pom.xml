@@ -66,21 +66,21 @@
         <groupId>org.codehaus.mojo</groupId>
         <version>1.6.0</version>
         <executions>
-          <execution>
-            <id>run-server</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>node</executable>
-              <workingDirectory>${session.executionRootDirectory}/node_modules/@microsoft.azure/autorest.testserver</workingDirectory>
-              <arguments>
-                <argument>.</argument>
-              </arguments>
-              <async>true</async>
-            </configuration>
-          </execution>
+<!--          <execution>-->
+<!--            <id>run-server</id>-->
+<!--            <phase>test-compile</phase>-->
+<!--            <goals>-->
+<!--              <goal>exec</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <executable>node</executable>-->
+<!--              <workingDirectory>${session.executionRootDirectory}/node_modules/@microsoft.azure/autorest.testserver</workingDirectory>-->
+<!--              <arguments>-->
+<!--                <argument>.</argument>-->
+<!--              </arguments>-->
+<!--              <async>true</async>-->
+<!--            </configuration>-->
+<!--          </execution>-->
           <execution>
             <id>report-coverage</id>
             <phase>test</phase>
