@@ -116,6 +116,7 @@ jobs:
       - script: |
           cat coverage/report-vanilla.json
           cat coverage/report-azure.json
+          cat coverage/report-llc.json
         displayName: 'Display coverage data'
 
 #      # autorest.testserver reads "package.json" 2 level up from "coverage" directory
