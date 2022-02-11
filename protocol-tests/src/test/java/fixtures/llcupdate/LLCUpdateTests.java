@@ -27,11 +27,12 @@ public class LLCUpdateTests {
     @Test
     public void getRequired() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("parameter1", "1");
-        requestOptions.addHeader("parameter2", "2");
-        requestOptions.addHeader("parameter3", "3");
+        requestOptions.addQueryParam("parameter", "I am a required parameter");
 
         client.getRequiredWithResponse(requestOptions);
-        //client2.getRequiredWithResponse(requestOptions);
+
+        requestOptions.addQueryParam("new_parameter", "I'm a new input optional parameter");
+
+        client2.getRequiredWithResponse(requestOptions);
     }
 }
