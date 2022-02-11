@@ -3,12 +3,12 @@
 
 package com.azure.autorest.util;
 
-public class ProxyMethodExampleWrapper {
+public class XmsExampleWrapper {
 
     private final Object xmsExample;
     private final String operationId;
 
-    public ProxyMethodExampleWrapper(Object xmsExample, String operationId) {
+    public XmsExampleWrapper(Object xmsExample, String operationId) {
         this.xmsExample = xmsExample;
         this.operationId = operationId;
     }

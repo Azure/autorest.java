@@ -23,7 +23,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.ProxyMethodExampleWrapper;
+import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -270,7 +270,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     && !operation.getExtensions().getXmsExamples().getExamples().isEmpty()) {
                 String operationIdLocal = operationId;
                 Map<String, ProxyMethodExample> examples = operation.getExtensions().getXmsExamples().getExamples().entrySet().stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(new ProxyMethodExampleWrapper(e.getValue(), operationIdLocal))));
+                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(new XmsExampleWrapper(e.getValue(), operationIdLocal))));
                 builder.examples(examples);
             }
 

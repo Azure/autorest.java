@@ -5,12 +5,12 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
-import com.azure.autorest.util.ProxyMethodExampleWrapper;
+import com.azure.autorest.util.XmsExampleWrapper;
 
 import java.util.Locale;
 import java.util.Map;
 
-public class ProxyMethodExampleMapper implements IMapper<ProxyMethodExampleWrapper, ProxyMethodExample> {
+public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, ProxyMethodExample> {
 
     private static final ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
 
@@ -23,7 +23,7 @@ public class ProxyMethodExampleMapper implements IMapper<ProxyMethodExampleWrapp
 
     @SuppressWarnings("unchecked")
     @Override
-    public ProxyMethodExample map(ProxyMethodExampleWrapper exampleWrapper) {
+    public ProxyMethodExample map(XmsExampleWrapper exampleWrapper) {
         ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
 
         Object xmsExample = exampleWrapper.getXmsExample();
