@@ -38,7 +38,7 @@ jobs:
 
       - script: |
           npm install -g autorest
-          npm install --no-bin-links
+          npm install
         displayName: 'Prepare Environment for Generation'
 
       - script: |
@@ -53,6 +53,10 @@ jobs:
       - script: |
           [ -z "`git status --porcelain`" ]
         displayName: 'Check no diff in generated files'
+
+      - script: |
+          npm run testserver-run &
+        displayName: 'Start testserver'
 
       - task: Maven@3
         displayName: 'Run vanilla tests'
@@ -106,17 +110,17 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
 
       - script: |
-          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-vanilla.json
-          cat node_modules/@microsoft.azure/autorest.testserver/coverage/report-azure.json
+          npm run testserver-stop
+        displayName: 'Stop testserver'
+
+      - script: |
+          cat coverage/report-vanilla.json
+          cat coverage/report-azure.json
+          cat coverage/report-llc.json
         displayName: 'Display coverage data'
 
-      # autorest.testserver reads "package.json" 2 level up from "coverage" directory
       - script: |
-          cp node_modules/@microsoft.azure/autorest.testserver/package.json node_modules/@microsoft.azure/package.json
-        displayName: 'Prepare for coverage report publish'
-
-      - script: |
-          npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
+          npm run testserver-coverage-publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
         condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
         displayName: 'Publish coverage report to storage account'
 
