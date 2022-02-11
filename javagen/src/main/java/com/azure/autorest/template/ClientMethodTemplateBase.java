@@ -205,7 +205,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         String description = CodeNamer.escapeXmlComment(paramJavadoc);
         // query with array, add additional description
         if (parameter.getRequestParameterLocation() == RequestParameterLocation.QUERY && parameter.getCollectionFormat() != null) {
-            description = CoreUtils.isNullOrEmpty(description) || description.endsWith(".") ? description : description + ".";
+            description = (CoreUtils.isNullOrEmpty(description) || description.endsWith(".")) ? description : (description + ".");
             if (parameter.getExplode()) {
                 // collectionFormat: multi
                 description += " Call {@link RequestOptions#addQueryParam} to add string to array.";
