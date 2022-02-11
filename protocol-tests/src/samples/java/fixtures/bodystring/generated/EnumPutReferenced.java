@@ -12,9 +12,11 @@ import fixtures.bodystring.EnumClientBuilder;
 
 public class EnumPutReferenced {
     public static void main(String[] args) {
+        // BEGIN: fixtures.bodystring.generated.enumputreferenced.enumputreferenced
         EnumClient client = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         BinaryData enumStringBody = BinaryData.fromString("\"red color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.putReferencedWithResponse(enumStringBody, requestOptions);
+        // END: fixtures.bodystring.generated.enumputreferenced.enumputreferenced
     }
 }

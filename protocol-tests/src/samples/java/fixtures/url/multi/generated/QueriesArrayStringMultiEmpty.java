@@ -11,6 +11,7 @@ import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuild
 
 public class QueriesArrayStringMultiEmpty {
     public static void main(String[] args) {
+        // BEGIN: fixtures.url.multi.queries.arraystringmultiempty
         AutoRestUrlMutliCollectionFormatTestServiceClient client =
                 new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
                         .host("http://localhost:3000")
@@ -18,5 +19,6 @@ public class QueriesArrayStringMultiEmpty {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("arrayQuery", "");
         Response<Void> response = client.arrayStringMultiEmptyWithResponse(requestOptions);
+        // END: fixtures.url.multi.queries.arraystringmultiempty
     }
 }

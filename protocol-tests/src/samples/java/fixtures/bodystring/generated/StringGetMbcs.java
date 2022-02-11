@@ -12,8 +12,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetMbcs {
     public static void main(String[] args) {
+        // BEGIN: fixtures.bodystring.generated.stringgetmbcs.stringgetmbcs
         StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = client.getMbcsWithResponse(requestOptions);
+        // END: fixtures.bodystring.generated.stringgetmbcs.stringgetmbcs
     }
 }

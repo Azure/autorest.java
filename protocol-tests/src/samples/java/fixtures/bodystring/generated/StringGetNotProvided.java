@@ -12,8 +12,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetNotProvided {
     public static void main(String[] args) {
+        // BEGIN: fixtures.bodystring.generated.stringgetnotprovided.stringgetnotprovided
         StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = client.getNotProvidedWithResponse(requestOptions);
+        // END: fixtures.bodystring.generated.stringgetnotprovided.stringgetnotprovided
     }
 }
