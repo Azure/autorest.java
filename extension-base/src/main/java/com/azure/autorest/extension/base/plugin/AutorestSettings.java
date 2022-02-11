@@ -13,12 +13,11 @@ public class AutorestSettings {
     private String tag;
     private String baseFolder;
     private String outputFolder;
+    private String security;
+    private String securityScopes;
+    private String securityHeaderName;
     private String azureLibrariesForJavaFolder;
     private final List<String> inputFiles = new ArrayList<>();
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public void setTag(String tag) {
         this.tag = tag;
@@ -34,10 +33,6 @@ public class AutorestSettings {
 
     public void setAzureLibrariesForJavaFolder(String azureLibrariesForJavaFolder) {
         this.azureLibrariesForJavaFolder = azureLibrariesForJavaFolder;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getTag() {
@@ -58,5 +53,37 @@ public class AutorestSettings {
 
     public List<String> getInputFiles() {
         return inputFiles;
+    }
+
+    public Optional<String> getTitle() {
+        return Optional.ofNullable(title);
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Optional<String> getSecurity() {
+        return Optional.ofNullable(security);
+    }
+
+    public void setSecurity(String security) {
+        this.security = security;
+    }
+
+    public Optional<String> getSecurityScopes() {
+        return Optional.ofNullable(securityScopes);
+    }
+
+    public void setSecurityScopes(String securityScopes) {
+        this.securityScopes = securityScopes;
+    }
+
+    public Optional<String> getSecurityHeaderName() {
+        return Optional.ofNullable(securityHeaderName);
+    }
+
+    public void setSecurityHeaderName(String securityHeaderName) {
+        this.securityHeaderName = securityHeaderName;
     }
 }

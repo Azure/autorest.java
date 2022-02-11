@@ -145,6 +145,10 @@ public class FluentJavaSettings {
             autorestSettings = new AutorestSettings();
 
             loadStringSetting("title", autorestSettings::setTitle);
+            loadStringSetting("security", autorestSettings::setSecurity);
+            loadStringSetting("security-scopes", autorestSettings::setSecurityScopes);
+            loadStringSetting("security-header-name", autorestSettings::setSecurityHeaderName);
+
             loadStringSetting("tag", autorestSettings::setTag);
 
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
