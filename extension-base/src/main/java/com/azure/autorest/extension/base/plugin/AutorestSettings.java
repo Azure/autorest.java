@@ -5,6 +5,7 @@ package com.azure.autorest.extension.base.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AutorestSettings {
@@ -13,8 +14,8 @@ public class AutorestSettings {
     private String tag;
     private String baseFolder;
     private String outputFolder;
-    private String security;
-    private String securityScopes;
+    private List<String> security = new ArrayList<>();
+    private List<String> securityScopes = new ArrayList<>();
     private String securityHeaderName;
     private String azureLibrariesForJavaFolder;
     private final List<String> inputFiles = new ArrayList<>();
@@ -56,31 +57,31 @@ public class AutorestSettings {
     }
 
     public Optional<String> getTitle() {
-        return Optional.ofNullable(title);
+        return Optional.ofNullable(this.title);
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Optional<String> getSecurity() {
-        return Optional.ofNullable(security);
+    public List<String> getSecurity() {
+        return this.security;
     }
 
-    public void setSecurity(String security) {
-        this.security = security;
+    public void setSecurity(List<String> security) {
+        this.security = Objects.requireNonNull(security);
     }
 
-    public Optional<String> getSecurityScopes() {
-        return Optional.ofNullable(securityScopes);
+    public List<String> getSecurityScopes() {
+        return this.securityScopes;
     }
 
-    public void setSecurityScopes(String securityScopes) {
-        this.securityScopes = securityScopes;
+    public void setSecurityScopes(List<String> securityScopes) {
+        this.securityScopes = Objects.requireNonNull(securityScopes);
     }
 
     public Optional<String> getSecurityHeaderName() {
-        return Optional.ofNullable(securityHeaderName);
+        return Optional.ofNullable(this.securityHeaderName);
     }
 
     public void setSecurityHeaderName(String securityHeaderName) {

@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.projectmodel.Project;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,10 +30,12 @@ public class SwaggerReadmeTemplate {
 
         settings.getAutorestSettings().getTitle()
                 .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("title", value));
-        settings.getAutorestSettings().getSecurity()
-                .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("security", value));
-        settings.getAutorestSettings().getSecurityScopes()
-                .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("security-scopes", value));
+        if (!settings.getAutorestSettings().getSecurity().isEmpty()) {
+            OVERRIDE_SETTINGS.putIfAbsent("security", stringOrArray(settings.getAutorestSettings().getSecurity()));
+        }
+        if (!settings.getAutorestSettings().getSecurityScopes().isEmpty()) {
+            OVERRIDE_SETTINGS.putIfAbsent("security-scopes", stringOrArray(settings.getAutorestSettings().getSecurityScopes()));
+        }
         settings.getAutorestSettings().getSecurityHeaderName()
                 .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("security-header-name", value));
 
@@ -73,5 +76,13 @@ public class SwaggerReadmeTemplate {
 
     private void newLine() {
         builder.append(NEW_LINE);
+    }
+
+    private String stringOrArray(List<String> array) {
+        if (array.size() == 1) {
+            return array.iterator().next();
+        } else {
+            return "[" + String.join(",", array) + "]";
+        }
     }
 }
