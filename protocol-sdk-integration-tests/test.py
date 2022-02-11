@@ -12,7 +12,7 @@ AUTOREST_CORE_VERSION = '3.6.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 
-def run(script_path: str, output_folder: str, json_path: str, namespace: str, credential_scopes: str = None):
+def run(script_path: str, output_folder: str, json_path: str, namespace: str, security_scopes: str = None):
     logging.info(f'SDK for {json_path}')
 
     package_relative_path = namespace.replace('.', '/')
@@ -22,12 +22,13 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, cr
     logging.info(f'delete {output_folder}')
 
     # generate code
-    credential_types = 'tokencredential'
-    credential_scopes_str = f'--credential-types={credential_types}'
-    if credential_scopes:
-        credential_scopes_str += f' --credential-scopes={credential_scopes}'
-    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {credential_scopes_str} --sdk-integration --generate-samples'.split(' ')
+    security = 'AADToken'
+    security_scopes_str = f'--security={security}'
+    if security_scopes:
+        security_scopes_str += f' --security-scopes={security_scopes}'
+    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_scopes_str} --sdk-integration --generate-samples'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
+    logging.info(' '.join(cmd))
     subprocess.check_call(cmd, cwd=script_path)
 
     logging.info('pass autorest')

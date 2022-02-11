@@ -20,7 +20,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.Configuration;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -60,8 +59,9 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
         Set<String> imports = new HashSet<>();
         imports.add(syncClient.getPackageName() + "." + syncClient.getClassName());
         imports.add(syncClient.getPackageName() + "." + builderName);
-        imports.add(Configuration.class.getName());
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
+        ClassType.AzureKeyCredential.addImportsTo(imports, false);
+        ClassType.Configuration.addImportsTo(imports, false);
         method.addImportsTo(imports, false, settings);
         javaFile.declareImport(imports);
 
