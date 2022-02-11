@@ -270,7 +270,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     && !operation.getExtensions().getXmsExamples().getExamples().isEmpty()) {
                 String operationIdLocal = operationId;
                 Map<String, ProxyMethodExample> examples = operation.getExtensions().getXmsExamples().getExamples().entrySet().stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(new XmsExampleWrapper(e.getValue(), operationIdLocal))));
+                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(new XmsExampleWrapper(e.getValue(), operationIdLocal, e.getKey()))));
                 builder.examples(examples);
             }
 

@@ -5,6 +5,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.XmsExampleWrapper;
 
 import java.util.Locale;
@@ -37,19 +38,17 @@ public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, Prox
             String xmsOriginalFile = (String) ((Map<String, Object>) xmsExample).get("x-ms-original-file");
             builder.originalFile(xmsOriginalFile);
             if (exampleWrapper.getOperationId() != null) {
-                builder.codeSnippetIdentifier(buildCodeSnippetIdentifier(exampleWrapper.getOperationId()));
+                builder.codeSnippetIdentifier(buildCodeSnippetIdentifier(exampleWrapper.getOperationId(), exampleWrapper.getExampleName()));
             }
         }
         return builder.build();
     }
 
-    private String buildCodeSnippetIdentifier(String operationId) {
-        String[] operationGroupAndId = operationId.split("_");
-        if (operationGroupAndId.length != 2) {
-            return null;
-        }
-        String operationGroup = operationGroupAndId[0];
-        String oprId = operationGroupAndId[1];
-        return String.format("%s.%s.%s", JavaSettings.getInstance().getPackage(), operationGroup.toLowerCase(Locale.ROOT), oprId.toLowerCase(Locale.ROOT));
+    private String buildCodeSnippetIdentifier(String operationId, String exampleName) {
+        return String.format("%s.generated.%s.%s", JavaSettings.getInstance().getPackage(), getValidName(operationId), getValidName(exampleName)).toLowerCase(Locale.ROOT);
+    }
+
+    private String getValidName(String exampleName) {
+        return CodeNamer.getValidName(exampleName).replace("_", "");
     }
 }
