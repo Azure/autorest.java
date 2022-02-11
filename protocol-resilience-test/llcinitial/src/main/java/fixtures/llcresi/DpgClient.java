@@ -14,9 +14,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.llcresi.implementation.ParamsImpl;
 
-/** Initializes a new instance of the synchronous LlcClient type. */
-@ServiceClient(builder = LlcClientBuilder.class)
-public final class LlcClient {
+/** Initializes a new instance of the synchronous DpgClient type. */
+@ServiceClient(builder = DpgClientBuilder.class)
+public final class DpgClient {
     @Generated private final ParamsImpl serviceClient;
 
     /**
@@ -25,7 +25,7 @@ public final class LlcClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LlcClient(ParamsImpl serviceClient) {
+    DpgClient(ParamsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

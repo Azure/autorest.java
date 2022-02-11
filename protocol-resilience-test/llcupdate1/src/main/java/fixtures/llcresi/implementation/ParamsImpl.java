@@ -31,24 +31,24 @@ public final class ParamsImpl {
     private final ParamsService service;
 
     /** The service client containing this operation class. */
-    private final LlcClientImpl client;
+    private final DpgClientImpl client;
 
     /**
      * Initializes an instance of ParamsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ParamsImpl(LlcClientImpl client) {
+    ParamsImpl(DpgClientImpl client) {
         this.service = RestProxy.create(ParamsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for LlcClientParams to be used by the proxy service to perform REST
+     * The interface defining all the services for DpgClientParams to be used by the proxy service to perform REST
      * calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "LlcClientParams")
+    @ServiceInterface(name = "DpgClientParams")
     private interface ParamsService {
         @Head("/serviceDriven/parameters")
         @ExpectedResponses({200})
