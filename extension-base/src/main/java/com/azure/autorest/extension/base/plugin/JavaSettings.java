@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 /**
  * Settings that are used by the Java AutoRest Generator.
  */
@@ -34,7 +33,7 @@ public class JavaSettings {
 
     private static String _header;
 
-    private static final Map<String, String> simpleJavaSettings = new HashMap<>();
+    private static final Map<String, Object> simpleJavaSettings = new HashMap<>();
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -72,6 +71,10 @@ public class JavaSettings {
         if (_instance == null) {
             AutorestSettings autorestSettings = new AutorestSettings();
             loadStringSetting("title", autorestSettings::setTitle);
+            loadStringOrArraySettingAsArray("security", autorestSettings::setSecurity);
+            loadStringOrArraySettingAsArray("security-scopes", autorestSettings::setSecurityScopes);
+            loadStringSetting("security-header-name", autorestSettings::setSecurityHeaderName);
+
             loadStringSetting("tag", autorestSettings::setTag);
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
@@ -423,7 +426,7 @@ public class JavaSettings {
         return autorestSettings;
     }
 
-    public Map<String, String> getSimpleJavaSettings() {
+    public Map<String, Object> getSimpleJavaSettings() {
         return simpleJavaSettings;
     }
 
@@ -923,8 +926,23 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
-            simpleJavaSettings.put(settingName, String.valueOf(ret));
+            simpleJavaSettings.put(settingName, ret);
             return ret;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void loadStringOrArraySettingAsArray(String settingName, Consumer<List<String>> action) {
+        List<String> settingValues = new ArrayList<>();
+        Object settingValue = host.getValue(Object.class, settingName);
+        if (settingValue instanceof String) {
+            settingValues.add(settingValue.toString());
+        } else if (settingValue instanceof List) {
+            List<String> settingValueList = (List<String>) settingValue;
+            settingValues.addAll(settingValueList);
+        }
+        if (!settingValues.isEmpty()) {
+            action.accept(settingValues);
         }
     }
 }
