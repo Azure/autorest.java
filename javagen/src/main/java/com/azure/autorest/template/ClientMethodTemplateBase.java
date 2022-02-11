@@ -100,7 +100,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         for (ProxyMethodParameter parameter : parameters) {
             commentBlock.line(String.format(
                     "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                    parameter.getName(),
+                    parameter.getRequestParameterName(),
                     CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
                     parameter.getIsRequired() ? "Yes" : "No",
                     parameterDescriptionOrDefault(parameter)));
