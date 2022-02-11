@@ -33,7 +33,7 @@ public class JavaSettings {
 
     private static String _header;
 
-    private static final Map<String, String> simpleJavaSettings = new HashMap<>();
+    private static final Map<String, Object> simpleJavaSettings = new HashMap<>();
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -426,7 +426,7 @@ public class JavaSettings {
         return autorestSettings;
     }
 
-    public Map<String, String> getSimpleJavaSettings() {
+    public Map<String, Object> getSimpleJavaSettings() {
         return simpleJavaSettings;
     }
 
@@ -926,7 +926,7 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
-            simpleJavaSettings.put(settingName, String.valueOf(ret));
+            simpleJavaSettings.put(settingName, ret);
             return ret;
         }
     }
