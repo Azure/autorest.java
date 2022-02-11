@@ -5,11 +5,12 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
-import com.azure.autorest.util.ExampleWrapper;
+import com.azure.autorest.util.ProxyMethodExampleWrapper;
 
+import java.util.Locale;
 import java.util.Map;
 
-public class ProxyMethodExampleMapper implements IMapper<ExampleWrapper, ProxyMethodExample> {
+public class ProxyMethodExampleMapper implements IMapper<ProxyMethodExampleWrapper, ProxyMethodExample> {
 
     private static final ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
 
@@ -22,7 +23,7 @@ public class ProxyMethodExampleMapper implements IMapper<ExampleWrapper, ProxyMe
 
     @SuppressWarnings("unchecked")
     @Override
-    public ProxyMethodExample map(ExampleWrapper exampleWrapper) {
+    public ProxyMethodExample map(ProxyMethodExampleWrapper exampleWrapper) {
         ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
 
         Object xmsExample = exampleWrapper.getXmsExample();
@@ -49,6 +50,6 @@ public class ProxyMethodExampleMapper implements IMapper<ExampleWrapper, ProxyMe
         }
         String operationGroup = operationGroupAndId[0];
         String oprId = operationGroupAndId[1];
-        return String.format("%s.%s.%s", JavaSettings.getInstance().getPackage(), operationGroup, oprId);
+        return String.format("%s.%s.%s", JavaSettings.getInstance().getPackage(), operationGroup.toLowerCase(Locale.ROOT), oprId.toLowerCase(Locale.ROOT));
     }
 }

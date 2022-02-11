@@ -200,6 +200,10 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
+                // codesnippet begin
+                if (protocolExample.getProxyMethodExample().getCodeSnippetIdentifier() != null) {
+                    methodBlock.line(String.format("// BEGIN: %s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
+                }
                 // client
                 String clientInit = "%1$s client = new %2$s()" +
                         "%3$s" +  // credentials
@@ -232,6 +236,10 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                         method.getReturnValue().getType(),
                         method.getName(),
                         String.join(", ", params)));
+                // codesnippet end
+                if (protocolExample.getProxyMethodExample().getCodeSnippetIdentifier() != null) {
+                    methodBlock.line(String.format("// END: %s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
+                }
             });
         });
     }

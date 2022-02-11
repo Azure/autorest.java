@@ -3,16 +3,12 @@
 
 package com.azure.autorest.util;
 
-import com.azure.autorest.extension.base.model.codemodel.Operation;
-
-/**
- */
-public class ExampleWrapper {
+public class ProxyMethodExampleWrapper {
 
     private final Object xmsExample;
     private final String operationId;
 
-    public ExampleWrapper(Object xmsExample, String operationId) {
+    public ProxyMethodExampleWrapper(Object xmsExample, String operationId) {
         this.xmsExample = xmsExample;
         this.operationId = operationId;
     }
