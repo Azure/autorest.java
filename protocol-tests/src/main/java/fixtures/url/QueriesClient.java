@@ -624,7 +624,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -646,7 +646,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the csv-array format In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -667,7 +667,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the csv-array format In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -710,7 +710,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format In the form of " " separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -732,7 +732,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format In the form of "	" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -755,7 +755,7 @@ public final class QueriesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format In the form of "|" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -11,7 +11,7 @@ import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuild
 
 public class QueriesArrayStringMultiValid {
     public static void main(String[] args) {
-        // BEGIN: fixtures.url.multi.queries.arraystringmultivalid
+        // BEGIN: fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
         AutoRestUrlMutliCollectionFormatTestServiceClient client =
                 new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
                         .host("http://localhost:3000")
@@ -19,6 +19,6 @@ public class QueriesArrayStringMultiValid {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("arrayQuery", "ArrayQuery1,begin!*'();:@ &= $,/?#[]end,,");
         Response<Void> response = client.arrayStringMultiValidWithResponse(requestOptions);
-        // END: fixtures.url.multi.queries.arraystringmultivalid
+        // END: fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
     }
 }

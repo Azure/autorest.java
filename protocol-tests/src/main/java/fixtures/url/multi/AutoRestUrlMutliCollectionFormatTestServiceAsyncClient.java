@@ -37,7 +37,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the multi-array format Call {@link RequestOptions#addQueryParam} to add string to array</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -59,7 +59,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the multi-array format Call {@link RequestOptions#addQueryParam} to add string to array</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -81,7 +81,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format Call {@link RequestOptions#addQueryParam} to add string to array</td></tr>
+     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

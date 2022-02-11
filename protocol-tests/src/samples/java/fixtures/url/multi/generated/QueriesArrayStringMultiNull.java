@@ -11,13 +11,13 @@ import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuild
 
 public class QueriesArrayStringMultiNull {
     public static void main(String[] args) {
-        // BEGIN: fixtures.url.multi.queries.arraystringmultinull
+        // BEGIN: fixtures.url.multi.generated.queriesarraystringmultinull.queriesarraystringmultinull
         AutoRestUrlMutliCollectionFormatTestServiceClient client =
                 new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
                         .host("http://localhost:3000")
                         .buildClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = client.arrayStringMultiNullWithResponse(requestOptions);
-        // END: fixtures.url.multi.queries.arraystringmultinull
+        // END: fixtures.url.multi.generated.queriesarraystringmultinull.queriesarraystringmultinull
     }
 }
