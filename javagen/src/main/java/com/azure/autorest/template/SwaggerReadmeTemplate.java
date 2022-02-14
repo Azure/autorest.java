@@ -5,9 +5,13 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.projectmodel.Project;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class SwaggerReadmeTemplate {
 
@@ -15,47 +19,59 @@ public class SwaggerReadmeTemplate {
 
     private static final String NEW_LINE = System.lineSeparator();
 
-    private static final Map<String, String> OVERRIDE_SETTINGS = new TreeMap<>();
+    private static final Map<String, Object> OVERRIDE_SETTINGS = new LinkedHashMap<>();
     static {
         OVERRIDE_SETTINGS.put("output-folder", "../");
-        OVERRIDE_SETTINGS.put("java", "true");
-        OVERRIDE_SETTINGS.put("regenerate-pom", "false");
-        OVERRIDE_SETTINGS.put("partial-update", "true");
+        OVERRIDE_SETTINGS.put("java", true);
+        OVERRIDE_SETTINGS.put("regenerate-pom", false);
+        OVERRIDE_SETTINGS.put("partial-update", true);
         OVERRIDE_SETTINGS.put("sdk-integration", null);
     }
 
     public String write(Project project) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        if (!OVERRIDE_SETTINGS.containsKey("title")) {
-            OVERRIDE_SETTINGS.put("title", settings.getAutorestSettings().getTitle());
+        // prepare OVERRIDE_SETTINGS
+        settings.getAutorestSettings().getTitle()
+                .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("title", value));
+        if (!settings.getAutorestSettings().getSecurity().isEmpty()) {
+            OVERRIDE_SETTINGS.putIfAbsent("security",
+                    stringOrArray(settings.getAutorestSettings().getSecurity()));
         }
-
-        line("## Generate autorest code");
-        newLine();
-
-        line("```yaml");
-        // input-files
-        line("input-file:");
-        for (String jsonPath : settings.getAutorestSettings().getInputFiles()) {
-            line(String.format("  - %s", jsonPath));
+        if (!settings.getAutorestSettings().getSecurityScopes().isEmpty()) {
+            OVERRIDE_SETTINGS.putIfAbsent("security-scopes",
+                    stringOrArray(settings.getAutorestSettings().getSecurityScopes()));
         }
+        settings.getAutorestSettings().getSecurityHeaderName()
+                .ifPresent(value -> OVERRIDE_SETTINGS.putIfAbsent("security-header-name", value));
+
+        // prepare YAML object
+        DumperOptions dumperOptions = new DumperOptions();
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        Yaml yaml = new Yaml(dumperOptions);
+
+        Map<String, Object> objectNode = new LinkedHashMap<>();
+        objectNode.put("input-files", settings.getAutorestSettings().getInputFiles());
         // settings from internal
-        for (Map.Entry<String, String> entry : OVERRIDE_SETTINGS.entrySet()) {
+        for (Map.Entry<String, Object> entry : OVERRIDE_SETTINGS.entrySet()) {
             if (entry.getValue() != null) {
-                line(String.format("%s: %s", entry.getKey(), entry.getValue()));
+                objectNode.put(entry.getKey(), entry.getValue());
             }
         }
         // settings from external
-        for (Map.Entry<String, String> entry : settings.getSimpleJavaSettings().entrySet()) {
+        for (Map.Entry<String, Object> entry : settings.getSimpleJavaSettings().entrySet()) {
             if (!OVERRIDE_SETTINGS.containsKey(entry.getKey()) && entry.getValue() != null) {
-                line(String.format("%s: %s", entry.getKey(), entry.getValue()));
+                objectNode.put(entry.getKey(), entry.getValue());
             }
         }
         // service-versions
-        line("service-versions:");
-        line(String.format("  - '%s'", project.getApiVersion()));
+        objectNode.put("service-versions", Collections.singletonList(project.getApiVersion()));
 
+        // write README
+        line("## Generate autorest code");
+        newLine();
+        line("```yaml");
+        builder.append(yaml.dump(objectNode));
         line("```");
 
         return builder.toString();
@@ -68,5 +84,13 @@ public class SwaggerReadmeTemplate {
 
     private void newLine() {
         builder.append(NEW_LINE);
+    }
+
+    private Object stringOrArray(List<String> array) {
+        if (array.size() == 1) {
+            return array.iterator().next();
+        } else {
+            return array;
+        }
     }
 }
