@@ -12,8 +12,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetNull {
     public static void main(String[] args) {
+        // BEGIN: fixtures.bodystring.generated.stringgetnull.stringgetnull
         StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = client.getNullWithResponse(requestOptions);
+        // END: fixtures.bodystring.generated.stringgetnull.stringgetnull
     }
 }

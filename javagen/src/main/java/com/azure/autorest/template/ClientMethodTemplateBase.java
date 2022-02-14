@@ -202,7 +202,19 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
-        return CodeNamer.escapeXmlComment(paramJavadoc);
+        String description = CodeNamer.escapeXmlComment(paramJavadoc);
+        // query with array, add additional description
+        if (parameter.getRequestParameterLocation() == RequestParameterLocation.QUERY && parameter.getCollectionFormat() != null) {
+            description = (CoreUtils.isNullOrEmpty(description) || description.endsWith(".")) ? description : (description + ".");
+            if (parameter.getExplode()) {
+                // collectionFormat: multi
+                description += " Call {@link RequestOptions#addQueryParam} to add string to array.";
+            } else {
+                // collectionFormat: csv, ssv, tsv, pipes
+                description += String.format(" In the form of \"%s\" separated string.", parameter.getCollectionFormat().getDelimiter());
+            }
+        }
+        return description;
     }
 
     private static String methodParameterDescriptionOrDefault(ClientMethodParameter p) {

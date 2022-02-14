@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -76,8 +77,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .name(operationName)
                 .isResumable(false);
 
+        String operationId = null;
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // "default" could be null for generated method like "listNext"
-            String operationId;
             if (operation.getOperationGroup() != null
                     && operation.getOperationGroup().getLanguage() != null
                     && operation.getOperationGroup().getLanguage().getDefault() != null
@@ -267,8 +268,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             if (operation.getExtensions() != null && operation.getExtensions().getXmsExamples() != null
                     && operation.getExtensions().getXmsExamples().getExamples() != null
                     && !operation.getExtensions().getXmsExamples().getExamples().isEmpty()) {
+                String operationIdLocal = operationId;
                 Map<String, ProxyMethodExample> examples = operation.getExtensions().getXmsExamples().getExamples().entrySet().stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(e.getValue())));
+                        .collect(Collectors.toMap(Map.Entry::getKey, e -> Mappers.getProxyMethodExampleMapper().map(new XmsExampleWrapper(e.getValue(), operationIdLocal, e.getKey()))));
                 builder.examples(examples);
             }
 

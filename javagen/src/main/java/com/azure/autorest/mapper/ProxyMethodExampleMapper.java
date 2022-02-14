@@ -3,11 +3,15 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
+import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.XmsExampleWrapper;
 
+import java.util.Locale;
 import java.util.Map;
 
-public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExample> {
+public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, ProxyMethodExample> {
 
     private static final ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
 
@@ -20,9 +24,10 @@ public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExam
 
     @SuppressWarnings("unchecked")
     @Override
-    public ProxyMethodExample map(Object xmsExample) {
+    public ProxyMethodExample map(XmsExampleWrapper exampleWrapper) {
         ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
 
+        Object xmsExample = exampleWrapper.getXmsExample();
         if (xmsExample instanceof Map) {
             Object parameters = ((Map<String, Object>) xmsExample).get("parameters");
             if (parameters instanceof Map) {
@@ -32,7 +37,18 @@ public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExam
             }
             String xmsOriginalFile = (String) ((Map<String, Object>) xmsExample).get("x-ms-original-file");
             builder.originalFile(xmsOriginalFile);
+            if (exampleWrapper.getOperationId() != null) {
+                builder.codeSnippetIdentifier(buildCodeSnippetIdentifier(exampleWrapper.getOperationId(), exampleWrapper.getExampleName()));
+            }
         }
         return builder.build();
+    }
+
+    private String buildCodeSnippetIdentifier(String operationId, String exampleName) {
+        return String.format("%s.generated.%s.%s", JavaSettings.getInstance().getPackage(), getValidName(operationId), getValidName(exampleName)).toLowerCase(Locale.ROOT);
+    }
+
+    private String getValidName(String exampleName) {
+        return CodeNamer.getValidName(exampleName).replace("_", "");
     }
 }

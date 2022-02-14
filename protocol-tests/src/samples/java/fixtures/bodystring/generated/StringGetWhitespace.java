@@ -12,8 +12,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetWhitespace {
     public static void main(String[] args) {
+        // BEGIN: fixtures.bodystring.generated.stringgetwhitespace.stringgetwhitespace
         StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = client.getWhitespaceWithResponse(requestOptions);
+        // END: fixtures.bodystring.generated.stringgetwhitespace.stringgetwhitespace
     }
 }
