@@ -154,10 +154,16 @@ public class FluentExampleTemplate {
                     .map(visitor::accept)
                     .collect(Collectors.joining(", "));
             if (parameter.getExampleNodes().size() == 1 && parameterInvocations.equals("null")) {
-                // avoid ambiguous type on "null"
-                parameterInvocations = String.format("(%1$s) %2$s",
-                        parameter.getExampleNodes().iterator().next().getClientType().toString(),
-                        parameterInvocations);
+                // more likely this is an invalid example, as these properties/parameters is required and cannot be null
+
+                IType clientType = parameter.getExampleNodes().iterator().next().getClientType();
+                if (clientType instanceof PrimitiveType) {
+                    // for primitive type, use language default value
+                    parameterInvocations = String.format("%1$s", clientType.defaultValueExpression());
+                } else {
+                    // avoid ambiguous type on "null"
+                    parameterInvocations = String.format("(%1$s) %2$s", clientType, parameterInvocations);
+                }
             }
             sb.append(".").append(parameter.getFluentMethod().getName())
                     .append("(").append(parameterInvocations).append(")");
