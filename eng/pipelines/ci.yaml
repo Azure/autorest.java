@@ -114,9 +114,9 @@ jobs:
         displayName: 'Stop testserver'
 
       - script: |
-          cat coverage/report-vanilla.json
-          cat coverage/report-azure.json
-          cat coverage/report-llc.json
+          cat coverage/report-vanilla.json || true
+          cat coverage/report-azure.json || true
+          cat coverage/report-dpg.json || true
         displayName: 'Display coverage data'
 
       - script: |
