@@ -22,6 +22,9 @@ public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, Prox
         return INSTANCE;
     }
 
+    // https://azure.github.io/autorest/extensions/#x-ms-examples
+    // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
+
     @SuppressWarnings("unchecked")
     @Override
     public ProxyMethodExample map(XmsExampleWrapper exampleWrapper) {
@@ -29,12 +32,28 @@ public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, Prox
 
         Object xmsExample = exampleWrapper.getXmsExample();
         if (xmsExample instanceof Map) {
+            // parameters
             Object parameters = ((Map<String, Object>) xmsExample).get("parameters");
             if (parameters instanceof Map) {
                 for (Map.Entry<String, Object> entry : ((Map<String, Object>) parameters).entrySet()) {
                     builder.parameter(entry.getKey(), entry.getValue());
                 }
             }
+
+            // responses
+            Object responses = ((Map<String, Object>) xmsExample).get("responses");
+            if (responses instanceof Map) {
+                for (Map.Entry<String, Object> entry : ((Map<String, Object>) responses).entrySet()) {
+                    try {
+                        Integer statusCode = Integer.valueOf(entry.getKey());
+                        builder.response(statusCode, entry.getValue());
+                    } catch (NumberFormatException numberFormatException) {
+                        // ignore the response
+                    }
+                }
+            }
+
+            // x-ms-original-file
             String xmsOriginalFile = (String) ((Map<String, Object>) xmsExample).get("x-ms-original-file");
             builder.originalFile(xmsOriginalFile);
             if (exampleWrapper.getOperationId() != null) {
