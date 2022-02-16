@@ -12,6 +12,8 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
@@ -20,6 +22,8 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.ContentType;
+import com.azure.core.http.rest.Response;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -40,6 +45,7 @@ public class ProtocolExampleWriter {
     private final Set<String> imports;
     private final Consumer<JavaBlock> clientInitializationWriter;
     private final Consumer<JavaBlock> clientMethodInvocationWriter;
+    private final Consumer<JavaBlock> assertionWriter;
 
     @SuppressWarnings("unchecked")
     public ProtocolExampleWriter(ProtocolExample protocolExample) {
@@ -54,12 +60,15 @@ public class ProtocolExampleWriter {
 
         // import
         this.imports = new HashSet<>();
-        imports.add(syncClient.getPackageName() + "." + syncClient.getClassName());
-        imports.add(syncClient.getPackageName() + "." + builderName);
+        syncClient.addImportsTo(imports, false);
+        syncClient.getClientBuilder().addImportsTo(imports, false);
+        method.addImportsTo(imports, false, settings);
+
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
         ClassType.AzureKeyCredential.addImportsTo(imports, false);
         ClassType.Configuration.addImportsTo(imports, false);
-        method.addImportsTo(imports, false, settings);
+
+        imports.add("org.junit.jupiter.api.Assertions");
 
         // method invocation
         // parameter values and required invocation on RequestOptions
@@ -238,6 +247,38 @@ public class ProtocolExampleWriter {
                     method.getName(),
                     String.join(", ", params)));
         };
+
+        this.assertionWriter = methodBlock -> {
+            Optional<ProxyMethodExample.Response> responseOpt = proxyMethodExample.getPrimaryResponse();
+            if (responseOpt.isPresent()) {
+                ProxyMethodExample.Response response = responseOpt.get();
+                IType returnType = method.getReturnValue().getType();
+                if (returnType instanceof GenericType
+                        && Response.class.getSimpleName().equals(((GenericType) returnType).getName())) {
+                    // Response<>
+                    GenericType responseType = (GenericType) returnType;
+
+                    // assert status code
+                    methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getStatusCode());", response.getStatusCode()));
+                    // assert headers
+                    response.getHttpHeaders().stream().forEach(header -> {
+                        String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
+                        String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
+                    });
+                    // assert JSON body
+                    if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                            && responseType.getTypeArguments().length > 0
+                            && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
+                        String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getValue().toString());", expectedJsonStr));
+                    }
+                }
+                // TODO (weidxu): PagedIterable and SyncPoller
+            } else {
+                methodBlock.line("Assertions.assertNotNull(response);");
+            }
+        };
     }
 
     public Set<String> getImports() {
@@ -253,6 +294,7 @@ public class ProtocolExampleWriter {
     }
 
     public void writeAssertion(JavaBlock methodBlock) {
+        assertionWriter.accept(methodBlock);
     }
 
     private static String getSerializedName(ProxyMethodParameter parameter) {

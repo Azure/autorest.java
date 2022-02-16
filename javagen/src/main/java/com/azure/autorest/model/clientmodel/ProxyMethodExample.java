@@ -31,14 +31,13 @@ public class ProxyMethodExample {
     private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
 
     private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
 
     // https://azure.github.io/autorest/extensions/#x-ms-examples
     // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
 
     public static class ParameterValue {
         private final Object objectValue;
-
-        private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
 
         public ParameterValue(Object objectValue) {
             this.objectValue = objectValue;
@@ -129,6 +128,19 @@ public class ProxyMethodExample {
         /** @return the response body */
         public Object getBody() {
             return body;
+        }
+
+        /** @return the response body as JSON string */
+        public String getJsonBody() {
+            if (body != null) {
+                try {
+                    return NORMAL_PRINTER.writeValueAsString(body);
+                } catch (JsonProcessingException e) {
+                    return body.toString();
+                }
+            } else {
+                return "";
+            }
         }
 
         @Override
