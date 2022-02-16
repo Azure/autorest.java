@@ -5,6 +5,7 @@ package com.azure.autorest.template.example;
 
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.clientmodel.TestContext;
@@ -81,8 +82,8 @@ public class ProtocolTestWriter {
                     String defaultValueExpression = serviceClientProperty.getDefaultValueExpression();
                     String expr;
                     if (defaultValueExpression == null) {
-                        expr = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\")",
-                                serviceClientProperty.getName().toUpperCase(Locale.ROOT));
+                        expr = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\", %2$s)",
+                                serviceClientProperty.getName().toUpperCase(Locale.ROOT), ClassType.String.defaultValueExpression(serviceClientProperty.getName().toLowerCase(Locale.ROOT)));
                     } else {
                         expr = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\", %2$s)",
                                 serviceClientProperty.getName().toUpperCase(Locale.ROOT), defaultValueExpression);
