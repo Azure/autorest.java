@@ -211,8 +211,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
+
         // module info
         builder.moduleInfo(moduleInfo());
+
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -221,6 +223,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
         builder.syncClients(syncClients);
         builder.asyncClients(asyncClients);
+
         // service client builder
         if (!serviceClient.builderDisabled()) {
             List<ClientBuilder> clientBuilders = new ArrayList<>();
@@ -260,6 +263,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
             builder.clientBuilders(clientBuilders);
         }
+
         // example/test
         if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
             List<ProtocolExample> protocolExamples = new ArrayList<>();
@@ -282,6 +286,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             }));
             builder.protocolExamples(protocolExamples);
         }
+
         return builder.build();
     }
 
