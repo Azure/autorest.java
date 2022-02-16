@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +55,11 @@ public class Client {
      */
     private ModuleInfo moduleInfo;
 
+    private final List<AsyncSyncClient> syncClients;
+    private final List<AsyncSyncClient> asyncClients;
+    private final List<ClientBuilder> clientBuilders;
+    private final List<ProtocolExample> protocolExamples;
+
     /**
      * Create a new Client with the provided values.
      * @param clientName The name of the service client.
@@ -61,12 +67,23 @@ public class Client {
      * @param enums The enum types that are used by the client.
      * @param exceptions The exception types that are used by the client.
      * @param xmlSequenceWrappers the xml wrapper types that are used by the client.
+     * @param responseModels the models for response.
      * @param models the client models that are used by the client.
      * @param packageInfos the package-info classes that are used by the client.
      * @param manager the manager class that is used by the client.
      * @param serviceClient the service client that is used by the client.
+     * @param moduleInfo the module-info.
+     * @param syncClients sync service clients.
+     * @param asyncClients async service clients.
+     * @param clientBuilders service client builders.
+     * @param protocolExamples examples for DPG.
      */
-    private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions, List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels, List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager, ServiceClient serviceClient, ModuleInfo moduleInfo) {
+    private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions,
+                   List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels,
+                   List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager,
+                   ServiceClient serviceClient, ModuleInfo moduleInfo,
+                   List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
+                   List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
         this.enums = enums;
@@ -78,6 +95,10 @@ public class Client {
         this.manager = manager;
         this.serviceClient = serviceClient;
         this.moduleInfo = moduleInfo;
+        this.syncClients = syncClients;
+        this.asyncClients = asyncClients;
+        this.clientBuilders = clientBuilders;
+        this.protocolExamples = protocolExamples;
     }
 
     public final String getClientName() {
@@ -124,6 +145,26 @@ public class Client {
         return serviceClient;
     }
 
+    /** @return the sync service clients */
+    public List<AsyncSyncClient> getSyncClients() {
+        return syncClients;
+    }
+
+    /** @return the async service clients */
+    public List<AsyncSyncClient> getAsyncClients() {
+        return asyncClients;
+    }
+
+    /** @return the service client builders */
+    public List<ClientBuilder> getClientBuilders() {
+        return clientBuilders;
+    }
+
+    /** @return the examples for DPG */
+    public List<ProtocolExample> getProtocolExamples() {
+        return protocolExamples;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
@@ -136,6 +177,10 @@ public class Client {
         private Manager manager;
         private ServiceClient serviceClient;
         private ModuleInfo moduleInfo;
+        private List<AsyncSyncClient> syncClients = new ArrayList<>();
+        private List<AsyncSyncClient> asyncClients = new ArrayList<>();
+        private List<ClientBuilder> clientBuilders = new ArrayList<>();
+        private List<ProtocolExample> protocolExamples = new ArrayList<>();
 
         /**
          * Sets the name of this service client.
@@ -247,6 +292,46 @@ public class Client {
             return this;
         }
 
+        /**
+         * Sets the module info for this client.
+         * @param syncClients the sync service clients
+         * @return the Builder itself
+         */
+        public Builder syncClients(List<AsyncSyncClient> syncClients) {
+            this.syncClients = syncClients;
+            return this;
+        }
+
+        /**
+         * Sets the module info for this client.
+         * @param asyncClients async service clients
+         * @return the Builder itself
+         */
+        public Builder asyncClients(List<AsyncSyncClient> asyncClients) {
+            this.asyncClients = asyncClients;
+            return this;
+        }
+
+        /**
+         * Sets the module info for this client.
+         * @param clientBuilders the service client builders
+         * @return the Builder itself
+         */
+        public Builder clientBuilders(List<ClientBuilder> clientBuilders) {
+            this.clientBuilders = clientBuilders;
+            return this;
+        }
+
+        /**
+         * Sets the examples for this client.
+         * @param protocolExamples the examples for DPG
+         * @return the Builder itself
+         */
+        public Builder protocolExamples(List<ProtocolExample> protocolExamples) {
+            this.protocolExamples = protocolExamples;
+            return this;
+        }
+
         public Client build() {
             return new Client(clientName,
                     clientDescription,
@@ -258,7 +343,11 @@ public class Client {
                     packageInfos,
                     manager,
                     serviceClient,
-                    moduleInfo);
+                    moduleInfo,
+                    syncClients,
+                    asyncClients,
+                    clientBuilders,
+                    protocolExamples);
         }
     }
 }

@@ -92,6 +92,7 @@ For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-
 `sdk-integration` option can be used for integrating to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/).
 
 `generate-samples` option can be used for generating samples for client.
+`generate-tests` option can be used for generating tests for client.
 
 ## Additional settings for Fluent
 

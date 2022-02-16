@@ -204,30 +204,20 @@ public class FluentGen extends Javagen {
                     .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
 
+        // Async/sync service clients
+        if (!javaSettings.isFluentLite()) {
+            // fluent lite only expose sync client
+            for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
+                javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
+            }
+        }
+        for (AsyncSyncClient syncClient : client.getSyncClients()) {
+            javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
+        }
+
         // Service client builder
-        String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-        String builderSuffix = ClientModelUtil.getBuilderSuffix();
-        String builderName = client.getServiceClient().getInterfaceName() + builderSuffix;
-        ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName, client.getServiceClient());
-        javaPackage.addServiceClientBuilder(builderPackage, builderName, clientBuilder);
-
-        if (javaSettings.shouldGenerateSyncAsyncClients()) {
-            List<AsyncSyncClient> asyncClients = new ArrayList<>();
-            List<AsyncSyncClient> syncClients = new ArrayList<>();
-            ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-            asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
-            syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
-
-            if (!javaSettings.isFluentLite()) {
-                // fluent lite only expose sync client
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
-                }
-            }
-            for (AsyncSyncClient syncClient : syncClients) {
-                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
-            }
+        for (ClientBuilder clientBuilder : client.getClientBuilders()) {
+            javaPackage.addServiceClientBuilder(clientBuilder);
         }
 
         // Method group

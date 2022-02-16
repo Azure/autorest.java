@@ -28,7 +28,8 @@ import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
 import com.azure.autorest.template.ProtocolSampleBlankTemplate;
-import com.azure.autorest.template.ProtocolTestBlankTemplate;
+import com.azure.autorest.template.ProtocolTestBaseTemplate;
+import com.azure.autorest.template.ProtocolTestTemplate;
 import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
@@ -111,8 +112,8 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceClientBuilder(String package_Keyword, String name, ClientBuilder model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addServiceClientBuilder(ClientBuilder model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(model.getPackageName(), model.getClassName());
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
@@ -205,18 +206,29 @@ public class JavaPackage {
     public void addProtocolExamples(ProtocolExample protocolExample) {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), protocolExample.getFilename());
         Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
 
     public void addProtocolExamplesBlank() {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage(), "ReadmeSamples");
         new ProtocolSampleBlankTemplate().write(null, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTestBlank(TestContext testContext) {
-        JavaFile javaFile = javaFileFactory.createTestFile(settings.getPackage(), "ClientTests");
-        new ProtocolTestBlankTemplate().write(testContext, javaFile);
+    public void addProtocolTestBase(TestContext testContext) {
+        JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), testContext.getTestBaseClassName());
+        ProtocolTestBaseTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addProtocolTest(TestContext testContext) {
+        String className = testContext.getTestCase().getFilename() + "Tests";
+        JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
+        ProtocolTestTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
 

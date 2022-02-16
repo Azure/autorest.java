@@ -136,6 +136,7 @@ public class JavaSettings {
                 host.getValue(new TypeReference<Map<String, PollingDetails>>() {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
+                getBooleanValue(host, "generate-tests", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
@@ -229,6 +230,7 @@ public class JavaSettings {
         boolean skipFormatting,
         Map<String, PollingDetails> pollingConfig,
         boolean generateSamples,
+        boolean generateTests,
         boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
@@ -308,6 +310,7 @@ public class JavaSettings {
         }
         this.pollingConfig = pollingConfig;
         this.generateSamples = generateSamples;
+        this.generateTests = generateTests;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
@@ -745,6 +748,12 @@ public class JavaSettings {
 
     public boolean isGenerateSamples() {
         return generateSamples;
+    }
+
+    private final boolean generateTests;
+
+    public boolean isGenerateTests() {
+        return generateTests;
     }
 
     private final boolean clientBuilderDisabled;
