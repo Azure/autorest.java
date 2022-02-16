@@ -12,9 +12,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 public class StringPutNull {
     public static void main(String[] args) {
         // BEGIN: fixtures.bodystring.generated.stringputnull.stringputnull
-        StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient =
+                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
-        Response<Void> response = client.putNullWithResponse(requestOptions);
+        Response<Void> response = stringOperationClient.putNullWithResponse(requestOptions);
         // END: fixtures.bodystring.generated.stringputnull.stringputnull
     }
 }
