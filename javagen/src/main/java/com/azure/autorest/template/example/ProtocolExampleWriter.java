@@ -23,7 +23,10 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.polling.LongRunningOperationStatus;
+import com.azure.core.util.polling.SyncPoller;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -64,11 +67,14 @@ public class ProtocolExampleWriter {
         syncClient.getClientBuilder().addImportsTo(imports, false);
         method.addImportsTo(imports, false, settings);
 
+        // credential
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
         ClassType.AzureKeyCredential.addImportsTo(imports, false);
         ClassType.Configuration.addImportsTo(imports, false);
 
+        // assertion
         imports.add("org.junit.jupiter.api.Assertions");
+        imports.add(LongRunningOperationStatus.class.getName());
 
         // method invocation
         // parameter values and required invocation on RequestOptions
@@ -253,28 +259,43 @@ public class ProtocolExampleWriter {
             if (responseOpt.isPresent()) {
                 ProxyMethodExample.Response response = responseOpt.get();
                 IType returnType = method.getReturnValue().getType();
-                if (returnType instanceof GenericType
-                        && Response.class.getSimpleName().equals(((GenericType) returnType).getName())) {
-                    // Response<>
+                if (returnType instanceof GenericType) {
                     GenericType responseType = (GenericType) returnType;
+                    if (Response.class.getSimpleName().equals(responseType.getName())) {
+                        // Response<>
 
-                    // assert status code
-                    methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getStatusCode());", response.getStatusCode()));
-                    // assert headers
-                    response.getHttpHeaders().stream().forEach(header -> {
-                        String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
-                        String keyStr = ClassType.String.defaultValueExpression(header.getName());
-                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
-                    });
-                    // assert JSON body
-                    if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
-                            && responseType.getTypeArguments().length > 0
-                            && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
-                        String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());
-                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getValue().toString());", expectedJsonStr));
+                        // assert status code
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getStatusCode());", response.getStatusCode()));
+                        // assert headers
+                        response.getHttpHeaders().stream().forEach(header -> {
+                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
+                        });
+                        // assert JSON body
+                        if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                                && responseType.getTypeArguments().length > 0
+                                && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
+                            String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getValue().toString());", expectedJsonStr));
+                        }
+                    } else if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
+                        // SyncPoller<>
+
+                        if (response.getStatusCode() / 100 == 2) {
+                            // it should have a 202 leading to SUCCESSFULLY_COMPLETED
+                            // but x-ms-examples usually does not include the final result
+                            methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
+                        }
+                    } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                        // PagedIterable<>
+
+                        if (method.getMethodPageDetails() != null) {
+                            // TODO (weidxu): PagedIterable
+
+                        }
                     }
                 }
-                // TODO (weidxu): PagedIterable and SyncPoller
             } else {
                 methodBlock.line("Assertions.assertNotNull(response);");
             }
