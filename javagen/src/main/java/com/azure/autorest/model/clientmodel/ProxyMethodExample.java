@@ -143,6 +143,22 @@ public class ProxyMethodExample {
             }
         }
 
+        /**
+         * @param obj the object for JSON string
+         * @return the object as JSON string
+         */
+        public String getJson(Object obj) {
+            if (obj != null) {
+                try {
+                    return NORMAL_PRINTER.writeValueAsString(obj);
+                } catch (JsonProcessingException e) {
+                    return obj.toString();
+                }
+            } else {
+                return "";
+            }
+        }
+
         @Override
         public String toString() {
             try {

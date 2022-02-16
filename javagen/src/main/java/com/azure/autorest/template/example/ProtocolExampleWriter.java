@@ -290,9 +290,34 @@ public class ProtocolExampleWriter {
                     } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
                         // PagedIterable<>
 
-                        if (method.getMethodPageDetails() != null) {
-                            // TODO (weidxu): PagedIterable
-
+                        // assert status code
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
+                        // assert headers
+                        response.getHttpHeaders().stream().forEach(header -> {
+                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
+                        });
+                        // assert JSON of first item, or assert count=0
+                        if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                                && responseType.getTypeArguments().length > 0
+                                && responseType.getTypeArguments()[0] == ClassType.BinaryData
+                                && method.getMethodPageDetails() != null
+                                && response.getBody() instanceof Map) {
+                            Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
+                            if (bodyMap.containsKey(method.getMethodPageDetails().getRawItemName())) {
+                                Object items = bodyMap.get(method.getMethodPageDetails().getRawItemName());
+                                if (items instanceof List) {
+                                    List<Object> itemArray = (List<Object>) items;
+                                    if (itemArray.isEmpty()) {
+                                        methodBlock.line("Assertions.assertEquals(0, response.stream().count());");
+                                    } else {
+                                        Object firstItem = itemArray.iterator().next();
+                                        String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJson(firstItem));
+                                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterator().next().toString());", expectedJsonStr));
+                                    }
+                                }
+                            }
                         }
                     }
                 }
