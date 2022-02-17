@@ -330,6 +330,7 @@ public class FluentGen extends Javagen {
                     javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
                 }
             }
+
         }
 
         return fluentClient;

@@ -182,6 +182,7 @@ public class ProxyMethodExample {
     private final String originalFile;
     private String relativeOriginalFileName;
     private String codeSnippetIdentifier;
+    private String name;
 
     /**
      * @return the map of parameter name to parameter object values
@@ -289,6 +290,11 @@ public class ProxyMethodExample {
         return codeSnippetIdentifier;
     }
 
+    /** @return example name */
+    public String getName() {
+        return name;
+    }
+
     private ProxyMethodExample(String originalFile) {
         this.originalFile = originalFile;
     }
@@ -306,6 +312,7 @@ public class ProxyMethodExample {
         private final Map<Integer, Response> responses = new LinkedHashMap<>();
         private String originalFile;
         private String codeSnippetIdentifier;
+        private String name;
 
         public Builder() {
         }
@@ -332,11 +339,17 @@ public class ProxyMethodExample {
             return this;
         }
 
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
         public ProxyMethodExample build() {
             ProxyMethodExample proxyMethodExample = new ProxyMethodExample(originalFile);
             proxyMethodExample.parameters.putAll(this.parameters);
             proxyMethodExample.responses.putAll(this.responses);
             proxyMethodExample.codeSnippetIdentifier = this.codeSnippetIdentifier;
+            proxyMethodExample.name = this.name;
             return proxyMethodExample;
         }
     }

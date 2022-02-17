@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -53,23 +54,7 @@ public class FluentExampleTemplate {
     public final void write(com.azure.autorest.fluent.model.clientmodel.FluentExample example, JavaFile javaFile) {
         String className = example.getClassName();
 
-        List<ExampleMethod> exampleMethods = new ArrayList<>();
-        exampleMethods.addAll(
-                example.getResourceCreateExamples().stream()
-                        .map(this::generateExampleMethod)
-                        .collect(Collectors.toList()));
-        exampleMethods.addAll(
-                example.getResourceUpdateExamples().stream()
-                        .map(this::generateExampleMethod)
-                        .collect(Collectors.toList()));
-        exampleMethods.addAll(
-                example.getCollectionMethodExamples().stream()
-                        .map(this::generateExampleMethod)
-                        .collect(Collectors.toList()));
-        exampleMethods.addAll(
-                example.getClientMethodExamples().stream()
-                        .map(this::generateExampleMethod)
-                        .collect(Collectors.toList()));
+        List<ExampleMethod> exampleMethods = getExampleMethods(example);
 
         Set<String> imports = exampleMethods.stream().flatMap(em -> em.getImports().stream()).collect(Collectors.toSet());
         javaFile.declareImport(imports);
@@ -98,27 +83,52 @@ public class FluentExampleTemplate {
             }
 
             if (helperFeatures.contains(HelperFeature.MapOfMethod)) {
-                classBlock.annotation("SuppressWarnings(\"unchecked\")");
-                classBlock.method(JavaVisibility.Private, Arrays.asList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
-                    methodBlock.line("Map<String, T> map = new HashMap<>();");
-                    methodBlock.line("for (int i = 0; i < inputs.length; i += 2) {");
-                    methodBlock.indent(() -> {
-                        methodBlock.line("String key = (String) inputs[i];");
-                        methodBlock.line("T value = (T) inputs[i + 1];");
-                        methodBlock.line("map.put(key, value);");
-                    });
-                    methodBlock.line("}");
-                    methodBlock.line("return map;");
-                });
+                writeMapOfMethod(classBlock);
             }
         });
+    }
+
+    void writeMapOfMethod(JavaClass classBlock) {
+        classBlock.annotation("SuppressWarnings(\"unchecked\")");
+        classBlock.method(JavaVisibility.Private, Arrays.asList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
+            methodBlock.line("Map<String, T> map = new HashMap<>();");
+            methodBlock.line("for (int i = 0; i < inputs.length; i += 2) {");
+            methodBlock.indent(() -> {
+                methodBlock.line("String key = (String) inputs[i];");
+                methodBlock.line("T value = (T) inputs[i + 1];");
+                methodBlock.line("map.put(key, value);");
+            });
+            methodBlock.line("}");
+            methodBlock.line("return map;");
+        });
+    }
+
+    private List<ExampleMethod> getExampleMethods(com.azure.autorest.fluent.model.clientmodel.FluentExample example) {
+        List<ExampleMethod> exampleMethods = new ArrayList<>();
+        exampleMethods.addAll(
+                example.getResourceCreateExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getResourceUpdateExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getCollectionMethodExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getClientMethodExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
+        return exampleMethods;
     }
 
     private String getExampleTag(FluentExample example) {
         return "x-ms-original-file: " + example.getOriginalFileName();
     }
 
-    private ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
+    public ExampleMethod generateExampleMethod(FluentMethodExample methodExample) {
         String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(methodExample.getName()));
         String managerName = methodExample.getEntryName();
 
@@ -142,7 +152,7 @@ public class FluentExampleTemplate {
         return exampleMethod;
     }
 
-    private ExampleMethod generateExampleMethod(FluentResourceCreateExample resourceCreateExample) {
+    public ExampleMethod generateExampleMethod(FluentResourceCreateExample resourceCreateExample) {
         String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(resourceCreateExample.getName()));
         String managerName = resourceCreateExample.getEntryName();
 
@@ -179,7 +189,7 @@ public class FluentExampleTemplate {
         return exampleMethod;
     }
 
-    private ExampleMethod generateExampleMethod(FluentResourceUpdateExample resourceUpdateExample) {
+    public ExampleMethod generateExampleMethod(FluentResourceUpdateExample resourceUpdateExample) {
         String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(resourceUpdateExample.getName()));
         String managerName = resourceUpdateExample.getEntryName();
 
@@ -321,7 +331,7 @@ public class FluentExampleTemplate {
         }
     }
 
-    private enum HelperFeature {
+    public enum HelperFeature {
         // 'mapOf(...)' method in class
         MapOfMethod,
 
@@ -329,7 +339,7 @@ public class FluentExampleTemplate {
         ThrowsIOException
     }
 
-    private static class ExampleMethod {
+    public static class ExampleMethod {
         private FluentExample example;
         private Set<String> imports;
         private String methodSignature;
@@ -363,7 +373,7 @@ public class FluentExampleTemplate {
             return this;
         }
 
-        private String getMethodContent() {
+        String getMethodContent() {
             return methodContent;
         }
 
