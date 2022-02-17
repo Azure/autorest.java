@@ -99,61 +99,70 @@ public class FluentMapper {
 
         FluentLiveTests result = new FluentLiveTests();
 
-        result.getTestCases().addAll(liveTests.getTestCases().stream().map(new Function<LiveTestCase, FluentLiveTestCase>() {
-            @Override
-            public FluentLiveTestCase apply(LiveTestCase liveTestCase) {
-                FluentLiveTestCase testCase = new FluentLiveTestCase();
-                testCase.getSteps().addAll(liveTestCase.getTestSteps().stream().map(new Function<LiveTestStep, FluentLiveTestStep>() {
-                    @Override
-                    public FluentLiveTestStep apply(LiveTestStep step) {
-                        if (step instanceof ExampleLiveTestStep) {
-                            FluentExampleLiveTestStep fluentStep = new FluentExampleLiveTestStep();
-                            ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) step;
-                            String operationId = exampleStep.getOperationId();
-                            String[] oprs = operationId.split("_");
-                            String operationGroup = oprs[0];
-                            String operation = oprs[1];
-                            ProxyMethodExample example = exampleStep.getExample();
-                            FluentResourceCollection resourceCollection = findResourceCollection(fluentClient, operationGroup);
+        result.getTestCases().addAll(liveTests.getTestCases().stream().map(liveTestCase -> {
+            FluentLiveTestCase testCase = new FluentLiveTestCase();
+            testCase.getSteps().addAll(liveTestCase.getTestSteps().stream().map((Function<LiveTestStep, FluentLiveTestStep>) step -> {
+                if (step instanceof ExampleLiveTestStep) {
+                    FluentExampleLiveTestStep fluentStep = new FluentExampleLiveTestStep();
+                    ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) step;
+                    String operationId = exampleStep.getOperationId();
+                    String[] oprs = operationId.split("_");
+                    String operationGroup = oprs[0];
+                    String operation = oprs[1];
+                    ProxyMethodExample example = exampleStep.getExample();
+                    FluentResourceCollection resourceCollection = findResourceCollection(fluentClient, operationGroup);
 
-                            // find collectionMethod
-                            Optional<FluentCollectionMethod> collectionMethodOptional = findCollectionMethod(resourceCollection, operation);
-                            if (collectionMethodOptional.isPresent()) {
-                                FluentCollectionMethod collectionMethod = collectionMethodOptional.get();
-                                FluentCollectionMethodExample collectionMethodExample = ExampleParser.parseMethodExample(resourceCollection, collectionMethod, example);
-                                FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
+                    // find collectionMethod
+                    Optional<FluentCollectionMethod> collectionMethodOptional = findCollectionMethod(resourceCollection, operation);
+                    if (collectionMethodOptional.isPresent()) {
+                        FluentCollectionMethod collectionMethod = collectionMethodOptional.get();
+                        FluentCollectionMethodExample collectionMethodExample = ExampleParser.parseMethodExample(resourceCollection, collectionMethod, example);
+                        FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
+                        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
+                    } else {
+                        // find resourceCreate
+                        Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
+                        if (createMethod.isPresent()) {
+                            ResourceCreate create = createMethod.get();
+                            FluentResourceCreateExample createExample = ExampleParser.parseResourceCreate(resourceCollection, create, example);
+                            FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(createExample);
+                            testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
+                            fluentStep.setExampleMethod(exampleMethod);
+                        } else {
+                            // find resourceUpdate
+                            Optional<ResourceUpdate> updateMethod = resourceCollection.getResourceUpdates().stream().filter(rc -> FluentUtils.exampleIsUpdate(rc.getMethodName()) && rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
+                            if (updateMethod.isPresent()) {
+                                ResourceUpdate update = updateMethod.get();
+                                FluentResourceUpdateExample updateExample = ExampleParser.parseResourceUpdate(resourceCollection, update, example);
+                                FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
                                 testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                            } else {
-                                // find resourceCreate
-                                Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
-                                if (createMethod.isPresent()) {
-                                    ResourceCreate create = createMethod.get();
-                                    FluentResourceCreateExample createExample = ExampleParser.parseResourceCreate(resourceCollection, create, example);
-                                    FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(createExample);
-                                    testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                                    fluentStep.setExampleMethod(exampleMethod);
-                                } else {
-                                    // find resourceUpdate
-                                    Optional<ResourceUpdate> updateMethod = resourceCollection.getResourceUpdates().stream().filter(rc -> FluentUtils.exampleIsUpdate(rc.getMethodName()) && rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
-                                    if (updateMethod.isPresent()) {
-                                        ResourceUpdate update = updateMethod.get();
-                                        FluentResourceUpdateExample updateExample = ExampleParser.parseResourceUpdate(resourceCollection, update, example);
-                                        FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
-                                        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                                        fluentStep.setExampleMethod(exampleMethod);
-                                    }
-                                }
+                                fluentStep.setExampleMethod(exampleMethod);
                             }
-                            return fluentStep;
                         }
-                        throw new UnsupportedOperationException(String.format("unsupported step type:%s", step.getClass().getSimpleName()));
                     }
-                }).collect(Collectors.toList()));
-                return testCase;
-            }
+                    return fluentStep;
+                }
+                throw new UnsupportedOperationException(String.format("unsupported step type:%s", step.getClass().getSimpleName()));
+            }).collect(Collectors.toList()));
+            return testCase;
         }).collect(Collectors.toList()));
 
         return result;
+    }
+
+    private FluentResourceCollection findResourceCollection(FluentClient fluentClient, String operationGroup) {
+        // TODO
+        throw new UnsupportedOperationException("method [findResourceCollection] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
+    }
+
+    private Optional<FluentCollectionMethod> findCollectionMethod(FluentResourceCollection resourceCollection, String operation) {
+        // TODO
+        throw new UnsupportedOperationException("method [findCollectionMethod] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
+    }
+
+    private Optional<ResourceCreate> findResourceCreate(FluentResourceCollection resourceCollection, String operation) {
+        // TODO
+        throw new UnsupportedOperationException("method [findResourceCreate] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
     }
 
     FluentClient basicMap(CodeModel codeModel, Client client) {

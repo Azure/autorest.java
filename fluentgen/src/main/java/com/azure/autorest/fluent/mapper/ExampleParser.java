@@ -226,6 +226,11 @@ public class ExampleParser {
         return collectionMethodExample;
     }
 
+    public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod, ProxyMethodExample example) {
+        // TODO
+        throw new UnsupportedOperationException("method [parseMethodExample] not implemented in class [com.azure.autorest.fluent.mapper.ExampleParser]");
+    }
+
     private static FluentClientMethodExample parseMethodForExample(MethodGroupClient methodGroup, ClientMethod clientMethod,
                                                                        List<MethodParameter> methodParameters,
                                                                        String exampleName, ProxyMethodExample proxyMethodExample) {
@@ -346,6 +351,11 @@ public class ExampleParser {
         return ret;
     }
 
+    public static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection resourceCollection, ResourceCreate create, ProxyMethodExample example) {
+        // TODO
+        throw new UnsupportedOperationException("method [parseResourceCreate] not implemented in class [com.azure.autorest.fluent.mapper.ExampleParser]");
+    }
+
     private static List<FluentResourceUpdateExample> parseResourceUpdate(FluentResourceCollection collection, ResourceUpdate resourceUpdate) {
         List<FluentResourceUpdateExample> ret = null;
 
@@ -430,6 +440,11 @@ public class ExampleParser {
             }
         }
         return ret;
+    }
+
+    public static FluentResourceUpdateExample parseResourceUpdate(FluentResourceCollection resourceCollection, ResourceUpdate update, ProxyMethodExample example) {
+        // TODO
+        throw new UnsupportedOperationException("method [parseResourceUpdate] not implemented in class [com.azure.autorest.fluent.mapper.ExampleParser]");
     }
 
     private static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {
