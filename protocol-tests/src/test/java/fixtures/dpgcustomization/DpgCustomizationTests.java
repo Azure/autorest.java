@@ -98,7 +98,7 @@ public class DpgCustomizationTests {
             this.poller = poller;
         }
 
-        private PollResponse<LROProduct> map(PollResponse<BinaryData> response) {
+        private static PollResponse<LROProduct> map(PollResponse<BinaryData> response) {
             return new PollResponse<>(response.getStatus(),
                     response.getValue().toObject(LROProduct.class),
                     response.getRetryAfter());
