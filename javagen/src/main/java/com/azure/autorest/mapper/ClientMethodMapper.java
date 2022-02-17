@@ -41,6 +41,7 @@ import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -201,14 +202,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (!(parameter.getSchema() instanceof ConstantSchema) && parameter.getGroupedBy() == null) {
+                    Map.Entry<String, String> validationExpression = getValidationExpression(parameter,
+                        clientMethodParameter);
+                    if (validationExpression != null) {
+                        validateExpressions.put(validationExpression.getKey(), validationExpression.getValue());
+                    }
+
                     if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
                         // Validations
                         if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
                             requiredParameterExpressions.add(clientMethodParameter.getName());
-                        }
-                        String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
-                        if (validation != null) {
-                            validateExpressions.put(clientMethodParameter.getName(), validation);
                         }
                     } else {
                         ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
@@ -216,11 +219,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
                             requiredParameterExpressions.add(exp);
-                        }
-
-                        String validation = proxyParameter.getClientType().validate(exp);
-                        if (validation != null) {
-                            validateExpressions.put(exp, validation);
                         }
                     }
                 }
@@ -603,6 +601,96 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
         }
+
+        // If methods are generating the request body as BinaryData two variants should be created.
+        //
+        // First matches previous AutoRest generation, ex Flux<ByteBuffer> as the body.
+        // Second uses BinaryData as the body.
+        //
+        // The proxy interface method should be updated to use BinaryData as the body type as well. So, the
+        // implementation of the previous AutoRest generation (Flux<ByteBuffer>, etc) will pass the body as a new
+        // instance of BinaryData, ex BinaryData.fromFlux(flux).
+        //
+        // This is done to ease the transition for SDK authors, aka when the directive to generate request bodies as
+        // BinaryData is passed there isn't a requirement right away to translate their current SDK calls to the new
+        // BinaryData format. Instead, SDK authors will be able to port, test, and validate the transition to BinaryData
+        // when appropriate.
+        if (settings.isRequestBodyGeneratedAsBinaryData()) {
+            // Loop over each ClientMethod that was generated and for each method that has a BodyParam create a new
+            // instance that uses BinaryData as the value type.
+            //
+            // This is done using an iteration with index so that the new instance can be inserted into the list of
+            // ClientMethods to be generated next to its corresponding non-BinaryData overload.
+            for (int methodIndex = 0; methodIndex < methods.size(); methodIndex++) {
+                ClientMethod method = methods.get(methodIndex);
+                List<String> validateExpressionsToRemove = new ArrayList<>();
+
+                List<ClientMethodParameter> binaryDataMethodParameters = new ArrayList<>();
+                for (int parameterIndex = 0; parameterIndex < method.getParameters().size(); parameterIndex++) {
+                    ClientMethodParameter parameter = method.getParameters().get(parameterIndex);
+                    if (parameter.getLocation() != RequestParameterLocation.BODY || parameter.getFromClient()
+                        || (method.getOnlyRequiredParameters() && !parameter.getIsRequired())) {
+                        binaryDataMethodParameters.add(parameter);
+                        continue;
+                    }
+
+                    validateExpressionsToRemove.add(parameter.getName());
+
+                    // Copy the ClientMethodParameter and change the raw and wire type to BinaryData.
+                    binaryDataMethodParameters.add(new ClientMethodParameter.Builder()
+                        .description(parameter.getDescription())
+                        .isFinal(parameter.getIsFinal())
+                        .wireType(ClassType.BinaryData)
+                        .rawType(ClassType.BinaryData)
+                        .name(parameter.getName())
+                        .isRequired(parameter.getIsRequired())
+                        .isConstant(parameter.getIsConstant())
+                        .fromClient(parameter.getFromClient())
+                        .defaultValue(parameter.getDefaultValue())
+                        .annotations(parameter.getAnnotations())
+                        .location(parameter.getLocation())
+                        .build());
+                }
+
+                if (!validateExpressionsToRemove.isEmpty()) {
+                    // Clone the validation expressions and remove those that match the parameters that were modified.
+                    // BinaryData is assumed to be validated beforehand, so the generated client method shouldn't
+                    // attempt to perform validation.
+                    Map<String, String> copiedValidateExpressions = new HashMap<>(method.getValidateExpressions());
+                    validateExpressionsToRemove.forEach(copiedValidateExpressions::remove);
+
+                    // Copy the method that has a body parameter into a new BinaryData version.
+                    ClientMethod binaryDataMethod = new ClientMethod.Builder()
+                        .parameters(binaryDataMethodParameters)
+                        .description(method.getDescription())
+                        .returnValue(method.getReturnValue())
+                        .name(method.getName())
+                        .onlyRequiredParameters(method.getOnlyRequiredParameters())
+                        .type(method.getType())
+                        .proxyMethod(method.getProxyMethod())
+                        .validateExpressions(copiedValidateExpressions)
+                        .clientReference(method.getClientReference())
+                        .requiredNullableParameterExpressions(method.getRequiredNullableParameterExpressions())
+                        .isGroupedParameterRequired(method.getIsGroupedParameterRequired())
+                        .groupedParameterTypeName(method.getGroupedParameterTypeName())
+                        .methodPageDetails(method.getMethodPageDetails())
+                        .methodTransformationDetails(method.getMethodTransformationDetails())
+                        .methodVisibility(method.getMethodVisibility())
+                        .methodPollingDetails(method.getMethodPollingDetails())
+                        .build();
+
+                    // Insert the new BinaryData method into the next index or add it if it will be the last index.
+                    if (methods.size() - 1 == methodIndex) {
+                        methods.add(binaryDataMethod);
+                    } else {
+                        methods.add(methodIndex + 1, binaryDataMethod);
+                    }
+
+                    methodIndex++;
+                }
+            }
+        }
+
         return methods.stream()
             .filter(m -> m.getMethodVisibility() != NOT_GENERATE)
             .collect(Collectors.toList());
@@ -934,5 +1022,25 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             description = description.substring(0, 1).toLowerCase() + description.substring(1);
         }
         return description;
+    }
+
+    private static Map.Entry<String, String> getValidationExpression(Parameter parameter,
+        ClientMethodParameter clientMethodParameter) {
+        if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
+            String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
+            if (validation != null) {
+                return new AbstractMap.SimpleEntry<>(clientMethodParameter.getName(), validation);
+            }
+        } else {
+            ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
+            String exp = proxyParameter.getParameterReference();
+
+            String validation = proxyParameter.getClientType().validate(exp);
+            if (validation != null) {
+                return new AbstractMap.SimpleEntry<>(exp, validation);
+            }
+        }
+
+        return null;
     }
 }

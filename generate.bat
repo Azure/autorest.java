@@ -34,6 +34,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/xml-service.json -
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameter-flattening.json --namespace=fixtures.parameterflattening --payload-flattening-threshold=1
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/model-flattening.json --namespace=fixtures.modelflattening --payload-flattening-threshold=1 --optional-constant-as-enum=true
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1
+call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.bodyasbinarydata --request-body-as-binarydata=true
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/validation.json --namespace=fixtures.validation
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.json --namespace=fixtures.nonstringenum --generate-sync-async-clients --disable-client-builder
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance

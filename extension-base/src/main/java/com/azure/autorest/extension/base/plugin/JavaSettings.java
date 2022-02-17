@@ -143,7 +143,8 @@ public class JavaSettings {
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
-                getBooleanValue(host, "partial-update", false)
+                getBooleanValue(host, "partial-update", false),
+                getBooleanValue(host, "request-body-as-binarydata", false)
             );
         }
         return _instance;
@@ -182,6 +183,8 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
+     * @param requestBodyAsBinaryData Indicates that all request bodies should be generated as {@code BinaryData}
+     * instead of more specific types such as {@code Flux<ByteBuffer>}, {@code InputStream}, etc.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -236,7 +239,8 @@ public class JavaSettings {
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
-        boolean handlePartialUpdate) {
+        boolean handlePartialUpdate,
+        boolean requestBodyAsBinaryData) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -320,6 +324,8 @@ public class JavaSettings {
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
 
         this.handlePartialUpdate = handlePartialUpdate;
+
+        this.requestBodyAsBinaryData = requestBodyAsBinaryData;
     }
 
     private String keyCredentialHeaderName;
@@ -872,6 +878,24 @@ public class JavaSettings {
 
     public boolean isHandlePartialUpdate() {
         return handlePartialUpdate;
+    }
+
+    private final boolean requestBodyAsBinaryData;
+
+    /**
+     * Indicates whether the request body should be generated as {@code BinaryData} instead of more specific typs such
+     * as {@code Flux<ByteBuffer>}, {@code InputStream}, etc.
+     * <p>
+     * Generating all request bodies as {@code BinaryData} offers uniformity and extensibility of the request body as
+     * {@code BinaryData} can represent many forms such as {@code Flux<ByteBuffer>}, {@code InputStream},
+     * {@code byte[]}, etc. Additionally, {@code BinaryData} is able to pack additional metadata about the request body
+     * not offered by specific types, allowing for generalized optimizations of how the request body should be sent over
+     * the wire.
+     *
+     * @return Whether the request body should be generated as {@code BinaryData} insted of more specific types.
+     */
+    public boolean isRequestBodyGeneratedAsBinaryData() {
+        return requestBodyAsBinaryData;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",

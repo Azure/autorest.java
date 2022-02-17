@@ -508,13 +508,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
                         !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
                     function.text(".flatMap(");
-                    function.lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
-                        lambda.ifBlock("res.getValue() != null", ifAction -> {
-                            ifAction.methodReturn("Mono.just(res.getValue())");
-                        }).elseBlock(elseAction -> {
-                            elseAction.methodReturn("Mono.empty()");
-                        });
-                    });
+                    function.lambda(returnValueTypeArgumentClientType.toString(), "res",
+                        "Mono.justOrEmpty(res.getValue())");
                     function.line(");");
                 } else {
                     function.text(".flatMap(");
