@@ -387,7 +387,8 @@ public class ClientMethod {
             }
         }
 
-        if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
+        if (includeImplementationImports
+                && (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync)) {
             imports.add(SimpleResponse.class.getName());
             ClassType.BinaryData.addImportsTo(imports, false);
         }

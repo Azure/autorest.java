@@ -5,7 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class ClientMethodParameter {
             .description("The context to associate with this operation.")
             .wireType(ClassType.Context)
             .name("context")
-            .annotations(new ArrayList<>())
+            .annotations(Collections.emptyList())
             .isConstant(false)
             .defaultValue(null)
             .fromClient(false)
@@ -31,7 +31,7 @@ public class ClientMethodParameter {
             .description("The HTTP request to send.")
             .wireType(ClassType.HttpRequest)
             .name("httpRequest")
-            .annotations(new ArrayList<>())
+            .annotations(Collections.emptyList())
             .isConstant(false)
             .defaultValue(null)
             .fromClient(false)
