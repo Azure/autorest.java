@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.http.HttpRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +75,7 @@ public class ClassType implements IType {
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
     public static final ClassType RequestOptions = new Builder().packageName("com.azure.core.http.rest").name("RequestOptions").build();
     public static final ClassType ClientOptions = new Builder().knownClass(com.azure.core.util.ClientOptions.class).build();
+    public static final ClassType HttpRequest = new Builder().knownClass(com.azure.core.http.HttpRequest.class).build();
 
     // Java exception types
     public static final ClassType HttpResponseException = new Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();

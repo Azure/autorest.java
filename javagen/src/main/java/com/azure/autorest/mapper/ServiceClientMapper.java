@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.IType;
@@ -87,9 +88,16 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             proxyBuilder.methods(restAPIMethods);
             proxy = proxyBuilder.build();
             builder.proxy(proxy);
-            builder.clientMethods(codeModelRestAPIMethods.stream()
+            List<ClientMethod> clientMethods = codeModelRestAPIMethods.stream()
                     .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList());
+            if (settings.isGenerateSendRequestMethod()) {
+                clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(true));
+                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                    clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(true));
+                }
+            }
+            builder.clientMethods(clientMethods);
         } else {
             builder.clientMethods(new ArrayList<>());
         }

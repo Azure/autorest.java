@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +14,31 @@ import java.util.stream.Collectors;
  * A parameter for a method.
  */
 public class ClientMethodParameter {
+
+    public static final ClientMethodParameter CONTEXT_PARAMETER = new ClientMethodParameter.Builder()
+            .description("The context to associate with this operation.")
+            .wireType(ClassType.Context)
+            .name("context")
+            .annotations(new ArrayList<>())
+            .isConstant(false)
+            .defaultValue(null)
+            .fromClient(false)
+            .isFinal(false)
+            .isRequired(false)
+            .build();
+
+    public static final ClientMethodParameter HTTP_REQUEST_PARAMETER = new ClientMethodParameter.Builder()
+            .description("The HTTP request to send.")
+            .wireType(ClassType.HttpRequest)
+            .name("httpRequest")
+            .annotations(new ArrayList<>())
+            .isConstant(false)
+            .defaultValue(null)
+            .fromClient(false)
+            .isFinal(false)
+            .isRequired(true)
+            .build();
+
     /**
      * The description of this parameter.
      */

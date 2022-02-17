@@ -15,8 +15,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.rest.SimpleResponse;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -327,16 +329,18 @@ public class ClientMethod {
             }
 
             if (includeImplementationImports) {
-                proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
-                for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
-                    parameter.getClientType().addImportsTo(imports, true);
+                if (proxyMethod != null) {
+                    proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+                    for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                        parameter.getClientType().addImportsTo(imports, true);
 
-                    if (parameter.getExplode()) {
-                        imports.add("java.util.Objects");
-                        imports.add("java.util.Optional");
-                        imports.add("java.util.stream.Stream");
-                        imports.add("java.util.stream.Collectors");
-                        imports.add("java.util.Collection");
+                        if (parameter.getExplode()) {
+                            imports.add("java.util.Objects");
+                            imports.add("java.util.Optional");
+                            imports.add("java.util.stream.Stream");
+                            imports.add("java.util.stream.Collectors");
+                            imports.add("java.util.Collection");
+                        }
                     }
                 }
 
@@ -382,6 +386,39 @@ public class ClientMethod {
                 }
             }
         }
+
+        if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
+            imports.add(SimpleResponse.class.getName());
+            ClassType.BinaryData.addImportsTo(imports, false);
+        }
+    }
+
+    public static ClientMethod getAsyncSendRequestClientMethod(boolean isInMethodGroup) {
+        return new Builder()
+                .name("sendRequestAsync")
+                .description("Wraps the {@code request} in a context and sends it through client.")
+                .clientReference(isInMethodGroup ? "this.client" : "this")
+                .methodVisibility(JavaVisibility.Public)
+                .onlyRequiredParameters(false)
+                .type(ClientMethodType.SendRequestAsync)
+                .parameters(Collections.singletonList(ClientMethodParameter.HTTP_REQUEST_PARAMETER))
+                .returnValue(new ReturnValue("the response body on successful completion of {@link Mono}",
+                        GenericType.Mono(GenericType.Response(ClassType.BinaryData))))
+                .build();
+    }
+
+    public static ClientMethod getSyncSendRequestClientMethod(boolean isInMethodGroup) {
+        return new Builder()
+                .name("sendRequest")
+                .description("Wraps the {@code request} in a context and sends it through client.")
+                .clientReference(isInMethodGroup ? "this.client" : "this")
+                .methodVisibility(JavaVisibility.Public)
+                .onlyRequiredParameters(false)
+                .type(ClientMethodType.SendRequestSync)
+                .parameters(Arrays.asList(ClientMethodParameter.HTTP_REQUEST_PARAMETER, ClientMethodParameter.CONTEXT_PARAMETER))
+                .returnValue(new ReturnValue("the response body along with {@link Response}",
+                        GenericType.Response(ClassType.BinaryData)))
+                .build();
     }
 
     public static class Builder {

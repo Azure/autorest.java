@@ -24,7 +24,10 @@ public enum ClientMethodType {
     SimpleAsyncRestResponse(11),
     SimpleSyncRestResponse(12),
 
-    Resumable(13);
+    Resumable(13),
+
+    SendRequestSync(14),
+    SendRequestAsync(15);
 
     private static java.util.HashMap<Integer, ClientMethodType> mappings;
     private int intValue;
