@@ -18,15 +18,21 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.ProtocolExample;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -37,6 +43,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -61,6 +68,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         JavaSettings settings = JavaSettings.getInstance();
         Client.Builder builder = new Client.Builder();
 
+        // enum model
         List<EnumType> enumTypes = new ArrayList<>();
         Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
@@ -85,6 +93,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
         builder.enums(enumTypes);
 
+        // exception
         builder.exceptions(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .flatMap(o -> o.getExceptions().stream())
@@ -98,6 +107,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
 
+        // class model
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
             codeModel.getSchemas().getObjects().stream(),
             codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
@@ -111,6 +121,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
         builder.models(clientModels);
 
+        // response model (subclass of Response with headers)
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .distinct()
@@ -119,16 +130,15 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .distinct()
                 .collect(Collectors.toList()));
 
+        // service client
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
-
+        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
         builder.clientName(serviceClientName)
                 .clientDescription(serviceClientDescription)
-                .serviceClient(Mappers.getServiceClientMapper().map(codeModel));
+                .serviceClient(serviceClient);
 
-        // TODO: Manager
-//        Manager manager = Mappers.ManagerMapper.Map(codeModel);
-
+        // package info
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
@@ -201,7 +211,82 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
+
+        // module info
         builder.moduleInfo(moduleInfo());
+
+        // async/sync service client (wrapper for the ServiceClient)
+        List<AsyncSyncClient> syncClients = new ArrayList<>();
+        List<AsyncSyncClient> asyncClients = new ArrayList<>();
+        if (settings.shouldGenerateSyncAsyncClients()) {
+            ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
+        }
+        builder.syncClients(syncClients);
+        builder.asyncClients(asyncClients);
+
+        // service client builder
+        if (!serviceClient.builderDisabled()) {
+            List<ClientBuilder> clientBuilders = new ArrayList<>();
+            String builderSuffix = ClientModelUtil.getBuilderSuffix();
+            String builderName = serviceClient.getInterfaceName() + builderSuffix;
+            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
+            if (settings.shouldGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
+                // service client builder per service client
+                for (int i = 0; i < asyncClients.size(); ++i) {
+                    AsyncSyncClient asyncClient = asyncClients.get(i);
+                    AsyncSyncClient syncClient = (i > syncClients.size()) ? null : syncClients.get(i);
+                    String clientName = ((syncClient != null)
+                            ? syncClient.getClassName()
+                            : asyncClient.getClassName().replace("AsyncClient", "Client"));
+                    String clientBuilderName = clientName + builderSuffix;
+                    ClientBuilder clientBuilder = new ClientBuilder(
+                            builderPackage, clientBuilderName, serviceClient,
+                            (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
+                            Collections.singletonList(asyncClient));
+                    clientBuilders.add(clientBuilder);
+
+                    // there is a cross-reference between service client and service client builder
+                    asyncClient.setClientBuilder(clientBuilder);
+                    if (syncClient != null) {
+                        syncClient.setClientBuilder(clientBuilder);
+                    }
+                }
+            } else {
+                // service client builder
+                ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
+                        serviceClient, syncClients, asyncClients);
+                clientBuilders.add(clientBuilder);
+
+                // there is a cross-reference between service client and service client builder
+                asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+                syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+            }
+            builder.clientBuilders(clientBuilders);
+        }
+
+        // example/test
+        if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
+            List<ProtocolExample> protocolExamples = new ArrayList<>();
+            Set<String> protocolExampleNameSet = new HashSet<>();
+            syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
+                    .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
+                            .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync || m.getType() == ClientMethodType.LongRunningBeginSync)
+                            .forEach(m -> {
+                                ClientBuilder clientBuilder = c.getClientBuilder();
+                                if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
+                                    m.getProxyMethod().getExamples().forEach((name, example) -> {
+                                        String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                                        if (!protocolExampleNameSet.contains(filename)) {
+                                            ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
+                                            protocolExamples.add(protocolExample);
+                                            protocolExampleNameSet.add(filename);
+                                        }
+                                    });
+                                }
+                            }));
+            builder.protocolExamples(protocolExamples);
+        }
+
         return builder.build();
     }
 

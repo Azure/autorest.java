@@ -12,9 +12,9 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumGetReferenced {
     public static void main(String[] args) {
         // BEGIN: fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
-        EnumClient client = new EnumClientBuilder().host("http://localhost:3000").buildClient();
+        EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
-        Response<String> response = client.getReferencedWithResponse(requestOptions);
+        Response<String> response = enumClient.getReferencedWithResponse(requestOptions);
         // END: fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
     }
 }

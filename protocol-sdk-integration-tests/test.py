@@ -26,7 +26,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, se
     security_scopes_str = f'--security={security}'
     if security_scopes:
         security_scopes_str += f' --security-scopes={security_scopes}'
-    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_scopes_str} --sdk-integration --generate-samples'.split(' ')
+    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_scopes_str} --sdk-integration --generate-samples --generate-tests'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
     logging.info(' '.join(cmd))
     subprocess.check_call(cmd, cwd=script_path)
@@ -57,7 +57,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, se
     assert path.exists(path.join(output_folder, f'src/samples/java/{package_relative_path}/generated'))
     logging.info('pass samples')
 
-    assert path.exists(path.join(output_folder, f'src/test/java/{package_relative_path}/ClientTests.java'))
+    assert path.exists(path.join(output_folder, f'src/test/java/{package_relative_path}/generated'))
     logging.info('pass tests')
 
 

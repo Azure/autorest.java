@@ -56,9 +56,9 @@ public class JavaClass implements JavaType {
         addNewLine = true;
     }
 
-    public final void packagePrivateStaticFinalVariable(String variableDeclaration) {
+    public final void protectedMemberVariable(String variableType, String variableName) {
         addExpectedNewLine();
-        contents.line(String.format("static final %1$s;", variableDeclaration));
+        contents.line(String.format("protected %1$s %2$s;", variableType, variableName));
         addNewLine = true;
     }
 

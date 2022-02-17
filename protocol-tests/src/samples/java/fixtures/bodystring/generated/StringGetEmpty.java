@@ -13,9 +13,10 @@ import fixtures.bodystring.StringOperationClientBuilder;
 public class StringGetEmpty {
     public static void main(String[] args) {
         // BEGIN: fixtures.bodystring.generated.stringgetempty.stringgetempty
-        StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient =
+                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = client.getEmptyWithResponse(requestOptions);
+        Response<BinaryData> response = stringOperationClient.getEmptyWithResponse(requestOptions);
         // END: fixtures.bodystring.generated.stringgetempty.stringgetempty
     }
 }

@@ -13,11 +13,12 @@ import fixtures.bodystring.StringOperationClientBuilder;
 public class StringPutMbcs {
     public static void main(String[] args) {
         // BEGIN: fixtures.bodystring.generated.stringputmbcs.stringputmbcs
-        StringOperationClient client = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient =
+                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setBody(
                 BinaryData.fromString("\"啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€\""));
-        Response<Void> response = client.putMbcsWithResponse(requestOptions);
+        Response<Void> response = stringOperationClient.putMbcsWithResponse(requestOptions);
         // END: fixtures.bodystring.generated.stringputmbcs.stringputmbcs
     }
 }

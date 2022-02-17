@@ -13,9 +13,9 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumGetReferencedConstant {
     public static void main(String[] args) {
         // BEGIN: fixtures.bodystring.generated.enumgetreferencedconstant.enumgetreferencedconstant
-        EnumClient client = new EnumClientBuilder().host("http://localhost:3000").buildClient();
+        EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = client.getReferencedConstantWithResponse(requestOptions);
+        Response<BinaryData> response = enumClient.getReferencedConstantWithResponse(requestOptions);
         // END: fixtures.bodystring.generated.enumgetreferencedconstant.enumgetreferencedconstant
     }
 }
