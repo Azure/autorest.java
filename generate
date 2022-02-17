@@ -83,6 +83,7 @@ autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azur
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/lro.json --namespace=fixtures.lro
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/dpg_initial.json --namespace=fixtures.llcinitial
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/dpg_update1.json --namespace=fixtures.llcupdate1
+autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/$TEST_SERVER_COMMIT/swagger/dpg-customization.json --namespace=fixtures.dpgcustomization
 # Java 8 does not support module. Remove it to pass CI.
 rm ./protocol-tests/src/main/java/module-info.java
 

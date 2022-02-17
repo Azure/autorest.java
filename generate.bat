@@ -82,6 +82,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.co
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/lro.json --namespace=fixtures.lro
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/dpg_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/dpg_update1.json --namespace=fixtures.llcupdate1
+call autorest %PROTOCOL_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/%TEST_SERVER_COMMIT%/swagger/dpg-customization.json --namespace=fixtures.dpgcustomization
 del protocol-tests\src\main\java\module-info.java
 
 rem Protocol resilience
