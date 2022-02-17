@@ -397,7 +397,7 @@ public class ClientMethod {
     public static ClientMethod getAsyncSendRequestClientMethod(boolean isInMethodGroup) {
         return new Builder()
                 .name("sendRequestAsync")
-                .description("Wraps the {@code request} in a context and sends it through client.")
+                .description("Sends the {@code httpRequest}.")
                 .clientReference(isInMethodGroup ? "this.client" : "this")
                 .methodVisibility(JavaVisibility.Public)
                 .onlyRequiredParameters(false)
@@ -411,7 +411,7 @@ public class ClientMethod {
     public static ClientMethod getSyncSendRequestClientMethod(boolean isInMethodGroup) {
         return new Builder()
                 .name("sendRequest")
-                .description("Wraps the {@code request} in a context and sends it through client.")
+                .description("Sends the {@code httpRequest}.")
                 .clientReference(isInMethodGroup ? "this.client" : "this")
                 .methodVisibility(JavaVisibility.Public)
                 .onlyRequiredParameters(false)

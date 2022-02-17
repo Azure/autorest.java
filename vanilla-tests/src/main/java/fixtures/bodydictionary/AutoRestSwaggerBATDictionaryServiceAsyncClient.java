@@ -1902,7 +1902,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Wraps the {@code request} in a context and sends it through client.
+     * Sends the {@code httpRequest}.
      *
      * @param httpRequest The HTTP request to send.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

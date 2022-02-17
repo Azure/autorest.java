@@ -3858,7 +3858,7 @@ public final class DictionariesImpl {
     }
 
     /**
-     * Wraps the {@code request} in a context and sends it through client.
+     * Sends the {@code httpRequest}.
      *
      * @param httpRequest The HTTP request to send.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3882,7 +3882,7 @@ public final class DictionariesImpl {
     }
 
     /**
-     * Wraps the {@code request} in a context and sends it through client.
+     * Sends the {@code httpRequest}.
      *
      * @param httpRequest The HTTP request to send.
      * @param context The context to associate with this operation.

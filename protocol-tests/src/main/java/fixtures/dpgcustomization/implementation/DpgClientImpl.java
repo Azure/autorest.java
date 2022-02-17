@@ -712,7 +712,7 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Wraps the {@code request} in a context and sends it through client.
+     * Sends the {@code httpRequest}.
      *
      * @param httpRequest The HTTP request to send.
      * @return the response body on successful completion of {@link Mono}.
@@ -734,7 +734,7 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Wraps the {@code request} in a context and sends it through client.
+     * Sends the {@code httpRequest}.
      *
      * @param httpRequest The HTTP request to send.
      * @param context The context to associate with this operation.
