@@ -9,6 +9,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -207,5 +208,17 @@ public final class DpgAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNewOperationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNewOperationWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
+        return this.serviceClient.sendRequestAsync(httpRequest);
     }
 }

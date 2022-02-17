@@ -80,7 +80,7 @@ autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url.json --namespace=fix
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url-multi-collectionFormat.json --namespace=fixtures.url.multi
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcinitial
-autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1
+autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method
 # Java 8 does not support module. Remove it to pass CI.
 rm ./protocol-tests/src/main/java/module-info.java
