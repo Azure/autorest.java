@@ -2,7 +2,7 @@
 
 ```yaml
 java: true
-input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/head-exceptions.json
+input-file: ../../node_modules/@microsoft.azure/autorest.testserver/swagger/head-exceptions.json
 output-folder: ..
 namespace: fixtures.customhttpexceptionmapping
 license-header: MICROSOFT_MIT_SMALL

@@ -24,19 +24,12 @@ public enum ClientMethodType {
     SimpleAsyncRestResponse(11),
     SimpleSyncRestResponse(12),
 
-    Resumable(13),
-
-    ProtocolSimpleAsync(14),
-    ProtocolSimpleSync(15),
-    ProtocolLongRunningBeginAsync(16),
-    ProtocolLongRunningBeginSync(17),
-    ProtocolPagingAsync(18),
-    ProtocolPagingSync(19);
+    Resumable(13);
 
     private static java.util.HashMap<Integer, ClientMethodType> mappings;
     private int intValue;
 
-    private ClientMethodType(int value) {
+    ClientMethodType(int value) {
         intValue = value;
         getMappings().put(value, this);
     }
