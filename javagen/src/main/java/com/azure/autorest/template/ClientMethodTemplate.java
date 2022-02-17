@@ -784,15 +784,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.methodReturn(String.format("%1$s.getHttpPipeline().send(%2$s).flatMap(response -> BinaryData.fromFlux(response.getBody()).map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body)))",
+            function.methodReturn(String.format("FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context).flatMap(response -> BinaryData.fromFlux(response.getBody()).map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body))))",
                     clientMethod.getClientReference(), clientMethod.getArgumentList()));
         });
     }
 
     protected void generateSendRequestSync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.methodReturn(String.format("%1$s.getHttpPipeline().send(%2$s).flatMap(response -> BinaryData.fromFlux(response.getBody()).map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body))).block()",
-                    clientMethod.getClientReference(), clientMethod.getArgumentList()));
+            function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });
     }
 }
