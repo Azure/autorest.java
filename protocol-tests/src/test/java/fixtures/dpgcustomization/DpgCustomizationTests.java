@@ -3,9 +3,12 @@
 
 package fixtures.dpgcustomization;
 
+import com.azure.core.http.HttpMethod;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
@@ -25,10 +28,12 @@ import java.util.stream.Collectors;
 public class DpgCustomizationTests {
 
     private static DpgClient client;
+    private static DpgAsyncClient asyncClient;
 
     @BeforeAll
     public static void setup() {
         client = new DpgClientBuilder().buildClient();
+        asyncClient = new DpgClientBuilder().buildAsyncClient();
     }
 
     @Test
@@ -138,5 +143,21 @@ public class DpgCustomizationTests {
         public void cancelOperation() {
             poller.cancelOperation();
         }
+    }
+
+    @Test
+    public void testSendRequestMethod() {
+        HttpRequest request = new HttpRequest(HttpMethod.GET, "http://localhost:3000/customization/model/raw");
+        Response<BinaryData> response = client.sendRequest(request, Context.NONE);
+        Assertions.assertEquals(200, response.getStatusCode());
+        Map<String, String> rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
+        Assertions.assertTrue(rawModel.containsKey("received"));
+        Assertions.assertEquals("raw", rawModel.get("received"));
+
+        response = asyncClient.sendRequest(request).block();
+        Assertions.assertEquals(200, response.getStatusCode());
+        rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
+        Assertions.assertTrue(rawModel.containsKey("received"));
+        Assertions.assertEquals("raw", rawModel.get("received"));
     }
 }
