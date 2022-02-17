@@ -719,18 +719,20 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
-        return this.getHttpPipeline()
-                .send(httpRequest)
-                .flatMap(
-                        response ->
-                                BinaryData.fromFlux(response.getBody())
-                                        .map(
-                                                body ->
-                                                        new SimpleResponse<>(
-                                                                response.getRequest(),
-                                                                response.getStatusCode(),
-                                                                response.getHeaders(),
-                                                                body)));
+        return FluxUtil.withContext(
+                context ->
+                        this.getHttpPipeline()
+                                .send(httpRequest, context)
+                                .flatMap(
+                                        response ->
+                                                BinaryData.fromFlux(response.getBody())
+                                                        .map(
+                                                                body ->
+                                                                        new SimpleResponse<>(
+                                                                                response.getRequest(),
+                                                                                response.getStatusCode(),
+                                                                                response.getHeaders(),
+                                                                                body))));
     }
 
     /**
@@ -741,18 +743,8 @@ public final class DpgClientImpl {
      * @return the response body along with {@link Response}.
      */
     public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.getHttpPipeline()
-                .send(httpRequest, context)
-                .flatMap(
-                        response ->
-                                BinaryData.fromFlux(response.getBody())
-                                        .map(
-                                                body ->
-                                                        new SimpleResponse<>(
-                                                                response.getRequest(),
-                                                                response.getStatusCode(),
-                                                                response.getHeaders(),
-                                                                body)))
+        return this.sendRequestAsync(httpRequest)
+                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
                 .block();
     }
 
