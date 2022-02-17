@@ -9,10 +9,12 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.dpgcustomization.implementation.DpgClientImpl;
 
@@ -140,5 +142,18 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
         return this.serviceClient.beginLro(mode, requestOptions);
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @param context The context to associate with this operation.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
+        return this.serviceClient.sendRequest(httpRequest, context);
     }
 }

@@ -17,7 +17,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-mor
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head.json --namespace=fixtures.head
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head-exceptions.json --namespace=fixtures.headexceptions
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header --context-client-method-parameter
-call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request
+call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-duration.json --namespace=fixtures.bodyduration
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-integer.json --namespace=fixtures.bodyinteger
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-number.json --namespace=fixtures.bodynumber --disable-client-builder
@@ -80,7 +80,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collect
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1
-call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request
+call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method
 del protocol-tests\src\main\java\module-info.java
 
 rem Protocol resilience

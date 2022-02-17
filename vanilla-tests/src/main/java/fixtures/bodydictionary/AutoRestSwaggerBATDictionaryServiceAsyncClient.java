@@ -8,7 +8,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.bodydictionary.implementation.DictionariesImpl;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
@@ -1897,5 +1899,18 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         return this.serviceClient.putDictionaryValidAsync(arrayBody);
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
+        return this.serviceClient.sendRequestAsync(httpRequest);
     }
 }

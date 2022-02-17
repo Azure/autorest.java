@@ -22,7 +22,7 @@ autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/custom-baseUrl-more-optio
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/head.json --namespace=fixtures.head
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/head-exceptions.json --namespace=fixtures.headexceptions
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/header.json --namespace=fixtures.header --context-client-method-parameter
-autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request
+autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-duration.json --namespace=fixtures.bodyduration
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-integer.json --namespace=fixtures.bodyinteger
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-number.json --namespace=fixtures.bodynumber --disable-client-builder
@@ -81,7 +81,7 @@ autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url-multi-collectionForm
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcinitial
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1
-autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request
+autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method
 # Java 8 does not support module. Remove it to pass CI.
 rm ./protocol-tests/src/main/java/module-info.java
 

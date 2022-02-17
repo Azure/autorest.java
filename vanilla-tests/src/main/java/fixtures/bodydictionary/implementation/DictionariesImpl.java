@@ -16,9 +16,12 @@ import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
@@ -3852,5 +3855,54 @@ public final class DictionariesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         putDictionaryValidAsync(arrayBody).block();
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
+        return this.client
+                .getHttpPipeline()
+                .send(httpRequest)
+                .flatMap(
+                        response ->
+                                BinaryData.fromFlux(response.getBody())
+                                        .map(
+                                                body ->
+                                                        new SimpleResponse<>(
+                                                                response.getRequest(),
+                                                                response.getStatusCode(),
+                                                                response.getHeaders(),
+                                                                body)));
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @param context The context to associate with this operation.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
+        return this.client
+                .getHttpPipeline()
+                .send(httpRequest, context)
+                .flatMap(
+                        response ->
+                                BinaryData.fromFlux(response.getBody())
+                                        .map(
+                                                body ->
+                                                        new SimpleResponse<>(
+                                                                response.getRequest(),
+                                                                response.getStatusCode(),
+                                                                response.getHeaders(),
+                                                                body)))
+                .block();
     }
 }

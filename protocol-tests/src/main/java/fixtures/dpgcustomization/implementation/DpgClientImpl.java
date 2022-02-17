@@ -18,6 +18,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
@@ -28,6 +29,7 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -707,6 +709,51 @@ public final class DpgClientImpl {
                                         getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
+        return this.getHttpPipeline()
+                .send(httpRequest)
+                .flatMap(
+                        response ->
+                                BinaryData.fromFlux(response.getBody())
+                                        .map(
+                                                body ->
+                                                        new SimpleResponse<>(
+                                                                response.getRequest(),
+                                                                response.getStatusCode(),
+                                                                response.getHeaders(),
+                                                                body)));
+    }
+
+    /**
+     * Wraps the {@code request} in a context and sends it through client.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @param context The context to associate with this operation.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
+        return this.getHttpPipeline()
+                .send(httpRequest, context)
+                .flatMap(
+                        response ->
+                                BinaryData.fromFlux(response.getBody())
+                                        .map(
+                                                body ->
+                                                        new SimpleResponse<>(
+                                                                response.getRequest(),
+                                                                response.getStatusCode(),
+                                                                response.getHeaders(),
+                                                                body)))
+                .block();
     }
 
     private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
