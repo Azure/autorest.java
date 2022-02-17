@@ -92,9 +92,9 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
                     .collect(Collectors.toList());
             if (settings.isGenerateSendRequestMethod()) {
-                clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(true));
+                clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(false));
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(true));
+                    clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(false));
                 }
             }
             builder.clientMethods(clientMethods);
