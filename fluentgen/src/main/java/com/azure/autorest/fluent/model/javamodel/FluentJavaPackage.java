@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
+import com.azure.autorest.fluent.template.FluentLiveTestsTemplate;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
 import com.azure.autorest.fluent.template.FluentExampleTemplate;
@@ -109,6 +110,7 @@ public class FluentJavaPackage extends JavaPackage {
     public void addLiveTests(FluentLiveTests liveTests) {
         JavaFile javaFile = getJavaFileFactory().createSampleFile(
             liveTests.getPackageName(), liveTests.getClassName());
-        // TODO adding template methods
+        FluentLiveTestsTemplate.getInstance().write(liveTests, javaFile);
+        addJavaFile(javaFile);
     }
 }
