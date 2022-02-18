@@ -68,6 +68,8 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.azure.autorest.fluent.util.FluentUtils.exampleIsUpdate;
+
 public class ExampleParser {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
@@ -777,11 +779,6 @@ public class ExampleParser {
             return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
         }
         return false;
-    }
-
-    private static boolean exampleIsUpdate(String name) {
-        name = name.toLowerCase(Locale.ROOT);
-        return name.contains("update") && !name.contains("create");
     }
 
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {

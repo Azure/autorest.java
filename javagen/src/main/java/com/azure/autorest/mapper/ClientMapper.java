@@ -3,35 +3,10 @@
 
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
-import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
-import com.azure.autorest.extension.base.model.codemodel.Header;
-import com.azure.autorest.extension.base.model.codemodel.Language;
-import com.azure.autorest.extension.base.model.codemodel.Languages;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
-import com.azure.autorest.extension.base.model.codemodel.Operation;
-import com.azure.autorest.extension.base.model.codemodel.Property;
-import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.*;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientBuilder;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ModuleInfo;
-import com.azure.autorest.model.clientmodel.PackageInfo;
-import com.azure.autorest.model.clientmodel.ProtocolExample;
-import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -41,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -287,7 +264,25 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             builder.protocolExamples(protocolExamples);
         }
 
+        if (settings.isGenerateLiveTests() && codeModel.getTestModel() != null) {
+            builder.liveTests(parseLiveTests(codeModel.getTestModel()));
+        }
+
         return builder.build();
+    }
+
+    private List<LiveTests> parseLiveTests(TestModel testModel) {
+        if (testModel.getScenarioTests() == null) {
+            return Lists.newArrayList();
+        }
+        return testModel.getScenarioTests().stream().map(new Function<ScenarioTest, LiveTests>() {
+            @Override
+            public LiveTests apply(ScenarioTest scenarioTest) {
+                LiveTests liveTests = new LiveTests();
+//                liveTests.setTestClassName(scenarioTest.get);
+                return liveTests;
+            }
+        }).collect(Collectors.toList());
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {

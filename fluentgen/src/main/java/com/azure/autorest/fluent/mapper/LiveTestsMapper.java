@@ -22,5 +22,6 @@ public class LiveTestsMapper implements IMapper<ScenarioTest, LiveTests> {
         for (TestScenario testScenario : scenarioTest.getScenarios()) {
 
         }
+        return result;
     }
 }

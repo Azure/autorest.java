@@ -29,4 +29,14 @@ public class FluentGenTests {
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
     }
+
+    @Test
+    @Disabled
+    public void testLiveTestGen(){
+        CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-signalr.yaml");
+        Client client = FluentStatic.getClient();
+        FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
+        FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
+    }
+
 }

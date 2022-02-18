@@ -65,3 +65,28 @@ required-parameter-client-methods: true
 model-override-setter-from-superclass: true
 client-flattened-annotation-target: none
 ```
+
+
+
+
+``` yaml $(test-modeler)
+use-extension:
+  "@autorest/testmodeler": "C:\\Users\\xiaofeicao\\projects\\fork\\azure-sdk-tools\\tools\\sdk-testgen\\packages\\autorest.testmodeler"
+  # "@autorest/testmodeler": "1.0.4"
+
+pipeline:
+  test-modeler:
+    input: modelerfour/identity
+  test-modeler/identity:
+    input: test-modeler
+  fluentnamer:
+    input: test-modeler/identity
+
+  
+test-resources:
+  - test: ..\..\azure-rest-api-specs\specification\signalr\resource-manager\Microsoft.SignalRService\preview\2020-07-01-preview\test-scenarios\signalR.yaml
+  
+input-file:
+  - C:\Users\xiaofeicao\projects\fork\azure-rest-api-specs\specification\signalr\resource-manager\Microsoft.SignalRService\preview\2020-07-01-preview\signalr.json
+
+```
