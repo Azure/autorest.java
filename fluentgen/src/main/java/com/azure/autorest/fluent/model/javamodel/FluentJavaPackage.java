@@ -6,6 +6,7 @@ package com.azure.autorest.fluent.model.javamodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -103,5 +104,11 @@ public class FluentJavaPackage extends JavaPackage {
         FluentExampleTemplate.getInstance().write(example, javaFile);
         addJavaFile(javaFile);
         return javaFile;
+    }
+
+    public void addLiveTests(FluentLiveTests liveTests) {
+        JavaFile javaFile = getJavaFileFactory().createSampleFile(
+            liveTests.getPackageName(), liveTests.getClassName());
+        // TODO adding template methods
     }
 }

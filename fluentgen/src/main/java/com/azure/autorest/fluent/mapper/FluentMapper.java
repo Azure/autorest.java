@@ -98,13 +98,14 @@ public class FluentMapper {
     private FluentLiveTests mapLiveTests(LiveTests liveTests, FluentClient fluentClient) {
 
         FluentLiveTests result = new FluentLiveTests();
+        result.setClassName(liveTests.getTestClassName());
 
-        result.getTestCases().addAll(liveTests.getTestCases().stream().map(liveTestCase -> {
+        parseLiveTests: for (LiveTestCase liveTestCase : liveTests.getTestCases()) {
             FluentLiveTestCase testCase = new FluentLiveTestCase();
-            testCase.getSteps().addAll(liveTestCase.getTestSteps().stream().map((Function<LiveTestStep, FluentLiveTestStep>) step -> {
-                if (step instanceof ExampleLiveTestStep) {
+            for (LiveTestStep liveTestStep : liveTestCase.getTestSteps()) {
+                if (liveTestStep instanceof ExampleLiveTestStep) {
                     FluentExampleLiveTestStep fluentStep = new FluentExampleLiveTestStep();
-                    ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) step;
+                    ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) liveTestStep;
                     String operationId = exampleStep.getOperationId();
                     String[] oprs = operationId.split("_");
                     String operationGroup = oprs[0];
@@ -119,6 +120,7 @@ public class FluentMapper {
                         FluentCollectionMethodExample collectionMethodExample = ExampleParser.parseMethodExample(resourceCollection, collectionMethod, example);
                         FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
                         testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
+                        fluentStep.setExampleMethod(exampleMethod);
                     } else {
                         // find resourceCreate
                         Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
@@ -134,35 +136,40 @@ public class FluentMapper {
                             if (updateMethod.isPresent()) {
                                 ResourceUpdate update = updateMethod.get();
                                 FluentResourceUpdateExample updateExample = ExampleParser.parseResourceUpdate(resourceCollection, update, example);
+                                if (updateExample == null) {
+                                    continue parseLiveTests;
+                                }
                                 FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
                                 testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
                                 fluentStep.setExampleMethod(exampleMethod);
                             }
                         }
                     }
-                    return fluentStep;
+                    testCase.getSteps().add(fluentStep);
+                } else {
+                    continue parseLiveTests;
                 }
-                throw new UnsupportedOperationException(String.format("unsupported step type:%s", step.getClass().getSimpleName()));
-            }).collect(Collectors.toList()));
-            return testCase;
-        }).collect(Collectors.toList()));
+            }
+
+            result.getTestCases().add(testCase);
+
+        }
 
         return result;
     }
 
     private FluentResourceCollection findResourceCollection(FluentClient fluentClient, String operationGroup) {
-        // TODO
-        throw new UnsupportedOperationException("method [findResourceCollection] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
+        return fluentClient.getResourceCollections().stream().filter(collection -> collection.getInterfaceType().getName().equalsIgnoreCase(CodeNamer.getPlural(operationGroup))).findFirst().get();
     }
 
     private Optional<FluentCollectionMethod> findCollectionMethod(FluentResourceCollection resourceCollection, String operation) {
-        // TODO
-        throw new UnsupportedOperationException("method [findCollectionMethod] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
+        return resourceCollection.getMethodsForTemplate().stream().filter(m -> operation.equalsIgnoreCase(m.getMethodName())).findFirst();
     }
 
     private Optional<ResourceCreate> findResourceCreate(FluentResourceCollection resourceCollection, String operation) {
-        // TODO
-        throw new UnsupportedOperationException("method [findResourceCreate] not implemented in class [com.azure.autorest.fluent.mapper.FluentMapper]");
+        return resourceCollection.getResourceCreates().stream().filter(rc ->
+            !FluentUtils.exampleIsUpdate(rc.getMethodName()) &&
+                rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
     }
 
     FluentClient basicMap(CodeModel codeModel, Client client) {

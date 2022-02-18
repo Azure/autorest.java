@@ -49,6 +49,7 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("required-parameter-client-methods", true);
             DEFAULT_SETTINGS.put("generate-samples", true);
             DEFAULT_SETTINGS.put("model-override-setter-from-superclass", true);
+            DEFAULT_SETTINGS.put("generate-live-tests", true);
             //DEFAULT_SETTINGS.put("client-flattened-annotation-target", "NONE");
         }
 

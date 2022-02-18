@@ -28,7 +28,7 @@ public class ProxyMethodExampleMapper implements IMapper<XmsExampleWrapper, Prox
     @SuppressWarnings("unchecked")
     @Override
     public ProxyMethodExample map(XmsExampleWrapper exampleWrapper) {
-        ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
+        ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder().name(exampleWrapper.getExampleName());
 
         Object xmsExample = exampleWrapper.getXmsExample();
         if (xmsExample instanceof Map) {

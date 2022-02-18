@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import com.google.common.collect.Lists;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -275,14 +277,35 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (testModel.getScenarioTests() == null) {
             return Lists.newArrayList();
         }
-        return testModel.getScenarioTests().stream().map(new Function<ScenarioTest, LiveTests>() {
-            @Override
-            public LiveTests apply(ScenarioTest scenarioTest) {
-                LiveTests liveTests = new LiveTests();
-//                liveTests.setTestClassName(scenarioTest.get);
-                return liveTests;
-            }
+        return testModel.getScenarioTests().stream().map(scenarioTest -> {
+            LiveTests liveTests = new LiveTests();
+            liveTests.setTestClassName(getTestClassName(scenarioTest.getFilePath()));
+            liveTests.setTestCases(scenarioTest.getScenarios().stream().map(testScenario -> {
+                LiveTestCase liveTestCase = new LiveTestCase();
+                liveTestCase.setName(CodeNamer.toCamelCase(testScenario.getScenario()));
+                liveTestCase.setTestSteps(testScenario.getResolvedSteps().stream().map((Function<ScenarioStep, LiveTestStep>) scenarioStep -> {
+                    // future work: support other step types, for now only support example file
+                    if (scenarioStep.getType() != TestScenarioStepType.REST_CALL ||
+                        scenarioStep.getExampleFile() == null) {
+                        throw new UnsupportedOperationException(String.format("Scenario test step: %s is not supported", scenarioStep.getType()));
+                    }
+                    Map<String, Object> example = new HashMap<>();
+                    example.put("parameters", scenarioStep.getRequestParameters());
+                    XmsExampleWrapper exampleWrapper = new XmsExampleWrapper(example, scenarioStep.getOperationId(), scenarioStep.getExampleName());
+                    ProxyMethodExample proxyMethodExample = ProxyMethodExampleMapper.getInstance().map(exampleWrapper);
+                    return new ExampleLiveTestStep(scenarioStep.getOperationId(), proxyMethodExample);
+                }).collect(Collectors.toList()));
+                return liveTestCase;
+            }).collect(Collectors.toList()));
+            return liveTests;
         }).collect(Collectors.toList());
+    }
+
+    private static String getTestClassName(String filePath) {
+        String[] split = filePath.replaceAll("\\\\", "/").split("/");
+        String filename = split[split.length - 1];
+        filename = filename.split("\\.")[0];
+        return CodeNamer.toCamelCase(filename);
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {

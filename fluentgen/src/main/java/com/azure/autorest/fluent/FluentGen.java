@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.FluentPomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -328,6 +329,13 @@ public class FluentGen extends Javagen {
                 javaPackage.addChangelogMarkdown(project.getChangelog());
                 if (fluentJavaSettings.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
                     javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
+                }
+            }
+
+            // Live tests
+            if (javaSettings.isGenerateLiveTests()) {
+                for (FluentLiveTests liveTests : fluentClient.getLiveTests()) {
+                    javaPackage.addLiveTests(liveTests);
                 }
             }
 
