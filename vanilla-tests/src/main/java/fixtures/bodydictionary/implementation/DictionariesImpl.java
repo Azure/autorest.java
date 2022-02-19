@@ -3891,6 +3891,7 @@ public final class DictionariesImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
         return this.sendRequestAsync(httpRequest)
                 .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
