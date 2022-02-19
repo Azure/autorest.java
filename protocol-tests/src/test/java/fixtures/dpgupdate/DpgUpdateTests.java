@@ -1,8 +1,11 @@
 package fixtures.dpgupdate;
 
+import com.azure.core.http.HttpMethod;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import fixtures.llcinitial.DpgAsyncClient;
 import fixtures.llcinitial.DpgClient;
 import fixtures.llcinitial.DpgClientBuilder;
@@ -10,6 +13,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 public class DpgUpdateTests {
     private static DpgAsyncClient asyncClient;
@@ -113,5 +118,18 @@ public class DpgUpdateTests {
 
         Response<BinaryData> response = client2.getNewOperationWithResponse(requestOptions);
         Assertions.assertEquals(200, response.getStatusCode());
+    }
+
+
+    @Test
+    public void testSendRequestMethod() {
+        HttpRequest request = new HttpRequest(HttpMethod.DELETE, "http://localhost:3000/serviceDriven/parameters");
+        Response<BinaryData> response = client2.sendRequest(request, Context.NONE);
+        Assertions.assertEquals(204, response.getStatusCode());
+        Assertions.assertEquals(0, response.getValue().getLength());
+
+        response = asyncClient2.sendRequest(request).block();
+        Assertions.assertEquals(204, response.getStatusCode());
+        Assertions.assertEquals(0, response.getValue().getLength());
     }
 }

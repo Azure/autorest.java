@@ -36,42 +36,46 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     protected static void generateProtocolMethodJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
         commentBlock.description(clientMethod.getDescription());
 
-        List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
-                .collect(Collectors.toList());
-        if (!queryParameters.isEmpty()) {
-            optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
-        }
+        if (clientMethod.getProxyMethod() != null) {
+            List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters()
+                    .stream().filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
+                    .collect(Collectors.toList());
+            if (!queryParameters.isEmpty()) {
+                optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
+            }
 
-        List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
-                .collect(Collectors.toList());
-        if (!headerParameters.isEmpty()) {
-            optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
-        }
+            List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
+                    .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
+                    .collect(Collectors.toList());
+            if (!headerParameters.isEmpty()) {
+                optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
+            }
 
-        // Request body
-        Set<IType> typesInJavadoc = new HashSet<>();
+            // Request body
+            Set<IType> typesInJavadoc = new HashSet<>();
 
-        clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                .map(ProxyMethodParameter::getRawType)
-                .findFirst()
-                .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc));
+            clientMethod.getProxyMethod().getAllParameters()
+                    .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
+                    .map(ProxyMethodParameter::getRawType)
+                    .findFirst()
+                    .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc));
 
-        // Response body
-        IType responseBodyType;
-        if (JavaSettings.getInstance().isLowLevelClient()) {
-            responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
-        } else {
-            responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
-        }
-        if (responseBodyType != null && !responseBodyType.equals(PrimitiveType.Void)) {
-            responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
+            // Response body
+            IType responseBodyType;
+            if (JavaSettings.getInstance().isLowLevelClient()) {
+                responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+            } else {
+                responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
+            }
+            if (responseBodyType != null && !responseBodyType.equals(PrimitiveType.Void)) {
+                responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
+            }
         }
 
         clientMethod.getParameters().forEach(p -> commentBlock.param(p.getName(), methodParameterDescriptionOrDefault(p)));
-        generateJavadocExceptions(clientMethod, commentBlock, false);
+        if (clientMethod.getProxyMethod() != null) {
+            generateJavadocExceptions(clientMethod, commentBlock, false);
+        }
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
 
