@@ -4,14 +4,23 @@
 package fixtures.dpgcustomization;
 
 import com.azure.core.http.HttpMethod;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpRequest;
+import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.paging.PageRetriever;
+import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
+import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.serializer.TypeReference;
 import fixtures.dpgcustomization.models.Input;
 import fixtures.dpgcustomization.models.LROProduct;
 import fixtures.dpgcustomization.models.Product;
@@ -19,10 +28,13 @@ import fixtures.dpgcustomization.models.ProductReceived;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class DpgCustomizationTests {
@@ -72,10 +84,33 @@ public class DpgCustomizationTests {
         Assertions.assertTrue(rawModel.containsKey("received"));
 //        Assertions.assertEquals("raw", rawModel.get("received"));
 
-        response = client.getPages("model", null);
-        Assertions.assertEquals(200, response.iterableByPage().iterator().next().getStatusCode());
-        List<Product> modelList = response.mapPage(data -> data.toObject(Product.class)).stream().collect(Collectors.toList());
+        PagedFlux<BinaryData> pagedFlux = asyncClient.getPages("model", null);
+        // PagedFlux<BinaryData> to PagedFlux<Product>
+        PagedFlux<Product> modelPagedFlux = mapPage(pagedFlux, data -> data.toObject(Product.class));
+        // PagedIterable from PagedFlux
+        PagedIterable<Product> modelPagedIterable = new PagedIterable<>(modelPagedFlux);
+        Assertions.assertEquals(200, modelPagedIterable.iterableByPage().iterator().next().getStatusCode());
+        List<Product> modelList = modelPagedIterable.stream().collect(Collectors.toList());
         Assertions.assertEquals(ProductReceived.MODEL, modelList.get(0).getReceived());
+    }
+
+    private static <T, S> PagedFlux<S> mapPage(PagedFlux<T> pagedFlux, Function<T, S> mapper) {
+        Supplier<PageRetriever<String, PagedResponse<S>>> provider = () -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<T>> flux = (continuationToken == null)
+                    ? pagedFlux.byPage().take(1)
+                    : pagedFlux.byPage(continuationToken).take(1);
+            return flux.map(mapPagedResponse(mapper));
+        };
+        return PagedFlux.create(provider);
+    }
+
+    private static <T, S> Function<PagedResponse<T>, PagedResponse<S>> mapPagedResponse(Function<T, S> mapper) {
+        return pagedResponse -> new PagedResponseBase<Void, S>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(),
+                pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream().map(mapper).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(),
+                null);
     }
 
     @Test
@@ -88,11 +123,29 @@ public class DpgCustomizationTests {
         Assertions.assertEquals("Succeeded", rawModel.get("provisioningState"));
 
         poller = client.beginLro("model", null);
-        ProductSyncPoller modelPoller = new ProductSyncPoller(poller);
+        SyncPoller<LROProduct, LROProduct> modelPoller = new ProductSyncPoller(poller);
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, modelPoller.waitForCompletion().getStatus());
         LROProduct model = modelPoller.getFinalResult();
         Assertions.assertEquals(ProductReceived.MODEL, model.getReceived());
         Assertions.assertEquals("Succeeded", model.getProvisioningState());
+
+        // PollerFlux<LROProduct, LROProduct>
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().build();  // httpPipeline exists in serviceClient
+        PollerFlux<LROProduct, LROProduct> modelPollerFlux = PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> asyncClient.lroWithResponse("model", null),
+                new DefaultPollingStrategy<>(httpPipeline),
+                new TypeReferenceLroProduct(),
+                new TypeReferenceLroProduct());
+        model = modelPollerFlux.last().block().getFinalResult().block();
+        Assertions.assertEquals(ProductReceived.MODEL, model.getReceived());
+        Assertions.assertEquals("Succeeded", model.getProvisioningState());
+        // SyncPoller from PollerFlux
+        modelPoller = modelPollerFlux.getSyncPoller();
+    }
+
+    private static final class TypeReferenceLroProduct extends TypeReference<LROProduct> {
+        // empty
     }
 
     static class ProductSyncPoller implements SyncPoller<LROProduct, LROProduct> {
