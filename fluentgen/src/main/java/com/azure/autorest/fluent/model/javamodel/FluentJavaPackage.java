@@ -108,7 +108,7 @@ public class FluentJavaPackage extends JavaPackage {
     }
 
     public void addLiveTests(FluentLiveTests liveTests) {
-        JavaFile javaFile = getJavaFileFactory().createSampleFile(
+        JavaFile javaFile = getJavaFileFactory().createTestFile(
             liveTests.getPackageName(), liveTests.getClassName());
         FluentLiveTestsTemplate.getInstance().write(liveTests, javaFile);
         addJavaFile(javaFile);

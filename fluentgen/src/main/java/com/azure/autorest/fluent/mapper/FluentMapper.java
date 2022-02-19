@@ -19,7 +19,6 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentExampleLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestCase;
-import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
@@ -51,7 +50,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -98,10 +96,11 @@ public class FluentMapper {
     private FluentLiveTests mapLiveTests(LiveTests liveTests, FluentClient fluentClient) {
 
         FluentLiveTests result = new FluentLiveTests();
-        result.setClassName(liveTests.getTestClassName());
+        result.setClassName(liveTests.getFilename() + "Tests");
 
         parseLiveTests: for (LiveTestCase liveTestCase : liveTests.getTestCases()) {
             FluentLiveTestCase testCase = new FluentLiveTestCase();
+            testCase.setMethodName(liveTestCase.getName());
             for (LiveTestStep liveTestStep : liveTestCase.getTestSteps()) {
                 if (liveTestStep instanceof ExampleLiveTestStep) {
                     FluentExampleLiveTestStep fluentStep = new FluentExampleLiveTestStep();
@@ -119,8 +118,7 @@ public class FluentMapper {
                         FluentCollectionMethod collectionMethod = collectionMethodOptional.get();
                         FluentCollectionMethodExample collectionMethodExample = ExampleParser.parseMethodExample(resourceCollection, collectionMethod, example);
                         FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
-                        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                        fluentStep.setExampleMethod(exampleMethod);
+                        setExampleStepFeatures(result, testCase, fluentStep, collectionMethodExample, exampleMethod);
                     } else {
                         // find resourceCreate
                         Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
@@ -128,8 +126,7 @@ public class FluentMapper {
                             ResourceCreate create = createMethod.get();
                             FluentResourceCreateExample createExample = ExampleParser.parseResourceCreate(resourceCollection, create, example);
                             FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(createExample);
-                            testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                            fluentStep.setExampleMethod(exampleMethod);
+                            setExampleStepFeatures(result, testCase, fluentStep, createExample, exampleMethod);
                         } else {
                             // find resourceUpdate
                             Optional<ResourceUpdate> updateMethod = resourceCollection.getResourceUpdates().stream().filter(rc -> FluentUtils.exampleIsUpdate(rc.getMethodName()) && rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
@@ -140,12 +137,12 @@ public class FluentMapper {
                                     continue parseLiveTests;
                                 }
                                 FluentExampleTemplate.ExampleMethod exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
-                                testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-                                fluentStep.setExampleMethod(exampleMethod);
+                                setExampleStepFeatures(result, testCase, fluentStep, updateExample, exampleMethod);
                             }
                         }
                     }
                     testCase.getSteps().add(fluentStep);
+                    result.getHelperFeatures().addAll(testCase.getHelperFeatures());
                 } else {
                     continue parseLiveTests;
                 }
@@ -156,6 +153,14 @@ public class FluentMapper {
         }
 
         return result;
+    }
+
+    private void setExampleStepFeatures(FluentLiveTests result, FluentLiveTestCase testCase, FluentExampleLiveTestStep fluentStep, com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample createExample, FluentExampleTemplate.ExampleMethod exampleMethod) {
+        fluentStep.setExampleMethod(exampleMethod);
+        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
+        result.getImports().addAll(exampleMethod.getImports());
+        result.setEntryName(createExample.getEntryName());
+        result.setEntryType(createExample.getEntryType());
     }
 
     private FluentResourceCollection findResourceCollection(FluentClient fluentClient, String operationGroup) {

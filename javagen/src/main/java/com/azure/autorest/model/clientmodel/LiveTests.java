@@ -9,15 +9,15 @@ import java.util.List;
 
 public class LiveTests {
 
-    private String testClassName;
+    private String filename;
     private List<LiveTestCase> testCases;
 
-    public String getTestClassName() {
-        return testClassName;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setTestClassName(String testClassName) {
-        this.testClassName = testClassName;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public List<LiveTestCase> getTestCases() {

@@ -19,7 +19,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import com.google.common.collect.Lists;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -279,7 +278,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
         return testModel.getScenarioTests().stream().map(scenarioTest -> {
             LiveTests liveTests = new LiveTests();
-            liveTests.setTestClassName(getTestClassName(scenarioTest.getFilePath()));
+            liveTests.setFilename(getFilename(scenarioTest.getFilePath()));
             liveTests.setTestCases(scenarioTest.getScenarios().stream().map(testScenario -> {
                 LiveTestCase liveTestCase = new LiveTestCase();
                 liveTestCase.setName(CodeNamer.toCamelCase(testScenario.getScenario()));
@@ -301,7 +300,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }).collect(Collectors.toList());
     }
 
-    private static String getTestClassName(String filePath) {
+    private static String getFilename(String filePath) {
         String[] split = filePath.replaceAll("\\\\", "/").split("/");
         String filename = split[split.length - 1];
         filename = filename.split("\\.")[0];

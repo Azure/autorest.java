@@ -88,7 +88,7 @@ public class FluentExampleTemplate {
         });
     }
 
-    void writeMapOfMethod(JavaClass classBlock) {
+    public void writeMapOfMethod(JavaClass classBlock) {
         classBlock.annotation("SuppressWarnings(\"unchecked\")");
         classBlock.method(JavaVisibility.Private, Arrays.asList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
             methodBlock.line("Map<String, T> map = new HashMap<>();");
@@ -355,7 +355,7 @@ public class FluentExampleTemplate {
             return this;
         }
 
-        private Set<String> getImports() {
+        public Set<String> getImports() {
             return imports;
         }
 
