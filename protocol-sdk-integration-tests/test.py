@@ -66,7 +66,26 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
     logging.info('pass tests')
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--all',
+        dest='verify_all',
+        required=False,
+        default=False,
+        action='store_true',
+        help='Generate and verify all projects',
+    )
+
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+    verify_all = args.verify_all
+
+    logging.info('verify all projects' if verify_all else 'verify required projects')
+    
     script_path = path.abspath(path.dirname(sys.argv[0]))
 
     with open(path.join(script_path, 'data-specs.json'), 'r', encoding='utf-8') as f_in:
@@ -80,14 +99,16 @@ def main():
         security_scopes = spec['security-scopes'] if 'security-scopes' in spec else None
         security_header_name = spec['security-header-name'] if 'security-header-name' in spec else None
 
-        required = spec['required']
+        required = spec['required'] if 'required' in spec else False
+        skip = spec['skip'] if 'skip' in spec else False
 
         output_path = path.join(script_path, 'sdk', group, module)
         namespace = 'com.' + module.replace('-', '.')
 
-        logging.info(f'case {key}')
-        run(script_path, output_path, json_path, namespace,
-            security, security_scopes, security_header_name)
+        if (verify_all or required) and not skip:
+            logging.info(f'generate and verify for {key}')
+            run(script_path, output_path, json_path, namespace,
+                security, security_scopes, security_header_name)
 
 
 if __name__ == "__main__":

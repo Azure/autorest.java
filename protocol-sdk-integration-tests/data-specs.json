@@ -17,5 +17,46 @@
     "security": "AzureKey",
     "security-header-name": "Ocp-Apim-Subscription-Key",
     "required": true
+  },
+  "purview-metadata": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json"
+    ],
+    "group": "purview",
+    "module": "azure-analytics-purview-metadata",
+    "security-scopes": "https://purview.azure.net/.default"
+  },
+  "purview-catalog": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json"
+    ],
+    "group": "purview",
+    "module": "azure-analytics-purview-catalog",
+    "security-scopes": "https://purview.azure.net/.default"
+  },
+  "purview-scanning": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json"
+    ],
+    "group": "purview",
+    "module": "azure-analytics-purview-scanning",
+    "security-scopes": "https://purview.azure.net/.default"
+  },
+  "deviceupdate": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/deviceupdate/data-plane/Microsoft.DeviceUpdate/preview/2021-06-01-preview/deviceupdate.json"
+    ],
+    "group": "deviceupdate",
+    "module": "azure-iot-deviceupdate",
+    "security-scopes": "https://api.adu.microsoft.com/.default"
+  },
+  "webpubsub": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/webpubsub/data-plane/WebPubSub/stable/2021-10-01/webpubsub.json"
+    ],
+    "group": "webpubsub",
+    "module": "azure-messaging-webpubsub",
+    "security-scopes": "https://webpubsub.azure.com/.default",
+    "skip": true
   }
 }
