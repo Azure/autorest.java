@@ -67,7 +67,6 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.azure.autorest.fluent.util.FluentUtils.exampleIsUpdate;
 
 public class ExampleParser {
 
@@ -272,7 +271,7 @@ public class ExampleParser {
                         .findFirst().orElse(null);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                    if (methodIsCreateOrUpdate && exampleIsUpdate(entry.getKey())) {
+                    if (methodIsCreateOrUpdate && FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely a resource update example
                         logger.info("Skip possible resource update example '{}' in create", entry.getKey());
                         continue;
@@ -355,7 +354,12 @@ public class ExampleParser {
     }
 
     public static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection resourceCollection, ResourceCreate create, ProxyMethodExample example) {
-        List<MethodParameter> methodParameters = getParameters(create.getMethodReferences().iterator().next().getInnerClientMethod());
+        List<MethodParameter> methodParameters = getParameters(
+            create.getMethodReferences()
+                .stream()
+                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .findFirst().get()
+                .getInnerClientMethod());
         MethodParameter requestBodyParameter = methodParameters.stream()
             .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
             .findFirst().orElse(null);
@@ -392,7 +396,7 @@ public class ExampleParser {
                         .findFirst().orElse(null);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                    if (methodIsCreateOrUpdate && !exampleIsUpdate(entry.getKey())) {
+                    if (methodIsCreateOrUpdate && !FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely not a resource update example
                         logger.info("Skip possible resource create example '{}' in update", entry.getKey());
                         continue;
@@ -401,7 +405,6 @@ public class ExampleParser {
                     logger.info("Parse resource update example '{}'", entry.getKey());
 
                     ProxyMethodExample example = entry.getValue();
-                    String exampleName = example.getName();
                     FluentResourceUpdateExample resourceUpdateExample = parseResourceUpdate(collection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
 
                     ret.add(resourceUpdateExample);
