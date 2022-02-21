@@ -143,8 +143,7 @@ public class JavaSettings {
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
-                getBooleanValue(host, "partial-update", false),
-                getBooleanValue(host, "generate-live-tests", false)
+                getBooleanValue(host, "partial-update", false)
             );
         }
         return _instance;
@@ -237,8 +236,7 @@ public class JavaSettings {
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
-        boolean handlePartialUpdate,
-        boolean generateLiveTests) {
+        boolean handlePartialUpdate) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -322,7 +320,6 @@ public class JavaSettings {
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
 
         this.handlePartialUpdate = handlePartialUpdate;
-        this.generateLiveTests = generateLiveTests;
     }
 
     private String keyCredentialHeaderName;
@@ -757,12 +754,6 @@ public class JavaSettings {
 
     public boolean isGenerateTests() {
         return generateTests;
-    }
-
-    private final boolean generateLiveTests;
-
-    public boolean isGenerateLiveTests(){
-        return this.generateLiveTests;
     }
 
     private final boolean clientBuilderDisabled;

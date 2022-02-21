@@ -3,6 +3,7 @@
 
 package com.azure.autorest.fluent.mapper;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.mapper.PomMapper;
@@ -26,9 +27,10 @@ public class FluentPomMapper extends PomMapper {
         List<String> dependencyIdentifiers = new ArrayList<>();
         dependencyIdentifiers.add("com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion());
         dependencyIdentifiers.add("com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion());
-
-        dependencyIdentifiers.add("com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test");
-        dependencyIdentifiers.add("com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test");
+        if (JavaSettings.getInstance().isGenerateTests()) {
+            dependencyIdentifiers.add("com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test");
+            dependencyIdentifiers.add("com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test");
+        }
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith("com.azure:azure-core:")
                         && !dependencyIdentifier.startsWith("com.azure:azure-core-management:"))

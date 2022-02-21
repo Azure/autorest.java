@@ -332,8 +332,9 @@ public class FluentGen extends Javagen {
                 }
             }
 
-            // Live tests
-            if (javaSettings.isGenerateLiveTests()) {
+            // Tests
+            if (javaSettings.isGenerateTests()) {
+                // Live tests
                 for (FluentLiveTests liveTests : fluentClient.getLiveTests()) {
                     javaPackage.addLiveTests(liveTests);
                 }
