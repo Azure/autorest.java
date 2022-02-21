@@ -1,0 +1,21 @@
+{
+  "purview-account": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json"
+    ],
+    "group": "purview",
+    "module": "azure-analytics-purview-account",
+    "security-scopes": "https://purview.azure.net/.default",
+    "required": true
+  },
+  "documenttranslator": {
+    "input": [
+      "https://github.com/Azure/azure-rest-api-specs/blob/main/specification/cognitiveservices/data-plane/TranslatorText/stable/v1.0/TranslatorBatch.json"
+    ],
+    "group": "translation",
+    "module": "azure-ai-documenttranslator",
+    "security": "AzureKey",
+    "security-header-name": "Ocp-Apim-Subscription-Key",
+    "required": true
+  }
+}
