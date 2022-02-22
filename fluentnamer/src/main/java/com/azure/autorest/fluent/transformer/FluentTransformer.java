@@ -111,7 +111,7 @@ public class FluentTransformer {
     }
 
     protected CodeModel renameUngroupedOperationGroup(CodeModel codeModel, FluentJavaSettings settings) {
-        final String nameForUngroupedOperations = getNameForUngroupedOperations(codeModel, settings);
+        final String nameForUngroupedOperations = Utils.getNameForUngroupedOperations(codeModel, settings);
         if (nameForUngroupedOperations == null) {
             return codeModel;
         }
@@ -124,23 +124,6 @@ public class FluentTransformer {
                     og.getLanguage().getDefault().setName(nameForUngroupedOperations);
                 });
         return codeModel;
-    }
-
-    public static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
-        String nameForUngroupOperations = null;
-        if (settings.getNameForUngroupedOperations().isPresent()) {
-            nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
-        } else if (JavaSettings.getInstance().isFluentLite()) {
-            nameForUngroupOperations = FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
-
-            Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
-                    .map(Utils::getDefaultName)
-                    .collect(Collectors.toSet());
-            if (operationGroupNames.contains(nameForUngroupOperations)) {
-                nameForUngroupOperations += FluentConsts.DEFAULT_SUFFIX_FOR_UNGROUPED_OPERATIONS;
-            }
-        }
-        return nameForUngroupOperations;
     }
 
     /**

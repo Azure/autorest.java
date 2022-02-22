@@ -299,43 +299,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
-            builder.liveTests(parseLiveTests(codeModel.getTestModel()));
+            builder.liveTests(LiveTestsMapper.getInstance().map(codeModel.getTestModel()));
         }
 
         return builder.build();
-    }
-
-    private List<LiveTests> parseLiveTests(TestModel testModel) {
-        if (testModel.getScenarioTests() == null) {
-            return Lists.newArrayList();
-        }
-        return testModel.getScenarioTests().stream().map(scenarioTest -> {
-            LiveTests liveTests = new LiveTests(getFilename(scenarioTest.getFilePath()));
-            liveTests.addTestCases(scenarioTest.getScenarios().stream().map(testScenario -> {
-                LiveTestCase liveTestCase = new LiveTestCase(CodeNamer.toCamelCase(testScenario.getScenario()));
-                liveTestCase.addTestSteps(testScenario.getResolvedSteps().stream().map((Function<ScenarioStep, LiveTestStep>) scenarioStep -> {
-                    // future work: support other step types, for now only support example file
-                    if (scenarioStep.getType() != TestScenarioStepType.REST_CALL ||
-                        scenarioStep.getExampleFile() == null) {
-                        throw new UnsupportedOperationException(String.format("Scenario test step: %s is not supported", scenarioStep.getType()));
-                    }
-                    Map<String, Object> example = new HashMap<>();
-                    example.put("parameters", scenarioStep.getRequestParameters());
-                    XmsExampleWrapper exampleWrapper = new XmsExampleWrapper(example, scenarioStep.getOperationId(), scenarioStep.getExampleName());
-                    ProxyMethodExample proxyMethodExample = ProxyMethodExampleMapper.getInstance().map(exampleWrapper);
-                    return new ExampleLiveTestStep(scenarioStep.getOperationId(), proxyMethodExample);
-                }).collect(Collectors.toList()));
-                return liveTestCase;
-            }).collect(Collectors.toList()));
-            return liveTests;
-        }).collect(Collectors.toList());
-    }
-
-    private static String getFilename(String filePath) {
-        String[] split = filePath.replaceAll("\\\\", "/").split("/");
-        String filename = split[split.length - 1];
-        filename = filename.split("\\.")[0];
-        return CodeNamer.toCamelCase(filename);
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {

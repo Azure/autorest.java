@@ -15,41 +15,21 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
-import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
-import com.azure.autorest.fluent.model.clientmodel.FluentExampleLiveTestStep;
-import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestCase;
-import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
-import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
-import com.azure.autorest.fluent.template.FluentExampleTemplate;
-import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
-import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ExampleLiveTestStep;
-import com.azure.autorest.model.clientmodel.LiveTestCase;
-import com.azure.autorest.model.clientmodel.LiveTestStep;
-import com.azure.autorest.model.clientmodel.LiveTests;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
-import com.azure.autorest.model.clientmodel.ProxyMethodExample;
-import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -59,7 +39,6 @@ public class FluentMapper {
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentMapper.class);
 
     private final FluentJavaSettings fluentJavaSettings;
-    private final FluentExampleTemplate fluentExampleTemplate = FluentExampleTemplate.getInstance();
 
     public FluentMapper(FluentJavaSettings fluentJavaSettings) {
         this.fluentJavaSettings = fluentJavaSettings;
@@ -89,106 +68,9 @@ public class FluentMapper {
         }
 
         // live tests
-        fluentClient.getLiveTests().addAll(client.getLiveTests().stream().map(liveTests -> mapLiveTests(liveTests, fluentClient, codeModel)).collect(Collectors.toList()));
+        fluentClient.getLiveTests().addAll(client.getLiveTests().stream().map(liveTests -> FluentLiveTestsMapper.getInstance().map(liveTests, fluentClient, codeModel, fluentJavaSettings)).collect(Collectors.toList()));
 
         return fluentClient;
-    }
-
-    private FluentLiveTests mapLiveTests(LiveTests liveTests, FluentClient fluentClient, CodeModel codeModel) {
-
-        FluentLiveTests.Builder resultBuilder = FluentLiveTests.newBuilder();
-
-        resultBuilder.className(liveTests.getFilename() + "Tests");
-
-        parseLiveTests: for (LiveTestCase liveTestCase : liveTests.getTestCases()) {
-            FluentLiveTestCase testCase = new FluentLiveTestCase(liveTestCase.getName());
-            for (LiveTestStep liveTestStep : liveTestCase.getTestSteps()) {
-                if (liveTestStep instanceof ExampleLiveTestStep) {
-                    ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) liveTestStep;
-                    String operationId = exampleStep.getOperationId();
-                    String[] oprs = getOperationGroupPair(operationId, codeModel);
-                    String operationGroup = oprs[0];
-                    String operation = oprs[1];
-                    ProxyMethodExample example = exampleStep.getExample();
-                    FluentResourceCollection resourceCollection = findResourceCollection(fluentClient, operationGroup);
-
-                    FluentExampleTemplate.ExampleMethod exampleMethod = null;
-
-                    // find collectionMethod
-                    Optional<FluentCollectionMethod> collectionMethodOptional = findCollectionMethod(resourceCollection, operation);
-                    if (collectionMethodOptional.isPresent()) {
-                        FluentCollectionMethod collectionMethod = collectionMethodOptional.get();
-                        FluentCollectionMethodExample collectionMethodExample = ExampleParser.parseMethodExample(resourceCollection, collectionMethod, example);
-                        exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
-                        setExampleStepFeatures(resultBuilder, testCase, collectionMethodExample, exampleMethod);
-                    } else {
-                        // find resourceCreate
-                        Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
-                        if (createMethod.isPresent()) {
-                            ResourceCreate create = createMethod.get();
-                            FluentResourceCreateExample createExample = ExampleParser.parseResourceCreate(resourceCollection, create, example);
-                            exampleMethod = fluentExampleTemplate.generateExampleMethod(createExample);
-                            setExampleStepFeatures(resultBuilder, testCase, createExample, exampleMethod);
-                        } else {
-                            // find resourceUpdate
-                            Optional<ResourceUpdate> updateMethod = resourceCollection.getResourceUpdates().stream().filter(rc -> FluentUtils.exampleIsUpdate(rc.getMethodName()) && rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
-                            if (updateMethod.isPresent()) {
-                                ResourceUpdate update = updateMethod.get();
-                                FluentResourceUpdateExample updateExample = ExampleParser.parseResourceUpdate(resourceCollection, update, example);
-                                if (updateExample == null) {
-                                    continue parseLiveTests;
-                                }
-                                exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
-                                setExampleStepFeatures(resultBuilder, testCase, updateExample, exampleMethod);
-                            }
-                        }
-                    }
-                    if (exampleMethod != null) {
-                        testCase.getSteps().add( new FluentExampleLiveTestStep(exampleMethod));
-                        resultBuilder.addHelperFeatures(testCase.getHelperFeatures());
-                    } else {
-                        // can't find method, ignore the whole test case altogether
-                        logger.warn(String.format("Operation : %s not found, ignore this test case.", operationId));
-                        continue parseLiveTests;
-                    }
-                } else {
-                    continue parseLiveTests;
-                }
-            }
-
-            resultBuilder.addTestCase(testCase);
-
-        }
-
-        return resultBuilder.build();
-    }
-
-    private String[] getOperationGroupPair(String operationId, CodeModel codeModel) {
-        if (!operationId.contains("_")){
-            return new String[]{FluentTransformer.getNameForUngroupedOperations(codeModel, fluentJavaSettings), operationId};
-        }
-        return operationId.split("_");
-    }
-
-    private void setExampleStepFeatures(FluentLiveTests.Builder resultBuilder, FluentLiveTestCase testCase, com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample fluentExample, FluentExampleTemplate.ExampleMethod exampleMethod) {
-        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
-        resultBuilder.addImports(exampleMethod.getImports())
-            .managerName(fluentExample.getEntryName())
-            .managerType(fluentExample.getEntryType());
-    }
-
-    private FluentResourceCollection findResourceCollection(FluentClient fluentClient, String operationGroup) {
-        return fluentClient.getResourceCollections().stream().filter(collection -> collection.getInterfaceType().getName().equalsIgnoreCase(CodeNamer.getPlural(operationGroup))).findFirst().get();
-    }
-
-    private Optional<FluentCollectionMethod> findCollectionMethod(FluentResourceCollection resourceCollection, String operation) {
-        return resourceCollection.getMethodsForTemplate().stream().filter(m -> operation.equalsIgnoreCase(m.getMethodName())).findFirst();
-    }
-
-    private Optional<ResourceCreate> findResourceCreate(FluentResourceCollection resourceCollection, String operation) {
-        return resourceCollection.getResourceCreates().stream().filter(rc ->
-            !FluentUtils.exampleIsUpdate(rc.getMethodName()) &&
-                rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
     }
 
     FluentClient basicMap(CodeModel codeModel, Client client) {

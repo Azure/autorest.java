@@ -3,12 +3,16 @@
 
 package com.azure.autorest.fluent.util;
 
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -57,5 +61,22 @@ public class Utils {
 
             clazz = clazz.getSuperclass();
         }
+    }
+
+    public static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
+        String nameForUngroupOperations = null;
+        if (settings.getNameForUngroupedOperations().isPresent()) {
+            nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
+        } else if (JavaSettings.getInstance().isFluentLite()) {
+            nameForUngroupOperations = FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
+
+            Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
+                .map(Utils::getDefaultName)
+                .collect(Collectors.toSet());
+            if (operationGroupNames.contains(nameForUngroupOperations)) {
+                nameForUngroupOperations += FluentConsts.ANTI_CONFLICT_SUFFIX_FOR_UNGROUPED_OPERATIONS;
+            }
+        }
+        return nameForUngroupOperations;
     }
 }

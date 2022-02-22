@@ -6,7 +6,11 @@ package com.azure.autorest.fluent.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.fluent.util.FluentConsts;
+import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -71,7 +75,9 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
         return super.operationGroupNotNull(operation, settings)
             // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
-            // future works: also need to check for "nameForUngroupedOperations" in FluentJavaSettings as it overrides the default "ResourceProvider"
-            && !(settings.isFluent() && FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS.equals(operation.getOperationGroup().getLanguage().getDefault().getName()));
+            && !(
+                settings.isFluent()
+                    && Utils.getNameForUngroupedOperations(operation.getOperationGroup().getCodeModel(), FluentStatic.getFluentJavaSettings()).equals(operation.getOperationGroup().getLanguage().getDefault().getName())
+            );
     }
 }
