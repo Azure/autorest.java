@@ -310,12 +310,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             return Lists.newArrayList();
         }
         return testModel.getScenarioTests().stream().map(scenarioTest -> {
-            LiveTests liveTests = new LiveTests();
-            liveTests.setFilename(getFilename(scenarioTest.getFilePath()));
-            liveTests.setTestCases(scenarioTest.getScenarios().stream().map(testScenario -> {
-                LiveTestCase liveTestCase = new LiveTestCase();
-                liveTestCase.setName(CodeNamer.toCamelCase(testScenario.getScenario()));
-                liveTestCase.setTestSteps(testScenario.getResolvedSteps().stream().map((Function<ScenarioStep, LiveTestStep>) scenarioStep -> {
+            LiveTests liveTests = new LiveTests(getFilename(scenarioTest.getFilePath()));
+            liveTests.addTestCases(scenarioTest.getScenarios().stream().map(testScenario -> {
+                LiveTestCase liveTestCase = new LiveTestCase(CodeNamer.toCamelCase(testScenario.getScenario()));
+                liveTestCase.addTestSteps(testScenario.getResolvedSteps().stream().map((Function<ScenarioStep, LiveTestStep>) scenarioStep -> {
                     // future work: support other step types, for now only support example file
                     if (scenarioStep.getType() != TestScenarioStepType.REST_CALL ||
                         scenarioStep.getExampleFile() == null) {

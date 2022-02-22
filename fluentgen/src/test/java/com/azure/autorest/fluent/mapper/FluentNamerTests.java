@@ -36,7 +36,7 @@ public class FluentNamerTests {
         Client client = FluentStatic.getClient();
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
-        // exist operation without operation group and exist also operation group name "ResourceProvider"
+        // exist operation without operation group and also operation group named "ResourceProvider", this case, null operation group is named "ResourceProviderOperation" to avoid confliction
         Assertions.assertTrue(fluentClient.getResourceCollections().stream().anyMatch(collection -> collection.getInterfaceType().getName().equals(CodeNamer.getPlural(FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS))));
         // exist operation without operation group
         Assertions.assertTrue(fluentClient.getResourceCollections().stream().anyMatch(collection -> collection.getInterfaceType().getName().equals(CodeNamer.getPlural(FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS + FluentConsts.DEFAULT_SUFFIX_FOR_UNGROUPED_OPERATIONS))));

@@ -5,26 +5,31 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LiveTests {
 
-    private String filename;
-    private List<LiveTestCase> testCases;
+    private final String filename;
+    private final List<LiveTestCase> testCases = new ArrayList<>();
+
+    public LiveTests(String filename) {
+        this.filename = filename;
+    }
 
     public String getFilename() {
         return filename;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
     public List<LiveTestCase> getTestCases() {
-        return testCases;
+        return Collections.unmodifiableList(testCases);
     }
 
-    public void setTestCases(List<LiveTestCase> testCases) {
-        this.testCases = testCases;
+    public void addTestCases(List<LiveTestCase> testCases){
+        if (testCases != null) {
+            this.testCases.addAll(testCases);
+        }
     }
+
 }
