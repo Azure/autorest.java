@@ -13,6 +13,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.util.FluentConsts;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
@@ -125,18 +126,18 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    private static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
+    public static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
         String nameForUngroupOperations = null;
         if (settings.getNameForUngroupedOperations().isPresent()) {
             nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
         } else if (JavaSettings.getInstance().isFluentLite()) {
-            nameForUngroupOperations = "ResourceProvider";
+            nameForUngroupOperations = FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
 
             Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
                     .map(Utils::getDefaultName)
                     .collect(Collectors.toSet());
             if (operationGroupNames.contains(nameForUngroupOperations)) {
-                nameForUngroupOperations += "Operation";
+                nameForUngroupOperations += FluentConsts.DEFAULT_SUFFIX_FOR_UNGROUPED_OPERATIONS;
             }
         }
         return nameForUngroupOperations;

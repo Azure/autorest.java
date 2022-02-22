@@ -8,7 +8,7 @@ package com.azure.autorest.model.clientmodel;
 public class ExampleLiveTestStep extends LiveTestStep{
 
     private final String operationId;
-    private ProxyMethodExample example;
+    private final ProxyMethodExample example;
 
     public ExampleLiveTestStep(String operationId, ProxyMethodExample example) {
         this.operationId = operationId;
@@ -21,9 +21,5 @@ public class ExampleLiveTestStep extends LiveTestStep{
 
     public ProxyMethodExample getExample() {
         return example;
-    }
-
-    public void setExample(ProxyMethodExample example) {
-        this.example = example;
     }
 }

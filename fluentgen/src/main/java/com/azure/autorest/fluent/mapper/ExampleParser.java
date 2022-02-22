@@ -468,7 +468,13 @@ public class ExampleParser {
             return null;
         }
         List<MethodParameter> resourceGetMethodParameters = getParameters(resourceGetMethod.getInnerClientMethod());
-        List<MethodParameter> methodParameters = getParameters(resourceUpdate.getMethodReferences().iterator().next().getInnerClientMethod());
+        List<MethodParameter> methodParameters = getParameters(
+            resourceUpdate.getMethodReferences()
+                .stream()
+                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .findFirst().get()
+                .getInnerClientMethod()
+        );
         MethodParameter requestBodyParameter = methodParameters.stream()
             .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
             .findFirst().orElse(null);

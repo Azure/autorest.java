@@ -16,14 +16,14 @@ public class FluentLiveTestCase {
 
     private final Set<FluentExampleTemplate.HelperFeature> helperFeatures = new HashSet<>();
     private final List<FluentLiveTestStep> steps = new ArrayList<>();
-    private String methodName;
+    private final String methodName;
+
+    public FluentLiveTestCase(String methodName) {
+        this.methodName = methodName;
+    }
 
     public String getMethodName() {
         return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
     }
 
     public Set<FluentExampleTemplate.HelperFeature> getHelperFeatures() {

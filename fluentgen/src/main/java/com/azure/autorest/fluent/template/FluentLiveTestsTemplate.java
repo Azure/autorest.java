@@ -7,7 +7,6 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.util.CodeNamer;
 import com.google.common.collect.Lists;
 
 public class FluentLiveTestsTemplate {
@@ -24,14 +23,14 @@ public class FluentLiveTestsTemplate {
         javaFile.publicClass(Lists.newArrayList(), liveTests.getClassName(), classBlock->{
             for (FluentLiveTestCase testCase : liveTests.getTestCases()) {
                 // write manager field
-                classBlock.privateMemberVariable(liveTests.getEntryType().getName(), liveTests.getEntryName());
+                classBlock.privateMemberVariable(liveTests.getManagerType().getName(), liveTests.getManagerName());
                 // write @BeforeEach
                 classBlock.annotation("BeforeEach");
                 classBlock.publicMethod("void init()", methodBlock -> {
                     methodBlock.line(
                             String.format("%s = %s.authenticate(" +
                                     "new DefaultAzureCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE)" +
-                                    ");", liveTests.getEntryName(), liveTests.getEntryType().getName())
+                                    ");", liveTests.getManagerName(), liveTests.getManagerType().getName())
                     );
                 });
                 // write method signature
@@ -58,7 +57,7 @@ public class FluentLiveTestsTemplate {
 
     private void addImports(FluentLiveTests liveTests, JavaFile javaFile) {
         javaFile.declareImport(liveTests.getImports());
-        javaFile.declareImport(liveTests.getEntryType().getFullName());
+        javaFile.declareImport(liveTests.getManagerType().getFullName());
         javaFile.declareImport("org.junit.jupiter.api.Test", "org.junit.jupiter.api.BeforeEach");
         javaFile.declareImport("com.azure.identity.DefaultAzureCredentialBuilder", "com.azure.core.management.profile.AzureProfile", "com.azure.core.management.AzureEnvironment");
     }

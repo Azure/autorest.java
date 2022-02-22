@@ -9,13 +9,14 @@ import com.azure.autorest.fluent.template.FluentExampleTemplate;
 
 public class FluentExampleLiveTestStep extends FluentLiveTestStep {
 
-    private FluentExampleTemplate.ExampleMethod exampleMethod;
+    private final FluentExampleTemplate.ExampleMethod exampleMethod;
+
+    public FluentExampleLiveTestStep(FluentExampleTemplate.ExampleMethod exampleMethod) {
+        this.exampleMethod = exampleMethod;
+    }
 
     public FluentExampleTemplate.ExampleMethod getExampleMethod() {
         return exampleMethod;
     }
 
-    public void setExampleMethod(FluentExampleTemplate.ExampleMethod exampleMethod) {
-        this.exampleMethod = exampleMethod;
-    }
 }
