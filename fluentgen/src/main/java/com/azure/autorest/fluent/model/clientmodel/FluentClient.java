@@ -4,7 +4,6 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.LiveTests;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 
 import java.util.ArrayList;

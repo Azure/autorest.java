@@ -1,7 +1,5 @@
-/*
- * // Copyright (c) Microsoft Corporation. All rights reserved.
- * // Licensed under the MIT License.
- */
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 package com.azure.autorest.model.clientmodel;
 
@@ -18,6 +16,10 @@ public class LiveTestCase {
     public LiveTestCase(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void addTestSteps(List<LiveTestStep> testSteps) {

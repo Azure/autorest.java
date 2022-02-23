@@ -1,11 +1,12 @@
-/*
- * // Copyright (c) Microsoft Corporation. All rights reserved.
- * // Licensed under the MIT License.
- */
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.fluent.model.clientmodel.*;
+import com.azure.autorest.fluent.model.clientmodel.FluentExampleLiveTestStep;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestCase;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestStep;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.util.CoreUtils;
 import com.google.common.collect.Lists;
@@ -37,7 +38,7 @@ public class FluentLiveTestsTemplate {
                 // write method signature
                 classBlock.annotation("Test");
                 classBlock.annotation("DoNotRecord(skipInPlayback = true)");
-                String methodSignature = String.format("%s %s()", "void", testCase.getMethodName());
+                String methodSignature = String.format("%s %s()", "void", getTestMethodName(testCase.getMethodName()));
                 if (testCase.getHelperFeatures().contains(FluentExampleTemplate.HelperFeature.ThrowsIOException)) {
                     methodSignature += " throws IOException";
                 }
@@ -58,6 +59,10 @@ public class FluentLiveTestsTemplate {
                 FluentExampleTemplate.getInstance().writeMapOfMethod(classBlock);
             }
         });
+    }
+
+    private String getTestMethodName(String methodName) {
+        return methodName.endsWith("Test") ? methodName : methodName + "Test";
     }
 
     private void addImports(FluentLiveTests liveTests, JavaFile javaFile) {
