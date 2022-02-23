@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -89,9 +88,9 @@ public class FluentLiveTests {
             return this;
         }
 
-        public Builder addTestCase(FluentLiveTestCase testCase) {
+        public Builder addTestCases(Collection<FluentLiveTestCase> testCase) {
             if (testCase != null) {
-                this.testCases.add(testCase);
+                this.testCases.addAll(testCase);
             }
             return this;
         }

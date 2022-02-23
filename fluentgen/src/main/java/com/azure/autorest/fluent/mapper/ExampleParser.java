@@ -56,6 +56,7 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -226,7 +227,8 @@ public class ExampleParser {
         return collectionMethodExample;
     }
 
-    public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod, ProxyMethodExample example) {
+    public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, Collection<FluentCollectionMethod> collectionMethods, ProxyMethodExample example) {
+        FluentCollectionMethod collectionMethod = collectionMethods.stream().filter(method -> requiresExample(method.getInnerClientMethod())).findFirst().get();
         return parseMethodForExample(resourceCollection, collectionMethod, getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
     }
 

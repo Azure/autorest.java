@@ -13,9 +13,11 @@ public class LiveTestCase {
 
     private final String name;
     private final List<LiveTestStep> testSteps = new ArrayList<>();
+    private final String description;
 
-    public LiveTestCase(String name) {
+    public LiveTestCase(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public void addTestSteps(List<LiveTestStep> testSteps) {

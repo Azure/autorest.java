@@ -30,6 +30,7 @@ public class FluentPomMapper extends PomMapper {
         if (JavaSettings.getInstance().isGenerateTests()) {
             dependencyIdentifiers.add("com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test");
             dependencyIdentifiers.add("com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test");
+            dependencyIdentifiers.add("org.slf4j:slf4j-simple:" + project.getPackageVersions().getSlf4jSimple() + ":test");
         }
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith("com.azure:azure-core:")

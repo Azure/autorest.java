@@ -9,10 +9,28 @@ import com.azure.autorest.fluent.template.FluentExampleTemplate;
 
 public class FluentExampleLiveTestStep extends FluentLiveTestStep {
 
-    private final FluentExampleTemplate.ExampleMethod exampleMethod;
+    private FluentExampleTemplate.ExampleMethod exampleMethod;
 
-    public FluentExampleLiveTestStep(FluentExampleTemplate.ExampleMethod exampleMethod) {
-        this.exampleMethod = exampleMethod;
+    public static Builder newBuilder(){
+        return new Builder();
+    }
+
+    public static class Builder extends FluentLiveTestStep.Builder<FluentExampleLiveTestStep, Builder> {
+
+        private Builder(){
+            super(new FluentExampleLiveTestStep());
+        }
+
+        public Builder exampleMethod(FluentExampleTemplate.ExampleMethod exampleMethod) {
+            getStep().exampleMethod = exampleMethod;
+            return this;
+        }
+
+        @Override
+        protected Builder getThis() {
+            return this;
+        }
+
     }
 
     public FluentExampleTemplate.ExampleMethod getExampleMethod() {

@@ -172,7 +172,7 @@ globalParameters:
           SignalRPrivateLinkResources_List:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               resourceName: mySignalRService, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateLinkResources_List.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateLinkResources_List.json
             responses:
               '200':
                 body:
@@ -3058,7 +3058,7 @@ operationGroups:
         examples:
           Operations_List:
             parameters: {api-version: 2020-07-01-preview}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/Operations_List.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/Operations_List.json
             responses:
               '200':
                 body:
@@ -3937,7 +3937,7 @@ operationGroups:
               location: eastus
               parameters: {name: my-signalr-service, type: Microsoft.SignalRService/SignalR}
               subscriptionId: 00000000-0000-0000-0000-000000000000
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_CheckNameAvailability.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_CheckNameAvailability.json
             responses:
               '200':
                 body: {message: The leaf is already used by other people, nameAvailable: false,
@@ -4175,7 +4175,7 @@ operationGroups:
         examples:
           SignalR_ListBySubscription:
             parameters: {api-version: 2020-07-01-preview, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListBySubscription.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListBySubscription.json
             responses:
               '200':
                 body:
@@ -4412,7 +4412,7 @@ operationGroups:
           SignalR_ListByResourceGroup:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListByResourceGroup.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListByResourceGroup.json
             responses:
               '200':
                 body:
@@ -4604,7 +4604,7 @@ operationGroups:
           SignalR_Get:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               resourceName: mySignalRService, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Get.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Get.json
             responses:
               '200':
                 body:
@@ -4806,9 +4806,9 @@ operationGroups:
                 sku: {name: Standard_S1, capacity: 1, tier: Standard}
                 tags: {key1: value1}
               resourceGroupName: myResourceGroup
-              resourceName: mySignalRService123xx
+              resourceName: mySignalRService
               subscriptionId: 00000000-0000-0000-0000-000000000000
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_CreateOrUpdate.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_CreateOrUpdate.json
             responses:
               '200':
                 body:
@@ -4833,7 +4833,7 @@ operationGroups:
                     - flag: EnableMessagingLogs
                       properties: {}
                       value: 'False'
-                    hostName: mysignalrservice123.service.signalr.net
+                    hostName: mysignalrservice.service.signalr.net
                     networkACLs:
                       defaultAction: Deny
                       privateEndpoints:
@@ -4890,7 +4890,7 @@ operationGroups:
                     networkACLs:
                       defaultAction: Deny
                       privateEndpoints:
-                      - name: mySignalRService123.1fa229cd-bf3f-47f0-8c49-afb36723997e
+                      - name: mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e
                         allow: [ServerConnection]
                         deny: null
                       publicNetwork:
@@ -5065,7 +5065,7 @@ operationGroups:
           SignalR_Delete:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               resourceName: mySignalRService, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Delete.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Delete.json
             responses:
               '202':
                 headers: {Azure-AsyncOperation: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus...',
@@ -5224,7 +5224,7 @@ operationGroups:
               resourceGroupName: myResourceGroup
               resourceName: mySignalRService
               subscriptionId: 00000000-0000-0000-0000-000000000000
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Update.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Update.json
             responses:
               '200':
                 body:
@@ -5416,7 +5416,7 @@ operationGroups:
           SignalR_ListKeys:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               resourceName: mySignalRService, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListKeys.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_ListKeys.json
             responses:
               '200':
                 body: {primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;Version=1.0',
@@ -5517,8 +5517,6 @@ operationGroups:
         minProperties: 0.0
         properties:
         - apiVersions: []
-          extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
           isDiscriminator: false
           language:
             default: {description: The primary access key., name: primaryKey}
@@ -5530,8 +5528,6 @@ operationGroups:
           schema: &id247 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
             - {version: 2020-07-01-preview}
-            extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-              xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
             language:
               default: {description: The primary access key., name: SignalRKeysPrimaryKey}
             maxLength: 0.0
@@ -5540,8 +5536,6 @@ operationGroups:
             type: STRING
           serializedName: primaryKey
         - apiVersions: []
-          extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
           isDiscriminator: false
           language:
             default: {description: The secondary access key., name: secondaryKey}
@@ -5553,8 +5547,6 @@ operationGroups:
           schema: &id248 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
             - {version: 2020-07-01-preview}
-            extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-              xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
             language:
               default: {description: The secondary access key., name: SignalRKeysSecondaryKey}
             maxLength: 0.0
@@ -5563,8 +5555,6 @@ operationGroups:
             type: STRING
           serializedName: secondaryKey
         - apiVersions: []
-          extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
           isDiscriminator: false
           language:
             default: {description: Connection string constructed via the primaryKey,
@@ -5578,8 +5568,6 @@ operationGroups:
           schema: &id249 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
             - {version: 2020-07-01-preview}
-            extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-              xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
             language:
               default: {description: Connection string constructed via the primaryKey,
                 name: SignalRKeysPrimaryConnectionString}
@@ -5589,8 +5577,6 @@ operationGroups:
             type: STRING
           serializedName: primaryConnectionString
         - apiVersions: []
-          extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-            xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
           isDiscriminator: false
           language:
             default: {description: Connection string constructed via the secondaryKey,
@@ -5604,8 +5590,6 @@ operationGroups:
           schema: &id250 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
             apiVersions:
             - {version: 2020-07-01-preview}
-            extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
-              xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
             language:
               default: {description: Connection string constructed via the secondaryKey,
                 name: SignalRKeysSecondaryConnectionString}
@@ -5645,7 +5629,7 @@ operationGroups:
               resourceGroupName: myResourceGroup
               resourceName: mySignalRService
               subscriptionId: 00000000-0000-0000-0000-000000000000
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_RegenerateKey.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_RegenerateKey.json
             responses:
               '201':
                 body: {primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;Version=1.0;',
@@ -5829,7 +5813,7 @@ operationGroups:
           SignalR_Restart:
             parameters: {api-version: 2020-07-01-preview, resourceGroupName: myResourceGroup,
               resourceName: mySignalRService, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Restart.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalR_Restart.json
             responses:
               '202':
                 headers: {Azure-AsyncOperation: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus...',
@@ -5957,7 +5941,7 @@ operationGroups:
         examples:
           Usages_List:
             parameters: {api-version: 2020-07-01-preview, location: eastus, subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/Usages_List.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/Usages_List.json
             responses:
               '200':
                 body:
@@ -6356,7 +6340,7 @@ operationGroups:
             parameters: {api-version: 2020-07-01-preview, privateEndpointConnectionName: mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e,
               resourceGroupName: myResourceGroup, resourceName: mySignalRService,
               subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Get.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Get.json
             responses:
               '200':
                 body:
@@ -6505,7 +6489,7 @@ operationGroups:
               resourceGroupName: myResourceGroup
               resourceName: mySignalRService
               subscriptionId: 00000000-0000-0000-0000-000000000000
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Update.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Update.json
             responses:
               '200':
                 body:
@@ -6669,7 +6653,7 @@ operationGroups:
             parameters: {api-version: 2020-07-01-preview, privateEndpointConnectionName: mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e,
               resourceGroupName: myResourceGroup, resourceName: mySignalRService,
               subscriptionId: 00000000-0000-0000-0000-000000000000}
-            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Delete.json
+            x-ms-original-file: file:///C:/Users/xiaofeicao/projects/fork/scenario/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/examples/SignalRPrivateEndpointConnections_Delete.json
             responses:
               '202':
                 headers: {Azure-AsyncOperation: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus...',
@@ -6994,16 +6978,28 @@ security:
   schemes: []
 testModel:
   scenarioTests:
-  - filePath: ..\..\azure-rest-api-specs\specification\signalr\resource-manager\Microsoft.SignalRService\preview\2020-07-01-preview\test-scenarios\signalR.yaml
+  - filePath: ..\..\scenario\azure-rest-api-specs\specification\signalr\resource-manager\Microsoft.SignalRService\preview\2020-07-01-preview\scenarios\signalR.yaml
     requiredVariables: [subscriptionId, location]
     requiredVariablesDefault: {location: westus, resourceGroupName: scenarioTestTempGroup,
       subscriptionId: 00000000-00000000-00000000-00000000}
     scenarios:
-    - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
+    - description: Microsoft.SignalRService/Basic_CRUD
       requiredVariables: [subscriptionId, location]
       requiredVariablesDefault: {location: westus, subscriptionId: 00000000-00000000-00000000-00000000}
       resolvedSteps:
-      - exampleFile: ../examples/SignalR_CreateOrUpdate.json
+      - {type: STEP_ARM_TEMPLATE}
+      - description: check name availability
+        exampleFile: ../examples/SignalR_CheckNameAvailability.json
+        exampleName: SignalR_CheckNameAvailability
+        operationId: SignalR_CheckNameAvailability
+        requestParameters:
+          api-version: 2020-07-01-preview
+          location: $(location)
+          parameters: {name: $(resourceName), type: Microsoft.SignalRService/SignalR}
+          subscriptionId: $(subscriptionId)
+        type: REST_CALL
+      - description: put signalR resource
+        exampleFile: ../examples/SignalR_CreateOrUpdate.json
         exampleName: SignalR_CreateOrUpdate
         operationId: SignalR_CreateOrUpdate
         requestParameters:
@@ -7028,7 +7024,7 @@ testModel:
               networkACLs:
                 defaultAction: Deny
                 privateEndpoints:
-                - name: mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e
+                - name: $(resourceName).1fa229cd-bf3f-47f0-8c49-afb36723997e
                   allow: [ServerConnection]
                   deny: null
                 publicNetwork:
@@ -7047,16 +7043,18 @@ testModel:
             sku: {name: Standard_S1, capacity: 1, tier: Standard}
             tags: {key1: value1}
           resourceGroupName: $(resourceGroupName)
-          resourceName: mySignalRService123xx
+          resourceName: $(resourceName)
           subscriptionId: $(subscriptionId)
         type: REST_CALL
-      - exampleFile: ../examples/SignalR_Delete.json
-        exampleName: SignalR_Delete
-        operationId: SignalR_Delete
+      - description: get signalR resource
+        exampleFile: ../examples/SignalR_Get.json
+        exampleName: SignalR_Get
+        operationId: SignalR_Get
         requestParameters: {api-version: 2020-07-01-preview, resourceGroupName: $(resourceGroupName),
-          resourceName: mySignalRService, subscriptionId: $(subscriptionId)}
+          resourceName: $(resourceName), subscriptionId: $(subscriptionId)}
         type: REST_CALL
-      - exampleFile: ../examples/SignalR_Update.json
+      - description: update signalR resource
+        exampleFile: ../examples/SignalR_Update.json
         exampleName: SignalR_Update
         operationId: SignalR_Update
         requestParameters:
@@ -7081,7 +7079,7 @@ testModel:
               networkACLs:
                 defaultAction: Deny
                 privateEndpoints:
-                - name: mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e
+                - name: $(resourceName).1fa229cd-bf3f-47f0-8c49-afb36723997e
                   allow: [ServerConnection]
                   deny: null
                 publicNetwork:
@@ -7100,10 +7098,68 @@ testModel:
             sku: {name: Standard_S1, capacity: 1, tier: Standard}
             tags: {key1: value1}
           resourceGroupName: $(resourceGroupName)
-          resourceName: mySignalRService
+          resourceName: $(resourceName)
           subscriptionId: $(subscriptionId)
         type: REST_CALL
-      scenario: quickStart
+      - description: list keys
+        exampleFile: ../examples/SignalR_ListKeys.json
+        exampleName: SignalR_ListKeys
+        operationId: SignalR_ListKeys
+        requestParameters: {api-version: 2020-07-01-preview, resourceGroupName: $(resourceGroupName),
+          resourceName: $(resourceName), subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      - description: regenerate key
+        exampleFile: ../examples/SignalR_RegenerateKey.json
+        exampleName: SignalR_RegenerateKey
+        operationId: SignalR_RegenerateKey
+        requestParameters:
+          api-version: 2020-07-01-preview
+          parameters: {keyType: Primary}
+          resourceGroupName: $(resourceGroupName)
+          resourceName: $(resourceName)
+          subscriptionId: $(subscriptionId)
+        type: REST_CALL
+      - description: restart
+        exampleFile: ../examples/SignalR_Restart.json
+        exampleName: SignalR_Restart
+        operationId: SignalR_Restart
+        requestParameters: {api-version: 2020-07-01-preview, resourceGroupName: $(resourceGroupName),
+          resourceName: $(resourceName), subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      - description: list usages
+        exampleFile: ../examples/Usages_List.json
+        exampleName: Usages_List
+        operationId: Usages_List
+        requestParameters: {api-version: 2020-07-01-preview, location: $(location),
+          subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      - description: list by resource group
+        exampleFile: ../examples/SignalR_ListByResourceGroup.json
+        exampleName: SignalR_ListByResourceGroup
+        operationId: SignalR_ListByResourceGroup
+        requestParameters: {api-version: 2020-07-01-preview, resourceGroupName: $(resourceGroupName),
+          subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      - description: list by subscription
+        exampleFile: ../examples/SignalR_ListBySubscription.json
+        exampleName: SignalR_ListBySubscription
+        operationId: SignalR_ListBySubscription
+        requestParameters: {api-version: 2020-07-01-preview, subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      - description: list operations
+        exampleFile: ../examples/Operations_List.json
+        exampleName: Operations_List
+        operationId: Operations_List
+        requestParameters: {api-version: 2020-07-01-preview}
+        type: REST_CALL
+      - description: delete
+        exampleFile: ../examples/SignalR_Delete.json
+        exampleName: SignalR_Delete
+        operationId: SignalR_Delete
+        requestParameters: {api-version: 2020-07-01-preview, resourceGroupName: $(resourceGroupName),
+          resourceName: $(resourceName), subscriptionId: $(subscriptionId)}
+        type: REST_CALL
+      scenario: SignalR
       shareScope: true
     scope: RESOURCE_GROUP
-    useArmTemplate: false
+    useArmTemplate: true
