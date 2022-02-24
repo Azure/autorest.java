@@ -1,6 +1,9 @@
 # default
 *                           @weidongxu-microsoft @srnagar
 
+# Git Hub bot rules
+/.github/fabricbot.json     @AlexGhiondea @jsquire
+
 # fluentgen
 /fluent*                    @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
 /azure-tests                @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
