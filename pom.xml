@@ -238,6 +238,17 @@
         <module>./fluent-tests</module>
       </modules>
     </profile>
+    <profile>
+      <id>testScenario</id>
+      <activation>
+        <property>
+          <name>testScenario</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./scenario-tests</module>
+      </modules>
+    </profile>
   </profiles>
 
 </project>
