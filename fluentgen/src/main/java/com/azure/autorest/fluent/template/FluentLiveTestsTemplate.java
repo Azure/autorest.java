@@ -36,6 +36,9 @@ public class FluentLiveTestsTemplate {
                             ");", liveTests.getManagerName(), liveTests.getManagerType().getName())
                 ));
                 // write method signature
+                if (!CoreUtils.isNullOrEmpty(testCase.getDescription())) {
+                    classBlock.javadocComment(testCase.getDescription());
+                }
                 classBlock.annotation("Test");
                 classBlock.annotation("DoNotRecord(skipInPlayback = true)");
                 String methodSignature = String.format("%s %s()", "void", getTestMethodName(testCase.getMethodName()));
@@ -60,7 +63,6 @@ public class FluentLiveTestsTemplate {
             }
         });
     }
-
     private String getTestMethodName(String methodName) {
         return methodName.endsWith("Test") ? methodName : methodName + "Test";
     }
@@ -73,5 +75,4 @@ public class FluentLiveTestsTemplate {
         javaFile.declareImport("com.azure.core.test.annotation.DoNotRecord", "com.azure.core.test.TestBase");
         javaFile.declareImport("com.azure.core.http.policy.HttpLogOptions", "com.azure.core.http.policy.HttpLogDetailLevel");
     }
-
 }

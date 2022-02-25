@@ -53,8 +53,8 @@ public class FluentLiveTestsMapper {
         resultBuilder.className(liveTests.getFilename() + "Tests");
 
         resultBuilder.addTestCases(liveTests.getTestCases().stream().map(liveTestCase -> {
-            FluentLiveTestCase testCase = new FluentLiveTestCase(liveTestCase.getName());
-            testCase.getSteps().addAll(
+            FluentLiveTestCase.Builder testCaseBuilder = FluentLiveTestCase.newBuilder().methodName(CodeNamer.toCamelCase(liveTestCase.getName()));
+            testCaseBuilder.addSteps(
                 liveTestCase.getTestSteps()
                     .stream()
                     // future work: support other step types
@@ -81,7 +81,7 @@ public class FluentLiveTestsMapper {
                                 , example
                             );
                             exampleMethod = fluentExampleTemplate.generateExampleMethod(collectionMethodExample);
-                            setExampleStepFeatures(resultBuilder, testCase, collectionMethodExample, exampleMethod);
+                            setExampleStepFeatures(resultBuilder, testCaseBuilder, collectionMethodExample, exampleMethod);
                         } else {
                             // find resourceCreate
                             Optional<ResourceCreate> createMethod = findResourceCreate(resourceCollection, operation);
@@ -89,7 +89,7 @@ public class FluentLiveTestsMapper {
                                 ResourceCreate create = createMethod.get();
                                 FluentResourceCreateExample createExample = ExampleParser.parseResourceCreate(resourceCollection, create, example);
                                 exampleMethod = fluentExampleTemplate.generateExampleMethod(createExample);
-                                setExampleStepFeatures(resultBuilder, testCase, createExample, exampleMethod);
+                                setExampleStepFeatures(resultBuilder, testCaseBuilder, createExample, exampleMethod);
                             } else {
                                 // find resourceUpdate
                                 Optional<ResourceUpdate> updateMethod = resourceCollection.getResourceUpdates().stream().filter(rc -> FluentUtils.exampleIsUpdate(rc.getMethodName()) && rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
@@ -100,12 +100,12 @@ public class FluentLiveTestsMapper {
                                         return Optional.empty();
                                     }
                                     exampleMethod = fluentExampleTemplate.generateExampleMethod(updateExample);
-                                    setExampleStepFeatures(resultBuilder, testCase, updateExample, exampleMethod);
+                                    setExampleStepFeatures(resultBuilder, testCaseBuilder, updateExample, exampleMethod);
                                 }
                             }
                         }
                         if (exampleMethod != null) {
-                            resultBuilder.addHelperFeatures(testCase.getHelperFeatures());
+                            resultBuilder.addHelperFeatures(testCaseBuilder.getHelperFeatures());
                             return Optional.of(FluentExampleLiveTestStep.newBuilder().description(step.getDescription()).exampleMethod(exampleMethod).build());
                         } else {
                             // can't find method, ignore the whole test case altogether
@@ -116,7 +116,7 @@ public class FluentLiveTestsMapper {
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .collect(Collectors.toList()));
-            return testCase;
+            return testCaseBuilder.build();
         }).collect(Collectors.toList()));
 
         return resultBuilder.build();
@@ -129,8 +129,8 @@ public class FluentLiveTestsMapper {
         return operationId.split("_");
     }
 
-    private void setExampleStepFeatures(FluentLiveTests.Builder resultBuilder, FluentLiveTestCase testCase, com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample fluentExample, FluentExampleTemplate.ExampleMethod exampleMethod) {
-        testCase.getHelperFeatures().addAll(exampleMethod.getHelperFeatures());
+    private void setExampleStepFeatures(FluentLiveTests.Builder resultBuilder, FluentLiveTestCase.Builder testCaseBuilder, com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample fluentExample, FluentExampleTemplate.ExampleMethod exampleMethod) {
+        testCaseBuilder.addHelperFeatures(exampleMethod.getHelperFeatures());
         resultBuilder.addImports(exampleMethod.getImports())
             .managerName(fluentExample.getEntryName())
             .managerType(fluentExample.getEntryType());

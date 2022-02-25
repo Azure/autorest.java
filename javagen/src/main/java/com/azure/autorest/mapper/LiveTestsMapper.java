@@ -67,6 +67,6 @@ public class LiveTestsMapper implements IMapper<TestModel, List<LiveTests>>{
         String[] split = filePath.replaceAll("\\\\", "/").split("/");
         String filename = split[split.length - 1];
         filename = filename.split("\\.")[0];
-        return CodeNamer.toCamelCase(filename);
+        return CodeNamer.toPascalCase(filename);
     }
 }
