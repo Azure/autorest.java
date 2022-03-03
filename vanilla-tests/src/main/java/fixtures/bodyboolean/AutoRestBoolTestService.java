@@ -9,11 +9,14 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the AutoRestBoolTestService type. */
 public final class AutoRestBoolTestService {
+    private static final ClientLogger LOGGER = new ClientLogger(AutoRestBoolTestService.class);
+
     /** server parameter. */
     private final String host;
 

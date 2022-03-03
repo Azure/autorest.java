@@ -19,12 +19,15 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Dictionaries. */
 public final class Dictionaries {
+    private static final ClientLogger LOGGER = new ClientLogger(Dictionaries.class);
+
     /** The proxy service used to perform REST calls. */
     private final DictionariesService service;
 
