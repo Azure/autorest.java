@@ -18,9 +18,11 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -134,8 +136,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
                 // properties for sdk name and version
                 String propertiesValue = "new HashMap<>()";
-                if (!settings.getArtifactId().isEmpty()) {
-                    propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
+                String artifactId = ClientModelUtil.getArtifactId();
+                if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                    propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
                 }
                 addGeneratedAnnotation(classBlock);
                 classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);

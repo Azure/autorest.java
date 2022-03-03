@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedIterable;
@@ -131,7 +132,7 @@ public class FluentUtils {
 
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
-        String artifactId = settings.getArtifactId();
+        String artifactId = ClientModelUtil.getArtifactId();
         if (CoreUtils.isNullOrEmpty(artifactId)) {
             artifactId = getArtifactIdFromPackageName(settings.getPackage().toLowerCase(Locale.ROOT));
         }
