@@ -7,17 +7,30 @@ It can be enabled with the flag `--low-level-client`.
 
 There is additional flags that can enhance the generated library.
 
-### Title or Service Name
+### Service Name and Service Versions
 
-### Service Versions
+The option `service-name` specifies the name of the service.
+If not specified, it is deduced from `title` in the OpenAPI specs, or the `--title` flag of AutoRest.
 
-The flag `--service-versions` with an array of `api-version`s specify the list of compatible [service API versions][serivce-api-version] with the API of this client.
+The option `service-versions` as an array of `api-version`s specify the list of compatible [service API versions][service-api-version] with this client.
+If not specified, it uses the `api-version` in the OpenAPI specs.
+
+As an example, following `service-name` and `service-versions`
+
+```
+service-name: PurviewScanning
+service-version:
+- 2018-12-01-preview
+- 2021-10-01-preview
+```
+
+results in this `PurviewScanningServiceVersion` class
 
 ```java
 /** Service version of PurviewScanning. */
 public enum PurviewScanningServiceVersion implements ServiceVersion {
     /** Enum value 2018-12-01-preview. */
-    V2018_12_01_PREVIEW("2021-10-01-preview"),
+    V2018_12_01_PREVIEW("2018-12-01-preview"),
     /** Enum value 2021-10-01-preview. */
     V2021_10_01_PREVIEW("2021-10-01-preview");
 
@@ -27,7 +40,7 @@ public enum PurviewScanningServiceVersion implements ServiceVersion {
      * @return The latest {@link PurviewScanningServiceVersion}.
      */
     public static PurviewScanningServiceVersion getLatest() {
-        return V2021_05_01_PREVIEW;
+        return V2021_10_01_PREVIEW;
     }
 }
 ```
@@ -54,7 +67,7 @@ public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context
 
 ### POM
 
-The flag `--regenerate-pom` generates the Maven `pom.xml` for the library.
+The flag `--regenerate-pom` generates the Maven POM for the library.
 
 Note that it replaces the original `pom.xml`, if exists.
 
