@@ -10,10 +10,10 @@ There is additional flags that can enhance the generated client library.
 ### Service Name and Service Versions
 
 The option `service-name` specifies the name of the service.
-If not specified, it is deduced from `title` in the OpenAPI specs, or the `--title` flag of AutoRest.
+If not specified, it is deduced from `title` in the OpenAPI specs, or the `title` option of AutoRest.
 
 The option `service-versions` as an array of `api-version`s specify the list of compatible [service API versions][service-api-version] with this client.
-If not specified, it uses the `api-version` in the OpenAPI specs.
+If not specified, it uses the single `api-version` in the OpenAPI specs.
 
 As an example, following `service-name` and `service-versions`
 
