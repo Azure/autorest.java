@@ -67,7 +67,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(JsonIgnore.class.getName());
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
@@ -189,8 +188,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
             if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-                classBlock.annotation("JsonIgnore");
-                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
+                classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
+                        ClassType.ClientLogger.toString(), model.getName()));
             }
 
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
@@ -585,7 +584,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.shouldClientLogger()) {
                                 ifBlock.line(String.format(
-                                        "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
+                                        "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%s));",
                                         errorMessage));
                             } else {
                                 ifBlock.line(String.format(

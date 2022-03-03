@@ -98,12 +98,13 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
         {
             if (settings.shouldClientLogger()) {
-                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", serviceClient.getClassName()));
+                classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
+                        ClassType.ClientLogger.toString(), serviceClient.getClassName()));
             }
 
             // Add proxy service member variable
             if (serviceClient.getProxy() != null) {
-                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.javadocComment("The proxy service used to perform REST calls.");
                 classBlock.privateFinalMemberVariable(serviceClient.getProxy().getName(), "service");
             }
 
