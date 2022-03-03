@@ -5,7 +5,7 @@ The Java generator offers the ability to generate [data-plane][data-plane] clien
 Data-plane client libraries look like [this][data-plane-client].
 It can be enabled with the flag `--low-level-client`.
 
-There is additional flags that can enhance the generated library.
+There is additional flags that can enhance the generated client library.
 
 ### Service Name and Service Versions
 
@@ -45,6 +45,12 @@ public enum PurviewScanningServiceVersion implements ServiceVersion {
 }
 ```
 
+### Long-running Operation
+
+By default, generated client library uses the `DefaultPollingStrategy` for polling of long-running operation.
+
+This default polling behavior can be configured via [polling configuration][polling-configuration].
+
 ### Samples
 
 The flag `--generate-samples` generates sample classes in `src/samples/java/<namespace>/generated`, which can be selectively modified and moved to `src/samples/java/<namespace>` as samples in README or in [Javadoc][code-snippet].
@@ -79,3 +85,4 @@ Generally, this flag is implied when generating the client library first time wi
 [code-snippet]: https://github.com/Azure/azure-sdk-tools/blob/main/packages/java-packages/codesnippet-maven-plugin/README.md
 [azure-sdk-for-java]: https://github.com/Azure/azure-sdk-for-java
 [service-api-version]: https://azure.github.io/azure-sdk/general_design.html#service-api-versions
+[polling-configuration]: ../../readme.md#polling-configuration
