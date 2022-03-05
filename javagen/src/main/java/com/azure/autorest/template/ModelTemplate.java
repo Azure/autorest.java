@@ -186,11 +186,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
-            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-                classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
-                        ClassType.ClientLogger.toString(), model.getName()));
-            }
-
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
 
             for (ClientModelProperty property : model.getProperties()) {
@@ -441,6 +436,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             addPropertyValidations(classBlock, model, settings);
+
+            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
+            }
         });
     }
 

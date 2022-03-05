@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
@@ -190,6 +191,15 @@ public class TemplateUtil {
         Supplier<String> annotation) {
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
             classBlock.annotation(annotation.get());
+        }
+    }
+
+    public static void addClientLogger(JavaClass classBlock, String className, JavaFileContents javaFileContents) {
+        String content = javaFileContents.toString();
+        if (content.contains("throw LOGGER")) {
+            // hack to add LOGGER class variable only if LOGGER is used in code
+            classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
+                    ClassType.ClientLogger.toString(), className));
         }
     }
 }
