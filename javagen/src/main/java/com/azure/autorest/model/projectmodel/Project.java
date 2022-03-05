@@ -50,11 +50,11 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.25.0";
-        private String azureCoreManagementVersion = "1.5.2";
-        private String azureCoreHttpNettyVersion = "1.11.7";
-        private String azureCoreTestVersion = "1.7.8";
-        private String azureIdentityVersion = "1.4.4";
+        private String azureCoreVersion = "1.26.0";
+        private String azureCoreManagementVersion = "1.5.3";
+        private String azureCoreHttpNettyVersion = "1.11.8";
+        private String azureCoreTestVersion = "1.7.9";
+        private String azureIdentityVersion = "1.4.5";
         private String junitVersion = "5.8.2";
         private String revapiMavenPlugin = "0.14.6";
 
