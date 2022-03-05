@@ -11,8 +11,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.core.util.CoreUtils;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -249,5 +251,17 @@ public class ClientModelUtil {
                 .findFirst()
                 .orElse(null);
         return apiVersion;
+    }
+
+    public static String getArtifactId() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String artifactId = settings.getArtifactId();
+        if (settings.isLowLevelClient() && CoreUtils.isNullOrEmpty(artifactId)) {
+            // convert package/namespace to artifact
+            artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
+                    .replace("com.", "")
+                    .replace(".", "-");
+        }
+        return artifactId;
     }
 }

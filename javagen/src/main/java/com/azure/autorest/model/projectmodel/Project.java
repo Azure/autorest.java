@@ -7,6 +7,7 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
@@ -28,7 +29,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -103,7 +103,7 @@ public class Project {
 
         this.serviceName = serviceName;
         this.namespace = JavaSettings.getInstance().getPackage();
-        this.artifactId = getArtifactIdFromNamespace();
+        this.artifactId = ClientModelUtil.getArtifactId();
 
         this.serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
 
@@ -360,16 +360,5 @@ public class Project {
 
     public boolean isGenerateSamples() {
         return JavaSettings.getInstance().isGenerateSamples();
-    }
-
-    private static String getArtifactIdFromNamespace() {
-        JavaSettings settings = JavaSettings.getInstance();
-        String artifactId = settings.getArtifactId();
-        if (CoreUtils.isNullOrEmpty(artifactId)) {
-            artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
-                    .replace("com.", "")
-                    .replace(".", "-");
-        }
-        return artifactId;
     }
 }

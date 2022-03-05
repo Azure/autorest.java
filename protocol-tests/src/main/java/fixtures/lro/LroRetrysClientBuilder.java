@@ -25,7 +25,6 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceClientImpl;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,7 +36,7 @@ public final class LroRetrysClientBuilder {
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = new HashMap<>();
+    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-lro.properties");
 
     /** Create an instance of the LroRetrysClientBuilder. */
     @Generated
