@@ -5,14 +5,11 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Pet model. */
 @Fluent
 public class Pet {
-    private static final ClientLogger LOGGER = new ClientLogger(Pet.class);
-
     /*
      * The id property.
      */

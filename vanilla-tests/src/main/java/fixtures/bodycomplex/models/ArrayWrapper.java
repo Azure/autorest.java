@@ -5,15 +5,12 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The ArrayWrapper model. */
 @Fluent
 public final class ArrayWrapper {
-    private static final ClientLogger LOGGER = new ClientLogger(ArrayWrapper.class);
-
     /*
      * The array property.
      */

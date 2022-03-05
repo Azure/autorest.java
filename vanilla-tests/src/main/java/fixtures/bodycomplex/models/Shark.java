@@ -28,8 +28,6 @@ import java.util.List;
 })
 @Fluent
 public class Shark extends Fish {
-    private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
-
     /*
      * The age property.
      */
@@ -112,4 +110,6 @@ public class Shark extends Fish {
                     new IllegalArgumentException("Missing required property birthday in model Shark"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 }

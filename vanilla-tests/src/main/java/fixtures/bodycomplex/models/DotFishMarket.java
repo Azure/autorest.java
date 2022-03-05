@@ -5,15 +5,12 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The DotFishMarket model. */
 @Fluent
 public final class DotFishMarket {
-    private static final ClientLogger LOGGER = new ClientLogger(DotFishMarket.class);
-
     /*
      * The sampleSalmon property.
      */

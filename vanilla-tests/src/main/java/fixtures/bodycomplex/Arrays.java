@@ -19,15 +19,12 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Arrays. */
 public final class Arrays {
-    private static final ClientLogger LOGGER = new ClientLogger(Arrays.class);
-
     /** The proxy service used to perform REST calls. */
     private final ArraysService service;
 

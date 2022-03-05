@@ -5,15 +5,12 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
 /** The DurationWrapper model. */
 @Fluent
 public final class DurationWrapper {
-    private static final ClientLogger LOGGER = new ClientLogger(DurationWrapper.class);
-
     /*
      * The field property.
      */

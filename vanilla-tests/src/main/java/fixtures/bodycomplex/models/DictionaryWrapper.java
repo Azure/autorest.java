@@ -5,15 +5,12 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /** The DictionaryWrapper model. */
 @Fluent
 public final class DictionaryWrapper {
-    private static final ClientLogger LOGGER = new ClientLogger(DictionaryWrapper.class);
-
     /*
      * Dictionary of <string>
      */

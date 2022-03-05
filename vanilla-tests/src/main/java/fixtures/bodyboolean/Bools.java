@@ -25,8 +25,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Bools. */
 public final class Bools {
-    private static final ClientLogger LOGGER = new ClientLogger(Bools.class);
-
     /** The proxy service used to perform REST calls. */
     private final BoolsService service;
 
@@ -706,4 +704,6 @@ public final class Bools {
     public Response<Boolean> getInvalidWithResponse(Context context) {
         return getInvalidWithResponseAsync(context).block();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Bools.class);
 }

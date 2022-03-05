@@ -5,14 +5,11 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ReadonlyObj model. */
 @Fluent
 public final class ReadonlyObj {
-    private static final ClientLogger LOGGER = new ClientLogger(ReadonlyObj.class);
-
     /*
      * The id property.
      */

@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,8 +21,6 @@ import java.util.Map;
 @JsonTypeName("smart_salmon")
 @Fluent
 public final class SmartSalmon extends Salmon {
-    private static final ClientLogger LOGGER = new ClientLogger(SmartSalmon.class);
-
     /*
      * The college_degree property.
      */

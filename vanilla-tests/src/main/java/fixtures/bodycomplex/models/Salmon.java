@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -23,8 +22,6 @@ import java.util.List;
 @JsonSubTypes({@JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)})
 @Fluent
 public class Salmon extends Fish {
-    private static final ClientLogger LOGGER = new ClientLogger(Salmon.class);
-
     /*
      * The location property.
      */

@@ -5,14 +5,11 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The BooleanWrapper model. */
 @Fluent
 public final class BooleanWrapper {
-    private static final ClientLogger LOGGER = new ClientLogger(BooleanWrapper.class);
-
     /*
      * The field_true property.
      */

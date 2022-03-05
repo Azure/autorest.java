@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -26,8 +25,6 @@ import java.util.List;
 })
 @Fluent
 public class Fish {
-    private static final ClientLogger LOGGER = new ClientLogger(Fish.class);
-
     /*
      * The species property.
      */
