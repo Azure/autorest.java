@@ -104,7 +104,7 @@ public class Javagen extends NewPlugin {
                 writeFile(textFile.getFilePath(), textFile.getContents(), null);
             }
 
-            String artifactId = settings.getArtifactId();
+            String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
