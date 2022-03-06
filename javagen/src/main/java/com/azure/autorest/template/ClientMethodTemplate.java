@@ -560,7 +560,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
                         if (settings.shouldClientLogger()) {
-                            elseAction.line("throw logger.logExceptionAsError(new NullPointerException());");
+                            elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");
                         }

@@ -97,13 +97,9 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
         {
-            if (settings.shouldClientLogger()) {
-                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", serviceClient.getClassName()));
-            }
-
             // Add proxy service member variable
             if (serviceClient.getProxy() != null) {
-                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.javadocComment("The proxy service used to perform REST calls.");
                 classBlock.privateFinalMemberVariable(serviceClient.getProxy().getName(), "service");
             }
 
@@ -289,6 +285,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             additionalMethods.forEach(method -> method.writeMethod(classBlock));
 
             this.writeAdditionalClassBlock(classBlock);
+
+            if (settings.shouldClientLogger()) {
+                TemplateUtil.addClientLogger(classBlock, serviceClient.getClassName(), javaFile.getContents());
+            }
         });
     }
 

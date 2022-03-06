@@ -122,7 +122,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                             String errorMessageExpr = String.format("String.format(\"The resource ID '%%s' is not valid. Missing path segment '%1$s'.\", %2$s)",
                                     segmentNameForErrorPrompt, ModelNaming.METHOD_PARAMETER_NAME_ID);
                             ifBlock.line(String.format(
-                                    "throw logger.logExceptionAsError(new IllegalArgumentException(%1$s));",
+                                    "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%1$s));",
                                     errorMessageExpr));
                         });
                     });
