@@ -12,7 +12,7 @@ sync-methods: all
 client-side-validations: true
 add-context-parameter: true
 service-interface-as-public: true
-default-http-exception-type: com.azure.core.exception.ResourceNotFoundException
+default-http-exception-type: fixtures.headexceptions.models.CustomizedException
 http-status-code-to-exception-type-mapping:
-  404: com.azure.core.exception.ResourceExistsException
+  404: com.azure.core.exception.ResourceNotFoundException
 ```

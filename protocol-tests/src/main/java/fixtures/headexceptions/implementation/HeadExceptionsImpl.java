@@ -12,13 +12,13 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.exception.ResourceExistsException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in HeadExceptions. */
@@ -50,25 +50,25 @@ public final class HeadExceptionsImpl {
         @Head("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
-                value = ResourceExistsException.class,
+                value = ResourceNotFoundException.class,
                 code = {404})
-        @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
+        @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
-                value = ResourceExistsException.class,
+                value = ResourceNotFoundException.class,
                 code = {404})
-        @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
+        @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Head("/http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
-                value = ResourceExistsException.class,
+                value = ResourceNotFoundException.class,
                 code = {404})
-        @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
+        @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head404(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
@@ -76,8 +76,8 @@ public final class HeadExceptionsImpl {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,8 +90,8 @@ public final class HeadExceptionsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -103,8 +103,8 @@ public final class HeadExceptionsImpl {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -116,8 +116,8 @@ public final class HeadExceptionsImpl {
      * Return 204 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -130,8 +130,8 @@ public final class HeadExceptionsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -143,8 +143,8 @@ public final class HeadExceptionsImpl {
      * Return 204 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -156,8 +156,8 @@ public final class HeadExceptionsImpl {
      * Return 404 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -170,8 +170,8 @@ public final class HeadExceptionsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -183,8 +183,8 @@ public final class HeadExceptionsImpl {
      * Return 404 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server.
-     * @throws ResourceExistsException thrown if the request is rejected by server on status code 404.
+     * @throws CustomizedException thrown if the request is rejected by server.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
