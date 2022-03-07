@@ -329,7 +329,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             ? swaggerExceptionDefinitions.defaultExceptionType
             : settingsDefaultExceptionType;
 
-        if (defaultErrorType != null && (!settings.isLowLevelClient() || settingsDefaultExceptionType != null)) {
+        if (defaultErrorType != null) {
             builder.unexpectedResponseExceptionType(defaultErrorType);
         } else {
             builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
@@ -366,52 +366,60 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     private static SwaggerExceptionDefinitions getSwaggerExceptionDefinitions(Operation operation,
         JavaSettings settings) {
+
         SwaggerExceptionDefinitions exceptionDefinitions = new SwaggerExceptionDefinitions();
         ClassType swaggerDefaultExceptionType = null;
         Map<Integer, ClassType> swaggerExceptionTypeMap = new HashMap<>();
 
-        /*
-        1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
-        2. If exception does not have status codes, or have 'default' or invalid number, put the first to unexpectedResponseExceptionType, ignore the rest
-        3. After processing, if no model in unexpectedResponseExceptionType, take any from unexpectedResponseExceptionTypes and put it to unexpectedResponseExceptionType
-         */
-        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            for (Response exception : operation.getExceptions()) {
-                // Exception doesn't have HTTP configurations, skip it.
-                if (exception.getProtocol() == null || exception.getProtocol().getHttp() == null) {
-                    continue;
-                }
+        if (settings.isLowLevelClient()) {
+            // LLC does not use model, hence exception from swagger
+            swaggerDefaultExceptionType = ClassType.HttpResponseException;
+            exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;
+            exceptionDefinitions.exceptionTypeMapping = swaggerExceptionTypeMap;
+        } else {
+            /*
+            1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
+            2. If exception does not have status codes, or have 'default' or invalid number, put the first to unexpectedResponseExceptionType, ignore the rest
+            3. After processing, if no model in unexpectedResponseExceptionType, take any from unexpectedResponseExceptionTypes and put it to unexpectedResponseExceptionType
+             */
+            if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
+                for (Response exception : operation.getExceptions()) {
+                    // Exception doesn't have HTTP configurations, skip it.
+                    if (exception.getProtocol() == null || exception.getProtocol().getHttp() == null) {
+                        continue;
+                    }
 
-                boolean isDefaultError = true;
-                List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
-                if (statusCodes != null && !statusCodes.isEmpty()) {
-                    try {
-                        ClassType exceptionType = getExceptionType(exception, settings);
-                        statusCodes.stream().map(Integer::parseInt)
-                            .forEach(status -> swaggerExceptionTypeMap.put(status, exceptionType));
+                    boolean isDefaultError = true;
+                    List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
+                    if (statusCodes != null && !statusCodes.isEmpty()) {
+                        try {
+                            ClassType exceptionType = getExceptionType(exception, settings);
+                            statusCodes.stream().map(Integer::parseInt)
+                                    .forEach(status -> swaggerExceptionTypeMap.put(status, exceptionType));
 
-                        isDefaultError = false;
-                    } catch (NumberFormatException ex) {
-                        // statusCodes can be 'default'
-                        //logger.warn("Failed to parse status code, exception {}", ex.toString());
+                            isDefaultError = false;
+                        } catch (NumberFormatException ex) {
+                            // statusCodes can be 'default'
+                            //logger.warn("Failed to parse status code, exception {}", ex.toString());
+                        }
+                    }
+
+                    if (swaggerDefaultExceptionType == null && isDefaultError && exception.getSchema() != null) {
+                        swaggerDefaultExceptionType = processExceptionClassType(
+                                (ClassType) Mappers.getSchemaMapper().map(exception.getSchema()), settings);
                     }
                 }
 
-                if (swaggerDefaultExceptionType == null && isDefaultError && exception.getSchema() != null) {
+                if (swaggerDefaultExceptionType == null) {
+                    // no default error, use the 1st to keep backward compatibility
                     swaggerDefaultExceptionType = processExceptionClassType(
-                        (ClassType) Mappers.getSchemaMapper().map(exception.getSchema()), settings);
+                            (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema()), settings);
                 }
             }
 
-            if (swaggerDefaultExceptionType == null) {
-                // no default error, use the 1st to keep backward compatibility
-                swaggerDefaultExceptionType = processExceptionClassType(
-                    (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema()), settings);
-            }
+            exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;
+            exceptionDefinitions.exceptionTypeMapping = swaggerExceptionTypeMap;
         }
-
-        exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;
-        exceptionDefinitions.exceptionTypeMapping = swaggerExceptionTypeMap;
 
         return exceptionDefinitions;
     }
