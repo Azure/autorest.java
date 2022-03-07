@@ -329,7 +329,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             ? swaggerExceptionDefinitions.defaultExceptionType
             : settingsDefaultExceptionType;
 
-        if (defaultErrorType != null && !settings.isLowLevelClient()) {
+        if (defaultErrorType != null && (!settings.isLowLevelClient() || settingsDefaultExceptionType != null)) {
             builder.unexpectedResponseExceptionType(defaultErrorType);
         } else {
             builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
@@ -344,25 +344,23 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             swaggerExceptionDefinitions.exceptionTypeMapping);
         mergedExceptionTypeMapping.putAll(settingsExceptionTypeMap);
 
-        if (!settings.isLowLevelClient()) {
-            // Convert the exception type mapping into what code generation uses elsewhere.
-            Map<ClassType, List<Integer>> processedMapping = new HashMap<>();
-            for (Map.Entry<Integer, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {
-                processedMapping.compute(kvp.getValue(), (errorType, statuses) -> {
-                    if (statuses == null) {
-                        List<Integer> statusList = new ArrayList<>();
-                        statusList.add(kvp.getKey());
-                        return statusList;
-                    }
+        // Convert the exception type mapping into what code generation uses elsewhere.
+        Map<ClassType, List<Integer>> processedMapping = new HashMap<>();
+        for (Map.Entry<Integer, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {
+            processedMapping.compute(kvp.getValue(), (errorType, statuses) -> {
+                if (statuses == null) {
+                    List<Integer> statusList = new ArrayList<>();
+                    statusList.add(kvp.getKey());
+                    return statusList;
+                }
 
-                    statuses.add(kvp.getKey());
-                    return statuses;
-                });
-            }
+                statuses.add(kvp.getKey());
+                return statuses;
+            });
+        }
 
-            if (!processedMapping.isEmpty()) {
-                builder.unexpectedResponseExceptionTypes(processedMapping);
-            }
+        if (!processedMapping.isEmpty()) {
+            builder.unexpectedResponseExceptionTypes(processedMapping);
         }
     }
 
