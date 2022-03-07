@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
@@ -74,7 +75,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
             // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
             && !(
                 settings.isFluent()
-                    && Utils.getNameForUngroupedOperations(operation.getOperationGroup().getCodeModel(), FluentStatic.getFluentJavaSettings()).equals(operation.getOperationGroup().getLanguage().getDefault().getName())
+                    && Objects.equals(Utils.getNameForUngroupedOperations(operation.getOperationGroup().getCodeModel(), FluentStatic.getFluentJavaSettings()), operation.getOperationGroup().getLanguage().getDefault().getName())
             );
     }
 }
