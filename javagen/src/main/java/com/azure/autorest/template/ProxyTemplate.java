@@ -70,6 +70,10 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                             interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
                                     restAPIMethod.getReturnValueWireType()));
                         }
+                    }
+
+                    if (!settings.isLowLevelClient() || isExceptionCustomized()) {
+                        // write @UnexpectedResponseExceptionType
 
                         if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
                             writeUnexpectedExceptions(restAPIMethod, interfaceBlock);
@@ -180,5 +184,12 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
      * @param interfaceBlock interface block
      */
     protected void writeProxyMethodHeaders(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+    }
+
+    private static boolean isExceptionCustomized() {
+        JavaSettings settings = JavaSettings.getInstance();
+        return settings.getDefaultHttpExceptionType() != null
+                || settings.isUseDefaultHttpStatusCodeToExceptionTypeMapping()
+                || settings.getHttpStatusCodeToExceptionTypeMapping() != null;
     }
 }
