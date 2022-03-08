@@ -5,14 +5,17 @@ import platform
 import subprocess
 import shutil
 import logging
+import json
+import argparse
 from os import path
 
 
-AUTOREST_CORE_VERSION = '3.6.6'
+AUTOREST_CORE_VERSION = '3.7.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 
-def run(script_path: str, output_folder: str, json_path: str, namespace: str, security_scopes: str = None):
+def run(script_path: str, output_folder: str, json_path: str, namespace: str,
+        security: str, security_scopes: str = None, security_header_name: str = None):
     logging.info(f'SDK for {json_path}')
 
     package_relative_path = namespace.replace('.', '/')
@@ -22,11 +25,12 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, se
     logging.info(f'delete {output_folder}')
 
     # generate code
-    security = 'AADToken'
-    security_scopes_str = f'--security={security}'
+    security_str = f'--security={security}'
     if security_scopes:
-        security_scopes_str += f' --security-scopes={security_scopes}'
-    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_scopes_str} --sdk-integration --generate-samples --generate-tests'.split(' ')
+        security_str += f' --security-scopes={security_scopes}'
+    if security_header_name:
+        security_str += f' --security-header-name={security_header_name}'
+    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_str} --sdk-integration --generate-samples --generate-tests'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
     logging.info(' '.join(cmd))
     subprocess.check_call(cmd, cwd=script_path)
@@ -45,6 +49,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, se
 
     logging.info('pass maven package')
 
+    # verify
     assert path.exists(path.join(output_folder, 'README.md'))
     logging.info('pass README.md')
 
@@ -61,18 +66,49 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str, se
     logging.info('pass tests')
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--all',
+        dest='verify_all',
+        required=False,
+        default=False,
+        action='store_true',
+        help='Generate and verify all projects',
+    )
+
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+    verify_all = args.verify_all
+
+    logging.info('verify all projects' if verify_all else 'verify required projects')
+    
     script_path = path.abspath(path.dirname(sys.argv[0]))
 
-    purview_json_path = 'https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json'
-    purview_output_path = path.join(script_path, 'sdk/purview/azure-analytics-purview-account')
+    with open(path.join(script_path, 'data-specs.json'), 'r', encoding='utf-8') as f_in:
+        data_specs = json.load(f_in)
 
-    run(script_path, purview_output_path, purview_json_path, 'com.azure.analytics.purview.account', 'https://purview.azure.net/.default')
+    for key, spec in data_specs.items():
+        json_path = spec['input'][0]
+        group = spec['group']
+        module = spec['module']
+        security = spec['security'] if 'security' in spec else 'AADToken'
+        security_scopes = spec['security-scopes'] if 'security-scopes' in spec else None
+        security_header_name = spec['security-header-name'] if 'security-header-name' in spec else None
 
-    translator_json_path = 'https://github.com/Azure/azure-rest-api-specs/blob/main/specification/cognitiveservices/data-plane/TranslatorText/stable/v1.0/TranslatorBatch.json'
-    translator_output_path = path.join(script_path, 'sdk/ai/azure-ai-translator')
+        required = spec['required'] if 'required' in spec else False
+        skip = spec['skip'] if 'skip' in spec else False
 
-    run(script_path, translator_output_path, translator_json_path, 'com.azure.ai.translator', 'https://noop.azure.net/.default')
+        output_path = path.join(script_path, 'sdk', group, module)
+        namespace = 'com.' + module.replace('-', '.')
+
+        if (verify_all or required) and not skip:
+            logging.info(f'generate and verify for {key}')
+            run(script_path, output_path, json_path, namespace,
+                security, security_scopes, security_header_name)
 
 
 if __name__ == "__main__":

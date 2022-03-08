@@ -277,7 +277,7 @@ public class ProtocolExampleWriter {
                                 && responseType.getTypeArguments().length > 0
                                 && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
                             String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());
-                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getValue().toString());", expectedJsonStr));
+                            methodBlock.line(String.format("Assertions.assertEquals(BinaryData.fromString(%1$s).toObject(Object.class), response.getValue().toObject(Object.class));", expectedJsonStr));
                         }
                     } else if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
                         // SyncPoller<>
@@ -314,7 +314,7 @@ public class ProtocolExampleWriter {
                                     } else {
                                         Object firstItem = itemArray.iterator().next();
                                         String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJson(firstItem));
-                                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterator().next().toString());", expectedJsonStr));
+                                        methodBlock.line(String.format("Assertions.assertEquals(BinaryData.fromString(%1$s).toObject(Object.class), response.iterator().next().toObject(Object.class));", expectedJsonStr));
                                     }
                                 }
                             }

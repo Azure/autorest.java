@@ -2,7 +2,7 @@
 
 ```yaml
 java: true
-input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json
+input-file: ../../node_modules/@microsoft.azure/autorest.testserver/swagger/lro.json
 output-folder: ..
 namespace: fixtures.lro
 license-header: MICROSOFT_MIT_SMALL

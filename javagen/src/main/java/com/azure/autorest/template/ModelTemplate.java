@@ -26,7 +26,6 @@ import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
@@ -67,7 +66,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(JsonIgnore.class.getName());
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
@@ -188,11 +186,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
-            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-                classBlock.annotation("JsonIgnore");
-                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
-            }
-
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
 
             for (ClientModelProperty property : model.getProperties()) {
@@ -443,6 +436,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             addPropertyValidations(classBlock, model, settings);
+
+            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
+            }
         });
     }
 
@@ -585,7 +582,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.shouldClientLogger()) {
                                 ifBlock.line(String.format(
-                                        "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
+                                        "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%s));",
                                         errorMessage));
                             } else {
                                 ifBlock.line(String.format(

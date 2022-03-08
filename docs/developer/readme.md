@@ -31,7 +31,13 @@ There is unit tests under fluentgen. It depends on [recorded YAML output of flue
 Vanilla tests and Azure tests both depends on [AutoRest Test Server](https://github.com/Azure/autorest.testserver), which provides OpenAPI 2.0 swaggers and NodeJS test server which implements the swaggers.
 
 The generated code is checked-in to the repository. [`generate` or `generate.bat` script](https://github.com/Azure/autorest.java/blob/main/generate) in project root will re-generate the code.
-Maven will start the NodeJS test server and run the tests, which communicate with the test server.
+CI will start the NodeJS test server and run the tests, which communicate with the test server.
+
+Test server can be installed and ran locally.
+```
+npm install
+npm run testserver-run
+```
 
 Fluent tests is different. It depends on the real OpenAPI 2.0 swaggers for ARM services.
 

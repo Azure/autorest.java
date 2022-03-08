@@ -4,7 +4,9 @@ Most of the information you'll need to generate a Java client can be found in th
 
 * [Generating Fluent code][fluent]
 * [Generating with customizations][customizations]
+* [Generating Data Plane code][data-plane-generator]
 
 <!-- LINKS -->
 [fluent]: ./fluent.md
 [customizations]: ./customizations.md
+[data-plane-generator]: ./dataplane.md

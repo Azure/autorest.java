@@ -91,11 +91,13 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
             }
-            if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(),
-                        "thrown if the request is rejected by server");
+            if (restAPIMethod != null) {
+                if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+                    comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(),
+                            "thrown if the request is rejected by server");
+                }
+                comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             }
-            comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
     }

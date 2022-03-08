@@ -119,6 +119,12 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         for (Operation operation : methodGroup.getOperations()) {
             clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
         }
+        if (settings.isGenerateSendRequestMethod()) {
+            clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(true));
+            if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(true));
+            }
+        }
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 

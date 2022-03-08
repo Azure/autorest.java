@@ -762,18 +762,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
     }
 
-    private static final ClientMethodParameter CONTEXT_PARAM = new ClientMethodParameter.Builder()
-            .description("The context to associate with this operation.")
-            .wireType(ClassType.Context)
-            .name("context")
-            .annotations(new ArrayList<>())
-            .isConstant(false)
-            .defaultValue(null)
-            .fromClient(false)
-            .isFinal(false)
-            .isRequired(false)
-            .build();
-
     private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
         List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
         ReturnValue returnValue, MethodPageDetails details) {
@@ -794,7 +782,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected ClientMethodParameter getContextParameter() {
-        return CONTEXT_PARAM;
+        return ClientMethodParameter.CONTEXT_PARAMETER;
     }
 
     private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
