@@ -25,6 +25,7 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.bodystring.implementation.AutoRestSwaggerBatServiceClientImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -44,7 +45,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodystring.properties");
+    @Generated private final Map<String, String> properties = new HashMap<>();
 
     /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
     @Generated

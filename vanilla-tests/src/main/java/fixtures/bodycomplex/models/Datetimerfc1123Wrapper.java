@@ -6,12 +6,16 @@ package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The Datetimerfc1123Wrapper model. */
 @Fluent
 public final class Datetimerfc1123Wrapper {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Datetimerfc1123Wrapper.class);
+
     /*
      * The field property.
      */

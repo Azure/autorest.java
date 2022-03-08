@@ -5,11 +5,15 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Error model. */
 @Fluent
 public final class Error {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Error.class);
+
     /*
      * The status property.
      */

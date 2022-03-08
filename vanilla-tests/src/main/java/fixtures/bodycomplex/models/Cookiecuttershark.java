@@ -5,7 +5,9 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -17,6 +19,8 @@ import java.util.List;
 @JsonTypeName("cookiecuttershark")
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Cookiecuttershark.class);
+
     /**
      * Creates an instance of Cookiecuttershark class.
      *

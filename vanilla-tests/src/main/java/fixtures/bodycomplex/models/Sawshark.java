@@ -6,7 +6,9 @@ package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -18,6 +20,8 @@ import java.util.List;
 @JsonTypeName("sawshark")
 @Fluent
 public final class Sawshark extends Shark {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Sawshark.class);
+
     /*
      * The picture property.
      */

@@ -8,11 +8,10 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.headexceptions.implementation.HeadExceptionsImpl;
-import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestHeadExceptionTestServiceClient type. */
@@ -34,8 +33,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
      * Return 200 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws CustomizedException thrown if the request is rejected by server.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
@@ -48,8 +46,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
      * Return 204 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws CustomizedException thrown if the request is rejected by server.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
@@ -62,8 +59,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
      * Return 404 status code if successful.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws CustomizedException thrown if the request is rejected by server.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated

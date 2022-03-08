@@ -5,11 +5,15 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The IntWrapper model. */
 @Fluent
 public final class IntWrapper {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(IntWrapper.class);
+
     /*
      * The field1 property.
      */
