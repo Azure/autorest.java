@@ -7,7 +7,6 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -29,8 +28,6 @@ import java.util.List;
 })
 @Fluent
 public class Shark extends Fish {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(Shark.class);
-
     /*
      * The age property.
      */
@@ -109,8 +106,10 @@ public class Shark extends Fish {
     public void validate() {
         super.validate();
         if (getBirthday() == null) {
-            throw logger.logExceptionAsError(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Missing required property birthday in model Shark"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 }

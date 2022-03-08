@@ -6,8 +6,6 @@ package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -18,8 +16,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonFlatten
 @Fluent
 public class DotSalmon extends DotFish {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(DotSalmon.class);
-
     /*
      * The location property.
      */

@@ -9,6 +9,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -31,8 +32,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
+     * Head request, no params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -59,8 +59,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -79,8 +78,7 @@ public final class DpgAsyncClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}
-     *     on successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,8 +87,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
+     * Put, has both required and optional params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -154,8 +151,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
-     * in a known path.
+     * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -168,8 +164,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -188,8 +183,7 @@ public final class DpgAsyncClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -198,8 +192,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
-     * method in a new path.
+     * I'm a new operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -215,5 +208,17 @@ public final class DpgAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNewOperationWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNewOperationWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Sends the {@code httpRequest}.
+     *
+     * @param httpRequest The HTTP request to send.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
+        return this.serviceClient.sendRequestAsync(httpRequest);
     }
 }

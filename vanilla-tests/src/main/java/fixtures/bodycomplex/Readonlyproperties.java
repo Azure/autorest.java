@@ -19,15 +19,12 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Readonlyproperties. */
 public final class Readonlyproperties {
-    private final ClientLogger logger = new ClientLogger(Readonlyproperties.class);
-
     /** The proxy service used to perform REST calls. */
     private final ReadonlypropertiesService service;
 

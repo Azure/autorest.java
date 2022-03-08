@@ -5,15 +5,11 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DoubleWrapper model. */
 @Fluent
 public final class DoubleWrapper {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(DoubleWrapper.class);
-
     /*
      * The field1 property.
      */
