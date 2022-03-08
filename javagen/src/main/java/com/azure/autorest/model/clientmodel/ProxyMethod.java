@@ -92,6 +92,8 @@ public class ProxyMethod {
 
     private final Map<String, ProxyMethodExample> examples;
 
+    private final List<String> specialHeaders;
+
     private final String operationId;
 
     /**
@@ -120,7 +122,8 @@ public class ProxyMethod {
                           List<ProxyMethodParameter> allParameters, String description,
                           IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
                           boolean isResumable, Set<String> responseContentTypes,
-                          String operationId, Map<String, ProxyMethodExample> examples) {
+                          String operationId, Map<String, ProxyMethodExample> examples,
+                          List<String> specialHeaders) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -140,6 +143,7 @@ public class ProxyMethod {
         this.responseContentTypes = responseContentTypes;
         this.operationId = operationId;
         this.examples = examples;
+        this.specialHeaders = specialHeaders;
     }
 
     public final String getRequestContentType() {
@@ -234,7 +238,11 @@ public class ProxyMethod {
         return examples;
     }
 
-//    private MethodType _methodType = null;
+    public List<String> getSpecialHeaders() {
+        return specialHeaders;
+    }
+
+    //    private MethodType _methodType = null;
 //    public final MethodType getMethodType()
 //    {
 //        if (_methodType != null)
@@ -347,6 +355,7 @@ public class ProxyMethod {
         protected Set<String> responseContentTypes;
         protected Map<String, ProxyMethodExample> examples;
         protected String operationId;
+        protected List<String> specialHeaders;
 
         /*
          * Sets the Content-Type of the request.
@@ -538,6 +547,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets the special headers
+         * @param specialHeaders the special headers
+         * @return the Builder
+         */
+        public Builder specialHeaders(List<String> specialHeaders) {
+            this.specialHeaders = specialHeaders;
+            return this;
+        }
+
+        /**
          * @return an immutable ProxyMethod instance with the configurations on this builder.
          */
         public ProxyMethod build() {
@@ -559,7 +578,8 @@ public class ProxyMethod {
                     isResumable,
                     responseContentTypes,
                     operationId,
-                    examples);
+                    examples,
+                    specialHeaders);
         }
     }
 }

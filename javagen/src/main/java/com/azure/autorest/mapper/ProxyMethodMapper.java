@@ -75,6 +75,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
                 .name(operationName)
+                .specialHeaders(operation.getSpecialHeaders())
                 .isResumable(false);
 
         String operationId = null;

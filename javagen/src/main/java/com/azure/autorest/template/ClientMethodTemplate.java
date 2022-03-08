@@ -27,9 +27,11 @@ import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -316,6 +318,33 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
+    private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
+        boolean requestOptionsLocal = false;
+        if (clientMethod.getProxyMethod() != null && !CoreUtils.isNullOrEmpty(clientMethod.getProxyMethod().getSpecialHeaders())) {
+            List<String> specialHeaders = clientMethod.getProxyMethod().getSpecialHeaders().stream()
+                    .map(s -> s.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toList());
+
+            if (clientMethod.getProxyMethod().getHttpMethod() == HttpMethod.POST) {
+                // Repeatable Requests Version 1.0
+                // https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html
+
+                requestOptionsLocal = true;
+
+                function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
+
+                if (specialHeaders.contains("repeatability-request-id")) {
+                    function.line("requestOptionsLocal.setHeader(\"Repeatability-Request-ID\", UUID.randomUUID().toString());");
+
+                    if (specialHeaders.contains("repeatability-first-sent")) {
+                        function.line("requestOptionsLocal.setHeader(\"Repeatability-First-Sent\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));");
+                    }
+                }
+            }
+        }
+        return requestOptionsLocal;
+    }
+
     protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
         if (visibility == JavaVisibility.Public) {
             typeBlock.publicMethod(methodSignature, method);
@@ -465,7 +494,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        //                typeBlock.javadocComment(comment ->
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
@@ -632,7 +660,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             ApplyParameterTransformations(function, clientMethod, settings);
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
+            boolean requestOptionsLocal = false;
+            if (settings.isLowLevelClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
             if (settings.getAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.line(String.format("return %s", serviceMethodCall));
@@ -675,13 +708,19 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
-    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, JavaSettings settings) {
+    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, boolean useLocalRequestOptions, JavaSettings settings) {
         List<String> serviceMethodArgs = clientMethod.getProxyMethodArguments(settings)
                 .stream()
                 .map(argVal -> {
                     if (clientMethod.getParameters().stream().filter(param -> param.getName().equals(argVal))
                             .anyMatch(param -> clientMethod.getMethodTransformationDetails().stream()
                                     .anyMatch(transformation -> param.getName().equals(transformation.getOutParameter().getName())))) {
+                        return argVal + "Local";
+                    }
+                    return argVal;
+                })
+                .map(argVal -> {
+                    if (useLocalRequestOptions && "requestOptions".equals(argVal)) {
                         return argVal + "Local";
                     }
                     return argVal;
@@ -699,7 +738,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             ApplyParameterTransformations(function, clientMethod, settings);
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
+            boolean requestOptionsLocal = false;
+            if (settings.isLowLevelClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
             if (settings.getAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);
