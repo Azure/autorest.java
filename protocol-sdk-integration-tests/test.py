@@ -10,7 +10,7 @@ import argparse
 from os import path
 
 
-AUTOREST_CORE_VERSION = '3.6.6'
+AUTOREST_CORE_VERSION = '3.7.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 

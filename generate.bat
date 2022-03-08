@@ -1,8 +1,8 @@
-set VANILLA_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
-set AZURE_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
-set ARM_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.6.6 --java --use=. --output-folder=protocol-tests --low-level-client --generate-samples
-set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.6.6 --java --use=. --low-level-client
+set VANILLA_ARGUMENTS=--version=3.7.6 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
+set AZURE_ARGUMENTS=--version=3.7.6 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
+set ARM_ARGUMENTS=--version=3.7.6 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
+set PROTOCOL_ARGUMENTS=--version=3.7.6 --java --use=. --output-folder=protocol-tests --low-level-client --generate-samples
+set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.7.6 --java --use=. --low-level-client
 set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/additionalProperties.json --namespace=fixtures.additionalproperties
@@ -39,8 +39,8 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.js
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-call autorest --version=3.6.6 --use=./ vanilla-tests/swagger/lro.md
-call autorest --version=3.6.6 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+call autorest --version=3.7.6 --use=./ vanilla-tests/swagger/lro.md
+call autorest --version=3.7.6 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 
 rem local swagger
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
@@ -92,12 +92,12 @@ del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
 rem customization
-call autorest --version=3.6.6 --use:. customization-tests/swagger
+call autorest --version=3.7.6 --use:. customization-tests/swagger
 
 call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
 call autorest --use:. docs/samples/specification/basic/readme.md
 call autorest --use:. docs/samples/specification/management/readme.md
 
 rem partial update tests
-call autorest --version=3.6.6 --use:. partial-update-tests/existing/swagger/README.md
+call autorest --version=3.7.6 --use:. partial-update-tests/existing/swagger/README.md
 del partial-update-tests\generated\src\main\java\module-info.java
