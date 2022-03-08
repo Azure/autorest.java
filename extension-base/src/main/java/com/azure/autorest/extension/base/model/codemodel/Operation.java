@@ -71,6 +71,10 @@ public class Operation extends Metadata {
      * 
      */
     private ExternalDocumentation externalDocs;
+
+    private List<String> specialHeaders;
+
+    // internal
     private OperationGroup operationGroup;
 
     /**
@@ -271,5 +275,16 @@ public class Operation extends Metadata {
 
     public void setSignatureParameters(List<Parameter> signatureParameters) {
         this.signatureParameters = signatureParameters;
+    }
+
+    /**
+     * @return headers that require special processing, e.g. Repeatability-Request-ID
+     */
+    public List<String> getSpecialHeaders() {
+        return specialHeaders;
+    }
+
+    public void setSpecialHeaders(List<String> specialHeaders) {
+        this.specialHeaders = specialHeaders;
     }
 }

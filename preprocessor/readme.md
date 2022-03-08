@@ -58,6 +58,10 @@ pipeline:
       override:
         ip: Ip
         id: Id
+
+    skip-special-headers:
+    - Repeatability-Request-ID
+    - Repeatability-First-Sent
 ```
 
 ```yaml $(low-level-client) && $(sdk-integration)
