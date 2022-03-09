@@ -52,6 +52,25 @@ public final class SpecialHeaderAsyncClient {
     }
 
     /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramRepeatabilityRequestPutWithResponseAsync(requestOptions);
+    }
+
+    /**
      * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
      *
      * <p><strong>Response Body Schema</strong>

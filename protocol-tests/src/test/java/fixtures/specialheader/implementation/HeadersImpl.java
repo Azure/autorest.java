@@ -10,6 +10,7 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -69,7 +70,12 @@ public final class HeadersImpl {
         Mono<Response<BinaryData>> paramRepeatabilityRequest(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
-        @Get("/specialHeader/repeatabilityRequestGet")
+        @Put("/status/500")
+        @ExpectedResponses({200})
+        Mono<Response<BinaryData>> paramRepeatabilityRequestPut(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/status/500")
         @ExpectedResponses({200})
         Mono<Response<BinaryData>> paramRepeatabilityRequestGet(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
@@ -109,9 +115,9 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));
@@ -137,9 +143,9 @@ public final class HeadersImpl {
     public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));
@@ -162,6 +168,77 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestWithResponse(RequestOptions requestOptions) {
         return paramRepeatabilityRequestWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent",
+                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
+                        .withZone(ZoneId.of("GMT"))
+                        .format(OffsetDateTime.now()));
+        return FluxUtil.withContext(
+                context -> service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context));
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent",
+                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
+                        .withZone(ZoneId.of("GMT"))
+                        .format(OffsetDateTime.now()));
+        return service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context);
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> paramRepeatabilityRequestPutWithResponse(RequestOptions requestOptions) {
+        return paramRepeatabilityRequestPutWithResponseAsync(requestOptions).block();
     }
 
     /**
@@ -237,9 +314,9 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));
@@ -265,9 +342,9 @@ public final class HeadersImpl {
     public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));
@@ -362,9 +439,9 @@ public final class HeadersImpl {
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
             RequestOptions requestOptions) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));
@@ -406,9 +483,9 @@ public final class HeadersImpl {
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
             RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("Repeatability-Request-ID", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "Repeatability-First-Sent",
+                "repeatability-first-sent",
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
                         .withZone(ZoneId.of("GMT"))
                         .format(OffsetDateTime.now()));

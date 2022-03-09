@@ -45,9 +45,42 @@
             }
           }
         }
-      }
-    },
-    "/specialHeader/repeatabilityRequestGet": {
+      },
+      "put": {
+        "operationId": "header_paramRepeatabilityRequestPut",
+        "description": "Send a putrequest with header Repeatability-Request-ID and Repeatability-First-Sent",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-ID and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-ID is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If specified, the client directs that the request is repeatable.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
       "get": {
         "operationId": "header_paramRepeatabilityRequestGet",
         "description": "Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent",

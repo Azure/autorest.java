@@ -16,6 +16,7 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.util.CoreUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
@@ -116,6 +117,17 @@ public class SpecialHeaderTests {
 
         Assertions.assertThrows(HttpResponseException.class,
                 () -> client.paramRepeatabilityRequestWithResponse(null));
+
+        Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
+    }
+
+    @Test
+    @Disabled("same behavior as POST, avoid too many call to httpbin")
+    public void testRepeatabilityRequestPut() {
+        VALIDATION_POLICY.clear();
+
+        Assertions.assertThrows(HttpResponseException.class,
+                () -> client.paramRepeatabilityRequestPutWithResponse(null));
 
         Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
     }

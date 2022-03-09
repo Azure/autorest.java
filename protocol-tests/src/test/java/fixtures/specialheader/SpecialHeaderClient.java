@@ -51,6 +51,25 @@ public final class SpecialHeaderClient {
     }
 
     /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @return any object along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> paramRepeatabilityRequestPutWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.paramRepeatabilityRequestPutWithResponse(requestOptions);
+    }
+
+    /**
      * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
      *
      * <p><strong>Response Body Schema</strong>
