@@ -15,9 +15,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.http.HttpMethod;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.CoreUtils;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -400,9 +399,7 @@ public class ClientMethod {
             ClassType.BinaryData.addImportsTo(imports, false);
         }
 
-        if (includeImplementationImports && getProxyMethod() != null
-                && getProxyMethod().getHttpMethod() == HttpMethod.POST
-                && !CoreUtils.isNullOrEmpty(getProxyMethod().getSpecialHeaders())) {
+        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this)) {
             // Repeatable Requests
             imports.add(UUID.class.getName());
             imports.add(DateTimeFormatter.class.getName());

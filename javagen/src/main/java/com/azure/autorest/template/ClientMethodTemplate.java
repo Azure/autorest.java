@@ -26,12 +26,11 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -320,27 +319,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
         boolean requestOptionsLocal = false;
-        if (clientMethod.getProxyMethod() != null && !CoreUtils.isNullOrEmpty(clientMethod.getProxyMethod().getSpecialHeaders())) {
-            List<String> specialHeaders = clientMethod.getProxyMethod().getSpecialHeaders().stream()
-                    .map(s -> s.toLowerCase(Locale.ROOT))
-                    .collect(Collectors.toList());
-
-            if (clientMethod.getProxyMethod().getHttpMethod() == HttpMethod.POST) {
-                // Repeatable Requests Version 1.0
-                // https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html
-
-                requestOptionsLocal = true;
-
-                function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
-
-                if (specialHeaders.contains("repeatability-request-id")) {
-                    function.line("requestOptionsLocal.setHeader(\"Repeatability-Request-ID\", UUID.randomUUID().toString());");
-
-                    if (specialHeaders.contains("repeatability-first-sent")) {
-                        function.line("requestOptionsLocal.setHeader(\"Repeatability-First-Sent\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));");
-                    }
-                }
-            }
+        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod)) {
+            requestOptionsLocal = true;
+            function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
         }
         return requestOptionsLocal;
     }
