@@ -344,6 +344,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             swaggerExceptionDefinitions.exceptionTypeMapping);
         mergedExceptionTypeMapping.putAll(settingsExceptionTypeMap);
 
+        // remove expected status codes
+        expectedStatusCodes.forEach(mergedExceptionTypeMapping.keySet()::remove);
+
         // Convert the exception type mapping into what code generation uses elsewhere.
         Map<ClassType, List<Integer>> processedMapping = new HashMap<>();
         for (Map.Entry<Integer, ClassType> kvp : mergedExceptionTypeMapping.entrySet()) {

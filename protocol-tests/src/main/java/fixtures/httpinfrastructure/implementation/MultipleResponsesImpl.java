@@ -177,9 +177,6 @@ public final class MultipleResponsesImpl {
                 value = ClientAuthenticationException.class,
                 code = {401})
         @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -191,9 +188,6 @@ public final class MultipleResponsesImpl {
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
         @UnexpectedResponseExceptionType(
                 value = ResourceModifiedException.class,
                 code = {409})
@@ -207,9 +201,6 @@ public final class MultipleResponsesImpl {
                 value = ClientAuthenticationException.class,
                 code = {401})
         @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -221,9 +212,6 @@ public final class MultipleResponsesImpl {
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
         @UnexpectedResponseExceptionType(
                 value = ResourceModifiedException.class,
                 code = {409})
@@ -1174,7 +1162,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1200,7 +1187,6 @@ public final class MultipleResponsesImpl {
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1223,7 +1209,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
@@ -1245,7 +1230,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1271,7 +1255,6 @@ public final class MultipleResponsesImpl {
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1294,7 +1277,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
@@ -1316,7 +1298,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1342,7 +1323,6 @@ public final class MultipleResponsesImpl {
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1365,7 +1345,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
@@ -1387,7 +1366,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1413,7 +1391,6 @@ public final class MultipleResponsesImpl {
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
@@ -1436,7 +1413,6 @@ public final class MultipleResponsesImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
