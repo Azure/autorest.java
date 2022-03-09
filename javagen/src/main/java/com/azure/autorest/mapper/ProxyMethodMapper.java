@@ -590,30 +590,31 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .collect(Collectors.toList());
                 boolean supportRepeatabilityRequest = specialHeaders.contains(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
                         && specialHeaders.contains(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
+                if (supportRepeatabilityRequest) {
+                    Function<ProxyMethodParameter.Builder, ProxyMethodParameter.Builder> commonBuilderSetting = builder -> {
+                        builder.rawType(ClassType.String)
+                                .wireType(ClassType.String)
+                                .clientType(ClassType.String)
+                                .requestParameterLocation(RequestParameterLocation.HEADER)
+                                .isRequired(false)
+                                .isNullable(true)
+                                .fromClient(false);
+                        return builder;
+                    };
 
-                Function<ProxyMethodParameter.Builder, ProxyMethodParameter.Builder> commonBuilderSetting = builder -> {
-                    builder.rawType(ClassType.String)
-                            .wireType(ClassType.String)
-                            .clientType(ClassType.String)
-                            .requestParameterLocation(RequestParameterLocation.HEADER)
-                            .isRequired(false)
-                            .isNullable(true)
-                            .fromClient(false);
-                    return builder;
-                };
-
-                specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
-                                .name(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
-                                .parameterReference(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
-                                .requestParameterName(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
-                                .description("Repeatability request ID header"))
-                        .build());
-                specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
-                                .name(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
-                                .parameterReference(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
-                                .requestParameterName(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)
-                                .description("Repeatability first sent header as HTTP-date"))
-                        .build());
+                    specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
+                                    .name(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
+                                    .requestParameterName(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
+                                    .description("Repeatability request ID header"))
+                            .build());
+                    specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
+                                    .name(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
+                                    .requestParameterName(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)
+                                    .description("Repeatability first sent header as HTTP-date"))
+                            .build());
+                }
             }
         }
         return specialParameters;
