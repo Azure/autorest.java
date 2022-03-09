@@ -43,6 +43,7 @@ generate-builder-per-client: true
 add-context-parameter: true
 context-client-method-parameter: true
 sync-methods: all
+use-default-http-status-code-to-exception-type-mapping: true
 polling: {}
 
 pipeline:
