@@ -17,6 +17,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
@@ -211,19 +212,7 @@ public class ExampleParser {
                 exampleName, proxyMethodExample.getRelativeOriginalFileName(),
                 FluentStatic.getFluentManager(), collection, collectionMethod);
 
-        for (MethodParameter methodParameter : methodParameters) {
-            ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
-
-            if (node.getObjectValue() == null) {
-                if (methodParameter.getClientMethodParameter().getIsRequired()) {
-                    logger.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
-                }
-            }
-
-            ParameterExample parameterExample = new ParameterExample(node);
-            collectionMethodExample.getParameters().add(parameterExample);
-        }
-
+        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, collectionMethodExample);
         return collectionMethodExample;
     }
 
@@ -238,6 +227,11 @@ public class ExampleParser {
         FluentClientMethodExample collectionMethodExample = new FluentClientMethodExample(
                 exampleName, proxyMethodExample.getRelativeOriginalFileName(), methodGroup, clientMethod);
 
+        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, collectionMethodExample);
+        return collectionMethodExample;
+    }
+
+    private static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
         for (MethodParameter methodParameter : methodParameters) {
             ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
 
@@ -248,10 +242,8 @@ public class ExampleParser {
             }
 
             ParameterExample parameterExample = new ParameterExample(node);
-            collectionMethodExample.getParameters().add(parameterExample);
+            methodExample.getParameters().add(parameterExample);
         }
-
-        return collectionMethodExample;
     }
 
     private static List<FluentResourceCreateExample> parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
@@ -268,9 +260,7 @@ public class ExampleParser {
                 }
 
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
-                MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-                        .findFirst().orElse(null);
+                MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && FluentUtils.exampleIsUpdate(entry.getKey())) {
@@ -362,9 +352,7 @@ public class ExampleParser {
                 .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
                 .findFirst().get()
                 .getInnerClientMethod());
-        MethodParameter requestBodyParameter = methodParameters.stream()
-            .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-            .findFirst().orElse(null);
+        MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
         return parseResourceCreate(resourceCollection, create, example, methodParameters, requestBodyParameter);
     }
 
@@ -372,12 +360,7 @@ public class ExampleParser {
         List<FluentResourceUpdateExample> ret = null;
 
         final boolean methodIsCreateOrUpdate = methodIsCreateOrUpdate(resourceUpdate.getResourceModel());
-        FluentCollectionMethod resourceGetMethod = null;
-        if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
-            resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
-                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
-                    .findFirst().orElse(null);
-        }
+        FluentCollectionMethod resourceGetMethod = findResourceGetMethod(resourceUpdate);
         if (resourceGetMethod == null) {
             // 'get' method not found
             return null;
@@ -393,9 +376,7 @@ public class ExampleParser {
                 }
 
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
-                MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-                        .findFirst().orElse(null);
+                MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && !FluentUtils.exampleIsUpdate(entry.getKey())) {
@@ -414,6 +395,16 @@ public class ExampleParser {
             }
         }
         return ret;
+    }
+
+    private static FluentCollectionMethod findResourceGetMethod(ResourceUpdate resourceUpdate) {
+        FluentCollectionMethod resourceGetMethod = null;
+        if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
+            resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
+                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
+                    .findFirst().orElse(null);
+        }
+        return resourceGetMethod;
     }
 
     private static FluentResourceUpdateExample parseResourceUpdate(FluentResourceCollection collection, ResourceUpdate resourceUpdate, ProxyMethodExample example, FluentCollectionMethod resourceGetMethod, List<MethodParameter> resourceGetMethodParameters, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
@@ -459,12 +450,7 @@ public class ExampleParser {
     }
 
     public static FluentResourceUpdateExample parseResourceUpdate(FluentResourceCollection resourceCollection, ResourceUpdate resourceUpdate, ProxyMethodExample example) {
-        FluentCollectionMethod resourceGetMethod = null;
-        if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
-            resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
-                .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
-                .findFirst().orElse(null);
-        }
+        FluentCollectionMethod resourceGetMethod = findResourceGetMethod(resourceUpdate);
         if (resourceGetMethod == null) {
             // 'get' method not found
             return null;
@@ -477,11 +463,15 @@ public class ExampleParser {
                 .findFirst().get()
                 .getInnerClientMethod()
         );
-        MethodParameter requestBodyParameter = methodParameters.stream()
-            .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-            .findFirst().orElse(null);
+        MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
         return parseResourceUpdate(resourceCollection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
 
+    }
+
+    private static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
+        return methodParameters.stream()
+                .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
+                .findFirst().orElse(null);
     }
 
     private static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {

@@ -3,9 +3,9 @@
 
 package com.azure.autorest.fluent.util;
 
-public class FluentConsts {
+public class Constants {
 
     public static final String DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS = "ResourceProvider";
-    public static final String ANTI_CONFLICT_SUFFIX_FOR_UNGROUPED_OPERATIONS = "Operation";
+    public static final String OPERATION_GROUP_DEDUPLICATE_SUFFIX = "Operation";
 
 }

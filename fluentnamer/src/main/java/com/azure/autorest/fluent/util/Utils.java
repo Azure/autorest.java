@@ -68,13 +68,13 @@ public class Utils {
         if (settings.getNameForUngroupedOperations().isPresent()) {
             nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
         } else if (JavaSettings.getInstance().isFluentLite()) {
-            nameForUngroupOperations = FluentConsts.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
+            nameForUngroupOperations = Constants.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
 
             Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
                 .map(Utils::getDefaultName)
                 .collect(Collectors.toSet());
             if (operationGroupNames.contains(nameForUngroupOperations)) {
-                nameForUngroupOperations += FluentConsts.ANTI_CONFLICT_SUFFIX_FOR_UNGROUPED_OPERATIONS;
+                nameForUngroupOperations += Constants.OPERATION_GROUP_DEDUPLICATE_SUFFIX;
             }
         }
         return nameForUngroupOperations;

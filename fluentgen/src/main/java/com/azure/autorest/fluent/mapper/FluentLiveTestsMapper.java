@@ -62,9 +62,14 @@ public class FluentLiveTestsMapper {
                     .map((Function<LiveTestStep, Optional<FluentLiveTestStep>>) step -> {
                         ExampleLiveTestStep exampleStep = (ExampleLiveTestStep) step;
                         String operationId = exampleStep.getOperationId();
-                        String[] oprs = getOperationGroupPair(operationId, codeModel, fluentJavaSettings);
-                        String operationGroup = oprs[0];
-                        String operation = oprs[1];
+                        // operationId is from testModel, if it's null, ignore the step.
+                        if (operationId == null) {
+                            logger.warn(String.format("null operationId found for example file step : %s", exampleStep.getExample().getName()));
+                            return Optional.empty();
+                        }
+                        OperationGroupPair operationGroupPair = getOperationGroupPair(operationId, codeModel, fluentJavaSettings);
+                        String operationGroup = operationGroupPair.operationGroup;
+                        String operation = operationGroupPair.operation;
                         ProxyMethodExample example = exampleStep.getExample();
                         FluentResourceCollection resourceCollection = findResourceCollection(fluentClient, operationGroup);
 
@@ -122,11 +127,12 @@ public class FluentLiveTestsMapper {
         return resultBuilder.build();
     }
 
-    private String[] getOperationGroupPair(String operationId, CodeModel codeModel, FluentJavaSettings fluentJavaSettings) {
+    private OperationGroupPair getOperationGroupPair(String operationId, CodeModel codeModel, FluentJavaSettings fluentJavaSettings) {
         if (!operationId.contains("_")){
-            return new String[]{Utils.getNameForUngroupedOperations(codeModel, fluentJavaSettings), operationId};
+            return new OperationGroupPair(Utils.getNameForUngroupedOperations(codeModel, fluentJavaSettings), operationId);
         }
-        return operationId.split("_");
+        String[] pair = operationId.split("_");
+        return new OperationGroupPair(pair[0], pair[1]);
     }
 
     private void setExampleStepFeatures(FluentLiveTests.Builder resultBuilder, FluentLiveTestCase.Builder testCaseBuilder, com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample fluentExample, FluentExampleTemplate.ExampleMethod exampleMethod) {
@@ -148,6 +154,16 @@ public class FluentLiveTestsMapper {
         return resourceCollection.getResourceCreates().stream().filter(rc ->
             !FluentUtils.exampleIsUpdate(rc.getMethodName()) &&
                 rc.getMethodName().equalsIgnoreCase(operation)).findFirst();
+    }
+
+    private static class OperationGroupPair {
+        private final String operationGroup;
+        private final String operation;
+
+        public OperationGroupPair(String operationGroup, String operation) {
+            this.operationGroup = operationGroup;
+            this.operation = operation;
+        }
     }
 
 
