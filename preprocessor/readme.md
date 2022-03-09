@@ -18,6 +18,10 @@ pipeline:
 
     seal-single-value-enum-by-default: true
 
+    skip-special-headers:
+    - Repeatability-Request-ID
+    - Repeatability-First-Sent
+
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
     input: modelerfour
@@ -58,10 +62,6 @@ pipeline:
       override:
         ip: Ip
         id: Id
-
-    skip-special-headers:
-    - Repeatability-Request-ID
-    - Repeatability-First-Sent
 ```
 
 ```yaml $(low-level-client) && $(sdk-integration)

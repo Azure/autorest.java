@@ -399,7 +399,7 @@ public class ClientMethod {
             ClassType.BinaryData.addImportsTo(imports, false);
         }
 
-        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this)) {
+        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
             // Repeatable Requests
             imports.add(UUID.class.getName());
             imports.add(DateTimeFormatter.class.getName());

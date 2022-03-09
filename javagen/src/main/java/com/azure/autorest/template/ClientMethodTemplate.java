@@ -319,13 +319,20 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
         boolean requestOptionsLocal = false;
-        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod)) {
+        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
             function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
             function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
         }
         return requestOptionsLocal;
+    }
+
+    protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
+        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
+            function.line(String.format("String %1$s = UUID.randomUUID().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
+            function.line(String.format("String %1$s = DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
+        }
     }
 
     protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
@@ -646,6 +653,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isLowLevelClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
@@ -724,6 +733,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isLowLevelClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
