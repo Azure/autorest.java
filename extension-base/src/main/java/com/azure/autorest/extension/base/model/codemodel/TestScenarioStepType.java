@@ -23,7 +23,7 @@ public enum TestScenarioStepType {
     /**
      * Step to deploy ARM template to the scope.
      */
-    STEP_ARM_TEMPLATE("stepArmTemplate"),
+    STEP_ARM_TEMPLATE("armTemplateDeployment"),
     /**
      * Step to deploy ARM deployment script to the scope.
      */

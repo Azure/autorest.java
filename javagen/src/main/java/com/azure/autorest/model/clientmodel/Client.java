@@ -59,6 +59,7 @@ public class Client {
     private final List<AsyncSyncClient> asyncClients;
     private final List<ClientBuilder> clientBuilders;
     private final List<ProtocolExample> protocolExamples;
+    private final List<LiveTests> liveTests;
 
     /**
      * Create a new Client with the provided values.
@@ -83,7 +84,9 @@ public class Client {
                    List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager,
                    ServiceClient serviceClient, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
-                   List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples) {
+                   List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
+                   List<LiveTests> liveTests
+    ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
         this.enums = enums;
@@ -99,6 +102,7 @@ public class Client {
         this.asyncClients = asyncClients;
         this.clientBuilders = clientBuilders;
         this.protocolExamples = protocolExamples;
+        this.liveTests = liveTests;
     }
 
     public final String getClientName() {
@@ -165,6 +169,11 @@ public class Client {
         return protocolExamples;
     }
 
+    /** @return the live tests */
+    public List<LiveTests> getLiveTests() {
+        return liveTests;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
@@ -181,6 +190,7 @@ public class Client {
         private List<AsyncSyncClient> asyncClients = new ArrayList<>();
         private List<ClientBuilder> clientBuilders = new ArrayList<>();
         private List<ProtocolExample> protocolExamples = new ArrayList<>();
+        private List<LiveTests> liveTests = new ArrayList<>();
 
         /**
          * Sets the name of this service client.
@@ -332,6 +342,16 @@ public class Client {
             return this;
         }
 
+        /**
+         * Sets the live tests for this client.
+         * @param liveTests live tests
+         * @return the Builder itself
+         */
+        public Builder liveTests(List<LiveTests> liveTests) {
+            this.liveTests = liveTests;
+            return this;
+        }
+
         public Client build() {
             return new Client(clientName,
                     clientDescription,
@@ -347,7 +367,9 @@ public class Client {
                     syncClients,
                     asyncClients,
                     clientBuilders,
-                    protocolExamples);
+                    protocolExamples,
+                    liveTests
+                );
         }
     }
 }

@@ -360,4 +360,9 @@ public class FluentUtils {
         }
         return Arrays.asList(values);
     }
+
+    public static boolean exampleIsUpdate(String name) {
+        name = name.toLowerCase(Locale.ROOT);
+        return name.contains("update") && !name.contains("create");
+    }
 }

@@ -11,7 +11,6 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
@@ -21,7 +20,6 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -110,7 +108,7 @@ public class FluentTransformer {
     }
 
     protected CodeModel renameUngroupedOperationGroup(CodeModel codeModel, FluentJavaSettings settings) {
-        final String nameForUngroupedOperations = getNameForUngroupedOperations(codeModel, settings);
+        final String nameForUngroupedOperations = Utils.getNameForUngroupedOperations(codeModel, settings);
         if (nameForUngroupedOperations == null) {
             return codeModel;
         }
@@ -123,23 +121,6 @@ public class FluentTransformer {
                     og.getLanguage().getDefault().setName(nameForUngroupedOperations);
                 });
         return codeModel;
-    }
-
-    private static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
-        String nameForUngroupOperations = null;
-        if (settings.getNameForUngroupedOperations().isPresent()) {
-            nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
-        } else if (JavaSettings.getInstance().isFluentLite()) {
-            nameForUngroupOperations = "ResourceProvider";
-
-            Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
-                    .map(Utils::getDefaultName)
-                    .collect(Collectors.toSet());
-            if (operationGroupNames.contains(nameForUngroupOperations)) {
-                nameForUngroupOperations += "Operation";
-            }
-        }
-        return nameForUngroupOperations;
     }
 
     /**

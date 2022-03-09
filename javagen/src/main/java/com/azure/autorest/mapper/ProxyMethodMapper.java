@@ -79,12 +79,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         String operationId = null;
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // "default" could be null for generated method like "listNext"
-            if (operation.getOperationGroup() != null
-                    && operation.getOperationGroup().getLanguage() != null
-                    && operation.getOperationGroup().getLanguage().getDefault() != null
-                    && !CoreUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName())
-                    // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
-                    && !(settings.isFluent() && "ResourceProvider".equals(operation.getOperationGroup().getLanguage().getDefault().getName()))) {
+            if (operationGroupNotNull(operation, settings)) {
                 operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_" + operation.getLanguage().getDefault().getName();
             } else {
                 operationId = operation.getLanguage().getDefault().getName();
@@ -280,6 +275,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             parsed.put(request, proxyMethod);
         }
         return result;
+    }
+
+    protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
+        return operation.getOperationGroup() != null
+                && operation.getOperationGroup().getLanguage() != null
+                && operation.getOperationGroup().getLanguage().getDefault() != null
+                && !CoreUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName());
     }
 
     protected ClassType getContextClass() {

@@ -57,6 +57,7 @@ public class Project {
         private String azureIdentityVersion = "1.4.6";
         private String junitVersion = "5.8.2";
         private String revapiMavenPlugin = "0.14.6";
+        private String slf4jSimple = "1.7.32";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
@@ -88,6 +89,10 @@ public class Project {
 
         public String getRevapiMavenPlugin() {
             return revapiMavenPlugin;
+        }
+
+        public String getSlf4jSimple() {
+            return slf4jSimple;
         }
     }
 
@@ -220,6 +225,8 @@ public class Project {
                 checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
                 checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
                 checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
+                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
+                checkArtifact(line, "org.slf4j:slf4j-simple").ifPresent(v -> packageVersions.slf4jSimple = v);
             });
         }
     }

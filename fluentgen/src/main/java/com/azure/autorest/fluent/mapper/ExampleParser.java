@@ -17,6 +17,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
@@ -56,17 +57,18 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
 
 public class ExampleParser {
 
@@ -210,20 +212,13 @@ public class ExampleParser {
                 exampleName, proxyMethodExample.getRelativeOriginalFileName(),
                 FluentStatic.getFluentManager(), collection, collectionMethod);
 
-        for (MethodParameter methodParameter : methodParameters) {
-            ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
-
-            if (node.getObjectValue() == null) {
-                if (methodParameter.getClientMethodParameter().getIsRequired()) {
-                    logger.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
-                }
-            }
-
-            ParameterExample parameterExample = new ParameterExample(node);
-            collectionMethodExample.getParameters().add(parameterExample);
-        }
-
+        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, collectionMethodExample);
         return collectionMethodExample;
+    }
+
+    public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, Collection<FluentCollectionMethod> collectionMethods, ProxyMethodExample example) {
+        FluentCollectionMethod collectionMethod = collectionMethods.stream().filter(method -> requiresExample(method.getInnerClientMethod())).findFirst().get();
+        return parseMethodForExample(resourceCollection, collectionMethod, getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
     }
 
     private static FluentClientMethodExample parseMethodForExample(MethodGroupClient methodGroup, ClientMethod clientMethod,
@@ -232,6 +227,11 @@ public class ExampleParser {
         FluentClientMethodExample collectionMethodExample = new FluentClientMethodExample(
                 exampleName, proxyMethodExample.getRelativeOriginalFileName(), methodGroup, clientMethod);
 
+        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, collectionMethodExample);
+        return collectionMethodExample;
+    }
+
+    private static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
         for (MethodParameter methodParameter : methodParameters) {
             ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
 
@@ -242,10 +242,8 @@ public class ExampleParser {
             }
 
             ParameterExample parameterExample = new ParameterExample(node);
-            collectionMethodExample.getParameters().add(parameterExample);
+            methodExample.getParameters().add(parameterExample);
         }
-
-        return collectionMethodExample;
     }
 
     private static List<FluentResourceCreateExample> parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
@@ -262,13 +260,10 @@ public class ExampleParser {
                 }
 
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
-                ClientModel requestBodyClientModel = resourceCreate.getRequestBodyParameterModel();
-                MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-                        .findFirst().orElse(null);
+                MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                    if (methodIsCreateOrUpdate && exampleIsUpdate(entry.getKey())) {
+                    if (methodIsCreateOrUpdate && FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely a resource update example
                         logger.info("Skip possible resource update example '{}' in create", entry.getKey());
                         continue;
@@ -276,68 +271,7 @@ public class ExampleParser {
 
                     logger.info("Parse resource create example '{}'", entry.getKey());
 
-                    ProxyMethodExample example = entry.getValue();
-                    FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(
-                            entry.getKey(), example.getRelativeOriginalFileName(),
-                            FluentStatic.getFluentManager(), collection, resourceCreate);
-
-                    FluentDefineMethod defineMethod = resourceCreate.getDefineMethod();
-                    ExampleNode defineNode = null;
-                    if (defineMethod.getMethodParameter() != null) {
-                        MethodParameter methodParameter = findMethodParameter(methodParameters, defineMethod.getMethodParameter());
-                        defineNode = parseNodeFromParameter(example, methodParameter);
-
-                        if (defineNode.getObjectValue() == null) {
-                            logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
-                        }
-                    }
-                    resourceCreateExample.getParameters().add(new ParameterExample(defineMethod, defineNode));
-
-                    for (DefinitionStage stage : resourceCreate.getDefinitionStages()) {
-                        List<FluentMethod> fluentMethods = stage.getMethods();
-                        if (!fluentMethods.isEmpty()) {
-                            FluentMethod fluentMethod = fluentMethods.iterator().next();
-                            List<ExampleNode> exampleNodes = new ArrayList<>();
-
-                            if (stage instanceof DefinitionStageBlank || stage instanceof DefinitionStageCreate) {
-                                // blank and create stage does not have parameter
-                            } else if (stage instanceof DefinitionStageParent) {
-                                List<MethodParameter> parameters = fluentMethod.getParameters().stream()
-                                        .map(p -> findMethodParameter(methodParameters, p))
-                                        .collect(Collectors.toList());
-                                exampleNodes.addAll(parameters.stream()
-                                        .map(p -> parseNodeFromParameter(example, p))
-                                        .collect(Collectors.toList()));
-                            } else if (stage instanceof DefinitionStageMisc) {
-                                DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
-                                MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
-                                ExampleNode node = parseNodeFromParameter(example, methodParameter);
-
-                                if (stage.isMandatoryStage() || !node.isNull()) {
-                                    exampleNodes.add(node);
-                                }
-                            } else {
-                                ModelProperty modelProperty = stage.getModelProperty();
-                                if (modelProperty != null) {
-                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, modelProperty);
-
-                                    if (stage.isMandatoryStage() || !node.isNull()) {
-                                        exampleNodes.add(node);
-                                    }
-                                }
-                            }
-
-                            if (exampleNodes.stream().anyMatch(ExampleNode::isNull)) {
-                                if (stage.isMandatoryStage()) {
-                                    logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
-                                }
-                            }
-
-                            if (!exampleNodes.isEmpty()) {
-                                resourceCreateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
-                            }
-                        }
-                    }
+                    FluentResourceCreateExample resourceCreateExample = parseResourceCreate(collection, resourceCreate, entry.getValue(), methodParameters, requestBodyParameter);
 
                     ret.add(resourceCreateExample);
                 }
@@ -346,16 +280,87 @@ public class ExampleParser {
         return ret;
     }
 
+    private static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate, ProxyMethodExample example, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
+        FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(
+                example.getName(), example.getRelativeOriginalFileName(),
+                FluentStatic.getFluentManager(), collection, resourceCreate);
+
+        FluentDefineMethod defineMethod = resourceCreate.getDefineMethod();
+        ExampleNode defineNode = null;
+        if (defineMethod.getMethodParameter() != null) {
+            MethodParameter methodParameter = findMethodParameter(methodParameters, defineMethod.getMethodParameter());
+            defineNode = parseNodeFromParameter(example, methodParameter);
+
+            if (defineNode.getObjectValue() == null) {
+                logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
+            }
+        }
+        resourceCreateExample.getParameters().add(new ParameterExample(defineMethod, defineNode));
+
+        for (DefinitionStage stage : resourceCreate.getDefinitionStages()) {
+            List<FluentMethod> fluentMethods = stage.getMethods();
+            if (!fluentMethods.isEmpty()) {
+                FluentMethod fluentMethod = fluentMethods.iterator().next();
+                List<ExampleNode> exampleNodes = new ArrayList<>();
+
+                if (stage instanceof DefinitionStageBlank || stage instanceof DefinitionStageCreate) {
+                    // blank and create stage does not have parameter
+                } else if (stage instanceof DefinitionStageParent) {
+                    List<MethodParameter> parameters = fluentMethod.getParameters().stream()
+                            .map(p -> findMethodParameter(methodParameters, p))
+                            .collect(Collectors.toList());
+                    exampleNodes.addAll(parameters.stream()
+                            .map(p -> parseNodeFromParameter(example, p))
+                            .collect(Collectors.toList()));
+                } else if (stage instanceof DefinitionStageMisc) {
+                    DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
+                    MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
+                    ExampleNode node = parseNodeFromParameter(example, methodParameter);
+
+                    if (stage.isMandatoryStage() || !node.isNull()) {
+                        exampleNodes.add(node);
+                    }
+                } else {
+                    ModelProperty modelProperty = stage.getModelProperty();
+                    if (modelProperty != null) {
+                        ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, resourceCreate.getRequestBodyParameterModel(), modelProperty);
+
+                        if (stage.isMandatoryStage() || !node.isNull()) {
+                            exampleNodes.add(node);
+                        }
+                    }
+                }
+
+                if (exampleNodes.stream().anyMatch(ExampleNode::isNull)) {
+                    if (stage.isMandatoryStage()) {
+                        logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
+                    }
+                }
+
+                if (!exampleNodes.isEmpty()) {
+                    resourceCreateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
+                }
+            }
+        }
+        return resourceCreateExample;
+    }
+
+    public static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection resourceCollection, ResourceCreate create, ProxyMethodExample example) {
+        List<MethodParameter> methodParameters = getParameters(
+            create.getMethodReferences()
+                .stream()
+                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .findFirst().get()
+                .getInnerClientMethod());
+        MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
+        return parseResourceCreate(resourceCollection, create, example, methodParameters, requestBodyParameter);
+    }
+
     private static List<FluentResourceUpdateExample> parseResourceUpdate(FluentResourceCollection collection, ResourceUpdate resourceUpdate) {
         List<FluentResourceUpdateExample> ret = null;
 
         final boolean methodIsCreateOrUpdate = methodIsCreateOrUpdate(resourceUpdate.getResourceModel());
-        FluentCollectionMethod resourceGetMethod = null;
-        if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
-            resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
-                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
-                    .findFirst().orElse(null);
-        }
+        FluentCollectionMethod resourceGetMethod = findResourceGetMethod(resourceUpdate);
         if (resourceGetMethod == null) {
             // 'get' method not found
             return null;
@@ -371,13 +376,10 @@ public class ExampleParser {
                 }
 
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
-                ClientModel requestBodyClientModel = resourceUpdate.getRequestBodyParameterModel();
-                MethodParameter requestBodyParameter = methodParameters.stream()
-                        .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
-                        .findFirst().orElse(null);
+                MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                    if (methodIsCreateOrUpdate && !exampleIsUpdate(entry.getKey())) {
+                    if (methodIsCreateOrUpdate && !FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely not a resource update example
                         logger.info("Skip possible resource create example '{}' in update", entry.getKey());
                         continue;
@@ -386,50 +388,90 @@ public class ExampleParser {
                     logger.info("Parse resource update example '{}'", entry.getKey());
 
                     ProxyMethodExample example = entry.getValue();
-                    FluentCollectionMethodExample resourceGetExample =
-                            parseMethodForExample(collection, resourceGetMethod, resourceGetMethodParameters, entry.getKey(), example);
-                    FluentResourceUpdateExample resourceUpdateExample = new FluentResourceUpdateExample(
-                            entry.getKey(), example.getRelativeOriginalFileName(),
-                            FluentStatic.getFluentManager(), collection, resourceUpdate, resourceGetExample);
-
-                    for (UpdateStage stage : resourceUpdate.getUpdateStages()) {
-                        List<FluentMethod> fluentMethods = stage.getMethods();
-                        if (!fluentMethods.isEmpty()) {
-                            FluentMethod fluentMethod = fluentMethods.iterator().next();
-                            List<ExampleNode> exampleNodes = new ArrayList<>();
-
-                            if (stage instanceof UpdateStageApply) {
-                                // apply stage does not have parameter
-                            } else if (stage instanceof UpdateStageMisc) {
-                                UpdateStageMisc miscStage = (UpdateStageMisc) stage;
-                                MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
-                                ExampleNode node = parseNodeFromParameter(example, methodParameter);
-
-                                if (!node.isNull()) {
-                                    exampleNodes.add(node);
-                                }
-                            } else {
-                                ModelProperty modelProperty = stage.getModelProperty();
-                                if (modelProperty != null) {
-                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, modelProperty);
-
-                                    if (!node.isNull()) {
-                                        exampleNodes.add(node);
-                                    }
-                                }
-                            }
-
-                            if (!exampleNodes.isEmpty()) {
-                                resourceUpdateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
-                            }
-                        }
-                    }
+                    FluentResourceUpdateExample resourceUpdateExample = parseResourceUpdate(collection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
 
                     ret.add(resourceUpdateExample);
                 }
             }
         }
         return ret;
+    }
+
+    private static FluentCollectionMethod findResourceGetMethod(ResourceUpdate resourceUpdate) {
+        FluentCollectionMethod resourceGetMethod = null;
+        if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
+            resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
+                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
+                    .findFirst().orElse(null);
+        }
+        return resourceGetMethod;
+    }
+
+    private static FluentResourceUpdateExample parseResourceUpdate(FluentResourceCollection collection, ResourceUpdate resourceUpdate, ProxyMethodExample example, FluentCollectionMethod resourceGetMethod, List<MethodParameter> resourceGetMethodParameters, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
+        FluentCollectionMethodExample resourceGetExample =
+                parseMethodForExample(collection, resourceGetMethod, resourceGetMethodParameters, example.getName(), example);
+        FluentResourceUpdateExample resourceUpdateExample = new FluentResourceUpdateExample(
+                example.getName(), example.getRelativeOriginalFileName(),
+                FluentStatic.getFluentManager(), collection, resourceUpdate, resourceGetExample);
+
+        for (UpdateStage stage : resourceUpdate.getUpdateStages()) {
+            List<FluentMethod> fluentMethods = stage.getMethods();
+            if (!fluentMethods.isEmpty()) {
+                FluentMethod fluentMethod = fluentMethods.iterator().next();
+                List<ExampleNode> exampleNodes = new ArrayList<>();
+
+                if (stage instanceof UpdateStageApply) {
+                    // apply stage does not have parameter
+                } else if (stage instanceof UpdateStageMisc) {
+                    UpdateStageMisc miscStage = (UpdateStageMisc) stage;
+                    MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
+                    ExampleNode node = parseNodeFromParameter(example, methodParameter);
+
+                    if (!node.isNull()) {
+                        exampleNodes.add(node);
+                    }
+                } else {
+                    ModelProperty modelProperty = stage.getModelProperty();
+                    if (modelProperty != null) {
+                        ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, resourceUpdate.getRequestBodyParameterModel(), modelProperty);
+
+                        if (!node.isNull()) {
+                            exampleNodes.add(node);
+                        }
+                    }
+                }
+
+                if (!exampleNodes.isEmpty()) {
+                    resourceUpdateExample.getParameters().add(new ParameterExample(fluentMethod, exampleNodes));
+                }
+            }
+        }
+        return resourceUpdateExample;
+    }
+
+    public static FluentResourceUpdateExample parseResourceUpdate(FluentResourceCollection resourceCollection, ResourceUpdate resourceUpdate, ProxyMethodExample example) {
+        FluentCollectionMethod resourceGetMethod = findResourceGetMethod(resourceUpdate);
+        if (resourceGetMethod == null) {
+            // 'get' method not found
+            return null;
+        }
+        List<MethodParameter> resourceGetMethodParameters = getParameters(resourceGetMethod.getInnerClientMethod());
+        List<MethodParameter> methodParameters = getParameters(
+            resourceUpdate.getMethodReferences()
+                .stream()
+                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .findFirst().get()
+                .getInnerClientMethod()
+        );
+        MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
+        return parseResourceUpdate(resourceCollection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
+
+    }
+
+    private static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
+        return methodParameters.stream()
+                .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
+                .findFirst().orElse(null);
     }
 
     private static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {
@@ -762,11 +804,6 @@ public class ExampleParser {
             return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
         }
         return false;
-    }
-
-    private static boolean exampleIsUpdate(String name) {
-        name = name.toLowerCase(Locale.ROOT);
-        return name.contains("update") && !name.contains("create");
     }
 
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {

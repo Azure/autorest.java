@@ -287,6 +287,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             builder.protocolExamples(protocolExamples);
         }
 
+        if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
+            builder.liveTests(LiveTestsMapper.getInstance().map(codeModel.getTestModel()));
+        }
+
         return builder.build();
     }
 
