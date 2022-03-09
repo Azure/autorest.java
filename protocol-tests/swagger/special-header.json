@@ -48,7 +48,7 @@
       },
       "put": {
         "operationId": "header_paramRepeatabilityRequestPut",
-        "description": "Send a putrequest with header Repeatability-Request-ID and Repeatability-First-Sent",
+        "description": "Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent",
         "tags": [
           "Header Operations"
         ],
