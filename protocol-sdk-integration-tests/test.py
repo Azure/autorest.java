@@ -55,6 +55,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
     cmd = [
         MAVEN_CLI,
         'verify',
+        '-Dmaven.javadoc.skip',
         '--no-transfer-progress'
     ]
     subprocess.check_call(cmd, cwd=output_folder)
