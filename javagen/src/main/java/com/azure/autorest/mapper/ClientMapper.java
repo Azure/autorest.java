@@ -174,9 +174,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-        } else if (!settings.isLowLevelClient()) {
-            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
-                .getImplementationSubpackage().isEmpty()) {
+        } else {
+            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
+                    && !settings.getImplementationSubpackage().isEmpty()) {
+
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
@@ -186,11 +187,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
                     && !clientModels.isEmpty()) {
+
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
                     packageInfos.put(modelsPackage, new PackageInfo(
