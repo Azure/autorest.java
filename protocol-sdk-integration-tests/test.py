@@ -42,6 +42,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
         'mvn' + ('.cmd' if OS_WINDOWS else ''),
         'clean',
         'package',
+        '-DskipTests',
         '-Dmaven.javadoc.skip',
         '--no-transfer-progress'
     ]
@@ -50,6 +51,16 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
     logging.info('pass maven package')
 
     # verify
+    cmd = [
+        'mvn' + ('.cmd' if OS_WINDOWS else ''),
+        'verify',
+        '--no-transfer-progress'
+    ]
+    subprocess.check_call(cmd, cwd=output_folder)
+
+    logging.info('pass maven verify')
+
+    # verify folder/files
     assert path.exists(path.join(output_folder, 'README.md'))
     logging.info('pass README.md')
 
