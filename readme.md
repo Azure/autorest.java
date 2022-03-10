@@ -93,6 +93,7 @@ For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-
 
 `generate-samples` option can be used for generating samples for client.
 `generate-tests` option can be used for generating tests for client.
+`generate-models` option can be used for generating models.
 
 ## Additional settings for Fluent
 

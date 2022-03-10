@@ -21,10 +21,10 @@ import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
-import fixtures.dpgcustomization.models.Input;
-import fixtures.dpgcustomization.models.LROProduct;
-import fixtures.dpgcustomization.models.Product;
-import fixtures.dpgcustomization.models.ProductReceived;
+import fixtures.dpgcustomization.implementation.models.Input;
+import fixtures.dpgcustomization.implementation.models.LroProduct;
+import fixtures.dpgcustomization.implementation.models.Product;
+import fixtures.dpgcustomization.implementation.models.ProductReceived;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -123,15 +123,15 @@ public class DpgCustomizationTests {
         Assertions.assertEquals("Succeeded", rawModel.get("provisioningState"));
 
         poller = client.beginLro("model", null);
-        SyncPoller<LROProduct, LROProduct> modelPoller = new ProductSyncPoller(poller);
+        SyncPoller<LroProduct, LroProduct> modelPoller = new ProductSyncPoller(poller);
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, modelPoller.waitForCompletion().getStatus());
-        LROProduct model = modelPoller.getFinalResult();
+        LroProduct model = modelPoller.getFinalResult();
         Assertions.assertEquals(ProductReceived.MODEL, model.getReceived());
         Assertions.assertEquals("Succeeded", model.getProvisioningState());
 
-        // PollerFlux<LROProduct, LROProduct>
+        // PollerFlux<LroProduct, LroProduct>
         HttpPipeline httpPipeline = new HttpPipelineBuilder().build();  // httpPipeline exists in serviceClient
-        PollerFlux<LROProduct, LROProduct> modelPollerFlux = PollerFlux.create(
+        PollerFlux<LroProduct, LroProduct> modelPollerFlux = PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> asyncClient.lroWithResponse("model", null),
                 new DefaultPollingStrategy<>(httpPipeline),
@@ -144,11 +144,11 @@ public class DpgCustomizationTests {
         modelPoller = modelPollerFlux.getSyncPoller();
     }
 
-    private static final class TypeReferenceLroProduct extends TypeReference<LROProduct> {
+    private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {
         // empty
     }
 
-    static class ProductSyncPoller implements SyncPoller<LROProduct, LROProduct> {
+    static class ProductSyncPoller implements SyncPoller<LroProduct, LroProduct> {
 
         private final SyncPoller<BinaryData, BinaryData> poller;
 
@@ -156,40 +156,40 @@ public class DpgCustomizationTests {
             this.poller = poller;
         }
 
-        private static PollResponse<LROProduct> map(PollResponse<BinaryData> response) {
+        private static PollResponse<LroProduct> map(PollResponse<BinaryData> response) {
             return new PollResponse<>(response.getStatus(),
-                    response.getValue().toObject(LROProduct.class),
+                    response.getValue().toObject(LroProduct.class),
                     response.getRetryAfter());
         }
 
         @Override
-        public PollResponse<LROProduct> poll() {
+        public PollResponse<LroProduct> poll() {
             return map(poller.poll());
         }
 
         @Override
-        public PollResponse<LROProduct> waitForCompletion() {
+        public PollResponse<LroProduct> waitForCompletion() {
             return map(poller.waitForCompletion());
         }
 
         @Override
-        public PollResponse<LROProduct> waitForCompletion(Duration timeout) {
+        public PollResponse<LroProduct> waitForCompletion(Duration timeout) {
             return map(poller.waitForCompletion(timeout));
         }
 
         @Override
-        public PollResponse<LROProduct> waitUntil(LongRunningOperationStatus statusToWaitFor) {
+        public PollResponse<LroProduct> waitUntil(LongRunningOperationStatus statusToWaitFor) {
             return map(poller.waitUntil(statusToWaitFor));
         }
 
         @Override
-        public PollResponse<LROProduct> waitUntil(Duration timeout, LongRunningOperationStatus statusToWaitFor) {
+        public PollResponse<LroProduct> waitUntil(Duration timeout, LongRunningOperationStatus statusToWaitFor) {
             return map(poller.waitUntil(timeout, statusToWaitFor));
         }
 
         @Override
-        public LROProduct getFinalResult() {
-            return poller.getFinalResult().toObject(LROProduct.class);
+        public LroProduct getFinalResult() {
+            return poller.getFinalResult().toObject(LroProduct.class);
         }
 
         @Override
