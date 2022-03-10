@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
@@ -36,10 +37,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,6 +78,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
                 .name(operationName)
+                .specialHeaders(operation.getSpecialHeaders())
                 .isResumable(false);
 
         String operationId = null;
@@ -213,6 +217,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     }
                 }
             }
+            List<ProxyMethodParameter> specialParameters = getSpecialParameters(operation);
+            if (!settings.isLowLevelClient()) {
+                parameters.addAll(specialParameters);
+            }
+            allParameters.addAll(specialParameters);
 
             String name = deduplicateMethodName(operationName, parameters, requestContentType, methodSignatures);
             builder.name(name);
@@ -567,5 +576,52 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      */
     protected ClassType getHttpResponseExceptionType() {
         return ClassType.HttpResponseException;
+    }
+
+    /**
+     * Gets the special parameters.
+     *
+     * @param operation the operation
+     * @return the special parameters.
+     */
+    protected List<ProxyMethodParameter> getSpecialParameters(Operation operation) {
+        List<ProxyMethodParameter> specialParameters = new ArrayList<>();
+        if (!CoreUtils.isNullOrEmpty(operation.getSpecialHeaders()) && !CoreUtils.isNullOrEmpty(operation.getRequests())) {
+            HttpMethod httpMethod = HttpMethod.valueOf(
+                    operation.getRequests().get(0).getProtocol().getHttp().getMethod().toUpperCase());
+            if (MethodUtil.isHttpMethodSupportRepeatableRequestHeaders(httpMethod)) {
+                List<String> specialHeaders = operation.getSpecialHeaders().stream()
+                        .map(s -> s.toLowerCase(Locale.ROOT))
+                        .collect(Collectors.toList());
+                boolean supportRepeatabilityRequest = specialHeaders.contains(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
+                        && specialHeaders.contains(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
+                if (supportRepeatabilityRequest) {
+                    Function<ProxyMethodParameter.Builder, ProxyMethodParameter.Builder> commonBuilderSetting = builder -> {
+                        builder.rawType(ClassType.String)
+                                .wireType(ClassType.String)
+                                .clientType(ClassType.String)
+                                .requestParameterLocation(RequestParameterLocation.HEADER)
+                                .isRequired(false)
+                                .isNullable(true)
+                                .fromClient(false);
+                        return builder;
+                    };
+
+                    specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
+                                    .name(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
+                                    .requestParameterName(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
+                                    .description("Repeatability request ID header"))
+                            .build());
+                    specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
+                                    .name(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
+                                    .requestParameterName(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)
+                                    .description("Repeatability first sent header as HTTP-date"))
+                            .build());
+                }
+            }
+        }
+        return specialParameters;
     }
 }

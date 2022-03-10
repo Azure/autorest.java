@@ -15,13 +15,19 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -391,6 +397,15 @@ public class ClientMethod {
                 && (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync)) {
             imports.add(SimpleResponse.class.getName());
             ClassType.BinaryData.addImportsTo(imports, false);
+        }
+
+        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
+            // Repeatable Requests
+            imports.add(UUID.class.getName());
+            imports.add(DateTimeFormatter.class.getName());
+            imports.add(Locale.class.getName());
+            imports.add(ZoneId.class.getName());
+            imports.add(OffsetDateTime.class.getName());
         }
     }
 

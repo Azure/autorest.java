@@ -38,7 +38,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                                  Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes,
                                  String name, List<ProxyMethodParameter> parameters, String description,
                                  IType returnValueWireType, IType responseBodyType, boolean isResumable, Set<String> responseContentTypes,
-                                 String operationId, Map<String, ProxyMethodExample> examples) {
+                                 String operationId, Map<String, ProxyMethodExample> examples,
+                                 List<String> specialHeaders) {
         super(requestContentType,
                 returnType,
                 httpMethod,
@@ -57,7 +58,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                 isResumable,
                 responseContentTypes,
                 operationId,
-                examples);
+                examples,
+                specialHeaders);
     }
 
     @Override
@@ -158,7 +160,8 @@ public class AndroidProxyMethod extends ProxyMethod {
                     isResumable,
                     responseContentTypes,
                     operationId,
-                    examples);
+                    examples,
+                    specialHeaders);
         }
     }
 }
