@@ -216,7 +216,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
             // Response
             for (ClientResponse response : client.getResponseModels()) {
                 javaPackage.addClientResponse(response.getPackage(), response.getName(), response);

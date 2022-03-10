@@ -44,6 +44,9 @@ add-context-parameter: true
 context-client-method-parameter: true
 sync-methods: all
 use-default-http-status-code-to-exception-type-mapping: true
+models-subpackage: implementation.models
+client-logger: true
+model-override-setter-from-superclass: true
 polling: {}
 
 pipeline:

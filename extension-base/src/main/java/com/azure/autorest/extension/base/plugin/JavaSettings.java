@@ -138,6 +138,7 @@ public class JavaSettings {
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 getBooleanValue(host, "generate-send-request-method", false),
+                getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
@@ -233,6 +234,7 @@ public class JavaSettings {
         boolean generateSamples,
         boolean generateTests,
         boolean generateSendRequestMethod,
+        boolean generateModels,
         boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
@@ -314,6 +316,7 @@ public class JavaSettings {
         this.generateSamples = generateSamples;
         this.generateTests = generateTests;
         this.generateSendRequestMethod = generateSendRequestMethod;
+        this.generateModels = generateModels;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
@@ -763,6 +766,12 @@ public class JavaSettings {
 
     public boolean isGenerateSendRequestMethod() {
         return generateSendRequestMethod;
+    }
+
+    private final boolean generateModels;
+
+    public boolean isGenerateModels() {
+        return generateModels;
     }
 
     private final boolean clientBuilderDisabled;

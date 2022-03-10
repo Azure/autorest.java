@@ -68,67 +68,70 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         JavaSettings settings = JavaSettings.getInstance();
         Client.Builder builder = new Client.Builder();
 
-        // enum model
-        List<EnumType> enumTypes = new ArrayList<>();
-        Set<String> enumNames = new HashSet<>();
-        for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
-            IType iType = Mappers.getChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
-                EnumType enumType = (EnumType) iType;
-                if (!enumNames.contains(enumType.getName())) {
-                    enumTypes.add(enumType);
-                    enumNames.add(enumType.getName());
+        List<ClientModel> clientModels = Collections.emptyList();
+        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
+            // enum model
+            List<EnumType> enumTypes = new ArrayList<>();
+            Set<String> enumNames = new HashSet<>();
+            for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
+                IType iType = Mappers.getChoiceMapper().map(choiceSchema);
+                if (iType != ClassType.String) {
+                    EnumType enumType = (EnumType) iType;
+                    if (!enumNames.contains(enumType.getName())) {
+                        enumTypes.add(enumType);
+                        enumNames.add(enumType.getName());
+                    }
                 }
             }
-        }
-        for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
-            IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
-                EnumType enumType = (EnumType) iType;
-                if (!enumNames.contains(enumType.getName())) {
-                    enumTypes.add(enumType);
-                    enumNames.add(enumType.getName());
+            for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
+                IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
+                if (iType != ClassType.String) {
+                    EnumType enumType = (EnumType) iType;
+                    if (!enumNames.contains(enumType.getName())) {
+                        enumTypes.add(enumType);
+                        enumNames.add(enumType.getName());
+                    }
                 }
             }
+            builder.enums(enumTypes);
+
+            // exception
+            builder.exceptions(codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getExceptions().stream())
+                    .map(Response::getSchema)
+                    .distinct()
+                    .filter(s -> s instanceof ObjectSchema)
+                    .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
+                    .filter(Objects::nonNull)
+                    .distinct()
+                    .collect(Collectors.toList()));
+
+            builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
+
+            // class model
+            Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
+                    codeModel.getSchemas().getObjects().stream(),
+                    codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
+                            .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
+
+            clientModels = autoRestModelTypes
+                    .distinct()
+                    .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+                    .filter(Objects::nonNull)
+                    .distinct()
+                    .collect(Collectors.toList());
+            builder.models(clientModels);
+
+            // response model (subclass of Response with headers)
+            builder.responseModels(codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .distinct()
+                    .map(m -> parseResponse(m, settings))
+                    .filter(Objects::nonNull)
+                    .distinct()
+                    .collect(Collectors.toList()));
         }
-        builder.enums(enumTypes);
-
-        // exception
-        builder.exceptions(codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getExceptions().stream())
-                .map(Response::getSchema)
-                .distinct()
-                .filter(s -> s instanceof ObjectSchema)
-                .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
-                .filter(Objects::nonNull)
-                .distinct()
-                .collect(Collectors.toList()));
-
-        builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
-
-        // class model
-        Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
-            codeModel.getSchemas().getObjects().stream(),
-            codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
-                .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
-
-        List<ClientModel> clientModels = autoRestModelTypes
-                .distinct()
-                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-                .filter(Objects::nonNull)
-                .distinct()
-                .collect(Collectors.toList());
-        builder.models(clientModels);
-
-        // response model (subclass of Response with headers)
-        builder.responseModels(codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .distinct()
-                .map(m -> parseResponse(m, settings))
-                .filter(Objects::nonNull)
-                .distinct()
-                .collect(Collectors.toList()));
 
         // service client
         String serviceClientName = codeModel.getLanguage().getJava().getName();
@@ -174,9 +177,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-        } else if (!settings.isLowLevelClient()) {
-            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
-                .getImplementationSubpackage().isEmpty()) {
+        } else {
+            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
+                    && !settings.getImplementationSubpackage().isEmpty()) {
+
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
@@ -186,11 +190,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
                     && !clientModels.isEmpty()) {
+
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
                     packageInfos.put(modelsPackage, new PackageInfo(
