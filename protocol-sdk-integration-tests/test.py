@@ -12,6 +12,7 @@ from os import path
 
 AUTOREST_CORE_VERSION = '3.7.6'
 OS_WINDOWS = platform.system().lower() == 'windows'
+MAVEN_CLI = 'mvn' + ('.cmd' if OS_WINDOWS else '')
 
 
 def run(script_path: str, output_folder: str, json_path: str, namespace: str,
@@ -30,7 +31,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
         security_str += f' --security-scopes={security_scopes}'
     if security_header_name:
         security_str += f' --security-header-name={security_header_name}'
-    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_str} --sdk-integration --generate-samples --generate-tests --generate-send-request-method --generate-models'.split(' ')
+    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --low-level-client --output-folder={output_folder} --namespace={namespace} {security_str} --sdk-integration --generate-samples --generate-tests --generate-models'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
     logging.info(' '.join(cmd))
     subprocess.check_call(cmd, cwd=script_path)
@@ -39,9 +40,10 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
 
     # build
     cmd = [
-        'mvn' + ('.cmd' if OS_WINDOWS else ''),
+        MAVEN_CLI,
         'clean',
         'package',
+        '-DskipTests',
         '-Dmaven.javadoc.skip',
         '--no-transfer-progress'
     ]
@@ -50,6 +52,18 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
     logging.info('pass maven package')
 
     # verify
+    cmd = [
+        MAVEN_CLI,
+        'verify',
+        '-Drevapi.skip',
+        '-Dmaven.javadoc.skip',
+        '--no-transfer-progress'
+    ]
+    subprocess.check_call(cmd, cwd=output_folder)
+
+    logging.info('pass maven verify')
+
+    # verify folder/files
     assert path.exists(path.join(output_folder, 'README.md'))
     logging.info('pass README.md')
 
@@ -88,6 +102,17 @@ def main():
     
     script_path = path.abspath(path.dirname(sys.argv[0]))
 
+    # install code quality reports
+    reports_path = path.join(script_path, 'eng/code-quality-reports')
+    cmd = [
+        MAVEN_CLI,
+        'install',
+        '-Dmaven.javadoc.skip',
+        '--no-transfer-progress'
+    ]
+    subprocess.check_call(cmd, cwd=reports_path)
+
+    # run for each package
     with open(path.join(script_path, 'data-specs.json'), 'r', encoding='utf-8') as f_in:
         data_specs = json.load(f_in)
 
