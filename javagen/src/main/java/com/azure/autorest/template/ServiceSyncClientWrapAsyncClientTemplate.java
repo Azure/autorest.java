@@ -55,10 +55,29 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
         protected void writeMethodInvocation(ClientMethod clientMethod, JavaBlock function, boolean shouldReturn) {
             List<String> parameterNames = clientMethod.getMethodInputParameters().stream()
                     .map(ClientMethodParameter::getName).collect(Collectors.toList());
-            parameterNames.add("Context.NONE");
 
-            function.line((shouldReturn ? "return " : "") + "this.asyncClient.%1$s(%2$s);",
-                    clientMethod.getName(), String.join(", ", parameterNames));
+            String methodInvoke = String.format("this.asyncClient.%1$s(%2$s)", clientMethod.getName(), String.join(", ", parameterNames));
+            switch (clientMethod.getType()) {
+                case PagingSync:
+                    methodInvoke = "new PagedIterable<>(" + methodInvoke + ")";
+                    break;
+
+                case LongRunningBeginSync:
+                    methodInvoke = methodInvoke + ".getSyncPoller()";
+                    break;
+
+                case SendRequestSync:
+                    parameterNames.remove("context");
+                    methodInvoke = String.format("this.asyncClient.%1$s(%2$s)", clientMethod.getName(), String.join(", ", parameterNames));
+                    methodInvoke = methodInvoke + ".contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()";
+                    break;
+
+                default:
+                    methodInvoke = methodInvoke + ".block()";
+                    break;
+            }
+
+            function.line((shouldReturn ? "return " : "") + methodInvoke + ";");
         }
     }
 }
