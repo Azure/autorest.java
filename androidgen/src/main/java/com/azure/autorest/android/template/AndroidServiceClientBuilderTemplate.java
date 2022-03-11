@@ -4,10 +4,12 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
@@ -22,6 +24,12 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
 
     public static ServiceClientBuilderTemplate getInstance() {
         return _instance;
+    }
+
+    @Override
+    protected void writeSyncClientBuildMethod(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                              String buildMethodName, boolean wrapServiceClient) {
+        writeSyncClientBuildMethodFromInnerClient(syncClient, function, buildMethodName, wrapServiceClient);
     }
 
     @Override

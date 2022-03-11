@@ -3,6 +3,8 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
@@ -14,6 +16,12 @@ public class FluentServiceClientBuilderTemplate extends ServiceClientBuilderTemp
 
     public static FluentServiceClientBuilderTemplate getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    protected void writeSyncClientBuildMethod(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                              String buildMethodName, boolean wrapServiceClient) {
+        writeSyncClientBuildMethodFromInnerClient(syncClient, function, buildMethodName, wrapServiceClient);
     }
 
     @Override

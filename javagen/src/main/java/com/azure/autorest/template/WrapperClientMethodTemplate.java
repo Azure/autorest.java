@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 
 import java.util.List;
@@ -74,11 +75,22 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
 
-            List<ClientMethodParameter> parameters = clientMethod.getMethodInputParameters();
-            function
-                    .line((shouldReturn ? "return " : "") + "this.serviceClient.%1$s(%2$s);", clientMethod.getName(),
-                            parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", ")));
+            writeMethodInvocation(clientMethod, function, shouldReturn);
         });
+    }
+
+    /**
+     * Extension to write the client method invocation.
+     *
+     * @param clientMethod the client method
+     * @param function the method block to write the method invocation
+     * @param shouldReturn whether method need return value
+     */
+    protected void writeMethodInvocation(ClientMethod clientMethod, JavaBlock function, boolean shouldReturn) {
+        List<ClientMethodParameter> parameters = clientMethod.getMethodInputParameters();
+        function.line((shouldReturn ? "return " : "") + "this.serviceClient.%1$s(%2$s);",
+                clientMethod.getName(),
+                parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", ")));
     }
 
     protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {

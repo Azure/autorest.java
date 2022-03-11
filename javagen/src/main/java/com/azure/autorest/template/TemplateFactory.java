@@ -41,6 +41,8 @@ public interface TemplateFactory {
 
     ServiceSyncClientTemplate getServiceSynClientTemplate();
 
+    ServiceSyncClientTemplate getServiceSyncClientWrapAsyncClientTemplate();
+
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
 
     PomTemplate getPomTemplate();

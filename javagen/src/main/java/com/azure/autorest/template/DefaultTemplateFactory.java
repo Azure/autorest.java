@@ -95,6 +95,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
+    public ServiceSyncClientTemplate getServiceSyncClientWrapAsyncClientTemplate() {
+        return ServiceSyncClientWrapAsyncClientTemplate.getInstance();
+    }
+
+    @Override
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return WrapperClientMethodTemplate.getInstance();
     }
