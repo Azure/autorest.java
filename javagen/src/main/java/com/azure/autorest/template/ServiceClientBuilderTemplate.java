@@ -320,7 +320,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 && settings.isLowLevelClient()
                 && asyncClient != null;
         if (syncClientWrapAsync) {
-            writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName);
+            writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
         } else {
             writeSyncClientBuildMethodFromInnerClient(syncClient, function, buildMethodName, wrapServiceClient);
         }
@@ -337,8 +337,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void writeSyncClientBuildMethodFromAsyncClient(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
-                                                             String buildMethodName) {
-        function.line("return new %1$s(new %2$s(%3$s()));", syncClient.getClassName(), asyncClient.getClassName(), buildMethodName);
+                                                             String buildMethodName, boolean wrapServiceClient) {
+        if (wrapServiceClient) {
+            function.line("return new %1$s(new %2$s(%3$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName);
+        } else {
+            function.line("return new %1$s(new %2$s(%3$s().get%4$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName, CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
+        }
     }
 
     protected String getSerializerMemberName() {
