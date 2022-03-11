@@ -6,14 +6,13 @@ package fixtures.lro.implementation;
 
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fixtures.lro.fluent.LroRetrysClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LroRetrys;
 import fixtures.lro.models.Product;
 
 public final class LroRetrysImpl implements LroRetrys {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LroRetrysImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(LroRetrysImpl.class);
 
     private final LroRetrysClient innerClient;
 

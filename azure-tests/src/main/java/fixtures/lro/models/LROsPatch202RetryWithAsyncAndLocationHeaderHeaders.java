@@ -5,16 +5,11 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LROsPatch202RetryWithAsyncAndLocationHeaderHeaders model. */
 @Fluent
 public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(LROsPatch202RetryWithAsyncAndLocationHeaderHeaders.class);
-
     /*
      * The Azure-AsyncOperation property.
      */

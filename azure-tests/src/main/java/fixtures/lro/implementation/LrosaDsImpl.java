@@ -6,14 +6,13 @@ package fixtures.lro.implementation;
 
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fixtures.lro.fluent.LrosaDsClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LrosaDs;
 import fixtures.lro.models.Product;
 
 public final class LrosaDsImpl implements LrosaDs {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LrosaDsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(LrosaDsImpl.class);
 
     private final LrosaDsClient innerClient;
 

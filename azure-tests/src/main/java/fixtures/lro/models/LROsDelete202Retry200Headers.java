@@ -5,15 +5,11 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LROsDelete202Retry200Headers model. */
 @Fluent
 public final class LROsDelete202Retry200Headers {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsDelete202Retry200Headers.class);
-
     /*
      * The Retry-After property.
      */

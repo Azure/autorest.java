@@ -5,15 +5,11 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LROsPatch200SucceededIgnoreHeadersHeaders model. */
 @Fluent
 public final class LROsPatch200SucceededIgnoreHeadersHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsPatch200SucceededIgnoreHeadersHeaders.class);
-
     /*
      * The Azure-AsyncOperation property.
      */
