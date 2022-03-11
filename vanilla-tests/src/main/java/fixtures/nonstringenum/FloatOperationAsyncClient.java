@@ -18,7 +18,7 @@ public final class FloatOperationAsyncClient {
     @Generated private final FloatOperationsImpl serviceClient;
 
     /**
-     * Initializes an instance of FloatOperations client.
+     * Initializes an instance of FloatOperationAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */
