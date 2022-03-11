@@ -262,6 +262,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
      */
     @Generated
     public AutoRestPagingTestServiceClient buildClient() {
-        return new AutoRestPagingTestServiceClient(buildInnerClient().getPagings());
+        return new AutoRestPagingTestServiceClient(
+                new AutoRestPagingTestServiceAsyncClient(buildInnerClient().getPagings()));
     }
 }

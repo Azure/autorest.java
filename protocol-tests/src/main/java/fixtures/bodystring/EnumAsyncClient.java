@@ -24,7 +24,7 @@ public final class EnumAsyncClient {
     @Generated private final EnumsImpl serviceClient;
 
     /**
-     * Initializes an instance of Enums client.
+     * Initializes an instance of EnumAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

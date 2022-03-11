@@ -32,7 +32,7 @@ public final class StringOperationClient {
     /**
      * Initializes an instance of StringOperations client.
      *
-     * @param asyncClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
     StringOperationClient(StringOperationAsyncClient asyncClient) {

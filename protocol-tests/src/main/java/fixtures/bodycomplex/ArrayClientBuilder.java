@@ -282,6 +282,6 @@ public final class ArrayClientBuilder {
      */
     @Generated
     public ArrayClient buildClient() {
-        return new ArrayClient(buildInnerClient().getArrays());
+        return new ArrayClient(new ArrayAsyncClient(buildInnerClient().getArrays()));
     }
 }

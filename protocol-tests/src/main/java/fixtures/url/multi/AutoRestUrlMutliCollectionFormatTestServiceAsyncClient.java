@@ -23,7 +23,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceAsyncClient {
     @Generated private final QueriesImpl serviceClient;
 
     /**
-     * Initializes an instance of Queries client.
+     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

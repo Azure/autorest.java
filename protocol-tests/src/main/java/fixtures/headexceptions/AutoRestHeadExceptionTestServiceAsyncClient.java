@@ -23,7 +23,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
     @Generated private final HeadExceptionsImpl serviceClient;
 
     /**
-     * Initializes an instance of HeadExceptions client.
+     * Initializes an instance of AutoRestHeadExceptionTestServiceAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

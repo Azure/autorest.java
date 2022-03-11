@@ -20,7 +20,7 @@ public final class FlattencomplexClient {
     @Generated private final FlattencomplexesImpl serviceClient;
 
     /**
-     * Initializes an instance of Flattencomplexes client.
+     * Initializes an instance of FlattencomplexClient client.
      *
      * @param serviceClient the service client implementation.
      */

@@ -15,21 +15,20 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PolymorphismClientBuilder.class)
 public final class PolymorphismClient {
-    @Generated private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Polymorphisms client.
+     * Initializes an instance of PolymorphismClient client.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    PolymorphismClient(PolymorphismsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    PolymorphismClient(PolymorphismAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -57,7 +56,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getValidWithResponse(requestOptions);
+        return this.asyncClient.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -91,7 +90,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -115,7 +114,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDotSyntaxWithResponse(requestOptions);
+        return this.asyncClient.getDotSyntaxWithResponse(requestOptions).block();
     }
 
     /**
@@ -154,7 +153,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComposedWithDiscriminatorWithResponse(requestOptions);
+        return this.asyncClient.getComposedWithDiscriminatorWithResponse(requestOptions).block();
     }
 
     /**
@@ -193,7 +192,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComposedWithoutDiscriminatorWithResponse(requestOptions);
+        return this.asyncClient.getComposedWithoutDiscriminatorWithResponse(requestOptions).block();
     }
 
     /**
@@ -230,7 +229,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComplicatedWithResponse(requestOptions);
+        return this.asyncClient.getComplicatedWithResponse(requestOptions).block();
     }
 
     /**
@@ -267,7 +266,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putComplicatedWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putComplicatedWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -325,7 +324,7 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
             BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -359,6 +358,6 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidMissingRequiredWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidMissingRequiredWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidMissingRequiredWithResponse(complexBody, requestOptions).block();
     }
 }

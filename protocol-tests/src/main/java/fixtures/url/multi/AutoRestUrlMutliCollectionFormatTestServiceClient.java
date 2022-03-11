@@ -14,21 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.url.multi.implementation.QueriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlMutliCollectionFormatTestServiceClient type. */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class)
 public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
-    @Generated private final QueriesImpl serviceClient;
+    @Generated private final AutoRestUrlMutliCollectionFormatTestServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Queries client.
+     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceClient client.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    AutoRestUrlMutliCollectionFormatTestServiceClient(QueriesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    AutoRestUrlMutliCollectionFormatTestServiceClient(
+            AutoRestUrlMutliCollectionFormatTestServiceAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -52,7 +52,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringMultiNullWithResponse(requestOptions);
+        return this.asyncClient.arrayStringMultiNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -76,7 +76,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringMultiEmptyWithResponse(requestOptions);
+        return this.asyncClient.arrayStringMultiEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -101,6 +101,6 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringMultiValidWithResponse(requestOptions);
+        return this.asyncClient.arrayStringMultiValidWithResponse(requestOptions).block();
     }
 }

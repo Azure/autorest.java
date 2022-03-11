@@ -20,7 +20,7 @@ public final class BasicAsyncClient {
     @Generated private final BasicsImpl serviceClient;
 
     /**
-     * Initializes an instance of Basics client.
+     * Initializes an instance of BasicAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

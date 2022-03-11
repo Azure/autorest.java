@@ -25,7 +25,7 @@ public final class LrosaDsAsyncClient {
     @Generated private final LrosaDsImpl serviceClient;
 
     /**
-     * Initializes an instance of LrosaDs client.
+     * Initializes an instance of LrosaDsAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

@@ -23,7 +23,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
     @Generated private final PagingsImpl serviceClient;
 
     /**
-     * Initializes an instance of Pagings client.
+     * Initializes an instance of AutoRestPagingTestServiceAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

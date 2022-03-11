@@ -262,6 +262,6 @@ public final class HttpRetryClientBuilder {
      */
     @Generated
     public HttpRetryClient buildClient() {
-        return new HttpRetryClient(buildInnerClient().getHttpRetries());
+        return new HttpRetryClient(new HttpRetryAsyncClient(buildInnerClient().getHttpRetries()));
     }
 }

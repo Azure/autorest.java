@@ -111,13 +111,13 @@ public final class EnumClient {
         return this.asyncClient.putReferencedWithResponse(enumStringBody, requestOptions).block();
     }
 
+    @Generated private final EnumAsyncClient asyncClient;
+
     /**
      * Initializes an instance of EnumClient client.
      *
-     * @param asyncClient the service client implementation.
+     * @param asyncClient the async client.
      */
-    @Generated private final EnumAsyncClient asyncClient;
-
     @Generated
     EnumClient(EnumAsyncClient asyncClient) {
         this.asyncClient = asyncClient;

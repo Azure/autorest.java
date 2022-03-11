@@ -282,6 +282,6 @@ public final class PrimitiveClientBuilder {
      */
     @Generated
     public PrimitiveClient buildClient() {
-        return new PrimitiveClient(buildInnerClient().getPrimitives());
+        return new PrimitiveClient(new PrimitiveAsyncClient(buildInnerClient().getPrimitives()));
     }
 }

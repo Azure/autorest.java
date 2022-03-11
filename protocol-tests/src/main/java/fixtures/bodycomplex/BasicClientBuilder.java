@@ -282,6 +282,6 @@ public final class BasicClientBuilder {
      */
     @Generated
     public BasicClient buildClient() {
-        return new BasicClient(buildInnerClient().getBasics());
+        return new BasicClient(new BasicAsyncClient(buildInnerClient().getBasics()));
     }
 }

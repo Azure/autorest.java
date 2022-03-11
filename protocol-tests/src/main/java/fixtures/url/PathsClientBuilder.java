@@ -299,6 +299,6 @@ public final class PathsClientBuilder {
      */
     @Generated
     public PathsClient buildClient() {
-        return new PathsClient(buildInnerClient().getPaths());
+        return new PathsClient(new PathsAsyncClient(buildInnerClient().getPaths()));
     }
 }

@@ -261,6 +261,6 @@ public final class LroRetrysClientBuilder {
      */
     @Generated
     public LroRetrysClient buildClient() {
-        return new LroRetrysClient(buildInnerClient().getLroRetrys());
+        return new LroRetrysClient(new LroRetrysAsyncClient(buildInnerClient().getLroRetrys()));
     }
 }

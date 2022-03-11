@@ -259,6 +259,6 @@ public final class DpgClientBuilder {
      */
     @Generated
     public DpgClient buildClient() {
-        return new DpgClient(buildInnerClient().getParams());
+        return new DpgClient(new DpgAsyncClient(buildInnerClient().getParams()));
     }
 }

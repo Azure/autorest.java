@@ -24,7 +24,7 @@ public final class MediaTypesAsyncClient {
     @Generated private final MediaTypesClientImpl serviceClient;
 
     /**
-     * Initializes an instance of MediaTypesClient client.
+     * Initializes an instance of MediaTypesAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

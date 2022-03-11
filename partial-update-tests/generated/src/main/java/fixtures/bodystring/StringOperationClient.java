@@ -28,6 +28,11 @@ public final class StringOperationClient {
         this.asyncClient = asyncClient;
     }
 
+    /**
+     * Initializes an instance of StringOperationClient client.
+     *
+     * @param asyncClient the async client.
+     */
     @Generated
     StringOperationClient(StringOperationAsyncClient asyncClient) {
         this.asyncClient = asyncClient;
@@ -330,11 +335,6 @@ public final class StringOperationClient {
         return this.asyncClient.getNullBase64UrlEncodedWithResponse(requestOptions).block();
     }
 
-    /**
-     * Initializes an instance of StringOperationClient client.
-     *
-     * @param asyncClient the service client implementation.
-     */
     @Generated private final StringOperationAsyncClient asyncClient;
 
     /**

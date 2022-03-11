@@ -261,6 +261,6 @@ public final class LrosaDsClientBuilder {
      */
     @Generated
     public LrosaDsClient buildClient() {
-        return new LrosaDsClient(buildInnerClient().getLrosaDs());
+        return new LrosaDsClient(new LrosaDsAsyncClient(buildInnerClient().getLrosaDs()));
     }
 }

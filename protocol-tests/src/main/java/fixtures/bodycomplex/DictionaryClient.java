@@ -15,21 +15,20 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.DictionariesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = DictionaryClientBuilder.class)
 public final class DictionaryClient {
-    @Generated private final DictionariesImpl serviceClient;
+    @Generated private final DictionaryAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Dictionaries client.
+     * Initializes an instance of DictionaryClient client.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    DictionaryClient(DictionariesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    DictionaryClient(DictionaryAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -55,7 +54,7 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getValidWithResponse(requestOptions);
+        return this.asyncClient.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -83,7 +82,7 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -109,7 +108,7 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyWithResponse(requestOptions);
+        return this.asyncClient.getEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -136,7 +135,7 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putEmptyWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putEmptyWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -162,7 +161,7 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNullWithResponse(requestOptions);
+        return this.asyncClient.getNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -189,6 +188,6 @@ public final class DictionaryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvidedWithResponse(requestOptions);
+        return this.asyncClient.getNotProvidedWithResponse(requestOptions).block();
     }
 }

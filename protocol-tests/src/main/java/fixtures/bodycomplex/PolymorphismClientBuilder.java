@@ -282,6 +282,6 @@ public final class PolymorphismClientBuilder {
      */
     @Generated
     public PolymorphismClient buildClient() {
-        return new PolymorphismClient(buildInnerClient().getPolymorphisms());
+        return new PolymorphismClient(new PolymorphismAsyncClient(buildInnerClient().getPolymorphisms()));
     }
 }

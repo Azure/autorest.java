@@ -97,10 +97,11 @@ del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 rem customization
 call autorest --version=3.7.6 --use:. customization-tests/swagger
 
-call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
-call autorest --use:. docs/samples/specification/basic/readme.md
-call autorest --use:. docs/samples/specification/management/readme.md
-
 rem partial update tests
 call autorest --version=3.7.6 --use:. partial-update-tests/existing/swagger/README.md
 del partial-update-tests\generated\src\main\java\module-info.java
+
+rem docs
+call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
+call autorest --use:. docs/samples/specification/basic/readme.md
+call autorest --use:. docs/samples/specification/management/readme.md

@@ -265,6 +265,7 @@ public final class AutoRestSwaggerBatHeaderServiceClientBuilder {
      */
     @Generated
     public AutoRestSwaggerBatHeaderServiceClient buildClient() {
-        return new AutoRestSwaggerBatHeaderServiceClient(buildInnerClient().getHeaders());
+        return new AutoRestSwaggerBatHeaderServiceClient(
+                new AutoRestSwaggerBatHeaderServiceAsyncClient(buildInnerClient().getHeaders()));
     }
 }

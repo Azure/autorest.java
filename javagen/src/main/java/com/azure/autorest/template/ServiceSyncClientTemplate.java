@@ -89,8 +89,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
 
     // Service Client Constructor
     classBlock.javadocComment(comment -> {
-      comment.description(String.format("Initializes an instance of %1$s client.",
-          wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()));
+      comment.description(String.format("Initializes an instance of %1$s client.", syncClient.getClassName()));
       comment.param("serviceClient", "the service client implementation.");
     });
     addGeneratedAnnotation(classBlock);

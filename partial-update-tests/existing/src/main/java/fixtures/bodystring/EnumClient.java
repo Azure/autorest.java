@@ -164,6 +164,11 @@ public final class EnumClient {
 
     @Generated private final EnumAsyncClient asyncClient;
 
+    /**
+     * Initializes an instance of EnumClient client.
+     *
+     * @param asyncClient the async client.
+     */
     @Generated
     EnumClient(EnumAsyncClient asyncClient) {
         this.asyncClient = asyncClient;

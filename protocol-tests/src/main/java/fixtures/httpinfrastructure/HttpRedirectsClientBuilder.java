@@ -262,6 +262,6 @@ public final class HttpRedirectsClientBuilder {
      */
     @Generated
     public HttpRedirectsClient buildClient() {
-        return new HttpRedirectsClient(buildInnerClient().getHttpRedirects());
+        return new HttpRedirectsClient(new HttpRedirectsAsyncClient(buildInnerClient().getHttpRedirects()));
     }
 }

@@ -262,6 +262,6 @@ public final class HttpFailureClientBuilder {
      */
     @Generated
     public HttpFailureClient buildClient() {
-        return new HttpFailureClient(buildInnerClient().getHttpFailures());
+        return new HttpFailureClient(new HttpFailureAsyncClient(buildInnerClient().getHttpFailures()));
     }
 }

@@ -261,6 +261,6 @@ public final class LROsClientBuilder {
      */
     @Generated
     public LROsClient buildClient() {
-        return new LROsClient(buildInnerClient().getLROs());
+        return new LROsClient(new LROsAsyncClient(buildInnerClient().getLROs()));
     }
 }

@@ -262,6 +262,6 @@ public final class MultipleResponsesClientBuilder {
      */
     @Generated
     public MultipleResponsesClient buildClient() {
-        return new MultipleResponsesClient(buildInnerClient().getMultipleResponses());
+        return new MultipleResponsesClient(new MultipleResponsesAsyncClient(buildInnerClient().getMultipleResponses()));
     }
 }

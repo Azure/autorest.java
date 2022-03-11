@@ -282,6 +282,7 @@ public final class PolymorphicrecursiveClientBuilder {
      */
     @Generated
     public PolymorphicrecursiveClient buildClient() {
-        return new PolymorphicrecursiveClient(buildInnerClient().getPolymorphicrecursives());
+        return new PolymorphicrecursiveClient(
+                new PolymorphicrecursiveAsyncClient(buildInnerClient().getPolymorphicrecursives()));
     }
 }

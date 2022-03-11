@@ -261,6 +261,6 @@ public final class EnumClientBuilder {
      */
     @Generated
     public EnumClient buildClient() {
-        return new EnumClient(buildInnerClient().getEnums());
+        return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
     }
 }

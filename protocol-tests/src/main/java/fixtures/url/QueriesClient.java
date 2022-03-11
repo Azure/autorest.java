@@ -14,21 +14,20 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.url.implementation.QueriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
 @ServiceClient(builder = QueriesClientBuilder.class)
 public final class QueriesClient {
-    @Generated private final QueriesImpl serviceClient;
+    @Generated private final QueriesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Queries client.
+     * Initializes an instance of QueriesClient client.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    QueriesClient(QueriesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    QueriesClient(QueriesAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -52,7 +51,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBooleanTrueWithResponse(requestOptions);
+        return this.asyncClient.getBooleanTrueWithResponse(requestOptions).block();
     }
 
     /**
@@ -76,7 +75,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBooleanFalseWithResponse(requestOptions);
+        return this.asyncClient.getBooleanFalseWithResponse(requestOptions).block();
     }
 
     /**
@@ -100,7 +99,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBooleanNullWithResponse(requestOptions);
+        return this.asyncClient.getBooleanNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -124,7 +123,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getIntOneMillionWithResponse(requestOptions);
+        return this.asyncClient.getIntOneMillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -148,7 +147,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getIntNegativeOneMillionWithResponse(requestOptions);
+        return this.asyncClient.getIntNegativeOneMillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -172,7 +171,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getIntNullWithResponse(requestOptions);
+        return this.asyncClient.getIntNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -196,7 +195,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getTenBillionWithResponse(requestOptions);
+        return this.asyncClient.getTenBillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -220,7 +219,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNegativeTenBillionWithResponse(requestOptions);
+        return this.asyncClient.getNegativeTenBillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -244,7 +243,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLongNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getLongNullWithResponse(requestOptions);
+        return this.asyncClient.getLongNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -268,7 +267,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.floatScientificPositiveWithResponse(requestOptions);
+        return this.asyncClient.floatScientificPositiveWithResponse(requestOptions).block();
     }
 
     /**
@@ -292,7 +291,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.floatScientificNegativeWithResponse(requestOptions);
+        return this.asyncClient.floatScientificNegativeWithResponse(requestOptions).block();
     }
 
     /**
@@ -316,7 +315,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.floatNullWithResponse(requestOptions);
+        return this.asyncClient.floatNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -340,7 +339,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.doubleDecimalPositiveWithResponse(requestOptions);
+        return this.asyncClient.doubleDecimalPositiveWithResponse(requestOptions).block();
     }
 
     /**
@@ -364,7 +363,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.doubleDecimalNegativeWithResponse(requestOptions);
+        return this.asyncClient.doubleDecimalNegativeWithResponse(requestOptions).block();
     }
 
     /**
@@ -388,7 +387,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.doubleNullWithResponse(requestOptions);
+        return this.asyncClient.doubleNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -412,7 +411,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringUnicodeWithResponse(requestOptions);
+        return this.asyncClient.stringUnicodeWithResponse(requestOptions).block();
     }
 
     /**
@@ -436,7 +435,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringUrlEncodedWithResponse(requestOptions);
+        return this.asyncClient.stringUrlEncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -460,7 +459,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringEmptyWithResponse(requestOptions);
+        return this.asyncClient.stringEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -484,7 +483,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringNullWithResponse(requestOptions);
+        return this.asyncClient.stringNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -508,7 +507,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.enumValidWithResponse(requestOptions);
+        return this.asyncClient.enumValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -532,7 +531,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.enumNullWithResponse(requestOptions);
+        return this.asyncClient.enumNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -556,7 +555,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.byteMultiByteWithResponse(requestOptions);
+        return this.asyncClient.byteMultiByteWithResponse(requestOptions).block();
     }
 
     /**
@@ -580,7 +579,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.byteEmptyWithResponse(requestOptions);
+        return this.asyncClient.byteEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -604,7 +603,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.byteNullWithResponse(requestOptions);
+        return this.asyncClient.byteNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -628,7 +627,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateValidWithResponse(requestOptions);
+        return this.asyncClient.dateValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -652,7 +651,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateNullWithResponse(requestOptions);
+        return this.asyncClient.dateNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -676,7 +675,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateTimeValidWithResponse(requestOptions);
+        return this.asyncClient.dateTimeValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -700,7 +699,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateTimeNullWithResponse(requestOptions);
+        return this.asyncClient.dateTimeNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -725,7 +724,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringCsvValidWithResponse(requestOptions);
+        return this.asyncClient.arrayStringCsvValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -749,7 +748,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringCsvNullWithResponse(requestOptions);
+        return this.asyncClient.arrayStringCsvNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -773,7 +772,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringCsvEmptyWithResponse(requestOptions);
+        return this.asyncClient.arrayStringCsvEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -798,7 +797,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringNoCollectionFormatEmptyWithResponse(requestOptions);
+        return this.asyncClient.arrayStringNoCollectionFormatEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -823,7 +822,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringSsvValidWithResponse(requestOptions);
+        return this.asyncClient.arrayStringSsvValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -848,7 +847,7 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringTsvValidWithResponse(requestOptions);
+        return this.asyncClient.arrayStringTsvValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -874,6 +873,6 @@ public final class QueriesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringPipesValidWithResponse(requestOptions);
+        return this.asyncClient.arrayStringPipesValidWithResponse(requestOptions).block();
     }
 }

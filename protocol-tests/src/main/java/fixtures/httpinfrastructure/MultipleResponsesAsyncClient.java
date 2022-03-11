@@ -24,7 +24,7 @@ public final class MultipleResponsesAsyncClient {
     @Generated private final MultipleResponsesImpl serviceClient;
 
     /**
-     * Initializes an instance of MultipleResponses client.
+     * Initializes an instance of MultipleResponsesAsyncClient client.
      *
      * @param serviceClient the service client implementation.
      */

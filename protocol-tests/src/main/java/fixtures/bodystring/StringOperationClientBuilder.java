@@ -261,6 +261,6 @@ public final class StringOperationClientBuilder {
      */
     @Generated
     public StringOperationClient buildClient() {
-        return new StringOperationClient(buildInnerClient().getStringOperations());
+        return new StringOperationClient(new StringOperationAsyncClient(buildInnerClient().getStringOperations()));
     }
 }
