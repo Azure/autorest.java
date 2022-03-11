@@ -41,10 +41,7 @@ public class ClientModelUtil {
                     .packageName(packageName)
                     .serviceClient(serviceClient);
 
-            String asyncClassName =
-                    serviceClient.getClientBaseName().endsWith("Client")
-                            ? serviceClient.getClientBaseName().replace("Client", "AsyncClient")
-                            : serviceClient.getClientBaseName() + "AsyncClient";
+            String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
             asyncClients.add(builder.className(asyncClassName).build());
 
             if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
@@ -66,10 +63,7 @@ public class ClientModelUtil {
             if (count == 1) {
                 // if it is the only method group, use service client name as base.
 
-                String asyncClassName =
-                        serviceClient.getClientBaseName().endsWith("Client")
-                                ? serviceClient.getClientBaseName().replace("Client", "AsyncClient")
-                                : serviceClient.getClientBaseName() + "AsyncClient";
+                String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
                 asyncClients.add(builder.className(asyncClassName).build());
 
                 if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
@@ -80,10 +74,7 @@ public class ClientModelUtil {
                     syncClients.add(builder.className(syncClassName).build());
                 }
             } else {
-                String asyncClassName =
-                        methodGroupClient.getClassBaseName().endsWith("Client")
-                                ? methodGroupClient.getClassBaseName().replace("Client", "AsyncClient")
-                                : methodGroupClient.getClassBaseName() + "AsyncClient";
+                String asyncClassName = clientNameToAsyncClientName(methodGroupClient.getClassBaseName());
                 asyncClients.add(builder.className(asyncClassName).build());
 
                 if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
@@ -263,5 +254,14 @@ public class ClientModelUtil {
                     .replace(".", "-");
         }
         return artifactId;
+    }
+
+    public static String clientNameToAsyncClientName(String clientName) {
+        if (clientName.endsWith("Client")) {
+            clientName = clientName.substring(0, clientName.length() - "Client".length()) + "AsyncClient";
+        } else {
+            clientName += "AsyncClient";
+        }
+        return clientName;
     }
 }

@@ -63,7 +63,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
       javaFile.annotation(String.format("ServiceClient(builder = %s.class)", syncClient.getClientBuilder().getClassName()));
     }
     javaFile.publicFinalClass(syncClassName, classBlock -> {
-      writeClass(syncClient, classBlock, syncClassName, constructorVisibility);
+      writeClass(syncClient, classBlock, constructorVisibility);
     });
   }
 
@@ -72,11 +72,9 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
    *
    * @param syncClient the sync client
    * @param classBlock the class block to write
-   * @param className the class name
    * @param constructorVisibility the visibility of class constructor
    */
-  protected void writeClass(AsyncSyncClient syncClient, JavaClass classBlock,
-                            String className, JavaVisibility constructorVisibility) {
+  protected void writeClass(AsyncSyncClient syncClient, JavaClass classBlock, JavaVisibility constructorVisibility) {
     final ServiceClient serviceClient = syncClient.getServiceClient();
     final MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
     final boolean wrapServiceClient = methodGroupClient == null;
@@ -97,12 +95,12 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     });
     addGeneratedAnnotation(classBlock);
     if (wrapServiceClient) {
-      classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", className,
+      classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClient.getClassName(),
           serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
         constructorBlock.line("this.serviceClient = serviceClient;");
       });
     } else {
-      classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", className,
+      classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClient.getClassName(),
           methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
         constructorBlock.line("this.serviceClient = serviceClient;");
       });

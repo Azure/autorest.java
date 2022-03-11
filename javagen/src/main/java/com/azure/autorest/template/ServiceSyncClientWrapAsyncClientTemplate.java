@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,20 +25,20 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
     private static final String ASYNC_CLIENT_VAR_NAME = "asyncClient";
 
     @Override
-    protected void writeClass(AsyncSyncClient syncClient, JavaClass classBlock,
-                              String className, JavaVisibility constructorVisibility) {
+    protected void writeClass(AsyncSyncClient syncClient, JavaClass classBlock, JavaVisibility constructorVisibility) {
         // class variable
-        String asyncClassName = className.replace("Client", "AsyncClient");
+        String asyncClassName = ClientModelUtil.clientNameToAsyncClientName(syncClient.getClassName());
+
+        addGeneratedAnnotation(classBlock);
+        classBlock.privateFinalMemberVariable(asyncClassName, ASYNC_CLIENT_VAR_NAME);
 
         // constructor
         classBlock.javadocComment(comment -> {
             comment.description(String.format("Initializes an instance of %1$s client.", syncClient.getClassName()));
-            comment.param(ASYNC_CLIENT_VAR_NAME, "the service client implementation.");
+            comment.param(ASYNC_CLIENT_VAR_NAME, "the async client.");
         });
         addGeneratedAnnotation(classBlock);
-        classBlock.privateFinalMemberVariable(asyncClassName, ASYNC_CLIENT_VAR_NAME);
-        addGeneratedAnnotation(classBlock);
-        classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", className,
+        classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClient.getClassName(),
                 asyncClassName, ASYNC_CLIENT_VAR_NAME), constructorBlock -> {
             constructorBlock.line(String.format("this.%1$s = %1$s;", ASYNC_CLIENT_VAR_NAME));
         });
