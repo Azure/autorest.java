@@ -22,7 +22,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated private final AutoRestPagingTestServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of AutoRestPagingTestServiceClient client.
+     * Initializes an instance of AutoRestPagingTestServiceClient class.
      *
      * @param asyncClient the async client.
      */

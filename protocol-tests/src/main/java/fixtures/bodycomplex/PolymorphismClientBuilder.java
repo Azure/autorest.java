@@ -266,7 +266,7 @@ public final class PolymorphismClientBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphismAsyncClient async client.
+     * Builds an instance of PolymorphismAsyncClient class.
      *
      * @return an instance of PolymorphismAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class PolymorphismClientBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphismClient sync client.
+     * Builds an instance of PolymorphismClient class.
      *
      * @return an instance of PolymorphismClient.
      */

@@ -245,7 +245,7 @@ public final class StringOperationClientBuilder {
     }
 
     /**
-     * Builds an instance of StringOperationAsyncClient async client.
+     * Builds an instance of StringOperationAsyncClient class.
      *
      * @return an instance of StringOperationAsyncClient.
      */
@@ -255,7 +255,7 @@ public final class StringOperationClientBuilder {
     }
 
     /**
-     * Builds an instance of StringOperationClient sync client.
+     * Builds an instance of StringOperationClient class.
      *
      * @return an instance of StringOperationClient.
      */

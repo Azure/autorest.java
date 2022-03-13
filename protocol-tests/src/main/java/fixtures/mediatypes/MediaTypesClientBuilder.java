@@ -244,7 +244,7 @@ public final class MediaTypesClientBuilder {
     }
 
     /**
-     * Builds an instance of MediaTypesAsyncClient async client.
+     * Builds an instance of MediaTypesAsyncClient class.
      *
      * @return an instance of MediaTypesAsyncClient.
      */
@@ -254,7 +254,7 @@ public final class MediaTypesClientBuilder {
     }
 
     /**
-     * Builds an instance of MediaTypesClient sync client.
+     * Builds an instance of MediaTypesClient class.
      *
      * @return an instance of MediaTypesClient.
      */

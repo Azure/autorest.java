@@ -25,12 +25,18 @@ public final class StringOperationClient {
     private EnumsImpl enumClient;
 
     // 1. manually add one constructor
+    /**
+     * Initializes an instance of StringOperations class.
+     *
+     * @param asyncClient the async client.
+     * @param test the parameter.
+     */
     StringOperationClient(StringOperationAsyncClient asyncClient, String test) {
         this.asyncClient = asyncClient;
     }
 
     /**
-     * Initializes an instance of StringOperations client.
+     * Initializes an instance of StringOperations class.
      *
      * @param asyncClient the async client.
      */

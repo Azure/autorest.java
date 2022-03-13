@@ -22,7 +22,7 @@ public final class PolymorphismClient {
     @Generated private final PolymorphismAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of PolymorphismClient client.
+     * Initializes an instance of PolymorphismClient class.
      *
      * @param asyncClient the async client.
      */

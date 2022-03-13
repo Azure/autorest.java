@@ -165,7 +165,7 @@ public final class EnumClient {
     @Generated private final EnumAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of EnumClient client.
+     * Initializes an instance of EnumClient class.
      *
      * @param asyncClient the async client.
      */

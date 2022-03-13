@@ -264,7 +264,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         classBlock.javadocComment(comment ->
                         {
                             comment.description(String
-                                    .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
+                                    .format("Builds an instance of %1$s class", asyncClient.getClassName()));
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
                         addGeneratedAnnotation(classBlock);
@@ -289,7 +289,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     classBlock.javadocComment(comment ->
                     {
                         comment.description(String
-                                .format("Builds an instance of %1$s sync client", syncClient.getClassName()));
+                                .format("Builds an instance of %1$s class", syncClient.getClassName()));
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
                     addGeneratedAnnotation(classBlock);

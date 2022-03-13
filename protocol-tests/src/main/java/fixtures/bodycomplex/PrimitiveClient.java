@@ -22,7 +22,7 @@ public final class PrimitiveClient {
     @Generated private final PrimitiveAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of PrimitiveClient client.
+     * Initializes an instance of PrimitiveClient class.
      *
      * @param asyncClient the async client.
      */

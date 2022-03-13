@@ -23,7 +23,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     @Generated private final HeadersImpl serviceClient;
 
     /**
-     * Initializes an instance of AutoRestSwaggerBatHeaderServiceAsyncClient client.
+     * Initializes an instance of AutoRestSwaggerBatHeaderServiceAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

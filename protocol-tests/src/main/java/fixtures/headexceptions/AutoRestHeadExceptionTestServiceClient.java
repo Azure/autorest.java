@@ -21,7 +21,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated private final AutoRestHeadExceptionTestServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of AutoRestHeadExceptionTestServiceClient client.
+     * Initializes an instance of AutoRestHeadExceptionTestServiceClient class.
      *
      * @param asyncClient the async client.
      */

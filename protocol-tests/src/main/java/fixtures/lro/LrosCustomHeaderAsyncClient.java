@@ -25,7 +25,7 @@ public final class LrosCustomHeaderAsyncClient {
     @Generated private final LrosCustomHeadersImpl serviceClient;
 
     /**
-     * Initializes an instance of LrosCustomHeaderAsyncClient client.
+     * Initializes an instance of LrosCustomHeaderAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

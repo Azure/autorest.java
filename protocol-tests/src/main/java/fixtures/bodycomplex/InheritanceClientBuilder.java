@@ -266,7 +266,7 @@ public final class InheritanceClientBuilder {
     }
 
     /**
-     * Builds an instance of InheritanceAsyncClient async client.
+     * Builds an instance of InheritanceAsyncClient class.
      *
      * @return an instance of InheritanceAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class InheritanceClientBuilder {
     }
 
     /**
-     * Builds an instance of InheritanceClient sync client.
+     * Builds an instance of InheritanceClient class.
      *
      * @return an instance of InheritanceClient.
      */

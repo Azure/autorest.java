@@ -266,7 +266,7 @@ public final class ArrayClientBuilder {
     }
 
     /**
-     * Builds an instance of ArrayAsyncClient async client.
+     * Builds an instance of ArrayAsyncClient class.
      *
      * @return an instance of ArrayAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class ArrayClientBuilder {
     }
 
     /**
-     * Builds an instance of ArrayClient sync client.
+     * Builds an instance of ArrayClient class.
      *
      * @return an instance of ArrayClient.
      */

@@ -21,7 +21,7 @@ public final class HttpRetryClient {
     @Generated private final HttpRetryAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpRetryClient client.
+     * Initializes an instance of HttpRetryClient class.
      *
      * @param asyncClient the async client.
      */

@@ -27,7 +27,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     @Generated private final DictionariesImpl serviceClient;
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient client.
+     * Initializes an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

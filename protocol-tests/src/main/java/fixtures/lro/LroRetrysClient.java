@@ -22,7 +22,7 @@ public final class LroRetrysClient {
     @Generated private final LroRetrysAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of LroRetrysClient client.
+     * Initializes an instance of LroRetrysClient class.
      *
      * @param asyncClient the async client.
      */

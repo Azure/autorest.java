@@ -20,7 +20,7 @@ public final class InheritanceClient {
     @Generated private final InheritancesImpl serviceClient;
 
     /**
-     * Initializes an instance of InheritanceClient client.
+     * Initializes an instance of InheritanceClient class.
      *
      * @param serviceClient the service client implementation.
      */

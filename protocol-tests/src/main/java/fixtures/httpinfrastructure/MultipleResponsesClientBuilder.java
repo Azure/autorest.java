@@ -246,7 +246,7 @@ public final class MultipleResponsesClientBuilder {
     }
 
     /**
-     * Builds an instance of MultipleResponsesAsyncClient async client.
+     * Builds an instance of MultipleResponsesAsyncClient class.
      *
      * @return an instance of MultipleResponsesAsyncClient.
      */
@@ -256,7 +256,7 @@ public final class MultipleResponsesClientBuilder {
     }
 
     /**
-     * Builds an instance of MultipleResponsesClient sync client.
+     * Builds an instance of MultipleResponsesClient class.
      *
      * @return an instance of MultipleResponsesClient.
      */

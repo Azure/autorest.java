@@ -266,7 +266,7 @@ public final class PrimitiveClientBuilder {
     }
 
     /**
-     * Builds an instance of PrimitiveAsyncClient async client.
+     * Builds an instance of PrimitiveAsyncClient class.
      *
      * @return an instance of PrimitiveAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class PrimitiveClientBuilder {
     }
 
     /**
-     * Builds an instance of PrimitiveClient sync client.
+     * Builds an instance of PrimitiveClient class.
      *
      * @return an instance of PrimitiveClient.
      */

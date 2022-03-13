@@ -265,7 +265,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of StringOperationAsyncClient async client.
+     * Builds an instance of StringOperationAsyncClient class.
      *
      * @return an instance of StringOperationAsyncClient.
      */
@@ -275,7 +275,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of EnumAsyncClient async client.
+     * Builds an instance of EnumAsyncClient class.
      *
      * @return an instance of EnumAsyncClient.
      */
@@ -285,7 +285,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of StringOperationClient sync client.
+     * Builds an instance of StringOperationClient class.
      *
      * @return an instance of StringOperationClient.
      */
@@ -295,7 +295,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of EnumClient sync client.
+     * Builds an instance of EnumClient class.
      *
      * @return an instance of EnumClient.
      */

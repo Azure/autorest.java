@@ -266,7 +266,7 @@ public final class DictionaryClientBuilder {
     }
 
     /**
-     * Builds an instance of DictionaryAsyncClient async client.
+     * Builds an instance of DictionaryAsyncClient class.
      *
      * @return an instance of DictionaryAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class DictionaryClientBuilder {
     }
 
     /**
-     * Builds an instance of DictionaryClient sync client.
+     * Builds an instance of DictionaryClient class.
      *
      * @return an instance of DictionaryClient.
      */

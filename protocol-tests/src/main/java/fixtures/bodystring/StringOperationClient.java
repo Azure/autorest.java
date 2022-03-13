@@ -22,7 +22,7 @@ public final class StringOperationClient {
     @Generated private final StringOperationAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of StringOperationClient client.
+     * Initializes an instance of StringOperationClient class.
      *
      * @param asyncClient the async client.
      */

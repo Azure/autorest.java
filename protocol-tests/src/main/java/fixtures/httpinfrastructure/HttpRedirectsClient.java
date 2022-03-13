@@ -22,7 +22,7 @@ public final class HttpRedirectsClient {
     @Generated private final HttpRedirectsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpRedirectsClient client.
+     * Initializes an instance of HttpRedirectsClient class.
      *
      * @param asyncClient the async client.
      */

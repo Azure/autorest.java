@@ -25,7 +25,7 @@ public final class DpgAsyncClient {
     @Generated private final ParamsImpl serviceClient;
 
     /**
-     * Initializes an instance of DpgAsyncClient client.
+     * Initializes an instance of DpgAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

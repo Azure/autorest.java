@@ -21,7 +21,7 @@ public final class QueriesClient {
     @Generated private final QueriesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of QueriesClient client.
+     * Initializes an instance of QueriesClient class.
      *
      * @param asyncClient the async client.
      */

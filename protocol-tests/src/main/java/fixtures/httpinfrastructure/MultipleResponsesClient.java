@@ -22,7 +22,7 @@ public final class MultipleResponsesClient {
     @Generated private final MultipleResponsesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of MultipleResponsesClient client.
+     * Initializes an instance of MultipleResponsesClient class.
      *
      * @param asyncClient the async client.
      */

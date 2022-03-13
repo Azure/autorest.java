@@ -21,7 +21,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated private final AutoRestUrlMutliCollectionFormatTestServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceClient client.
+     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceClient class.
      *
      * @param asyncClient the async client.
      */

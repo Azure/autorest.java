@@ -24,7 +24,7 @@ public final class ArrayAsyncClient {
     @Generated private final ArraysImpl serviceClient;
 
     /**
-     * Initializes an instance of ArrayAsyncClient client.
+     * Initializes an instance of ArrayAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

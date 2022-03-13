@@ -20,7 +20,7 @@ public final class DictionaryAsyncClient {
     @Generated private final DictionariesImpl serviceClient;
 
     /**
-     * Initializes an instance of DictionaryAsyncClient client.
+     * Initializes an instance of DictionaryAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

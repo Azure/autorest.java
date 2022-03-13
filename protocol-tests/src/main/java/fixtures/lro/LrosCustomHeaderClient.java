@@ -22,7 +22,7 @@ public final class LrosCustomHeaderClient {
     @Generated private final LrosCustomHeaderAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of LrosCustomHeaderClient client.
+     * Initializes an instance of LrosCustomHeaderClient class.
      *
      * @param asyncClient the async client.
      */

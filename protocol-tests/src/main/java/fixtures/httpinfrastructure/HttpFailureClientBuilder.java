@@ -246,7 +246,7 @@ public final class HttpFailureClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpFailureAsyncClient async client.
+     * Builds an instance of HttpFailureAsyncClient class.
      *
      * @return an instance of HttpFailureAsyncClient.
      */
@@ -256,7 +256,7 @@ public final class HttpFailureClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpFailureClient sync client.
+     * Builds an instance of HttpFailureClient class.
      *
      * @return an instance of HttpFailureClient.
      */

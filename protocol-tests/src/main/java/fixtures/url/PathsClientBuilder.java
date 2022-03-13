@@ -283,7 +283,7 @@ public final class PathsClientBuilder {
     }
 
     /**
-     * Builds an instance of PathsAsyncClient async client.
+     * Builds an instance of PathsAsyncClient class.
      *
      * @return an instance of PathsAsyncClient.
      */
@@ -293,7 +293,7 @@ public final class PathsClientBuilder {
     }
 
     /**
-     * Builds an instance of PathsClient sync client.
+     * Builds an instance of PathsClient class.
      *
      * @return an instance of PathsClient.
      */

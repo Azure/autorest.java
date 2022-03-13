@@ -245,7 +245,7 @@ public final class LROsClientBuilder {
     }
 
     /**
-     * Builds an instance of LROsAsyncClient async client.
+     * Builds an instance of LROsAsyncClient class.
      *
      * @return an instance of LROsAsyncClient.
      */
@@ -255,7 +255,7 @@ public final class LROsClientBuilder {
     }
 
     /**
-     * Builds an instance of LROsClient sync client.
+     * Builds an instance of LROsClient class.
      *
      * @return an instance of LROsClient.
      */

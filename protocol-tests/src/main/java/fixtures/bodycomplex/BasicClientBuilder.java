@@ -266,7 +266,7 @@ public final class BasicClientBuilder {
     }
 
     /**
-     * Builds an instance of BasicAsyncClient async client.
+     * Builds an instance of BasicAsyncClient class.
      *
      * @return an instance of BasicAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class BasicClientBuilder {
     }
 
     /**
-     * Builds an instance of BasicClient sync client.
+     * Builds an instance of BasicClient class.
      *
      * @return an instance of BasicClient.
      */

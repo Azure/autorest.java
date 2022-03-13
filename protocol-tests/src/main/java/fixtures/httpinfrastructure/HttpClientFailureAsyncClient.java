@@ -23,7 +23,7 @@ public final class HttpClientFailureAsyncClient {
     @Generated private final HttpClientFailuresImpl serviceClient;
 
     /**
-     * Initializes an instance of HttpClientFailureAsyncClient client.
+     * Initializes an instance of HttpClientFailureAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

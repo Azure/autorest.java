@@ -246,7 +246,7 @@ public final class HttpSuccessClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpSuccessAsyncClient async client.
+     * Builds an instance of HttpSuccessAsyncClient class.
      *
      * @return an instance of HttpSuccessAsyncClient.
      */
@@ -256,7 +256,7 @@ public final class HttpSuccessClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpSuccessClient sync client.
+     * Builds an instance of HttpSuccessClient class.
      *
      * @return an instance of HttpSuccessClient.
      */

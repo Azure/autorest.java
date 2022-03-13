@@ -23,7 +23,7 @@ public final class QueriesAsyncClient {
     @Generated private final QueriesImpl serviceClient;
 
     /**
-     * Initializes an instance of QueriesAsyncClient client.
+     * Initializes an instance of QueriesAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

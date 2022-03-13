@@ -20,7 +20,7 @@ public final class PolymorphicrecursiveClient {
     @Generated private final PolymorphicrecursivesImpl serviceClient;
 
     /**
-     * Initializes an instance of PolymorphicrecursiveClient client.
+     * Initializes an instance of PolymorphicrecursiveClient class.
      *
      * @param serviceClient the service client implementation.
      */

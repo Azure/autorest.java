@@ -20,7 +20,7 @@ public final class ArrayClient {
     @Generated private final ArraysImpl serviceClient;
 
     /**
-     * Initializes an instance of ArrayClient client.
+     * Initializes an instance of ArrayClient class.
      *
      * @param serviceClient the service client implementation.
      */

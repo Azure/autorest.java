@@ -283,7 +283,7 @@ public final class QueriesClientBuilder {
     }
 
     /**
-     * Builds an instance of QueriesAsyncClient async client.
+     * Builds an instance of QueriesAsyncClient class.
      *
      * @return an instance of QueriesAsyncClient.
      */
@@ -293,7 +293,7 @@ public final class QueriesClientBuilder {
     }
 
     /**
-     * Builds an instance of QueriesClient sync client.
+     * Builds an instance of QueriesClient class.
      *
      * @return an instance of QueriesClient.
      */

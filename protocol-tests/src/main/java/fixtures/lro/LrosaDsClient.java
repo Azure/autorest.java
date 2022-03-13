@@ -22,7 +22,7 @@ public final class LrosaDsClient {
     @Generated private final LrosaDsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of LrosaDsClient client.
+     * Initializes an instance of LrosaDsClient class.
      *
      * @param asyncClient the async client.
      */

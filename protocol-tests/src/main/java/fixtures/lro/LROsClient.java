@@ -22,7 +22,7 @@ public final class LROsClient {
     @Generated private final LROsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of LROsClient client.
+     * Initializes an instance of LROsClient class.
      *
      * @param asyncClient the async client.
      */

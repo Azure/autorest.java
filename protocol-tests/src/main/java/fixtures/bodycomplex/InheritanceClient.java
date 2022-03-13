@@ -22,7 +22,7 @@ public final class InheritanceClient {
     @Generated private final InheritanceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of InheritanceClient client.
+     * Initializes an instance of InheritanceClient class.
      *
      * @param asyncClient the async client.
      */

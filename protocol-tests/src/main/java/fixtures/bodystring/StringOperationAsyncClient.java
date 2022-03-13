@@ -24,7 +24,7 @@ public final class StringOperationAsyncClient {
     @Generated private final StringOperationsImpl serviceClient;
 
     /**
-     * Initializes an instance of StringOperationAsyncClient client.
+     * Initializes an instance of StringOperationAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

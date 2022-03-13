@@ -22,7 +22,7 @@ public final class DictionaryClient {
     @Generated private final DictionaryAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of DictionaryClient client.
+     * Initializes an instance of DictionaryClient class.
      *
      * @param asyncClient the async client.
      */

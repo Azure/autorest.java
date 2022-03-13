@@ -25,7 +25,7 @@ public final class LroRetrysAsyncClient {
     @Generated private final LroRetrysImpl serviceClient;
 
     /**
-     * Initializes an instance of LroRetrysAsyncClient client.
+     * Initializes an instance of LroRetrysAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

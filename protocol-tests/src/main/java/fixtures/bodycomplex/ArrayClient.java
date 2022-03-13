@@ -22,7 +22,7 @@ public final class ArrayClient {
     @Generated private final ArrayAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of ArrayClient client.
+     * Initializes an instance of ArrayClient class.
      *
      * @param asyncClient the async client.
      */

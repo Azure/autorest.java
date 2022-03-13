@@ -16,7 +16,7 @@ public final class IntClient {
     @Generated private final IntsImpl serviceClient;
 
     /**
-     * Initializes an instance of IntClient client.
+     * Initializes an instance of IntClient class.
      *
      * @param serviceClient the service client implementation.
      */

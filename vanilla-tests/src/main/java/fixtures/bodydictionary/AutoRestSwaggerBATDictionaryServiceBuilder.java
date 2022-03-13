@@ -270,7 +270,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient async client.
+     * Builds an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient class.
      *
      * @return an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient.
      */
@@ -280,7 +280,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBATDictionaryServiceClient sync client.
+     * Builds an instance of AutoRestSwaggerBATDictionaryServiceClient class.
      *
      * @return an instance of AutoRestSwaggerBATDictionaryServiceClient.
      */

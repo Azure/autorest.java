@@ -21,7 +21,7 @@ public final class HttpFailureClient {
     @Generated private final HttpFailureAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpFailureClient client.
+     * Initializes an instance of HttpFailureClient class.
      *
      * @param asyncClient the async client.
      */

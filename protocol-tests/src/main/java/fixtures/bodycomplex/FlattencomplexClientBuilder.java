@@ -266,7 +266,7 @@ public final class FlattencomplexClientBuilder {
     }
 
     /**
-     * Builds an instance of FlattencomplexAsyncClient async client.
+     * Builds an instance of FlattencomplexAsyncClient class.
      *
      * @return an instance of FlattencomplexAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class FlattencomplexClientBuilder {
     }
 
     /**
-     * Builds an instance of FlattencomplexClient sync client.
+     * Builds an instance of FlattencomplexClient class.
      *
      * @return an instance of FlattencomplexClient.
      */

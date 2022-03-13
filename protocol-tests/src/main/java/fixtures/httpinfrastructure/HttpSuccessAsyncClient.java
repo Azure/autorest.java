@@ -23,7 +23,7 @@ public final class HttpSuccessAsyncClient {
     @Generated private final HttpSuccessImpl serviceClient;
 
     /**
-     * Initializes an instance of HttpSuccessAsyncClient client.
+     * Initializes an instance of HttpSuccessAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

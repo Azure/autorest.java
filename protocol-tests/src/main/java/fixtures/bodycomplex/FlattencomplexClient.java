@@ -22,7 +22,7 @@ public final class FlattencomplexClient {
     @Generated private final FlattencomplexAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of FlattencomplexClient client.
+     * Initializes an instance of FlattencomplexClient class.
      *
      * @param asyncClient the async client.
      */

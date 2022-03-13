@@ -23,7 +23,7 @@ public final class PathItemsAsyncClient {
     @Generated private final PathItemsImpl serviceClient;
 
     /**
-     * Initializes an instance of PathItemsAsyncClient client.
+     * Initializes an instance of PathItemsAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

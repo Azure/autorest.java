@@ -266,7 +266,7 @@ public final class ReadonlypropertyClientBuilder {
     }
 
     /**
-     * Builds an instance of ReadonlypropertyAsyncClient async client.
+     * Builds an instance of ReadonlypropertyAsyncClient class.
      *
      * @return an instance of ReadonlypropertyAsyncClient.
      */
@@ -276,7 +276,7 @@ public final class ReadonlypropertyClientBuilder {
     }
 
     /**
-     * Builds an instance of ReadonlypropertyClient sync client.
+     * Builds an instance of ReadonlypropertyClient class.
      *
      * @return an instance of ReadonlypropertyClient.
      */

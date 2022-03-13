@@ -25,7 +25,7 @@ public final class DpgClient {
     @Generated private final DpgAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of DpgClient client.
+     * Initializes an instance of DpgClient class.
      *
      * @param asyncClient the async client.
      */

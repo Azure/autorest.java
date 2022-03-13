@@ -22,7 +22,7 @@ public final class BasicClient {
     @Generated private final BasicAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of BasicClient client.
+     * Initializes an instance of BasicClient class.
      *
      * @param asyncClient the async client.
      */

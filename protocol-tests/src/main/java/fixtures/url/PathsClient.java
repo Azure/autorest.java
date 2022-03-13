@@ -21,7 +21,7 @@ public final class PathsClient {
     @Generated private final PathsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of PathsClient client.
+     * Initializes an instance of PathsClient class.
      *
      * @param asyncClient the async client.
      */
