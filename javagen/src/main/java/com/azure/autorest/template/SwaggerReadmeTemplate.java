@@ -51,7 +51,7 @@ public class SwaggerReadmeTemplate {
         Yaml yaml = new Yaml(dumperOptions);
 
         Map<String, Object> objectNode = new LinkedHashMap<>();
-        objectNode.put("input-files", settings.getAutorestSettings().getInputFiles());
+        objectNode.put("input-file", settings.getAutorestSettings().getInputFiles());
         // settings from internal
         for (Map.Entry<String, Object> entry : OVERRIDE_SETTINGS.entrySet()) {
             if (entry.getValue() != null) {
