@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -50,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -270,22 +272,31 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
             List<ProtocolExample> protocolExamples = new ArrayList<>();
             Set<String> protocolExampleNameSet = new HashSet<>();
+
+            BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
+                if (m.getType() == ClientMethodType.SimpleSyncRestResponse
+                        || m.getType() == ClientMethodType.PagingSync
+                        || m.getType() == ClientMethodType.LongRunningBeginSync) {
+                    ClientBuilder clientBuilder = c.getClientBuilder();
+                    if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
+                        m.getProxyMethod().getExamples().forEach((name, example) -> {
+                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                            if (!protocolExampleNameSet.contains(filename)) {
+                                ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
+                                protocolExamples.add(protocolExample);
+                                protocolExampleNameSet.add(filename);
+                            }
+                        });
+                    }
+                }
+            };
+
+            syncClients.stream().filter(c -> c.getServiceClient() != null)
+                    .forEach(c -> c.getServiceClient().getClientMethods()
+                            .forEach(m -> handleExample.accept(c, m)));
             syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
-                    .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
-                            .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync || m.getType() == ClientMethodType.LongRunningBeginSync)
-                            .forEach(m -> {
-                                ClientBuilder clientBuilder = c.getClientBuilder();
-                                if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
-                                    m.getProxyMethod().getExamples().forEach((name, example) -> {
-                                        String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-                                        if (!protocolExampleNameSet.contains(filename)) {
-                                            ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
-                                            protocolExamples.add(protocolExample);
-                                            protocolExampleNameSet.add(filename);
-                                        }
-                                    });
-                                }
-                            }));
+                    .forEach(c -> c.getMethodGroupClient().getClientMethods()
+                            .forEach(m -> handleExample.accept(c, m)));
             builder.protocolExamples(protocolExamples);
         }
 
