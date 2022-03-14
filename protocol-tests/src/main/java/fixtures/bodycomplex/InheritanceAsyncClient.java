@@ -24,7 +24,7 @@ public final class InheritanceAsyncClient {
     @Generated private final InheritancesImpl serviceClient;
 
     /**
-     * Initializes an instance of Inheritances client.
+     * Initializes an instance of InheritanceAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

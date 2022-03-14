@@ -22,7 +22,6 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import fixtures.lro.fluent.LrosCustomHeadersClient;
@@ -33,8 +32,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in LrosCustomHeadersClient. */
 public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClient {
-    private final ClientLogger logger = new ClientLogger(LrosCustomHeadersClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final LrosCustomHeadersService service;
 

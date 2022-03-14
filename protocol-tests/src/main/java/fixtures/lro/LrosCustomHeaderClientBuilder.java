@@ -245,7 +245,7 @@ public final class LrosCustomHeaderClientBuilder {
     }
 
     /**
-     * Builds an instance of LrosCustomHeaderAsyncClient async client.
+     * Builds an instance of LrosCustomHeaderAsyncClient class.
      *
      * @return an instance of LrosCustomHeaderAsyncClient.
      */
@@ -255,12 +255,12 @@ public final class LrosCustomHeaderClientBuilder {
     }
 
     /**
-     * Builds an instance of LrosCustomHeaderClient sync client.
+     * Builds an instance of LrosCustomHeaderClient class.
      *
      * @return an instance of LrosCustomHeaderClient.
      */
     @Generated
     public LrosCustomHeaderClient buildClient() {
-        return new LrosCustomHeaderClient(buildInnerClient().getLrosCustomHeaders());
+        return new LrosCustomHeaderClient(new LrosCustomHeaderAsyncClient(buildInnerClient().getLrosCustomHeaders()));
     }
 }

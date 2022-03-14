@@ -13,22 +13,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.headexceptions.implementation.HeadExceptionsImpl;
 import fixtures.headexceptions.models.CustomizedException;
 
 /** Initializes a new instance of the synchronous AutoRestHeadExceptionTestServiceClient type. */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class)
 public final class AutoRestHeadExceptionTestServiceClient {
-    @Generated private final HeadExceptionsImpl serviceClient;
+    @Generated private final AutoRestHeadExceptionTestServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HeadExceptions client.
+     * Initializes an instance of AutoRestHeadExceptionTestServiceClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    AutoRestHeadExceptionTestServiceClient(HeadExceptionsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    AutoRestHeadExceptionTestServiceClient(AutoRestHeadExceptionTestServiceAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -44,7 +43,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.head200WithResponse(requestOptions);
+        return this.asyncClient.head200WithResponse(requestOptions).block();
     }
 
     /**
@@ -60,7 +59,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.head204WithResponse(requestOptions);
+        return this.asyncClient.head204WithResponse(requestOptions).block();
     }
 
     /**
@@ -76,6 +75,6 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head404WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.head404WithResponse(requestOptions);
+        return this.asyncClient.head404WithResponse(requestOptions).block();
     }
 }

@@ -14,23 +14,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodystring.implementation.EnumsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class EnumClient {
-
-    @Generated private final EnumsImpl serviceClient;
-
-    /**
-     * Initializes an instance of Enums client.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    EnumClient(EnumsImpl serviceClient) {
-        this.serviceClient = serviceClient;
-    }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -52,7 +39,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNotExpandableWithResponse(requestOptions);
+        return this.asyncClient.getNotExpandableWithResponse(requestOptions).block();
     }
 
     /**
@@ -75,7 +62,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(BinaryData stringBodyUpdated, RequestOptions requestOptions) {
-        return this.serviceClient.putNotExpandableWithResponse(stringBodyUpdated, requestOptions);
+        return this.asyncClient.putNotExpandableWithResponse(stringBodyUpdated, requestOptions).block();
     }
 
     /**
@@ -98,7 +85,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getReferencedWithResponse(requestOptions);
+        return this.asyncClient.getReferencedWithResponse(requestOptions).block();
     }
 
     /**
@@ -121,6 +108,18 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return this.serviceClient.putReferencedWithResponse(enumStringBody, requestOptions);
+        return this.asyncClient.putReferencedWithResponse(enumStringBody, requestOptions).block();
+    }
+
+    @Generated private final EnumAsyncClient asyncClient;
+
+    /**
+     * Initializes an instance of EnumClient class.
+     *
+     * @param asyncClient the async client.
+     */
+    @Generated
+    EnumClient(EnumAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 }

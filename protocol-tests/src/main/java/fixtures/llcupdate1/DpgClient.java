@@ -17,21 +17,21 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
-import fixtures.llcupdate1.implementation.ParamsImpl;
+import com.azure.core.util.FluxUtil;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated private final DpgAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Params client.
+     * Initializes an instance of DpgClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    DpgClient(ParamsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    DpgClient(DpgAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -61,7 +61,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.headNoParamsWithResponse(requestOptions);
+        return this.asyncClient.headNoParamsWithResponse(requestOptions).block();
     }
 
     /**
@@ -92,7 +92,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredWithResponse(requestOptions);
+        return this.asyncClient.getRequiredWithResponse(requestOptions).block();
     }
 
     /**
@@ -124,7 +124,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putRequiredOptionalWithResponse(requestOptions);
+        return this.asyncClient.putRequiredOptionalWithResponse(requestOptions).block();
     }
 
     /**
@@ -162,7 +162,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return this.serviceClient.postParametersWithResponse(parameter, requestOptions);
+        return this.asyncClient.postParametersWithResponse(parameter, requestOptions).block();
     }
 
     /**
@@ -178,7 +178,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.deleteParametersWithResponse(requestOptions);
+        return this.asyncClient.deleteParametersWithResponse(requestOptions).block();
     }
 
     /**
@@ -209,7 +209,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getOptionalWithResponse(requestOptions);
+        return this.asyncClient.getOptionalWithResponse(requestOptions).block();
     }
 
     /**
@@ -231,7 +231,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNewOperationWithResponse(requestOptions);
+        return this.asyncClient.getNewOperationWithResponse(requestOptions).block();
     }
 
     /**
@@ -244,6 +244,9 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.serviceClient.sendRequest(httpRequest, context);
+        return this.asyncClient
+                .sendRequest(httpRequest)
+                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
+                .block();
     }
 }

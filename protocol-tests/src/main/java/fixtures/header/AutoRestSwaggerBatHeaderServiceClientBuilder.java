@@ -249,7 +249,7 @@ public final class AutoRestSwaggerBatHeaderServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatHeaderServiceAsyncClient async client.
+     * Builds an instance of AutoRestSwaggerBatHeaderServiceAsyncClient class.
      *
      * @return an instance of AutoRestSwaggerBatHeaderServiceAsyncClient.
      */
@@ -259,12 +259,13 @@ public final class AutoRestSwaggerBatHeaderServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatHeaderServiceClient sync client.
+     * Builds an instance of AutoRestSwaggerBatHeaderServiceClient class.
      *
      * @return an instance of AutoRestSwaggerBatHeaderServiceClient.
      */
     @Generated
     public AutoRestSwaggerBatHeaderServiceClient buildClient() {
-        return new AutoRestSwaggerBatHeaderServiceClient(buildInnerClient().getHeaders());
+        return new AutoRestSwaggerBatHeaderServiceClient(
+                new AutoRestSwaggerBatHeaderServiceAsyncClient(buildInnerClient().getHeaders()));
     }
 }

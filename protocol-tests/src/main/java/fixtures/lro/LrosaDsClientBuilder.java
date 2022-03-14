@@ -245,7 +245,7 @@ public final class LrosaDsClientBuilder {
     }
 
     /**
-     * Builds an instance of LrosaDsAsyncClient async client.
+     * Builds an instance of LrosaDsAsyncClient class.
      *
      * @return an instance of LrosaDsAsyncClient.
      */
@@ -255,12 +255,12 @@ public final class LrosaDsClientBuilder {
     }
 
     /**
-     * Builds an instance of LrosaDsClient sync client.
+     * Builds an instance of LrosaDsClient class.
      *
      * @return an instance of LrosaDsClient.
      */
     @Generated
     public LrosaDsClient buildClient() {
-        return new LrosaDsClient(buildInnerClient().getLrosaDs());
+        return new LrosaDsClient(new LrosaDsAsyncClient(buildInnerClient().getLrosaDs()));
     }
 }

@@ -15,21 +15,20 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.InheritancesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = InheritanceClientBuilder.class)
 public final class InheritanceClient {
-    @Generated private final InheritancesImpl serviceClient;
+    @Generated private final InheritanceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Inheritances client.
+     * Initializes an instance of InheritanceClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    InheritanceClient(InheritancesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    InheritanceClient(InheritanceAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -63,7 +62,7 @@ public final class InheritanceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getValidWithResponse(requestOptions);
+        return this.asyncClient.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -100,6 +99,6 @@ public final class InheritanceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
     }
 }

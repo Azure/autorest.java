@@ -246,7 +246,7 @@ public final class HttpRedirectsClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpRedirectsAsyncClient async client.
+     * Builds an instance of HttpRedirectsAsyncClient class.
      *
      * @return an instance of HttpRedirectsAsyncClient.
      */
@@ -256,12 +256,12 @@ public final class HttpRedirectsClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpRedirectsClient sync client.
+     * Builds an instance of HttpRedirectsClient class.
      *
      * @return an instance of HttpRedirectsClient.
      */
     @Generated
     public HttpRedirectsClient buildClient() {
-        return new HttpRedirectsClient(buildInnerClient().getHttpRedirects());
+        return new HttpRedirectsClient(new HttpRedirectsAsyncClient(buildInnerClient().getHttpRedirects()));
     }
 }

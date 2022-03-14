@@ -266,7 +266,7 @@ public final class PolymorphicrecursiveClientBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphicrecursiveAsyncClient async client.
+     * Builds an instance of PolymorphicrecursiveAsyncClient class.
      *
      * @return an instance of PolymorphicrecursiveAsyncClient.
      */
@@ -276,12 +276,13 @@ public final class PolymorphicrecursiveClientBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphicrecursiveClient sync client.
+     * Builds an instance of PolymorphicrecursiveClient class.
      *
      * @return an instance of PolymorphicrecursiveClient.
      */
     @Generated
     public PolymorphicrecursiveClient buildClient() {
-        return new PolymorphicrecursiveClient(buildInnerClient().getPolymorphicrecursives());
+        return new PolymorphicrecursiveClient(
+                new PolymorphicrecursiveAsyncClient(buildInnerClient().getPolymorphicrecursives()));
     }
 }

@@ -245,7 +245,7 @@ public final class LroRetrysClientBuilder {
     }
 
     /**
-     * Builds an instance of LroRetrysAsyncClient async client.
+     * Builds an instance of LroRetrysAsyncClient class.
      *
      * @return an instance of LroRetrysAsyncClient.
      */
@@ -255,12 +255,12 @@ public final class LroRetrysClientBuilder {
     }
 
     /**
-     * Builds an instance of LroRetrysClient sync client.
+     * Builds an instance of LroRetrysClient class.
      *
      * @return an instance of LroRetrysClient.
      */
     @Generated
     public LroRetrysClient buildClient() {
-        return new LroRetrysClient(buildInnerClient().getLroRetrys());
+        return new LroRetrysClient(new LroRetrysAsyncClient(buildInnerClient().getLroRetrys()));
     }
 }

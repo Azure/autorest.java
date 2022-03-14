@@ -24,7 +24,7 @@ public final class PolymorphismAsyncClient {
     @Generated private final PolymorphismsImpl serviceClient;
 
     /**
-     * Initializes an instance of Polymorphisms client.
+     * Initializes an instance of PolymorphismAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

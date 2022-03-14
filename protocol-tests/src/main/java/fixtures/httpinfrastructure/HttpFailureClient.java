@@ -14,21 +14,20 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpFailureClientBuilder.class)
 public final class HttpFailureClient {
-    @Generated private final HttpFailuresImpl serviceClient;
+    @Generated private final HttpFailureAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpFailures client.
+     * Initializes an instance of HttpFailureClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    HttpFailureClient(HttpFailuresImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    HttpFailureClient(HttpFailureAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -50,7 +49,7 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyErrorWithResponse(requestOptions);
+        return this.asyncClient.getEmptyErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -72,7 +71,7 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelErrorWithResponse(requestOptions);
+        return this.asyncClient.getNoModelErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -94,6 +93,6 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelEmptyWithResponse(requestOptions);
+        return this.asyncClient.getNoModelEmptyWithResponse(requestOptions).block();
     }
 }

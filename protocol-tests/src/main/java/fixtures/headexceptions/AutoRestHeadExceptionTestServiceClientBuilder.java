@@ -250,7 +250,7 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestHeadExceptionTestServiceAsyncClient async client.
+     * Builds an instance of AutoRestHeadExceptionTestServiceAsyncClient class.
      *
      * @return an instance of AutoRestHeadExceptionTestServiceAsyncClient.
      */
@@ -260,12 +260,13 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestHeadExceptionTestServiceClient sync client.
+     * Builds an instance of AutoRestHeadExceptionTestServiceClient class.
      *
      * @return an instance of AutoRestHeadExceptionTestServiceClient.
      */
     @Generated
     public AutoRestHeadExceptionTestServiceClient buildClient() {
-        return new AutoRestHeadExceptionTestServiceClient(buildInnerClient().getHeadExceptions());
+        return new AutoRestHeadExceptionTestServiceClient(
+                new AutoRestHeadExceptionTestServiceAsyncClient(buildInnerClient().getHeadExceptions()));
     }
 }

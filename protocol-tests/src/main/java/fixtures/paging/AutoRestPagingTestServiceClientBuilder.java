@@ -246,7 +246,7 @@ public final class AutoRestPagingTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestPagingTestServiceAsyncClient async client.
+     * Builds an instance of AutoRestPagingTestServiceAsyncClient class.
      *
      * @return an instance of AutoRestPagingTestServiceAsyncClient.
      */
@@ -256,12 +256,13 @@ public final class AutoRestPagingTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestPagingTestServiceClient sync client.
+     * Builds an instance of AutoRestPagingTestServiceClient class.
      *
      * @return an instance of AutoRestPagingTestServiceClient.
      */
     @Generated
     public AutoRestPagingTestServiceClient buildClient() {
-        return new AutoRestPagingTestServiceClient(buildInnerClient().getPagings());
+        return new AutoRestPagingTestServiceClient(
+                new AutoRestPagingTestServiceAsyncClient(buildInnerClient().getPagings()));
     }
 }

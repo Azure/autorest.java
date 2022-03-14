@@ -156,7 +156,12 @@ public class Javagen extends NewPlugin {
             javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
         }
         for (AsyncSyncClient syncClient : client.getSyncClients()) {
-            javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
+            boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
+                    // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
+                    && settings.isLowLevelClient()
+                    // 1-1 match of SyncClient and AsyncClient
+                    && client.getAsyncClients().size() == client.getSyncClients().size();
+            javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
         }
 
         // Service client builder

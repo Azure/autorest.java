@@ -23,7 +23,7 @@ public final class PathsAsyncClient {
     @Generated private final PathsImpl serviceClient;
 
     /**
-     * Initializes an instance of Paths client.
+     * Initializes an instance of PathsAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

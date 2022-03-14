@@ -245,7 +245,7 @@ public final class EnumClientBuilder {
     }
 
     /**
-     * Builds an instance of EnumAsyncClient async client.
+     * Builds an instance of EnumAsyncClient class.
      *
      * @return an instance of EnumAsyncClient.
      */
@@ -255,12 +255,12 @@ public final class EnumClientBuilder {
     }
 
     /**
-     * Builds an instance of EnumClient sync client.
+     * Builds an instance of EnumClient class.
      *
      * @return an instance of EnumClient.
      */
     @Generated
     public EnumClient buildClient() {
-        return new EnumClient(buildInnerClient().getEnums());
+        return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
     }
 }

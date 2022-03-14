@@ -39,8 +39,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRestLongRunningOperationTestService {
-    private final ClientLogger logger = new ClientLogger(AutoRestLongRunningOperationTestServiceImpl.class);
-
     /** server parameter. */
     private final String endpoint;
 
@@ -245,7 +243,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -304,4 +302,6 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AutoRestLongRunningOperationTestServiceImpl.class);
 }

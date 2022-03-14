@@ -14,21 +14,20 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.url.implementation.PathsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
 @ServiceClient(builder = PathsClientBuilder.class)
 public final class PathsClient {
-    @Generated private final PathsImpl serviceClient;
+    @Generated private final PathsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Paths client.
+     * Initializes an instance of PathsClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    PathsClient(PathsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    PathsClient(PathsAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -44,7 +43,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBooleanTrueWithResponse(requestOptions);
+        return this.asyncClient.getBooleanTrueWithResponse(requestOptions).block();
     }
 
     /**
@@ -60,7 +59,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBooleanFalseWithResponse(requestOptions);
+        return this.asyncClient.getBooleanFalseWithResponse(requestOptions).block();
     }
 
     /**
@@ -76,7 +75,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getIntOneMillionWithResponse(requestOptions);
+        return this.asyncClient.getIntOneMillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -92,7 +91,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getIntNegativeOneMillionWithResponse(requestOptions);
+        return this.asyncClient.getIntNegativeOneMillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -108,7 +107,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getTenBillionWithResponse(requestOptions);
+        return this.asyncClient.getTenBillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -124,7 +123,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNegativeTenBillionWithResponse(requestOptions);
+        return this.asyncClient.getNegativeTenBillionWithResponse(requestOptions).block();
     }
 
     /**
@@ -140,7 +139,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.floatScientificPositiveWithResponse(requestOptions);
+        return this.asyncClient.floatScientificPositiveWithResponse(requestOptions).block();
     }
 
     /**
@@ -156,7 +155,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.floatScientificNegativeWithResponse(requestOptions);
+        return this.asyncClient.floatScientificNegativeWithResponse(requestOptions).block();
     }
 
     /**
@@ -172,7 +171,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.doubleDecimalPositiveWithResponse(requestOptions);
+        return this.asyncClient.doubleDecimalPositiveWithResponse(requestOptions).block();
     }
 
     /**
@@ -188,7 +187,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.doubleDecimalNegativeWithResponse(requestOptions);
+        return this.asyncClient.doubleDecimalNegativeWithResponse(requestOptions).block();
     }
 
     /**
@@ -204,7 +203,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringUnicodeWithResponse(requestOptions);
+        return this.asyncClient.stringUnicodeWithResponse(requestOptions).block();
     }
 
     /**
@@ -220,7 +219,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringUrlEncodedWithResponse(requestOptions);
+        return this.asyncClient.stringUrlEncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -236,7 +235,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlNonEncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringUrlNonEncodedWithResponse(requestOptions);
+        return this.asyncClient.stringUrlNonEncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -252,7 +251,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.stringEmptyWithResponse(requestOptions);
+        return this.asyncClient.stringEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -269,7 +268,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(String stringPath, RequestOptions requestOptions) {
-        return this.serviceClient.stringNullWithResponse(stringPath, requestOptions);
+        return this.asyncClient.stringNullWithResponse(stringPath, requestOptions).block();
     }
 
     /**
@@ -286,7 +285,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions) {
-        return this.serviceClient.enumValidWithResponse(enumPath, requestOptions);
+        return this.asyncClient.enumValidWithResponse(enumPath, requestOptions).block();
     }
 
     /**
@@ -303,7 +302,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(String enumPath, RequestOptions requestOptions) {
-        return this.serviceClient.enumNullWithResponse(enumPath, requestOptions);
+        return this.asyncClient.enumNullWithResponse(enumPath, requestOptions).block();
     }
 
     /**
@@ -320,7 +319,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
-        return this.serviceClient.byteMultiByteWithResponse(bytePath, requestOptions);
+        return this.asyncClient.byteMultiByteWithResponse(bytePath, requestOptions).block();
     }
 
     /**
@@ -336,7 +335,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.byteEmptyWithResponse(requestOptions);
+        return this.asyncClient.byteEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -353,7 +352,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
-        return this.serviceClient.byteNullWithResponse(bytePath, requestOptions);
+        return this.asyncClient.byteNullWithResponse(bytePath, requestOptions).block();
     }
 
     /**
@@ -369,7 +368,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateValidWithResponse(requestOptions);
+        return this.asyncClient.dateValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -387,7 +386,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions) {
-        return this.serviceClient.dateNullWithResponse(datePath, requestOptions);
+        return this.asyncClient.dateNullWithResponse(datePath, requestOptions).block();
     }
 
     /**
@@ -403,7 +402,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.dateTimeValidWithResponse(requestOptions);
+        return this.asyncClient.dateTimeValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -421,7 +420,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
-        return this.serviceClient.dateTimeNullWithResponse(dateTimePath, requestOptions);
+        return this.asyncClient.dateTimeNullWithResponse(dateTimePath, requestOptions).block();
     }
 
     /**
@@ -438,7 +437,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponse(base64UrlPath, requestOptions);
+        return this.asyncClient.base64UrlWithResponse(base64UrlPath, requestOptions).block();
     }
 
     /**
@@ -457,7 +456,7 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
-        return this.serviceClient.arrayCsvInPathWithResponse(arrayPath, requestOptions);
+        return this.asyncClient.arrayCsvInPathWithResponse(arrayPath, requestOptions).block();
     }
 
     /**
@@ -474,6 +473,6 @@ public final class PathsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimeUrlWithResponse(long unixTimeUrlPath, RequestOptions requestOptions) {
-        return this.serviceClient.unixTimeUrlWithResponse(unixTimeUrlPath, requestOptions);
+        return this.asyncClient.unixTimeUrlWithResponse(unixTimeUrlPath, requestOptions).block();
     }
 }

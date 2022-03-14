@@ -24,7 +24,7 @@ public final class PrimitiveAsyncClient {
     @Generated private final PrimitivesImpl serviceClient;
 
     /**
-     * Initializes an instance of Primitives client.
+     * Initializes an instance of PrimitiveAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

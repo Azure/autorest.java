@@ -189,8 +189,6 @@
     <module>./fluentgen</module>
     <module>./fluentnamer</module>
     <module>./androidgen</module>
-    <module>./protocol-resilience-test</module>
-    <module>./partial-update-tests</module>
   </modules>
 
   <profiles>
@@ -203,6 +201,8 @@
       </activation>
       <modules>
         <module>./protocol-tests</module>
+        <module>./protocol-resilience-test</module>
+        <module>./partial-update-tests</module>
       </modules>
     </profile>
     <profile>

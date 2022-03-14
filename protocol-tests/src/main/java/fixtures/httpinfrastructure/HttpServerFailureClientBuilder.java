@@ -246,7 +246,7 @@ public final class HttpServerFailureClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpServerFailureAsyncClient async client.
+     * Builds an instance of HttpServerFailureAsyncClient class.
      *
      * @return an instance of HttpServerFailureAsyncClient.
      */
@@ -256,12 +256,13 @@ public final class HttpServerFailureClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpServerFailureClient sync client.
+     * Builds an instance of HttpServerFailureClient class.
      *
      * @return an instance of HttpServerFailureClient.
      */
     @Generated
     public HttpServerFailureClient buildClient() {
-        return new HttpServerFailureClient(buildInnerClient().getHttpServerFailures());
+        return new HttpServerFailureClient(
+                new HttpServerFailureAsyncClient(buildInnerClient().getHttpServerFailures()));
     }
 }

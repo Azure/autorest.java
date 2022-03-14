@@ -25,7 +25,7 @@ public final class LROsAsyncClient {
     @Generated private final LROsImpl serviceClient;
 
     /**
-     * Initializes an instance of LROs client.
+     * Initializes an instance of LROsAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */

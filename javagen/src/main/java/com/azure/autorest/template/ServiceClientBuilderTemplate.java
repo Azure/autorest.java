@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -263,7 +264,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         classBlock.javadocComment(comment ->
                         {
                             comment.description(String
-                                    .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
+                                    .format("Builds an instance of %1$s class", asyncClient.getClassName()));
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
                         addGeneratedAnnotation(classBlock);
@@ -279,28 +280,71 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     }
                 }
 
+                int syncClientIndex = 0;
                 for (AsyncSyncClient syncClient : syncClients) {
                     final boolean wrapServiceClient = syncClient.getMethodGroupClient() == null;
+
+                    AsyncSyncClient asyncClient = (asyncClients.size() == syncClients.size()) ? asyncClients.get(syncClientIndex) : null;
 
                     classBlock.javadocComment(comment ->
                     {
                         comment.description(String
-                                .format("Builds an instance of %1$s sync client", syncClient.getClassName()));
+                                .format("Builds an instance of %1$s class", syncClient.getClassName()));
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
                             function -> {
-                                if (wrapServiceClient) {
-                                    function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
-                                } else {
-                                    function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
-                                            CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
-                                }
+                                writeSyncClientBuildMethod(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
                             });
+
+                    ++syncClientIndex;
                 }
             }
         });
+    }
+
+    /**
+     * Extension to write sync client build method invocation
+     *
+     * @param syncClient the sync client
+     * @param asyncClient the async client
+     * @param function the method block to write method invocation
+     * @param buildMethodName the name of build method
+     * @param wrapServiceClient whether the sync client wraps a service client implementation or method group implementation
+     */
+    protected void writeSyncClientBuildMethod(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                              String buildMethodName, boolean wrapServiceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
+        boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
+                && settings.isLowLevelClient()
+                && asyncClient != null;
+        if (syncClientWrapAsync) {
+            writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
+        } else {
+            writeSyncClientBuildMethodFromInnerClient(syncClient, function, buildMethodName, wrapServiceClient);
+        }
+    }
+
+    protected void writeSyncClientBuildMethodFromInnerClient(AsyncSyncClient syncClient, JavaBlock function,
+                                                             String buildMethodName, boolean wrapServiceClient) {
+        if (wrapServiceClient) {
+            function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
+        } else {
+            function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
+                    CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
+        }
+    }
+
+    protected void writeSyncClientBuildMethodFromAsyncClient(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                                             String buildMethodName, boolean wrapServiceClient) {
+        if (wrapServiceClient) {
+            function.line("return new %1$s(new %2$s(%3$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName);
+        } else {
+            function.line("return new %1$s(new %2$s(%3$s().get%4$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName, CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
+        }
     }
 
     protected String getSerializerMemberName() {

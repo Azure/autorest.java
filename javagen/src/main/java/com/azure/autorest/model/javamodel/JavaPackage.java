@@ -31,6 +31,7 @@ import com.azure.autorest.template.ProtocolSampleBlankTemplate;
 import com.azure.autorest.template.ProtocolTestBaseTemplate;
 import com.azure.autorest.template.ProtocolTestTemplate;
 import com.azure.autorest.template.ReadmeTemplate;
+import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
@@ -97,6 +98,15 @@ public class JavaPackage {
     public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
         Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient, boolean syncClientWrapAsync) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
+        ServiceSyncClientTemplate template = syncClientWrapAsync
+                ? Templates.getServiceSyncClientWrapAsyncClientTemplate()
+                : Templates.getServiceSyncClientTemplate();
+        template.write(syncClient, javaFile);
         addJavaFile(javaFile);
     }
 

@@ -249,7 +249,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestUrlMutliCollectionFormatTestServiceAsyncClient async client.
+     * Builds an instance of AutoRestUrlMutliCollectionFormatTestServiceAsyncClient class.
      *
      * @return an instance of AutoRestUrlMutliCollectionFormatTestServiceAsyncClient.
      */
@@ -259,12 +259,13 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestUrlMutliCollectionFormatTestServiceClient sync client.
+     * Builds an instance of AutoRestUrlMutliCollectionFormatTestServiceClient class.
      *
      * @return an instance of AutoRestUrlMutliCollectionFormatTestServiceClient.
      */
     @Generated
     public AutoRestUrlMutliCollectionFormatTestServiceClient buildClient() {
-        return new AutoRestUrlMutliCollectionFormatTestServiceClient(buildInnerClient().getQueries());
+        return new AutoRestUrlMutliCollectionFormatTestServiceClient(
+                new AutoRestUrlMutliCollectionFormatTestServiceAsyncClient(buildInnerClient().getQueries()));
     }
 }

@@ -6,12 +6,11 @@ package fixtures.lroparameterizedendpoints.implementation;
 
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fixtures.lroparameterizedendpoints.fluent.ResourceProvidersClient;
 import fixtures.lroparameterizedendpoints.models.ResourceProviders;
 
 public final class ResourceProvidersImpl implements ResourceProviders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ResourceProvidersImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(ResourceProvidersImpl.class);
 
     private final ResourceProvidersClient innerClient;
 

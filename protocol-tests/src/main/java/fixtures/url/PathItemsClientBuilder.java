@@ -283,7 +283,7 @@ public final class PathItemsClientBuilder {
     }
 
     /**
-     * Builds an instance of PathItemsAsyncClient async client.
+     * Builds an instance of PathItemsAsyncClient class.
      *
      * @return an instance of PathItemsAsyncClient.
      */
@@ -293,12 +293,12 @@ public final class PathItemsClientBuilder {
     }
 
     /**
-     * Builds an instance of PathItemsClient sync client.
+     * Builds an instance of PathItemsClient class.
      *
      * @return an instance of PathItemsClient.
      */
     @Generated
     public PathItemsClient buildClient() {
-        return new PathItemsClient(buildInnerClient().getPathItems());
+        return new PathItemsClient(new PathItemsAsyncClient(buildInnerClient().getPathItems()));
     }
 }

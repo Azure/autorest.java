@@ -5,17 +5,11 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders model. */
 @Fluent
 public final class LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
-    @JsonIgnore
-    private final ClientLogger logger =
-        new ClientLogger(LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class);
-
     /*
      * The Retry-After property.
      */

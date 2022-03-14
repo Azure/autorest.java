@@ -246,7 +246,7 @@ public final class HttpRetryClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpRetryAsyncClient async client.
+     * Builds an instance of HttpRetryAsyncClient class.
      *
      * @return an instance of HttpRetryAsyncClient.
      */
@@ -256,12 +256,12 @@ public final class HttpRetryClientBuilder {
     }
 
     /**
-     * Builds an instance of HttpRetryClient sync client.
+     * Builds an instance of HttpRetryClient class.
      *
      * @return an instance of HttpRetryClient.
      */
     @Generated
     public HttpRetryClient buildClient() {
-        return new HttpRetryClient(buildInnerClient().getHttpRetries());
+        return new HttpRetryClient(new HttpRetryAsyncClient(buildInnerClient().getHttpRetries()));
     }
 }

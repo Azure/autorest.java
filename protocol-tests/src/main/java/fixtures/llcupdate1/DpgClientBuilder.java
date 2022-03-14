@@ -243,7 +243,7 @@ public final class DpgClientBuilder {
     }
 
     /**
-     * Builds an instance of DpgAsyncClient async client.
+     * Builds an instance of DpgAsyncClient class.
      *
      * @return an instance of DpgAsyncClient.
      */
@@ -253,12 +253,12 @@ public final class DpgClientBuilder {
     }
 
     /**
-     * Builds an instance of DpgClient sync client.
+     * Builds an instance of DpgClient class.
      *
      * @return an instance of DpgClient.
      */
     @Generated
     public DpgClient buildClient() {
-        return new DpgClient(buildInnerClient().getParams());
+        return new DpgClient(new DpgAsyncClient(buildInnerClient().getParams()));
     }
 }
