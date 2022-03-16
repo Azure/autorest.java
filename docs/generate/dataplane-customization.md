@@ -35,7 +35,7 @@ This ensures that future code generate will not override this customized method.
 
 ## Change Operation Behavior
 
-Generated client methods accept `ReqestOptions` for request parameters.
+Generated client methods accept `RequestOptions` for request parameters.
 For frequently invoked methods, one can customize them for better user-experience.
 
 Here is an [example](https://github.com/weidongxu-microsoft/azure-sdk-for-java/commit/c3e8ebc1bf13dd29d67da0b68d23a84197ce681e) of the modification of client to support options for client methods.
@@ -51,7 +51,7 @@ Note that the conversion only happen once in package private `MetricsAdvisorAsyn
 Generated client methods accept and produce `BinaryData` for request payload and response body.
 For frequently invoked methods, one can customize them for better user-experience.
 
-AutoRest Java `generate-models` option is provided to generate models from OpenAPI specs, to `implmenetation.models` package. They are provided only as reference.
+AutoRest Java `generate-models` option is provided to generate models from OpenAPI specs, to `implementation.models` package. They are provided only as reference.
 
 ### Model as Response Body
 
