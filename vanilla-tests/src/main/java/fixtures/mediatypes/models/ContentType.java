@@ -47,7 +47,7 @@ public enum ContentType {
 
     @JsonValue
     @Override
-    public String tofromString() {
+    public String toString() {
         return this.value;
     }
 }

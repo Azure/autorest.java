@@ -41,7 +41,7 @@ public enum LeaseDurationType {
 
     @JsonValue
     @Override
-    public String tofromString() {
+    public String toString() {
         return this.value;
     }
 }

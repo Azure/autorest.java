@@ -44,7 +44,7 @@ public enum UriColor {
 
     @JsonValue
     @Override
-    public String tofromString() {
+    public String toString() {
         return this.value;
     }
 }

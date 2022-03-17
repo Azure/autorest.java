@@ -44,7 +44,7 @@ public enum FooEnum {
 
     @JsonValue
     @Override
-    public String tofromString() {
+    public String toString() {
         return this.value;
     }
 }

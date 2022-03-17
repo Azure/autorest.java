@@ -126,10 +126,8 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     });
                     enumBlock.annotation("JsonValue");
                 }
-                enumBlock.PublicMethod(String.format("%1$s to%2$s()", typeName, converterName), (function) ->
-                {
-                    function.methodReturn("this.value");
-                });
+                enumBlock.PublicMethod(String.format("%1$s %2$s()", typeName, enumType.getToJsonMethodName()),
+                    function -> function.methodReturn("this.value"));
             });
         }
     }

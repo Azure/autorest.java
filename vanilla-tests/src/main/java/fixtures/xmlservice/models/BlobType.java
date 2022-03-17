@@ -44,7 +44,7 @@ public enum BlobType {
 
     @JsonValue
     @Override
-    public String tofromString() {
+    public String toString() {
         return this.value;
     }
 }
