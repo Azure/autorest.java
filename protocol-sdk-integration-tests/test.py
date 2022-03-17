@@ -10,7 +10,7 @@ import argparse
 from os import path
 
 
-AUTOREST_CORE_VERSION = '3.7.6'
+AUTOREST_CORE_VERSION = '3.8.0'
 OS_WINDOWS = platform.system().lower() == 'windows'
 MAVEN_CLI = 'mvn' + ('.cmd' if OS_WINDOWS else '')
 
