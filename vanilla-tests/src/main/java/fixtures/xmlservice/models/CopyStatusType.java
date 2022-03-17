@@ -47,7 +47,7 @@ public enum CopyStatusType {
 
     @JsonValue
     @Override
-    public String toString() {
+    public String tofromString() {
         return this.value;
     }
 }

@@ -41,7 +41,7 @@ public enum SkuName {
 
     @JsonValue
     @Override
-    public String toString() {
+    public String tofromString() {
         return this.value;
     }
 }

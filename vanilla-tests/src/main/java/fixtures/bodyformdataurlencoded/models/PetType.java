@@ -44,7 +44,7 @@ public enum PetType {
 
     @JsonValue
     @Override
-    public String toString() {
+    public String tofromString() {
         return this.value;
     }
 }
