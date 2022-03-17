@@ -32,6 +32,7 @@ public class CodeSample {
 
     public static CodeSample fromTestFile(Path testFilePath) {
         // the assumption is there is a embedme block in a @Test method
+        // for now, only extract first block
 
         CodeSample codeSample = new CodeSample();
 
@@ -58,7 +59,7 @@ public class CodeSample {
                         // method ends without embedme block
 
                         testMethodBegin = false;
-                        break;
+                        // continue
                     } else if (line.trim().equals(EMBEDME_START_COMMENT)) {
                         // next get inside embedme block, similar to https://github.com/zakhenry/embedme/issues/48
 
@@ -74,6 +75,7 @@ public class CodeSample {
 
                         embedmeBlockBegin = false;
                         break;
+                        // for now, only extract one block
                     } else {
                         // extract the code line (except Assertions)
 
