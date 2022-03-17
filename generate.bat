@@ -39,7 +39,6 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.js
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-call autorest %VANILLA_ARGUMENTS% --input-file=protocol-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call autorest --version=3.8.0 --use=./ vanilla-tests/swagger/lro.md
 call autorest --version=3.8.0 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 
@@ -54,6 +53,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminat
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
+call autorest %VANILLA_ARGUMENTS% --input-file=protocol-tests/swagger/special-header.json --namespace=fixtures.specialheader
 
 rem Azure
 call autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1

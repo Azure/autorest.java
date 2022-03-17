@@ -410,7 +410,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
             function.line("policies.add(new CookiePolicy());");
 
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 if (securityInfo.getHeaderName() == null
                     || securityInfo.getHeaderName().isEmpty()) {
                     LOGGER.error("key-credential-header-name is required for " +
@@ -424,7 +424,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             + "\", azureKeyCredential));");
                 });
             }
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 function.ifBlock("tokenCredential != null", action -> {
                     function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
@@ -473,7 +473,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             commonProperties.add(new ServiceClientProperty("The configuration store that is used during "
                     + "construction of the service client.", ClassType.Configuration, "configuration", false, null));
 
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 commonProperties.add(new ServiceClientProperty.Builder()
                         .description("The Azure Key Credential used for authentication.")
                         .type(ClassType.AzureKeyCredential)
@@ -482,7 +482,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         .readOnly(false)
                         .build());
             }
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 commonProperties.add(new ServiceClientProperty.Builder()
                         .description("The TokenCredential used for authentication.")
                         .type(ClassType.TokenCredential)

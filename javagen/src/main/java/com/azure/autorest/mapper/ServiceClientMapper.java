@@ -223,7 +223,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             SecurityInfo securityInfoInCodeModel = new SecurityInfo();
             codeModel.getSecurity().getSchemes().stream().forEach(securityScheme -> {
                 securityInfoInCodeModel.getSecurityTypes().add(securityScheme.getType());
-                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AADTOKEN)) {
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.OAUTH2)) {
                     Set<String> credentialScopes = securityScheme.getScopes().stream().map(scope -> {
                         if (!scope.startsWith("\"")) {
                             return "\"" + scope + "\"";
@@ -233,8 +233,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     }).collect(Collectors.toSet());
                     securityInfoInCodeModel.setScopes(credentialScopes);
                 }
-                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AZUREKEY)) {
-                    securityInfoInCodeModel.setHeaderName(securityScheme.getHeaderName());
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.KEY)) {
+                    securityInfoInCodeModel.setHeaderName(securityScheme.getName());
                 }
             });
             securityInfo = securityInfoInCodeModel;
@@ -245,18 +245,18 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 !settings.getCredentialTypes().contains(JavaSettings.CredentialType.NONE)) {
             SecurityInfo securityInfoInJavaSettings = new SecurityInfo();
             if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
-                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AADTOKEN);
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.OAUTH2);
                 securityInfoInJavaSettings.setScopes(settings.getCredentialScopes());
             }
             if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
-                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AZUREKEY);
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.KEY);
                 securityInfoInJavaSettings.setHeaderName(settings.getKeyCredentialHeaderName());
             }
             securityInfo = securityInfoInJavaSettings;
         }
         builder.securityInfo(securityInfo);
 
-        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
             Set<String> scopes = securityInfo.getScopes();
             String scopeParams;
             if (scopes != null && !scopes.isEmpty()) {
