@@ -18,7 +18,11 @@ public final class HeadersResponseDoubleHeaders {
     private Double value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseDoubleHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseDoubleHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseDoubleHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = Double.valueOf(rawHeaders.getValue("value"));

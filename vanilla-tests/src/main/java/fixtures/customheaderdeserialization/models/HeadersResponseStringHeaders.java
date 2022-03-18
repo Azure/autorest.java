@@ -18,7 +18,11 @@ public final class HeadersResponseStringHeaders {
     private String value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseStringHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseStringHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseStringHeaders(HttpHeaders rawHeaders) {
         this.value = rawHeaders.getValue("value");
     }

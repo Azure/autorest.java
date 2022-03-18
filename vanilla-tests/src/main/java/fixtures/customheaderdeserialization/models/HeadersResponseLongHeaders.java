@@ -18,7 +18,11 @@ public final class HeadersResponseLongHeaders {
     private Long value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseLongHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseLongHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseLongHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = Long.valueOf(rawHeaders.getValue("value"));

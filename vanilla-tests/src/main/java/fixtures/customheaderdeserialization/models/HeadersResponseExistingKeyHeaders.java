@@ -18,7 +18,11 @@ public final class HeadersResponseExistingKeyHeaders {
     private String userAgent;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseExistingKeyHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseExistingKeyHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseExistingKeyHeaders(HttpHeaders rawHeaders) {
         this.userAgent = rawHeaders.getValue("User-Agent");
     }

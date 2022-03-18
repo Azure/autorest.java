@@ -19,7 +19,11 @@ public final class HeadersResponseDatetimeHeaders {
     private OffsetDateTime value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseDatetimeHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseDatetimeHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseDatetimeHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = OffsetDateTime.parse(rawHeaders.getValue("value"));

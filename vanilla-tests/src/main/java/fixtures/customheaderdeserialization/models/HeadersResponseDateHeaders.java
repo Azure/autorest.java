@@ -19,7 +19,11 @@ public final class HeadersResponseDateHeaders {
     private LocalDate value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseDateHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseDateHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseDateHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = LocalDate.parse(rawHeaders.getValue("value"));

@@ -20,7 +20,11 @@ public final class HeadersResponseByteHeaders {
     private byte[] value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseByteHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseByteHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = Base64.getDecoder().decode(rawHeaders.getValue("value"));

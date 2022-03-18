@@ -18,7 +18,11 @@ public final class HeadersResponseIntegerHeaders {
     private Integer value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseIntegerHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseIntegerHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseIntegerHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = Integer.valueOf(rawHeaders.getValue("value"));

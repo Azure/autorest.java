@@ -575,8 +575,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             });
         } else if (model.isStronglyTypedHeader() && settings.isCustomStronglyTypedHeaderDeserializationUsed()) {
             classBlock.lineComment("HttpHeaders containing the raw property values.");
-            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                comment.description(String.format("Creates an instance of %1$s class.", model.getName())));
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), comment -> {
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
+                comment.param("rawHeaders", "The raw HttpHeaders that will be used to create the property values.");
+            });
             classBlock.publicConstructor(String.format("%s(HttpHeaders rawHeaders)", model.getName()), constructor -> {
                 for (ClientModelProperty property : model.getProperties()) {
                     addConstructorCustomDeserialization(property, constructor);

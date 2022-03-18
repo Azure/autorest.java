@@ -18,7 +18,11 @@ public final class HeadersResponseProtectedKeyHeaders {
     private String contentType;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseProtectedKeyHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseProtectedKeyHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseProtectedKeyHeaders(HttpHeaders rawHeaders) {
         this.contentType = rawHeaders.getValue("Content-Type");
     }

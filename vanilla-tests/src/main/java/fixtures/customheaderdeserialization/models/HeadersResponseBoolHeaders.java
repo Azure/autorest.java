@@ -18,7 +18,11 @@ public final class HeadersResponseBoolHeaders {
     private Boolean value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseBoolHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseBoolHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseBoolHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = Boolean.valueOf(rawHeaders.getValue("value"));

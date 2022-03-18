@@ -18,7 +18,11 @@ public final class HeadersResponseEnumHeaders {
     private GreyscaleColors value;
 
     // HttpHeaders containing the raw property values.
-    /** Creates an instance of HeadersResponseEnumHeaders class. */
+    /**
+     * Creates an instance of HeadersResponseEnumHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
     public HeadersResponseEnumHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
             this.value = GreyscaleColors.fromString(rawHeaders.getValue("value"));
