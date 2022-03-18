@@ -94,8 +94,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
 
         IType asyncRestResponseReturnType;
-        IType asyncReturnType = PrimitiveType.Void;
-        IType syncReturnType = PrimitiveType.Void;
+        IType asyncReturnType;
+        IType syncReturnType;
         IType syncReturnWithResponse;
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -613,10 +613,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
-        // method with schema in headers would require a ClientResponse, only high level
-        return SchemaUtil.responseContainsHeaderSchemas(operation) && !settings.isLowLevelClient() ?
-                ClientMapper.getClientResponseClassType(operation, settings) :
-                GenericType.Response(syncReturnType);
+        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation);
+
+        // If LLC is being generated or the response doesn't contain headers return Response<T>
+        // If no named response types are being used return ResponseBase<H, T>
+        // Else named response types are being used and return that.
+        if (settings.isLowLevelClient() || !responseContainsHeaders) {
+            return GenericType.Response(syncReturnType);
+        } else if (settings.isNoNamedResponseTypes()) {
+            return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
+                syncReturnType);
+        } else {
+            return ClientMapper.getClientResponseClassType(operation, settings);
+        }
     }
 
     protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse, IType syncReturnType) {

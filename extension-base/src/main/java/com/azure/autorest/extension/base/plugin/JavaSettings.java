@@ -145,7 +145,8 @@ public class JavaSettings {
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
-                getBooleanValue(host, "partial-update", false)
+                getBooleanValue(host, "partial-update", false),
+                getBooleanValue(host, "no-named-response-types", false)
             );
         }
         return _instance;
@@ -184,6 +185,9 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
+     * @param noNamedResponseTypes If set to true, responses will only use the generic Response, ResponseBase,
+     * PagedResponse, and PagedResponseBase types with generics instead of creating a specific named type that extends
+     * on of those types.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -240,7 +244,8 @@ public class JavaSettings {
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
-        boolean handlePartialUpdate) {
+        boolean handlePartialUpdate,
+        boolean noNamedResponseTypes) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -326,6 +331,8 @@ public class JavaSettings {
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
 
         this.handlePartialUpdate = handlePartialUpdate;
+
+        this.noNamedResponseTypes = noNamedResponseTypes;
     }
 
     private String keyCredentialHeaderName;
@@ -894,6 +901,18 @@ public class JavaSettings {
 
     public boolean isHandlePartialUpdate() {
         return handlePartialUpdate;
+    }
+
+    private final boolean noNamedResponseTypes;
+
+    /**
+     * Whether Response, ResponseBase, PagedResponse, or PagedResponseBase will be used directly with generics instead
+     * of creating a named type that extends one of those type.
+     *
+     * @return Whether generic response types are used instead of named types that extend the generic type.
+     */
+    public boolean isNoNamedResponseTypes() {
+        return noNamedResponseTypes;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",

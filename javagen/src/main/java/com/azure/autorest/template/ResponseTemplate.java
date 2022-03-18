@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -17,39 +18,47 @@ import java.util.Set;
  * Writes a ClientResponse to a JavaFile.
  */
 public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile> {
-    private static ResponseTemplate _instance = new ResponseTemplate();
+    private static final ResponseTemplate INSTANCE = new ResponseTemplate();
 
     protected ResponseTemplate() {
     }
 
     public static ResponseTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ClientResponse response, JavaFile javaFile) {
-        Set<String> imports = new HashSet<String>();
+        JavaSettings settings = JavaSettings.getInstance();
+
+        Set<String> imports = new HashSet<>();
         addRequestAndHeaderImports(imports);
         IType restResponseType = getRestResponseType(response);
         restResponseType.addImportsTo(imports, true);
 
         boolean isStreamResponse = response.getBodyType().equals(GenericType.FluxByteBuffer);
+
+        // Stream responses implement Closeable to offer a way for the Flux<ByteBuffer> response to be drained
+        // if it isn't consumed.
         if (isStreamResponse) {
             imports.add("java.io.Closeable");
         }
 
         javaFile.declareImport(imports);
 
-        String classSignature = isStreamResponse ? String.format("%1$s extends %2$s implements Closeable", response.getName(), restResponseType) : String.format("%1$s extends %2$s", response.getName(), restResponseType);
+        String classSignature;
+        if (isStreamResponse) {
+            classSignature = String.format("%1$s extends %2$s implements Closeable", response.getName(),
+                restResponseType);
+        } else if (settings.isNoNamedResponseTypes()) {
+            classSignature = restResponseType.toString();
+        } else {
+            classSignature = String.format("%1$s extends %2$s", response.getName(), restResponseType);
+        }
 
-        javaFile.javadocComment(javadoc ->
-        {
-            javadoc.description(response.getDescription());
-        });
+        javaFile.javadocComment(javadoc -> javadoc.description(response.getDescription()));
 
-        javaFile.publicFinalClass(classSignature, classBlock ->
-        {
-            classBlock.javadocComment(javadoc ->
-            {
+        javaFile.publicFinalClass(classSignature, classBlock -> {
+            classBlock.javadocComment(javadoc -> {
                 javadoc.description(String.format("Creates an instance of %1$s.", response.getName()));
                 javadoc.param("request", String.format("the request which resulted in this %1$s.", response.getName()));
                 javadoc.param("statusCode", "the status code of the HTTP response");
@@ -57,7 +66,10 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
                 javadoc.param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
                 javadoc.param("headers", "the deserialized headers of the HTTP response");
             });
-            classBlock.publicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)", response.getName(), response.getBodyType().asNullable(), response.getHeadersType()), ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
+
+            classBlock.publicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)",
+                response.getName(), response.getBodyType().asNullable(), response.getHeadersType()),
+                ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
 
             if (!response.getBodyType().asNullable().equals(ClassType.Void)) {
                 if (response.getBodyType().equals(GenericType.FluxByteBuffer)) {
@@ -68,7 +80,8 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
 
 
                 classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%1$s getValue()", response.getBodyType().asNullable()), methodBlock -> methodBlock.methodReturn("super.getValue()"));
+                classBlock.publicMethod(String.format("%1$s getValue()", response.getBodyType().asNullable()),
+                    methodBlock -> methodBlock.methodReturn("super.getValue()"));
             }
 
             if (isStreamResponse) {
