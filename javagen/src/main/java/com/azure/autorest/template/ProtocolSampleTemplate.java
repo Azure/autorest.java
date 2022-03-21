@@ -27,17 +27,18 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
 
         javaFile.publicClass(null, filename, classBlock -> {
             classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
+                writer.writeClientInitialization(methodBlock);
+
                 // codesnippet begin
                 if (protocolExample.getProxyMethodExample().getCodeSnippetIdentifier() != null) {
-                    methodBlock.line(String.format("// BEGIN: %s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
+                    methodBlock.line(String.format("// BEGIN:%s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
                 }
 
-                writer.writeClientInitialization(methodBlock);
                 writer.writeClientMethodInvocation(methodBlock);
 
                 // codesnippet end
                 if (protocolExample.getProxyMethodExample().getCodeSnippetIdentifier() != null) {
-                    methodBlock.line(String.format("// END: %s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
+                    methodBlock.line(String.format("// END:%s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
                 }
             });
         });

@@ -16,8 +16,8 @@ public class ProtocolSampleBlankTemplate implements IJavaTemplate<Void, JavaFile
 
         context.publicFinalClass("ReadmeSamples", classBlock -> {
             classBlock.publicMethod("void readmeSamples()", methodBlock -> {
-                methodBlock.line(String.format("// BEGIN: %s", snippetReference));
-                methodBlock.line(String.format("// END: %s", snippetReference));
+                methodBlock.line(String.format("// BEGIN:%s", snippetReference));
+                methodBlock.line(String.format("// END:%s", snippetReference));
             });
         });
     }
