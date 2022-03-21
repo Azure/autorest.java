@@ -11,10 +11,10 @@ import fixtures.bodystring.EnumClientBuilder;
 
 public class EnumGetReferenced {
     public static void main(String[] args) {
-        // BEGIN: fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
+        // BEGIN:fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
         RequestOptions requestOptions = new RequestOptions();
         Response<String> response = enumClient.getReferencedWithResponse(requestOptions);
-        // END: fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
+        // END:fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
     }
 }
