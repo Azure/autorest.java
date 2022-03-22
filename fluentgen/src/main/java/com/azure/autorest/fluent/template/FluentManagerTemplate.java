@@ -22,6 +22,7 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -99,6 +100,7 @@ public class FluentManagerTemplate {
                 HttpPipelinePolicy.class.getName(),
                 HttpPipelinePosition.class.getName(),
                 HttpPolicyProviders.class.getName(),
+                AddHeadersFromContextPolicy.class.getName(),
                 RequestIdPolicy.class.getName(),
                 RetryPolicy.class.getName(),
                 AddDatePolicy.class.getName(),
