@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -40,7 +38,6 @@ import java.util.stream.Stream;
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static final ServiceClientMapper INSTANCE = new ServiceClientMapper();
 
-    private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern TRAILING_FORWARD_SLASH = Pattern.compile("/+$");
     private static final Pattern URL_PATH = Pattern.compile("(?<!/)[/][^/]+");
 
