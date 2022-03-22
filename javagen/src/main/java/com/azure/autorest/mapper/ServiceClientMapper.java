@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -217,20 +219,31 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         // map security information in code model to ServiceClient.SecurityInfo
         SecurityInfo securityInfo = new SecurityInfo();
-        if (codeModel != null && codeModel.getSecurity() != null &&
+        if (codeModel.getSecurity() != null &&
                 codeModel.getSecurity().getSchemes() != null &&
                 codeModel.getSecurity().isAuthenticationRequired()) {
+            final String userImpersonationScope = "user_impersonation";
+
             SecurityInfo securityInfoInCodeModel = new SecurityInfo();
-            codeModel.getSecurity().getSchemes().stream().forEach(securityScheme -> {
+            codeModel.getSecurity().getSchemes().forEach(securityScheme -> {
+                // hack, ignore "user_impersonation", as these non-AADToken appears in modelerfour 4.23.0+
+                if (securityScheme.getType() == Scheme.SecuritySchemeType.OAUTH2
+                        && securityScheme.getScopes().size() == 1
+                        && userImpersonationScope.equals(securityScheme.getScopes().iterator().next())) {
+                    return;
+                }
+
                 securityInfoInCodeModel.getSecurityTypes().add(securityScheme.getType());
                 if (securityScheme.getType().equals(Scheme.SecuritySchemeType.OAUTH2)) {
-                    Set<String> credentialScopes = securityScheme.getScopes().stream().map(scope -> {
-                        if (!scope.startsWith("\"")) {
-                            return "\"" + scope + "\"";
-                        } else {
-                            return scope;
-                        }
-                    }).collect(Collectors.toSet());
+                    Set<String> credentialScopes = securityScheme.getScopes().stream()
+                            .filter(s -> !userImpersonationScope.equals(s)) // hack, filter out "user_impersonation"
+                            .map(scope -> {
+                                if (!scope.startsWith("\"")) {
+                                    return "\"" + scope + "\"";
+                                } else {
+                                    return scope;
+                                }
+                            }).collect(Collectors.toSet());
                     securityInfoInCodeModel.setScopes(credentialScopes);
                 }
                 if (securityScheme.getType().equals(Scheme.SecuritySchemeType.KEY)) {

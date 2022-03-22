@@ -6,14 +6,12 @@ package fixtures.discriminatorflattening;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
-import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
@@ -38,8 +36,6 @@ public final class MonitorManagementClientBuilder {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
-
-    @Generated private static final String[] DEFAULT_SCOPES = new String[] {"user_impersonation"};
 
     @Generated private final Map<String, String> properties = new HashMap<>();
 
@@ -132,23 +128,6 @@ public final class MonitorManagementClientBuilder {
     @Generated
     public MonitorManagementClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
-        return this;
-    }
-
-    /*
-     * The TokenCredential used for authentication.
-     */
-    @Generated private TokenCredential tokenCredential;
-
-    /**
-     * Sets The TokenCredential used for authentication.
-     *
-     * @param tokenCredential the tokenCredential value.
-     * @return the MonitorManagementClientBuilder.
-     */
-    @Generated
-    public MonitorManagementClientBuilder credential(TokenCredential tokenCredential) {
-        this.tokenCredential = tokenCredential;
         return this;
     }
 
@@ -269,9 +248,6 @@ public final class MonitorManagementClientBuilder {
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);
         policies.add(new CookiePolicy());
-        if (tokenCredential != null) {
-            policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, DEFAULT_SCOPES));
-        }
         policies.addAll(
                 this.pipelinePolicies.stream()
                         .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
