@@ -53,7 +53,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminat
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
-call autorest %VANILLA_ARGUMENTS% --input-file=protocol-tests/swagger/special-header.json --namespace=fixtures.specialheader
+call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 
 rem Azure
 call autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
@@ -82,7 +82,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namesp
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
-call autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/special-header.json --namespace=fixtures.specialheader
+call autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call autorest --version=3.6.6 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models
 copy protocol-tests\swagger\CustomizedException.java protocol-tests\src\main\java\fixtures\headexceptions\models\CustomizedException.java
