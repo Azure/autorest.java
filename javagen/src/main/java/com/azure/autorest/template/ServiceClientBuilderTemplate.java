@@ -23,6 +23,15 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
+import com.azure.core.http.policy.AddHeadersPolicy;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
+import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpPipelinePolicy;
+import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
@@ -360,12 +369,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
-        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
-        imports.add("com.azure.core.http.policy.AzureKeyCredentialPolicy");
-        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
-        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
-        imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
-        imports.add("com.azure.core.http.policy.AddHeadersPolicy");
+        imports.add(BearerTokenAuthenticationPolicy.class.getName());
+        imports.add(AzureKeyCredentialPolicy.class.getName());
+        imports.add(HttpPolicyProviders.class.getName());
+        imports.add(HttpPipelinePolicy.class.getName());
+        imports.add(HttpLoggingPolicy.class.getName());
+        imports.add(AddHeadersPolicy.class.getName());
+        imports.add(RequestIdPolicy.class.getName());
+        imports.add(AddHeadersFromContextPolicy.class.getName());
+        imports.add(AddDatePolicy.class.getName());
         imports.add(HttpPipelinePosition.class.getName());
         imports.add(Collectors.class.getName());
     }
@@ -390,13 +402,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
-
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
             function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
+
+            function.line("policies.add(new RequestIdPolicy());");
+            function.line("policies.add(new AddHeadersFromContextPolicy());");
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
@@ -408,6 +422,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     ".collect(Collectors.toList()));");
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
+            function.line("policies.add(new AddDatePolicy());");
             function.line("policies.add(new CookiePolicy());");
 
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
@@ -456,7 +471,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
         commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
                 settings.isAzureOrFluent()
-                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
+                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"
                         : "createHttpPipeline()"));
 
         // Low-level client does not need serializer. It returns BinaryData.

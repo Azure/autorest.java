@@ -120,6 +120,7 @@ public static final class Configurable {
         }
         List<HttpPipelinePolicy> policies = new ArrayList<>();
         policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
+        policies.add(new AddHeadersFromContextPolicy());
         policies.add(new RequestIdPolicy());
         policies.addAll(
             this.policies.stream()
