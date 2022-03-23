@@ -53,19 +53,10 @@ public class RetryOptionsTests {
         public RetryPolicy getRetryPolicy() {
             if (retryPolicy == null) {
                 if (retryOptions != null) {
-                    RetryStrategy retryStrategy = null;
-                    if (retryOptions.getExponentialBackoffOptions() != null) {
-                        retryStrategy = new ExponentialBackoff(retryOptions.getExponentialBackoffOptions());
-                    } else if (retryOptions.getFixedDelayOptions() != null) {
-                        retryStrategy = new FixedDelay(retryOptions.getFixedDelayOptions());
-                    }
-                    if (retryStrategy != null) {
-                        retryPolicy = new RetryPolicy(retryStrategy, "Retry-After", ChronoUnit.SECONDS);
-                    }
+                    retryPolicy = new RetryPolicy(retryOptions);
+                } else {
+                    retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
                 }
-            }
-            if (retryPolicy == null) {
-                retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
             return retryPolicy;
         }
@@ -75,29 +66,26 @@ public class RetryOptionsTests {
     public void testManagerConfigurableRetryOptions() throws Exception {
         // not configured
         Configurable configurable = new Configurable();
-        validateRetryPolicy(configurable.getRetryPolicy());
+        validateRetryPolicy(configurable.getRetryPolicy(), false);
 
         // configured as FixedDelayOptions
         configurable = new Configurable().withRetryOptions(new RetryOptions(new FixedDelayOptions(3, Duration.ofSeconds(10))));
-        validateRetryPolicy(configurable.getRetryPolicy(), FixedDelay.class);
+        validateRetryPolicy(configurable.getRetryPolicy(), true, FixedDelay.class);
 
         // configured as ExponentialBackoffOptions
         configurable = new Configurable().withRetryOptions(new RetryOptions(new ExponentialBackoffOptions()));
-        validateRetryPolicy(configurable.getRetryPolicy(), ExponentialBackoff.class);
+        validateRetryPolicy(configurable.getRetryPolicy(), true);
 
         // RetryPolicy override RetryOptions
         configurable = new Configurable().withRetryPolicy(new RetryPolicy()).withRetryOptions(new RetryOptions(new FixedDelayOptions(3, Duration.ofSeconds(10))));
-        Field retryAfterHeaderField = RetryPolicy.class.getDeclaredField("retryAfterHeader");
-        retryAfterHeaderField.setAccessible(true);
-        String retryAfterHeader = (String) retryAfterHeaderField.get(configurable.getRetryPolicy());
-        Assertions.assertNull(retryAfterHeader);
+        validateRetryPolicy(configurable.getRetryPolicy(), true, ExponentialBackoff.class);
     }
 
-    private static void validateRetryPolicy(RetryPolicy retryPolicy) throws NoSuchFieldException, IllegalAccessException {
-        validateRetryPolicy(retryPolicy, null);
+    private static void validateRetryPolicy(RetryPolicy retryPolicy, boolean retryAfterHeaderAsNull) throws NoSuchFieldException, IllegalAccessException {
+        validateRetryPolicy(retryPolicy, retryAfterHeaderAsNull, null);
     }
 
-    private static void validateRetryPolicy(RetryPolicy retryPolicy, Class<?> retryStrategyClass) throws NoSuchFieldException, IllegalAccessException {
+    private static void validateRetryPolicy(RetryPolicy retryPolicy, boolean retryAfterHeaderAsNull, Class<?> retryStrategyClass) throws NoSuchFieldException, IllegalAccessException {
         Assertions.assertNotNull(retryPolicy);
 
         Field retryAfterHeaderField = RetryPolicy.class.getDeclaredField("retryAfterHeader");
@@ -109,8 +97,12 @@ public class RetryOptionsTests {
         retryStrategyField.setAccessible(true);
         String retryAfterHeader = (String) retryAfterHeaderField.get(retryPolicy);
         ChronoUnit retryAfterTimeUnit = (ChronoUnit) retryAfterTimeUnitField.get(retryPolicy);
-        Assertions.assertEquals("Retry-After", retryAfterHeader);
-        Assertions.assertEquals(ChronoUnit.SECONDS, retryAfterTimeUnit);
+        if (retryAfterHeaderAsNull) {
+            Assertions.assertNull(retryAfterHeader);
+        } else {
+            Assertions.assertEquals("Retry-After", retryAfterHeader);
+            Assertions.assertEquals(ChronoUnit.SECONDS, retryAfterTimeUnit);
+        }
 
         if (retryStrategyClass != null) {
             RetryStrategy retryStrategy = (RetryStrategy) retryStrategyField.get(retryPolicy);

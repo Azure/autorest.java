@@ -131,19 +131,10 @@ public static final class Configurable {
         }
         if (retryPolicy == null) {
             if (retryOptions != null) {
-                RetryStrategy retryStrategy = null;
-                if (retryOptions.getExponentialBackoffOptions() != null) {
-                    retryStrategy = new ExponentialBackoff(retryOptions.getExponentialBackoffOptions());
-                } else if (retryOptions.getFixedDelayOptions() != null) {
-                    retryStrategy = new FixedDelay(retryOptions.getFixedDelayOptions());
-                }
-                if (retryStrategy != null) {
-                    retryPolicy = new RetryPolicy(retryStrategy, "Retry-After", ChronoUnit.SECONDS);
-                }
+                retryPolicy = new RetryPolicy(retryOptions);
+            } else {
+                retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
-        }
-        if (retryPolicy == null) {
-            retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
         }
         List<HttpPipelinePolicy> policies = new ArrayList<>();
         policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
