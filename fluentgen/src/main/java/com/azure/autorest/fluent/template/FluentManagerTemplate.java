@@ -28,6 +28,7 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
@@ -100,6 +101,7 @@ public class FluentManagerTemplate {
                 HttpPipelinePolicy.class.getName(),
                 HttpPipelinePosition.class.getName(),
                 HttpPolicyProviders.class.getName(),
+                RetryOptions.class.getName(),
                 AddHeadersFromContextPolicy.class.getName(),
                 RequestIdPolicy.class.getName(),
                 RetryPolicy.class.getName(),
