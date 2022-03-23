@@ -38,7 +38,6 @@ import java.util.stream.Stream;
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static final ServiceClientMapper INSTANCE = new ServiceClientMapper();
 
-    private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern TRAILING_FORWARD_SLASH = Pattern.compile("/+$");
     private static final Pattern URL_PATH = Pattern.compile("(?<!/)[/][^/]+");
 
@@ -217,24 +216,35 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         // map security information in code model to ServiceClient.SecurityInfo
         SecurityInfo securityInfo = new SecurityInfo();
-        if (codeModel != null && codeModel.getSecurity() != null &&
+        if (codeModel.getSecurity() != null &&
                 codeModel.getSecurity().getSchemes() != null &&
                 codeModel.getSecurity().isAuthenticationRequired()) {
+            final String userImpersonationScope = "user_impersonation";
+
             SecurityInfo securityInfoInCodeModel = new SecurityInfo();
-            codeModel.getSecurity().getSchemes().stream().forEach(securityScheme -> {
+            codeModel.getSecurity().getSchemes().forEach(securityScheme -> {
+                // hack, ignore "user_impersonation", as these non-AADToken appears in modelerfour 4.23.0+
+                if (securityScheme.getType() == Scheme.SecuritySchemeType.OAUTH2
+                        && securityScheme.getScopes().size() == 1
+                        && userImpersonationScope.equals(securityScheme.getScopes().iterator().next())) {
+                    return;
+                }
+
                 securityInfoInCodeModel.getSecurityTypes().add(securityScheme.getType());
-                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AADTOKEN)) {
-                    Set<String> credentialScopes = securityScheme.getScopes().stream().map(scope -> {
-                        if (!scope.startsWith("\"")) {
-                            return "\"" + scope + "\"";
-                        } else {
-                            return scope;
-                        }
-                    }).collect(Collectors.toSet());
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.OAUTH2)) {
+                    Set<String> credentialScopes = securityScheme.getScopes().stream()
+                            .filter(s -> !userImpersonationScope.equals(s)) // hack, filter out "user_impersonation"
+                            .map(scope -> {
+                                if (!scope.startsWith("\"")) {
+                                    return "\"" + scope + "\"";
+                                } else {
+                                    return scope;
+                                }
+                            }).collect(Collectors.toSet());
                     securityInfoInCodeModel.setScopes(credentialScopes);
                 }
-                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.AZUREKEY)) {
-                    securityInfoInCodeModel.setHeaderName(securityScheme.getHeaderName());
+                if (securityScheme.getType().equals(Scheme.SecuritySchemeType.KEY)) {
+                    securityInfoInCodeModel.setHeaderName(securityScheme.getName());
                 }
             });
             securityInfo = securityInfoInCodeModel;
@@ -245,18 +255,18 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 !settings.getCredentialTypes().contains(JavaSettings.CredentialType.NONE)) {
             SecurityInfo securityInfoInJavaSettings = new SecurityInfo();
             if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
-                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AADTOKEN);
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.OAUTH2);
                 securityInfoInJavaSettings.setScopes(settings.getCredentialScopes());
             }
             if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.AZURE_KEY_CREDENTIAL)) {
-                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.AZUREKEY);
+                securityInfoInJavaSettings.getSecurityTypes().add(Scheme.SecuritySchemeType.KEY);
                 securityInfoInJavaSettings.setHeaderName(settings.getKeyCredentialHeaderName());
             }
             securityInfo = securityInfoInJavaSettings;
         }
         builder.securityInfo(securityInfo);
 
-        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
             Set<String> scopes = securityInfo.getScopes();
             String scopeParams;
             if (scopes != null && !scopes.isEmpty()) {

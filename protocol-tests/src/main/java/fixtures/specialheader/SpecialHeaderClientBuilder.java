@@ -245,7 +245,7 @@ public final class SpecialHeaderClientBuilder {
     }
 
     /**
-     * Builds an instance of SpecialHeaderAsyncClient async client.
+     * Builds an instance of SpecialHeaderAsyncClient class.
      *
      * @return an instance of SpecialHeaderAsyncClient.
      */
@@ -255,12 +255,12 @@ public final class SpecialHeaderClientBuilder {
     }
 
     /**
-     * Builds an instance of SpecialHeaderClient sync client.
+     * Builds an instance of SpecialHeaderClient class.
      *
      * @return an instance of SpecialHeaderClient.
      */
     @Generated
     public SpecialHeaderClient buildClient() {
-        return new SpecialHeaderClient(buildInnerClient().getHeaders());
+        return new SpecialHeaderClient(new SpecialHeaderAsyncClient(buildInnerClient().getHeaders()));
     }
 }

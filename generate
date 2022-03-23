@@ -2,11 +2,11 @@
 
 set -e
 
-VANILLA_ARGUMENTS='--version=3.7.6 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
-AZURE_ARGUMENTS='--version=3.7.6 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
-ARM_ARGUMENTS='--version=3.7.6 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
-PROTOCOL_ARGUMENTS='--version=3.7.6 --java --use=./ --output-folder=protocol-tests --low-level-client --generate-samples'
-PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.7.6 --java --use=./ --low-level-client'
+VANILLA_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
+AZURE_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
+ARM_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
+PROTOCOL_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=protocol-tests --low-level-client --generate-samples'
+PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.8.1 --java --use=./ --low-level-client'
 SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
 # Vanilla
@@ -38,14 +38,14 @@ autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/required-optional.json --
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/xml-service.json --namespace=fixtures.xmlservice --enable-xml
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/parameter-flattening.json --namespace=fixtures.parameterflattening --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/model-flattening.json --namespace=fixtures.modelflattening --payload-flattening-threshold=1 --optional-constant-as-enum=true
-autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1
+autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1 --modelerfour.lenient-model-deduplication
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/validation.json --namespace=fixtures.validation
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/non-string-enum.json --namespace=fixtures.nonstringenum --generate-sync-async-clients --disable-client-builder
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-autorest --version=3.7.6 --use=./ vanilla-tests/swagger/lro.md
-autorest --version=3.7.6 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+autorest --version=3.8.1 --use=./ vanilla-tests/swagger/lro.md
+autorest --version=3.8.1 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 
 # local swagger
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
@@ -58,6 +58,7 @@ autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/client-default-va
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
+autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 
 # Azure
 autorest $AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
@@ -82,6 +83,7 @@ autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fix
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcinitial
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
+autorest $PROTOCOL_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 autorest --version=3.6.6 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests/src/main/java/fixtures/headexceptions/models
 cp protocol-tests/swagger/CustomizedException.java protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java
@@ -97,8 +99,8 @@ rm ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
 rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 
 # customization
-autorest --version=3.7.6 --use:. customization-tests/swagger
+autorest --version=3.8.1 --use:. customization-tests/swagger
 
 # partial update tests
-autorest --version=3.7.6 --use:. partial-update-tests/existing/swagger/README.md
+autorest --version=3.8.1 --use:. partial-update-tests/existing/swagger/README.md
 rm ./partial-update-tests/generated/src/main/java/module-info.java
