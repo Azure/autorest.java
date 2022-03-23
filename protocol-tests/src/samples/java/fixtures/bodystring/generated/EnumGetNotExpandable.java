@@ -11,10 +11,10 @@ import fixtures.bodystring.EnumClientBuilder;
 
 public class EnumGetNotExpandable {
     public static void main(String[] args) {
-        // BEGIN: fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
+        // BEGIN:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
         RequestOptions requestOptions = new RequestOptions();
         Response<String> response = enumClient.getNotExpandableWithResponse(requestOptions);
-        // END: fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
+        // END:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
     }
 }
