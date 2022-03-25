@@ -3,10 +3,13 @@
 
 package com.azure.mgmttest;
 
+import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
@@ -15,6 +18,7 @@ import com.azure.core.management.Region;
 import com.azure.core.management.ResourceAuthorIdentityType;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Context;
@@ -302,6 +306,22 @@ public class RuntimeTests {
                 .filter(recommendation -> recommendation.resourceMetadata().resourceId().equals(storageAccount.id()) && !recommendation.suppressionIds().contains(suppressionId))
                 .count();
         Assertions.assertEquals(countBeforeSuppress, countAfterDelete);
+    }
+
+    @Test
+    @Disabled("live test")
+    public void testStorageWithPipeline() {
+        AzureProfile profile = new AzureProfile(AzureEnvironment.AZURE);
+        HttpClient httpClient = HttpClient.createDefault();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder()
+                .httpClient(httpClient)
+                .policies(new ArmChallengeAuthenticationPolicy(
+                        new EnvironmentCredentialBuilder().build(),
+                        profile.getEnvironment().getManagementEndpoint() + "/.default"),
+                        new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)))
+                .build();
+        StorageManager storageManager = StorageManager.authenticate(httpPipeline, profile);
+        List<StorageAccount> storageAccounts = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
     }
 
     private ResourceManager authenticateResourceManager() {

@@ -173,6 +173,18 @@ public class FluentManagerTemplate {
                 methodBlock.methodReturn("configure().authenticate(credential, profile)");
             });
 
+            classBlock.javadocComment(comment -> {
+                comment.description(String.format("Creates an instance of %1$s service API entry point.", manager.getServiceName()));
+                comment.param("httpPipeline", "the {@link HttpPipeline} configured with Azure authentication credential");
+                comment.param("profile", "the Azure profile for client");
+                comment.methodReturns(String.format("the %1$s service API instance", manager.getServiceName()));
+            });
+            classBlock.publicStaticMethod(String.format("%1$s authenticate(HttpPipeline httpPipeline, AzureProfile profile)", managerName), methodBlock -> {
+                methodBlock.line("Objects.requireNonNull(httpPipeline, \"'httpPipeline' cannot be null.\");");
+                methodBlock.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
+                methodBlock.methodReturn(String.format("new %1$s(httpPipeline, profile, null)", managerName));
+            });
+
             // configure()
             classBlock.javadocComment(comment -> {
                 comment.description(String.format("Gets a Configurable instance that can be used to create %1$s with optional configuration.", managerName));
