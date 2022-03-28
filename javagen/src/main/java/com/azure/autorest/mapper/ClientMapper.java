@@ -347,7 +347,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return xmlSequenceWrappers;
     }
 
-    private ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
+    static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
         String name = CodeNamer.getPlural(operation.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
@@ -395,15 +395,17 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private ClientResponse parseResponse(Operation method, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
-        if (headerSchema == null) {
+        if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
+
         ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
-        builder.name(classType.getName()).packageName(classType.getPackage());
-        builder.description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()));
-        builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
-        builder.bodyType(SchemaUtil.getOperationResponseType(method));
-        return builder.build();
+        return builder.name(classType.getName())
+            .packageName(classType.getPackage())
+            .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
+            .headersType(Mappers.getSchemaMapper().map(headerSchema))
+            .bodyType(SchemaUtil.getOperationResponseType(method))
+            .build();
     }
 
     private static ModuleInfo moduleInfo() {

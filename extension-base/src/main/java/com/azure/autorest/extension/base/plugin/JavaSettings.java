@@ -142,7 +142,8 @@ public class JavaSettings {
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
-                getBooleanValue(host, "custom-strongly-typed-header-deserialization", false)
+                getBooleanValue(host, "custom-strongly-typed-header-deserialization", false),
+                getBooleanValue(host, "generic-response-type", false)
             );
         }
         return _instance;
@@ -184,6 +185,8 @@ public class JavaSettings {
      * @param customStronglyTypedHeaderDeserialization If set to true, strongly-typed HTTP header objects will use
      * custom deserialization logic instead of using Jackson Databind's convertValue method, offering substantial
      * performance benefits.
+     * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
+     * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -241,7 +244,8 @@ public class JavaSettings {
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
-        boolean customStronglyTypedHeaderDeserialization) {
+        boolean customStronglyTypedHeaderDeserialization,
+        boolean genericResponseTypes) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -329,6 +333,7 @@ public class JavaSettings {
         this.handlePartialUpdate = handlePartialUpdate;
 
         this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
+        this.genericResponseTypes = genericResponseTypes;
     }
 
     private String keyCredentialHeaderName;
@@ -920,6 +925,18 @@ public class JavaSettings {
      */
     public boolean isCustomStronglyTypedHeaderDeserializationUsed() {
         return customStronglyTypedHeaderDeserialization;
+    }
+
+    private final boolean genericResponseTypes;
+
+    /**
+     * Whether Response, ResponseBase, PagedResponse, or PagedResponseBase will be used directly with generics instead
+     * of creating a named type that extends one of those type.
+     *
+     * @return Whether generic response types are used instead of named types that extend the generic type.
+     */
+    public boolean isGenericResponseTypes() {
+        return genericResponseTypes;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",
