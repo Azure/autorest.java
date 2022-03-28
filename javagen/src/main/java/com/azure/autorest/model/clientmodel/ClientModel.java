@@ -73,6 +73,11 @@ public class ClientModel {
 
     private IType modelType;
 
+    /*
+     * Whether this model is a strongly-typed HTTP headers class.
+     */
+    private final boolean stronglyTypedHeader;
+
     /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
@@ -88,12 +93,13 @@ public class ClientModel {
      * @param properties The properties for this model.
      * @param propertyReferences
      * @param modelType the type of the model.
+     * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
      */
     protected ClientModel(String package_Keyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-            IType modelType) {
+            IType modelType, boolean stronglyTypedHeader) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -109,6 +115,7 @@ public class ClientModel {
         this.properties = properties;
         this.propertyReferences = propertyReferences;
         this.modelType = modelType;
+        this.stronglyTypedHeader = stronglyTypedHeader;
     }
 
     public final String getPackage() {
@@ -176,6 +183,15 @@ public class ClientModel {
 
     public List<ClientModelPropertyReference> getPropertyReferences() {
         return propertyReferences == null ? Collections.emptyList() : propertyReferences;
+    }
+
+    /**
+     * Whether this model is a strongly-typed HTTP headers class.
+     *
+     * @return Whether this model is a strongly-typed HTTP headers class.
+     */
+    public boolean isStronglyTypedHeader() {
+        return stronglyTypedHeader;
     }
 
     /**
@@ -257,6 +273,7 @@ public class ClientModel {
         protected String xmlNamespace;
         protected List<ClientModelPropertyReference> propertyReferences;
         protected IType modelType;
+        protected boolean stronglyTypedHeader;
 
         /**
          * Sets the package that this model class belongs to.
@@ -409,6 +426,17 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets whether the model is a strongly-typed HTTP headers class.
+         *
+         * @param stronglyTypedHeader Whether the model is a strongly-typed HTTP headers class.
+         * @return the Builder itself
+         */
+        public Builder stronglyTypedHeader(boolean stronglyTypedHeader) {
+            this.stronglyTypedHeader = stronglyTypedHeader;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -424,7 +452,8 @@ public class ClientModel {
                     xmlNamespace,
                     properties,
                     propertyReferences,
-                    modelType);
+                    modelType,
+                    stronglyTypedHeader);
         }
     }
 }

@@ -98,6 +98,24 @@ public class EnumType implements IType {
         }
     }
 
+    /**
+     * Gets the method name used to convert JSON to the enum type.
+     *
+     * @return The method name used to convert JSON to the enum type.
+     */
+    public final String getFromJsonMethodName() {
+        return "from" + CodeNamer.toPascalCase(elementType.getClientType().toString());
+    }
+
+    /**
+     * Gets the method name used to convert the enum type to JSON.
+     *
+     * @return The method name used to convert the enum type to JSON.
+     */
+    public final String getToJsonMethodName() {
+        return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
+    }
+
     @Override
     public String defaultValueExpression() {
         return "null";

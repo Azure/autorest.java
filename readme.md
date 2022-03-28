@@ -80,6 +80,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--default-http-exception-type`|Indicates the fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|Indicates the HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
+|`--custom-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header objects will use custom desrialization instead of Jackson Databind's convertValue method, providing substantial performance benefits.|
 
 ## Settings for minimal clients (low-level clients)
 
