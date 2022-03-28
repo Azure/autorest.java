@@ -80,7 +80,7 @@ public class ModelProperty {
                     .map(s -> s.replace(".", "\\\\."))
                     .collect(Collectors.joining("."));
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + property.getClass().getName());
         }
     }
 
@@ -97,7 +97,7 @@ public class ModelProperty {
                     .map(ClientModelProperty::getSerializedName)
                     .collect(Collectors.toList());
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + property.getClass().getName());
         }
     }
 

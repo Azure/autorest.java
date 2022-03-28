@@ -88,7 +88,7 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
         } else if (referenceProperty instanceof ClientModelPropertyReference) {
             properties.addAll(((ClientModelPropertyReference) referenceProperty).getAllProperties());
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + referenceProperty.getClass().getName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + referenceProperty.getClass().getName());
         }
         return properties;
     }
