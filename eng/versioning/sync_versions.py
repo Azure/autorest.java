@@ -101,6 +101,7 @@ def update_pom(package_versions: List[PackageVersion]):
         if not lines == new_lines:
             with open(path.join(root_path, pom_file), 'w', encoding='utf-8') as f_out:
                 f_out.write(''.join(new_lines))
+                logging.info(f'update POM {pom_file}')
 
 
 def main():
