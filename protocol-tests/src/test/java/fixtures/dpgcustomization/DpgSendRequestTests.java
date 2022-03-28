@@ -3,6 +3,7 @@
 
 package fixtures.dpgcustomization;
 
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.http.HttpRequest;
@@ -10,10 +11,13 @@ import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import fixtures.MockHttpResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,10 +28,18 @@ public class DpgSendRequestTests {
 
     @BeforeAll
     public static void setup() {
+        HttpClient mockHttpClient = request -> {
+            Map<String, String> headers = request.getHeaders().toMap();
+            Map<String, Object> response = Collections.singletonMap("headers", headers);
+            return Mono.just(new MockHttpResponse(request, 200, response));
+        };
+
         client = new DpgClientBuilder()
+                .httpClient(mockHttpClient)
                 .addPolicy(new AddHeadersFromContextPolicy())
                 .buildClient();
         asyncClient = new DpgClientBuilder()
+                .httpClient(mockHttpClient)
                 .addPolicy(new AddHeadersFromContextPolicy())
                 .buildAsyncClient();
     }

@@ -12,12 +12,12 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringPutEmpty {
     public static void main(String[] args) {
-        // BEGIN: fixtures.bodystring.generated.stringputempty.stringputempty
         StringOperationClient stringOperationClient =
                 new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        // BEGIN:fixtures.bodystring.generated.stringputempty.stringputempty
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setBody(BinaryData.fromString("\"\""));
         Response<Void> response = stringOperationClient.putEmptyWithResponse(requestOptions);
-        // END: fixtures.bodystring.generated.stringputempty.stringputempty
+        // END:fixtures.bodystring.generated.stringputempty.stringputempty
     }
 }

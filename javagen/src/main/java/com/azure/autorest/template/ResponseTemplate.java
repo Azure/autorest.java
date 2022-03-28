@@ -49,7 +49,7 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
         if (isStreamResponse) {
             classSignature = String.format("%1$s extends %2$s implements Closeable", response.getName(),
                 restResponseType);
-        } else if (settings.isNoNamedResponseTypes()) {
+        } else if (settings.isGenericResponseTypes()) {
             classSignature = restResponseType.toString();
         } else {
             classSignature = String.format("%1$s extends %2$s", response.getName(), restResponseType);

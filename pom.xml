@@ -42,10 +42,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azure-core.version>1.26.0</azure-core.version>
-    <azure-core-management.version>1.5.3</azure-core-management.version>
-    <azure-core-http-netty.version>1.11.8</azure-core-http-netty.version>
-    <azure-identity.version>1.4.6</azure-identity.version>
 
     <checkstyle.skip>false</checkstyle.skip>
   </properties>

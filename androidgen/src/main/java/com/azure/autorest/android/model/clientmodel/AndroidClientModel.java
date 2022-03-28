@@ -15,7 +15,7 @@ public class AndroidClientModel extends ClientModel {
                                  boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
                                  String parentModelName, java.util.List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName, String xmlNamespace,
                                  java.util.List<com.azure.autorest.model.clientmodel.ClientModelProperty> properties, java.util.List<com.azure.autorest.model.clientmodel.ClientModelPropertyReference> propertyReferences,
-                                 IType modelType) {
+                                 IType modelType, boolean stronglyTypedHeader) {
         super(package_Keyword,
                 name,
                 imports,
@@ -30,7 +30,8 @@ public class AndroidClientModel extends ClientModel {
                 xmlNamespace,
                 properties,
                 propertyReferences,
-                modelType);
+                modelType,
+                stronglyTypedHeader);
     }
 
     @Override
@@ -75,7 +76,8 @@ public class AndroidClientModel extends ClientModel {
                     xmlNamespace,
                     properties,
                     propertyReferences,
-                    modelType);
+                    modelType,
+                    stronglyTypedHeader);
         }
     }
 }

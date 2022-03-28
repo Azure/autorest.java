@@ -9,6 +9,7 @@ public static final class Configurable {
     private final List<HttpPipelinePolicy> policies = new ArrayList<>();
     private final List<String> scopes = new ArrayList<>();
     private RetryPolicy retryPolicy;
+    private RetryOptions retryOptions;
     private Duration defaultPollInterval;
 
     private Configurable() {
@@ -70,6 +71,19 @@ public static final class Configurable {
     }
 
     /**
+     * Sets the retry options for the HTTP pipeline retry policy.
+     * <p>
+     * This setting has no effect, if retry policy is set via {@link #withRetryPolicy(RetryPolicy)}.
+     *
+     * @param retryOptions the retry options for the HTTP pipeline retry policy.
+     * @return the configurable object itself.
+     */
+    public Configurable withRetryOptions(RetryOptions retryOptions) {
+        this.retryOptions = Objects.requireNonNull(retryOptions, "'retryOptions' cannot be null.");
+        return this;
+    }
+
+    /**
      * Sets the default poll interval, used when service does not provide "Retry-After" header.
      *
      * @param defaultPollInterval the default poll interval.
@@ -116,10 +130,15 @@ public static final class Configurable {
             scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
         }
         if (retryPolicy == null) {
-            retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+            if (retryOptions != null) {
+                retryPolicy = new RetryPolicy(retryOptions);
+            } else {
+                retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+            }
         }
         List<HttpPipelinePolicy> policies = new ArrayList<>();
         policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
+        policies.add(new AddHeadersFromContextPolicy());
         policies.add(new RequestIdPolicy());
         policies.addAll(
             this.policies.stream()

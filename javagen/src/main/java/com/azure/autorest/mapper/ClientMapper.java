@@ -368,6 +368,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         headerSchema.getLanguage().setJava(new Language());
         headerSchema.getLanguage().getJava().setName(name);
         headerSchema.setProperties(new ArrayList<>());
+        headerSchema.setStronglyTypedHeader(true);
         for (Map.Entry<String, Schema> header : headerMap.entrySet()) {
             Property property = new Property();
             property.setSerializedName(header.getKey());
@@ -394,7 +395,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private ClientResponse parseResponse(Operation method, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
-        if (headerSchema == null || settings.isNoNamedResponseTypes()) {
+        if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
 

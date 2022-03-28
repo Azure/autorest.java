@@ -620,7 +620,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Else named response types are being used and return that.
         if (settings.isLowLevelClient() || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
-        } else if (settings.isNoNamedResponseTypes()) {
+        } else if (settings.isGenericResponseTypes()) {
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                 syncReturnType);
         } else {

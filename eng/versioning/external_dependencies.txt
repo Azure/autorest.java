@@ -1,0 +1,14 @@
+com.azure:azure-core
+com.azure:azure-core-http-netty
+com.azure:azure-core-management
+com.azure:azure-core-test
+com.azure:azure-identity
+
+com.fasterxml.jackson.core:jackson-core
+com.fasterxml.jackson.core:jackson-databind
+org.slf4j:slf4j-simple
+junit:junit
+org.junit.jupiter:junit-jupiter-api
+org.junit.jupiter:junit-jupiter-engine
+
+ch.qos.logback:logback-classic;1.2.11
