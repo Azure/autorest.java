@@ -32,7 +32,8 @@ public final class DpgClient {
     }
 
     /**
-     * Head request, no params.
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
+     * added.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -54,7 +55,8 @@ public final class DpgClient {
     }
 
     /**
-     * Get true Boolean value on path.
+     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
+     * query parameter is added.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -75,7 +77,7 @@ public final class DpgClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path along with {@link Response}.
+     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -84,7 +86,8 @@ public final class DpgClient {
     }
 
     /**
-     * Put, has both required and optional params.
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
+     * query parameter is added.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -146,7 +149,8 @@ public final class DpgClient {
     }
 
     /**
-     * Get true Boolean value on path.
+     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
+     * parameter is added.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -167,7 +171,7 @@ public final class DpgClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path along with {@link Response}.
+     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
