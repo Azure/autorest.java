@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.model.javamodel.JavaBlock;
@@ -20,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Class representing a builder trait that adds additional context to the {@link ClientBuilder} client model.
+ */
 public class ClientBuilderTrait {
 
     public static final ClientBuilderTrait HTTP_TRAIT = createHttpTrait();
@@ -36,26 +42,50 @@ public class ClientBuilderTrait {
     private List<String> importPackages;
     private List<ClientBuilderTraitMethod> clientBuilderTraitMethods;
 
+    /**
+     * Returns the trait interface name.
+     * @return the trait interface name.
+     */
     public String getTraitInterfaceName() {
         return traitInterfaceName;
     }
 
+    /**
+     * Sets the trait interface name.
+     * @param traitInterfaceName  the trait interface name.
+     */
     public void setTraitInterfaceName(String traitInterfaceName) {
         this.traitInterfaceName = traitInterfaceName;
     }
 
+    /**
+     * Returns the list of packages that needs to be imported for this trait.
+     * @return The list of packages that needs to be imported for this trait.
+     */
     public List<String> getImportPackages() {
         return importPackages;
     }
 
+    /**
+     * Sets the list of packages that needs to be imported for this trait.
+     * @param importPackages the list of packages that needs to be imported for this trait.
+     */
     public void setImportPackages(List<String> importPackages) {
         this.importPackages = importPackages;
     }
 
+    /**
+     * Returns the list of methods that this trait interface contains.
+     * @return the list of methods that this trait interface contains.
+     */
     public List<ClientBuilderTraitMethod> getTraitMethods() {
         return clientBuilderTraitMethods;
     }
 
+    /**
+     * Sets the list of methods that this trait interface contains.
+     * @param clientBuilderTraitMethods the list of methods that this trait interface contains.
+     */
     public void setTraitMethods(List<ClientBuilderTraitMethod> clientBuilderTraitMethods) {
         this.clientBuilderTraitMethods = clientBuilderTraitMethods;
     }
