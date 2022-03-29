@@ -17,7 +17,7 @@ public class AutorestSettings {
     private List<String> security = new ArrayList<>();
     private List<String> securityScopes = new ArrayList<>();
     private String securityHeaderName;
-    private String azureLibrariesForJavaFolder;
+    private String javaSdksFolder;
     private final List<String> inputFiles = new ArrayList<>();
 
     public void setTag(String tag) {
@@ -32,8 +32,8 @@ public class AutorestSettings {
         this.outputFolder = outputFolder;
     }
 
-    public void setAzureLibrariesForJavaFolder(String azureLibrariesForJavaFolder) {
-        this.azureLibrariesForJavaFolder = azureLibrariesForJavaFolder;
+    public void setJavaSdksFolder(String javaSdksFolder) {
+        this.javaSdksFolder = javaSdksFolder;
     }
 
     public String getTag() {
@@ -48,8 +48,8 @@ public class AutorestSettings {
         return outputFolder;
     }
 
-    public Optional<String> getAzureLibrariesForJavaFolder() {
-        return Optional.ofNullable(azureLibrariesForJavaFolder);
+    public Optional<String> getJavaSdksFolder() {
+        return Optional.ofNullable(javaSdksFolder);
     }
 
     public List<String> getInputFiles() {

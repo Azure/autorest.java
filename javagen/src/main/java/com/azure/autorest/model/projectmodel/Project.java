@@ -150,12 +150,12 @@ public class Project {
 
     private Optional<String> findSdkFolder() {
         JavaSettings settings = JavaSettings.getInstance();
-        Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
+        Optional<String> sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
         if (!sdkFolderOpt.isPresent()) {
-            logger.info("'azure-libraries-for-java-folder' parameter not available");
+            logger.info("'java-sdks-folder' parameter not available");
         } else {
             if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
-                logger.info("'azure-libraries-for-java-folder' parameter is not an absolute path");
+                logger.info("'java-sdks-folder' parameter is not an absolute path");
                 sdkFolderOpt = Optional.empty();
             }
         }
