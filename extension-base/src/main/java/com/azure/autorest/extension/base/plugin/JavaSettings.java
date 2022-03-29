@@ -76,7 +76,7 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             if (!autorestSettings.getJavaSdksFolder().isPresent() || autorestSettings.getJavaSdksFolder().get().isEmpty()) {
-                // TODO remove after script updated
+                // TODO(weidxu): remove after script updated
                 loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setJavaSdksFolder);
             }
             List<Object> inputFiles = host.getValue(List.class, "input-file");
