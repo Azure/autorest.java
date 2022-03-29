@@ -70,6 +70,7 @@ public class ClassType implements IType {
     public static final ClassType ServiceVersion = new ClassType.Builder().knownClass(com.azure.core.util.ServiceVersion.class).build();
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
+    public static final ClassType RetryOptions = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryOptions.class).build();
     public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument = new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
