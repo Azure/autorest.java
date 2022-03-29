@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodystring.implementation.EnumsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = EnumClientBuilder.class)
 public final class EnumClient {
-    @Generated private final EnumsImpl serviceClient;
+    @Generated private final EnumAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Enums client.
+     * Initializes an instance of EnumClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    EnumClient(EnumsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    EnumClient(EnumAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -40,13 +42,16 @@ public final class EnumClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
      *     Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNotExpandableWithResponse(requestOptions);
+        return this.asyncClient.getNotExpandableWithResponse(requestOptions).block();
     }
 
     /**
@@ -61,12 +66,15 @@ public final class EnumClient {
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return this.serviceClient.putNotExpandableWithResponse(stringBody, requestOptions);
+        return this.asyncClient.putNotExpandableWithResponse(stringBody, requestOptions).block();
     }
 
     /**
@@ -80,13 +88,16 @@ public final class EnumClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
      *     Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getReferencedWithResponse(requestOptions);
+        return this.asyncClient.getReferencedWithResponse(requestOptions).block();
     }
 
     /**
@@ -101,12 +112,15 @@ public final class EnumClient {
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return this.serviceClient.putReferencedWithResponse(enumStringBody, requestOptions);
+        return this.asyncClient.putReferencedWithResponse(enumStringBody, requestOptions).block();
     }
 
     /**
@@ -123,12 +137,15 @@ public final class EnumClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return value 'green-color' from the constant along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getReferencedConstantWithResponse(requestOptions);
+        return this.asyncClient.getReferencedConstantWithResponse(requestOptions).block();
     }
 
     /**
@@ -146,11 +163,14 @@ public final class EnumClient {
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return this.serviceClient.putReferencedConstantWithResponse(enumStringBody, requestOptions);
+        return this.asyncClient.putReferencedConstantWithResponse(enumStringBody, requestOptions).block();
     }
 }

@@ -8,24 +8,26 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpFailureClientBuilder.class)
 public final class HttpFailureClient {
-    @Generated private final HttpFailuresImpl serviceClient;
+    @Generated private final HttpFailureAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpFailures client.
+     * Initializes an instance of HttpFailureClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    HttpFailureClient(HttpFailuresImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    HttpFailureClient(HttpFailureAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -39,12 +41,15 @@ public final class HttpFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return empty error form server along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyErrorWithResponse(requestOptions);
+        return this.asyncClient.getEmptyErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -58,12 +63,15 @@ public final class HttpFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return empty error form server along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelErrorWithResponse(requestOptions);
+        return this.asyncClient.getNoModelErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -77,11 +85,14 @@ public final class HttpFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return empty response from server along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNoModelEmptyWithResponse(requestOptions);
+        return this.asyncClient.getNoModelEmptyWithResponse(requestOptions).block();
     }
 }

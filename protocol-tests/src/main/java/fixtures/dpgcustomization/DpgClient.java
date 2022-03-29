@@ -8,29 +8,32 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.SyncPoller;
-import fixtures.dpgcustomization.implementation.DpgClientImpl;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {
-    @Generated private final DpgClientImpl serviceClient;
+    @Generated private final DpgAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of DpgClient client.
+     * Initializes an instance of DpgClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    DpgClient(DpgClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    DpgClient(DpgAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -48,13 +51,16 @@ public final class DpgClient {
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return models that you will either return to end users as a raw body, or with a model added during grow up along
      *     with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(String mode, RequestOptions requestOptions) {
-        return this.serviceClient.getModelWithResponse(mode, requestOptions);
+        return this.asyncClient.getModelWithResponse(mode, requestOptions).block();
     }
 
     /**
@@ -82,12 +88,15 @@ public final class DpgClient {
      * @param input Please put {'hello': 'world!'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postModelWithResponse(String mode, BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.postModelWithResponse(mode, input, requestOptions);
+        return this.asyncClient.postModelWithResponse(mode, input, requestOptions).block();
     }
 
     /**
@@ -110,13 +119,16 @@ public final class DpgClient {
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
      *     paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPages(String mode, RequestOptions requestOptions) {
-        return this.serviceClient.getPages(mode, requestOptions);
+        return new PagedIterable<>(this.asyncClient.getPages(mode, requestOptions));
     }
 
     /**
@@ -136,12 +148,15 @@ public final class DpgClient {
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
-        return this.serviceClient.beginLro(mode, requestOptions);
+        return this.asyncClient.beginLro(mode, requestOptions).getSyncPoller();
     }
 
     /**
@@ -154,6 +169,9 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.serviceClient.sendRequest(httpRequest, context);
+        return this.asyncClient
+                .sendRequest(httpRequest)
+                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
+                .block();
     }
 }

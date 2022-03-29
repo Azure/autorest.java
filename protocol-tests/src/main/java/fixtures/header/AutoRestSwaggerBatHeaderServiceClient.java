@@ -8,24 +8,26 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.header.implementation.HeadersImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class)
 public final class AutoRestSwaggerBatHeaderServiceClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated private final AutoRestSwaggerBatHeaderServiceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Headers client.
+     * Initializes an instance of AutoRestSwaggerBatHeaderServiceClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    AutoRestSwaggerBatHeaderServiceClient(HeadersImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    AutoRestSwaggerBatHeaderServiceClient(AutoRestSwaggerBatHeaderServiceAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -41,12 +43,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramExistingKeyWithResponse(requestOptions);
+        return this.asyncClient.paramExistingKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -54,12 +59,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "User-Agent": "overwrite" along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseExistingKeyWithResponse(requestOptions);
+        return this.asyncClient.responseExistingKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -75,12 +83,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramProtectedKeyWithResponse(requestOptions);
+        return this.asyncClient.paramProtectedKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -88,12 +99,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "Content-Type": "text/html" along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseProtectedKeyWithResponse(requestOptions);
+        return this.asyncClient.responseProtectedKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -110,12 +124,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramIntegerWithResponse(requestOptions);
+        return this.asyncClient.paramIntegerWithResponse(requestOptions).block();
     }
 
     /**
@@ -131,12 +148,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 1 or -2 along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseIntegerWithResponse(requestOptions);
+        return this.asyncClient.responseIntegerWithResponse(requestOptions).block();
     }
 
     /**
@@ -154,12 +174,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramLongWithResponse(requestOptions);
+        return this.asyncClient.paramLongWithResponse(requestOptions).block();
     }
 
     /**
@@ -175,12 +198,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 105 or -2 along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseLongWithResponse(requestOptions);
+        return this.asyncClient.responseLongWithResponse(requestOptions).block();
     }
 
     /**
@@ -198,12 +224,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramFloatWithResponse(requestOptions);
+        return this.asyncClient.paramFloatWithResponse(requestOptions).block();
     }
 
     /**
@@ -219,12 +248,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 0.07 or -3.0 along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseFloatWithResponse(requestOptions);
+        return this.asyncClient.responseFloatWithResponse(requestOptions).block();
     }
 
     /**
@@ -242,12 +274,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramDoubleWithResponse(requestOptions);
+        return this.asyncClient.paramDoubleWithResponse(requestOptions).block();
     }
 
     /**
@@ -263,12 +298,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 7e120 or -3.0 along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseDoubleWithResponse(requestOptions);
+        return this.asyncClient.responseDoubleWithResponse(requestOptions).block();
     }
 
     /**
@@ -285,12 +323,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramBoolWithResponse(requestOptions);
+        return this.asyncClient.paramBoolWithResponse(requestOptions).block();
     }
 
     /**
@@ -306,12 +347,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": true or false along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseBoolWithResponse(requestOptions);
+        return this.asyncClient.responseBoolWithResponse(requestOptions).block();
     }
 
     /**
@@ -329,12 +373,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramStringWithResponse(requestOptions);
+        return this.asyncClient.paramStringWithResponse(requestOptions).block();
     }
 
     /**
@@ -350,13 +397,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
      *     {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseStringWithResponse(requestOptions);
+        return this.asyncClient.responseStringWithResponse(requestOptions).block();
     }
 
     /**
@@ -374,12 +424,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramDateWithResponse(requestOptions);
+        return this.asyncClient.paramDateWithResponse(requestOptions).block();
     }
 
     /**
@@ -395,12 +448,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseDateWithResponse(requestOptions);
+        return this.asyncClient.responseDateWithResponse(requestOptions).block();
     }
 
     /**
@@ -418,12 +474,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramDatetimeWithResponse(requestOptions);
+        return this.asyncClient.paramDatetimeWithResponse(requestOptions).block();
     }
 
     /**
@@ -439,13 +498,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
      *     Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseDatetimeWithResponse(requestOptions);
+        return this.asyncClient.responseDatetimeWithResponse(requestOptions).block();
     }
 
     /**
@@ -463,12 +525,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramDatetimeRfc1123WithResponse(requestOptions);
+        return this.asyncClient.paramDatetimeRfc1123WithResponse(requestOptions).block();
     }
 
     /**
@@ -484,13 +549,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
      *     with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseDatetimeRfc1123WithResponse(requestOptions);
+        return this.asyncClient.responseDatetimeRfc1123WithResponse(requestOptions).block();
     }
 
     /**
@@ -507,12 +575,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramDurationWithResponse(requestOptions);
+        return this.asyncClient.paramDurationWithResponse(requestOptions).block();
     }
 
     /**
@@ -528,12 +599,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "P123DT22H14M12.011S" along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseDurationWithResponse(requestOptions);
+        return this.asyncClient.responseDurationWithResponse(requestOptions).block();
     }
 
     /**
@@ -550,12 +624,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramByteWithResponse(requestOptions);
+        return this.asyncClient.paramByteWithResponse(requestOptions).block();
     }
 
     /**
@@ -571,12 +648,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseByteWithResponse(requestOptions);
+        return this.asyncClient.responseByteWithResponse(requestOptions).block();
     }
 
     /**
@@ -593,12 +673,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.paramEnumWithResponse(requestOptions);
+        return this.asyncClient.paramEnumWithResponse(requestOptions).block();
     }
 
     /**
@@ -614,12 +697,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "GREY" or null along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.responseEnumWithResponse(requestOptions);
+        return this.asyncClient.responseEnumWithResponse(requestOptions).block();
     }
 
     /**
@@ -627,11 +713,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.customRequestIdWithResponse(requestOptions);
+        return this.asyncClient.customRequestIdWithResponse(requestOptions).block();
     }
 }

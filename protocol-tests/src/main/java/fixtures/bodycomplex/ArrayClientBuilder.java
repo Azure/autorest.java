@@ -11,12 +11,15 @@ import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.ClientOptions;
@@ -25,7 +28,6 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,7 +39,8 @@ public final class ArrayClientBuilder {
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = new HashMap<>();
+    @Generated
+    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodycomplex.properties");
 
     /** Create an instance of the ArrayClientBuilder. */
     @Generated
@@ -238,6 +241,8 @@ public final class ArrayClientBuilder {
         String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
+        policies.add(new RequestIdPolicy());
+        policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
         clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));
         if (headers.getSize() > 0) {
@@ -249,6 +254,7 @@ public final class ArrayClientBuilder {
                         .collect(Collectors.toList()));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);
+        policies.add(new AddDatePolicy());
         policies.add(new CookiePolicy());
         policies.addAll(
                 this.pipelinePolicies.stream()
@@ -266,7 +272,7 @@ public final class ArrayClientBuilder {
     }
 
     /**
-     * Builds an instance of ArrayAsyncClient async client.
+     * Builds an instance of ArrayAsyncClient class.
      *
      * @return an instance of ArrayAsyncClient.
      */
@@ -276,12 +282,12 @@ public final class ArrayClientBuilder {
     }
 
     /**
-     * Builds an instance of ArrayClient sync client.
+     * Builds an instance of ArrayClient class.
      *
      * @return an instance of ArrayClient.
      */
     @Generated
     public ArrayClient buildClient() {
-        return new ArrayClient(buildInnerClient().getArrays());
+        return new ArrayClient(new ArrayAsyncClient(buildInnerClient().getArrays()));
     }
 }

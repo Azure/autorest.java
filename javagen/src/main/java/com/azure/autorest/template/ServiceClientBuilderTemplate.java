@@ -13,13 +13,25 @@ import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
+import com.azure.core.http.policy.AddHeadersPolicy;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
+import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpPipelinePolicy;
+import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -145,8 +157,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
                 // properties for sdk name and version
                 String propertiesValue = "new HashMap<>()";
-                if (!settings.getArtifactId().isEmpty()) {
-                    propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
+                String artifactId = ClientModelUtil.getArtifactId();
+                if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                    propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
                 }
                 addGeneratedAnnotation(classBlock);
                 classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
@@ -269,7 +282,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         classBlock.javadocComment(comment ->
                         {
                             comment.description(String
-                                    .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
+                                    .format("Builds an instance of %1$s class", asyncClient.getClassName()));
                             comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
                         });
                         addGeneratedAnnotation(classBlock);
@@ -285,25 +298,25 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     }
                 }
 
+                int syncClientIndex = 0;
                 for (AsyncSyncClient syncClient : syncClients) {
                     final boolean wrapServiceClient = syncClient.getMethodGroupClient() == null;
+
+                    AsyncSyncClient asyncClient = (asyncClients.size() == syncClients.size()) ? asyncClients.get(syncClientIndex) : null;
 
                     classBlock.javadocComment(comment ->
                     {
                         comment.description(String
-                                .format("Builds an instance of %1$s sync client", syncClient.getClassName()));
+                                .format("Builds an instance of %1$s class", syncClient.getClassName()));
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
                             function -> {
-                                if (wrapServiceClient) {
-                                    function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
-                                } else {
-                                    function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
-                                            CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
-                                }
+                                writeSyncClientBuildMethod(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
                             });
+
+                    ++syncClientIndex;
                 }
             }
         });
@@ -333,6 +346,49 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 });
     }
 
+    /**
+     * Extension to write sync client build method invocation
+     *
+     * @param syncClient the sync client
+     * @param asyncClient the async client
+     * @param function the method block to write method invocation
+     * @param buildMethodName the name of build method
+     * @param wrapServiceClient whether the sync client wraps a service client implementation or method group implementation
+     */
+    protected void writeSyncClientBuildMethod(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                              String buildMethodName, boolean wrapServiceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
+        boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
+                && settings.isLowLevelClient()
+                && asyncClient != null;
+        if (syncClientWrapAsync) {
+            writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
+        } else {
+            writeSyncClientBuildMethodFromInnerClient(syncClient, function, buildMethodName, wrapServiceClient);
+        }
+    }
+
+    protected void writeSyncClientBuildMethodFromInnerClient(AsyncSyncClient syncClient, JavaBlock function,
+                                                             String buildMethodName, boolean wrapServiceClient) {
+        if (wrapServiceClient) {
+            function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
+        } else {
+            function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
+                    CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
+        }
+    }
+
+    protected void writeSyncClientBuildMethodFromAsyncClient(AsyncSyncClient syncClient, AsyncSyncClient asyncClient, JavaBlock function,
+                                                             String buildMethodName, boolean wrapServiceClient) {
+        if (wrapServiceClient) {
+            function.line("return new %1$s(new %2$s(%3$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName);
+        } else {
+            function.line("return new %1$s(new %2$s(%3$s().get%4$s()));", syncClient.getClassName(), asyncClient.getClassName(),
+                    buildMethodName, CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
+        }
+    }
+
     protected String getSerializerMemberName() {
         return "serializerAdapter";
     }
@@ -347,12 +403,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
-        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
-        imports.add("com.azure.core.http.policy.AzureKeyCredentialPolicy");
-        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
-        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
-        imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
-        imports.add("com.azure.core.http.policy.AddHeadersPolicy");
+        imports.add(BearerTokenAuthenticationPolicy.class.getName());
+        imports.add(AzureKeyCredentialPolicy.class.getName());
+        imports.add(HttpPolicyProviders.class.getName());
+        imports.add(HttpPipelinePolicy.class.getName());
+        imports.add(HttpLoggingPolicy.class.getName());
+        imports.add(AddHeadersPolicy.class.getName());
+        imports.add(RequestIdPolicy.class.getName());
+        imports.add(AddHeadersFromContextPolicy.class.getName());
+        imports.add(AddDatePolicy.class.getName());
         imports.add(HttpPipelinePosition.class.getName());
         imports.add(Collectors.class.getName());
     }
@@ -381,13 +440,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
-
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
             function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
+
+            function.line("policies.add(new RequestIdPolicy());");
+            function.line("policies.add(new AddHeadersFromContextPolicy());");
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
@@ -400,9 +461,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new " +
                     "RetryPolicy()));");
+            function.line("policies.add(new AddDatePolicy());");
             function.line("policies.add(new CookiePolicy());");
 
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 if (securityInfo.getHeaderName() == null
                     || securityInfo.getHeaderName().isEmpty()) {
                     LOGGER.error("key-credential-header-name is required for " +
@@ -416,7 +478,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             + "\", azureKeyCredential));");
                 });
             }
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 function.ifBlock("tokenCredential != null", action -> {
                     function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });

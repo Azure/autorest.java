@@ -90,6 +90,10 @@ public class Templates {
         return factory.getServiceSynClientTemplate();
     }
 
+    public static ServiceSyncClientTemplate getServiceSyncClientWrapAsyncClientTemplate() {
+        return factory.getServiceSyncClientWrapAsyncClientTemplate();
+    }
+
     public static PomTemplate getPomTemplate() {
         return factory.getPomTemplate();
     }

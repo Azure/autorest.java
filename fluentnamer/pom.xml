@@ -39,13 +39,13 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>${azure-core.version}</version>
+      <version>1.26.0</version>
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>${azure-core-management.version}</version>
+      <version>1.5.3</version>
     </dependency>
   </dependencies>
 

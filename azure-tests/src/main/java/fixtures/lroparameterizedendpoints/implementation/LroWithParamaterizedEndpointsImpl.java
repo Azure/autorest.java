@@ -36,8 +36,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the LroWithParamaterizedEndpointsImpl type. */
 @ServiceClient(builder = LroWithParamaterizedEndpointsBuilder.class)
 public final class LroWithParamaterizedEndpointsImpl implements LroWithParamaterizedEndpoints {
-    private final ClientLogger logger = new ClientLogger(LroWithParamaterizedEndpointsImpl.class);
-
     /** A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test. */
     private final String host;
 
@@ -204,7 +202,7 @@ public final class LroWithParamaterizedEndpointsImpl implements LroWithParamater
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -263,4 +261,6 @@ public final class LroWithParamaterizedEndpointsImpl implements LroWithParamater
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(LroWithParamaterizedEndpointsImpl.class);
 }

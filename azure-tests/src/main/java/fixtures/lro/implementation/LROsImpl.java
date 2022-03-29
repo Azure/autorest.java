@@ -6,7 +6,6 @@ package fixtures.lro.implementation;
 
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fixtures.lro.fluent.LROsClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.fluent.models.SkuInner;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class LROsImpl implements LROs {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(LROsImpl.class);
 
     private final LROsClient innerClient;
 

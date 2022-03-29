@@ -5,15 +5,11 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LROsDeleteAsyncNoHeaderInRetryHeaders model. */
 @Fluent
 public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsDeleteAsyncNoHeaderInRetryHeaders.class);
-
     /*
      * The Location property.
      */

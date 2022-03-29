@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.llcinitial.implementation.ParamsImpl;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated private final DpgAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Params client.
+     * Initializes an instance of DpgClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    DpgClient(ParamsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    DpgClient(DpgAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -40,12 +42,15 @@ public final class DpgClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return any object along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.headNoParamsWithResponse(requestOptions);
+        return this.asyncClient.headNoParamsWithResponse(requestOptions).block();
     }
 
     /**
@@ -67,12 +72,15 @@ public final class DpgClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredWithResponse(requestOptions);
+        return this.asyncClient.getRequiredWithResponse(requestOptions).block();
     }
 
     /**
@@ -95,12 +103,15 @@ public final class DpgClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return any object along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putRequiredOptionalWithResponse(requestOptions);
+        return this.asyncClient.putRequiredOptionalWithResponse(requestOptions).block();
     }
 
     /**
@@ -123,12 +134,15 @@ public final class DpgClient {
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return any object along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return this.serviceClient.postParametersWithResponse(parameter, requestOptions);
+        return this.asyncClient.postParametersWithResponse(parameter, requestOptions).block();
     }
 
     /**
@@ -150,11 +164,14 @@ public final class DpgClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getOptionalWithResponse(requestOptions);
+        return this.asyncClient.getOptionalWithResponse(requestOptions).block();
     }
 }

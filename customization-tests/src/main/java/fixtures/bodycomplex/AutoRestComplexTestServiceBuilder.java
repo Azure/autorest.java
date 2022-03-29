@@ -11,12 +11,15 @@ import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.ClientOptions;
@@ -278,6 +281,8 @@ public final class AutoRestComplexTestServiceBuilder {
         String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
+        policies.add(new RequestIdPolicy());
+        policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
         clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));
         if (headers.getSize() > 0) {
@@ -289,6 +294,7 @@ public final class AutoRestComplexTestServiceBuilder {
                         .collect(Collectors.toList()));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);
+        policies.add(new AddDatePolicy());
         policies.add(new CookiePolicy());
         policies.addAll(
                 this.pipelinePolicies.stream()
@@ -306,7 +312,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of BasicAsyncClient async client.
+     * Builds an instance of BasicAsyncClient class.
      *
      * @return an instance of BasicAsyncClient.
      */
@@ -316,7 +322,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PrimitiveAsyncClient async client.
+     * Builds an instance of PrimitiveAsyncClient class.
      *
      * @return an instance of PrimitiveAsyncClient.
      */
@@ -326,7 +332,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of ArrayAsyncClient async client.
+     * Builds an instance of ArrayAsyncClient class.
      *
      * @return an instance of ArrayAsyncClient.
      */
@@ -336,7 +342,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of DictionaryAsyncClient async client.
+     * Builds an instance of DictionaryAsyncClient class.
      *
      * @return an instance of DictionaryAsyncClient.
      */
@@ -346,7 +352,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of InheritanceAsyncClient async client.
+     * Builds an instance of InheritanceAsyncClient class.
      *
      * @return an instance of InheritanceAsyncClient.
      */
@@ -356,7 +362,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphismAsyncClient async client.
+     * Builds an instance of PolymorphismAsyncClient class.
      *
      * @return an instance of PolymorphismAsyncClient.
      */
@@ -366,7 +372,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphicrecursiveAsyncClient async client.
+     * Builds an instance of PolymorphicrecursiveAsyncClient class.
      *
      * @return an instance of PolymorphicrecursiveAsyncClient.
      */
@@ -376,7 +382,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of ReadonlypropertyAsyncClient async client.
+     * Builds an instance of ReadonlypropertyAsyncClient class.
      *
      * @return an instance of ReadonlypropertyAsyncClient.
      */
@@ -386,7 +392,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of FlattencomplexAsyncClient async client.
+     * Builds an instance of FlattencomplexAsyncClient class.
      *
      * @return an instance of FlattencomplexAsyncClient.
      */
@@ -396,7 +402,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of BasicClient sync client.
+     * Builds an instance of BasicClient class.
      *
      * @return an instance of BasicClient.
      */
@@ -406,7 +412,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PrimitiveClient sync client.
+     * Builds an instance of PrimitiveClient class.
      *
      * @return an instance of PrimitiveClient.
      */
@@ -416,7 +422,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of ArrayClient sync client.
+     * Builds an instance of ArrayClient class.
      *
      * @return an instance of ArrayClient.
      */
@@ -426,7 +432,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of DictionaryClient sync client.
+     * Builds an instance of DictionaryClient class.
      *
      * @return an instance of DictionaryClient.
      */
@@ -436,7 +442,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of InheritanceClient sync client.
+     * Builds an instance of InheritanceClient class.
      *
      * @return an instance of InheritanceClient.
      */
@@ -446,7 +452,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphismClient sync client.
+     * Builds an instance of PolymorphismClient class.
      *
      * @return an instance of PolymorphismClient.
      */
@@ -456,7 +462,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of PolymorphicrecursiveClient sync client.
+     * Builds an instance of PolymorphicrecursiveClient class.
      *
      * @return an instance of PolymorphicrecursiveClient.
      */
@@ -466,7 +472,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of ReadonlypropertyClient sync client.
+     * Builds an instance of ReadonlypropertyClient class.
      *
      * @return an instance of ReadonlypropertyClient.
      */
@@ -476,7 +482,7 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /**
-     * Builds an instance of FlattencomplexClient sync client.
+     * Builds an instance of FlattencomplexClient class.
      *
      * @return an instance of FlattencomplexClient.
      */

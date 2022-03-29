@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.httpinfrastructure.implementation.MultipleResponsesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = MultipleResponsesClientBuilder.class)
 public final class MultipleResponsesClient {
-    @Generated private final MultipleResponsesImpl serviceClient;
+    @Generated private final MultipleResponsesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of MultipleResponses client.
+     * Initializes an instance of MultipleResponsesClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    MultipleResponsesClient(MultipleResponsesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    MultipleResponsesClient(MultipleResponsesAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -42,12 +44,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model204NoModelDefaultError200ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model204NoModelDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -63,12 +68,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model204NoModelDefaultError204ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model204NoModelDefaultError204ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -84,12 +92,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model204NoModelDefaultError201InvalidWithResponse(requestOptions);
+        return this.asyncClient.get200Model204NoModelDefaultError201InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -105,12 +116,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model204NoModelDefaultError202NoneWithResponse(requestOptions);
+        return this.asyncClient.get200Model204NoModelDefaultError202NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -126,12 +140,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model204NoModelDefaultError400ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model204NoModelDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -147,12 +164,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model201ModelDefaultError200ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model201ModelDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -168,12 +188,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model201ModelDefaultError201ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model201ModelDefaultError201ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -189,12 +212,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200Model201ModelDefaultError400ValidWithResponse(requestOptions);
+        return this.asyncClient.get200Model201ModelDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -208,13 +234,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -228,13 +256,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -248,13 +278,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -268,13 +300,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -282,12 +316,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultError202NoneWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultError202NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -295,12 +332,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultError204NoneWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultError204NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -308,12 +348,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultError400ValidWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -321,12 +364,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultNone202InvalidWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultNone202InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -334,12 +380,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultNone204NoneWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultNone204NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -347,12 +396,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultNone400NoneWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultNone400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -360,12 +412,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get202None204NoneDefaultNone400InvalidWithResponse(requestOptions);
+        return this.asyncClient.get202None204NoneDefaultNone400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -381,12 +436,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultModelA200ValidWithResponse(requestOptions);
+        return this.asyncClient.getDefaultModelA200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -402,12 +460,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultModelA200NoneWithResponse(requestOptions);
+        return this.asyncClient.getDefaultModelA200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -415,12 +476,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultModelA400ValidWithResponse(requestOptions);
+        return this.asyncClient.getDefaultModelA400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -428,12 +492,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultModelA400NoneWithResponse(requestOptions);
+        return this.asyncClient.getDefaultModelA400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -441,12 +508,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultNone200InvalidWithResponse(requestOptions);
+        return this.asyncClient.getDefaultNone200InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -454,12 +524,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultNone200NoneWithResponse(requestOptions);
+        return this.asyncClient.getDefaultNone200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -467,12 +540,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultNone400InvalidWithResponse(requestOptions);
+        return this.asyncClient.getDefaultNone400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -480,12 +556,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDefaultNone400NoneWithResponse(requestOptions);
+        return this.asyncClient.getDefaultNone400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -502,12 +581,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA200NoneWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -523,12 +605,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA200ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -544,12 +629,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA200InvalidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA200InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -565,12 +653,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA400NoneWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -586,12 +677,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA400ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -607,12 +701,15 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA400InvalidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -628,11 +725,14 @@ public final class MultipleResponsesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get200ModelA202ValidWithResponse(requestOptions);
+        return this.asyncClient.get200ModelA202ValidWithResponse(requestOptions).block();
     }
 }

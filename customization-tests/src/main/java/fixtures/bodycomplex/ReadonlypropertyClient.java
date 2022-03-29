@@ -20,7 +20,7 @@ public final class ReadonlypropertyClient {
     @Generated private final ReadonlypropertiesImpl serviceClient;
 
     /**
-     * Initializes an instance of Readonlyproperties client.
+     * Initializes an instance of ReadonlypropertyClient class.
      *
      * @param serviceClient the service client implementation.
      */

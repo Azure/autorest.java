@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 
 /** Initializes a new instance of the synchronous MediaTypesClient type. */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {
-    @Generated private final MediaTypesClientImpl serviceClient;
+    @Generated private final MediaTypesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of MediaTypesClient client.
+     * Initializes an instance of MediaTypesClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    MediaTypesClient(MediaTypesClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    MediaTypesClient(MediaTypesAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -55,12 +57,15 @@ public final class MediaTypesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.analyzeBodyWithResponse(requestOptions);
+        return this.asyncClient.analyzeBodyWithResponse(requestOptions).block();
     }
 
     /**
@@ -83,12 +88,15 @@ public final class MediaTypesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.analyzeBodyNoAcceptHeaderWithResponse(requestOptions);
+        return this.asyncClient.analyzeBodyNoAcceptHeaderWithResponse(requestOptions).block();
     }
 
     /**
@@ -108,12 +116,15 @@ public final class MediaTypesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.contentTypeWithEncodingWithResponse(requestOptions);
+        return this.asyncClient.contentTypeWithEncodingWithResponse(requestOptions).block();
     }
 
     /**
@@ -144,13 +155,16 @@ public final class MediaTypesClient {
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
             BinaryData message, RequestOptions requestOptions) {
-        return this.serviceClient.binaryBodyWithTwoContentTypesWithResponse(message, requestOptions);
+        return this.asyncClient.binaryBodyWithTwoContentTypesWithResponse(message, requestOptions).block();
     }
 
     /**
@@ -181,17 +195,28 @@ public final class MediaTypesClient {
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
             BinaryData message, RequestOptions requestOptions) {
-        return this.serviceClient.binaryBodyWithThreeContentTypesWithResponse(message, requestOptions);
+        return this.asyncClient.binaryBodyWithThreeContentTypesWithResponse(message, requestOptions).block();
     }
 
     /**
      * Body that's either text/plain or application/json.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -208,11 +233,14 @@ public final class MediaTypesClient {
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putTextAndJsonBodyWithResponse(BinaryData message, RequestOptions requestOptions) {
-        return this.serviceClient.putTextAndJsonBodyWithResponse(message, requestOptions);
+        return this.asyncClient.putTextAndJsonBodyWithResponse(message, requestOptions).block();
     }
 }

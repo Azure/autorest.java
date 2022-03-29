@@ -24,6 +24,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -52,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -176,9 +178,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-        } else if (!settings.isLowLevelClient()) {
-            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
-                .getImplementationSubpackage().isEmpty()) {
+        } else {
+            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
+                    && !settings.getImplementationSubpackage().isEmpty()) {
+
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
@@ -188,11 +191,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
                     && !clientModels.isEmpty()) {
+
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
                     packageInfos.put(modelsPackage, new PackageInfo(
@@ -273,23 +277,36 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
             List<ProtocolExample> protocolExamples = new ArrayList<>();
             Set<String> protocolExampleNameSet = new HashSet<>();
+
+            BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
+                if (m.getType() == ClientMethodType.SimpleSyncRestResponse
+                        || m.getType() == ClientMethodType.PagingSync
+                        || m.getType() == ClientMethodType.LongRunningBeginSync) {
+                    ClientBuilder clientBuilder = c.getClientBuilder();
+                    if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
+                        m.getProxyMethod().getExamples().forEach((name, example) -> {
+                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                            if (!protocolExampleNameSet.contains(filename)) {
+                                ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
+                                protocolExamples.add(protocolExample);
+                                protocolExampleNameSet.add(filename);
+                            }
+                        });
+                    }
+                }
+            };
+
+            syncClients.stream().filter(c -> c.getServiceClient() != null)
+                    .forEach(c -> c.getServiceClient().getClientMethods()
+                            .forEach(m -> handleExample.accept(c, m)));
             syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
-                    .forEach(c -> c.getMethodGroupClient().getClientMethods().stream()
-                            .filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse || m.getType() == ClientMethodType.PagingSync || m.getType() == ClientMethodType.LongRunningBeginSync)
-                            .forEach(m -> {
-                                ClientBuilder clientBuilder = c.getClientBuilder();
-                                if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
-                                    m.getProxyMethod().getExamples().forEach((name, example) -> {
-                                        String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-                                        if (!protocolExampleNameSet.contains(filename)) {
-                                            ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
-                                            protocolExamples.add(protocolExample);
-                                            protocolExampleNameSet.add(filename);
-                                        }
-                                    });
-                                }
-                            }));
+                    .forEach(c -> c.getMethodGroupClient().getClientMethods()
+                            .forEach(m -> handleExample.accept(c, m)));
             builder.protocolExamples(protocolExamples);
+        }
+
+        if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
+            builder.liveTests(LiveTestsMapper.getInstance().map(codeModel.getTestModel()));
         }
 
         return builder.build();
@@ -298,10 +315,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {
         clientBuilder.addBuilderTrait(ClientBuilderTrait.HTTP_TRAIT);
         clientBuilder.addBuilderTrait(ClientBuilderTrait.CONFIGURATION_TRAIT);
-        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.TOKEN_CREDENTIAL_TRAIT);
         }
-        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
         }
         if (serviceClient.getProperties().stream().anyMatch(property -> property.getName().equals("endpoint"))) {
@@ -349,7 +366,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return xmlSequenceWrappers;
     }
 
-    private ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
+    static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
         String name = CodeNamer.getPlural(operation.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
@@ -370,6 +387,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         headerSchema.getLanguage().setJava(new Language());
         headerSchema.getLanguage().getJava().setName(name);
         headerSchema.setProperties(new ArrayList<>());
+        headerSchema.setStronglyTypedHeader(true);
         for (Map.Entry<String, Schema> header : headerMap.entrySet()) {
             Property property = new Property();
             property.setSerializedName(header.getKey());
@@ -396,15 +414,17 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private ClientResponse parseResponse(Operation method, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
-        if (headerSchema == null) {
+        if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
+
         ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
-        builder.name(classType.getName()).packageName(classType.getPackage());
-        builder.description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()));
-        builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
-        builder.bodyType(SchemaUtil.getOperationResponseType(method));
-        return builder.build();
+        return builder.name(classType.getName())
+            .packageName(classType.getPackage())
+            .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
+            .headersType(Mappers.getSchemaMapper().map(headerSchema))
+            .bodyType(SchemaUtil.getOperationResponseType(method))
+            .build();
     }
 
     private static ModuleInfo moduleInfo() {

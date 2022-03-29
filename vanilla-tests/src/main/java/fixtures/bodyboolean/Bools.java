@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.bodyboolean.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -181,7 +182,7 @@ public final class Bools {
         if (value != null) {
             return value;
         } else {
-            throw new NullPointerException();
+            throw LOGGER.logExceptionAsError(new NullPointerException());
         }
     }
 
@@ -379,7 +380,7 @@ public final class Bools {
         if (value != null) {
             return value;
         } else {
-            throw new NullPointerException();
+            throw LOGGER.logExceptionAsError(new NullPointerException());
         }
     }
 
@@ -577,7 +578,7 @@ public final class Bools {
         if (value != null) {
             return value;
         } else {
-            throw new NullPointerException();
+            throw LOGGER.logExceptionAsError(new NullPointerException());
         }
     }
 
@@ -686,7 +687,7 @@ public final class Bools {
         if (value != null) {
             return value;
         } else {
-            throw new NullPointerException();
+            throw LOGGER.logExceptionAsError(new NullPointerException());
         }
     }
 
@@ -703,4 +704,6 @@ public final class Bools {
     public Response<Boolean> getInvalidWithResponse(Context context) {
         return getInvalidWithResponseAsync(context).block();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Bools.class);
 }

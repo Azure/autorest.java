@@ -8,24 +8,26 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import fixtures.httpinfrastructure.implementation.HttpServerFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpServerFailureClientBuilder.class)
 public final class HttpServerFailureClient {
-    @Generated private final HttpServerFailuresImpl serviceClient;
+    @Generated private final HttpServerFailureAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of HttpServerFailures client.
+     * Initializes an instance of HttpServerFailureClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    HttpServerFailureClient(HttpServerFailuresImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    HttpServerFailureClient(HttpServerFailureAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -33,12 +35,15 @@ public final class HttpServerFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.head501WithResponse(requestOptions);
+        return this.asyncClient.head501WithResponse(requestOptions).block();
     }
 
     /**
@@ -46,12 +51,15 @@ public final class HttpServerFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.get501WithResponse(requestOptions);
+        return this.asyncClient.get501WithResponse(requestOptions).block();
     }
 
     /**
@@ -65,12 +73,15 @@ public final class HttpServerFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.post505WithResponse(requestOptions);
+        return this.asyncClient.post505WithResponse(requestOptions).block();
     }
 
     /**
@@ -84,11 +95,14 @@ public final class HttpServerFailureClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.delete505WithResponse(requestOptions);
+        return this.asyncClient.delete505WithResponse(requestOptions).block();
     }
 }

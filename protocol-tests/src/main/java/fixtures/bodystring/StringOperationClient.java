@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = StringOperationClientBuilder.class)
 public final class StringOperationClient {
-    @Generated private final StringOperationsImpl serviceClient;
+    @Generated private final StringOperationAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of StringOperations client.
+     * Initializes an instance of StringOperationClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    StringOperationClient(StringOperationsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    StringOperationClient(StringOperationAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -40,12 +42,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null string value value along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNullWithResponse(requestOptions);
+        return this.asyncClient.getNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -59,12 +64,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putNullWithResponse(requestOptions);
+        return this.asyncClient.putNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -78,12 +86,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return empty string value value '' along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getEmptyWithResponse(requestOptions);
+        return this.asyncClient.getEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -97,12 +108,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putEmptyWithResponse(requestOptions);
+        return this.asyncClient.putEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -116,13 +130,16 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
      *     {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getMbcsWithResponse(requestOptions);
+        return this.asyncClient.getMbcsWithResponse(requestOptions).block();
     }
 
     /**
@@ -136,12 +153,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putMbcsWithResponse(requestOptions);
+        return this.asyncClient.putMbcsWithResponse(requestOptions).block();
     }
 
     /**
@@ -156,6 +176,9 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
      *     Response}.
@@ -163,7 +186,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getWhitespaceWithResponse(requestOptions);
+        return this.asyncClient.getWhitespaceWithResponse(requestOptions).block();
     }
 
     /**
@@ -178,12 +201,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putWhitespaceWithResponse(requestOptions);
+        return this.asyncClient.putWhitespaceWithResponse(requestOptions).block();
     }
 
     /**
@@ -197,12 +223,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return string value when no string value is sent in response payload along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNotProvidedWithResponse(requestOptions);
+        return this.asyncClient.getNotProvidedWithResponse(requestOptions).block();
     }
 
     /**
@@ -216,12 +245,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return value that is base64 encoded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBase64EncodedWithResponse(requestOptions);
+        return this.asyncClient.getBase64EncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -235,12 +267,15 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return value that is base64url encoded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getBase64UrlEncodedWithResponse(requestOptions);
+        return this.asyncClient.getBase64UrlEncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -255,12 +290,15 @@ public final class StringOperationClient {
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return this.serviceClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions);
+        return this.asyncClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions).block();
     }
 
     /**
@@ -274,11 +312,14 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null value that is expected to be base64url encoded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
+        return this.asyncClient.getNullBase64UrlEncodedWithResponse(requestOptions).block();
     }
 }

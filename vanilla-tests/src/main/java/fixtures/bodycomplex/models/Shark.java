@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -105,7 +106,10 @@ public class Shark extends Fish {
     public void validate() {
         super.validate();
         if (getBirthday() == null) {
-            throw new IllegalArgumentException("Missing required property birthday in model Shark");
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Missing required property birthday in model Shark"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 }

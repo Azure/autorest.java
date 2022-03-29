@@ -6,12 +6,15 @@ package com.azure.autorest.fluent.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
@@ -64,5 +67,15 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
         }
         builder.unexpectedResponseExceptionTypes(unexpectedResponseExceptionTypes);
         */
+    }
+
+    @Override
+    protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
+        return super.operationGroupNotNull(operation, settings)
+            // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
+            && !(
+                settings.isFluent()
+                    && Objects.equals(Utils.getNameForUngroupedOperations(operation.getOperationGroup().getCodeModel(), FluentStatic.getFluentJavaSettings()), operation.getOperationGroup().getLanguage().getDefault().getName())
+            );
     }
 }

@@ -67,6 +67,13 @@ public class FluentMapper {
             fluentClient.getExamples().addAll(examples);
         }
 
+        // live tests
+        fluentClient.getLiveTests().addAll(
+                client.getLiveTests()
+                        .stream()
+                        .map(liveTests -> FluentLiveTestsMapper.getInstance().map(liveTests, fluentClient, codeModel, fluentJavaSettings))
+                        .collect(Collectors.toList()));
+
         return fluentClient;
     }
 

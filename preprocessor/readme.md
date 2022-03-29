@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.21.4"
+  "@autorest/modelerfour": "4.23.1"
 
 pipeline:
 
@@ -17,6 +17,10 @@ pipeline:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
 
     seal-single-value-enum-by-default: true
+
+    skip-special-headers:
+    - Repeatability-Request-ID
+    - Repeatability-First-Sent
 
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
@@ -43,6 +47,10 @@ generate-builder-per-client: true
 add-context-parameter: true
 context-client-method-parameter: true
 sync-methods: all
+use-default-http-status-code-to-exception-type-mapping: true
+models-subpackage: implementation.models
+client-logger: true
+model-override-setter-from-superclass: true
 polling: {}
 
 pipeline:

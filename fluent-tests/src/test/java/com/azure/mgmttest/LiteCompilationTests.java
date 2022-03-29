@@ -3,7 +3,9 @@
 
 package com.azure.mgmttest;
 
+import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.rest.PagedIterable;
@@ -33,6 +35,8 @@ import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 
 import java.time.Duration;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
 public class LiteCompilationTests {
@@ -93,6 +97,14 @@ public class LiteCompilationTests {
                 .create();
 
         storageManager.storageAccounts().deleteByResourceGroup(rgName, saName);
+
+        storageManager = StorageManager.authenticate(any(TokenCredential.class), any(AzureProfile.class));
+
+        storageManager = StorageManager.configure()
+                .withDefaultPollInterval(any(Duration.class))
+                .authenticate(any(TokenCredential.class), any(AzureProfile.class));
+
+        storageManager = StorageManager.authenticate(any(HttpPipeline.class), any(AzureProfile.class));
     }
 
     public void testResources() {
@@ -122,7 +134,7 @@ public class LiteCompilationTests {
     public void testMediaServices() {
         MediaServicesManager mediaServicesManager = mock(MediaServicesManager.class);
 
-        MediaService mediaService = mediaServicesManager.mediaservices().getById(mock(String.class));
-        mediaService.syncStorageKeys(mock(SyncStorageKeysInput.class));
+        MediaService mediaService = mediaServicesManager.mediaservices().getById(anyString());
+        mediaService.syncStorageKeys(any(SyncStorageKeysInput.class));
     }
 }

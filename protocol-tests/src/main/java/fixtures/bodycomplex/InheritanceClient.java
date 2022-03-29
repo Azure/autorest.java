@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.InheritancesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = InheritanceClientBuilder.class)
 public final class InheritanceClient {
-    @Generated private final InheritancesImpl serviceClient;
+    @Generated private final InheritanceAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Inheritances client.
+     * Initializes an instance of InheritanceClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    InheritanceClient(InheritancesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    InheritanceClient(InheritanceAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -52,12 +54,15 @@ public final class InheritanceClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that extend others along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getValidWithResponse(requestOptions);
+        return this.asyncClient.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -86,11 +91,14 @@ public final class InheritanceClient {
      *     food="french fries".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
     }
 }

@@ -30,7 +30,7 @@ public final class PrimitiveClient {
     @Generated private final PrimitivesImpl serviceClient;
 
     /**
-     * Initializes an instance of Primitives client.
+     * Initializes an instance of PrimitiveClient class.
      *
      * @param serviceClient the service client implementation.
      */

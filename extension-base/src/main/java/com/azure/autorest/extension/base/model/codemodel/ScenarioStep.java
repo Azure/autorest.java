@@ -17,6 +17,15 @@ public class ScenarioStep {
      * map of resolved parameter name and value.
      */
     private Map<String, Object> requestParameters;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public TestScenarioStepType getType() {
         return type;

@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import fixtures.lro.implementation.LrosCustomHeadersImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
 @ServiceClient(builder = LrosCustomHeaderClientBuilder.class)
 public final class LrosCustomHeaderClient {
-    @Generated private final LrosCustomHeadersImpl serviceClient;
+    @Generated private final LrosCustomHeaderAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of LrosCustomHeaders client.
+     * Initializes an instance of LrosCustomHeaderClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    LrosCustomHeaderClient(LrosCustomHeadersImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    LrosCustomHeaderClient(LrosCustomHeaderAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -73,12 +75,15 @@ public final class LrosCustomHeaderClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
-        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions);
+        return this.asyncClient.beginPutAsyncRetrySucceeded(requestOptions).getSyncPoller();
     }
 
     /**
@@ -125,12 +130,15 @@ public final class LrosCustomHeaderClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
-        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions);
+        return this.asyncClient.beginPut201CreatingSucceeded200(requestOptions).getSyncPoller();
     }
 
     /**
@@ -158,12 +166,15 @@ public final class LrosCustomHeaderClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
-        return this.serviceClient.beginPost202Retry200(requestOptions);
+        return this.asyncClient.beginPost202Retry200(requestOptions).getSyncPoller();
     }
 
     /**
@@ -192,11 +203,14 @@ public final class LrosCustomHeaderClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
-        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions);
+        return this.asyncClient.beginPostAsyncRetrySucceeded(requestOptions).getSyncPoller();
     }
 }

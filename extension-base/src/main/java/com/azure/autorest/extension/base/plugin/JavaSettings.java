@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -23,9 +22,6 @@ import java.util.stream.Collectors;
  */
 public class JavaSettings {
     private static final String VERSION = "4.0.0";
-
-    private static final Pattern LEADING_PERIOD = Pattern.compile("^\\.");
-    private static final Pattern TRAILING_PERIOD = Pattern.compile("\\.$");
 
     private static JavaSettings _instance;
 
@@ -78,7 +74,11 @@ public class JavaSettings {
             loadStringSetting("tag", autorestSettings::setTag);
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
-            loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setAzureLibrariesForJavaFolder);
+            loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
+            if (!autorestSettings.getJavaSdksFolder().isPresent() || autorestSettings.getJavaSdksFolder().get().isEmpty()) {
+                // TODO(weidxu): remove after script updated
+                loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setJavaSdksFolder);
+            }
             List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
@@ -138,13 +138,16 @@ public class JavaSettings {
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 getBooleanValue(host, "generate-send-request-method", false),
+                getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
-                getBooleanValue(host, "partial-update", false)
+                getBooleanValue(host, "partial-update", false),
+                getBooleanValue(host, "custom-strongly-typed-header-deserialization", false),
+                getBooleanValue(host, "generic-response-type", false)
             );
         }
         return _instance;
@@ -183,6 +186,11 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
+     * @param customStronglyTypedHeaderDeserialization If set to true, strongly-typed HTTP header objects will use
+     * custom deserialization logic instead of using Jackson Databind's convertValue method, offering substantial
+     * performance benefits.
+     * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
+     * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -233,12 +241,15 @@ public class JavaSettings {
         boolean generateSamples,
         boolean generateTests,
         boolean generateSendRequestMethod,
+        boolean generateModels,
         boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
-        boolean handlePartialUpdate) {
+        boolean handlePartialUpdate,
+        boolean customStronglyTypedHeaderDeserialization,
+        boolean genericResponseTypes) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -314,6 +325,7 @@ public class JavaSettings {
         this.generateSamples = generateSamples;
         this.generateTests = generateTests;
         this.generateSendRequestMethod = generateSendRequestMethod;
+        this.generateModels = generateModels;
         this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
@@ -323,6 +335,9 @@ public class JavaSettings {
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
 
         this.handlePartialUpdate = handlePartialUpdate;
+
+        this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
+        this.genericResponseTypes = genericResponseTypes;
     }
 
     private String keyCredentialHeaderName;
@@ -478,8 +493,19 @@ public class JavaSettings {
             for (String packageSuffix : packageSuffixes) {
                 if (packageSuffix != null && !packageSuffix.isEmpty()) {
                     // Cleanse the package suffix to remove leading and trailing periods.
-                    String cleansedPackageSuffix = LEADING_PERIOD.matcher(packageSuffix).replaceAll("");
-                    cleansedPackageSuffix = TRAILING_PERIOD.matcher(cleansedPackageSuffix).replaceAll("");
+                    boolean startsWithPeriod = packageSuffix.startsWith(".");
+                    boolean endsWithPeriod = packageSuffix.endsWith(".");
+
+                    String cleansedPackageSuffix;
+                    if (startsWithPeriod && endsWithPeriod) {
+                        cleansedPackageSuffix = packageSuffix.substring(1, packageSuffix.length() - 1);
+                    } else if (startsWithPeriod) {
+                        cleansedPackageSuffix = packageSuffix.substring(1);
+                    } else if (endsWithPeriod) {
+                        cleansedPackageSuffix = packageSuffix.substring(0, packageSuffix.length() - 1);
+                    } else {
+                        cleansedPackageSuffix = packageSuffix;
+                    }
 
                     packageBuilder.append(".").append(cleansedPackageSuffix);
                 }
@@ -604,6 +630,10 @@ public class JavaSettings {
 
     public final boolean shouldGenerateSyncAsyncClients() {
         return generateSyncAsyncClients;
+    }
+
+    public final boolean isSyncClientWrapAsyncClient() {
+        return true;
     }
 
     private SyncMethodsGeneration syncMethods = SyncMethodsGeneration.NONE; // no sync methods are generated by default
@@ -765,6 +795,12 @@ public class JavaSettings {
         return generateSendRequestMethod;
     }
 
+    private final boolean generateModels;
+
+    public boolean isGenerateModels() {
+        return generateModels;
+    }
+
     private final boolean clientBuilderDisabled;
 
     public boolean clientBuilderDisabled() {
@@ -881,6 +917,30 @@ public class JavaSettings {
 
     public boolean isHandlePartialUpdate() {
         return handlePartialUpdate;
+    }
+
+    private final boolean customStronglyTypedHeaderDeserialization;
+
+    /**
+     * Whether strongly-typed header objects should use custom deserialization logic instead of using Jackson Databind's
+     * convertValue method, offering substantial performance benefits.
+     *
+     * @return Whether strongly-typed header objects should use custom deserialization logic.
+     */
+    public boolean isCustomStronglyTypedHeaderDeserializationUsed() {
+        return customStronglyTypedHeaderDeserialization;
+    }
+
+    private final boolean genericResponseTypes;
+
+    /**
+     * Whether Response, ResponseBase, PagedResponse, or PagedResponseBase will be used directly with generics instead
+     * of creating a named type that extends one of those type.
+     *
+     * @return Whether generic response types are used instead of named types that extend the generic type.
+     */
+    public boolean isGenericResponseTypes() {
+        return genericResponseTypes;
     }
 
     public static final String DefaultCodeGenerationHeader = String.join("\r\n",

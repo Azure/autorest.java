@@ -8,25 +8,27 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PolymorphismClientBuilder.class)
 public final class PolymorphismClient {
-    @Generated private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of Polymorphisms client.
+     * Initializes an instance of PolymorphismClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    PolymorphismClient(PolymorphismsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    PolymorphismClient(PolymorphismAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -46,12 +48,15 @@ public final class PolymorphismClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that are polymorphic along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getValidWithResponse(requestOptions);
+        return this.asyncClient.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -77,12 +82,15 @@ public final class PolymorphismClient {
      *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -98,12 +106,15 @@ public final class PolymorphismClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDotSyntaxWithResponse(requestOptions);
+        return this.asyncClient.getDotSyntaxWithResponse(requestOptions).block();
     }
 
     /**
@@ -133,13 +144,16 @@ public final class PolymorphismClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     with discriminator specified along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComposedWithDiscriminatorWithResponse(requestOptions);
+        return this.asyncClient.getComposedWithDiscriminatorWithResponse(requestOptions).block();
     }
 
     /**
@@ -169,13 +183,16 @@ public final class PolymorphismClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
      *     without discriminator specified on wire along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComposedWithoutDiscriminatorWithResponse(requestOptions);
+        return this.asyncClient.getComposedWithoutDiscriminatorWithResponse(requestOptions).block();
     }
 
     /**
@@ -203,13 +220,16 @@ public final class PolymorphismClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
      *     along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getComplicatedWithResponse(requestOptions);
+        return this.asyncClient.getComplicatedWithResponse(requestOptions).block();
     }
 
     /**
@@ -238,12 +258,15 @@ public final class PolymorphismClient {
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putComplicatedWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putComplicatedWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -292,13 +315,16 @@ public final class PolymorphismClient {
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
             BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -324,11 +350,14 @@ public final class PolymorphismClient {
      *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidMissingRequiredWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.serviceClient.putValidMissingRequiredWithResponse(complexBody, requestOptions);
+        return this.asyncClient.putValidMissingRequiredWithResponse(complexBody, requestOptions).block();
     }
 }

@@ -26,6 +26,7 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 
@@ -316,6 +317,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
+    private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
+        boolean requestOptionsLocal = false;
+        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
+            requestOptionsLocal = true;
+            function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
+        }
+        return requestOptionsLocal;
+    }
+
+    protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
+        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
+            function.line(String.format("String %1$s = UUID.randomUUID().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
+            function.line(String.format("String %1$s = DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
+        }
+    }
+
     protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
         if (visibility == JavaVisibility.Public) {
             typeBlock.publicMethod(methodSignature, method);
@@ -465,7 +484,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        //                typeBlock.javadocComment(comment ->
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
@@ -560,7 +578,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
                         if (settings.shouldClientLogger()) {
-                            elseAction.line("throw logger.logExceptionAsError(new NullPointerException());");
+                            elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");
                         }
@@ -632,7 +650,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             ApplyParameterTransformations(function, clientMethod, settings);
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
+            boolean requestOptionsLocal = false;
+            if (settings.isLowLevelClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
             if (settings.getAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.line(String.format("return %s", serviceMethodCall));
@@ -675,13 +700,19 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
-    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, JavaSettings settings) {
+    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, boolean useLocalRequestOptions, JavaSettings settings) {
         List<String> serviceMethodArgs = clientMethod.getProxyMethodArguments(settings)
                 .stream()
                 .map(argVal -> {
                     if (clientMethod.getParameters().stream().filter(param -> param.getName().equals(argVal))
                             .anyMatch(param -> clientMethod.getMethodTransformationDetails().stream()
                                     .anyMatch(transformation -> param.getName().equals(transformation.getOutParameter().getName())))) {
+                        return argVal + "Local";
+                    }
+                    return argVal;
+                })
+                .map(argVal -> {
+                    if (useLocalRequestOptions && "requestOptions".equals(argVal)) {
                         return argVal + "Local";
                     }
                     return argVal;
@@ -699,7 +730,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             ApplyParameterTransformations(function, clientMethod, settings);
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
+            boolean requestOptionsLocal = false;
+            if (settings.isLowLevelClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
             if (settings.getAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);

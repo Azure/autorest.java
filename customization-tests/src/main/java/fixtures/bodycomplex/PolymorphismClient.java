@@ -23,7 +23,7 @@ public final class PolymorphismClient {
     @Generated private final PolymorphismsImpl serviceClient;
 
     /**
-     * Initializes an instance of Polymorphisms client.
+     * Initializes an instance of PolymorphismClient class.
      *
      * @param serviceClient the service client implementation.
      */

@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.FluentPomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
+import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -167,6 +168,7 @@ public class FluentGen extends Javagen {
 
     Client handleMap(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
+        FluentStatic.setFluentJavaSettings(getFluentJavaSettings());
 
         FluentMapper fluentMapper = this.getFluentMapper();
 
@@ -178,7 +180,6 @@ public class FluentGen extends Javagen {
         // samples for Fluent Premium
         if (fluentJavaSettings.isGenerateSamples() && settings.isFluentPremium()) {
             FluentStatic.setClient(client);
-            FluentStatic.setFluentJavaSettings(fluentJavaSettings);
             ExampleParser exampleParser = new ExampleParser();
             fluentPremiumExamples = client.getServiceClient().getMethodGroupClients().stream()
                     .flatMap(mg -> exampleParser.parseMethodGroup(mg).stream())
@@ -330,6 +331,15 @@ public class FluentGen extends Javagen {
                     javaPackage.addSampleMarkdown(fluentClient.getExamples(), sampleJavaFiles);
                 }
             }
+
+            // Tests
+            if (javaSettings.isGenerateTests()) {
+                // Live tests
+                for (FluentLiveTests liveTests : fluentClient.getLiveTests()) {
+                    javaPackage.addLiveTests(liveTests);
+                }
+            }
+
         }
 
         return fluentClient;

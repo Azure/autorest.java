@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.ValueSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.util.Constants;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
@@ -76,7 +77,7 @@ public class NamingConflictResolver {
 
     private static String renameOperationGroup(Metadata m) {
         String name = Utils.getJavaName(m);
-        String newName = name + "Operation";
+        String newName = name + Constants.OPERATION_GROUP_DEDUPLICATE_SUFFIX;
         logger.info("Rename operation group from '{}' to '{}'", name, newName);
         m.getLanguage().getJava().setName(newName);
         return newName;
