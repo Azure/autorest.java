@@ -74,7 +74,11 @@ public class JavaSettings {
             loadStringSetting("tag", autorestSettings::setTag);
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
-            loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setAzureLibrariesForJavaFolder);
+            loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
+            if (!autorestSettings.getJavaSdksFolder().isPresent() || autorestSettings.getJavaSdksFolder().get().isEmpty()) {
+                // TODO remove after script updated
+                loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setJavaSdksFolder);
+            }
             List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
