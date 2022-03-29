@@ -267,6 +267,12 @@ public class FluentGen extends Javagen {
             }
         }
 
+        if (javaSettings.isGenerateTests()) {
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModelUnitTest(model);
+            }
+        }
+
         return javaPackage;
     }
 

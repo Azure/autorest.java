@@ -27,6 +27,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
+import com.azure.autorest.template.ModelTestTemplate;
 import com.azure.autorest.template.ProtocolSampleBlankTemplate;
 import com.azure.autorest.template.ProtocolTestBaseTemplate;
 import com.azure.autorest.template.ProtocolTestTemplate;
@@ -238,6 +239,14 @@ public class JavaPackage {
         String className = testContext.getTestCase().getFilename() + "Tests";
         JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
         ProtocolTestTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addModelUnitTest(ClientModel model) {
+        String className = model.getName() + "Tests";
+        JavaFile javaFile = javaFileFactory.createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
+        ModelTestTemplate.getInstance().write(model, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
