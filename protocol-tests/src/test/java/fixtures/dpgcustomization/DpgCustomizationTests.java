@@ -214,7 +214,7 @@ public class DpgCustomizationTests {
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, poller.waitForCompletion().getStatus());
         Map<String, String> rawModel = (Map<String, String>) poller.getFinalResult().toObject(Object.class);
         Assertions.assertTrue(rawModel.containsKey("received"));
-        Assertions.assertEquals("raw final result", rawModel.get("received"));
+        Assertions.assertEquals("raw", rawModel.get("received"));
         Assertions.assertEquals("Succeeded", rawModel.get("provisioningState"));
 
         poller = client.beginLro("model", null);
