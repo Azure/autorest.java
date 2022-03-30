@@ -166,8 +166,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
+     * Head request, no params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -196,8 +195,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
+     * Head request, no params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -227,8 +225,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
+     * Head request, no params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -257,8 +254,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -280,8 +276,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}
-     *     on successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponseAsync(RequestOptions requestOptions) {
@@ -289,8 +284,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -313,8 +307,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}
-     *     on successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -322,8 +315,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -345,7 +337,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
+     * @return true Boolean value on path along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
@@ -353,8 +345,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
+     * Put, has both required and optional params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -386,8 +377,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
+     * Put, has both required and optional params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -420,8 +410,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
+     * Put, has both required and optional params.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -549,8 +538,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
-     * in a known path.
+     * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -566,8 +554,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
-     * in a known path.
+     * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -583,8 +570,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
-     * in a known path.
+     * Delete something.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -599,8 +585,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -622,8 +607,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions) {
@@ -631,8 +615,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -655,8 +638,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -664,8 +646,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
+     * Get true Boolean value on path.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -687,7 +668,7 @@ public final class ParamsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
+     * @return true Boolean value on path along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
@@ -695,8 +676,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
-     * method in a new path.
+     * I'm a new operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -717,8 +697,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
-     * method in a new path.
+     * I'm a new operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -740,8 +719,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
-     * method in a new path.
+     * I'm a new operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
