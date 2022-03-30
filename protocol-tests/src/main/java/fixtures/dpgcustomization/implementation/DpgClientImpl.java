@@ -673,11 +673,10 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLroAsync(String mode, RequestOptions requestOptions) {
-        // TODO: get context from requestOptions
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
-                new DefaultPollingStrategy<>(this.getHttpPipeline(), new DefaultJsonSerializer()),
+                new DefaultPollingStrategy<>(this.getHttpPipeline(), new DefaultJsonSerializer(), requestOptions.getContext()),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
