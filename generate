@@ -82,8 +82,8 @@ autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/media_types.json --names
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url.json --namespace=fixtures.url
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url-multi-collectionFormat.json --namespace=fixtures.url.multi
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro
-autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcinitial
-autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
+autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcinitial
+autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
 autorest $PROTOCOL_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 autorest --version=3.6.6 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
@@ -95,8 +95,8 @@ rm ./protocol-tests/src/main/java/module-info.java
 # Protocol resilience
 rm -rf protocol-resilience-test/llcinitial/src/main
 rm -rf protocol-resilience-test/llcupdate1/src/main
-autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+autorest $PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 rm ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
 rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 

@@ -175,15 +175,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 });
             }
 
+            Stream<ServiceClientProperty> serviceClientPropertyStream = serviceClient.getProperties().stream()
+                    .filter(p -> !p.isReadOnly());
             if (!settings.isAzureOrFluent()) {
                 addTraitMethods(clientBuilder, settings, serviceClientBuilderName, classBlock);
+                serviceClientPropertyStream = serviceClientPropertyStream
+                        .filter(property -> !(clientBuilder.getBuilderTraits().stream()
+                        .flatMap(trait -> trait.getTraitMethods().stream().filter(traitMethod -> traitMethod.getProperty() != null))
+                        .anyMatch(traitMethod -> property.getName().equals(traitMethod.getProperty().getName()))));
             }
-
-            Stream<ServiceClientProperty> serviceClientPropertyStream = serviceClient.getProperties().stream()
-                    .filter(p -> !p.isReadOnly())
-                    .filter(property -> !(clientBuilder.getBuilderTraits().stream()
-                            .flatMap(trait -> trait.getTraitMethods().stream().filter(traitMethod -> traitMethod.getProperty() != null))
-                            .anyMatch(traitMethod -> property.getName().equals(traitMethod.getProperty().getName()))));
 
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
