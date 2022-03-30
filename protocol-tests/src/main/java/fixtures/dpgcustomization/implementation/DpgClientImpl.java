@@ -34,6 +34,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.implementation.serializer.DefaultJsonSerializer;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -672,10 +673,11 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLroAsync(String mode, RequestOptions requestOptions) {
+        // TODO: get context from requestOptions
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
-                new DefaultPollingStrategy<>(this.getHttpPipeline()),
+                new DefaultPollingStrategy<>(this.getHttpPipeline(), new DefaultJsonSerializer()),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
