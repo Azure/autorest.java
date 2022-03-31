@@ -6,6 +6,8 @@ package fixtures.bodycomplex;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
+import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
@@ -20,11 +22,13 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
 import java.util.ArrayList;
@@ -34,7 +38,8 @@ import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the DictionaryClient type. */
 @ServiceClientBuilder(serviceClients = {DictionaryClient.class, DictionaryAsyncClient.class})
-public final class DictionaryClientBuilder {
+public final class DictionaryClientBuilder
+        implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -42,10 +47,100 @@ public final class DictionaryClientBuilder {
     @Generated
     private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodycomplex.properties");
 
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+
     /** Create an instance of the DictionaryClientBuilder. */
     @Generated
     public DictionaryClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
+    }
+
+    /*
+     * The HTTP pipeline to send requests through.
+     */
+    @Generated private HttpPipeline pipeline;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder pipeline(HttpPipeline pipeline) {
+        this.pipeline = pipeline;
+        return this;
+    }
+
+    /*
+     * The HTTP client used to send the request.
+     */
+    @Generated private HttpClient httpClient;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder httpClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
+        return this;
+    }
+
+    /*
+     * The logging configuration for HTTP requests and responses.
+     */
+    @Generated private HttpLogOptions httpLogOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+        this.httpLogOptions = httpLogOptions;
+        return this;
+    }
+
+    /*
+     * The client options such as application ID and custom headers to set on a
+     * request.
+     */
+    @Generated private ClientOptions clientOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder clientOptions(ClientOptions clientOptions) {
+        this.clientOptions = clientOptions;
+        return this;
+    }
+
+    /*
+     * The retry options to configure retry policy for failed requests.
+     */
+    @Generated private RetryOptions retryOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder retryOptions(RetryOptions retryOptions) {
+        this.retryOptions = retryOptions;
+        return this;
+    }
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        pipelinePolicies.add(customPolicy);
+        return this;
+    }
+
+    /*
+     * The configuration store that is used during construction of the service
+     * client.
+     */
+    @Generated private Configuration configuration;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public DictionaryClientBuilder configuration(Configuration configuration) {
+        this.configuration = configuration;
+        return this;
     }
 
     /*
@@ -83,75 +178,6 @@ public final class DictionaryClientBuilder {
     }
 
     /*
-     * The HTTP pipeline to send requests through
-     */
-    @Generated private HttpPipeline pipeline;
-
-    /**
-     * Sets The HTTP pipeline to send requests through.
-     *
-     * @param pipeline the pipeline value.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder pipeline(HttpPipeline pipeline) {
-        this.pipeline = pipeline;
-        return this;
-    }
-
-    /*
-     * The HTTP client used to send the request.
-     */
-    @Generated private HttpClient httpClient;
-
-    /**
-     * Sets The HTTP client used to send the request.
-     *
-     * @param httpClient the httpClient value.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder httpClient(HttpClient httpClient) {
-        this.httpClient = httpClient;
-        return this;
-    }
-
-    /*
-     * The configuration store that is used during construction of the service
-     * client.
-     */
-    @Generated private Configuration configuration;
-
-    /**
-     * Sets The configuration store that is used during construction of the service client.
-     *
-     * @param configuration the configuration value.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder configuration(Configuration configuration) {
-        this.configuration = configuration;
-        return this;
-    }
-
-    /*
-     * The logging configuration for HTTP requests and responses.
-     */
-    @Generated private HttpLogOptions httpLogOptions;
-
-    /**
-     * Sets The logging configuration for HTTP requests and responses.
-     *
-     * @param httpLogOptions the httpLogOptions value.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
-        this.httpLogOptions = httpLogOptions;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if
      * applicable.
      */
@@ -169,41 +195,6 @@ public final class DictionaryClientBuilder {
         return this;
     }
 
-    /*
-     * The list of Http pipeline policies to add.
-     */
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
-
-    /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
-     */
-    @Generated private ClientOptions clientOptions;
-
-    /**
-     * Sets The client options such as application ID and custom headers to set on a request.
-     *
-     * @param clientOptions the clientOptions value.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder clientOptions(ClientOptions clientOptions) {
-        this.clientOptions = clientOptions;
-        return this;
-    }
-
-    /**
-     * Adds a custom Http pipeline policy.
-     *
-     * @param customPolicy The custom Http pipeline policy to add.
-     * @return the DictionaryClientBuilder.
-     */
-    @Generated
-    public DictionaryClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        pipelinePolicies.add(customPolicy);
-        return this;
-    }
-
     /**
      * Builds an instance of AutoRestComplexTestServiceClientImpl with the provided parameters.
      *
@@ -211,14 +202,14 @@ public final class DictionaryClientBuilder {
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (serviceVersion == null) {
             this.serviceVersion = AutoRestComplexTestServiceVersion.getLatest();
-        }
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
         }
         AutoRestComplexTestServiceClientImpl client =
                 new AutoRestComplexTestServiceClientImpl(
@@ -253,7 +244,7 @@ public final class DictionaryClientBuilder {
                         .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
                         .collect(Collectors.toList()));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
-        policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);
+        policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
         policies.add(new CookiePolicy());
         policies.addAll(

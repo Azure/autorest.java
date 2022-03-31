@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class ClientBuilder {
     // syncClients and asyncClients can be empty. In this case, ClientBuilder build serviceClient directly. Note this usually is only used for internal implementation, as this pattern does not match Java guidelines.
     private final List<AsyncSyncClient> syncClients;
     private final List<AsyncSyncClient> asyncClients;
+    private final List<ClientBuilderTrait> builderTraits = new ArrayList<>();
 
     public ClientBuilder(String packageName, String className, ServiceClient serviceClient) {
         this.packageName = Objects.requireNonNull(packageName);
@@ -79,5 +81,13 @@ public class ClientBuilder {
         serviceClient.addImportsTo(imports, includeImplementationImports, true, settings);
         getSyncClients().forEach(c -> c.addImportsTo(imports, includeImplementationImports));
         getAsyncClients().forEach(c -> c.addImportsTo(imports, includeImplementationImports));
+    }
+
+    public void addBuilderTrait(ClientBuilderTrait trait) {
+        this.builderTraits.add(trait);
+    }
+
+    public List<ClientBuilderTrait> getBuilderTraits() {
+        return this.builderTraits;
     }
 }

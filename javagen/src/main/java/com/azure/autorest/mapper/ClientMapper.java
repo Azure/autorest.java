@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -22,6 +23,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -247,6 +249,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             builderPackage, clientBuilderName, serviceClient,
                             (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
                             Collections.singletonList(asyncClient));
+
+                    addBuilderTraits(clientBuilder, serviceClient);
                     clientBuilders.add(clientBuilder);
 
                     // there is a cross-reference between service client and service client builder
@@ -259,6 +263,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 // service client builder
                 ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
                         serviceClient, syncClients, asyncClients);
+                addBuilderTraits(clientBuilder, serviceClient);
                 clientBuilders.add(clientBuilder);
 
                 // there is a cross-reference between service client and service client builder
@@ -305,6 +310,20 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         return builder.build();
+    }
+
+    private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {
+        clientBuilder.addBuilderTrait(ClientBuilderTrait.HTTP_TRAIT);
+        clientBuilder.addBuilderTrait(ClientBuilderTrait.CONFIGURATION_TRAIT);
+        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
+            clientBuilder.addBuilderTrait(ClientBuilderTrait.TOKEN_CREDENTIAL_TRAIT);
+        }
+        if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
+            clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
+        }
+        if (serviceClient.getProperties().stream().anyMatch(property -> property.getName().equals("endpoint"))) {
+            clientBuilder.addBuilderTrait(ClientBuilderTrait.ENDPOINT_TRAIT);
+        }
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {
