@@ -30,15 +30,6 @@ import fixtures.dpgcustomization.implementation.models.Input;
 import fixtures.dpgcustomization.implementation.models.LroProduct;
 import fixtures.dpgcustomization.implementation.models.Product;
 import fixtures.dpgcustomization.implementation.models.ProductReceived;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.exporter.jaeger.JaegerGrpcSpanExporter;
-import io.opentelemetry.exporter.logging.LoggingSpanExporter;
-import io.opentelemetry.sdk.OpenTelemetrySdk;
-import io.opentelemetry.sdk.trace.SdkTracerProvider;
-import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -110,17 +101,13 @@ public class DpgCustomizationTests {
     }
 
     @Test
-    public void getPagesTracing() {
-        TracingValidationPolicy tracingValidationPolicy = new TracingValidationPolicy();
-        this.asyncClient = new DpgClientBuilder().addPolicy(tracingValidationPolicy).buildAsyncClient();
-
-        Tracer TRACER = configureJaegerExporter();
-
-        Span userParentSpan = TRACER.spanBuilder("user-parent-span").startSpan();
+    public void pagingContextValidation() {
+        ContextValidationPolicy contextValidationPolicy = new ContextValidationPolicy();
+        this.asyncClient = new DpgClientBuilder().addPolicy(contextValidationPolicy).buildAsyncClient();
 
         Context context = new Context(
-                com.azure.core.util.tracing.Tracer.PARENT_TRACE_CONTEXT_KEY,
-                io.opentelemetry.context.Context.current().with(userParentSpan));
+                ContextValidationPolicy.CONTEXT_VALIDATION_KEY,
+                ContextValidationPolicy.CONTEXT_VALIDATION_VALUE);
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -132,11 +119,10 @@ public class DpgCustomizationTests {
         PagedIterable<Product> modelPagedIterable = new PagedIterable<>(modelPagedFlux);
         Assertions.assertEquals(200, modelPagedIterable.iterableByPage().iterator().next().getStatusCode());
         List<Product> modelList = modelPagedIterable.stream().collect(Collectors.toList());
+
         Assertions.assertEquals(ProductReceived.MODEL, modelList.get(0).getReceived());
 
-        Assertions.assertTrue(tracingValidationPolicy.context.getData("trace-context").isPresent());
-
-        userParentSpan.end();
+        Assertions.assertTrue(contextValidationPolicy.hasCalledPolicy && contextValidationPolicy.hasContext);
     }
 
     private static <T, S> PagedFlux<S> mapPage(PagedFlux<T> pagedFlux, Function<T, S> mapper) {
@@ -158,41 +144,14 @@ public class DpgCustomizationTests {
                 null);
     }
 
-    /**
-     * Configure the OpenTelemetry {@link LoggingSpanExporter} to enable tracing.
-     *
-     * @return The OpenTelemetry {@link Tracer} instance.
-     */
-    private static Tracer configureJaegerExporter() {
-        // Create a channel towards Jaeger end point
-        ManagedChannel jaegerChannel =
-                ManagedChannelBuilder.forAddress("localhost", 14250).usePlaintext().build();
-        // Export traces to Jaeger
-        JaegerGrpcSpanExporter jaegerExporter =
-                JaegerGrpcSpanExporter.builder()
-                        .setChannel(jaegerChannel)
-                        .setTimeout(Duration.ofMinutes(30000))
-                        .build();
-
-        // Set to process the spans by the Jaeger Exporter
-        OpenTelemetrySdk openTelemetry = OpenTelemetrySdk.builder()
-                .setTracerProvider(
-                        SdkTracerProvider.builder().addSpanProcessor(SimpleSpanProcessor.create(jaegerExporter)).build())
-                .build();
-        return openTelemetry.getSdkTracerProvider().get("List-KV-Secrets-Sample");
-    }
-
     @Test
-    public void lroTracing() {
-        TracingValidationPolicy tracingValidationPolicy = new TracingValidationPolicy();
-        this.asyncClient = new DpgClientBuilder().addPolicy(tracingValidationPolicy).buildAsyncClient();
-        Tracer TRACER = configureJaegerExporter();
-
-        Span userParentSpan = TRACER.spanBuilder("user-parent-span").startSpan();
+    public void lroContextValidation() {
+        ContextValidationPolicy contextValidationPolicy = new ContextValidationPolicy();
+        this.asyncClient = new DpgClientBuilder().addPolicy(contextValidationPolicy).buildAsyncClient();
 
         Context context = new Context(
-                com.azure.core.util.tracing.Tracer.PARENT_TRACE_CONTEXT_KEY,
-                io.opentelemetry.context.Context.current().with(userParentSpan));
+                ContextValidationPolicy.CONTEXT_VALIDATION_KEY,
+                ContextValidationPolicy.CONTEXT_VALIDATION_VALUE);
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -203,9 +162,8 @@ public class DpgCustomizationTests {
         Map<String, String> rawModel = (Map<String, String>) binaryData.toObject(Object.class);
         Assertions.assertEquals("raw", rawModel.get("received"));
 
-        Assertions.assertTrue(tracingValidationPolicy.context.getData("trace-context").isPresent());
+        Assertions.assertTrue(contextValidationPolicy.hasCalledPolicy && contextValidationPolicy.hasContext);
 
-        userParentSpan.end();
     }
 
     @Test
@@ -309,16 +267,25 @@ public class DpgCustomizationTests {
         Assertions.assertEquals("raw", rawModel.get("received"));
     }
 
-    static class TracingValidationPolicy implements HttpPipelinePolicy {
+    static class ContextValidationPolicy implements HttpPipelinePolicy {
 
-        public HttpPipelineCallContext context;
+        public static final String CONTEXT_VALIDATION_KEY = "CONTEXT_VALIDATION_KEY";
+        public static final String CONTEXT_VALIDATION_VALUE = "CONTEXT_VALIDATION_VALUE";
+        public boolean hasContext = true;
+        public boolean hasCalledPolicy = false;
 
-        TracingValidationPolicy() {
+        ContextValidationPolicy() {
         }
 
         @Override
         public Mono<HttpResponse> process(HttpPipelineCallContext httpPipelineCallContext, HttpPipelineNextPolicy httpPipelineNextPolicy) {
-            this.context = httpPipelineCallContext;
+            hasCalledPolicy = true;
+            if (httpPipelineCallContext.getData(CONTEXT_VALIDATION_KEY).isPresent() &&
+                httpPipelineCallContext.getData(CONTEXT_VALIDATION_KEY).get().equals(CONTEXT_VALIDATION_VALUE)){
+                hasContext = hasContext && true;
+            } else {
+                hasContext = false;
+            }
             return httpPipelineNextPolicy.process();
         }
 
