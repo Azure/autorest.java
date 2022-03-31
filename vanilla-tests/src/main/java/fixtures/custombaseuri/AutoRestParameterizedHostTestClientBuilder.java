@@ -203,6 +203,9 @@ public final class AutoRestParameterizedHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedHostTestClient buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "host";
         }

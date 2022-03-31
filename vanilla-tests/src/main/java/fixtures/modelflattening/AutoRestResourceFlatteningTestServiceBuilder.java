@@ -203,6 +203,9 @@ public final class AutoRestResourceFlatteningTestServiceBuilder
      */
     @Generated
     public AutoRestResourceFlatteningTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

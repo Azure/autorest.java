@@ -222,6 +222,9 @@ public final class AutorestSecurityInfoBuilder
      */
     @Generated
     public AutorestSecurityInfo buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }

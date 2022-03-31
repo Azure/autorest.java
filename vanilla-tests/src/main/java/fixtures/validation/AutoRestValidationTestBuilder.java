@@ -236,6 +236,9 @@ public final class AutoRestValidationTestBuilder
      */
     @Generated
     public AutoRestValidationTest buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

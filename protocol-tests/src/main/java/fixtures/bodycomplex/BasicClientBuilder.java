@@ -201,6 +201,9 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

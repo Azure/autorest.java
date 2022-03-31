@@ -203,6 +203,9 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
      */
     @Generated
     public AutoRestRFC1123DateTimeTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

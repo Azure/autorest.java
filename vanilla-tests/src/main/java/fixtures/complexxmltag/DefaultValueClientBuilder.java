@@ -185,6 +185,9 @@ public final class DefaultValueClientBuilder
      */
     @Generated
     public DefaultValueClient buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }

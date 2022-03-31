@@ -208,6 +208,9 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder
      */
     @Generated
     private AutoRestSwaggerBATDictionaryServiceImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

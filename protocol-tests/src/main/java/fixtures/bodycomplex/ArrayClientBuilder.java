@@ -201,6 +201,9 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

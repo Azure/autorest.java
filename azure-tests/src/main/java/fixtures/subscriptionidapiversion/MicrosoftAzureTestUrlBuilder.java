@@ -236,6 +236,9 @@ public final class MicrosoftAzureTestUrlBuilder
      */
     @Generated
     public MicrosoftAzureTestUrl buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

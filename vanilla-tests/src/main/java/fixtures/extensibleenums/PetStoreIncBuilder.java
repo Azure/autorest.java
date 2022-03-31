@@ -201,6 +201,9 @@ public final class PetStoreIncBuilder implements HttpTrait<PetStoreIncBuilder>, 
      */
     @Generated
     public PetStoreInc buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

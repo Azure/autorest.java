@@ -183,6 +183,9 @@ public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, Co
      */
     @Generated
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

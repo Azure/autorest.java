@@ -189,6 +189,9 @@ public final class AutoRestSwaggerBatHeaderServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerBatHeaderServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

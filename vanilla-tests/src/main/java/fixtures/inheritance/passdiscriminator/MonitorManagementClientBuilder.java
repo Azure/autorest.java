@@ -202,6 +202,9 @@ public final class MonitorManagementClientBuilder
      */
     @Generated
     public MonitorManagementClient buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "https://management.azure.com";
         }

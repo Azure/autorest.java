@@ -183,6 +183,9 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
      */
     @Generated
     private DpgClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

@@ -202,6 +202,9 @@ public final class MediaTypesClientBuilder
      */
     @Generated
     public MediaTypesClient buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

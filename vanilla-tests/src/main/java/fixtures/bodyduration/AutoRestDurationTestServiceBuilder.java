@@ -203,6 +203,9 @@ public final class AutoRestDurationTestServiceBuilder
      */
     @Generated
     public AutoRestDurationTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

@@ -190,6 +190,9 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
      */
     @Generated
     private AutoRestHeadExceptionTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

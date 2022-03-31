@@ -203,6 +203,9 @@ public final class AutoRestParameterGroupingTestServiceBuilder
      */
     @Generated
     public AutoRestParameterGroupingTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

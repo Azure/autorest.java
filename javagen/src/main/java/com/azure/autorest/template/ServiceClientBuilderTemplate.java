@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientBuilderTraitMethod;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
@@ -37,6 +38,7 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -232,7 +234,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
-                for (ServiceClientProperty serviceClientProperty : clientProperties) {
+                List<ServiceClientProperty> allProperties = clientBuilder.getBuilderTraits()
+                        .stream()
+                        .flatMap(trait -> trait.getTraitMethods().stream())
+                        .map(ClientBuilderTraitMethod::getProperty)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+                allProperties.addAll(clientProperties);
+
+                for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
                         function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
                         {

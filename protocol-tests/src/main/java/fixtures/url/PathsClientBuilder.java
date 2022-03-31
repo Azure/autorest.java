@@ -217,6 +217,9 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

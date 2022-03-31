@@ -221,6 +221,9 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedCustomHostTestClient buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (dnsSuffix == null) {
             this.dnsSuffix = "host";
         }

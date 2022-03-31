@@ -185,6 +185,9 @@ public final class HttpRetryClientBuilder
      */
     @Generated
     private AutoRestHttpInfrastructureTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

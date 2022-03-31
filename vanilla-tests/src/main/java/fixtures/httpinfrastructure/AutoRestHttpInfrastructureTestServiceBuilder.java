@@ -203,6 +203,9 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
      */
     @Generated
     public AutoRestHttpInfrastructureTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

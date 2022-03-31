@@ -219,6 +219,9 @@ public final class AutoRestComplexTestServiceBuilder
      */
     @Generated
     public AutoRestComplexTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

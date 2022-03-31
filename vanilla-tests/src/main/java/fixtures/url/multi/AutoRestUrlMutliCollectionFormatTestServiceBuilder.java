@@ -203,6 +203,9 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder
      */
     @Generated
     public AutoRestUrlMutliCollectionFormatTestService buildClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }

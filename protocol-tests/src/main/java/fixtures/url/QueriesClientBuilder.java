@@ -218,6 +218,9 @@ public final class QueriesClientBuilder
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
+        if (pipeline == null) {
+            this.pipeline = createHttpPipeline();
+        }
         if (host == null) {
             this.host = "http://localhost:3000";
         }
