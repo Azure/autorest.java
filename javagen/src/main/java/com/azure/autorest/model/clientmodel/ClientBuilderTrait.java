@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.core.client.traits.AzureKeyCredentialTrait;
 import com.azure.core.client.traits.ConfigurationTrait;
@@ -102,7 +103,10 @@ public class ClientBuilderTrait {
 
         // pipeline
         ServiceClientProperty pipelineProperty = new ServiceClientProperty("The HTTP pipeline to send requests " +
-                "through.", ClassType.HttpPipeline, "pipeline", false, "createHttpPipeline()");
+                "through.", ClassType.HttpPipeline, "pipeline", false,
+                JavaSettings.getInstance().isAzureOrFluent()
+                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
+                        : "createHttpPipeline()");
         Consumer<JavaBlock> pipelineMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "pipeline", "pipeline"));
             function.methodReturn("this");
