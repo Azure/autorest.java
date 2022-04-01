@@ -105,7 +105,7 @@ public class ClientBuilderTrait {
         ServiceClientProperty pipelineProperty = new ServiceClientProperty("The HTTP pipeline to send requests " +
                 "through.", ClassType.HttpPipeline, "pipeline", false,
                 JavaSettings.getInstance().isAzureOrFluent()
-                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
+                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"
                         : "createHttpPipeline()");
         Consumer<JavaBlock> pipelineMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "pipeline", "pipeline"));
