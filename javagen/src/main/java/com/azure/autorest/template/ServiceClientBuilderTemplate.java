@@ -241,7 +241,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         .collect(Collectors.toList());
                 Set<String> propertyNames = allProperties.stream()
                         .map(ServiceClientProperty::getName)
-                        .collect(Collectors.toSet());;
+                        .collect(Collectors.toSet());
                 allProperties.addAll(clientProperties.stream()
                         .filter(p -> !propertyNames.contains(p))    // filter out properties already contained in traits
                         .collect(Collectors.toList()));
