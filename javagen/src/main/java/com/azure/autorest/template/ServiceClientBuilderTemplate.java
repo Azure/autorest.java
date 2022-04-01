@@ -240,7 +240,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         .map(ClientBuilderTraitMethod::getProperty)
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList());
-                allProperties.addAll(clientProperties);
+                Set<String> propertyNames = allProperties.stream()
+                        .map(ServiceClientProperty::getName)
+                        .collect(Collectors.toSet());
+                allProperties.addAll(clientProperties.stream()
+                        .filter(p -> !propertyNames.contains(p))    // filter out properties already contained in traits
+                        .collect(Collectors.toList()));
 
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
@@ -514,7 +519,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         if (settings.isAzureOrFluent()) {
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
             commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
-                            "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
+                            "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"));
         }
         if (settings.isFluent()) {
             commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
