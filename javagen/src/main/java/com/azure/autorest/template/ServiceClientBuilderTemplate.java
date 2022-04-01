@@ -232,7 +232,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
             });
             addGeneratedAnnotation(classBlock);
-            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function -> {
+            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
+            {
                 List<ServiceClientProperty> allProperties = clientBuilder.getBuilderTraits()
                         .stream()
                         .flatMap(trait -> trait.getTraitMethods().stream())
@@ -248,7 +249,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
-                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock -> {
+                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
+                        {
                             function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
                         });
                     }
