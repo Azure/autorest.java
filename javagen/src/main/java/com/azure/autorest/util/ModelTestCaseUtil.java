@@ -10,13 +10,11 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.core.util.CoreUtils;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 public class ModelTestCaseUtil {
 
@@ -93,7 +91,7 @@ public class ModelTestCaseUtil {
         if (value != null) {
             List<String> serializedNames;
             if (modelNeedsFlatten || property.getNeedsFlatten()) {
-                serializedNames = splitFlattenedSerializedName(property.getSerializedName());
+                serializedNames = ModelUtil.splitFlattenedSerializedName(property.getSerializedName());
             } else {
                 serializedNames = Collections.singletonList(property.getSerializedName());
             }
@@ -129,19 +127,5 @@ public class ModelTestCaseUtil {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-    }
-
-    private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
-
-    private static List<String> splitFlattenedSerializedName(String serializedName) {
-        if (serializedName == null) {
-            return Collections.emptyList();
-        }
-
-        String[] values = SPLIT_FLATTEN_PROPERTY_PATTERN.split(serializedName);
-        for (int i = 0; i < values.length; ++i) {
-            values[i] = values[i].replace("\\\\.", ".");
-        }
-        return Arrays.asList(values);
     }
 }

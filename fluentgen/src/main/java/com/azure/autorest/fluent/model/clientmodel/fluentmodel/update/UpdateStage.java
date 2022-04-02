@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.update;
 
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 
 public class UpdateStage extends FluentInterfaceStage {
