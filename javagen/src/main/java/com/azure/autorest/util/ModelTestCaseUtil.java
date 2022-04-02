@@ -10,6 +10,8 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.core.util.CoreUtils;
 
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,34 +27,14 @@ public class ModelTestCaseUtil {
     private static final Random RANDOM = new Random(3);
     private static final Configuration CONFIGURATION = new Configuration();
 
-    private static Object jsonFromType(IType type) {
-        if (type.asNullable() == ClassType.Integer) {
-            return RANDOM.nextInt() & Integer.MAX_VALUE;
-        } else if (type.asNullable() == ClassType.Long) {
-            return RANDOM.nextLong() & Long.MAX_VALUE;
-        } else if (type.asNullable() == ClassType.Float) {
-            return RANDOM.nextFloat();
-        } else if (type.asNullable() == ClassType.Double) {
-            return RANDOM.nextDouble();
-        } else if (type.asNullable() == ClassType.Boolean) {
-            return RANDOM.nextBoolean();
-        } else if (type == ClassType.String) {
-            return randomString();
-        } else if (type instanceof ClassType) {
-            ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
-            if (model != null) {
-                return jsonFromModel(model);
-            }
-        }
-        return null;
-    }
-
     public static Map<String, Object> jsonFromModel(ClientModel model) {
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
         if (model.getIsPolymorphic()) {
-            jsonObject.put(model.getPolymorphicDiscriminator(), model.getSerializedName());
+            addForProperty(jsonObject,
+                    model.getPolymorphicDiscriminator(), model.getNeedsFlatten(),
+                    model.getSerializedName());
         }
 
         // class
@@ -75,11 +57,37 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
+    private static Object jsonFromType(IType type) {
+        if (type.asNullable() == ClassType.Integer) {
+            return RANDOM.nextInt() & Integer.MAX_VALUE;
+        } else if (type.asNullable() == ClassType.Long) {
+            return RANDOM.nextLong() & Long.MAX_VALUE;
+        } else if (type.asNullable() == ClassType.Float) {
+            return RANDOM.nextFloat();
+        } else if (type.asNullable() == ClassType.Double) {
+            return RANDOM.nextDouble();
+        } else if (type.asNullable() == ClassType.Boolean) {
+            return RANDOM.nextBoolean();
+        } else if (type == ClassType.String) {
+            return randomString();
+        } else if (type == ClassType.DateTime) {
+            OffsetDateTime time = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
+            time = time.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
+            return time.toString();
+        } else if (type instanceof ClassType) {
+            ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
+            if (model != null) {
+                return jsonFromModel(model);
+            }
+        }
+        return null;
+    }
+
     private static void addForProperty(Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
         Object value = null;
         if (property.getIsConstant()) {
-            // TODO skip for now, as the property.getDefaultValue() is the code, not the raw data
+            // TODO (weidxu): skip for now, as the property.getDefaultValue() is the code, not the raw data
             //value = property.getDefaultValue();
             return;
         } else {
@@ -88,12 +96,20 @@ public class ModelTestCaseUtil {
             }
         }
 
+        addForProperty(jsonObject,
+                property.getSerializedName(), modelNeedsFlatten || property.getNeedsFlatten(),
+                value);
+    }
+
+    private static void addForProperty(Map<String, Object> jsonObject,
+                                       String serializedName, boolean modelNeedsFlatten,
+                                       Object value) {
         if (value != null) {
             List<String> serializedNames;
-            if (modelNeedsFlatten || property.getNeedsFlatten()) {
-                serializedNames = ModelUtil.splitFlattenedSerializedName(property.getSerializedName());
+            if (modelNeedsFlatten) {
+                serializedNames = ModelUtil.splitFlattenedSerializedName(serializedName);
             } else {
-                serializedNames = Collections.singletonList(property.getSerializedName());
+                serializedNames = Collections.singletonList(serializedName);
             }
             addToJsonObject(jsonObject, serializedNames, value);
         }
@@ -103,6 +119,7 @@ public class ModelTestCaseUtil {
         if (serializedNames.size() == 1) {
             jsonObject.put(serializedNames.iterator().next(), value);
         } else {
+            serializedNames = new ArrayList<>(serializedNames);
             String serializedName = serializedNames.iterator().next();
             serializedNames.remove(0);
             if (jsonObject.containsKey(serializedName)) {

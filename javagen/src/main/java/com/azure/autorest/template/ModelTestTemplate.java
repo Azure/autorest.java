@@ -6,7 +6,10 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.example.ModelExampleWriter;
+import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -36,23 +39,29 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         model.addImportsTo(imports, JavaSettings.getInstance());
         imports.add(ClassType.BinaryData.getFullName());
         imports.add("org.junit.jupiter.api.Test");
-        javaFile.declareImport(imports);
-//        BinaryData.fromString().toObject(ClientModel.class);
 
         String jsonStr;
+        ExampleNode exampleNode;
         try {
             Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
             jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
+
+            exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
         } catch (IOException e) {
             throw new IllegalStateException("Failed to serialize Map to JSON string", e);
         }
+
+        ModelExampleWriter writer = new ModelExampleWriter(exampleNode, "model");
+        imports.addAll(writer.getImports());
+
+        javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
             classBlock.annotation("Test");
             classBlock.publicMethod("void testSerialization()", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
-                // TODO assert
+                writer.writeAssertion(methodBlock);
             });
         });
     }

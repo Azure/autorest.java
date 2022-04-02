@@ -21,7 +21,9 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
 import com.azure.core.http.HttpMethod;
 import com.google.common.collect.Lists;
@@ -51,6 +53,7 @@ public class JavagenUnitTests {
         boolean modelTestCaseVerified = false;
         for (ClientModel model : client.getModels()) {
             Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
+            ExampleNode exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
             if ("RefColorConstant".equals(model.getName())) {
                 modelTestCaseVerified = true;
                 Assert.assertTrue(jsonObject.containsKey("field1"));

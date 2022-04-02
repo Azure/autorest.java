@@ -249,6 +249,13 @@ public class Javagen extends NewPlugin {
             }
         }
 
+        // Unit tests on client model
+        if (settings.isGenerateTests() && (!settings.isLowLevelClient() || settings.isGenerateModels())) {
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModelUnitTest(model);
+            }
+        }
+
         // Package-info
         for (PackageInfo packageInfo : client.getPackageInfos()) {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
