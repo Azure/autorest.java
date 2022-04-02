@@ -14,14 +14,14 @@ public final class SiameseTests {
     public void testSerialization() {
         Siamese model =
                 BinaryData.fromString(
-                                "{\"breed\":\"ajpsqucmpo\",\"color\":\"fdkfogknyg\",\"hates\":[{\"food\":\"jddeqsrdeu\",\"id\":794552832,\"name\":\"nwreitjzyf\"},{\"food\":\"usarhmofcq\",\"id\":440543153,\"name\":\"yurkdtmlxh\"}],\"id\":974822937,\"name\":\"ksjtxukcdm\"}")
+                                "{\"breed\":\"kwmrvktsiz\",\"color\":\"tocipaouaj\",\"hates\":[{\"food\":\"ucmpoyfdkf\",\"id\":934276292,\"name\":\"nygjofjdde\"},{\"food\":\"srdeupewnw\",\"id\":853033280,\"name\":\"tjzyflusar\"}],\"id\":1705319172,\"name\":\"fcqhsmyurk\"}")
                         .toObject(Siamese.class);
-        Assertions.assertEquals(974822937, model.getId());
-        Assertions.assertEquals("ksjtxukcdm", model.getName());
-        Assertions.assertEquals("fdkfogknyg", model.getColor());
-        Assertions.assertEquals(794552832, model.getHates().get(0).getId());
-        Assertions.assertEquals("nwreitjzyf", model.getHates().get(0).getName());
-        Assertions.assertEquals("jddeqsrdeu", model.getHates().get(0).getFood());
-        Assertions.assertEquals("ajpsqucmpo", model.getBreed());
+        Assertions.assertEquals(1705319172, model.getId());
+        Assertions.assertEquals("fcqhsmyurk", model.getName());
+        Assertions.assertEquals("tocipaouaj", model.getColor());
+        Assertions.assertEquals(934276292, model.getHates().get(0).getId());
+        Assertions.assertEquals("nygjofjdde", model.getHates().get(0).getName());
+        Assertions.assertEquals("ucmpoyfdkf", model.getHates().get(0).getFood());
+        Assertions.assertEquals("kwmrvktsiz", model.getBreed());
     }
 }

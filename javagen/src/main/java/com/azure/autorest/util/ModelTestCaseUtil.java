@@ -4,9 +4,11 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -21,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class ModelTestCaseUtil {
 
@@ -69,7 +72,7 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
-    private static Object jsonFromType(int depth, IType type) {
+    static Object jsonFromType(int depth, IType type) {
         if (type.asNullable() == ClassType.Integer) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
         } else if (type.asNullable() == ClassType.Long) {
@@ -90,6 +93,24 @@ public class ModelTestCaseUtil {
             Duration duration = Duration.parse("PT0S");
             duration = duration.plusSeconds(RANDOM.nextInt(10 * 24 * 60 * 60));
             return duration.toString();
+        } else if (type instanceof EnumType) {
+            IType elementType = ((EnumType) type).getElementType();
+            List<String> values = ((EnumType) type).getValues().stream().map(ClientEnumValue::getValue).collect(Collectors.toList());
+            int index = RANDOM.nextInt(values.size());
+            String value = values.get(index);
+            if (elementType.asNullable() == ClassType.Integer) {
+                return Integer.valueOf(value);
+            } else if (elementType.asNullable() == ClassType.Long) {
+                return Long.valueOf(value);
+            } else if (elementType.asNullable() == ClassType.Float) {
+                return Float.valueOf(value);
+            } else if (elementType.asNullable() == ClassType.Double) {
+                return Double.valueOf(value);
+            } else if (elementType.asNullable() == ClassType.Boolean) {
+                return Boolean.valueOf(value);
+            } else if (elementType == ClassType.String) {
+                return value;
+            }
         } else if (type instanceof ListType) {
             if (depth + 1 > CONFIGURATION.maxDepth) {
                 return null;    // abort
@@ -118,7 +139,6 @@ public class ModelTestCaseUtil {
                 return jsonFromModel(depth + 1, model);
             }
         }
-        // TODO (weidxu): enum
         return null;
     }
 

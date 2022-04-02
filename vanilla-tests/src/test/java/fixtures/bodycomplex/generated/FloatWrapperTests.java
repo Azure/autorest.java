@@ -13,8 +13,8 @@ public final class FloatWrapperTests {
     @Test
     public void testSerialization() {
         FloatWrapper model =
-                BinaryData.fromString("{\"field1\":41.28619,\"field2\":28.649754}").toObject(FloatWrapper.class);
-        Assertions.assertEquals(41.28619f, model.getField1());
-        Assertions.assertEquals(28.649754f, model.getField2());
+                BinaryData.fromString("{\"field1\":7.413268,\"field2\":92.62506}").toObject(FloatWrapper.class);
+        Assertions.assertEquals(7.413268f, model.getField1());
+        Assertions.assertEquals(92.62506f, model.getField2());
     }
 }

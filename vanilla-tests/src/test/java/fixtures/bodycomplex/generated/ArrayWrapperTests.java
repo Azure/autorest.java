@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public final class ArrayWrapperTests {
     @Test
     public void testSerialization() {
-        ArrayWrapper model = BinaryData.fromString("{\"array\":[\"obcufpdznr\"]}").toObject(ArrayWrapper.class);
-        Assertions.assertEquals("obcufpdznr", model.getArray().get(0));
+        ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bcufpdznrb\"]}").toObject(ArrayWrapper.class);
+        Assertions.assertEquals("bcufpdznrb", model.getArray().get(0));
     }
 }

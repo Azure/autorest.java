@@ -13,9 +13,9 @@ public final class LongWrapperTests {
     @Test
     public void testSerialization() {
         LongWrapper model =
-                BinaryData.fromString("{\"field1\":905525982984000849,\"field2\":5720978843418888179}")
+                BinaryData.fromString("{\"field1\":8549474011903598336,\"field2\":8179108615259937676}")
                         .toObject(LongWrapper.class);
-        Assertions.assertEquals(905525982984000849L, model.getField1());
-        Assertions.assertEquals(5720978843418888179L, model.getField2());
+        Assertions.assertEquals(8549474011903598336L, model.getField1());
+        Assertions.assertEquals(8179108615259937676L, model.getField2());
     }
 }

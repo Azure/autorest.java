@@ -13,10 +13,10 @@ public final class DogTests {
     @Test
     public void testSerialization() {
         Dog model =
-                BinaryData.fromString("{\"food\":\"ybrkxvdumj\",\"id\":1041852302,\"name\":\"fwvukxgaud\"}")
+                BinaryData.fromString("{\"food\":\"fcbjysagit\",\"id\":1190451363,\"name\":\"habifpikxw\"}")
                         .toObject(Dog.class);
-        Assertions.assertEquals(1041852302, model.getId());
-        Assertions.assertEquals("fwvukxgaud", model.getName());
-        Assertions.assertEquals("ybrkxvdumj", model.getFood());
+        Assertions.assertEquals(1190451363, model.getId());
+        Assertions.assertEquals("habifpikxw", model.getName());
+        Assertions.assertEquals("fcbjysagit", model.getFood());
     }
 }

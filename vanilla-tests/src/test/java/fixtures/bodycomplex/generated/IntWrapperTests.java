@@ -13,8 +13,8 @@ public final class IntWrapperTests {
     @Test
     public void testSerialization() {
         IntWrapper model =
-                BinaryData.fromString("{\"field1\":2050900245,\"field2\":680485277}").toObject(IntWrapper.class);
-        Assertions.assertEquals(2050900245, model.getField1());
-        Assertions.assertEquals(680485277, model.getField2());
+                BinaryData.fromString("{\"field1\":2058105586,\"field2\":182731623}").toObject(IntWrapper.class);
+        Assertions.assertEquals(2058105586, model.getField1());
+        Assertions.assertEquals(182731623, model.getField2());
     }
 }

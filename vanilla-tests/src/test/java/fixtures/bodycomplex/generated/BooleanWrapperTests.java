@@ -13,8 +13,8 @@ public final class BooleanWrapperTests {
     @Test
     public void testSerialization() {
         BooleanWrapper model =
-                BinaryData.fromString("{\"field_true\":true,\"field_false\":true}").toObject(BooleanWrapper.class);
-        Assertions.assertEquals(true, model.isFieldTrue());
+                BinaryData.fromString("{\"field_true\":false,\"field_false\":true}").toObject(BooleanWrapper.class);
+        Assertions.assertEquals(false, model.isFieldTrue());
         Assertions.assertEquals(true, model.isFieldFalse());
     }
 }

@@ -13,10 +13,10 @@ public final class StringWrapperTests {
     @Test
     public void testSerialization() {
         StringWrapper model =
-                BinaryData.fromString("{\"field\":\"dxbmtqioqj\",\"empty\":\"ehtbmufpow\",\"null\":\"oizhwlrxyb\"}")
+                BinaryData.fromString("{\"field\":\"xbmtqioqjz\",\"empty\":\"htbmufpown\",\"null\":\"izhwlrxybq\"}")
                         .toObject(StringWrapper.class);
-        Assertions.assertEquals("dxbmtqioqj", model.getField());
-        Assertions.assertEquals("ehtbmufpow", model.getEmpty());
-        Assertions.assertEquals("oizhwlrxyb", model.getNullProperty());
+        Assertions.assertEquals("xbmtqioqjz", model.getField());
+        Assertions.assertEquals("htbmufpown", model.getEmpty());
+        Assertions.assertEquals("izhwlrxybq", model.getNullProperty());
     }
 }

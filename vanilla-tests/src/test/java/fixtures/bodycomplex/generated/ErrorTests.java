@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 public final class ErrorTests {
     @Test
     public void testSerialization() {
-        Error model = BinaryData.fromString("{\"status\":1767665612,\"message\":\"hmtzopbsph\"}").toObject(Error.class);
-        Assertions.assertEquals(1767665612, model.getStatus());
-        Assertions.assertEquals("hmtzopbsph", model.getMessage());
+        Error model = BinaryData.fromString("{\"status\":1336465504,\"message\":\"mtzopbsphr\"}").toObject(Error.class);
+        Assertions.assertEquals(1336465504, model.getStatus());
+        Assertions.assertEquals("mtzopbsphr", model.getMessage());
     }
 }
