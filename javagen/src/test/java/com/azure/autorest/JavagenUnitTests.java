@@ -52,7 +52,7 @@ public class JavagenUnitTests {
 
         boolean modelTestCaseVerified = false;
         for (ClientModel model : client.getModels()) {
-            Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
+            Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(0, model);
             ExampleNode exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
             if ("RefColorConstant".equals(model.getName())) {
                 modelTestCaseVerified = true;

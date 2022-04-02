@@ -13,7 +13,7 @@ public final class DotFishTests {
     @Test
     public void testSerialization() {
         DotFish model =
-                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"wnwreitjzy\"}").toObject(DotFish.class);
-        Assertions.assertEquals("wnwreitjzy", model.getSpecies());
+                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"ofjaeqjhqj\"}").toObject(DotFish.class);
+        Assertions.assertEquals("ofjaeqjhqj", model.getSpecies());
     }
 }

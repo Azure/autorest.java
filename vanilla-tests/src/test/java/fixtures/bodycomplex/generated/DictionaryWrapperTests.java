@@ -6,11 +6,16 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DictionaryWrapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class DictionaryWrapperTests {
     @Test
     public void testSerialization() {
-        DictionaryWrapper model = BinaryData.fromString("{}").toObject(DictionaryWrapper.class);
+        DictionaryWrapper model =
+                BinaryData.fromString(
+                                "{\"defaultProgram\":{\"agdfmglzlh\":\"jxrifkwmrv\",\"ktsizntoci\":\"paouajpsqu\",\"cmpoyfdkfo\":\"gknygjofjd\"}}")
+                        .toObject(DictionaryWrapper.class);
+        Assertions.assertEquals("jxrifkwmrv", model.getDefaultProgram().get("agdfmglzlh"));
     }
 }

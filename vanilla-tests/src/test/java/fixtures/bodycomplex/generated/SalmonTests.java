@@ -14,11 +14,19 @@ public final class SalmonTests {
     public void testSerialization() {
         Salmon model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"salmon\",\"location\":\"pmrqobmtuk\",\"iswild\":true,\"species\":\"yrtihfxtij\",\"length\":0.96585906}")
+                                "{\"fishtype\":\"salmon\",\"location\":\"zwyiftyhxh\",\"iswild\":true,\"species\":\"kftyxolniw\",\"length\":0.7804106,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"kjfkgiawxk\",\"length\":0.85357416,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"lwckbasyyp\",\"length\":0.7080638,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"sgcbacphej\",\"length\":0.0863505,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"nqgoulzndl\",\"length\":0.16492963,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"qkgfgibmad\",\"length\":0.300018,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"qsrxybzqqe\",\"length\":0.41252303,\"siblings\":[null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"bciqfouflm\",\"length\":0.73384243,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"smodmgloug\",\"length\":0.040319443,\"siblings\":[null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"tmutduqkta\",\"length\":0.9451547,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gcuertumkd\",\"length\":0.84361917,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"whbmdgbbjf\",\"length\":0.21297592,\"siblings\":[null,null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"bmbexppbht\",\"length\":0.42629802,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"lfpfpsalgb\",\"length\":0.20176643,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gjyjgzjaoy\",\"length\":0.087763906,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"xilnerkujy\",\"length\":0.5583451,\"siblings\":[null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"juvfqawrly\",\"length\":0.2593289,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"cprbnwbxgj\",\"length\":0.7368988,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"pysszdnruj\",\"length\":0.6673355,\"siblings\":[null,null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"muouqfprwz\",\"length\":0.2810728,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"uitnwuizga\",\"length\":0.02362436,\"siblings\":[null,null]}]}]}]}")
                         .toObject(Salmon.class);
-        Assertions.assertEquals("yrtihfxtij", model.getSpecies());
-        Assertions.assertEquals(0.96585906f, model.getLength());
-        Assertions.assertEquals("pmrqobmtuk", model.getLocation());
+        Assertions.assertEquals("kftyxolniw", model.getSpecies());
+        Assertions.assertEquals(0.7804106f, model.getLength());
+        Assertions.assertEquals("kjfkgiawxk", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.85357416f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("lwckbasyyp", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.7080638f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "sgcbacphej", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                0.0863505f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("zwyiftyhxh", model.getLocation());
         Assertions.assertEquals(true, model.iswild());
     }
 }

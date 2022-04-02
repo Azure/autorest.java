@@ -15,11 +15,19 @@ public final class SharkTests {
     public void testSerialization() {
         Shark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"shark\",\"age\":143848779,\"birthday\":\"2021-06-14T11:48:10Z\",\"species\":\"vdumjgrtfw\",\"length\":0.3857544}")
+                                "{\"fishtype\":\"shark\",\"age\":1241894222,\"birthday\":\"2021-04-16T12:59:12Z\",\"species\":\"nlebxetqgt\",\"length\":0.4381237,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"nqbqqwxrjf\",\"length\":0.07907456,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"nwsubisnja\",\"length\":0.24825656,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gnzscxaqwo\",\"length\":0.97131914,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"bonqvpkvlr\",\"length\":0.953015,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"aseipheofl\",\"length\":0.25870234,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"yienjbdlwt\",\"length\":0.6859275,\"siblings\":[null,null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"djpjumasxa\",\"length\":0.39135772,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"yegualhbxx\",\"length\":0.0035515428,\"siblings\":[null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"zzvdudgwds\",\"length\":0.26195246,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"twmcynpwlb\",\"length\":0.59798074,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"acftadehxn\",\"length\":0.77809006,\"siblings\":[null,null,null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"soppusuesn\",\"length\":0.07725501,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"jbavorxzdm\",\"length\":0.6887096,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"bqvudwxdnd\",\"length\":0.08821899,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"gujjugwdkc\",\"length\":0.83534604,\"siblings\":[null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"lazjdyggdt\",\"length\":0.92217404,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"bkuofqweyk\",\"length\":0.7437913,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"evfyexfwhy\",\"length\":0.85087067,\"siblings\":[null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"vyvdcsityn\",\"length\":0.40747863,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"dectehfiqs\",\"length\":0.23135608,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"pvhezrkgqh\",\"length\":0.800361,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"fovgmkqsle\",\"length\":0.3822056,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"yqjpkcattp\",\"length\":0.82562375,\"siblings\":[null]}]},{\"fishtype\":\"Fish\",\"species\":\"rcczsqpjhv\",\"length\":0.1568377,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vnysounqec\",\"length\":0.21057588,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"eupfhyhltr\",\"length\":0.354967,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"jmcmatuokt\",\"length\":0.12270075,\"siblings\":[null,null]}]}]}]}")
                         .toObject(Shark.class);
-        Assertions.assertEquals("vdumjgrtfw", model.getSpecies());
-        Assertions.assertEquals(0.3857544f, model.getLength());
-        Assertions.assertEquals(143848779, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-14T11:48:10Z"), model.getBirthday());
+        Assertions.assertEquals("nlebxetqgt", model.getSpecies());
+        Assertions.assertEquals(0.4381237f, model.getLength());
+        Assertions.assertEquals("nqbqqwxrjf", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.07907456f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("nwsubisnja", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.24825656f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "gnzscxaqwo", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                0.97131914f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(1241894222, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-04-16T12:59:12Z"), model.getBirthday());
     }
 }

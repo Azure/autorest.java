@@ -6,11 +6,15 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.ArrayWrapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class ArrayWrapperTests {
     @Test
     public void testSerialization() {
-        ArrayWrapper model = BinaryData.fromString("{}").toObject(ArrayWrapper.class);
+        ArrayWrapper model =
+                BinaryData.fromString("{\"array\":[\"azlobcufpd\",\"znrbtcqqjn\",\"qglhqgnufo\",\"oojywifsqe\"]}")
+                        .toObject(ArrayWrapper.class);
+        Assertions.assertEquals("azlobcufpd", model.getArray().get(0));
     }
 }

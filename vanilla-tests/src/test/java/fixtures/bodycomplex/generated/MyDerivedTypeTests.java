@@ -14,10 +14,10 @@ public final class MyDerivedTypeTests {
     public void testSerialization() {
         MyDerivedType model =
                 BinaryData.fromString(
-                                "{\"kind\":\"Kind1\",\"propD1\":\"spodmailzy\",\"propB1\":\"ehojwyahux\",\"helper\":{\"propBH1\":\"npmqnjaqwi\"}}")
+                                "{\"kind\":\"Kind1\",\"propD1\":\"notyfjfcnj\",\"propB1\":\"kcnxdhbttk\",\"helper\":{\"propBH1\":\"hywpnvjtoq\"}}")
                         .toObject(MyDerivedType.class);
-        Assertions.assertEquals("ehojwyahux", model.getPropB1());
-        Assertions.assertEquals("npmqnjaqwi", model.getPropBH1());
-        Assertions.assertEquals("spodmailzy", model.getPropD1());
+        Assertions.assertEquals("kcnxdhbttk", model.getPropB1());
+        Assertions.assertEquals("hywpnvjtoq", model.getPropBH1());
+        Assertions.assertEquals("notyfjfcnj", model.getPropD1());
     }
 }

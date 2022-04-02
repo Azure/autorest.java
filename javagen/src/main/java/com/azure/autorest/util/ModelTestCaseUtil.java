@@ -8,6 +8,8 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.core.util.CoreUtils;
 
 import java.time.OffsetDateTime;
@@ -22,12 +24,16 @@ public class ModelTestCaseUtil {
 
     private static final class Configuration {
         private float nullableProbability = 0.0f;
+
+        private int maxDepth = 10;
+        private int maxList = 5;
+        private int maxDict = 5;
     }
 
     private static final Random RANDOM = new Random(3);
     private static final Configuration CONFIGURATION = new Configuration();
 
-    public static Map<String, Object> jsonFromModel(ClientModel model) {
+    public static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
@@ -39,7 +45,7 @@ public class ModelTestCaseUtil {
 
         // class
         for (ClientModelProperty property : model.getProperties()) {
-            addForProperty(jsonObject, property, model.getNeedsFlatten());
+            addForProperty(depth, jsonObject, property, model.getNeedsFlatten());
         }
 
         // superclasses
@@ -48,7 +54,7 @@ public class ModelTestCaseUtil {
             ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
             if (parentModel != null) {
                 for (ClientModelProperty property : parentModel.getProperties()) {
-                    addForProperty(jsonObject, property, parentModel.getNeedsFlatten());
+                    addForProperty(depth, jsonObject, property, parentModel.getNeedsFlatten());
                 }
             }
             parentModelName = parentModel == null ? null : parentModel.getParentModelName();
@@ -57,7 +63,7 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
-    private static Object jsonFromType(IType type) {
+    private static Object jsonFromType(int depth, IType type) {
         if (type.asNullable() == ClassType.Integer) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
         } else if (type.asNullable() == ClassType.Long) {
@@ -74,16 +80,42 @@ public class ModelTestCaseUtil {
             OffsetDateTime time = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
             time = time.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
             return time.toString();
+        } else if (type instanceof ListType) {
+            if (depth > CONFIGURATION.maxDepth) {
+                return null;    // abort
+            }
+            List<Object> list = new ArrayList<>();
+            IType elementType = ((ListType) type).getElementType();
+            int count = RANDOM.nextInt(CONFIGURATION.maxList - 1) + 1;
+            for (int i = 0; i < count; ++i) {
+                list.add(jsonFromType(depth + 1, elementType));
+            }
+            return list;
+        } else if (type instanceof MapType) {
+            if (depth > CONFIGURATION.maxDepth) {
+                return null;    // abort
+            }
+            Map<String, Object> map = new LinkedHashMap<>();
+            IType elementType = ((MapType) type).getValueType();
+            int count = RANDOM.nextInt(CONFIGURATION.maxDict - 1) + 1;
+            for (int i = 0; i < count; ++i) {
+                map.put(randomString(), jsonFromType(depth + 1, elementType));
+            }
+            return map;
         } else if (type instanceof ClassType) {
+            if (depth > CONFIGURATION.maxDepth) {
+                return null;    // abort
+            }
             ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
             if (model != null) {
-                return jsonFromModel(model);
+                return jsonFromModel(depth + 1, model);
             }
         }
+        // TODO (weidxu): enum
         return null;
     }
 
-    private static void addForProperty(Map<String, Object> jsonObject,
+    private static void addForProperty(int depth, Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
         Object value = null;
         if (property.getIsConstant()) {
@@ -92,7 +124,7 @@ public class ModelTestCaseUtil {
             return;
         } else {
             if (property.isRequired() || RANDOM.nextFloat() > CONFIGURATION.nullableProbability) {
-                value = jsonFromType(property.getWireType());
+                value = jsonFromType(depth + 1, property.getWireType());
             }
         }
 

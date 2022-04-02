@@ -13,10 +13,14 @@ public final class CatTests {
     @Test
     public void testSerialization() {
         Cat model =
-                BinaryData.fromString("{\"color\":\"sqesaagdfm\",\"id\":1317141227,\"name\":\"hjxrifkwmr\"}")
+                BinaryData.fromString(
+                                "{\"color\":\"vgnwzsymgl\",\"hates\":[{\"food\":\"cyzkohdbih\",\"id\":385615830,\"name\":\"fhfcbjysag\"},{\"food\":\"thxqhabifp\",\"id\":352895136,\"name\":\"wczbyscnpq\"},{\"food\":\"uhivyqniwb\",\"id\":1753847734,\"name\":\"kxvdumjgrt\"},{\"food\":\"wvukxgaudc\",\"id\":157917305,\"name\":\"hsjcnyejhk\"}],\"id\":1656493513,\"name\":\"tnapczwlok\"}")
                         .toObject(Cat.class);
-        Assertions.assertEquals(1317141227, model.getId());
-        Assertions.assertEquals("hjxrifkwmr", model.getName());
-        Assertions.assertEquals("sqesaagdfm", model.getColor());
+        Assertions.assertEquals(1656493513, model.getId());
+        Assertions.assertEquals("tnapczwlok", model.getName());
+        Assertions.assertEquals("vgnwzsymgl", model.getColor());
+        Assertions.assertEquals(385615830, model.getHates().get(0).getId());
+        Assertions.assertEquals("fhfcbjysag", model.getHates().get(0).getName());
+        Assertions.assertEquals("cyzkohdbih", model.getHates().get(0).getFood());
     }
 }

@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 public final class PetTests {
     @Test
     public void testSerialization() {
-        Pet model = BinaryData.fromString("{\"id\":1850052044,\"name\":\"dkfogknygj\"}").toObject(Pet.class);
-        Assertions.assertEquals(1850052044, model.getId());
-        Assertions.assertEquals("dkfogknygj", model.getName());
+        Pet model = BinaryData.fromString("{\"id\":1804300161,\"name\":\"ilzydehojw\"}").toObject(Pet.class);
+        Assertions.assertEquals(1804300161, model.getId());
+        Assertions.assertEquals("ilzydehojw", model.getName());
     }
 }
