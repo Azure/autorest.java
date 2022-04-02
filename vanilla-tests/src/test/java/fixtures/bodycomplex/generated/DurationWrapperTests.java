@@ -6,11 +6,14 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DurationWrapper;
+import java.time.Duration;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class DurationWrapperTests {
     @Test
     public void testSerialization() {
-        DurationWrapper model = BinaryData.fromString("{}").toObject(DurationWrapper.class);
+        DurationWrapper model = BinaryData.fromString("{\"field\":\"PT208H24M29S\"}").toObject(DurationWrapper.class);
+        Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
     }
 }

@@ -20,6 +20,8 @@ public interface ClientModelPropertyAccess {
 
     IType getClientType();
 
+    IType getWireType();
+
     boolean getIsReadOnly();
 
     boolean getIsReadOnlyForCreate();

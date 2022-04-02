@@ -14,11 +14,11 @@ public final class DoubleWrapperTests {
     public void testSerialization() {
         DoubleWrapper model =
                 BinaryData.fromString(
-                                "{\"field1\":0.1692379076854107,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":0.10963676785184384}")
+                                "{\"field1\":16.923790768541068,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":10.963676785184385}")
                         .toObject(DoubleWrapper.class);
-        Assertions.assertEquals(0.1692379076854107, model.getField1());
+        Assertions.assertEquals(16.923790768541068, model.getField1());
         Assertions.assertEquals(
-                0.10963676785184384,
+                10.963676785184385,
                 model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 }

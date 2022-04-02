@@ -524,7 +524,7 @@ public class ExampleParser {
 
             Object childObjectValue = ModelExampleUtil.getChildObjectValue(jsonPropertyNames, parameterValue.getObjectValue());
             if (childObjectValue != null) {
-                node = ModelExampleUtil.parseNode(modelProperty.getClientType(), childObjectValue);
+                node = ModelExampleUtil.parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
             } else {
                 node = new LiteralNode(modelProperty.getClientType(), null);
             }
@@ -534,6 +534,7 @@ public class ExampleParser {
 
     private static ExampleNode parseNodeFromMethodParameter(MethodParameter methodParameter, Object objectValue) {
         IType type = methodParameter.getClientMethodParameter().getClientType();
+        IType wireType = methodParameter.getClientMethodParameter().getWireType();
         if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null && type instanceof ListType && objectValue instanceof String) {
             // handle parameter style
 
@@ -567,7 +568,7 @@ public class ExampleParser {
             }
             return listNode;
         } else {
-            return ModelExampleUtil.parseNode(type, objectValue);
+            return ModelExampleUtil.parseNode(type, wireType, objectValue);
         }
     }
 

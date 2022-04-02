@@ -117,8 +117,14 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
         return CodeNamer.getModelNamer().modelPropertySetterName(this.getName());
     }
 
+    @Override
     public IType getClientType() {
         return referenceProperty.getClientType();
+    }
+
+    @Override
+    public IType getWireType() {
+        return referenceProperty.getWireType();
     }
 
     @Override

@@ -11,7 +11,9 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +36,10 @@ public class ModelTestCaseUtil {
     private static final Configuration CONFIGURATION = new Configuration();
 
     public static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
+        if (depth > CONFIGURATION.maxDepth) {
+            return null;    // abort
+        }
+
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
@@ -69,19 +75,23 @@ public class ModelTestCaseUtil {
         } else if (type.asNullable() == ClassType.Long) {
             return RANDOM.nextLong() & Long.MAX_VALUE;
         } else if (type.asNullable() == ClassType.Float) {
-            return RANDOM.nextFloat();
+            return RANDOM.nextFloat() * 100;
         } else if (type.asNullable() == ClassType.Double) {
-            return RANDOM.nextDouble();
+            return RANDOM.nextDouble() * 100;
         } else if (type.asNullable() == ClassType.Boolean) {
             return RANDOM.nextBoolean();
         } else if (type == ClassType.String) {
             return randomString();
         } else if (type == ClassType.DateTime) {
-            OffsetDateTime time = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
-            time = time.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
-            return time.toString();
+            return randomDateTime().toString();
+        } else if (type == ClassType.DateTimeRfc1123) {
+            return DateTimeRfc1123.toRfc1123String(randomDateTime());
+        } else if (type == ClassType.Duration) {
+            Duration duration = Duration.parse("PT0S");
+            duration = duration.plusSeconds(RANDOM.nextInt(10 * 24 * 60 * 60));
+            return duration.toString();
         } else if (type instanceof ListType) {
-            if (depth > CONFIGURATION.maxDepth) {
+            if (depth + 1 > CONFIGURATION.maxDepth) {
                 return null;    // abort
             }
             List<Object> list = new ArrayList<>();
@@ -92,7 +102,7 @@ public class ModelTestCaseUtil {
             }
             return list;
         } else if (type instanceof MapType) {
-            if (depth > CONFIGURATION.maxDepth) {
+            if (depth + 1 > CONFIGURATION.maxDepth) {
                 return null;    // abort
             }
             Map<String, Object> map = new LinkedHashMap<>();
@@ -103,9 +113,6 @@ public class ModelTestCaseUtil {
             }
             return map;
         } else if (type instanceof ClassType) {
-            if (depth > CONFIGURATION.maxDepth) {
-                return null;    // abort
-            }
             ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
             if (model != null) {
                 return jsonFromModel(depth + 1, model);
@@ -176,5 +183,11 @@ public class ModelTestCaseUtil {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
+    }
+
+    private static OffsetDateTime randomDateTime() {
+        OffsetDateTime time = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
+        time = time.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
+        return time;
     }
 }

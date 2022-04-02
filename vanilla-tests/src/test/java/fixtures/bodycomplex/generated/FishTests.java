@@ -14,17 +14,17 @@ public final class FishTests {
     public void testSerialization() {
         Fish model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"Fish\",\"species\":\"ahuxinpmqn\",\"length\":0.22651792,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ixjsprozvc\",\"length\":0.7670389,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gjvwmfdats\",\"length\":0.580224,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"pjhulsuuvm\",\"length\":0.695325,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"krwfndiodj\",\"length\":0.5537014,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"ejdpvwryoq\",\"length\":0.6672449,\"siblings\":[null,null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"cctazakljl\",\"length\":0.87918067,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ryffdfdosy\",\"length\":0.22420251,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"aojakhmsbz\",\"length\":0.40985173,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"zevdphlxao\",\"length\":0.22468936,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"trgqjbpfzf\",\"length\":0.4604854,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"gvfcjrwzox\",\"length\":0.026165128,\"siblings\":[null,null,null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"elluwfzito\",\"length\":0.5420993,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"fpjkjlxofp\",\"length\":0.89445055,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"fxxypininm\",\"length\":0.57324725,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"ybbkpodepo\",\"length\":0.52162135,\"siblings\":[null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"uvamiheogn\",\"length\":0.4433602,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xtheotusiv\",\"length\":0.74332696,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"ciqihnhung\",\"length\":0.7687214,\"siblings\":[null]},{\"fishtype\":\"Fish\",\"species\":\"rnfygxgisp\",\"length\":0.59519714,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"zfkufubljo\",\"length\":0.8982125,\"siblings\":[null,null,null]}]}]}]}")
+                                "{\"fishtype\":\"Fish\",\"species\":\"ryhtnapczw\",\"length\":31.021,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"yemkkvnipj\",\"length\":58.11662,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"nchgejspod\",\"length\":92.009636,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"zydehojwya\",\"length\":67.842415},{\"fishtype\":\"Fish\",\"species\":\"inpmqnjaqw\",\"length\":6.7156134},{\"fishtype\":\"Fish\",\"species\":\"sprozvcput\",\"length\":19.268911},{\"fishtype\":\"Fish\",\"species\":\"vwmfdatscm\",\"length\":57.26319}]},{\"fishtype\":\"Fish\",\"species\":\"jhulsuuvmk\",\"length\":96.98439,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"rwfndiodjp\",\"length\":41.583454}]}]}]}")
                         .toObject(Fish.class);
-        Assertions.assertEquals("ahuxinpmqn", model.getSpecies());
-        Assertions.assertEquals(0.22651792f, model.getLength());
-        Assertions.assertEquals("ixjsprozvc", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.7670389f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("gjvwmfdats", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.580224f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("ryhtnapczw", model.getSpecies());
+        Assertions.assertEquals(31.021f, model.getLength());
+        Assertions.assertEquals("yemkkvnipj", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(58.11662f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("nchgejspod", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(92.009636f, model.getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(
-                "pjhulsuuvm", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+                "zydehojwya", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
         Assertions.assertEquals(
-                0.695325f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+                67.842415f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
     }
 }

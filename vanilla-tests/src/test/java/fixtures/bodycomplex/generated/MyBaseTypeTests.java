@@ -14,9 +14,9 @@ public final class MyBaseTypeTests {
     public void testSerialization() {
         MyBaseType model =
                 BinaryData.fromString(
-                                "{\"kind\":\"MyBaseType\",\"propB1\":\"fvzwdzuhty\",\"helper\":{\"propBH1\":\"wisdkfthwx\"}}")
+                                "{\"kind\":\"MyBaseType\",\"propB1\":\"qfouflmmnk\",\"helper\":{\"propBH1\":\"smodmgloug\"}}")
                         .toObject(MyBaseType.class);
-        Assertions.assertEquals("fvzwdzuhty", model.getPropB1());
-        Assertions.assertEquals("wisdkfthwx", model.getPropBH1());
+        Assertions.assertEquals("qfouflmmnk", model.getPropB1());
+        Assertions.assertEquals("smodmgloug", model.getPropBH1());
     }
 }

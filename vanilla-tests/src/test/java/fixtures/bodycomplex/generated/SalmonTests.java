@@ -14,19 +14,19 @@ public final class SalmonTests {
     public void testSerialization() {
         Salmon model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"salmon\",\"location\":\"zwyiftyhxh\",\"iswild\":true,\"species\":\"kftyxolniw\",\"length\":0.7804106,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"kjfkgiawxk\",\"length\":0.85357416,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"lwckbasyyp\",\"length\":0.7080638,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"sgcbacphej\",\"length\":0.0863505,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"nqgoulzndl\",\"length\":0.16492963,\"siblings\":[null,null]},{\"fishtype\":\"Fish\",\"species\":\"qkgfgibmad\",\"length\":0.300018,\"siblings\":[null,null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"qsrxybzqqe\",\"length\":0.41252303,\"siblings\":[null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"bciqfouflm\",\"length\":0.73384243,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"smodmgloug\",\"length\":0.040319443,\"siblings\":[null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"tmutduqkta\",\"length\":0.9451547,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gcuertumkd\",\"length\":0.84361917,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"whbmdgbbjf\",\"length\":0.21297592,\"siblings\":[null,null,null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"bmbexppbht\",\"length\":0.42629802,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"lfpfpsalgb\",\"length\":0.20176643,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gjyjgzjaoy\",\"length\":0.087763906,\"siblings\":[null,null,null]},{\"fishtype\":\"Fish\",\"species\":\"xilnerkujy\",\"length\":0.5583451,\"siblings\":[null]}]}]},{\"fishtype\":\"Fish\",\"species\":\"juvfqawrly\",\"length\":0.2593289,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"cprbnwbxgj\",\"length\":0.7368988,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"pysszdnruj\",\"length\":0.6673355,\"siblings\":[null,null,null,null]}]},{\"fishtype\":\"Fish\",\"species\":\"muouqfprwz\",\"length\":0.2810728,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"uitnwuizga\",\"length\":0.02362436,\"siblings\":[null,null]}]}]}]}")
+                                "{\"fishtype\":\"salmon\",\"location\":\"iqihnhungb\",\"iswild\":false,\"species\":\"rnfygxgisp\",\"length\":59.519714,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"zfkufubljo\",\"length\":89.82125,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ofjaeqjhqj\",\"length\":21.308512,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"msmjqulngs\",\"length\":13.240772}]},{\"fishtype\":\"Fish\",\"species\":\"bybkzgcwrw\",\"length\":77.0421,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"wrljdouskc\",\"length\":70.357445},{\"fishtype\":\"Fish\",\"species\":\"ocrcjdkwtn\",\"length\":50.567795},{\"fishtype\":\"Fish\",\"species\":\"njbiksqrgl\",\"length\":63.875343},{\"fishtype\":\"Fish\",\"species\":\"inqpjwnzll\",\"length\":25.72022}]},{\"fishtype\":\"Fish\",\"species\":\"ppeebvmgxs\",\"length\":40.56281,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"qduujitcjc\",\"length\":58.667732},{\"fishtype\":\"Fish\",\"species\":\"evndhkrwpd\",\"length\":71.50293}]}]},{\"fishtype\":\"Fish\",\"species\":\"dsbdkvwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"nhutjeltmr\",\"length\":95.85893,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gjzzdatqxh\",\"length\":30.187613},{\"fishtype\":\"Fish\",\"species\":\"geablgphut\",\"length\":95.70302},{\"fishtype\":\"Fish\",\"species\":\"dvkaozwyif\",\"length\":25.075048},{\"fishtype\":\"Fish\",\"species\":\"xhurokftyx\",\"length\":95.32984}]}]},{\"fishtype\":\"Fish\",\"species\":\"iwpwcukjfk\",\"length\":45.296448,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xklryplwck\",\"length\":17.269373,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ypnddhsgcb\",\"length\":17.565834},{\"fishtype\":\"Fish\",\"species\":\"hejkotynqg\",\"length\":71.94767},{\"fishtype\":\"Fish\",\"species\":\"zndlikwyqk\",\"length\":70.784225},{\"fishtype\":\"Fish\",\"species\":\"ibmadgakeq\",\"length\":25.458097}]}]}]}")
                         .toObject(Salmon.class);
-        Assertions.assertEquals("kftyxolniw", model.getSpecies());
-        Assertions.assertEquals(0.7804106f, model.getLength());
-        Assertions.assertEquals("kjfkgiawxk", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.85357416f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("lwckbasyyp", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.7080638f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("rnfygxgisp", model.getSpecies());
+        Assertions.assertEquals(59.519714f, model.getLength());
+        Assertions.assertEquals("zfkufubljo", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(89.82125f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("ofjaeqjhqj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(21.308512f, model.getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(
-                "sgcbacphej", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+                "msmjqulngs", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
         Assertions.assertEquals(
-                0.0863505f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("zwyiftyhxh", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
+                13.240772f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("iqihnhungb", model.getLocation());
+        Assertions.assertEquals(false, model.iswild());
     }
 }

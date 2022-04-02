@@ -47,6 +47,10 @@ public class ModelProperty {
         return property.getClientType();
     }
 
+    public IType getWireType() {
+        return property.getWireType();
+    }
+
     public boolean isRequired() {
         return property.isRequired();
     }

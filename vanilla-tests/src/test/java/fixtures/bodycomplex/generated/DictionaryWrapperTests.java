@@ -14,8 +14,8 @@ public final class DictionaryWrapperTests {
     public void testSerialization() {
         DictionaryWrapper model =
                 BinaryData.fromString(
-                                "{\"defaultProgram\":{\"agdfmglzlh\":\"jxrifkwmrv\",\"ktsizntoci\":\"paouajpsqu\",\"cmpoyfdkfo\":\"gknygjofjd\"}}")
+                                "{\"defaultProgram\":{\"cqqjnqglhq\":\"gnufooojyw\",\"ifsqesaagd\":\"fmglzlhjxr\",\"ifkwmrvkts\":\"izntocipao\"}}")
                         .toObject(DictionaryWrapper.class);
-        Assertions.assertEquals("jxrifkwmrv", model.getDefaultProgram().get("agdfmglzlh"));
+        Assertions.assertEquals("gnufooojyw", model.getDefaultProgram().get("cqqjnqglhq"));
     }
 }

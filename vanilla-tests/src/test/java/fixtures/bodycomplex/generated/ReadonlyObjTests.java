@@ -13,7 +13,7 @@ public final class ReadonlyObjTests {
     @Test
     public void testSerialization() {
         ReadonlyObj model =
-                BinaryData.fromString("{\"id\":\"izuckyfihr\",\"size\":778150976}").toObject(ReadonlyObj.class);
-        Assertions.assertEquals(778150976, model.getSize());
+                BinaryData.fromString("{\"id\":\"ybzqqedqyt\",\"size\":961887193}").toObject(ReadonlyObj.class);
+        Assertions.assertEquals(961887193, model.getSize());
     }
 }

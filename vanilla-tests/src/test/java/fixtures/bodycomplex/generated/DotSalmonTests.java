@@ -14,10 +14,10 @@ public final class DotSalmonTests {
     public void testSerialization() {
         DotSalmon model =
                 BinaryData.fromString(
-                                "{\"fish.type\":\"DotSalmon\",\"location\":\"qxhocdgeab\",\"iswild\":false,\"species\":\"huticndvka\"}")
+                                "{\"fish.type\":\"DotSalmon\",\"location\":\"heognarxzx\",\"iswild\":true,\"species\":\"otusivyevc\"}")
                         .toObject(DotSalmon.class);
-        Assertions.assertEquals("huticndvka", model.getSpecies());
-        Assertions.assertEquals("qxhocdgeab", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertEquals("otusivyevc", model.getSpecies());
+        Assertions.assertEquals("heognarxzx", model.getLocation());
+        Assertions.assertEquals(true, model.iswild());
     }
 }

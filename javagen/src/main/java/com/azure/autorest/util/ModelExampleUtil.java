@@ -13,15 +13,20 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ObjectNode;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
 import org.slf4j.Logger;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -35,8 +40,12 @@ public class ModelExampleUtil {
 
     private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ModelExampleUtil.class);
 
-    @SuppressWarnings("unchecked")
     public static ExampleNode parseNode(IType type, Object objectValue) {
+        return parseNode(type, type, objectValue);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static ExampleNode parseNode(IType type, IType wireType, Object objectValue) {
         ExampleNode node;
         if (type instanceof ListType) {
             IType elementType = ((ListType) type).getElementType();
@@ -107,7 +116,7 @@ public class ModelExampleUtil {
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
                     if (childObjectValue != null) {
-                        ExampleNode childNode = parseNode(modelProperty.getClientType(), childObjectValue);
+                        ExampleNode childNode = parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
                         node.getChildNodes().add(childNode);
                         clientModelNode.getClientModelProperties().put(childNode, modelProperty);
                     }
@@ -125,7 +134,7 @@ public class ModelExampleUtil {
                             .filter(e -> !propertySerializedNames.contains(e.getKey()))
                             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-                    ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), remainingValues);
+                    ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), additionalPropertiesProperty.getWireType(), remainingValues);
                     node.getChildNodes().add(childNode);
                     clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
                 }
@@ -138,7 +147,16 @@ public class ModelExampleUtil {
             LiteralNode literalNode = new LiteralNode(type, objectValue);
             node = literalNode;
 
-            literalNode.setLiteralsValue(objectValue.toString());
+            // see ClassType.convertToClientType and PrimitiveType.convertToClientType
+            String literalValue = objectValue.toString();
+            if (wireType == ClassType.DateTimeRfc1123) {
+                literalValue = new DateTimeRfc1123(literalValue).getDateTime().toString();
+            } else if (wireType == ClassType.Base64Url) {
+                literalValue = new Base64Url(literalValue).toString();
+            } else if (wireType == PrimitiveType.UnixTimeLong) {
+                literalValue = OffsetDateTime.from(Instant.ofEpochSecond(Long.parseLong(literalValue))).toString();
+            }
+            literalNode.setLiteralsValue(literalValue);
         }
         return node;
     }
