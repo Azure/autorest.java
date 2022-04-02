@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 
 public final class DoubleWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         DoubleWrapper model =
                 BinaryData.fromString(
-                                "{\"field1\":73.05047882714513,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":94.31689547993322}")
+                                "{\"field1\":37.616192183070176,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":69.0779419799508}")
                         .toObject(DoubleWrapper.class);
-        Assertions.assertEquals(73.05047882714513, model.getField1());
+        Assertions.assertEquals(37.616192183070176, model.getField1());
         Assertions.assertEquals(
-                94.31689547993322,
+                69.0779419799508,
                 model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 }

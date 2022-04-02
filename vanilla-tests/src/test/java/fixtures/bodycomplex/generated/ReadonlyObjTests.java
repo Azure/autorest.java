@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 public final class ReadonlyObjTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         ReadonlyObj model =
-                BinaryData.fromString("{\"id\":\"zvypyqrimz\",\"size\":697614114}").toObject(ReadonlyObj.class);
-        Assertions.assertEquals(697614114, model.getSize());
+                BinaryData.fromString("{\"id\":\"opvkmijcm\",\"size\":962982014}").toObject(ReadonlyObj.class);
+        Assertions.assertEquals(962982014, model.getSize());
     }
 }

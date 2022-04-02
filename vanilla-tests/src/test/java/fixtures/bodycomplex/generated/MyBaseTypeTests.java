@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public final class MyBaseTypeTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         MyBaseType model =
                 BinaryData.fromString(
-                                "{\"kind\":\"MyBaseType\",\"propB1\":\"vswjdkirso\",\"helper\":{\"propBH1\":\"dqxhcrmnoh\"}}")
+                                "{\"kind\":\"MyBaseType\",\"propB1\":\"ufufsrp\",\"helper\":{\"propBH1\":\"zidnsezcxtbzsgfy\"}}")
                         .toObject(MyBaseType.class);
-        Assertions.assertEquals("vswjdkirso", model.getPropB1());
-        Assertions.assertEquals("dqxhcrmnoh", model.getPropBH1());
+        Assertions.assertEquals("ufufsrp", model.getPropB1());
+        Assertions.assertEquals("zidnsezcxtbzsgfy", model.getPropBH1());
     }
 }

@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public final class BooleanWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         BooleanWrapper model =
-                BinaryData.fromString("{\"field_true\":false,\"field_false\":true}").toObject(BooleanWrapper.class);
+                BinaryData.fromString("{\"field_true\":false,\"field_false\":false}").toObject(BooleanWrapper.class);
         Assertions.assertEquals(false, model.isFieldTrue());
-        Assertions.assertEquals(true, model.isFieldFalse());
+        Assertions.assertEquals(false, model.isFieldFalse());
     }
 }

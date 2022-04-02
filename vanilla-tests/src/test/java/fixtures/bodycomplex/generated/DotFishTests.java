@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public final class DotFishTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         DotFish model =
-                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"zfkufubljo\"}").toObject(DotFish.class);
-        Assertions.assertEquals("zfkufubljo", model.getSpecies());
+                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"hbcryffdfdosyge\"}")
+                        .toObject(DotFish.class);
+        Assertions.assertEquals("hbcryffdfdosyge", model.getSpecies());
     }
 }

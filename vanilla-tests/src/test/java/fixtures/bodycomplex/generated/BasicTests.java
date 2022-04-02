@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 public final class BasicTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Basic model =
-                BinaryData.fromString("{\"id\":268043672,\"name\":\"hquvgjxpyb\",\"color\":\"cyan\"}")
+                BinaryData.fromString("{\"id\":268043672,\"name\":\"quvgjxpybczme\",\"color\":\"blacK\"}")
                         .toObject(Basic.class);
         Assertions.assertEquals(268043672, model.getId());
-        Assertions.assertEquals("hquvgjxpyb", model.getName());
-        Assertions.assertEquals(CMYKColors.CYAN, model.getColor());
+        Assertions.assertEquals("quvgjxpybczme", model.getName());
+        Assertions.assertEquals(CMYKColors.BLACK, model.getColor());
     }
 }

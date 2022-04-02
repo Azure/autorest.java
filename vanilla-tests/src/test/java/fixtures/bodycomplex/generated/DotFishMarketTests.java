@@ -11,18 +11,18 @@ import org.junit.jupiter.api.Test;
 
 public final class DotFishMarketTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         DotFishMarket model =
                 BinaryData.fromString(
-                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"qeofjaeqjh\",\"iswild\":false,\"species\":\"asvmsmjqul\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"ntnbybkzgc\",\"iswild\":false,\"species\":\"clxxwrljdo\"},{\"fish.type\":\"DotSalmon\",\"location\":\"skcqvkocrc\",\"iswild\":false,\"species\":\"wtnhxbnjbi\"},{\"fish.type\":\"DotSalmon\",\"location\":\"sqrglssain\",\"iswild\":true,\"species\":\"wnzlljfmpp\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"bvmgxsabky\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"ujitcjczdz\"},{\"fish.type\":\"DotFish\",\"species\":\"vndhkrwpda\"}]}")
+                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"ojakhmsbzjhcrze\",\"iswild\":false,\"species\":\"lxaolthqtrgqjbp\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"inzgvfcj\",\"iswild\":false,\"species\":\"xxjtfe\"},{\"fish.type\":\"DotSalmon\",\"location\":\"uwfzitonpe\",\"iswild\":true,\"species\":\"kjlxofpdvhpf\"},{\"fish.type\":\"DotSalmon\",\"location\":\"ypininm\",\"iswild\":false,\"species\":\"ybb\"},{\"fish.type\":\"DotSalmon\",\"location\":\"odepoogin\",\"iswild\":true,\"species\":\"iheogna\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"xth\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"si\"},{\"fish.type\":\"DotFish\",\"species\":\"evcciqihnhun\"},{\"fish.type\":\"DotFish\",\"species\":\"wjzrnfygxgisp\"},{\"fish.type\":\"DotFish\",\"species\":\"vtz\"}]}")
                         .toObject(DotFishMarket.class);
-        Assertions.assertEquals("asvmsmjqul", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("qeofjaeqjh", model.getSampleSalmon().getLocation());
+        Assertions.assertEquals("lxaolthqtrgqjbp", model.getSampleSalmon().getSpecies());
+        Assertions.assertEquals("ojakhmsbzjhcrze", model.getSampleSalmon().getLocation());
         Assertions.assertEquals(false, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("clxxwrljdo", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("ntnbybkzgc", model.getSalmons().get(0).getLocation());
+        Assertions.assertEquals("xxjtfe", model.getSalmons().get(0).getSpecies());
+        Assertions.assertEquals("inzgvfcj", model.getSalmons().get(0).getLocation());
         Assertions.assertEquals(false, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("bvmgxsabky", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("ujitcjczdz", model.getFishes().get(0).getSpecies());
+        Assertions.assertEquals("xth", model.getSampleFish().getSpecies());
+        Assertions.assertEquals("si", model.getFishes().get(0).getSpecies());
     }
 }

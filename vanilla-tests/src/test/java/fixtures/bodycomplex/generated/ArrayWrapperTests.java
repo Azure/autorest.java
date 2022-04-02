@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 public final class ArrayWrapperTests {
     @Test
-    public void testSerialization() {
-        ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bcufpdznrb\"]}").toObject(ArrayWrapper.class);
-        Assertions.assertEquals("bcufpdznrb", model.getArray().get(0));
+    public void testDeserialize() {
+        ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bc\"]}").toObject(ArrayWrapper.class);
+        Assertions.assertEquals("bc", model.getArray().get(0));
     }
 }

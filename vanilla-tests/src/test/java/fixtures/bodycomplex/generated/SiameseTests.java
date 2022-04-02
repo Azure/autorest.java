@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test;
 
 public final class SiameseTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Siamese model =
                 BinaryData.fromString(
-                                "{\"breed\":\"kwmrvktsiz\",\"color\":\"tocipaouaj\",\"hates\":[{\"food\":\"ucmpoyfdkf\",\"id\":934276292,\"name\":\"nygjofjdde\"},{\"food\":\"srdeupewnw\",\"id\":853033280,\"name\":\"tjzyflusar\"}],\"id\":1705319172,\"name\":\"fcqhsmyurk\"}")
+                                "{\"breed\":\"jofjd\",\"color\":\"qs\",\"hates\":[{\"food\":\"pewnw\",\"id\":853033280,\"name\":\"jzyflu\"},{\"food\":\"rh\",\"id\":614383228,\"name\":\"qhsmyurkdtml\"},{\"food\":\"ekuksjtx\",\"id\":743792160,\"name\":\"mparcryuanzw\"},{\"food\":\"zdxtayrlhmwhf\",\"id\":1944828988,\"name\":\"obmtukk\"}],\"id\":1306784267,\"name\":\"tihfx\"}")
                         .toObject(Siamese.class);
-        Assertions.assertEquals(1705319172, model.getId());
-        Assertions.assertEquals("fcqhsmyurk", model.getName());
-        Assertions.assertEquals("tocipaouaj", model.getColor());
-        Assertions.assertEquals(934276292, model.getHates().get(0).getId());
-        Assertions.assertEquals("nygjofjdde", model.getHates().get(0).getName());
-        Assertions.assertEquals("ucmpoyfdkf", model.getHates().get(0).getFood());
-        Assertions.assertEquals("kwmrvktsiz", model.getBreed());
+        Assertions.assertEquals(1306784267, model.getId());
+        Assertions.assertEquals("tihfx", model.getName());
+        Assertions.assertEquals("qs", model.getColor());
+        Assertions.assertEquals(853033280, model.getHates().get(0).getId());
+        Assertions.assertEquals("jzyflu", model.getHates().get(0).getName());
+        Assertions.assertEquals("pewnw", model.getHates().get(0).getFood());
+        Assertions.assertEquals("jofjd", model.getBreed());
     }
 }

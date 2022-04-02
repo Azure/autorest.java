@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public final class DogTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Dog model =
-                BinaryData.fromString("{\"food\":\"fcbjysagit\",\"id\":1190451363,\"name\":\"habifpikxw\"}")
+                BinaryData.fromString("{\"food\":\"cnpqxuhivyqniwby\",\"id\":143848779,\"name\":\"vd\"}")
                         .toObject(Dog.class);
-        Assertions.assertEquals(1190451363, model.getId());
-        Assertions.assertEquals("habifpikxw", model.getName());
-        Assertions.assertEquals("fcbjysagit", model.getFood());
+        Assertions.assertEquals(143848779, model.getId());
+        Assertions.assertEquals("vd", model.getName());
+        Assertions.assertEquals("cnpqxuhivyqniwby", model.getFood());
     }
 }

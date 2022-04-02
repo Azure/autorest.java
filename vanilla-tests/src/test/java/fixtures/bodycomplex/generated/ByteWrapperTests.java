@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public final class ByteWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         ByteWrapper model = BinaryData.fromString("{}").toObject(ByteWrapper.class);
     }
 }

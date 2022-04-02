@@ -11,16 +11,16 @@ import org.junit.jupiter.api.Test;
 
 public final class CatTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Cat model =
                 BinaryData.fromString(
-                                "{\"color\":\"tmlxhekuks\",\"hates\":[{\"food\":\"ukcdmparcr\",\"id\":658175717,\"name\":\"nzwuxzdxta\"},{\"food\":\"rlhmwhfpmr\",\"id\":918880721,\"name\":\"mtukknryrt\"},{\"food\":\"hfxtijbpzv\",\"id\":1041467339,\"name\":\"zsymglzufc\"}],\"id\":2049014083,\"name\":\"ohdbihanuf\"}")
+                                "{\"color\":\"jbpzvgnwzsymg\",\"hates\":[{\"food\":\"cyzkohdbihanuf\",\"id\":808084535,\"name\":\"jysagith\"}],\"id\":731883185,\"name\":\"bifpikxwczb\"}")
                         .toObject(Cat.class);
-        Assertions.assertEquals(2049014083, model.getId());
-        Assertions.assertEquals("ohdbihanuf", model.getName());
-        Assertions.assertEquals("tmlxhekuks", model.getColor());
-        Assertions.assertEquals(658175717, model.getHates().get(0).getId());
-        Assertions.assertEquals("nzwuxzdxta", model.getHates().get(0).getName());
-        Assertions.assertEquals("ukcdmparcr", model.getHates().get(0).getFood());
+        Assertions.assertEquals(731883185, model.getId());
+        Assertions.assertEquals("bifpikxwczb", model.getName());
+        Assertions.assertEquals("jbpzvgnwzsymg", model.getColor());
+        Assertions.assertEquals(808084535, model.getHates().get(0).getId());
+        Assertions.assertEquals("jysagith", model.getHates().get(0).getName());
+        Assertions.assertEquals("cyzkohdbihanuf", model.getHates().get(0).getFood());
     }
 }

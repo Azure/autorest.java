@@ -31,8 +31,10 @@ public class ModelTestCaseUtil {
         private float nullableProbability = 0.0f;
 
         private int maxDepth = 10;
-        private int maxList = 5;
-        private int maxDict = 5;
+
+        private int maxStringLen = 16 + 1;
+        private int maxList = 4 + 1;
+        private int maxDict = 4 + 1;
     }
 
     private static final Random RANDOM = new Random(3);
@@ -197,7 +199,7 @@ public class ModelTestCaseUtil {
     private static String randomString() {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
+        int targetStringLength = RANDOM.nextInt(CONFIGURATION.maxStringLen - 1) + 1;
 
         return RANDOM.ints(leftLimit, rightLimit + 1)
                 .limit(targetStringLength)

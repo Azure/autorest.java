@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public final class DurationWrapperTests {
     @Test
-    public void testSerialization() {
-        DurationWrapper model = BinaryData.fromString("{\"field\":\"PT160H46M54S\"}").toObject(DurationWrapper.class);
-        Assertions.assertEquals(Duration.parse("PT160H46M54S"), model.getField());
+    public void testDeserialize() {
+        DurationWrapper model = BinaryData.fromString("{\"field\":\"PT208H24M29S\"}").toObject(DurationWrapper.class);
+        Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
     }
 }

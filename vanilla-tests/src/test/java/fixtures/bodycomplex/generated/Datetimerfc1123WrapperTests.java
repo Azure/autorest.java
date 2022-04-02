@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 public final class Datetimerfc1123WrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Datetimerfc1123Wrapper model =
                 BinaryData.fromString(
-                                "{\"field\":\"Fri, 01 Oct 2021 09:23:29 GMT\",\"now\":\"Fri, 29 Jan 2021 16:12:59 GMT\"}")
+                                "{\"field\":\"Wed, 12 May 2021 13:31:22 GMT\",\"now\":\"Thu, 10 Jun 2021 08:54:16 GMT\"}")
                         .toObject(Datetimerfc1123Wrapper.class);
-        Assertions.assertEquals(OffsetDateTime.parse("2021-10-01T09:23:29Z"), model.getField());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-01-29T16:12:59Z"), model.getNow());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-05-12T13:31:22Z"), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-10T08:54:16Z"), model.getNow());
     }
 }

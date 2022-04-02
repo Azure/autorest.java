@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public final class StringWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         StringWrapper model =
-                BinaryData.fromString("{\"field\":\"xbmtqioqjz\",\"empty\":\"htbmufpown\",\"null\":\"izhwlrxybq\"}")
+                BinaryData.fromString("{\"field\":\"htbmuf\",\"empty\":\"wnoi\",\"null\":\"wlrxyb\"}")
                         .toObject(StringWrapper.class);
-        Assertions.assertEquals("xbmtqioqjz", model.getField());
-        Assertions.assertEquals("htbmufpown", model.getEmpty());
-        Assertions.assertEquals("izhwlrxybq", model.getNullProperty());
+        Assertions.assertEquals("htbmuf", model.getField());
+        Assertions.assertEquals("wnoi", model.getEmpty());
+        Assertions.assertEquals("wlrxyb", model.getNullProperty());
     }
 }

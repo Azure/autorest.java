@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public final class LongWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         LongWrapper model =
-                BinaryData.fromString("{\"field1\":8549474011903598336,\"field2\":8179108615259937676}")
+                BinaryData.fromString("{\"field1\":4252062726585189836,\"field2\":8175024465191423839}")
                         .toObject(LongWrapper.class);
-        Assertions.assertEquals(8549474011903598336L, model.getField1());
-        Assertions.assertEquals(8179108615259937676L, model.getField2());
+        Assertions.assertEquals(4252062726585189836L, model.getField1());
+        Assertions.assertEquals(8175024465191423839L, model.getField2());
     }
 }

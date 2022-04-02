@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 
 public final class DotSalmonTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         DotSalmon model =
                 BinaryData.fromString(
-                                "{\"fish.type\":\"DotSalmon\",\"location\":\"pdsbdkvwrw\",\"iswild\":false,\"species\":\"usnhutjelt\"}")
+                                "{\"fish.type\":\"DotSalmon\",\"location\":\"ufubl\",\"iswild\":false,\"species\":\"qeof\"}")
                         .toObject(DotSalmon.class);
-        Assertions.assertEquals("usnhutjelt", model.getSpecies());
-        Assertions.assertEquals("pdsbdkvwrw", model.getLocation());
+        Assertions.assertEquals("qeof", model.getSpecies());
+        Assertions.assertEquals("ufubl", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
     }
 }

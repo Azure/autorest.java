@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public final class DictionaryWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         DictionaryWrapper model =
                 BinaryData.fromString(
-                                "{\"defaultProgram\":{\"qqjnqglhqg\":\"nufooojywi\",\"fsqesaagdf\":\"mglzlhjxri\"}}")
+                                "{\"defaultProgram\":{\"dznrbtcqq\":\"nq\",\"lhqgnufooojy\":\"ifsqesaagdfmg\",\"zlhjxrifkwmrvkt\":\"izntocipao\",\"ajpsquc\":\"poyfdkfogkn\"}}")
                         .toObject(DictionaryWrapper.class);
-        Assertions.assertEquals("nufooojywi", model.getDefaultProgram().get("qqjnqglhqg"));
+        Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
     }
 }

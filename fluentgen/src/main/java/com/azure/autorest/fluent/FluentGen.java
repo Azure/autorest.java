@@ -117,8 +117,8 @@ public class FluentGen extends Javagen {
 
                 if (!settings.isSkipFormatting()) {
                     // formatter
-                    boolean isSampleJavaFile = path.contains("src/samples/java/");
-                    content = new JavaFormatter(content, path).format(!isSampleJavaFile);
+                    boolean isSampleOrTestJavaFile = path.contains("src/samples/java/") || path.contains("src/test/java/");
+                    content = new JavaFormatter(content, path).format(!isSampleOrTestJavaFile);
                 }
 
                 writeFile(path, content, null);

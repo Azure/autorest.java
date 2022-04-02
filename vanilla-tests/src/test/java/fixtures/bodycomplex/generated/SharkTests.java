@@ -12,22 +12,22 @@ import org.junit.jupiter.api.Test;
 
 public final class SharkTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         Shark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"shark\",\"age\":37175495,\"birthday\":\"2021-03-19T19:19:25Z\",\"species\":\"vdjwzrlovm\",\"length\":91.20445,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ijcoejctbz\",\"length\":25.220078,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"sycbkbfkgu\",\"length\":59.212852,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xxppofmxax\",\"length\":90.91013},{\"fishtype\":\"Fish\",\"species\":\"pgddtocjjx\",\"length\":80.35547},{\"fishtype\":\"Fish\",\"species\":\"mouexhdzxi\",\"length\":90.29794},{\"fishtype\":\"Fish\",\"species\":\"ojnxqbzvdd\",\"length\":4.383403}]},{\"fishtype\":\"Fish\",\"species\":\"ndeicbtwnp\",\"length\":34.97954,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vuhrhcffcy\",\"length\":69.74643},{\"fishtype\":\"Fish\",\"species\":\"lmjthjqkwp\",\"length\":90.16945},{\"fishtype\":\"Fish\",\"species\":\"cxmqciwqvh\",\"length\":14.463091},{\"fishtype\":\"Fish\",\"species\":\"xuigdtopbo\",\"length\":63.23664}]},{\"fishtype\":\"Fish\",\"species\":\"ghmewuamau\",\"length\":31.158012,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"yvvtpgvdfg\",\"length\":80.9739},{\"fishtype\":\"Fish\",\"species\":\"kftutqxlng\",\"length\":56.04713},{\"fishtype\":\"Fish\",\"species\":\"fgugnxkrxd\",\"length\":10.145628}]}]},{\"fishtype\":\"Fish\",\"species\":\"dtthzrvqdr\",\"length\":12.859451,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ybigehoqfb\",\"length\":19.68739,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"anyktzlcui\",\"length\":29.401552},{\"fishtype\":\"Fish\",\"species\":\"qywgndrvyn\",\"length\":90.62885},{\"fishtype\":\"Fish\",\"species\":\"pphrcgynco\",\"length\":18.435257},{\"fishtype\":\"Fish\",\"species\":\"cfvmmcoofs\",\"length\":70.36964}]},{\"fishtype\":\"Fish\",\"species\":\"evgbmqjqab\",\"length\":0.64109564,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ivkwlzuvcc\",\"length\":44.622604},{\"fishtype\":\"Fish\",\"species\":\"fnbacfionl\",\"length\":74.844604},{\"fishtype\":\"Fish\",\"species\":\"etqgtzxdpn\",\"length\":41.978294}]}]}]}")
+                                "{\"fishtype\":\"shark\",\"age\":1185115759,\"birthday\":\"2021-01-07T15:53:39Z\",\"species\":\"bzhfepgzgqexz\",\"length\":89.07796,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"c\",\"length\":42.87764,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"hhbcsglummajtjao\",\"length\":80.06312,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"bdxkqpxokaj\",\"length\":71.42319},{\"fishtype\":\"Fish\",\"species\":\"imexgstxgcpodgma\",\"length\":63.97488},{\"fishtype\":\"Fish\",\"species\":\"vdjwzrlovm\",\"length\":91.20445},{\"fishtype\":\"Fish\",\"species\":\"ijcoejctb\",\"length\":74.91223}]},{\"fishtype\":\"Fish\",\"species\":\"qsycbkbfkgu\",\"length\":59.212852,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xppofmxaxcfjp\",\"length\":63.614517},{\"fishtype\":\"Fish\",\"species\":\"ocjjxhvpmouexh\",\"length\":49.9817},{\"fishtype\":\"Fish\",\"species\":\"bqe\",\"length\":75.01583},{\"fishtype\":\"Fish\",\"species\":\"qbzvddntwnd\",\"length\":61.281292}]},{\"fishtype\":\"Fish\",\"species\":\"twnpzaoqvuhrhcf\",\"length\":76.06833,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"glmjth\",\"length\":74.24029},{\"fishtype\":\"Fish\",\"species\":\"pyeicxm\",\"length\":41.64201}]}]},{\"fishtype\":\"Fish\",\"species\":\"q\",\"length\":18.72976,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xuigdtopbobj\",\"length\":47.51092,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"w\",\"length\":0.8249521}]}]},{\"fishtype\":\"Fish\",\"species\":\"uhrzayvvt\",\"length\":83.356514,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"giotkftutqxlngx\",\"length\":44.588726,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gnxkrxdqmidtth\",\"length\":36.5727}]},{\"fishtype\":\"Fish\",\"species\":\"drabhjybige\",\"length\":69.17065,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"owskanyktz\",\"length\":53.713375},{\"fishtype\":\"Fish\",\"species\":\"y\",\"length\":52.055378},{\"fishtype\":\"Fish\",\"species\":\"wgndrvynhzgpp\",\"length\":25.54726}]}]}]}")
                         .toObject(Shark.class);
-        Assertions.assertEquals("vdjwzrlovm", model.getSpecies());
-        Assertions.assertEquals(91.20445f, model.getLength());
-        Assertions.assertEquals("ijcoejctbz", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(25.220078f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("sycbkbfkgu", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(59.212852f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("bzhfepgzgqexz", model.getSpecies());
+        Assertions.assertEquals(89.07796f, model.getLength());
+        Assertions.assertEquals("c", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(42.87764f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("hhbcsglummajtjao", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(80.06312f, model.getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(
-                "xxppofmxax", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+                "bdxkqpxokaj", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
         Assertions.assertEquals(
-                90.91013f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(37175495, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-03-19T19:19:25Z"), model.getBirthday());
+                71.42319f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(1185115759, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-01-07T15:53:39Z"), model.getBirthday());
     }
 }

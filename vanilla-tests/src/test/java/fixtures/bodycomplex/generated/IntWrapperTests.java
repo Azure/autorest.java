@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public final class IntWrapperTests {
     @Test
-    public void testSerialization() {
+    public void testDeserialize() {
         IntWrapper model =
-                BinaryData.fromString("{\"field1\":2058105586,\"field2\":182731623}").toObject(IntWrapper.class);
-        Assertions.assertEquals(2058105586, model.getField1());
-        Assertions.assertEquals(182731623, model.getField2());
+                BinaryData.fromString("{\"field1\":318397575,\"field2\":1830732530}").toObject(IntWrapper.class);
+        Assertions.assertEquals(318397575, model.getField1());
+        Assertions.assertEquals(1830732530, model.getField2());
     }
 }
