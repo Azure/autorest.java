@@ -36,4 +36,8 @@ public class FluentGenAccessor {
     public FluentMapper getFluentMapper() {
         return fluentgen.getFluentMapper();
     }
+
+    public void clear() {
+        fluentgen.clear();
+    }
 }
