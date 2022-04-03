@@ -28,19 +28,29 @@ import java.util.stream.Collectors;
 public class ModelTestCaseUtil {
 
     private static final class Configuration {
-        private float nullableProbability = 0.0f;
+        private final float nullableProbability = 0.0f;
 
-        private int maxDepth = 10;
+        private final int maxDepth = 10;
 
-        private int maxStringLen = 16 + 1;
-        private int maxList = 4 + 1;
-        private int maxDict = 4 + 1;
+        private final int maxStringLen = 16 + 1;
+        private final int maxList = 4 + 1;
+        private final int maxDict = 4 + 1;
     }
 
     private static final Random RANDOM = new Random(3);
     private static final Configuration CONFIGURATION = new Configuration();
 
-    public static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
+    /**
+     * Compose a random JSON object according to the structure of client model.
+     *
+     * @param model the client model
+     * @return the JSON object as Map
+     */
+    public static Map<String, Object> jsonFromModel(ClientModel model) {
+        return jsonFromModel(0, model);
+    }
+
+    private static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
         if (depth > CONFIGURATION.maxDepth) {
             return null;    // abort
         }
@@ -168,7 +178,7 @@ public class ModelTestCaseUtil {
         if (value != null) {
             List<String> serializedNames;
             if (modelNeedsFlatten) {
-                serializedNames = ModelUtil.splitFlattenedSerializedName(serializedName);
+                serializedNames = ClientModelUtil.splitFlattenedSerializedName(serializedName);
             } else {
                 serializedNames = Collections.singletonList(serializedName);
             }
@@ -176,6 +186,7 @@ public class ModelTestCaseUtil {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static void addToJsonObject(Map<String, Object> jsonObject, List<String> serializedNames, Object value) {
         if (serializedNames.size() == 1) {
             jsonObject.put(serializedNames.iterator().next(), value);

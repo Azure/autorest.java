@@ -3,7 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.util.ModelUtil;
+import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -88,7 +88,7 @@ public class ModelProperty {
         if (property instanceof ClientModelProperty) {
             ClientModelProperty clientModelProperty = (ClientModelProperty) property;
             if (!clientModelProperty.getNeedsFlatten()) {
-                return ModelUtil.splitFlattenedSerializedName(clientModelProperty.getSerializedName());
+                return ClientModelUtil.splitFlattenedSerializedName(clientModelProperty.getSerializedName());
             } else {
                 return Collections.singletonList(clientModelProperty.getSerializedName());
             }

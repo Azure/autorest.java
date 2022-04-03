@@ -43,7 +43,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String jsonStr;
         ExampleNode exampleNode;
         try {
-            Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(0, model);
+            Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
             jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
 
             exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);

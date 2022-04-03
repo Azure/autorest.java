@@ -17,20 +17,14 @@ import com.azure.autorest.mapper.ClientMethodMapperAccessor;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.util.ModelExampleUtil;
-import com.azure.autorest.util.ModelTestCaseUtil;
 import com.azure.core.http.HttpMethod;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Map;
 
 /**
  * unit test entry
@@ -49,20 +43,6 @@ public class JavagenUnitTests {
         JavaPackage javaPackage = javagen.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
 
         System.out.println(javaPackage.getJavaFiles().size());
-
-        boolean modelTestCaseVerified = false;
-        for (ClientModel model : client.getModels()) {
-            Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(0, model);
-            ExampleNode exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
-            if ("RefColorConstant".equals(model.getName())) {
-                modelTestCaseVerified = true;
-                Assert.assertTrue(jsonObject.containsKey("field1"));
-//                // constant
-//                Assert.assertTrue(jsonMap.containsKey("ColorConstant"));
-//                Assert.assertEquals("green-color", jsonMap.get("ColorConstant").toString());
-            }
-        }
-        Assert.assertTrue(modelTestCaseVerified);
     }
 
     /**

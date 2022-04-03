@@ -40,10 +40,25 @@ public class ModelExampleUtil {
 
     private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ModelExampleUtil.class);
 
+    /**
+     * Parse the type (client model or others) with JSON object to tree of ExampleNode.
+     *
+     * @param type the client type, wire type is assumed to be same
+     * @param objectValue the JSON object
+     * @return the tree of ExampleNode
+     */
     public static ExampleNode parseNode(IType type, Object objectValue) {
         return parseNode(type, type, objectValue);
     }
 
+    /**
+     * Parse the type (client model or others) with JSON object to tree of ExampleNode.
+     *
+     * @param type the client type
+     * @param wireType the wire type (the related but different type used in JSON, e.g. DateTimeRfc1123 for OffsetDateTime)
+     * @param objectValue the JSON object
+     * @return the tree of ExampleNode
+     */
     @SuppressWarnings("unchecked")
     public static ExampleNode parseNode(IType type, IType wireType, Object objectValue) {
         ExampleNode node;
@@ -88,7 +103,7 @@ public class ModelExampleUtil {
                     String serializedName = model.getPolymorphicDiscriminator();
                     List<String> jsonPropertyNames = Collections.singletonList(serializedName);
                     if (model.getNeedsFlatten()) {
-                        jsonPropertyNames = ModelUtil.splitFlattenedSerializedName(serializedName);
+                        jsonPropertyNames = ClientModelUtil.splitFlattenedSerializedName(serializedName);
                     }
 
                     Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
@@ -161,6 +176,7 @@ public class ModelExampleUtil {
         return node;
     }
 
+    @SuppressWarnings("unchecked")
     public static Object getChildObjectValue(List<String> jsonPropertyNames, Object objectValue) {
         boolean found = true;
         Object childObjectValue = objectValue;

@@ -25,7 +25,6 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.ModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
@@ -348,7 +347,7 @@ public class FluentUtils {
     }
 
     public static List<String> splitFlattenedSerializedName(String serializedName) {
-        return ModelUtil.splitFlattenedSerializedName(serializedName);
+        return ClientModelUtil.splitFlattenedSerializedName(serializedName);
     }
 
     public static boolean exampleIsUpdate(String name) {
