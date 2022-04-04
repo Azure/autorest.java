@@ -59,7 +59,7 @@ The `name` of `@autorest/java` in `package.json` makes sure that it is loaded wh
 
 ## Logging
 
-**DO NOT** log to stdout. AutoRest uses stdin and stdout as [PRC channel for plugins](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md#rpc-channel).
+**DO NOT** log to stdout. AutoRest uses stdin and stdout as [RPC channel for plugins](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md#rpc-channel).
 
 For formal logging, use `PluginLogger` in pattern `Logger logger = new PluginLogger(<PluginEntry>.getPluginInstance(), <Class>.class)`.
 
@@ -92,3 +92,27 @@ And downloaded Modeler Four version is 4.18.1 and 4.19.3, AutoRest Java version 
 ## Design on AutoRest Java
 
 See [Design](./design.md).
+
+## Debug AutoRest Java
+
+To enable debugging, first configure a remote JVM debugger. In IntelliJ, you can do this by going to
+Run -> Edit Configuration. On the configuration window, click on Add New Configuration -> Remote JVM Debug and 
+configure the remote debugger. Set the debugger mode to "Attach to remote JVM", Transport to "Socket", Host to 
+"localhost" and Port to "5005". Set the command line arguments to "-agentlib:jdwp=transport=dt_socket,server=y,
+suspend=n,address=*:5005".
+
+![img.png](../images/remote-debugger-config.png)
+
+After the remote debugger is configured, run autorest with this additional argument `--java.debugger`. The AutoRest 
+process will block until the JVM debugger is attached, so, after the AutoRest process pauses, start the debugger 
+which will connect to the remote debugger and this will hit the breakpoints set in the "Javagen" plugin. If you want 
+to set up a breakpoint in a different plugin like preprocessor or postprocessor, you can change the argument to 
+`--preprocessor.debugger` or `postprocessor.debugger` respectively.
+
+
+### Interactive UI to trace AutoRest pipeline
+
+Running autorest with `--interactive` mode on will pop up a browser window to show an interactive UI of the AutoRest 
+pipeline. This generally helps in identifying all the plugins that are executed, their order of execution, their 
+inputs and outputs.
+
