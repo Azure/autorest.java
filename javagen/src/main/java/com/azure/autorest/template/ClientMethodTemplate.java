@@ -53,7 +53,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             for (String expressionToCheck : expressionsToCheck) {
                 JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
                         ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
-                            + "cannot be null.\"));", expressionToCheck));
+                                + "cannot be null.\"));", expressionToCheck));
                 if (validateExpressions.containsKey(expressionToCheck)) {
                     nullCheck.elseBlock(elseBlock ->
                             elseBlock.line(validateExpressions.get(expressionToCheck) + ";"));
@@ -74,7 +74,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 if (!parameter.getIsRequired()) {
                     IType parameterClientType = parameter.getClientType();
                     String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
-                    function.line("final %s %s = %s;", parameterClientType, parameter.getName(), defaultValue == null ? "null" : defaultValue);
+                    function.line("final %s %s = %s;", parameterClientType, parameter.getName(),
+                            defaultValue == null ? "null" : defaultValue);
                 }
             }
         }
@@ -91,9 +92,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param clientMethod
      * @param proxyMethodAndConstantParameters
      * @param settings
-     * @param addOptional Whether add optional variables, init to default or null
-     * @param addConstant Whether add constant variables, init to default
-     * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
+     * @param addOptional                      Whether add optional variables, init to default or null
+     * @param addConstant                      Whether add constant variables, init to default
+     * @param ignoreParameterNeedConvert       When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
      */
     protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
                                                           boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
@@ -110,14 +111,17 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
-            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType &&
+                    clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
             if (!parameter.getFromClient()
                     && !alwaysNull
                     && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired())
-                    || (addConstant && parameter.getIsConstant() && (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired())))) {
+                    || (addConstant && parameter.getIsConstant() &&
+                    (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired())))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
-                function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
+                function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(),
+                        defaultValue == null ? "null" : defaultValue);
             }
         }
     }
@@ -152,7 +156,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
                         return parameterName + " != null";
                     }).collect(Collectors.joining(" || "));
-            boolean conditionalAssignment = !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
+            boolean conditionalAssignment = !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() &&
+                    !clientMethod.getOnlyRequiredParameters();
             // Use a mutable internal variable, leave the original name for effectively final variable
             String outParameterName = conditionalAssignment
                     ? transformation.getOutParameter().getName() + "Internal"
@@ -170,7 +175,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (transformationOutputParameterModelType instanceof ClassType) {
                 generatedCompositeType = ((ClassType) transformationOutputParameterModelType).getPackage().startsWith(settings.getPackage());
             }
-            if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
+            if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m ->
+                    m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelType.toString();
 
                 function.line("%s%s = new %s();",
@@ -200,7 +206,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
 
                 function.line("%s%s%s;",
-                        !conditionalAssignment && !generatedCompositeType ? transformation.getOutParameter().getClientType() + " " : "",
+                        !conditionalAssignment && !generatedCompositeType ?
+                                transformation.getOutParameter().getClientType() + " " : "",
                         outParameterName,
                         getMapping);
             }
@@ -277,7 +284,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         String expression;
                         if (alwaysNull) {
                             expression = "null";
-                        } else if (!parameter.getExplode()){
+                        } else if (!parameter.getExplode()) {
                             expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
                                             ".serializeList(%s, CollectionFormat.%s)", parameterName,
                                     parameter.getCollectionFormat().toString().toUpperCase());
@@ -288,8 +295,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             }
                         } else {
                             expression = String.format("Optional.ofNullable(%s).map(Collection::stream)" +
-                                    ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" +
-                                    ".collect(Collectors.toList())",
+                                            ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" +
+                                            ".collect(Collectors.toList())",
                                     parameterName);
                         }
                         function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
@@ -299,7 +306,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
                 if (settings.shouldGenerateXmlSerialization() &&
                         parameterClientType instanceof ListType &&
-                        (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
+                        (parameterLocation ==
+                                RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                     function.line("%s %s = new %s(%s);",
                             parameter.getWireType(),
                             parameterWireName,
@@ -384,7 +392,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
                 break;
 
-                // TODO: Simulated paging
+            // TODO: Simulated paging
 //            case SimulatedPagingSync:
 //                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
 //                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -426,7 +434,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningBeginAsync:
-                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isLowLevelClient()) {
+                    generateProtocolLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
+                    generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case LongRunningBeginSync:
@@ -488,14 +500,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                if (settings.isLowLevelClient()) {
+                    function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
+                    function.line("requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);");
+                }
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s),",
                             clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
                             clientMethod.getArgumentList());
-                    function.line("nextLink -> %s(%s));",
-                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentListWithoutRequestOptions());
+                    if (settings.isLowLevelClient()) {
+                        function.line("nextLink -> %s(%s));",
+                                clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                                clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"));
+                    } else {
+                        function.line("nextLink -> %s(%s));",
+                                clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                                clientMethod.getMethodPageDetails().getNextMethod().getArgumentListWithoutRequestOptions());
+                    }
                 });
             });
         } else {
@@ -595,9 +617,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     /**
      * Generate javadoc for client method.
      *
-     * @param clientMethod client method
-     * @param typeBlock code block
-     * @param restAPIMethod proxy method
+     * @param clientMethod     client method
+     * @param typeBlock        code block
+     * @param restAPIMethod    proxy method
      * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
@@ -614,9 +636,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     /**
      * Generate javadoc for client method.
      *
-     * @param clientMethod client method
-     * @param commentBlock comment block
-     * @param restAPIMethod proxy method
+     * @param clientMethod     client method
+     * @param commentBlock     comment block
+     * @param restAPIMethod    proxy method
      * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
@@ -625,7 +647,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         for (ClientMethodParameter parameter : methodParameters) {
             commentBlock.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
         }
-        if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
+        if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null &&
+                !clientMethod.getParametersDeclaration().isEmpty()) {
             commentBlock.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
         }
         generateJavadocExceptions(clientMethod, commentBlock, useFullClassName);
@@ -663,7 +686,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.line(String.format("return %s", serviceMethodCall));
                 } else {
                     function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                        serviceMethodCall));
+                            serviceMethodCall));
                 }
             } else {
                 function.line(String.format("return %s",
@@ -743,7 +766,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.methodReturn(serviceMethodCall);
                 } else {
                     function.methodReturn(String.format("FluxUtil.withContext(context -> %s)",
-                        serviceMethodCall));
+                            serviceMethodCall));
                 }
             } else {
                 function.methodReturn(serviceMethodCall);
@@ -762,10 +785,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     /**
      * Extension to write LRO async client method.
      *
-     * @param clientMethod client method
-     * @param typeBlock type block
+     * @param clientMethod  client method
+     * @param typeBlock     type block
      * @param restAPIMethod proxy method
-     * @param settings java settings
+     * @param settings      java settings
      */
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
@@ -774,10 +797,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     /**
      * Extension to write LRO begin async client method.
      *
-     * @param clientMethod client method
-     * @param typeBlock type block
+     * @param clientMethod  client method
+     * @param typeBlock     type block
      * @param restAPIMethod proxy method
-     * @param settings java settings
+     * @param settings      java settings
      */
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         String contextParam;
@@ -803,13 +826,29 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
+    protected void generateProtocolLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        // new DefaultPollingStrategy<>(this.getHttpPipeline(), null, requestOptions != null ? requestOptions.getContext() : Context.NONE),
+        String contextParam = "requestOptions != null ? requestOptions.getContext() : Context.NONE";
+        String httpPipelineParam = clientMethod.getClientReference() + ".getHttpPipeline()";
+        String pollingStrategy = "new DefaultPollingStrategy<>(" + httpPipelineParam + ", null, " + contextParam + ")";
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.decreaseIndent();
+        });
+    }
+
     /**
      * Extension to write LRO begin sync client method.
      *
-     * @param clientMethod client method
-     * @param typeBlock type block
+     * @param clientMethod  client method
+     * @param typeBlock     type block
      * @param restAPIMethod proxy method
-     * @param settings java settings
+     * @param settings      java settings
      */
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
