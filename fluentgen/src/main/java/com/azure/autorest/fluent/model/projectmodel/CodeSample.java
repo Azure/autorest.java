@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class CodeSample {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), CodeSample.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), CodeSample.class);
 
     private static final String TEST_ANNOTATION = "@Test";
     private static final String EMBEDME_START_COMMENT = "// @embedmeStart";
@@ -90,10 +90,10 @@ public class CodeSample {
                 codeLines = removeIndent(codeLines);
                 codeSample.code = String.join("\n", codeLines) + "\n";
 
-                logger.info("Read {} lines of code sample from test file '{}'", codeLines.size(), testFilePath);
+                LOGGER.info("Read {} lines of code sample from test file '{}'", codeLines.size(), testFilePath);
             }
         } catch (IOException e) {
-            logger.warn("Failed to read '" + testFilePath + "'", e);
+            LOGGER.warn("Failed to read '" + testFilePath + "'", e);
         }
 
         return codeSample;

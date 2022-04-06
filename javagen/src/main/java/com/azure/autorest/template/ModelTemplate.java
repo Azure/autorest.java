@@ -49,13 +49,13 @@ import java.util.stream.Collectors;
 public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
-    private static final ModelTemplate _instance = new ModelTemplate();
+    private static final ModelTemplate INSTANCE = new ModelTemplate();
 
     protected ModelTemplate() {
     }
 
     public static ModelTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ClientModel model, JavaFile javaFile) {
@@ -101,11 +101,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         String lastParentName = model.getName();
-        ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
+        ClientModel parentModel = ClientModels.INSTANCE.getModel(model.getParentModelName());
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             imports.addAll(parentModel.getImports());
             lastParentName = parentModel.getName();
-            parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
+            parentModel = ClientModels.INSTANCE.getModel(parentModel.getParentModelName());
         }
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
@@ -199,7 +199,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
                             String expression;
-                            if (propertyClientType.equals(ArrayType.ByteArray)) {
+                            if (propertyClientType.equals(ArrayType.BYTE_ARRAY)) {
                                 expression = String.format("CoreUtils.clone(%s)", property.getName());
                             } else {
                                 expression = property.getName();
@@ -491,7 +491,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelProperty> requiredProperties =
                 allRequiredProperties.stream().filter(property -> !property.getIsConstant()).collect(Collectors.toList());
         String lastParentName = model.getName();
-        ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
+        ClientModel parentModel = ClientModels.INSTANCE.getModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             List<ClientModelProperty> ctorArgs =
@@ -504,7 +504,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             requiredParentProperties.addAll(ctorArgs);
 
             lastParentName = parentModel.getName();
-            parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
+            parentModel = ClientModels.INSTANCE.getModel(parentModel.getParentModelName());
         }
 
         if (settings.isRequiredFieldsAsConstructorArgs() && (!requiredProperties.isEmpty() || !requiredParentProperties
@@ -611,7 +611,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String sourceTypeName = propertyType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = String.format("this.%s", property.getName());
-        if (propertyType.equals(ArrayType.ByteArray)) {
+        if (propertyType.equals(ArrayType.BYTE_ARRAY)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }
 
@@ -687,7 +687,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else if (wireType == ClassType.Long) {
             needsToBeGuardedAgainstNull = true;
             setter = String.format("Long.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.BYTE_ARRAY) {
             needsToBeGuardedAgainstNull = true;
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.String) {
@@ -822,7 +822,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String lastParentName = model.getName();
         String parentModelName = model.getParentModelName();
         while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-            ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+            ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
             if (parentModel != null) {
                 if (parentModel.getProperties() != null) {
                     propertyReferences.addAll(parentModel.getProperties().stream()

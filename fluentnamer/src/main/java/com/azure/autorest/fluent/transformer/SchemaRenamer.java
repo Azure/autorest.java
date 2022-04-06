@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class SchemaRenamer {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaRenamer.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), SchemaRenamer.class);
 
     private final Map<String, String> renameModel;
 
@@ -38,7 +38,7 @@ public class SchemaRenamer {
         String name = Utils.getJavaName(m);
         String newName = renameModel.get(name);
         if (!CoreUtils.isNullOrEmpty(newName)) {
-            logger.info("Rename model from '{}' to '{}'", name, newName);
+            LOGGER.info("Rename model from '{}' to '{}'", name, newName);
             m.getLanguage().getJava().setName(newName);
         }
     }

@@ -18,13 +18,13 @@ import java.util.Set;
  * Writes a EnumType to a JavaFile.
  */
 public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
-    private static EnumTemplate _instance = new EnumTemplate();
+    private static final EnumTemplate INSTANCE = new EnumTemplate();
 
     protected EnumTemplate() {
     }
 
     public static EnumTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(EnumType enumType, JavaFile javaFile) {
@@ -108,7 +108,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     comment.methodReturns(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
                 });
                 enumBlock.annotation("JsonCreator");
-                enumBlock.PublicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
+                enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
                 {
                     function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
                     function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
@@ -126,7 +126,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     });
                     enumBlock.annotation("JsonValue");
                 }
-                enumBlock.PublicMethod(String.format("%1$s %2$s()", typeName, enumType.getToJsonMethodName()),
+                enumBlock.publicMethod(String.format("%1$s %2$s()", typeName, enumType.getToJsonMethodName()),
                     function -> function.methodReturn("this.value"));
             });
         }

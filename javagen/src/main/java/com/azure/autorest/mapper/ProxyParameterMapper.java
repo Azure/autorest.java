@@ -52,8 +52,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
         builder.fromClient(parameterIsServiceClientProperty);
 
-        Schema ParameterJvWireType = parameter.getSchema();
-        IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
+        Schema parameterJvWireType = parameter.getSchema();
+        IType wireType = Mappers.getSchemaMapper().map(parameterJvWireType);
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
@@ -72,13 +72,13 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = CodeNamer
-                .toPascalCase(ParameterJvWireType.getSerialization().getXml().getName() +
+                .toPascalCase(parameterJvWireType.getSerialization().getXml().getName() +
                     "Wrapper");
             wireType = new ClassType.Builder()
                 .packageName(parameterTypePackage)
                 .name(parameterTypeName)
                 .build();
-        } else if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.BYTE_ARRAY) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }

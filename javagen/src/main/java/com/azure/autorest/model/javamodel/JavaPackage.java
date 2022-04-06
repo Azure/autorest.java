@@ -78,14 +78,14 @@ public class JavaPackage {
         return textFiles;
     }
 
-    public final void addManager(String package_Keyword, String name, Manager model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addManager(String packageKeyword, String name, Manager model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getManagerTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addServiceClient(String package_Keyword, String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addServiceClient(String packageKeyword, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getServiceClientTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
@@ -117,8 +117,8 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceClientInterface(String package_Keyword, String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addServiceClientInterface(String packageKeyword, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getServiceClientInterfaceTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
@@ -129,14 +129,14 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addServiceVersion(String package_Keyword, ServiceVersion serviceVersion) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, serviceVersion.getClassName());
+    public final void addServiceVersion(String packageKeyword, ServiceVersion serviceVersion) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, serviceVersion.getClassName());
         Templates.getServiceVersionTemplate().write(serviceVersion, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addMethodGroup(String package_Keyword, String name, MethodGroupClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addMethodGroup(String packageKeyword, String name, MethodGroupClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getMethodGroupTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
@@ -147,50 +147,50 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addMethodGroupInterface(String package_Keyword, String name, MethodGroupClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addMethodGroupInterface(String packageKeyword, String name, MethodGroupClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getMethodGroupInterfaceTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addModel(String package_Keyword, String name, ClientModel model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addModel(String packageKeyword, String name, ClientModel model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getModelTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addException(String package_Keyword, String name, ClientException model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addException(String packageKeyword, String name, ClientException model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getExceptionTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addEnum(String package_Keyword, String name, EnumType model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addEnum(String packageKeyword, String name, EnumType model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getEnumTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addPage(String package_Keyword, String name, PageDetails model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addPage(String packageKeyword, String name, PageDetails model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getPageTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addClientResponse(String package_Keyword, String name, ClientResponse model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addClientResponse(String packageKeyword, String name, ClientResponse model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getResponseTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addXmlSequenceWrapper(String package_Keyword, String name, XmlSequenceWrapper model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addXmlSequenceWrapper(String packageKeyword, String name, XmlSequenceWrapper model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getXmlSequenceWrapperTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
-    public final void addPackageInfo(String package_Keyword, String name, PackageInfo model) {
-        JavaFile javaFile = javaFileFactory.createEmptySourceFile(package_Keyword, name);
+    public final void addPackageInfo(String packageKeyword, String name, PackageInfo model) {
+        JavaFile javaFile = javaFileFactory.createEmptySourceFile(packageKeyword, name);
         Templates.getPackageInfoTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }

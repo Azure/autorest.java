@@ -7,8 +7,8 @@ import java.util.Comparator;
 import java.util.Locale;
 
 public class JavaImportComparer implements Comparator<String> {
-    private static String[] getImportParts(String import_Keyword) {
-        return import_Keyword.split("\\.", -1);
+    private static String[] getImportParts(String importKeyword) {
+        return importKeyword.split("\\.", -1);
     }
 
     private static boolean isLastPart(int importIndex, String[] importParts) {

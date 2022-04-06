@@ -48,17 +48,17 @@ import java.util.stream.Stream;
  */
 public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder, JavaFile> {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
-    private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
+    private static final ServiceClientBuilderTemplate INSTANCE = new ServiceClientBuilderTemplate();
 
-    private final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
+    private static final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
 
     protected ServiceClientBuilderTemplate() {
     }
 
     public static ServiceClientBuilderTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ClientBuilder clientBuilder, JavaFile javaFile) {
@@ -482,7 +482,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 if (securityInfo.getHeaderName() == null
                     || securityInfo.getHeaderName().isEmpty()) {
-                    LOGGER.error("key-credential-header-name is required for " +
+                    logger.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
                             "azurekeycredential credential type");

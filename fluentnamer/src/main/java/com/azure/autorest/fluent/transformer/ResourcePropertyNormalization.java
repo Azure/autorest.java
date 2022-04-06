@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  */
 public class ResourcePropertyNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ResourcePropertyNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ResourcePropertyNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         // Heuristic, only consider type used in request parameter.
@@ -64,21 +64,21 @@ public class ResourcePropertyNormalization {
                             ObjectSchema candidateType = (ObjectSchema) type;
                             if (checkOnParentConvertToSubResource(candidateType)) {
                                 p.setSchema(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
+                                LOGGER.info("SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         } else if (type instanceof ArraySchema && ((ArraySchema) type).getElementType() instanceof ObjectSchema) {
                             ArraySchema arrayType = ((ArraySchema) type);
                             ObjectSchema candidateType = (ObjectSchema) (arrayType.getElementType());
                             if (checkConvertToSubResource(candidateType)) {
                                 arrayType.setElementType(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("Array of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
+                                LOGGER.info("Array of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         } else if (type instanceof DictionarySchema && ((DictionarySchema) type).getElementType() instanceof ObjectSchema) {
                             DictionarySchema dictType = ((DictionarySchema) type);
                             ObjectSchema candidateType = (ObjectSchema) (dictType.getElementType());
                             if (checkConvertToSubResource(candidateType)) {
                                 dictType.setElementType(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("Dictionary of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
+                                LOGGER.info("Dictionary of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         }
                     });

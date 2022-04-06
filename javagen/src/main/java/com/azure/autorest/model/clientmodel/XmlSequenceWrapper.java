@@ -17,8 +17,8 @@ public class XmlSequenceWrapper {
     private Set<String> imports;
     private String packageName;
 
-    public XmlSequenceWrapper(String package_Keyword, IType sequenceType, String xmlRootElementName, String xmlListElementName, Set<String> imports) {
-        this.packageName = package_Keyword;
+    public XmlSequenceWrapper(String packageKeyword, IType sequenceType, String xmlRootElementName, String xmlListElementName, Set<String> imports) {
+        this.packageName = packageKeyword;
         this.sequenceType = sequenceType;
         this.xmlRootElementName = xmlRootElementName;
         this.xmlListElementName = xmlListElementName;

@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 
 public abstract class ResourceOperation {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceOperation.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceOperation.class);
 
     protected final FluentResourceModel resourceModel;
     protected final FluentResourceCollection resourceCollection;

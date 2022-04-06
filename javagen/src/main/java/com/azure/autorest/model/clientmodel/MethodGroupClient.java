@@ -68,8 +68,8 @@ public class MethodGroupClient {
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    protected MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
-        packageName = package_Keyword;
+    protected MethodGroupClient(String packageKeyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
+        packageName = packageKeyword;
         this.className = className;
         this.interfaceName = interfaceName;
         this.implementedInterfaces = implementedInterfaces;

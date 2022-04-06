@@ -22,13 +22,13 @@ import java.util.Map;
  * Writes a ServiceClient to a JavaFile.
  */
 public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
-    private static PomTemplate _instance = new PomTemplate();
+    private static final PomTemplate INSTANCE = new PomTemplate();
 
     protected PomTemplate() {
     }
 
     public static PomTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {

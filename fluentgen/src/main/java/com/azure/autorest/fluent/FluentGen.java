@@ -354,7 +354,7 @@ public class FluentGen extends Javagen {
 
     void clear() {
         JavaSettings.clear();
-        ClientModels.Instance.clear();
+        ClientModels.INSTANCE.clear();
         fluentJavaSettings = null;
         fluentMapper = null;
         fluentPremiumExamples = null;

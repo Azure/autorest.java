@@ -291,7 +291,7 @@ public class Javagen extends NewPlugin {
     }
 
     private void clear() {
-        ClientModels.Instance.clear();
+        ClientModels.INSTANCE.clear();
         JavaSettings.clear();
     }
 }

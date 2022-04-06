@@ -36,7 +36,7 @@ import java.util.stream.Stream;
  */
 public class SchemaNameNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaNameNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), SchemaNameNormalization.class);
 
     private final Map<String, String> nameOverridePlan = new HashMap<>();
 
@@ -105,7 +105,7 @@ public class SchemaNameNormalization {
                     .findFirst();
             if (property.isPresent()) {
                 String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(property.get().getSerializedName());
-                logger.warn("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
+                LOGGER.warn("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
                 schema.getLanguage().getDefault().setName(newName);
                 break;
             }
@@ -119,7 +119,7 @@ public class SchemaNameNormalization {
                         .findFirst();
                 if (parameter.isPresent()) {
                     String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
-                    logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                    LOGGER.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
                     schema.getLanguage().getDefault().setName(newName);
                     done = true;
                     break;
@@ -137,7 +137,7 @@ public class SchemaNameNormalization {
                             .findFirst();
                     if (parameter.isPresent()) {
                         String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
-                        logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                        LOGGER.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
                         schema.getLanguage().getDefault().setName(newName);
                         done = true;
                         break;
@@ -172,7 +172,7 @@ public class SchemaNameNormalization {
                         if (name.startsWith(prefix) && name.endsWith(postfix)) {
                             String newName = Utils.getDefaultName(dict);
                             type.getLanguage().getDefault().setName(newName);
-                            logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                            LOGGER.warn("Rename schema default name, from '{}' to '{}'", name, newName);
                         }
                     }
                 });
@@ -208,7 +208,7 @@ public class SchemaNameNormalization {
                     Schema firstChild = schema.getChildren().getImmediate().iterator().next();
                     String newName = "Base" + Utils.getDefaultName(firstChild);
                     schema.getLanguage().getDefault().setName(newName);
-                    logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                    LOGGER.warn("Rename schema default name, from '{}' to '{}'", name, newName);
                 }
             }
         });
@@ -236,7 +236,7 @@ public class SchemaNameNormalization {
                         if (name.startsWith(prefix) && name.endsWith(postfix) && name.contains(requestBody)) {
                             String newName = Utils.getDefaultName(og) + Utils.getDefaultName(operation) + "RequestBody";
                             schema.getLanguage().getDefault().setName(newName);
-                            logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                            LOGGER.warn("Rename schema default name, from '{}' to '{}'", name, newName);
                         }
                     }
                 });
@@ -285,10 +285,10 @@ public class SchemaNameNormalization {
                         String newName = overrideName(name);
                         if (!name.equals(newName)) {
                             if (name.equalsIgnoreCase(newName)) {
-                                logger.info("Override response header, from '{}' to '{}'", name, newName);
+                                LOGGER.info("Override response header, from '{}' to '{}'", name, newName);
                                 h.setHeader(newName);
                             } else {
-                                logger.info("Abort override response header, from '{}' to '{}'", name, newName);
+                                LOGGER.info("Abort override response header, from '{}' to '{}'", name, newName);
                             }
                         }
                     });
@@ -301,7 +301,7 @@ public class SchemaNameNormalization {
         String newName = overrideName(name);
         if (!name.equals(newName)) {
             m.getLanguage().getDefault().setName(newName);
-            logger.info("Override default name, from '{}' to '{}'", name, newName);
+            LOGGER.info("Override default name, from '{}' to '{}'", name, newName);
         }
     }
 

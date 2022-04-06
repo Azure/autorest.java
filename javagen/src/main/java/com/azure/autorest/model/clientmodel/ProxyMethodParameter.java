@@ -229,7 +229,7 @@ public class ProxyMethodParameter {
             imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.BODY) {
-            if (getClientType() == ArrayType.ByteArray) {
+            if (getClientType() == ArrayType.BYTE_ARRAY) {
                 imports.add("com.azure.core.util.Base64Util");
             } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");

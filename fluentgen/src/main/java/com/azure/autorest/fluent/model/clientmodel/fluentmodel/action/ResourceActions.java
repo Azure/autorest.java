@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 public class ResourceActions {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceActions.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceActions.class);
 
     private final FluentResourceModel resourceModel;
     private final FluentResourceCollection resourceCollection;
@@ -39,9 +39,9 @@ public class ResourceActions {
         this.resourceCollection = resourceCollection;
         this.actionMethods = actionMethods;
 
-        if (logger.isInfoEnabled()) {
+        if (LOGGER.isInfoEnabled()) {
             Set<String> methodNames = actionMethods.stream().map(m -> m.getInnerProxyMethod().getName()).collect(Collectors.toSet());
-            logger.info("ResourceActions: Fluent model '{}', action methods: {}", resourceModel.getName(), methodNames);
+            LOGGER.info("ResourceActions: Fluent model '{}', action methods: {}", resourceModel.getName(), methodNames);
         }
     }
 

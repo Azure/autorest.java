@@ -34,10 +34,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                ApplyParameterTransformations(function, clientMethod, settings);
-                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+                addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                applyParameterTransformations(function, clientMethod, settings);
+                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                 addSpecialHeadersToLocalVariables(function, clientMethod);
                 if (mergeContextParameter) {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
@@ -114,10 +114,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                ApplyParameterTransformations(function, clientMethod, settings);
-                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+                addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                applyParameterTransformations(function, clientMethod, settings);
+                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                 if (mergeContextParameter) {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
@@ -201,10 +201,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            ApplyParameterTransformations(function, clientMethod, settings);
-            ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
             addSpecialHeadersToLocalVariables(function, clientMethod);
 
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
@@ -228,7 +228,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
             function.indent(() -> {
                 function.line(".last()");
@@ -246,7 +246,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (mergeContextParameter) {
                 function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
             }
@@ -263,7 +263,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
             function.indent((() -> {
                 function.text(".getSyncPoller();");

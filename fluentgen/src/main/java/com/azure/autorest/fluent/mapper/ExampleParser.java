@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 
 public class ExampleParser {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
 
     static {
         ModelExampleUtil.setGetClientModelFunction(FluentUtils::getClientModel);
@@ -172,7 +172,7 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                logger.info("Parse collection method example '{}'", entry.getKey());
+                LOGGER.info("Parse collection method example '{}'", entry.getKey());
 
                 FluentCollectionMethodExample collectionMethodExample =
                         parseMethodForExample(collection, collectionMethod, methodParameters, entry.getKey(), entry.getValue());
@@ -190,7 +190,7 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : clientMethod.getProxyMethod().getExamples().entrySet()) {
-                logger.info("Parse client method example '{}'", entry.getKey());
+                LOGGER.info("Parse client method example '{}'", entry.getKey());
 
                 FluentClientMethodExample collectionMethodExample =
                         parseMethodForExample(methodGroup, clientMethod, methodParameters, entry.getKey(), entry.getValue());
@@ -232,7 +232,7 @@ public class ExampleParser {
 
             if (node.getObjectValue() == null) {
                 if (methodParameter.getClientMethodParameter().getIsRequired()) {
-                    logger.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
+                    LOGGER.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
                 }
             }
 
@@ -260,11 +260,11 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely a resource update example
-                        logger.info("Skip possible resource update example '{}' in create", entry.getKey());
+                        LOGGER.info("Skip possible resource update example '{}' in create", entry.getKey());
                         continue;
                     }
 
-                    logger.info("Parse resource create example '{}'", entry.getKey());
+                    LOGGER.info("Parse resource create example '{}'", entry.getKey());
 
                     FluentResourceCreateExample resourceCreateExample = parseResourceCreate(collection, resourceCreate, entry.getValue(), methodParameters, requestBodyParameter);
 
@@ -287,7 +287,7 @@ public class ExampleParser {
             defineNode = parseNodeFromParameter(example, methodParameter);
 
             if (defineNode.getObjectValue() == null) {
-                logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
+                LOGGER.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
             }
         }
         resourceCreateExample.getParameters().add(new ParameterExample(defineMethod, defineNode));
@@ -328,7 +328,7 @@ public class ExampleParser {
 
                 if (exampleNodes.stream().anyMatch(ExampleNode::isNull)) {
                     if (stage.isMandatoryStage()) {
-                        logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
+                        LOGGER.warn("Failed to assign sample value to required stage '{}'", stage.getName());
                     }
                 }
 
@@ -376,11 +376,11 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && !FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely not a resource update example
-                        logger.info("Skip possible resource create example '{}' in update", entry.getKey());
+                        LOGGER.info("Skip possible resource create example '{}' in update", entry.getKey());
                         continue;
                     }
 
-                    logger.info("Parse resource update example '{}'", entry.getKey());
+                    LOGGER.info("Parse resource update example '{}'", entry.getKey());
 
                     ProxyMethodExample example = entry.getValue();
                     FluentResourceUpdateExample resourceUpdateExample = parseResourceUpdate(collection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
@@ -560,7 +560,7 @@ public class ExampleParser {
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
                     elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
-                    logger.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+                    LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
             }
             for (String childObjectValue : elements) {
                 ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);

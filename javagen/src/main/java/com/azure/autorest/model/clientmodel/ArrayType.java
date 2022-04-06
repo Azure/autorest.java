@@ -11,7 +11,7 @@ import java.util.function.Function;
  * The details of an array type that is used by a client.
  */
 public class ArrayType implements IType {
-    public static final ArrayType ByteArray = new ArrayType(PrimitiveType.Byte, (String defaultValueExpression) -> defaultValueExpression == null ? "new byte[0]" : String.format("\"%1$s\".getBytes()", defaultValueExpression));
+    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.Byte, (String defaultValueExpression) -> defaultValueExpression == null ? "new byte[0]" : String.format("\"%1$s\".getBytes()", defaultValueExpression));
     private IType elementType;
     private Function<String, String> defaultValueExpressionConverter;
 

@@ -21,12 +21,13 @@ import java.util.Set;
  */
 public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile> {
 
-  private static ServiceAsyncClientTemplate _instance = new ServiceAsyncClientTemplate();
+  private static final ServiceAsyncClientTemplate INSTANCE = new ServiceAsyncClientTemplate();
+
   protected ServiceAsyncClientTemplate() {
   }
 
   public static ServiceAsyncClientTemplate getInstance() {
-    return _instance;
+    return INSTANCE;
   }
 
   @Override

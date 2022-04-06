@@ -39,16 +39,17 @@ public class Connection {
 
     private OutputStream writer;
     private PeekingBinaryReader reader;
-    private boolean _isDisposed = false;
+    private boolean isDisposed = false;
     private final AtomicInteger requestId;
     private final Map<Integer, CallerResponse<?>> tasks = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
-    private final CompletableFuture<Void> _loop;
+    private final CompletableFuture<Void> loop;
+    private final Map<String, Function<JsonNode, String>> dispatch = new HashMap<>();
 
     public Connection(OutputStream writer, InputStream input) {
         this.writer = writer;
         this.reader = new PeekingBinaryReader(input);
-        this._loop = CompletableFuture.runAsync(this::listen);
+        this.loop = CompletableFuture.runAsync(this::listen);
         this.requestId = new AtomicInteger(0);
     }
 
@@ -56,7 +57,7 @@ public class Connection {
 
     public void stop() {
         isAlive = false;
-        _loop.cancel(true);
+        loop.cancel(true);
     }
 
     private JsonNode readJson() {
@@ -79,10 +80,8 @@ public class Connection {
         }
     }
 
-    private final Map<String, Function<JsonNode, String>> _dispatch = new HashMap<>();
-
     public <T> void dispatch(String path, Supplier<T> method) {
-        _dispatch.put(path, input -> {
+        dispatch.put(path, input -> {
             T result = method.get();
             if (result == null) {
                 return "null";
@@ -123,7 +122,7 @@ public class Connection {
     }
 
     public void dispatchNotification(String path, Runnable method) {
-        _dispatch.put(path, input -> {
+        dispatch.put(path, input -> {
             method.run();
             return null;
         });
@@ -133,7 +132,7 @@ public class Connection {
     }
 
     public <P1, P2, T> void dispatch(String path, BiFunction<P1, P2, T> method, Class<? extends P1> p1Class, Class<? extends P2> p2Class) {
-        _dispatch.put(path, input -> {
+        dispatch.put(path, input -> {
             List<JsonNode> args = readArguments(input, 2);
             try {
                 P1 a1 = MAPPER.treeToValue(args.get(0), p1Class);
@@ -240,8 +239,8 @@ public class Connection {
                             }
                             // this is a method call.
                             // pass it to the service that is listening...
-                            if (_dispatch.containsKey(method)) {
-                                Function<JsonNode, String> fn = _dispatch.get(method);
+                            if (dispatch.containsKey(method)) {
+                                Function<JsonNode, String> fn = dispatch.get(method);
                                 JsonNode parameters = jobject.get("params");
                                 String result = fn.apply(parameters);
                                 if (id != -1) {
@@ -282,9 +281,9 @@ public class Connection {
     protected void close() throws IOException {
         // ensure that we are in a cancelled state.
         isAlive = false;
-        if (!_isDisposed) {
+        if (!isDisposed) {
             // make sure we can't dispose twice
-            _isDisposed = true;
+            isDisposed = true;
             for (Map.Entry<Integer, CallerResponse<?>> t : tasks.entrySet()) {
                 t.getValue().cancel(true);
             }
@@ -421,7 +420,7 @@ public class Connection {
 
     public void waitForAll() {
         try {
-            _loop.get();
+            loop.get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

@@ -14,13 +14,13 @@ import java.util.Set;
  * Writes a ClientException to a JavaFile.
  */
 public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFile> {
-    private static ExceptionTemplate _instance = new ExceptionTemplate();
+    private static final ExceptionTemplate INSTANCE = new ExceptionTemplate();
 
     protected ExceptionTemplate() {
     }
 
     public static ExceptionTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ClientException exception, JavaFile javaFile) {

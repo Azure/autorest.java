@@ -30,9 +30,9 @@ public class GenericType implements IType {
      * @param name The main non-generic type of this generic type.
      * @param typeArguments The type arguments of this generic type.
      */
-    public GenericType(String package_Keyword, String name, IType... typeArguments) {
+    public GenericType(String packageKeyword, String name, IType... typeArguments) {
         this.name = name;
-        packageName = package_Keyword;
+        packageName = packageKeyword;
         this.typeArguments = typeArguments;
     }
 

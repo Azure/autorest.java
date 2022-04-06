@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 
 public class FluentExampleTemplate {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentExampleTemplate.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentExampleTemplate.class);
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -271,7 +271,7 @@ public class FluentExampleTemplate {
                         return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
                                 ClassType.String.defaultValueExpression(jsonStr));
                     } catch (JsonProcessingException e) {
-                        logger.error("Failed to write JSON {}", node.getObjectValue());
+                        LOGGER.error("Failed to write JSON {}", node.getObjectValue());
                         throw new IllegalStateException(e);
                     }
                 }

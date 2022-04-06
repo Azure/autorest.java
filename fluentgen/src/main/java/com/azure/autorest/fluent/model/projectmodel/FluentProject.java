@@ -24,7 +24,7 @@ import java.util.List;
 
 public class FluentProject extends Project {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentProject.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentProject.class);
 
     protected final ServiceDescription serviceDescription = new ServiceDescription();
 
@@ -112,16 +112,16 @@ public class FluentProject extends Project {
             if (Files.isReadable(changelogPath)) {
                 try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
                     this.changelog = new Changelog(reader);
-                    logger.info("Update 'CHANGELOG.md' for version '{}'", version);
+                    LOGGER.info("Update 'CHANGELOG.md' for version '{}'", version);
                     this.changelog.updateForVersion(this);
                 } catch (IOException e) {
-                    logger.warn("Failed to parse 'CHANGELOG.md'", e);
+                    LOGGER.warn("Failed to parse 'CHANGELOG.md'", e);
                 }
             } else {
-                logger.info("'CHANGELOG.md' not found or not readable");
+                LOGGER.info("'CHANGELOG.md' not found or not readable");
             }
         } else {
-            logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
+            LOGGER.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
         }
     }
 
@@ -136,16 +136,16 @@ public class FluentProject extends Project {
                         if (!Files.isDirectory(path) && Files.isReadable(path)
                                 && (path.getFileName().toString().endsWith("Tests.java")
                                 || path.getFileName().toString().endsWith("Test.java"))) {
-                            logger.info("Attempt to find code sample from test file '{}'", path);
+                            LOGGER.info("Attempt to find code sample from test file '{}'", path);
                             codeSamples.add(CodeSample.fromTestFile(path));
                         }
                     });
                 } catch (IOException e) {
-                    logger.warn("Failed to walk path '" + srcTestJavaPath + "'", e);
+                    LOGGER.warn("Failed to walk path '" + srcTestJavaPath + "'", e);
                 }
             }
         } else {
-            logger.warn("'output-folder' parameter is not an absolute path, skip code samples");
+            LOGGER.warn("'output-folder' parameter is not an absolute path, skip code samples");
         }
     }
 

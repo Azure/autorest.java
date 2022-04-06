@@ -26,13 +26,13 @@ import java.util.stream.Collectors;
  * Writes a Proxy to a JavaClass block.
  */
 public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
-    private static ProxyTemplate _instance = new ProxyTemplate();
+    private static final ProxyTemplate INSTANCE = new ProxyTemplate();
 
     protected ProxyTemplate() {
     }
 
     public static ProxyTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(Proxy restAPI, JavaClass classBlock) {

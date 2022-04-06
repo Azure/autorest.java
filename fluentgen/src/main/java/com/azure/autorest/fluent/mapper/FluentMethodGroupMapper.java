@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class FluentMethodGroupMapper extends MethodGroupMapper {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentMethodGroupMapper.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentMethodGroupMapper.class);
 
     private static final FluentMethodGroupMapper INSTANCE = new FluentMethodGroupMapper();
 
@@ -54,7 +54,7 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
         classTypeForDelete.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsDelete(iType)));
 
         if (!interfaces.isEmpty()) {
-            logger.info("Method group '{}' support interfaces {}",
+            LOGGER.info("Method group '{}' support interfaces {}",
                     Utils.getJavaName(operationGroup),
                     interfaces.stream().map(IType::toString).collect(Collectors.toList()));
         }

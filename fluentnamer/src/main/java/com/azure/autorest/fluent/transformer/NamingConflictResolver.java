@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class NamingConflictResolver {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), NamingConflictResolver.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), NamingConflictResolver.class);
 
     public CodeModel process(CodeModel codeModel) {
         // conform to lowercase, to avoid problem on Windows system, where file name is case-insensitive
@@ -64,7 +64,7 @@ public class NamingConflictResolver {
                 newName = name + keywordManagementClient;
             }
 
-            logger.info("Rename code model from '{}' to '{}'", name, newName);
+            LOGGER.info("Rename code model from '{}' to '{}'", name, newName);
             codeModel.getLanguage().getJava().setName(newName);
         }
 
@@ -78,7 +78,7 @@ public class NamingConflictResolver {
     private static String renameOperationGroup(Metadata m) {
         String name = Utils.getJavaName(m);
         String newName = name + Constants.OPERATION_GROUP_DEDUPLICATE_SUFFIX;
-        logger.info("Rename operation group from '{}' to '{}'", name, newName);
+        LOGGER.info("Rename operation group from '{}' to '{}'", name, newName);
         m.getLanguage().getJava().setName(newName);
         return newName;
     }
@@ -87,8 +87,8 @@ public class NamingConflictResolver {
         String name = Utils.getJavaName(choice);
         if (objectNames.contains(name.toLowerCase(Locale.ROOT))) {
             String newName = name + "Value";
-            logger.warn("Name conflict of choice with object '{}'", name);
-            logger.info("Rename choice from '{}' to '{}'", name, newName);
+            LOGGER.warn("Name conflict of choice with object '{}'", name);
+            LOGGER.info("Rename choice from '{}' to '{}'", name, newName);
             choice.getLanguage().getJava().setName(newName);
         }
     }

@@ -5,7 +5,7 @@
 
 <suppressions>
   <!-- ignore com.azure.autorest.customization.implementation -->
-  <suppress checks="[IllegalImport]" files="src[/\\]main[/\\]java[/\\]com[/\\]azure[/\\]autorest[/\\]customization[/\\]implementation[/\\].*.java"/>
+  <suppress checks="IllegalImport" files="src[/\\]main[/\\]java[/\\]com[/\\]azure[/\\]autorest[/\\]customization[/\\]implementation[/\\].*.java"/>
 
   <!-- Add Javadoc suppression for any test files (ie. ones that live under src/test/java). -->
   <suppress checks="[a-zA-Z0-9]*" files="src[/\\]test[/\\]java[/\\].*.java"/>
@@ -19,4 +19,12 @@
 
   <!-- Don't check for JavaDocPackage in samples or tests-->
   <suppress checks="JavadocPackage" files=".*[/\\](samples|test)[/\\].*\.java"/>
+
+  <!-- code model-->
+  <suppress checks="[ParameterName|MemberName]" files="com[/\\]azure[/\\]autorest[/\\]extension[/\\]base[/\\]model[/\\]codemodel[/\\].*.java"/>
+  <!-- class type-->
+  <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]model[/\\]clientmodel[/\\](ClassType|GenericType|PrimitiveType).java"/>
+  <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]fluent[/\\]model[/\\]FluentType.java"/>
+  <!-- class type-->
+  <suppress checks="[a-zA-Z0-9]*" files="com[/\\]azure[/\\]autorest[/\\]android[/\\].*"/>
 </suppressions>

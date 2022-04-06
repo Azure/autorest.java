@@ -52,11 +52,11 @@ import java.util.stream.Stream;
  */
 public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
 
-    private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
+    private static final List<IType> UNIX_TIME_TYPES = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
         , ClassType.UnixTimeDateTime);
-    private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
+    private static final List<IType> RETURN_VALUE_WIRE_TYPE_OPTIONS = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), UNIX_TIME_TYPES.stream()).collect(Collectors.toList());
     private static final ProxyMethodMapper INSTANCE = new ProxyMethodMapper();
 
     private static final Pattern APOSTROPHE = Pattern.compile("'");
@@ -152,7 +152,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
-        builder.returnValueWireType(returnValueWireTypeOptions
+        builder.returnValueWireType(RETURN_VALUE_WIRE_TYPE_OPTIONS
                 .stream()
                 .filter(type -> responseBodyTypeReference.get().contains(type))
                 .findFirst()
@@ -512,7 +512,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
             // let's hope the new name does not conflict with name from another operation
             name = methodSignature.get(0);
-            LOGGER.warn("Rename method to '{}', due to conflict on method signature {}",
+            logger.warn("Rename method to '{}', due to conflict on method signature {}",
                     name,
                     conflictMethodSignature);
         }

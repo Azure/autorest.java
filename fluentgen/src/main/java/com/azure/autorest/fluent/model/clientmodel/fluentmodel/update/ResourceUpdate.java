@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 public class ResourceUpdate extends ResourceOperation {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceUpdate.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceUpdate.class);
 
     private List<UpdateStage> updateStages;
 
@@ -48,7 +48,7 @@ public class ResourceUpdate extends ResourceOperation {
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
 
-        logger.info("ResourceUpdate: Fluent model '{}', method reference '{}', body parameter '{}'",
+        LOGGER.info("ResourceUpdate: Fluent model '{}', method reference '{}', body parameter '{}'",
                 resourceModel.getName(), methodName, bodyParameterModel.getName());
     }
 

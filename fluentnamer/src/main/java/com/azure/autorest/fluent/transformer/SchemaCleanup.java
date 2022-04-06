@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  */
 public class SchemaCleanup {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaCleanup.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), SchemaCleanup.class);
 
     private final Set<String> javaNamesForPreserveModel;
 
@@ -37,10 +37,10 @@ public class SchemaCleanup {
     }
 
     public CodeModel process(CodeModel codeModel) {
-        final int MAX_TRY_COUNT = 5;    // try a few time for recursive removal (e.g., 1st pass model removed, 2nd pass model used as its properties removed)
+        final int maxTryCount = 5;    // try a few time for recursive removal (e.g., 1st pass model removed, 2nd pass model used as its properties removed)
 
         boolean codeModelModified = true;
-        for (int i = 0; i < MAX_TRY_COUNT && codeModelModified; ++i) {
+        for (int i = 0; i < maxTryCount && codeModelModified; ++i) {
             codeModelModified = tryCleanup(codeModel, javaNamesForPreserveModel);
         }
 
@@ -125,7 +125,7 @@ public class SchemaCleanup {
         codeModel.getSchemas().getObjects().removeIf(s -> {
             boolean unused = schemasNotInUse.contains(s) && !javaNamesForPreserveModel.contains(Utils.getJavaName(s));
             if (unused) {
-                logger.info("Remove unused object schema '{}'", Utils.getJavaName(s));
+                LOGGER.info("Remove unused object schema '{}'", Utils.getJavaName(s));
                 codeModelModified.set(true);
             }
             return unused;
@@ -134,7 +134,7 @@ public class SchemaCleanup {
         codeModel.getSchemas().getSealedChoices().removeIf(s -> {
             boolean unused = choicesSchemasNotInUse.contains(s) && !javaNamesForPreserveModel.contains(Utils.getJavaName(s));
             if (unused) {
-                logger.info("Remove unused sealed choice schema '{}'", Utils.getJavaName(s));
+                LOGGER.info("Remove unused sealed choice schema '{}'", Utils.getJavaName(s));
                 codeModelModified.set(true);
             }
             return unused;
@@ -143,7 +143,7 @@ public class SchemaCleanup {
         codeModel.getSchemas().getChoices().removeIf(s -> {
             boolean unused = choicesSchemasNotInUse.contains(s) && !javaNamesForPreserveModel.contains(Utils.getJavaName(s));
             if (unused) {
-                logger.info("Remove unused choice schema '{}'", Utils.getJavaName(s));
+                LOGGER.info("Remove unused choice schema '{}'", Utils.getJavaName(s));
                 codeModelModified.set(true);
             }
             return unused;

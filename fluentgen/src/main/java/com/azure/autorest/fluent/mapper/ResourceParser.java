@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 
 public class ResourceParser {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceParser.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceParser.class);
 
     public static void parseResourcesCategory(FluentResourceCollection collection,
                                               List<FluentResourceModel> availableFluentModels,
@@ -163,7 +163,7 @@ public class ResourceParser {
 
                 supportsCreateList.add(resourceCreate);
 
-                logger.info("Fluent model '{}' as category {}", fluentModel.getName(), category);
+                LOGGER.info("Fluent model '{}' as category {}", fluentModel.getName(), category);
             }
         }
 
@@ -191,7 +191,7 @@ public class ResourceParser {
         if (method != null) {
             ClientModel bodyClientModel = getBodyClientModel(method, availableModels);
             if (bodyClientModel == null) {
-                logger.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), method.getInnerClientMethod().getName());
+                LOGGER.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), method.getInnerClientMethod().getName());
             } else {
                 resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
                         resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
@@ -376,7 +376,7 @@ public class ResourceParser {
                                     if (categoryMatch) {
                                         ClientModel bodyClientModel = getBodyClientModel(m, availableModels);
                                         if (bodyClientModel == null) {
-                                            logger.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), m.getInnerClientMethod().getName());
+                                            LOGGER.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), m.getInnerClientMethod().getName());
                                         } else {
                                             ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
                                                     m.getInnerClientMethod().getName(), bodyClientModel);
@@ -411,7 +411,7 @@ public class ResourceParser {
                 .findAny();
 
         if (!clientModelOpt.isPresent()) {
-            logger.warn("Client model not found for type name '{}', method '{}'", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
+            LOGGER.warn("Client model not found for type name '{}', method '{}'", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
         }
         return clientModelOpt.orElse(null);
     }
