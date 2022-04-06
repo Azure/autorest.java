@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 
 public class ProtocolExampleWriter {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProtocolExampleWriter.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProtocolExampleWriter.class);
 
     private final Set<String> imports;
     private final Consumer<JavaBlock> clientInitializationWriter;
@@ -204,9 +204,9 @@ public class ProtocolExampleWriter {
         // credentials
         String credentialExpr;
         if (serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null) {
-            if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN)) {
+            if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
-            } else if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AZUREKEY)) {
+            } else if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
             } else {
                 credentialExpr = "";
@@ -365,7 +365,7 @@ public class ProtocolExampleWriter {
 
             if (proxyMethodParameter == null) {
                 // this should not happen unless we changed the naming of client method parameter from proxy method parameter
-                LOGGER.warn("Failed to find proxy method parameter for client method parameter with name '{}'", clientMethodParameter.getName());
+                logger.warn("Failed to find proxy method parameter for client method parameter with name '{}'", clientMethodParameter.getName());
             }
         }
         return proxyMethodParameters;

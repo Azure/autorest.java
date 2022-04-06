@@ -12,11 +12,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, JavaFile> {
-    private static final ServiceVersionTemplate _instance = new ServiceVersionTemplate();
+    private static final ServiceVersionTemplate INSTANCE = new ServiceVersionTemplate();
     private static final Pattern VERSION_TO_ENUM = Pattern.compile("[-.]");
 
     public static ServiceVersionTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
             );
 
             classBlock.annotation("Override");
-            classBlock.PublicMethod(
+            classBlock.publicMethod(
                     "String getVersion()",
                     javaBlock -> javaBlock.line("return this.version;")
             );
@@ -53,7 +53,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
                 comment.description("Gets the latest service version supported by this client library");
                 comment.methodReturns(String.format("The latest {@link %s}", className));
             });
-            classBlock.PublicStaticMethod(
+            classBlock.publicStaticMethod(
                     className + " getLatest()",
                     javaBlock -> javaBlock.methodReturn(
                             getVersionIdentifier(serviceVersions.get(serviceVersions.size() - 1)))

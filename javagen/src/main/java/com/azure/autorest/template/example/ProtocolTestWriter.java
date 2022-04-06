@@ -38,7 +38,7 @@ public class ProtocolTestWriter {
         final ServiceClient serviceClient = testContext.getServiceClient();
         final List<AsyncSyncClient> syncClients = testContext.getSyncClients();
         final boolean isTokenCredential = serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null
-                && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.AADTOKEN);
+                && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2);
 
         this.imports = new HashSet<>(Arrays.asList(
                 AccessToken.class.getName(),

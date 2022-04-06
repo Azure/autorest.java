@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ModuleInfoTemplate implements IJavaTemplate<ModuleInfo, JavaFile> {
 
-    private static ModuleInfoTemplate INSTANCE = new ModuleInfoTemplate();
+    private static final ModuleInfoTemplate INSTANCE = new ModuleInfoTemplate();
 
     private ModuleInfoTemplate() {
     }

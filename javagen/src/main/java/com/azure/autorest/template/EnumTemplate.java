@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
@@ -17,13 +18,13 @@ import java.util.Set;
  * Writes a EnumType to a JavaFile.
  */
 public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
-    private static EnumTemplate _instance = new EnumTemplate();
+    private static final EnumTemplate INSTANCE = new EnumTemplate();
 
     protected EnumTemplate() {
     }
 
     public static EnumTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(EnumType enumType, JavaFile javaFile) {
@@ -88,7 +89,9 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 }
 
                 String typeName = enumType.getElementType().getClientType().toString();
-                String converterName = CodeNamer.toPascalCase(typeName);
+
+                // This will be 'from*'.
+                String converterName = enumType.getFromJsonMethodName();
 
                 enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
                 enumBlock.privateFinalMemberVariable(typeName, "value");
@@ -105,36 +108,11 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     comment.methodReturns(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
                 });
                 enumBlock.annotation("JsonCreator");
-                enumBlock.PublicStaticMethod(String.format("%1$s from%2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
+                enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
                 {
                     function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
                     function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
-                    {
-                        String valueEqualsTest;
-                        if (enumType.getElementType() instanceof PrimitiveType) {
-                            PrimitiveType type = (PrimitiveType) enumType.getElementType();
-                            if (type == PrimitiveType.Float) {
-                                valueEqualsTest = String.format("Float.floatToIntBits(item.to%1$s()) == Float.floatToIntBits(value)", converterName);
-                            } else if (type == PrimitiveType.Double) {
-                                valueEqualsTest = String.format("Double.doubleToIntBits(item.to%1$s()) == Double.doubleToIntBits(value)", converterName);
-                            } else {
-                                valueEqualsTest = String.format("item.to%1$s() == value", converterName);
-                            }
-                        } else if (enumType.getElementType() instanceof ClassType) {
-                            ClassType type = (ClassType) enumType.getElementType();
-                            if (type == ClassType.String) {
-                                valueEqualsTest = String.format("item.to%1$s().equalsIgnoreCase(value)", converterName);
-                            } else {
-                                valueEqualsTest = String.format("item.to%1$s().equals(value)", converterName);
-                            }
-                        } else {
-                            valueEqualsTest = String.format("item.to%1$s().equals(value)", converterName);
-                        }
-                        foreachBlock.ifBlock(valueEqualsTest, (ifBlock) ->
-                        {
-                            ifBlock.methodReturn("item");
-                        });
-                    });
+                        foreachBlock.ifBlock(createEnumJsonCreatorIfCheck(enumType), ifBlock -> ifBlock.methodReturn("item")));
                     function.methodReturn("null");
                 });
 
@@ -148,15 +126,36 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     });
                     enumBlock.annotation("JsonValue");
                 }
-                enumBlock.PublicMethod(String.format("%1$s to%2$s()", typeName, converterName), (function) ->
-                {
-                    function.methodReturn("this.value");
-                });
+                enumBlock.publicMethod(String.format("%1$s %2$s()", typeName, enumType.getToJsonMethodName()),
+                    function -> function.methodReturn("this.value"));
             });
         }
     }
 
     protected String getStringEnumImport() {
         return "com.azure.core.util.ExpandableStringEnum";
+    }
+
+    /**
+     * Creates the if check used by the JsonCreator method used in the Enum type.
+     *
+     * @param enumType The enum type.
+     * @return The JsonCreator if check.
+     */
+    protected String createEnumJsonCreatorIfCheck(EnumType enumType) {
+        IType enumElementType = enumType.getElementType();
+        String toJsonMethodName = enumType.getToJsonMethodName();
+
+        if (enumElementType == PrimitiveType.Float) {
+            return String.format("Float.floatToIntBits(item.%s()) == Float.floatToIntBits(value)", toJsonMethodName);
+        } else if (enumElementType == PrimitiveType.Double) {
+            return String.format("Double.doubleToLongBits(item.%s()) == Double.doubleToLongBits(value)", toJsonMethodName);
+        } else if (enumElementType instanceof PrimitiveType) {
+            return String.format("item.%s() == value", toJsonMethodName);
+        } else if (enumElementType == ClassType.String) {
+            return String.format("item.%s().equalsIgnoreCase(value)", toJsonMethodName);
+        } else {
+            return String.format("item.%s().equals(value)", toJsonMethodName);
+        }
     }
 }

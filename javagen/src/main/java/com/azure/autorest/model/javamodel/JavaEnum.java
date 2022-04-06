@@ -87,11 +87,11 @@ public class JavaEnum {
         addNewLine = true;
     }
 
-    public final void PublicMethod(String methodSignature, Consumer<JavaBlock> method) {
+    public final void publicMethod(String methodSignature, Consumer<JavaBlock> method) {
         method(JavaVisibility.Public, null, methodSignature, method);
     }
 
-    public final void PublicStaticMethod(String methodSignature, Consumer<JavaBlock> method) {
+    public final void publicStaticMethod(String methodSignature, Consumer<JavaBlock> method) {
         method(JavaVisibility.Public, Collections.singletonList(JavaModifier.Static), methodSignature, method);
     }
 

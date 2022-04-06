@@ -4,6 +4,7 @@
 package fixtures.specialheader;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipelineCallContext;
@@ -14,9 +15,9 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.util.CoreUtils;
+import fixtures.MockHttpResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
@@ -91,8 +92,11 @@ public class SpecialHeaderTests {
 
     @BeforeAll
     public static void setup() {
+        HttpClient mockHttpClient = request -> Mono.just(new MockHttpResponse(request, 500));
+
         client = new SpecialHeaderClientBuilder()
-                .host("https://httpbin.org/")
+//                .host("https://httpbin.org/")
+                .httpClient(mockHttpClient)
                 .addPolicy(VALIDATION_POLICY)
                 .httpLogOptions(new HttpLogOptions()
                         .setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
@@ -122,7 +126,6 @@ public class SpecialHeaderTests {
     }
 
     @Test
-    @Disabled("same behavior as POST, avoid too many call to httpbin")
     public void testRepeatabilityRequestPut() {
         VALIDATION_POLICY.clear();
 

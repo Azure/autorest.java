@@ -12,9 +12,12 @@ public class Scheme {
 
     private Scheme.SecuritySchemeType type;
 
+    // OAuth2
     private Set<String> scopes = new HashSet<>();
 
-    private String headerName;
+    // Key
+    private String name;
+    private String in;
 
     public Scheme.SecuritySchemeType getType() {
         return type;
@@ -32,19 +35,26 @@ public class Scheme {
         this.scopes = scopes;
     }
 
-    public String getHeaderName() {
-        return headerName;
+    public String getName() {
+        return name;
     }
 
-    public void setHeaderName(String headerName) {
-        this.headerName = headerName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIn() {
+        return in;
+    }
+
+    public void setIn(String in) {
+        this.in = in;
     }
 
     public enum SecuritySchemeType {
 
-        AADTOKEN("AADToken"),
-        AZUREKEY("AzureKey"),
-        ANONYMOUS("Anonymous");
+        OAUTH2("OAuth2"),
+        KEY("Key");
 
         private final String value;
         private final static Map<String, Scheme.SecuritySchemeType> CONSTANTS = new HashMap<>();
@@ -55,7 +65,7 @@ public class Scheme {
             }
         }
 
-        private SecuritySchemeType(String value) {
+        SecuritySchemeType(String value) {
             this.value = value;
         }
 

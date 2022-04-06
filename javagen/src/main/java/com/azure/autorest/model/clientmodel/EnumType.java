@@ -37,9 +37,9 @@ public class EnumType implements IType {
      * @param expandable Whether or not this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
+    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
         this.name = name;
-        packageName = package_Keyword;
+        packageName = packageKeyword;
         this.expandable = expandable;
         this.values = values;
         this.elementType = elementType;
@@ -96,6 +96,24 @@ public class EnumType implements IType {
             }
             return null;
         }
+    }
+
+    /**
+     * Gets the method name used to convert JSON to the enum type.
+     *
+     * @return The method name used to convert JSON to the enum type.
+     */
+    public final String getFromJsonMethodName() {
+        return "from" + CodeNamer.toPascalCase(elementType.getClientType().toString());
+    }
+
+    /**
+     * Gets the method name used to convert the enum type to JSON.
+     *
+     * @return The method name used to convert the enum type to JSON.
+     */
+    public final String getToJsonMethodName() {
+        return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
     @Override

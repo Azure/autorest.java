@@ -14,7 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
@@ -43,7 +43,7 @@ import java.util.stream.Stream;
 
 public class ResourceCreate extends ResourceOperation {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceCreate.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceCreate.class);
 
     private List<DefinitionStage> definitionStages;
 
@@ -53,7 +53,7 @@ public class ResourceCreate extends ResourceOperation {
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
 
-        logger.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
+        LOGGER.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
                 resourceModel.getName(), methodName, bodyParameterModel.getName());
     }
 
@@ -262,7 +262,7 @@ public class ResourceCreate extends ResourceOperation {
     public FluentDefineMethod getDefineMethod() {
         if (defineMethod == null) {
             String resourceName = this.getResourceName();
-            logger.info("ResourceCreate: Fluent model '{}', resource define method '{}'", resourceModel.getName(), "define" + resourceName);
+            LOGGER.info("ResourceCreate: Fluent model '{}', resource define method '{}'", resourceModel.getName(), "define" + resourceName);
 
             if (this.isConstantResourceNamePathParameter()) {
                 defineMethod = FluentDefineMethod.defineMethodWithConstantResourceName(this.getResourceModel(), FluentMethodType.DEFINE, resourceName);

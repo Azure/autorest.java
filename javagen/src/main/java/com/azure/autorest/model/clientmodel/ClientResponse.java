@@ -13,9 +13,9 @@ public final class ClientResponse {
     private IType headersType;
     private IType bodyType;
 
-    private ClientResponse(String name, String package_Keyword, String description, IType headersType, IType bodyType) {
+    private ClientResponse(String name, String packageKeyword, String description, IType headersType, IType bodyType) {
         this.name = name;
-        packageName = package_Keyword;
+        packageName = packageKeyword;
         this.description = description;
         this.headersType = headersType;
         this.bodyType = bodyType;

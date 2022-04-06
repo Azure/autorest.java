@@ -36,7 +36,7 @@ import java.util.stream.Stream;
 
 public class FluentMapper {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentMapper.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentMapper.class);
 
     private final FluentJavaSettings fluentJavaSettings;
 
@@ -184,8 +184,8 @@ public class FluentMapper {
         compositeTypes.removeAll(errorTypes);
 
         compositeTypes = objectMapper.addInnerModels(compositeTypes);
-        if (logger.isInfoEnabled()) {
-            logger.info("Add Inner to response types: {}",
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Add Inner to response types: {}",
                     compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
         }
         recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
@@ -197,8 +197,8 @@ public class FluentMapper {
                     .collect(Collectors.toSet());
 
             compositeTypes = objectMapper.addInnerModels(compositeTypes);
-            if (logger.isInfoEnabled()) {
-                logger.info("Add Inner as requested: {}",
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Add Inner as requested: {}",
                         compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
@@ -245,8 +245,8 @@ public class FluentMapper {
 
         if (!compositeTypesInProperties.isEmpty()) {
             compositeTypesInProperties = objectMapper.addInnerModels(compositeTypesInProperties);
-            if (logger.isInfoEnabled()) {
-                logger.info("Add Inner for type '{}': {}", typeName,
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Add Inner for type '{}': {}", typeName,
                         compositeTypesInProperties.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypesInProperties);

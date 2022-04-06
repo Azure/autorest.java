@@ -10,13 +10,13 @@ import com.azure.autorest.model.javamodel.JavaFile;
  * Writes a Manager to a JavaFile.
  */
 public class ManagerTemplate implements IJavaTemplate<Manager, JavaFile> {
-    private static ManagerTemplate _instance = new ManagerTemplate();
+    private static final ManagerTemplate INSTANCE = new ManagerTemplate();
 
     private ManagerTemplate() {
     }
 
     public static ManagerTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(Manager manager, JavaFile javaFile) {

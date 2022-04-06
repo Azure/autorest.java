@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaFormatter {
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
 
     private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
@@ -24,7 +24,7 @@ public class JavaFormatter {
         boolean enabled = false;
         String version = System.getProperty("java.version");
         if (!CoreUtils.isNullOrEmpty(version)) {
-            logger.info("Java version: {}", version);
+            LOGGER.info("Java version: {}", version);
             String[] segments = version.split(Pattern.quote("."));
             if (segments.length >= 1 && !segments[0].equals("1")) {
                 try {
@@ -38,7 +38,7 @@ public class JavaFormatter {
             }
         }
         ENABLED = enabled;
-        logger.info("Java formatter {}", enabled ? "enabled" : "disabled");
+        LOGGER.info("Java formatter {}", enabled ? "enabled" : "disabled");
     }
 
     private final String content;
@@ -70,7 +70,7 @@ public class JavaFormatter {
             }
             return formattedCode;
         } catch (Exception e) {
-            logger.warn("Failed to parse Java file '{}', message: '{}'",
+            LOGGER.warn("Failed to parse Java file '{}', message: '{}'",
                     path,
                     (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage());
             return content;

@@ -5,7 +5,7 @@ package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.util.TypeConversionUtils;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;

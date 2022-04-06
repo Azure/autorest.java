@@ -39,16 +39,16 @@ import java.util.stream.Collectors;
  * Writes a ClientMethod to a JavaType block.
  */
 public class ClientMethodTemplate extends ClientMethodTemplateBase {
-    private static ClientMethodTemplate _instance = new ClientMethodTemplate();
+    private static final ClientMethodTemplate INSTANCE = new ClientMethodTemplate();
 
     protected ClientMethodTemplate() {
     }
 
     public static ClientMethodTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
-    protected static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
+    protected static void addValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck) {
                 JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
@@ -68,7 +68,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+    protected static void addOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
             for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
                 if (!parameter.getIsRequired()) {
@@ -80,8 +80,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
-        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true, true);
+    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+        addOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true, true);
     }
 
     /**
@@ -95,8 +95,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param addConstant Whether add constant variables, init to default
      * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
      */
-    protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
-                                                        boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
+    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
+                                                          boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
@@ -122,7 +122,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    protected static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
+    protected static void applyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
         for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails()) {
             if (transformation.getParameterMappings().isEmpty()) {
                 // the case that this flattened parameter is not original parameter from any other parameters
@@ -221,7 +221,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    protected static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
+    protected static void convertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
 
@@ -478,7 +478,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
     }
@@ -487,7 +487,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s),",
@@ -500,7 +500,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s));",
@@ -515,7 +515,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), parameter.getName()));
         });
     }
@@ -523,7 +523,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.indent((() -> {
                 GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
@@ -558,7 +558,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                         effectiveAsyncMethodName, clientMethod.getArgumentList());
@@ -645,10 +645,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            ApplyParameterTransformations(function, clientMethod, settings);
-            ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             boolean requestOptionsLocal = false;
             if (settings.isLowLevelClient()) {
@@ -725,10 +725,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            ApplyParameterTransformations(function, clientMethod, settings);
-            ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             boolean requestOptionsLocal = false;
             if (settings.isLowLevelClient()) {

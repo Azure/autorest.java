@@ -12,18 +12,15 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
+import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
+import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
@@ -43,36 +40,34 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 public class ExampleParser {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
+
+    static {
+        ModelExampleUtil.setGetClientModelFunction(FluentUtils::getClientModel);
+    }
 
     private final boolean aggregateExamples;
 
@@ -177,7 +172,7 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
-                logger.info("Parse collection method example '{}'", entry.getKey());
+                LOGGER.info("Parse collection method example '{}'", entry.getKey());
 
                 FluentCollectionMethodExample collectionMethodExample =
                         parseMethodForExample(collection, collectionMethod, methodParameters, entry.getKey(), entry.getValue());
@@ -195,7 +190,7 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : clientMethod.getProxyMethod().getExamples().entrySet()) {
-                logger.info("Parse client method example '{}'", entry.getKey());
+                LOGGER.info("Parse client method example '{}'", entry.getKey());
 
                 FluentClientMethodExample collectionMethodExample =
                         parseMethodForExample(methodGroup, clientMethod, methodParameters, entry.getKey(), entry.getValue());
@@ -237,7 +232,7 @@ public class ExampleParser {
 
             if (node.getObjectValue() == null) {
                 if (methodParameter.getClientMethodParameter().getIsRequired()) {
-                    logger.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
+                    LOGGER.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
                 }
             }
 
@@ -265,11 +260,11 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely a resource update example
-                        logger.info("Skip possible resource update example '{}' in create", entry.getKey());
+                        LOGGER.info("Skip possible resource update example '{}' in create", entry.getKey());
                         continue;
                     }
 
-                    logger.info("Parse resource create example '{}'", entry.getKey());
+                    LOGGER.info("Parse resource create example '{}'", entry.getKey());
 
                     FluentResourceCreateExample resourceCreateExample = parseResourceCreate(collection, resourceCreate, entry.getValue(), methodParameters, requestBodyParameter);
 
@@ -292,7 +287,7 @@ public class ExampleParser {
             defineNode = parseNodeFromParameter(example, methodParameter);
 
             if (defineNode.getObjectValue() == null) {
-                logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
+                LOGGER.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
             }
         }
         resourceCreateExample.getParameters().add(new ParameterExample(defineMethod, defineNode));
@@ -333,7 +328,7 @@ public class ExampleParser {
 
                 if (exampleNodes.stream().anyMatch(ExampleNode::isNull)) {
                     if (stage.isMandatoryStage()) {
-                        logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
+                        LOGGER.warn("Failed to assign sample value to required stage '{}'", stage.getName());
                     }
                 }
 
@@ -381,11 +376,11 @@ public class ExampleParser {
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                     if (methodIsCreateOrUpdate && !FluentUtils.exampleIsUpdate(entry.getKey())) {
                         // likely not a resource update example
-                        logger.info("Skip possible resource create example '{}' in update", entry.getKey());
+                        LOGGER.info("Skip possible resource create example '{}' in update", entry.getKey());
                         continue;
                     }
 
-                    logger.info("Parse resource update example '{}'", entry.getKey());
+                    LOGGER.info("Parse resource update example '{}'", entry.getKey());
 
                     ProxyMethodExample example = entry.getValue();
                     FluentResourceUpdateExample resourceUpdateExample = parseResourceUpdate(collection, resourceUpdate, example, resourceGetMethod, resourceGetMethodParameters, methodParameters, requestBodyParameter);
@@ -527,9 +522,9 @@ public class ExampleParser {
         } else {
             List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
-            Object childObjectValue = getChildObjectValue(jsonPropertyNames, parameterValue.getObjectValue());
+            Object childObjectValue = ModelExampleUtil.getChildObjectValue(jsonPropertyNames, parameterValue.getObjectValue());
             if (childObjectValue != null) {
-                node = parseNode(modelProperty.getClientType(), childObjectValue);
+                node = ModelExampleUtil.parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
             } else {
                 node = new LiteralNode(modelProperty.getClientType(), null);
             }
@@ -539,6 +534,7 @@ public class ExampleParser {
 
     private static ExampleNode parseNodeFromMethodParameter(MethodParameter methodParameter, Object objectValue) {
         IType type = methodParameter.getClientMethodParameter().getClientType();
+        IType wireType = methodParameter.getClientMethodParameter().getWireType();
         if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null && type instanceof ListType && objectValue instanceof String) {
             // handle parameter style
 
@@ -564,148 +560,16 @@ public class ExampleParser {
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
                     elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
-                    logger.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+                    LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
             }
             for (String childObjectValue : elements) {
-                ExampleNode childNode = parseNode(elementType, childObjectValue);
+                ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);
                 listNode.getChildNodes().add(childNode);
             }
             return listNode;
         } else {
-            return parseNode(type, objectValue);
+            return ModelExampleUtil.parseNode(type, wireType, objectValue);
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static ExampleNode parseNode(IType type, Object objectValue) {
-        ExampleNode node;
-        if (type instanceof ListType) {
-            IType elementType = ((ListType) type).getElementType();
-            if (objectValue instanceof List) {
-                ListNode listNode = new ListNode(elementType, objectValue);
-                node = listNode;
-
-                List<Object> elements = (List<Object>) objectValue;
-                for (Object childObjectValue : elements) {
-                    ExampleNode childNode = parseNode(elementType, childObjectValue);
-                    node.getChildNodes().add(childNode);
-                }
-            } else {
-                logger.error("Example value is not List type: {}", objectValue);
-                node = new ListNode(elementType, null);
-            }
-        } else if (type instanceof MapType) {
-            IType elementType = ((MapType) type).getValueType();
-            if (objectValue instanceof Map) {
-                MapNode mapNode = new MapNode(elementType, objectValue);
-                node = mapNode;
-
-                Map<String, Object> dict = (Map<String, Object>) objectValue;
-                for (Map.Entry<String, Object> entry : dict.entrySet()) {
-                    ExampleNode childNode = parseNode(elementType, entry.getValue());
-                    node.getChildNodes().add(childNode);
-                    mapNode.getKeys().add(entry.getKey());
-                }
-            } else {
-                logger.error("Example value is not Map type: {}", objectValue);
-                node = new MapNode(elementType, null);
-            }
-        } else if (type == ClassType.Object) {
-            node = new ObjectNode(type, objectValue);
-        } else if (type instanceof ClassType && objectValue instanceof Map) {
-            ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
-            if (model != null) {
-                if (model.getIsPolymorphic()) {
-                    // polymorphic, need to get the correct subclass from discriminator
-                    String serializedName = model.getPolymorphicDiscriminator();
-                    List<String> jsonPropertyNames = Collections.singletonList(serializedName);
-                    if (model.getNeedsFlatten()) {
-                        jsonPropertyNames = FluentUtils.splitFlattenedSerializedName(serializedName);
-                    }
-
-                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
-                    if (childObjectValue instanceof String) {
-                        String discriminatorValue = (String) childObjectValue;
-                        ClientModel derivedModel = getDerivedModel(model, discriminatorValue);
-                        if (derivedModel != null) {
-                            // use the subclass
-                            type = derivedModel.getType();
-                            model = derivedModel;
-                        } else {
-                            logger.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
-                        }
-                    } else {
-                        logger.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
-                    }
-                }
-
-                ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
-                node = clientModelNode;
-
-                List<ModelProperty> modelProperties = getWritablePropertiesIncludeSuperclass(model);
-                for (ModelProperty modelProperty : modelProperties) {
-                    List<String> jsonPropertyNames = modelProperty.getSerializedNames();
-
-                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
-                    if (childObjectValue != null) {
-                        ExampleNode childNode = parseNode(modelProperty.getClientType(), childObjectValue);
-                        node.getChildNodes().add(childNode);
-                        clientModelNode.getClientModelProperties().put(childNode, modelProperty);
-                    }
-                }
-
-                // additional properties
-                ModelProperty additionalPropertiesProperty = getAdditionalPropertiesProperty(model);
-                if (additionalPropertiesProperty != null) {
-                    // properties already defined in model
-                    Set<String> propertySerializedNames = modelProperties.stream()
-                            .map(p -> p.getSerializedNames().iterator().next())
-                            .collect(Collectors.toSet());
-                    // the remaining properties in json
-                    Map<String, Object> remainingValues = ((Map<String, Object>) objectValue).entrySet().stream()
-                            .filter(e -> !propertySerializedNames.contains(e.getKey()))
-                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-                    ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), remainingValues);
-                    node.getChildNodes().add(childNode);
-                    clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
-                }
-            } else {
-                throw new IllegalStateException("Model type not found for type " + type + " and value " + objectValue);
-            }
-        } else if (objectValue == null) {
-            node = null;
-        } else {
-            LiteralNode literalNode = new LiteralNode(type, objectValue);
-            node = literalNode;
-
-            literalNode.setLiteralsValue(objectValue.toString());
-        }
-        return node;
-    }
-
-    private static Object getChildObjectValue(List<String> jsonPropertyNames, Object objectValue) {
-        boolean found = true;
-        Object childObjectValue = objectValue;
-        // walk the sequence of serialized names
-        for (String name : jsonPropertyNames) {
-            if (name.isEmpty()) {
-                found = false;
-                break;
-            }
-
-            if (childObjectValue instanceof Map) {
-                childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
-                if (childObjectValue == null) {
-                    found = false;
-                    break;
-                }
-            } else {
-                found = false;
-                break;
-            }
-        }
-        return found ? childObjectValue : null;
     }
 
     private static List<MethodParameter> getParameters(ClientMethod clientMethod) {
@@ -716,83 +580,6 @@ public class ExampleParser {
                 .filter(p -> !p.getIsConstant() && !p.getFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
-    }
-
-    private static ModelProperty getAdditionalPropertiesProperty(ClientModel model) {
-        ModelProperty modelProperty = null;
-        ClientModelProperty property = model.getProperties().stream()
-                .filter(ClientModelProperty::isAdditionalProperties)
-                .findFirst().orElse(null);
-        if (property != null && property.getClientType() instanceof MapType) {
-            modelProperty = ModelProperty.ofClientModelProperty(property);
-        }
-        return modelProperty;
-    }
-
-    private static List<ModelProperty> getWritablePropertiesIncludeSuperclass(ClientModel model) {
-        Map<String, ModelProperty> propertiesMap = new LinkedHashMap<>();
-        List<ModelProperty> properties = new ArrayList<>();
-
-        List<ClientModel> parentModels = new ArrayList<>();
-        String parentModelName = model.getParentModelName();
-        while (!CoreUtils.isNullOrEmpty(parentModelName)) {
-            ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
-            if (parentModel != null) {
-                parentModels.add(parentModel);
-            }
-            parentModelName = parentModel == null ? null : parentModel.getParentModelName();
-        }
-
-        List<List<ModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
-        propertiesFromTypeAndParents.add(new ArrayList<>());
-        model.getAccessibleProperties().forEach(p -> {
-            ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
-            if (propertiesMap.putIfAbsent(modelProperty.getName(), modelProperty) == null) {
-                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
-            }
-        });
-
-        for (ClientModel parent : parentModels) {
-            propertiesFromTypeAndParents.add(new ArrayList<>());
-
-            parent.getAccessibleProperties().forEach(p -> {
-                ModelProperty modelProperty = ModelProperty.ofClientModelProperty(p);
-                if (propertiesMap.putIfAbsent(modelProperty.getName(), modelProperty) == null) {
-                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(modelProperty);
-                }
-            });
-        }
-
-        Collections.reverse(propertiesFromTypeAndParents);
-        for (List<ModelProperty> properties1 : propertiesFromTypeAndParents) {
-            properties.addAll(properties1);
-        }
-
-        return properties.stream()
-                .filter(p -> !p.isReadOnly() && !p.isConstant())
-                .collect(Collectors.toList());
-    }
-
-    private static ClientModel getDerivedModel(ClientModel model, String discriminatorValue) {
-        // depth first search
-
-        if (model.getDerivedModels() != null) {
-            for (ClientModel childModel : model.getDerivedModels()) {
-                if (discriminatorValue.equalsIgnoreCase(childModel.getSerializedName())) {
-                    // found
-                    return childModel;
-                } else if (childModel.getDerivedModels() != null) {
-                    // recursive
-                    ClientModel childModel2 = getDerivedModel(childModel, discriminatorValue);
-                    if (childModel2 != null) {
-                        return childModel2;
-                    }
-                }
-            }
-        }
-
-        // not found
-        return null;
     }
 
     private static boolean requiresExample(ClientMethod clientMethod) {

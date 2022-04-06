@@ -22,11 +22,13 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
@@ -47,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentManagerTemplate.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentManagerTemplate.class);
 
     private static final FluentManagerTemplate INSTANCE = new FluentManagerTemplate();
 
@@ -61,7 +63,7 @@ public class FluentManagerTemplate {
         final boolean hasEndpointParameter = serviceClient.getProperties().stream()
                 .anyMatch(p -> p.getName().equals("endpoint"));
         if (!hasEndpointParameter) {
-            logger.warn("'endpoint' (or '$host') is required in ServiceClient properties, candidate properties {}",
+            LOGGER.warn("'endpoint' (or '$host') is required in ServiceClient properties, candidate properties {}",
                     serviceClient.getProperties().stream().map(ServiceClientProperty::getName).collect(Collectors.toList()));
         }
 
@@ -99,6 +101,8 @@ public class FluentManagerTemplate {
                 HttpPipelinePolicy.class.getName(),
                 HttpPipelinePosition.class.getName(),
                 HttpPolicyProviders.class.getName(),
+                RetryOptions.class.getName(),
+                AddHeadersFromContextPolicy.class.getName(),
                 RequestIdPolicy.class.getName(),
                 RetryPolicy.class.getName(),
                 AddDatePolicy.class.getName(),
@@ -167,6 +171,18 @@ public class FluentManagerTemplate {
                 methodBlock.line("Objects.requireNonNull(credential, \"'credential' cannot be null.\");");
                 methodBlock.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
                 methodBlock.methodReturn("configure().authenticate(credential, profile)");
+            });
+
+            classBlock.javadocComment(comment -> {
+                comment.description(String.format("Creates an instance of %1$s service API entry point.", manager.getServiceName()));
+                comment.param("httpPipeline", "the {@link HttpPipeline} configured with Azure authentication credential");
+                comment.param("profile", "the Azure profile for client");
+                comment.methodReturns(String.format("the %1$s service API instance", manager.getServiceName()));
+            });
+            classBlock.publicStaticMethod(String.format("%1$s authenticate(HttpPipeline httpPipeline, AzureProfile profile)", managerName), methodBlock -> {
+                methodBlock.line("Objects.requireNonNull(httpPipeline, \"'httpPipeline' cannot be null.\");");
+                methodBlock.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
+                methodBlock.methodReturn(String.format("new %1$s(httpPipeline, profile, null)", managerName));
             });
 
             // configure()

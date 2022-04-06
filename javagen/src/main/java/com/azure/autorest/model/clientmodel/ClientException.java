@@ -9,18 +9,18 @@ package com.azure.autorest.model.clientmodel;
 public class ClientException {
     private final String name;
     private final String errorName;
-    private final String package_Keyword;
+    private final String packageKeyword;
     private final IType parentType;
 
     /**
      * Create a new ServiceException with the provided properties.
-     * @param package_Keyword The package that this Exception will appear in.
+     * @param packageKeyword The package that this Exception will appear in.
      * @param name The name of the ServiceException type.
      * @param errorName The name of the error type contained by the ServiceException.
      * @param parentType The type of parent exception.
      */
-    protected ClientException(String package_Keyword, String name, String errorName, IType parentType) {
-        this.package_Keyword = package_Keyword;
+    protected ClientException(String packageKeyword, String name, String errorName, IType parentType) {
+        this.packageKeyword = packageKeyword;
         this.name = name;
         this.errorName = errorName;
         this.parentType = parentType;
@@ -44,7 +44,7 @@ public class ClientException {
      * @return type of parent exception.The package that this Enum will appear in.
      */
     public final String getPackage() {
-        return package_Keyword;
+        return packageKeyword;
     }
 
     /**

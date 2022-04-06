@@ -6,7 +6,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.core.http.HttpRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +39,6 @@ public class ClassType implements IType {
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
     public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
-    public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
     public static final ClassType AndroidDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
@@ -70,12 +68,14 @@ public class ClassType implements IType {
     public static final ClassType ServiceVersion = new ClassType.Builder().knownClass(com.azure.core.util.ServiceVersion.class).build();
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
+    public static final ClassType RetryOptions = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryOptions.class).build();
     public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument = new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression)).build();
     public static final ClassType RequestOptions = new Builder().packageName("com.azure.core.http.rest").name("RequestOptions").build();
     public static final ClassType ClientOptions = new Builder().knownClass(com.azure.core.util.ClientOptions.class).build();
     public static final ClassType HttpRequest = new Builder().knownClass(com.azure.core.http.HttpRequest.class).build();
+    public static final ClassType HttpHeaders = new Builder().knownClass(com.azure.core.http.HttpHeaders.class).build();
 
     // Java exception types
     public static final ClassType HttpResponseException = new Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
@@ -91,8 +91,8 @@ public class ClassType implements IType {
     private final XmsExtensions extensions;
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
 
-    private ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
-        packageName = package_Keyword;
+    private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+        packageName = packageKeyword;
         this.name = name;
         this.implementationImports = implementationImports;
         this.extensions = extensions;

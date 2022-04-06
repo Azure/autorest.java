@@ -745,6 +745,14 @@ public final class MediaTypesClientImpl {
     /**
      * Body that's either text/plain or application/json.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -775,6 +783,14 @@ public final class MediaTypesClientImpl {
     /**
      * Body that's either text/plain or application/json.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -804,6 +820,14 @@ public final class MediaTypesClientImpl {
 
     /**
      * Body that's either text/plain or application/json.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *

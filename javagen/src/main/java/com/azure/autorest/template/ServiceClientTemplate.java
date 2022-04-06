@@ -41,7 +41,8 @@ import java.util.stream.Stream;
  * Writes a ServiceClient to a JavaFile.
  */
 public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
-    private static ServiceClientTemplate _instance = new ServiceClientTemplate();
+
+    private static final ServiceClientTemplate INSTANCE = new ServiceClientTemplate();
 
     // Extension for additional class methods
     protected List<MethodTemplate> additionalMethods = new ArrayList<>();
@@ -50,7 +51,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     public static ServiceClientTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {

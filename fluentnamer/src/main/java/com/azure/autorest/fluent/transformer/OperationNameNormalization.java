@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  */
 class OperationNameNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
 
     private static final Pattern TRIM_LEADING_AND_TRAILING_FORWARD_SLASH = Pattern.compile("^(?:/*)?(.*?)(?:/*)?$");
 
@@ -58,7 +58,7 @@ class OperationNameNormalization {
     private static void applyRename(OperationGroup operationGroup, Map<String, String> renamePlan) {
         Optional<Set<String>> conflictNames = checkConflict(operationGroup, renamePlan);
         conflictNames.ifPresent(names -> {
-            logger.warn("Conflict operation name found after attempted rename '{}', in operation group '{}'", names, Utils.getJavaName(operationGroup));
+            LOGGER.warn("Conflict operation name found after attempted rename '{}', in operation group '{}'", names, Utils.getJavaName(operationGroup));
             renamePlan.values().removeAll(names);
         });
 
@@ -87,7 +87,7 @@ class OperationNameNormalization {
                 .filter(operation -> renamePlan.containsKey(Utils.getJavaName(operation)))
                 .forEach(operation -> {
                     String newName = renamePlan.get(Utils.getJavaName(operation));
-                    logger.info("Rename operation from '{}' to '{}', in operation group '{}'", Utils.getJavaName(operation), newName, Utils.getJavaName(operationGroup));
+                    LOGGER.info("Rename operation from '{}' to '{}', in operation group '{}'", Utils.getJavaName(operation), newName, Utils.getJavaName(operationGroup));
                     operation.getLanguage().getJava().setName(newName);
                 });
     }
@@ -172,7 +172,7 @@ class OperationNameNormalization {
                 // resourceGroup parameter and resourceName parameter in reverse order
                 String resourceNameParameterName = parameterSerializedName(urlSegments[7]);
 
-                logger.info("Reorder '{}' parameter and '{}' parameter, in operation '{}'", resourceGroupParameterName, resourceNameParameterName, Utils.getJavaName(operation));
+                LOGGER.info("Reorder '{}' parameter and '{}' parameter, in operation '{}'", resourceGroupParameterName, resourceNameParameterName, Utils.getJavaName(operation));
 
                 int rgIndex = -1;
                 int nameIndex = -1;

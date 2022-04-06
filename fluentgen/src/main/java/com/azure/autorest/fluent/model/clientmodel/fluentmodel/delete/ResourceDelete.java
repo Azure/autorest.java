@@ -25,13 +25,13 @@ import java.util.Optional;
 
 public class ResourceDelete extends ResourceOperation {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceDelete.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceDelete.class);
 
     public ResourceDelete(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceDelete: Fluent model '{}', method reference '{}'",
+        LOGGER.info("ResourceDelete: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 

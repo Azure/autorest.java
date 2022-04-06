@@ -39,7 +39,7 @@ import java.util.stream.Stream;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static final ModelMapper INSTANCE = new ModelMapper();
-    private final ClientModels serviceModels = ClientModels.Instance;
+    private final ClientModels serviceModels = ClientModels.INSTANCE;
 
     private final static String PROPERTY_NAME_ADDITIONAL_PROPERTIES = "additionalProperties";
 
@@ -62,7 +62,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ClientModel.Builder builder = createModelBuilder()
                     .name(modelName)
                     .packageName(modelType.getPackage())
-                    .type(modelType);
+                    .type(modelType)
+                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.isPolymorphic(isPolymorphic);

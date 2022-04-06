@@ -59,7 +59,7 @@ public class FluentModelTemplate extends ModelTemplate {
             String lastParentName = model.getName();
             String parentModelName = model.getParentModelName();
             while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-                ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+                ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
                 if (parentModel == null) {
                     parentModel = getPredefinedModel(parentModelName).orElse(null);
                 }

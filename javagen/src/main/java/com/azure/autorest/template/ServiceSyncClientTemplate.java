@@ -22,12 +22,13 @@ import java.util.Set;
  */
 public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
 
-  private static ServiceSyncClientTemplate _instance = new ServiceSyncClientTemplate();
+  private static final ServiceSyncClientTemplate INSTANCE = new ServiceSyncClientTemplate();
+
   protected ServiceSyncClientTemplate() {
   }
 
   public static ServiceSyncClientTemplate getInstance() {
-    return _instance;
+    return INSTANCE;
   }
 
   @Override

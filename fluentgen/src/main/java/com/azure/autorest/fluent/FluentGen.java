@@ -22,6 +22,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -116,8 +117,8 @@ public class FluentGen extends Javagen {
 
                 if (!settings.isSkipFormatting()) {
                     // formatter
-                    boolean isSampleJavaFile = path.contains("src/samples/java/");
-                    content = new JavaFormatter(content, path).format(!isSampleJavaFile);
+                    boolean isSampleOrTestJavaFile = path.contains("src/samples/java/") || path.contains("src/test/java/");
+                    content = new JavaFormatter(content, path).format(!isSampleOrTestJavaFile);
                 }
 
                 writeFile(path, content, null);
@@ -267,6 +268,12 @@ public class FluentGen extends Javagen {
             }
         }
 
+        if (javaSettings.isGenerateTests()) {
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModelUnitTest(model);
+            }
+        }
+
         return javaPackage;
     }
 
@@ -345,8 +352,9 @@ public class FluentGen extends Javagen {
         return fluentClient;
     }
 
-    private void clear() {
+    void clear() {
         JavaSettings.clear();
+        ClientModels.INSTANCE.clear();
         fluentJavaSettings = null;
         fluentMapper = null;
         fluentPremiumExamples = null;

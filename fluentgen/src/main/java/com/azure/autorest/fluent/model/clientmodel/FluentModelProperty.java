@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.Set;

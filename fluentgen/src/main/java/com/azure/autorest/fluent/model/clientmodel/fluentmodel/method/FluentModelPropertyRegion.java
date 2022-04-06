@@ -6,7 +6,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClientModel;

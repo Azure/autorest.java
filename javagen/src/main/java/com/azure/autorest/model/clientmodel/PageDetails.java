@@ -12,8 +12,8 @@ public class PageDetails {
     private String itemName;
     private String className;
 
-    public PageDetails(String package_Keyword, String nextLinkName, String itemName, String className) {
-        packageName = package_Keyword;
+    public PageDetails(String packageKeyword, String nextLinkName, String itemName, String className) {
+        packageName = packageKeyword;
         this.nextLinkName = nextLinkName;
         this.itemName = itemName;
         this.className = className;

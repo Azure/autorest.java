@@ -15,36 +15,36 @@ public class JavaFileFactory {
         this.settings = settings;
     }
 
-    public final JavaFile createEmptySourceFile(String package_Keyword, String fileNameWithoutExtension) {
-        String folderPath = Paths.get("src", "main", "java", package_Keyword.replace('.', File.separatorChar)).toString();
+    public final JavaFile createEmptySourceFile(String packageKeyword, String fileNameWithoutExtension) {
+        String folderPath = Paths.get("src", "main", "java", packageKeyword.replace('.', File.separatorChar)).toString();
         String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
         return new JavaFile(filePath);
     }
 
-    public final JavaFile createSourceFile(String package_Keyword, String fileNameWithoutExtension) {
-        JavaFile javaFile = createEmptySourceFile(package_Keyword, fileNameWithoutExtension);
+    public final JavaFile createSourceFile(String packageKeyword, String fileNameWithoutExtension) {
+        JavaFile javaFile = createEmptySourceFile(packageKeyword, fileNameWithoutExtension);
 
-        addCommentAndPackage(javaFile, package_Keyword);
-
-        return javaFile;
-    }
-
-    public final JavaFile createSampleFile(String package_Keyword, String fileNameWithoutExtension) {
-        String folderPath = Paths.get("src", "samples", "java", package_Keyword.replace('.', File.separatorChar)).toString();
-        String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
-        JavaFile javaFile = new JavaFile(filePath);
-
-        addCommentAndPackage(javaFile, package_Keyword);
+        addCommentAndPackage(javaFile, packageKeyword);
 
         return javaFile;
     }
 
-    public final JavaFile createTestFile(String package_Keyword, String fileNameWithoutExtension) {
-        String folderPath = Paths.get("src", "test", "java", package_Keyword.replace('.', File.separatorChar)).toString();
+    public final JavaFile createSampleFile(String packageKeyword, String fileNameWithoutExtension) {
+        String folderPath = Paths.get("src", "samples", "java", packageKeyword.replace('.', File.separatorChar)).toString();
         String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
         JavaFile javaFile = new JavaFile(filePath);
 
-        addCommentAndPackage(javaFile, package_Keyword);
+        addCommentAndPackage(javaFile, packageKeyword);
+
+        return javaFile;
+    }
+
+    public final JavaFile createTestFile(String packageKeyword, String fileNameWithoutExtension) {
+        String folderPath = Paths.get("src", "test", "java", packageKeyword.replace('.', File.separatorChar)).toString();
+        String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
+        JavaFile javaFile = new JavaFile(filePath);
+
+        addCommentAndPackage(javaFile, packageKeyword);
 
         return javaFile;
     }

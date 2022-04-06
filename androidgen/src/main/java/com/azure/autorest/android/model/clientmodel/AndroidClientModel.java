@@ -11,12 +11,12 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.Set;
 
 public class AndroidClientModel extends ClientModel {
-    protected AndroidClientModel(String package_Keyword, String name, java.util.List<String> imports, String description,
+    protected AndroidClientModel(String packageKeyword, String name, java.util.List<String> imports, String description,
                                  boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
                                  String parentModelName, java.util.List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName, String xmlNamespace,
                                  java.util.List<com.azure.autorest.model.clientmodel.ClientModelProperty> properties, java.util.List<com.azure.autorest.model.clientmodel.ClientModelPropertyReference> propertyReferences,
-                                 IType modelType) {
-        super(package_Keyword,
+                                 IType modelType, boolean stronglyTypedHeader) {
+        super(packageKeyword,
                 name,
                 imports,
                 description,
@@ -30,7 +30,8 @@ public class AndroidClientModel extends ClientModel {
                 xmlNamespace,
                 properties,
                 propertyReferences,
-                modelType);
+                modelType,
+                stronglyTypedHeader);
     }
 
     @Override
@@ -75,7 +76,8 @@ public class AndroidClientModel extends ClientModel {
                     xmlNamespace,
                     properties,
                     propertyReferences,
-                    modelType);
+                    modelType,
+                    stronglyTypedHeader);
         }
     }
 }

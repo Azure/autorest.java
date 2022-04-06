@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class JavaFileContents {
-    private static final String singleIndent = "    ";
+    private static final String SINGLE_INDENT = "    ";
     private static final Pattern QUOTED_NEW_LINE = Pattern.compile(Pattern.quote("\n"));
 
     private StringBuilder contents;
@@ -102,11 +102,11 @@ public class JavaFileContents {
     }
 
     public final void increaseIndent() {
-        addToPrefix(singleIndent);
+        addToPrefix(SINGLE_INDENT);
     }
 
     public final void decreaseIndent() {
-        removeFromPrefix(singleIndent);
+        removeFromPrefix(SINGLE_INDENT);
     }
 
     private List<String> wordWrap(String line, boolean addPrefix) {
