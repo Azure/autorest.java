@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 public class FluentPomMapper extends PomMapper {
 
+    protected static final String CORE_MANAGEMENT_PREFIX = "com.azure:azure-core-management:";
+
     public Pom map(FluentProject project) {
         Pom pom = new Pom();
         pom.setGroupId(project.getGroupId());
@@ -25,21 +27,22 @@ public class FluentPomMapper extends PomMapper {
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         List<String> dependencyIdentifiers = new ArrayList<>();
-        dependencyIdentifiers.add("com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion());
-        dependencyIdentifiers.add("com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion());
+        dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
+        dependencyIdentifiers.add(CORE_MANAGEMENT_PREFIX + project.getPackageVersions().getAzureCoreManagementVersion());
         if (JavaSettings.getInstance().isGenerateTests()) {
-            dependencyIdentifiers.add("com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test");
-            dependencyIdentifiers.add("com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test");
-            dependencyIdentifiers.add("org.slf4j:slf4j-simple:" + project.getPackageVersions().getSlf4jSimple() + ":test");
+            dependencyIdentifiers.add(CORE_TEST_PREFIX + project.getPackageVersions().getAzureCoreTestVersion() + TEST_SUFFIX);
+            dependencyIdentifiers.add(IDENTITY_PREFIX + project.getPackageVersions().getAzureIdentityVersion() + TEST_SUFFIX);
+            dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
+            dependencyIdentifiers.add(SLF4J_SIMPLE_PREFIX + project.getPackageVersions().getSlf4jSimple() + TEST_SUFFIX);
         }
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
-                .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith("com.azure:azure-core:")
-                        && !dependencyIdentifier.startsWith("com.azure:azure-core-management:"))
+                .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith(CORE_PREFIX)
+                        && !dependencyIdentifier.startsWith(CORE_MANAGEMENT_PREFIX))
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
         if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
-            pom.setParentIdentifier("com.azure:azure-client-sdk-parent:" + project.getPackageVersions().getAzureClientSdkParentVersion());
+            pom.setParentIdentifier(CLIENT_SDK_PARENT_PREFIX + project.getPackageVersions().getAzureClientSdkParentVersion());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
 
