@@ -34,7 +34,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.implementation.serializer.DefaultJsonSerializer;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -559,9 +558,11 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagesAsync(String mode, RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getPagesSinglePageAsync(mode, requestOptions, context),
-                nextLink -> getPagesNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -678,7 +679,10 @@ public final class DpgClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
-                new DefaultPollingStrategy<>(this.getHttpPipeline(), new DefaultJsonSerializer(), requestOptions != null ? requestOptions.getContext() : Context.NONE),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null ? requestOptions.getContext() : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -712,7 +716,10 @@ public final class DpgClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions, context),
-                new DefaultPollingStrategy<>(this.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null ? requestOptions.getContext() : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }

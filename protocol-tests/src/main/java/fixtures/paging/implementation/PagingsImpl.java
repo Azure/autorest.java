@@ -721,9 +721,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -755,9 +757,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -1078,9 +1082,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -1112,9 +1118,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -1262,9 +1270,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -1297,9 +1307,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions, context),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null, context));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -1474,9 +1486,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -1518,9 +1532,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -1705,9 +1721,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getWithQueryParamsSinglePageAsync(requestOptions),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null));
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptionsForNextPage));
     }
 
     /**
@@ -1749,9 +1767,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getWithQueryParamsSinglePageAsync(requestOptions, context),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null, context));
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptionsForNextPage, context));
     }
 
     /**
@@ -2035,9 +2055,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -2079,9 +2101,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -2272,9 +2296,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -2318,9 +2344,12 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(
             int offset, RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions, context),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -2479,9 +2508,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -2514,9 +2545,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -2665,9 +2699,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -2700,9 +2736,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -2848,9 +2887,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -2882,9 +2923,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -3029,9 +3072,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -3063,9 +3108,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -3210,9 +3257,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -3244,9 +3293,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -3421,9 +3473,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null));
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -3465,9 +3519,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
             String tenant, RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions, context),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null, context));
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -3653,9 +3709,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
             String tenant, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null));
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -3697,9 +3755,12 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
             String tenant, RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions, context),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null, context));
+                nextLink ->
+                        nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -3884,9 +3945,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLroAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesLroSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, null));
+                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -3928,9 +3991,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLroAsync(RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getMultiplePagesLroSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, null, context));
+                nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -4299,9 +4364,13 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientNameAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(requestOptions),
-                nextLink -> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(nextLink, null));
+                nextLink ->
+                        getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
+                                nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -4334,9 +4403,13 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientNameAsync(
             RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(requestOptions, context),
-                nextLink -> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
+                                nextLink, requestOptionsForNextPage, context));
     }
 
     /**
