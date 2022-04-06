@@ -141,17 +141,17 @@ page at http://checkstyle.sourceforge.net/config.html -->
       <property name="severity" value="warning"/>
     </module>
 
-<!--    <module name="LocalFinalVariableName">-->
-<!--      &lt;!&ndash; Validates identifiers for local final variables against the-->
-<!--        expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="LocalFinalVariableName">
+      <!-- Validates identifiers for local final variables against the
+        expression "^[a-z][a-zA-Z0-9]*$". -->
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="LocalVariableName">-->
-<!--      &lt;!&ndash; Validates identifiers for local variables against the-->
-<!--        expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="LocalVariableName">
+      <!-- Validates identifiers for local variables against the
+        expression "^[a-z][a-zA-Z0-9]*$". -->
+      <property name="severity" value="warning"/>
+    </module>
 
 <!--    &lt;!&ndash; LENGTH and CODING CHECKS &ndash;&gt;-->
 <!--    <module name="LeftCurly">-->
