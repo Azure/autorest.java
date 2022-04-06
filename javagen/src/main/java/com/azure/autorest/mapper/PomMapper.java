@@ -14,20 +14,23 @@ import java.util.stream.Collectors;
 
 public class PomMapper implements IMapper<Project, Pom> {
 
-    private static final String CORE_PREFIX = "com.azure:azure-core:";
-    private static final String CORE_HTTP_NETTY_PREFIX = "com.azure:azure-core-http-netty:";
-    private static final String CORE_TEST_PREFIX = "com.azure:azure-core-test:";
-    private static final String IDENTITY_PREFIX = "com.azure:azure-identity:";
-    private static final String JUNIT_JUPITER_ENGINE_PREFIX = "org.junit.jupiter:junit-jupiter-engine:";
+    protected static final String CLIENT_SDK_PARENT_PREFIX = "com.azure:azure-client-sdk-parent:";
+    protected static final String CORE_PREFIX = "com.azure:azure-core:";
+    protected static final String CORE_HTTP_NETTY_PREFIX = "com.azure:azure-core-http-netty:";
+    protected static final String CORE_TEST_PREFIX = "com.azure:azure-core-test:";
+    protected static final String IDENTITY_PREFIX = "com.azure:azure-identity:";
+    protected static final String JUNIT_JUPITER_ENGINE_PREFIX = "org.junit.jupiter:junit-jupiter-engine:";
+    protected static final String SLF4J_SIMPLE_PREFIX = "org.slf4j:slf4j-simple:";
 
-    private static final String TEST_SUFFIX = ":test";
+    protected static final String TEST_SUFFIX = ":test";
 
     private static final List<String> KNOWN_DEPENDENCY_PREFIXES = Arrays.asList(
             CORE_PREFIX,
             CORE_HTTP_NETTY_PREFIX,
             CORE_TEST_PREFIX,
             IDENTITY_PREFIX,
-            JUNIT_JUPITER_ENGINE_PREFIX
+            JUNIT_JUPITER_ENGINE_PREFIX,
+            SLF4J_SIMPLE_PREFIX
     );
 
     @Override
@@ -46,13 +49,14 @@ public class PomMapper implements IMapper<Project, Pom> {
         dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
         dependencyIdentifiers.add(CORE_TEST_PREFIX + project.getPackageVersions().getAzureCoreTestVersion() + TEST_SUFFIX);
         dependencyIdentifiers.add(IDENTITY_PREFIX + project.getPackageVersions().getAzureIdentityVersion() + TEST_SUFFIX);
+        dependencyIdentifiers.add(SLF4J_SIMPLE_PREFIX + project.getPackageVersions().getSlf4jSimple() + TEST_SUFFIX);
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> KNOWN_DEPENDENCY_PREFIXES.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
         if (JavaSettings.getInstance().isSdkIntegration()) {
-            pom.setParentIdentifier("com.azure:azure-client-sdk-parent:" + project.getPackageVersions().getAzureClientSdkParentVersion());
+            pom.setParentIdentifier(CLIENT_SDK_PARENT_PREFIX + project.getPackageVersions().getAzureClientSdkParentVersion());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
 
