@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 
 public class Project {
 
-    private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), Project.class);
+    private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
     protected String serviceName;
     protected String serviceDescription;
@@ -143,7 +143,7 @@ public class Project {
             if (path != null) {
                 Collections.reverse(pathSegment);
                 sdkRepositoryUri = "https://github.com/Azure/azure-sdk-for-java/blob/main/" + String.join("/", pathSegment);
-                logger.info("Repository URI '{}' deduced from 'output-folder' parameter", sdkRepositoryUri);
+                LOGGER.info("Repository URI '{}' deduced from 'output-folder' parameter", sdkRepositoryUri);
             }
         }
     }
@@ -152,10 +152,10 @@ public class Project {
         JavaSettings settings = JavaSettings.getInstance();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
         if (!sdkFolderOpt.isPresent()) {
-            logger.info("'java-sdks-folder' parameter not available");
+            LOGGER.info("'java-sdks-folder' parameter not available");
         } else {
             if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
-                logger.info("'java-sdks-folder' parameter is not an absolute path");
+                LOGGER.info("'java-sdks-folder' parameter is not an absolute path");
                 sdkFolderOpt = Optional.empty();
             }
         }
@@ -175,14 +175,14 @@ public class Project {
                     }
                 }
                 if (path != null) {
-                    logger.info("'azure-sdk-for-java' SDK folder '{}' deduced from 'output-folder' parameter", path.toString());
+                    LOGGER.info("'azure-sdk-for-java' SDK folder '{}' deduced from 'output-folder' parameter", path.toString());
                     sdkFolderOpt = Optional.of(path.toString());
                 }
             }
         }
 
         if (!sdkFolderOpt.isPresent()) {
-            logger.warn("'azure-sdk-for-java' SDK folder not found, fallback to default versions for dependencies");
+            LOGGER.warn("'azure-sdk-for-java' SDK folder not found, fallback to default versions for dependencies");
         }
 
         return sdkFolderOpt;
@@ -202,15 +202,15 @@ public class Project {
             try {
                 findPackageVersions(versionClientPath);
             } catch (IOException e) {
-                logger.warn("Failed to parse 'version_client.txt'", e);
+                LOGGER.warn("Failed to parse 'version_client.txt'", e);
             }
             try {
                 findPackageVersions(versionExternalPath);
             } catch (IOException e) {
-                logger.warn("Failed to parse 'external_dependencies.txt'", e);
+                LOGGER.warn("Failed to parse 'external_dependencies.txt'", e);
             }
         } else {
-            logger.warn("'version_client.txt' or 'external_dependencies.txt' not found or not readable");
+            LOGGER.warn("'version_client.txt' or 'external_dependencies.txt' not found or not readable");
         }
     }
 
@@ -236,7 +236,7 @@ public class Project {
             String[] segments = line.split(Pattern.quote(";"));
             if (segments.length >= 2) {
                 String version = segments[1];
-                logger.info("Found version '{}' for artifact '{}'", version, artifact);
+                LOGGER.info("Found version '{}' for artifact '{}'", version, artifact);
                 return Optional.of(version);
             }
         }
@@ -298,7 +298,7 @@ public class Project {
                                                     dependencyIdentifier += ":" + scope;
                                                 }
                                                 this.pomDependencyIdentifiers.add(dependencyIdentifier);
-                                                logger.info("Found dependency identifier '{}' from POM", dependencyIdentifier);
+                                                LOGGER.info("Found dependency identifier '{}' from POM", dependencyIdentifier);
                                             }
                                         }
                                     }
@@ -307,13 +307,13 @@ public class Project {
                         }
                     }
                 } catch (IOException | ParserConfigurationException | SAXException e) {
-                    logger.warn("Failed to parse 'pom.xml'", e);
+                    LOGGER.warn("Failed to parse 'pom.xml'", e);
                 }
             } else {
-                logger.info("'pom.xml' not found or not readable");
+                LOGGER.info("'pom.xml' not found or not readable");
             }
         } else {
-            logger.warn("'output-folder' parameter is not an absolute path, fall back to default dependencies");
+            LOGGER.warn("'output-folder' parameter is not an absolute path, fall back to default dependencies");
         }
     }
 

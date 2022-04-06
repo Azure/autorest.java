@@ -142,7 +142,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                 && ((ClassType) type).getPackage().startsWith(JavaSettings.getInstance().getPackage())
                 && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
-            ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
+            ClientModel model = ClientModels.INSTANCE.getModel(((ClassType) type).getName());
             if (name != null) {
                 commentBlock.line(indent + name + ": {");
             } else {
@@ -196,7 +196,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
         if (model.getParentModelName() != null) {
-            traverseProperties(ClientModels.Instance.getModel(model.getParentModelName()), properties);
+            traverseProperties(ClientModels.INSTANCE.getModel(model.getParentModelName()), properties);
         }
         properties.addAll(model.getProperties());
     }

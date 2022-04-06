@@ -12,7 +12,7 @@ import com.azure.autorest.model.clientmodel.Proxy;
 import java.util.List;
 
 public class AndroidMethodGroupClient extends MethodGroupClient {
-    protected AndroidMethodGroupClient(String package_Keyword,
+    protected AndroidMethodGroupClient(String packageKeyword,
                                        String className,
                                        String interfaceName,
                                        List<String> implementedInterfaces,
@@ -23,7 +23,7 @@ public class AndroidMethodGroupClient extends MethodGroupClient {
                                        List<ClientMethod> clientMethods,
                                        List<IType> supportedInterfaces,
                                        String classBaseName) {
-        super(package_Keyword,
+        super(packageKeyword,
                 className,
                 interfaceName,
                 implementedInterfaces,

@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 
 public class ModelExampleUtil {
 
-    private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ModelExampleUtil.class);
+    private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ModelExampleUtil.class);
 
     /**
      * Parse the type (client model or others) with JSON object to tree of ExampleNode.
@@ -74,7 +74,7 @@ public class ModelExampleUtil {
                     node.getChildNodes().add(childNode);
                 }
             } else {
-                logger.error("Example value is not List type: {}", objectValue);
+                LOGGER.error("Example value is not List type: {}", objectValue);
                 node = new ListNode(elementType, null);
             }
         } else if (type instanceof MapType) {
@@ -90,7 +90,7 @@ public class ModelExampleUtil {
                     mapNode.getKeys().add(entry.getKey());
                 }
             } else {
-                logger.error("Example value is not Map type: {}", objectValue);
+                LOGGER.error("Example value is not Map type: {}", objectValue);
                 node = new MapNode(elementType, null);
             }
         } else if (type == ClassType.Object) {
@@ -115,10 +115,10 @@ public class ModelExampleUtil {
                             type = derivedModel.getType();
                             model = derivedModel;
                         } else {
-                            logger.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
+                            LOGGER.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
                         }
                     } else {
-                        logger.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
+                        LOGGER.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
                     }
                 }
 
@@ -281,7 +281,7 @@ public class ModelExampleUtil {
         return null;
     }
 
-    private static Function<String, ClientModel> getClientModelFunction = ClientModels.Instance::getModel;
+    private static Function<String, ClientModel> getClientModelFunction = ClientModels.INSTANCE::getModel;
 
     public static void setGetClientModelFunction(Function<String, ClientModel> function) {
         getClientModelFunction = function;

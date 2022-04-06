@@ -95,12 +95,12 @@ public class ClientModel {
      * @param modelType the type of the model.
      * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
      */
-    protected ClientModel(String package_Keyword, String name, List<String> imports, String description,
+    protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
             IType modelType, boolean stronglyTypedHeader) {
-        packageName = package_Keyword;
+        packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
         this.description = description;

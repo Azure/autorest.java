@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class ErrorTypeNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ErrorTypeNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ErrorTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().stream()
@@ -83,7 +83,7 @@ public class ErrorTypeNormalization {
     private void normalizeErrorType(ObjectSchema error, ObjectSchema errorSchema) {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
-                logger.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(error));
+                LOGGER.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(error));
 
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
 
@@ -100,7 +100,7 @@ public class ErrorTypeNormalization {
                 break;
 
             case SUBCLASS_MANAGEMENT_ERROR:
-                logger.info("Modify error '{}' as subclass of 'ManagementError'", Utils.getJavaName(error));
+                LOGGER.info("Modify error '{}' as subclass of 'ManagementError'", Utils.getJavaName(error));
 
                 error.getLanguage().getJava().setName(Utils.getJavaName(errorSchema));
 
@@ -136,7 +136,7 @@ public class ErrorTypeNormalization {
                 if (schema instanceof ObjectSchema) {
                     ObjectSchema error = (ObjectSchema) schema;
 
-                    logger.info("Modify type '{}' as subclass of '{}'", Utils.getJavaName(error), Utils.getJavaName(errorSchema));
+                    LOGGER.info("Modify type '{}' as subclass of '{}'", Utils.getJavaName(error), Utils.getJavaName(errorSchema));
 
                     filterProperties(error);
                 }

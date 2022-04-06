@@ -72,7 +72,7 @@ public class ModelTestCaseUtil {
         // superclasses
         String parentModelName = model.getParentModelName();
         while (!CoreUtils.isNullOrEmpty(parentModelName)) {
-            ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+            ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
             if (parentModel != null) {
                 for (ClientModelProperty property : parentModel.getProperties()) {
                     addForProperty(depth, jsonObject, property, parentModel.getNeedsFlatten());
@@ -146,7 +146,7 @@ public class ModelTestCaseUtil {
             }
             return map;
         } else if (type instanceof ClassType) {
-            ClientModel model = ClientModels.Instance.getModel(((ClassType) type).getName());
+            ClientModel model = ClientModels.INSTANCE.getModel(((ClassType) type).getName());
             if (model != null) {
                 return jsonFromModel(depth + 1, model);
             }

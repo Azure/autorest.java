@@ -11,7 +11,7 @@ import com.azure.autorest.model.clientmodel.IType;
 
 public class FluentPrimitiveMapper extends PrimitiveMapper {
 
-    private static FluentPrimitiveMapper INSTANCE = new FluentPrimitiveMapper();
+    private static final FluentPrimitiveMapper INSTANCE = new FluentPrimitiveMapper();
 
     public static FluentPrimitiveMapper getInstance() {
         return INSTANCE;

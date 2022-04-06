@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
  * Writes a MethodGroupClient to a JavaFile as an interface.
  */
 public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
-    private static MethodGroupInterfaceTemplate _instance = new MethodGroupInterfaceTemplate();
+    private static final MethodGroupInterfaceTemplate INSTANCE = new MethodGroupInterfaceTemplate();
 
     private MethodGroupInterfaceTemplate() {
     }
 
     public static MethodGroupInterfaceTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {

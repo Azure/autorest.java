@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 public class TemplateUtil {
 
-    private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), TemplateUtil.class);
+    private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), TemplateUtil.class);
 
     // begin of constant for template replacement, used in ResourceUtil.loadTextFromResource
     public static final String SERVICE_NAME = "service-name";
@@ -75,12 +75,12 @@ public class TemplateUtil {
                         text = text.replace("{{" + key + "}}", value);
                     }
                 } else {
-                    logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
+                    LOGGER.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                 }
             }
             return text;
         } catch (IOException e) {
-            logger.error("Failed to read file '{}'", filename);
+            LOGGER.error("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }

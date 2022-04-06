@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 
 public class FluentUtils {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentUtils.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentUtils.class);
 
     private static final Set<String> RESERVED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
             Response.class.getSimpleName(),
@@ -55,11 +55,11 @@ public class FluentUtils {
     }
 
     public static void log(String format) {
-        logger.info(format);
+        LOGGER.info(format);
     }
 
     public static void log(String format, Object... arguments) {
-        logger.info(format, arguments);
+        LOGGER.info(format, arguments);
     }
 
     public static Set<String> reservedClassNames() {

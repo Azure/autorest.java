@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 
 public class ProtocolExampleWriter {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProtocolExampleWriter.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProtocolExampleWriter.class);
 
     private final Set<String> imports;
     private final Consumer<JavaBlock> clientInitializationWriter;
@@ -365,7 +365,7 @@ public class ProtocolExampleWriter {
 
             if (proxyMethodParameter == null) {
                 // this should not happen unless we changed the naming of client method parameter from proxy method parameter
-                LOGGER.warn("Failed to find proxy method parameter for client method parameter with name '{}'", clientMethodParameter.getName());
+                logger.warn("Failed to find proxy method parameter for client method parameter with name '{}'", clientMethodParameter.getName());
             }
         }
         return proxyMethodParameters;

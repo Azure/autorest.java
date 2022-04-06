@@ -27,7 +27,7 @@ public class FluentTransformer {
 
     private final FluentJavaSettings fluentJavaSettings;
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), FluentTransformer.class);
+    private final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), FluentTransformer.class);
 
     public FluentTransformer(FluentJavaSettings fluentJavaSettings) {
         this.fluentJavaSettings = fluentJavaSettings;

@@ -55,7 +55,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
-    private static final ClientMethodMapper instance = new ClientMethodMapper();
+    private static final ClientMethodMapper INSTANCE = new ClientMethodMapper();
 
     private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
 
@@ -66,7 +66,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     public static ClientMethodMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

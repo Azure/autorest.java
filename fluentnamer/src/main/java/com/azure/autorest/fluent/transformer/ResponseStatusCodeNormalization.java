@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class ResponseStatusCodeNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ResponseStatusCodeNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ResponseStatusCodeNormalization.class);
 
     private static final boolean REMOVE_404_IN_GET_RESPONSE = true;
 
@@ -32,13 +32,13 @@ public class ResponseStatusCodeNormalization {
                     for (Response response : operation.getResponses()) {
                         if (response.getProtocol() != null && response.getProtocol().getHttp() != null && response.getProtocol().getHttp().getStatusCodes() != null) {
                             if (response.getProtocol().getHttp().getStatusCodes().contains("404")) {
-                                logger.warn("Operation '{}' expect '404' status code, in group '{}'",
+                                LOGGER.warn("Operation '{}' expect '404' status code, in group '{}'",
                                         Utils.getJavaName(operation), Utils.getJavaName(operation.getOperationGroup()));
 
                                 if (REMOVE_404_IN_GET_RESPONSE) {
                                     String operationNameInLower = Utils.getJavaName(operation).toLowerCase(Locale.ROOT);
                                     if (operationNameInLower.startsWith("get") || operationNameInLower.startsWith("list")) {
-                                        logger.info("Remove '404' status code in operation '{}', in group '{}'",
+                                        LOGGER.info("Remove '404' status code in operation '{}', in group '{}'",
                                                 Utils.getJavaName(operation), Utils.getJavaName(operation.getOperationGroup()));
                                         if (response.getProtocol().getHttp().getStatusCodes().size() == 1) {
                                             // remove the response with only 404

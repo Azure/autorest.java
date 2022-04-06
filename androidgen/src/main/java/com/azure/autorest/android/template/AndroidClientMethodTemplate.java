@@ -43,9 +43,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            ApplyParameterTransformations(function, clientMethod, settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
             //ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
@@ -96,9 +96,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            ApplyParameterTransformations(function, clientMethod, settings);
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
             // REVISIT: Restore this call for Android
             // ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
@@ -160,7 +160,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s).thenApply(response -> response.getValue());", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
         }));
     }
@@ -174,7 +174,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
             } else {

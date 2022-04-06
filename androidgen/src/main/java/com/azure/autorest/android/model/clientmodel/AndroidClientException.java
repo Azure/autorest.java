@@ -8,8 +8,8 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.IType;
 
 public class AndroidClientException extends ClientException {
-    protected AndroidClientException(String package_Keyword, String name, String errorName, IType parentType) {
-        super(package_Keyword,
+    protected AndroidClientException(String packageKeyword, String name, String errorName, IType parentType) {
+        super(packageKeyword,
                 name,
                 errorName,
                 parentType);

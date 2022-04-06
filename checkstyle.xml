@@ -68,95 +68,90 @@ page at http://checkstyle.sourceforge.net/config.html -->
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
 
-<!--    &lt;!&ndash; NAMING CHECKS &ndash;&gt;-->
-<!--    &lt;!&ndash; See http://checkstyle.sf.net/config_naming.html &ndash;&gt;-->
-<!--    <module name="ConstantName"/>-->
-<!--    <module name="LocalFinalVariableName"/>-->
-<!--    <module name="LocalVariableName"/>-->
-<!--    <module name="MemberName"/>-->
-<!--    <module name="MethodName">-->
-<!--      &lt;!&ndash; Use default MethodName but block the use of 'builder' as method name &ndash;&gt;-->
-<!--      <property name="format" value="(?=^[a-z][a-zA-Z0-9]*$)(?!^(?i)builder$)"/>-->
-<!--      &lt;!&ndash; allow the name on private methods  &ndash;&gt;-->
-<!--      <property name="applyToPrivate" value="false"/>-->
-<!--    </module>-->
-<!--    <module name="PackageName"/>-->
-<!--    <module name="ParameterName"/>-->
-<!--    <module name="StaticVariableName"/>-->
-<!--    <module name="TypeName"/>-->
+    <!-- NAMING CHECKS -->
+    <!-- See http://checkstyle.sf.net/config_naming.html -->
+    <module name="ConstantName"/>
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <module name="MemberName"/>
+    <module name="MethodName"/>
+    <module name="PackageName"/>
+    <module name="ParameterName"/>
+    <module name="StaticVariableName"/>
+    <module name="TypeName"/>
 
-<!--    <module name="TypeNameCheck">-->
-<!--      &lt;!&ndash; Validates static, final fields against the-->
-<!--      expression "^[A-Z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <metadata name="altname" value="TypeName"/>-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="TypeNameCheck">
+      <!-- Validates static, final fields against the
+      expression "^[A-Z][a-zA-Z0-9]*$". -->
+      <metadata name="altname" value="TypeName"/>
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="ConstantNameCheck">-->
-<!--      &lt;!&ndash; Validates non-private, static, final fields against the supplied-->
-<!--      public/package final fields "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". &ndash;&gt;-->
-<!--      <metadata name="altname" value="ConstantName"/>-->
-<!--      <property name="applyToPublic" value="true"/>-->
-<!--      <property name="applyToProtected" value="true"/>-->
-<!--      <property name="applyToPackage" value="true"/>-->
-<!--      <property name="applyToPrivate" value="false"/>-->
-<!--      <property name="format" value="^([A-Z][A-Z0-9]*(_[A-Z0-9]+)*|FLAG_.*)$"/>-->
-<!--      <message key="name.invalidPattern"-->
-<!--               value="Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="ConstantNameCheck">
+      <!-- Validates non-private, static, final fields against the supplied
+      public/package final fields "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". -->
+      <metadata name="altname" value="ConstantName"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPackage" value="true"/>
+      <property name="applyToPrivate" value="false"/>
+      <property name="format" value="^([A-Z][A-Z0-9]*(_[A-Z0-9]+)*|FLAG_.*)$"/>
+      <message key="name.invalidPattern"
+               value="Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>
+      <property name="severity" value="warning"/>
+    </module>
 
 <!--    <module name="MissingDeprecated"/>-->
 
-<!--    <module name="StaticVariableNameCheck">-->
-<!--      &lt;!&ndash; Validates static, non-final fields against the supplied-->
-<!--      expression "^[a-z][a-zA-Z0-9]*_?$". &ndash;&gt;-->
-<!--      <metadata name="altname" value="StaticVariableName"/>-->
-<!--      <property name="applyToPublic" value="true"/>-->
-<!--      <property name="applyToProtected" value="true"/>-->
-<!--      <property name="applyToPackage" value="true"/>-->
-<!--      <property name="applyToPrivate" value="true"/>-->
-<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="StaticVariableNameCheck">
+      <!-- Validates static, non-final fields against the supplied
+      expression "^[a-z][a-zA-Z0-9]*_?$". -->
+      <metadata name="altname" value="StaticVariableName"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPackage" value="true"/>
+      <property name="applyToPrivate" value="true"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="MemberNameCheck">-->
-<!--      &lt;!&ndash; Validates non-static members against the supplied expression. &ndash;&gt;-->
-<!--      <metadata name="altname" value="MemberName"/>-->
-<!--      <property name="applyToPublic" value="true"/>-->
-<!--      <property name="applyToProtected" value="true"/>-->
-<!--      <property name="applyToPackage" value="true"/>-->
-<!--      <property name="applyToPrivate" value="true"/>-->
-<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="MemberNameCheck">
+      <!-- Validates non-static members against the supplied expression. -->
+      <metadata name="altname" value="MemberName"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPackage" value="true"/>
+      <property name="applyToPrivate" value="true"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+      <property name="severity" value="warning"/>
+    </module>
 
 <!--    <module name="EqualsAvoidNullCheck"/>-->
 
-<!--    <module name="MethodNameCheck">-->
-<!--      &lt;!&ndash; Validates identifiers for method names. &ndash;&gt;-->
-<!--      <metadata name="altname" value="MethodName"/>-->
-<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-zA-Z0-9]+)*$"/>-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="MethodNameCheck">
+      <!-- Validates identifiers for method names. -->
+      <metadata name="altname" value="MethodName"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-zA-Z0-9]+)*$"/>
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="ParameterName">-->
-<!--      &lt;!&ndash; Validates identifiers for method parameters against the-->
-<!--        expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="ParameterName">
+      <!-- Validates identifiers for method parameters against the
+        expression "^[a-z][a-zA-Z0-9]*$". -->
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="LocalFinalVariableName">-->
-<!--      &lt;!&ndash; Validates identifiers for local final variables against the-->
-<!--        expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="LocalFinalVariableName">
+      <!-- Validates identifiers for local final variables against the
+        expression "^[a-z][a-zA-Z0-9]*$". -->
+      <property name="severity" value="warning"/>
+    </module>
 
-<!--    <module name="LocalVariableName">-->
-<!--      &lt;!&ndash; Validates identifiers for local variables against the-->
-<!--        expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--      <property name="severity" value="warning"/>-->
-<!--    </module>-->
+    <module name="LocalVariableName">
+      <!-- Validates identifiers for local variables against the
+        expression "^[a-z][a-zA-Z0-9]*$". -->
+      <property name="severity" value="warning"/>
+    </module>
 
 <!--    &lt;!&ndash; LENGTH and CODING CHECKS &ndash;&gt;-->
 <!--    <module name="LeftCurly">-->

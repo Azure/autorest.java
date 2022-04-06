@@ -27,7 +27,7 @@ import java.util.Set;
 
 public class ResourceRefresh extends ResourceOperation {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceRefresh.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ResourceRefresh.class);
 
     private List<FluentMethod> refreshMethods;
 
@@ -35,7 +35,7 @@ public class ResourceRefresh extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceRefresh: Fluent model '{}', method reference '{}'",
+        LOGGER.info("ResourceRefresh: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 

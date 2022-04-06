@@ -12,7 +12,7 @@ import java.util.Map;
  * The collection of all client models stored for inheritance lookup.
  */
 public class ClientModels {
-    public static final ClientModels Instance = new ClientModels();
+    public static final ClientModels INSTANCE = new ClientModels();
     private final Map<String, ClientModel> nameMap = new HashMap<>();
 //    private final Map<String, ArrayList<ClientModel>> derivedTypesMap = new HashMap<String, ArrayList<ClientModel>>();
     private ClientModels() {

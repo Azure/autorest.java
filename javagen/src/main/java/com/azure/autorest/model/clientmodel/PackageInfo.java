@@ -10,8 +10,8 @@ public class PackageInfo {
     private String packageName;
     private String description;
 
-    public PackageInfo(String package_Keyword, String description) {
-        packageName = package_Keyword;
+    public PackageInfo(String packageKeyword, String description) {
+        packageName = packageKeyword;
         this.description = description;
     }
 

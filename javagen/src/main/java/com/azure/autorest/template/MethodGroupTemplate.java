@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
  * Writes a MethodGroupClient to a JavaFile.
  */
 public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
-    private static MethodGroupTemplate _instance = new MethodGroupTemplate();
+    private static final MethodGroupTemplate INSTANCE = new MethodGroupTemplate();
 
     protected MethodGroupTemplate() {
     }
 
     public static MethodGroupTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {

@@ -91,8 +91,8 @@ public class ClassType implements IType {
     private final XmsExtensions extensions;
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
 
-    private ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
-        packageName = package_Keyword;
+    private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+        packageName = packageKeyword;
         this.name = name;
         this.implementationImports = implementationImports;
         this.extensions = extensions;

@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentManagerTemplate.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentManagerTemplate.class);
 
     private static final FluentManagerTemplate INSTANCE = new FluentManagerTemplate();
 
@@ -63,7 +63,7 @@ public class FluentManagerTemplate {
         final boolean hasEndpointParameter = serviceClient.getProperties().stream()
                 .anyMatch(p -> p.getName().equals("endpoint"));
         if (!hasEndpointParameter) {
-            logger.warn("'endpoint' (or '$host') is required in ServiceClient properties, candidate properties {}",
+            LOGGER.warn("'endpoint' (or '$host') is required in ServiceClient properties, candidate properties {}",
                     serviceClient.getProperties().stream().map(ServiceClientProperty::getName).collect(Collectors.toList()));
         }
 

@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  */
 class ResourceTypeNormalization {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ResourceTypeNormalization.class);
+    private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ResourceTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getSchemas().getObjects().forEach(compositeType -> {
@@ -174,13 +174,13 @@ class ResourceTypeNormalization {
                 compositeType.getProperties().removeIf(p -> (PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly())
                         || RESOURCE_EXTRA_FIELDS.contains(p.getSerializedName()));
 
-                logger.info("Add parent Resource, for '{}'", Utils.getJavaName(compositeType));
+                LOGGER.info("Add parent Resource, for '{}'", Utils.getJavaName(compositeType));
             } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
                 addDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
 
                 compositeType.getProperties().removeIf(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly());
 
-                logger.info("Add parent ProxyResource, for '{}'", Utils.getJavaName(compositeType));
+                LOGGER.info("Add parent ProxyResource, for '{}'", Utils.getJavaName(compositeType));
             }
         }
     }
@@ -189,10 +189,10 @@ class ResourceTypeNormalization {
         String previousName = Utils.getJavaName(compositeType);
         compositeType.getLanguage().getJava().setName(FluentType.SystemData.getName());
 
-        logger.info("Rename system data from '{}' to 'SystemData'", previousName);
+        LOGGER.info("Rename system data from '{}' to 'SystemData'", previousName);
 
         if (CoreUtils.isNullOrEmpty(compositeType.getProperties())) {
-            logger.warn("Ignored properties {}, for {}",
+            LOGGER.warn("Ignored properties {}, for {}",
                     compositeType.getProperties().stream().map(Utils::getJavaName).collect(Collectors.toList()),
                     previousName);
         }
@@ -301,7 +301,7 @@ class ResourceTypeNormalization {
                 }
             }
 
-            logger.info("Change parent from '{}' to '{}', for '{}'", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
+            LOGGER.info("Change parent from '{}' to '{}', for '{}'", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
         }
     }
 
@@ -347,7 +347,7 @@ class ResourceTypeNormalization {
                         if (indexFirstParent >= 0
                                 && index < child.getParents().getImmediate().size()
                                 && index > indexFirstParent) {
-                            logger.info("Change parent order between '{}' and '{}', for '{}'",
+                            LOGGER.info("Change parent order between '{}' and '{}', for '{}'",
                                     Utils.getJavaName(child.getParents().getImmediate().get(indexFirstParent)),
                                     Utils.getJavaName(child.getParents().getImmediate().get(index)),
                                     Utils.getJavaName(child));

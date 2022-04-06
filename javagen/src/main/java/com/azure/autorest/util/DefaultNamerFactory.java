@@ -5,10 +5,10 @@ package com.azure.autorest.util;
 
 public class DefaultNamerFactory implements NamerFactory {
 
-    private static final ModelNamer modelNamer = new ModelNamer();
+    private static final ModelNamer MODEL_NAMER = new ModelNamer();
 
     @Override
     public ModelNamer getModelNamer() {
-        return modelNamer;
+        return MODEL_NAMER;
     }
 }

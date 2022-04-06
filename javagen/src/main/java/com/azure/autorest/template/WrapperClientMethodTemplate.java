@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
  */
 public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
-    private static final WrapperClientMethodTemplate instance = new WrapperClientMethodTemplate();
+    private static final WrapperClientMethodTemplate INSTANCE = new WrapperClientMethodTemplate();
 
     protected WrapperClientMethodTemplate() {
     }
 
     public static WrapperClientMethodTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

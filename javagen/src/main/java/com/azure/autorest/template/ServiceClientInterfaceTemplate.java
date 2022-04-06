@@ -20,13 +20,14 @@ import java.util.HashSet;
  * Writes a ServiceClient to a JavaFile as an interface.
  */
 public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
-    private static ServiceClientInterfaceTemplate _instance = new ServiceClientInterfaceTemplate();
+
+    private static final ServiceClientInterfaceTemplate INSTANCE = new ServiceClientInterfaceTemplate();
 
     private ServiceClientInterfaceTemplate() {
     }
 
     public static ServiceClientInterfaceTemplate getInstance() {
-        return _instance;
+        return INSTANCE;
     }
 
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {

@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class ProxyMethodExample {
 
-    private final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
 
     private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
@@ -269,12 +269,12 @@ public class ProxyMethodExample {
 
                     default:
                     {
-                        LOGGER.error("Unknown protocol in x-ms-original-file: '{}'", originalFileName);
+                        logger.error("Unknown protocol in x-ms-original-file: '{}'", originalFileName);
                         break;
                     }
                 }
             } catch (MalformedURLException | URISyntaxException | IllegalArgumentException e) {
-                LOGGER.error("Failed to parse x-ms-original-file: '{}'", originalFileName);
+                logger.error("Failed to parse x-ms-original-file: '{}'", originalFileName);
             }
             relativeOriginalFileName = originalFileName;
         }
