@@ -221,6 +221,7 @@ public class ClientModel {
      */
     public void addImportsTo(Set<String> imports, JavaSettings settings) {
         // whether annotated as Immutable or Fluent is also determined by its superclass
+        imports.add(this.getFullName());
         addFluentAnnotationImport(imports);
         addImmutableAnnotationImport(imports);
 

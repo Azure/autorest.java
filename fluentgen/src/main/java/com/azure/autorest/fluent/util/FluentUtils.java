@@ -12,7 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -40,7 +40,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentUtils {
@@ -347,18 +346,8 @@ public class FluentUtils {
         return bodyType;
     }
 
-    private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
-
     public static List<String> splitFlattenedSerializedName(String serializedName) {
-        if (serializedName == null) {
-            return Collections.emptyList();
-        }
-
-        String[] values = SPLIT_FLATTEN_PROPERTY_PATTERN.split(serializedName);
-        for (int i = 0; i < values.length; ++i) {
-            values[i] = values[i].replace("\\\\.", ".");
-        }
-        return Arrays.asList(values);
+        return ClientModelUtil.splitFlattenedSerializedName(serializedName);
     }
 
     public static boolean exampleIsUpdate(String name) {

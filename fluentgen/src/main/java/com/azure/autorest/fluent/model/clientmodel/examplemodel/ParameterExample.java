@@ -4,6 +4,7 @@
 package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 
 import java.util.ArrayList;
 import java.util.Collection;

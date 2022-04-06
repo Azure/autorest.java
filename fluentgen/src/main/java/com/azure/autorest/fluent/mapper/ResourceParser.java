@@ -403,7 +403,7 @@ public class ResourceParser {
                 .findAny();
 
         if (!bodyTypeNameOpt.isPresent()) {
-            throw new IllegalStateException("body type not found for method " + method.getInnerClientMethod().getName());
+            throw new IllegalStateException("Body type not found for method " + method.getInnerClientMethod().getName());
         }
 
         Optional<ClientModel> clientModelOpt = availableModels.stream()
@@ -411,7 +411,7 @@ public class ResourceParser {
                 .findAny();
 
         if (!clientModelOpt.isPresent()) {
-            logger.warn("client model not found for type name '{}', method '{}'", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
+            logger.warn("Client model not found for type name '{}', method '{}'", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
         }
         return clientModelOpt.orElse(null);
     }

@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-import com.azure.autorest.fluent.model.clientmodel.ModelProperty;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 
 public class DefinitionStage extends FluentInterfaceStage {

@@ -1,13 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.fluent.model.clientmodel;
+package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +47,10 @@ public class ModelProperty {
         return property.getClientType();
     }
 
+    public IType getWireType() {
+        return property.getWireType();
+    }
+
     public boolean isRequired() {
         return property.isRequired();
     }
@@ -80,7 +80,7 @@ public class ModelProperty {
                     .map(s -> s.replace(".", "\\\\."))
                     .collect(Collectors.joining("."));
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + property.getClass().getName());
         }
     }
 
@@ -88,7 +88,7 @@ public class ModelProperty {
         if (property instanceof ClientModelProperty) {
             ClientModelProperty clientModelProperty = (ClientModelProperty) property;
             if (!clientModelProperty.getNeedsFlatten()) {
-                return FluentUtils.splitFlattenedSerializedName(clientModelProperty.getSerializedName());
+                return ClientModelUtil.splitFlattenedSerializedName(clientModelProperty.getSerializedName());
             } else {
                 return Collections.singletonList(clientModelProperty.getSerializedName());
             }
@@ -97,7 +97,7 @@ public class ModelProperty {
                     .map(ClientModelProperty::getSerializedName)
                     .collect(Collectors.toList());
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyBase: " + property.getClass().getName());
+            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + property.getClass().getName());
         }
     }
 

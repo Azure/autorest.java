@@ -13,6 +13,8 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.core.util.CoreUtils;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
 public class ClientModelUtil {
 
     private static final Pattern SPACE = Pattern.compile("\\s");
+    private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     /**
      * Prepare async/sync clients for service client.
@@ -263,5 +266,23 @@ public class ClientModelUtil {
             clientName += "AsyncClient";
         }
         return clientName;
+    }
+
+    /**
+     * Split and unescape the possible flattened serialized property name to its components.
+     *
+     * @param serializedName the serialized property name belongs to either model or property that has {@code @JsonFlatten} annotation.
+     * @return the components of the serialized property names
+     */
+    public static List<String> splitFlattenedSerializedName(String serializedName) {
+        if (serializedName == null) {
+            return Collections.emptyList();
+        }
+
+        String[] values = SPLIT_FLATTEN_PROPERTY_PATTERN.split(serializedName);
+        for (int i = 0; i < values.length; ++i) {
+            values[i] = values[i].replace("\\\\.", ".");
+        }
+        return Arrays.asList(values);
     }
 }

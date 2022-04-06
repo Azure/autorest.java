@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.fluent.model.clientmodel.examplemodel;
+package com.azure.autorest.model.clientmodel.examplemodel;
 
 import com.azure.autorest.model.clientmodel.IType;
 

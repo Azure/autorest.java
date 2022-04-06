@@ -18,6 +18,10 @@ public class ClientModels {
     private ClientModels() {
     }
 
+    public final void clear() {
+        nameMap.clear();
+    }
+
     public final ClientModel getModel(String modelName) {
         return nameMap.get(modelName);
     }

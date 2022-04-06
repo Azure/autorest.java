@@ -81,6 +81,7 @@ public class TestUtils {
     public static CodeModel loadCodeModel(FluentGenAccessor fluentgenAccessor, String filename) {
         String searchYamlContent = loadYaml(filename);
 
+        fluentgenAccessor.clear();
         CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
         Client client = fluentgenAccessor.handleMap(codeModel);
 

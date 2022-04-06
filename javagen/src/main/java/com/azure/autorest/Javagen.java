@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -249,6 +250,13 @@ public class Javagen extends NewPlugin {
             }
         }
 
+        // Unit tests on client model
+        if (settings.isGenerateTests() && (!settings.isLowLevelClient() || settings.isGenerateModels())) {
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModelUnitTest(model);
+            }
+        }
+
         // Package-info
         for (PackageInfo packageInfo : client.getPackageInfos()) {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
@@ -283,6 +291,7 @@ public class Javagen extends NewPlugin {
     }
 
     private void clear() {
+        ClientModels.Instance.clear();
         JavaSettings.clear();
     }
 }
