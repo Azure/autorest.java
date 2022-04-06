@@ -199,7 +199,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName(), property.getSetterName(), propertyClientType, property.getName()),
                         (methodBlock) -> {
                             String expression;
-                            if (propertyClientType.equals(ArrayType.BYTE_ARRAY)) {
+                            if (propertyClientType.equals(ArrayType.ByteArray)) {
                                 expression = String.format("CoreUtils.clone(%s)", property.getName());
                             } else {
                                 expression = property.getName();
@@ -611,7 +611,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String sourceTypeName = propertyType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = String.format("this.%s", property.getName());
-        if (propertyType.equals(ArrayType.BYTE_ARRAY)) {
+        if (propertyType.equals(ArrayType.ByteArray)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }
 
@@ -687,7 +687,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else if (wireType == ClassType.Long) {
             needsToBeGuardedAgainstNull = true;
             setter = String.format("Long.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == ArrayType.BYTE_ARRAY) {
+        } else if (wireType == ArrayType.ByteArray) {
             needsToBeGuardedAgainstNull = true;
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.String) {

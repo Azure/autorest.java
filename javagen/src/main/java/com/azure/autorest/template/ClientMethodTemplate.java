@@ -254,7 +254,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                     String parameterWireTypeName = parameterWireType.toString();
 
-                    if (parameterClientType == ArrayType.BYTE_ARRAY) {
+                    if (parameterClientType == ArrayType.ByteArray) {
                         if (parameterWireType == ClassType.String) {
                             String expression;
                             if (alwaysNull) {

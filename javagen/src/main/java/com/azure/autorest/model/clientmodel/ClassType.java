@@ -196,7 +196,7 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123) {
             clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
-            clientType = ArrayType.BYTE_ARRAY;
+            clientType = ArrayType.ByteArray;
         }
         return clientType;
     }

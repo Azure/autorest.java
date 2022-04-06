@@ -287,7 +287,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
         getClientType().addImportsTo(imports, false);
 
-        if (getClientType().equals(ArrayType.BYTE_ARRAY)) {
+        if (getClientType().equals(ArrayType.ByteArray)) {
             imports.add(CoreUtils.class.getName());
         }
 

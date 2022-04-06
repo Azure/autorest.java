@@ -78,7 +78,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .packageName(parameterTypePackage)
                 .name(parameterTypeName)
                 .build();
-        } else if (wireType == ArrayType.BYTE_ARRAY) {
+        } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }
