@@ -63,6 +63,13 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
                 writer.writeAssertion(methodBlock);
             });
+
+            classBlock.annotation("Test");
+            classBlock.publicMethod("void testSerialize()", methodBlock -> {
+                methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
+                        model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
+                writer.writeAssertion(methodBlock);
+            });
         });
     }
 }

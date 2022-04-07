@@ -6,35 +6,26 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.model.clientmodel.ModelProperty;
-import com.azure.autorest.model.clientmodel.examplemodel.ClientModelNode;
-import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
-import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
-import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
-import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
-import com.azure.autorest.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.CodeNamer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,7 +50,7 @@ public class FluentExampleTemplate {
         Set<String> imports = exampleMethods.stream().flatMap(em -> em.getImports().stream()).collect(Collectors.toSet());
         javaFile.declareImport(imports);
 
-        Set<HelperFeature> helperFeatures = exampleMethods.stream().flatMap(em -> em.getHelperFeatures().stream()).collect(Collectors.toSet());
+        Set<ExampleHelperFeature> helperFeatures = exampleMethods.stream().flatMap(em -> em.getHelperFeatures().stream()).collect(Collectors.toSet());
 
         javaFile.javadocComment(commentBlock -> {
             commentBlock.description(String.format("Samples for %1$s %2$s", example.getGroupName(), example.getMethodName()));
@@ -74,7 +65,7 @@ public class FluentExampleTemplate {
                             exampleMethod.getExample().getEntryDescription());
                 });
                 String methodSignature = exampleMethod.getMethodSignature();
-                if (exampleMethod.getHelperFeatures().contains(HelperFeature.ThrowsIOException)) {
+                if (exampleMethod.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
                     methodSignature += " throws IOException";
                 }
                 classBlock.publicStaticMethod(methodSignature, methodBlock -> {
@@ -82,7 +73,7 @@ public class FluentExampleTemplate {
                 });
             }
 
-            if (helperFeatures.contains(HelperFeature.MapOfMethod)) {
+            if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
                 writeMapOfMethod(classBlock);
             }
         });
@@ -145,10 +136,10 @@ public class FluentExampleTemplate {
 
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setExample(methodExample)
-                .setImports(visitor.imports)
+                .setImports(visitor.getImports())
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, methodExample.getEntryType().getFullName(), managerName))
                 .setMethodContent(snippet)
-                .setHelperFeatures(visitor.helperFeatures);
+                .setHelperFeatures(visitor.getHelperFeatures());
         return exampleMethod;
     }
 
@@ -182,10 +173,10 @@ public class FluentExampleTemplate {
 
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setExample(resourceCreateExample)
-                .setImports(visitor.imports)
+                .setImports(visitor.getImports())
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
                 .setMethodContent(sb.toString())
-                .setHelperFeatures(visitor.helperFeatures);
+                .setHelperFeatures(visitor.getHelperFeatures());
         return exampleMethod;
     }
 
@@ -219,124 +210,24 @@ public class FluentExampleTemplate {
         }
         sb.append(".apply();");
 
-        resourceUpdateExample.getResourceUpdate().getResourceModel().getInterfaceType().addImportsTo(visitor.imports, false);
+        resourceUpdateExample.getResourceUpdate().getResourceModel().getInterfaceType().addImportsTo(visitor.getImports(), false);
 
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setExample(resourceUpdateExample)
-                .setImports(visitor.imports)
+                .setImports(visitor.getImports())
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
                 .setMethodContent(sb.toString())
-                .setHelperFeatures(visitor.helperFeatures);
+                .setHelperFeatures(visitor.getHelperFeatures());
         return exampleMethod;
     }
 
-    private static class ExampleNodeVisitor {
+    private static class ExampleNodeVisitor extends ModelExampleWriter.ExampleNodeWriterVisitor {
 
-        private final Set<String> imports = new HashSet<>();
-        private final Set<HelperFeature> helperFeatures = new HashSet<>();
-
-        private String accept(ExampleNode node) {
-            if (node instanceof LiteralNode) {
-                node.getClientType().addImportsTo(imports, false);
-
-                return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
-            } else if (node instanceof ObjectNode) {
-                IType simpleType = null;
-                if (node.getObjectValue() instanceof Integer) {
-                    simpleType = PrimitiveType.Int;
-                } else if (node.getObjectValue() instanceof Long) {
-                    simpleType = PrimitiveType.Long;
-                } else if (node.getObjectValue() instanceof Float) {
-                    simpleType = PrimitiveType.Float;
-                } else if (node.getObjectValue() instanceof Double) {
-                    simpleType = PrimitiveType.Double;
-                } else if (node.getObjectValue() instanceof Boolean) {
-                    simpleType = PrimitiveType.Boolean;
-                } else if (node.getObjectValue() instanceof String) {
-                    simpleType = ClassType.String;
-                }
-
-                if (simpleType != null) {
-                    return simpleType.defaultValueExpression(node.getObjectValue().toString());
-                } else {
-                    imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
-                    imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
-                    imports.add(java.io.IOException.class.getName());
-
-                    helperFeatures.add(HelperFeature.ThrowsIOException);
-
-                    try {
-                        String jsonStr = OBJECT_MAPPER.writeValueAsString(node.getObjectValue());
-
-                        return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
-                                ClassType.String.defaultValueExpression(jsonStr));
-                    } catch (JsonProcessingException e) {
-                        LOGGER.error("Failed to write JSON {}", node.getObjectValue());
-                        throw new IllegalStateException(e);
-                    }
-                }
-            } else if (node instanceof ListNode) {
-                imports.add(java.util.Arrays.class.getName());
-
-                StringBuilder builder = new StringBuilder();
-                // Arrays.asList(...)
-                builder.append("Arrays.asList(")
-                        .append(node.getChildNodes().stream().map(this::accept).collect(Collectors.joining(", ")))
-                        .append(")");
-
-                return builder.toString();
-            } else if (node instanceof MapNode) {
-                imports.add(java.util.Map.class.getName());
-                imports.add(java.util.HashMap.class.getName());
-
-                helperFeatures.add(HelperFeature.MapOfMethod);
-
-                List<String> keys = ((MapNode) node).getKeys();
-
-                StringBuilder builder = new StringBuilder();
-                // mapOf(...)
-                // similar to Map.of in Java 9
-                builder.append("mapOf(");
-                for (int i = 0; i < keys.size(); ++i) {
-                    if (i != 0) {
-                        builder.append(", ");
-                    }
-                    String key = keys.get(i);
-                    ExampleNode elementNode = node.getChildNodes().get(i);
-                    builder.append(ClassType.String.defaultValueExpression(key))
-                            .append(", ")
-                            .append(this.accept(elementNode));
-                }
-                builder.append(")");
-
-                return builder.toString();
-            } else if (node instanceof ClientModelNode) {
-                ClientModelNode clientModelNode = ((ClientModelNode) node);
-
-                ClientModel model = clientModelNode.getClientModel();
-
-                imports.add(model.getFullName());
-
-                StringBuilder builder = new StringBuilder();
-                builder.append("new ").append(model.getName()).append("()");
-                for (ExampleNode childNode : node.getChildNodes()) {
-                    ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
-                    // .withProperty(...)
-                    builder.append(".").append(modelProperty.getSetterName())
-                            .append("(").append(this.accept(childNode)).append(")");
-                }
-                return builder.toString();
-            }
-            return null;
+        protected void addSerializerImports(Set<String> imports) {
+            imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
+            imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
+            imports.add(java.io.IOException.class.getName());
         }
-    }
-
-    public enum HelperFeature {
-        // 'mapOf(...)' method in class
-        MapOfMethod,
-
-        // 'throws IOException' in method signature
-        ThrowsIOException
     }
 
     public static class ExampleMethod {
@@ -344,7 +235,7 @@ public class FluentExampleTemplate {
         private Set<String> imports;
         private String methodSignature;
         private String methodContent;
-        private Set<HelperFeature> helperFeatures;
+        private Set<ExampleHelperFeature> helperFeatures;
 
         public FluentExample getExample() {
             return example;
@@ -382,11 +273,11 @@ public class FluentExampleTemplate {
             return this;
         }
 
-        public Set<HelperFeature> getHelperFeatures() {
+        public Set<ExampleHelperFeature> getHelperFeatures() {
             return helperFeatures;
         }
 
-        public ExampleMethod setHelperFeatures(Set<HelperFeature> helperFeatures) {
+        public ExampleMethod setHelperFeatures(Set<ExampleHelperFeature> helperFeatures) {
             this.helperFeatures = helperFeatures;
             return this;
         }

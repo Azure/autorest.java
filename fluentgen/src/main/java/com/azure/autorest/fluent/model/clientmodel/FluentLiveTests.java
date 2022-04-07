@@ -4,8 +4,8 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.template.FluentExampleTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class FluentLiveTests {
 
     private String className;
     private final Set<String> imports = new HashSet<>();
-    private final Set<FluentExampleTemplate.HelperFeature> helperFeatures = new HashSet<>();
+    private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
     private final List<FluentLiveTestCase> testCases = new ArrayList<>();
     private ClassType managerType;
     private String managerName;
@@ -40,7 +40,7 @@ public class FluentLiveTests {
         return imports;
     }
 
-    public Set<FluentExampleTemplate.HelperFeature> getHelperFeatures() {
+    public Set<ExampleHelperFeature> getHelperFeatures() {
         return helperFeatures;
     }
 
@@ -59,7 +59,7 @@ public class FluentLiveTests {
     public static final class Builder {
         private String className;
         private final Set<String> imports = new HashSet<>();
-        private final Set<FluentExampleTemplate.HelperFeature> helperFeatures = new HashSet<>();
+        private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
         private final List<FluentLiveTestCase> testCases = new ArrayList<>();
         private ClassType managerType;
         private String managerName;
@@ -79,7 +79,7 @@ public class FluentLiveTests {
             return this;
         }
 
-        public Builder addHelperFeatures(Collection<FluentExampleTemplate.HelperFeature> helperFeatures) {
+        public Builder addHelperFeatures(Collection<ExampleHelperFeature> helperFeatures) {
             if (!CoreUtils.isNullOrEmpty(helperFeatures)) {
                 this.helperFeatures.addAll(helperFeatures);
             }

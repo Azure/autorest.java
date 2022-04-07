@@ -7,6 +7,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentExampleLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestCase;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.util.CoreUtils;
 import com.google.common.collect.Lists;
@@ -42,7 +43,7 @@ public class FluentLiveTestsTemplate {
                 classBlock.annotation("Test");
                 classBlock.annotation("DoNotRecord(skipInPlayback = true)");
                 String methodSignature = String.format("%s %s()", "void", getTestMethodName(testCase.getMethodName()));
-                if (testCase.getHelperFeatures().contains(FluentExampleTemplate.HelperFeature.ThrowsIOException)) {
+                if (testCase.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
                     methodSignature += " throws IOException";
                 }
                 classBlock.publicMethod(methodSignature, methodBlock -> {
@@ -58,7 +59,7 @@ public class FluentLiveTestsTemplate {
                     }
                 });
             }
-            if (liveTests.getHelperFeatures().contains(FluentExampleTemplate.HelperFeature.MapOfMethod)) {
+            if (liveTests.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
                 FluentExampleTemplate.getInstance().writeMapOfMethod(classBlock);
             }
         });
