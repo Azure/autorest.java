@@ -5,7 +5,11 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.SmartSalmon;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,5 +33,66 @@ public final class SmartSalmonTests {
         Assertions.assertEquals("ypyqrimzinp", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
         Assertions.assertEquals("sne", model.getCollegeDegree());
+    }
+
+    @Test
+    public void testSerialize() {
+        SmartSalmon model =
+                new SmartSalmon(29.465246f)
+                        .setSpecies("dkirsoodqxhcr")
+                        .setSiblings(
+                                Arrays.asList(
+                                        new Fish(13.129669f)
+                                                .setSpecies("t")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(7.124424f)
+                                                                        .setSpecies("soifiyipjxsqw")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(23.660505f)
+                                                                                                .setSpecies("znorcj"),
+                                                                                        new Fish(30.247969f)
+                                                                                                .setSpecies(
+                                                                                                        "byxqabn"))))),
+                                        new Fish(59.107674f)
+                                                .setSpecies("cyshurzafbljjgp")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(57.07208f)
+                                                                        .setSpecies("jmkljavbqidtqajz")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(78.68875f)
+                                                                                                .setSpecies("u")))))))
+                        .setLocation("ypyqrimzinp")
+                        .setIswild(false)
+                        .setCollegeDegree("sne")
+                        .setAdditionalProperties(mapOf("fishtype", "smart_salmon"));
+        model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
+        Assertions.assertEquals("dkirsoodqxhcr", model.getSpecies());
+        Assertions.assertEquals(29.465246f, model.getLength());
+        Assertions.assertEquals("t", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(13.129669f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("soifiyipjxsqw", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(7.124424f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "znorcj", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                23.660505f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("ypyqrimzinp", model.getLocation());
+        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertEquals("sne", model.getCollegeDegree());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
     }
 }

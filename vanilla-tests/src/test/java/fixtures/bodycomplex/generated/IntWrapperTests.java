@@ -17,4 +17,12 @@ public final class IntWrapperTests {
         Assertions.assertEquals(318397575, model.getField1());
         Assertions.assertEquals(1830732530, model.getField2());
     }
+
+    @Test
+    public void testSerialize() {
+        IntWrapper model = new IntWrapper().setField1(318397575).setField2(1830732530);
+        model = BinaryData.fromObject(model).toObject(IntWrapper.class);
+        Assertions.assertEquals(318397575, model.getField1());
+        Assertions.assertEquals(1830732530, model.getField2());
+    }
 }

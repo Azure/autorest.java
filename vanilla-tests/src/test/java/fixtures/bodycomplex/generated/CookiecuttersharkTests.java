@@ -6,7 +6,9 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Cookiecuttershark;
+import fixtures.bodycomplex.models.Fish;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,46 @@ public final class CookiecuttersharkTests {
                 BinaryData.fromString(
                                 "{\"fishtype\":\"cookiecuttershark\",\"age\":1120772764,\"birthday\":\"2021-09-07T01:58:14Z\",\"species\":\"txfvjrbirph\",\"length\":65.93237,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vahfn\",\"length\":13.360113,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xjvuujqgidokg\",\"length\":68.45461,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xgvcl\",\"length\":91.293846},{\"fishtype\":\"Fish\",\"species\":\"ncghkje\",\"length\":7.7217636},{\"fishtype\":\"Fish\",\"species\":\"bijhtxfvgxbf\",\"length\":41.623993},{\"fishtype\":\"Fish\",\"species\":\"eh\",\"length\":56.621307}]}]}]}")
                         .toObject(Cookiecuttershark.class);
+        Assertions.assertEquals("txfvjrbirph", model.getSpecies());
+        Assertions.assertEquals(65.93237f, model.getLength());
+        Assertions.assertEquals("vahfn", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(13.360113f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("xjvuujqgidokg", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(68.45461f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "xgvcl", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                91.293846f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(1120772764, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-09-07T01:58:14Z"), model.getBirthday());
+    }
+
+    @Test
+    public void testSerialize() {
+        Cookiecuttershark model =
+                new Cookiecuttershark(65.93237f, OffsetDateTime.parse("2021-09-07T01:58:14Z"))
+                        .setSpecies("txfvjrbirph")
+                        .setSiblings(
+                                Arrays.asList(
+                                        new Fish(13.360113f)
+                                                .setSpecies("vahfn")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(68.45461f)
+                                                                        .setSpecies("xjvuujqgidokg")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(91.293846f)
+                                                                                                .setSpecies("xgvcl"),
+                                                                                        new Fish(7.7217636f)
+                                                                                                .setSpecies("ncghkje"),
+                                                                                        new Fish(41.623993f)
+                                                                                                .setSpecies(
+                                                                                                        "bijhtxfvgxbf"),
+                                                                                        new Fish(56.621307f)
+                                                                                                .setSpecies("eh")))))))
+                        .setAge(1120772764);
+        model = BinaryData.fromObject(model).toObject(Cookiecuttershark.class);
         Assertions.assertEquals("txfvjrbirph", model.getSpecies());
         Assertions.assertEquals(65.93237f, model.getLength());
         Assertions.assertEquals("vahfn", model.getSiblings().get(0).getSpecies());

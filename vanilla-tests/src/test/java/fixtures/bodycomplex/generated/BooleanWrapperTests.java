@@ -17,4 +17,12 @@ public final class BooleanWrapperTests {
         Assertions.assertEquals(false, model.isFieldTrue());
         Assertions.assertEquals(false, model.isFieldFalse());
     }
+
+    @Test
+    public void testSerialize() {
+        BooleanWrapper model = new BooleanWrapper().setFieldTrue(false).setFieldFalse(false);
+        model = BinaryData.fromObject(model).toObject(BooleanWrapper.class);
+        Assertions.assertEquals(false, model.isFieldTrue());
+        Assertions.assertEquals(false, model.isFieldFalse());
+    }
 }

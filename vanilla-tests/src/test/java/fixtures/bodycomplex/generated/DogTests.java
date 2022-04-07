@@ -19,4 +19,13 @@ public final class DogTests {
         Assertions.assertEquals("vd", model.getName());
         Assertions.assertEquals("cnpqxuhivyqniwby", model.getFood());
     }
+
+    @Test
+    public void testSerialize() {
+        Dog model = new Dog().setId(143848779).setName("vd").setFood("cnpqxuhivyqniwby");
+        model = BinaryData.fromObject(model).toObject(Dog.class);
+        Assertions.assertEquals(143848779, model.getId());
+        Assertions.assertEquals("vd", model.getName());
+        Assertions.assertEquals("cnpqxuhivyqniwby", model.getFood());
+    }
 }

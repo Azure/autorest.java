@@ -6,6 +6,8 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DictionaryWrapper;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,5 +19,34 @@ public final class DictionaryWrapperTests {
                                 "{\"defaultProgram\":{\"dznrbtcqq\":\"nq\",\"lhqgnufooojy\":\"ifsqesaagdfmg\",\"zlhjxrifkwmrvkt\":\"izntocipao\",\"ajpsquc\":\"poyfdkfogkn\"}}")
                         .toObject(DictionaryWrapper.class);
         Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
+    }
+
+    @Test
+    public void testSerialize() {
+        DictionaryWrapper model =
+                new DictionaryWrapper()
+                        .setDefaultProgram(
+                                mapOf(
+                                        "dznrbtcqq",
+                                        "nq",
+                                        "lhqgnufooojy",
+                                        "ifsqesaagdfmg",
+                                        "zlhjxrifkwmrvkt",
+                                        "izntocipao",
+                                        "ajpsquc",
+                                        "poyfdkfogkn"));
+        model = BinaryData.fromObject(model).toObject(DictionaryWrapper.class);
+        Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
     }
 }

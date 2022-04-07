@@ -19,4 +19,12 @@ public final class MyBaseTypeTests {
         Assertions.assertEquals("ufufsrp", model.getPropB1());
         Assertions.assertEquals("zidnsezcxtbzsgfy", model.getPropBH1());
     }
+
+    @Test
+    public void testSerialize() {
+        MyBaseType model = new MyBaseType().setPropB1("ufufsrp").setPropBH1("zidnsezcxtbzsgfy");
+        model = BinaryData.fromObject(model).toObject(MyBaseType.class);
+        Assertions.assertEquals("ufufsrp", model.getPropB1());
+        Assertions.assertEquals("zidnsezcxtbzsgfy", model.getPropBH1());
+    }
 }

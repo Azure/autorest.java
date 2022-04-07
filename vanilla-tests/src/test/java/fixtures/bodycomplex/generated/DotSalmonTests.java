@@ -20,4 +20,13 @@ public final class DotSalmonTests {
         Assertions.assertEquals("ufubl", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
     }
+
+    @Test
+    public void testSerialize() {
+        DotSalmon model = new DotSalmon().setSpecies("qeof").setLocation("ufubl").setIswild(false);
+        model = BinaryData.fromObject(model).toObject(DotSalmon.class);
+        Assertions.assertEquals("qeof", model.getSpecies());
+        Assertions.assertEquals("ufubl", model.getLocation());
+        Assertions.assertEquals(false, model.iswild());
+    }
 }

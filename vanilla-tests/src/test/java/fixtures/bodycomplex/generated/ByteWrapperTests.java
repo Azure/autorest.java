@@ -13,4 +13,10 @@ public final class ByteWrapperTests {
     public void testDeserialize() {
         ByteWrapper model = BinaryData.fromString("{}").toObject(ByteWrapper.class);
     }
+
+    @Test
+    public void testSerialize() {
+        ByteWrapper model = new ByteWrapper();
+        model = BinaryData.fromObject(model).toObject(ByteWrapper.class);
+    }
 }

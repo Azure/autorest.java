@@ -6,6 +6,7 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Fish;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,68 @@ public final class FishTests {
                 BinaryData.fromString(
                                 "{\"fishtype\":\"Fish\",\"species\":\"k\",\"length\":32.04869,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ccsnhsjc\",\"length\":26.373684,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"kryhtnapczwlokj\",\"length\":68.2114,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vnipjox\",\"length\":40.86501},{\"fishtype\":\"Fish\",\"species\":\"hgejspodma\",\"length\":85.94899},{\"fishtype\":\"Fish\",\"species\":\"deh\",\"length\":93.700584}]}]},{\"fishtype\":\"Fish\",\"species\":\"ahuxinpm\",\"length\":69.22819,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"wixjsprozvcp\",\"length\":49.213947,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwmf\",\"length\":36.996067}]}]},{\"fishtype\":\"Fish\",\"species\":\"cmdv\",\"length\":71.018425,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"suuv\",\"length\":60.36252,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"k\",\"length\":67.264824},{\"fishtype\":\"Fish\",\"species\":\"dio\",\"length\":47.16013},{\"fishtype\":\"Fish\",\"species\":\"lwejdpv\",\"length\":15.661436},{\"fishtype\":\"Fish\",\"species\":\"qpsoacctazak\",\"length\":2.8880775}]}]}]}")
                         .toObject(Fish.class);
+        Assertions.assertEquals("k", model.getSpecies());
+        Assertions.assertEquals(32.04869f, model.getLength());
+        Assertions.assertEquals("ccsnhsjc", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(26.373684f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("kryhtnapczwlokj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(68.2114f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "vnipjox", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                40.86501f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+    }
+
+    @Test
+    public void testSerialize() {
+        Fish model =
+                new Fish(32.04869f)
+                        .setSpecies("k")
+                        .setSiblings(
+                                Arrays.asList(
+                                        new Fish(26.373684f)
+                                                .setSpecies("ccsnhsjc")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(68.2114f)
+                                                                        .setSpecies("kryhtnapczwlokj")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(40.86501f)
+                                                                                                .setSpecies("vnipjox"),
+                                                                                        new Fish(85.94899f)
+                                                                                                .setSpecies(
+                                                                                                        "hgejspodma"),
+                                                                                        new Fish(93.700584f)
+                                                                                                .setSpecies("deh"))))),
+                                        new Fish(69.22819f)
+                                                .setSpecies("ahuxinpm")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(49.213947f)
+                                                                        .setSpecies("wixjsprozvcp")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(36.996067f)
+                                                                                                .setSpecies("vwmf"))))),
+                                        new Fish(71.018425f)
+                                                .setSpecies("cmdv")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(60.36252f)
+                                                                        .setSpecies("suuv")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(67.264824f)
+                                                                                                .setSpecies("k"),
+                                                                                        new Fish(47.16013f)
+                                                                                                .setSpecies("dio"),
+                                                                                        new Fish(15.661436f)
+                                                                                                .setSpecies("lwejdpv"),
+                                                                                        new Fish(2.8880775f)
+                                                                                                .setSpecies(
+                                                                                                        "qpsoacctazak")))))));
+        model = BinaryData.fromObject(model).toObject(Fish.class);
         Assertions.assertEquals("k", model.getSpecies());
         Assertions.assertEquals(32.04869f, model.getLength());
         Assertions.assertEquals("ccsnhsjc", model.getSiblings().get(0).getSpecies());

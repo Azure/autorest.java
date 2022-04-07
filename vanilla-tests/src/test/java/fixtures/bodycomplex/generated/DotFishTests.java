@@ -17,4 +17,11 @@ public final class DotFishTests {
                         .toObject(DotFish.class);
         Assertions.assertEquals("hbcryffdfdosyge", model.getSpecies());
     }
+
+    @Test
+    public void testSerialize() {
+        DotFish model = new DotFish().setSpecies("hbcryffdfdosyge");
+        model = BinaryData.fromObject(model).toObject(DotFish.class);
+        Assertions.assertEquals("hbcryffdfdosyge", model.getSpecies());
+    }
 }

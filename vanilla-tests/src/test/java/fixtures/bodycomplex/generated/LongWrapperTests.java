@@ -18,4 +18,12 @@ public final class LongWrapperTests {
         Assertions.assertEquals(4252062726585189836L, model.getField1());
         Assertions.assertEquals(8175024465191423839L, model.getField2());
     }
+
+    @Test
+    public void testSerialize() {
+        LongWrapper model = new LongWrapper().setField1(4252062726585189836L).setField2(8175024465191423839L);
+        model = BinaryData.fromObject(model).toObject(LongWrapper.class);
+        Assertions.assertEquals(4252062726585189836L, model.getField1());
+        Assertions.assertEquals(8175024465191423839L, model.getField2());
+    }
 }

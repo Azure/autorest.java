@@ -20,4 +20,15 @@ public final class Datetimerfc1123WrapperTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-05-12T13:31:22Z"), model.getField());
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-10T08:54:16Z"), model.getNow());
     }
+
+    @Test
+    public void testSerialize() {
+        Datetimerfc1123Wrapper model =
+                new Datetimerfc1123Wrapper()
+                        .setField(OffsetDateTime.parse("2021-05-12T13:31:22Z"))
+                        .setNow(OffsetDateTime.parse("2021-06-10T08:54:16Z"));
+        model = BinaryData.fromObject(model).toObject(Datetimerfc1123Wrapper.class);
+        Assertions.assertEquals(OffsetDateTime.parse("2021-05-12T13:31:22Z"), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-10T08:54:16Z"), model.getNow());
+    }
 }
