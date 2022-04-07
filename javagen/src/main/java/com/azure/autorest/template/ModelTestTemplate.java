@@ -58,6 +58,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
+            // testDeserialize
             classBlock.annotation("Test");
             classBlock.publicMethod("void testDeserialize()", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
@@ -65,25 +66,22 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writer.writeAssertion(methodBlock);
             });
 
-            if (!JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
-                // model initialization with constructor is not supported
+            // testSerialize
+            classBlock.annotation("Test");
+            String methodSignature = "void testSerialize()";
+            if (writer.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
+                methodSignature += " throws IOException";
+            }
+            classBlock.publicMethod(methodSignature, methodBlock -> {
+                methodBlock.line(String.format("%1$s model = %2$s;",
+                        model.getName(), writer.getModelInitializationCode()));
+                methodBlock.line(String.format("model = BinaryData.fromObject(model).toObject(%1$s.class);",
+                        model.getName()));
+                writer.writeAssertion(methodBlock);
+            });
 
-                classBlock.annotation("Test");
-                String methodSignature = "void testSerialize()";
-                if (writer.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
-                    methodSignature += " throws IOException";
-                }
-                classBlock.publicMethod(methodSignature, methodBlock -> {
-                    methodBlock.line(String.format("%1$s model = %2$s;",
-                            model.getName(), writer.getModelInitializationCode()));
-                    methodBlock.line(String.format("model = BinaryData.fromObject(model).toObject(%1$s.class);",
-                            model.getName()));
-                    writer.writeAssertion(methodBlock);
-                });
-
-                if (writer.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
-                    ModelExampleWriter.writeMapOfMethod(classBlock);
-                }
+            if (writer.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
+                ModelExampleWriter.writeMapOfMethod(classBlock);
             }
         });
     }

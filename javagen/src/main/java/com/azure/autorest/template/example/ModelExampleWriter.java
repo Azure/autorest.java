@@ -4,9 +4,11 @@
 package com.azure.autorest.template.example;
 
 import com.azure.autorest.Javagen;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -21,17 +23,21 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ModelExampleWriter {
 
@@ -243,12 +249,47 @@ public class ModelExampleWriter {
                 imports.add(model.getFullName());
 
                 StringBuilder builder = new StringBuilder();
-                builder.append("new ").append(model.getName()).append("()");
-                for (ExampleNode childNode : node.getChildNodes()) {
-                    ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
-                    // .withProperty(...)
-                    builder.append(".").append(modelProperty.getSetterName())
-                            .append("(").append(this.accept(childNode)).append(")");
+                if (JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
+                    List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredParentProperties(model);
+                    List<ClientModelProperty> requiredProperties = model.getProperties().stream()
+                            .filter(ClientModelProperty::isRequired)
+                            .filter(property -> !property.getIsConstant())
+                            .collect(Collectors.toList());
+
+                    List<ModelProperty> properties = Stream.concat(
+                            requiredParentProperties.stream(), requiredProperties.stream())
+                            .map(ModelProperty::ofClientModelProperty)
+                            .collect(Collectors.toList());
+                    Map<ModelProperty, Integer> ctorPosition = new HashMap<>();
+                    for (int i = 0; i < properties.size(); ++i) {
+                        ctorPosition.put(properties.get(i), i);
+                    }
+
+                    List<String> initAtCtors = new ArrayList<>(Collections.nCopies(properties.size(), ""));
+                    List<String> initAtSetters = new ArrayList<>();
+                    for (ExampleNode childNode : node.getChildNodes()) {
+                        ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
+                        if (ctorPosition.containsKey(modelProperty)) {
+                            initAtCtors.set(ctorPosition.get(modelProperty), this.accept(childNode));
+                        } else {
+                            // .setProperty(...)
+                            initAtSetters.add(String.format(".%1$s(%2$s)", modelProperty.getSetterName(), this.accept(childNode)));
+                        }
+                    }
+                    // model constructor
+                    builder.append("new ").append(model.getName())
+                            .append("(").append(String.join(", ", initAtCtors)).append(")");
+                    // setters
+                    initAtSetters.forEach(builder::append);
+                } else {
+                    // model with setters
+                    builder.append("new ").append(model.getName()).append("()");
+                    for (ExampleNode childNode : node.getChildNodes()) {
+                        ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
+                        // .setProperty(...)
+                        builder.append(".").append(modelProperty.getSetterName())
+                                .append("(").append(this.accept(childNode)).append(")");
+                    }
                 }
                 return builder.toString();
             }

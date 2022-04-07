@@ -9,16 +9,21 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.core.util.CoreUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Utilities for client model.
@@ -284,5 +289,26 @@ public class ClientModelUtil {
             values[i] = values[i].replace("\\\\.", ".");
         }
         return Arrays.asList(values);
+    }
+
+    public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {
+        String lastParentName = model.getName();
+        ClientModel parentModel = ClientModels.INSTANCE.getModel(model.getParentModelName());
+        List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
+        while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
+            List<ClientModelProperty> ctorArgs =
+                    parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
+                            .filter(property -> !property.getIsConstant())
+                            .collect(Collectors.toList());
+            // this will be reversed again, so, it will be in the right order if a
+            // super class has multiple ctor args
+            Collections.reverse(ctorArgs);
+            requiredParentProperties.addAll(ctorArgs);
+
+            lastParentName = parentModel.getName();
+            parentModel = ClientModels.INSTANCE.getModel(parentModel.getParentModelName());
+        }
+        Collections.reverse(requiredParentProperties);
+        return requiredParentProperties;
     }
 }
