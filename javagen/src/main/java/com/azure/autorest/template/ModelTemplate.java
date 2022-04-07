@@ -10,7 +10,6 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -101,11 +100,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         String lastParentName = model.getName();
-        ClientModel parentModel = ClientModels.INSTANCE.getModel(model.getParentModelName());
+        ClientModel parentModel = ClientModelUtil.getClientModel(model.getParentModelName());
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             imports.addAll(parentModel.getImports());
             lastParentName = parentModel.getName();
-            parentModel = ClientModels.INSTANCE.getModel(parentModel.getParentModelName());
+            parentModel = ClientModelUtil.getClientModel(parentModel.getParentModelName());
         }
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
@@ -804,7 +803,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String lastParentName = model.getName();
         String parentModelName = model.getParentModelName();
         while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-            ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
+            ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 if (parentModel.getProperties() != null) {
                     propertyReferences.addAll(parentModel.getProperties().stream()

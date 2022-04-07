@@ -199,7 +199,7 @@ public class FluentExampleTemplate {
 
         @Override
         protected String codeDeserializeJsonString(String jsonStr) {
-            imports.add(com.azure.core.util.serializer.JacksonAdapter.class.getName());
+            imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
             imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
             imports.add(java.io.IOException.class.getName());
 

@@ -16,9 +16,9 @@ public final class DictionaryWrapperTests {
     public void testDeserialize() {
         DictionaryWrapper model =
                 BinaryData.fromString(
-                                "{\"defaultProgram\":{\"dznrbtcqq\":\"nq\",\"lhqgnufooojy\":\"ifsqesaagdfmg\",\"zlhjxrifkwmrvkt\":\"izntocipao\",\"ajpsquc\":\"poyfdkfogkn\"}}")
+                                "{\"defaultProgram\":{\"nq\":\"dznrbtcqq\",\"ifsqesaagdfmg\":\"lhqgnufooojy\",\"izntocipao\":\"zlhjxrifkwmrvkt\",\"poyfdkfogkn\":\"ajpsquc\"}}")
                         .toObject(DictionaryWrapper.class);
-        Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
+        Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
     }
 
     @Test
@@ -27,16 +27,16 @@ public final class DictionaryWrapperTests {
                 new DictionaryWrapper()
                         .setDefaultProgram(
                                 mapOf(
-                                        "dznrbtcqq",
                                         "nq",
-                                        "lhqgnufooojy",
+                                        "dznrbtcqq",
                                         "ifsqesaagdfmg",
-                                        "zlhjxrifkwmrvkt",
+                                        "lhqgnufooojy",
                                         "izntocipao",
-                                        "ajpsquc",
-                                        "poyfdkfogkn"));
+                                        "zlhjxrifkwmrvkt",
+                                        "poyfdkfogkn",
+                                        "ajpsquc"));
         model = BinaryData.fromObject(model).toObject(DictionaryWrapper.class);
-        Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
+        Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
     }
 
     @SuppressWarnings("unchecked")

@@ -7,7 +7,6 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -52,7 +51,8 @@ public class ModelTestCaseUtil {
 
     private static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
         if (depth > CONFIGURATION.maxDepth) {
-            return null;    // abort
+            // abort
+            return null;
         }
 
         Map<String, Object> jsonObject = new LinkedHashMap<>();
@@ -72,7 +72,7 @@ public class ModelTestCaseUtil {
         // superclasses
         String parentModelName = model.getParentModelName();
         while (!CoreUtils.isNullOrEmpty(parentModelName)) {
-            ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
+            ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 for (ClientModelProperty property : parentModel.getProperties()) {
                     addForProperty(depth, jsonObject, property, parentModel.getNeedsFlatten());
@@ -124,29 +124,33 @@ public class ModelTestCaseUtil {
                 return value;
             }
         } else if (type instanceof ListType) {
-            if (depth + 1 > CONFIGURATION.maxDepth) {
-                return null;    // abort
-            }
             List<Object> list = new ArrayList<>();
-            IType elementType = ((ListType) type).getElementType();
-            int count = RANDOM.nextInt(CONFIGURATION.maxList - 1) + 1;
-            for (int i = 0; i < count; ++i) {
-                list.add(jsonFromType(depth + 1, elementType));
-            }
+            if (depth <= CONFIGURATION.maxDepth) {
+                IType elementType = ((ListType) type).getElementType();
+                int count = RANDOM.nextInt(CONFIGURATION.maxList - 1) + 1;
+                for (int i = 0; i < count; ++i) {
+                    Object element = jsonFromType(depth + 1, elementType);
+                    if (element != null) {
+                        list.add(element);
+                    }
+                }
+            } // else abort
             return list;
         } else if (type instanceof MapType) {
-            if (depth + 1 > CONFIGURATION.maxDepth) {
-                return null;    // abort
-            }
             Map<String, Object> map = new LinkedHashMap<>();
-            IType elementType = ((MapType) type).getValueType();
-            int count = RANDOM.nextInt(CONFIGURATION.maxDict - 1) + 1;
-            for (int i = 0; i < count; ++i) {
-                map.put(randomString(), jsonFromType(depth + 1, elementType));
-            }
+            if (depth <= CONFIGURATION.maxDepth) {
+                IType elementType = ((MapType) type).getValueType();
+                int count = RANDOM.nextInt(CONFIGURATION.maxDict - 1) + 1;
+                for (int i = 0; i < count; ++i) {
+                    Object element = jsonFromType(depth + 1, elementType);
+                    if (element != null) {
+                        map.put(randomString(), element);
+                    }
+                }
+            } // else abort
             return map;
         } else if (type instanceof ClassType) {
-            ClientModel model = ClientModels.INSTANCE.getModel(((ClassType) type).getName());
+            ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
                 return jsonFromModel(depth + 1, model);
             }

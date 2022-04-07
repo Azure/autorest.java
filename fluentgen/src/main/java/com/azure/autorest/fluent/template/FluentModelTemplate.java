@@ -9,8 +9,8 @@ import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.template.ModelTemplate;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class FluentModelTemplate extends ModelTemplate {
             String lastParentName = model.getName();
             String parentModelName = model.getParentModelName();
             while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-                ClientModel parentModel = ClientModels.INSTANCE.getModel(parentModelName);
+                ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
                 if (parentModel == null) {
                     parentModel = getPredefinedModel(parentModelName).orElse(null);
                 }

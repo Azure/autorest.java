@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -291,9 +292,19 @@ public class ClientModelUtil {
         return Arrays.asList(values);
     }
 
+    private static Function<String, ClientModel> getClientModelFunction = name -> ClientModels.getInstance().getModel(name);
+
+    public static void setGetClientModelFunction(Function<String, ClientModel> function) {
+        getClientModelFunction = function;
+    }
+
+    public static ClientModel getClientModel(String name) {
+        return getClientModelFunction.apply(name);
+    }
+
     public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {
         String lastParentName = model.getName();
-        ClientModel parentModel = ClientModels.INSTANCE.getModel(model.getParentModelName());
+        ClientModel parentModel = getClientModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             List<ClientModelProperty> ctorArgs =
@@ -306,7 +317,7 @@ public class ClientModelUtil {
             requiredParentProperties.addAll(ctorArgs);
 
             lastParentName = parentModel.getName();
-            parentModel = ClientModels.INSTANCE.getModel(parentModel.getParentModelName());
+            parentModel = ClientModelUtil.getClientModel(parentModel.getParentModelName());
         }
         Collections.reverse(requiredParentProperties);
         return requiredParentProperties;

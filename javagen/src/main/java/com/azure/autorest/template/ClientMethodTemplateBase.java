@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -21,6 +20,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
@@ -142,7 +142,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                 && ((ClassType) type).getPackage().startsWith(JavaSettings.getInstance().getPackage())
                 && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
-            ClientModel model = ClientModels.INSTANCE.getModel(((ClassType) type).getName());
+            ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (name != null) {
                 commentBlock.line(indent + name + ": {");
             } else {
@@ -196,7 +196,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
         if (model.getParentModelName() != null) {
-            traverseProperties(ClientModels.INSTANCE.getModel(model.getParentModelName()), properties);
+            traverseProperties(ClientModelUtil.getClientModel(model.getParentModelName()), properties);
         }
         properties.addAll(model.getProperties());
     }
