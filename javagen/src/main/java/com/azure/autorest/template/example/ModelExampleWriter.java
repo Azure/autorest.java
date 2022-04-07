@@ -18,11 +18,15 @@ import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,28 +41,57 @@ public class ModelExampleWriter {
     private final Set<String> imports = new HashSet<>();
 
     private final Consumer<JavaBlock> assertionWriter;
+    private final ExampleNodeModelInitializationVisitor modelInitializationVisitor =
+            new ExampleNodeModelInitializationVisitor();
+    private final String modelInitializationCode;
 
     public ModelExampleWriter(ExampleNode exampleNode, String modelVariableName) {
         this.imports.add("org.junit.jupiter.api.Assertions");
 
-        ExampleNodeReaderVisitor visitor = new ExampleNodeReaderVisitor();
-        visitor.accept(exampleNode, modelVariableName);
-        imports.addAll(visitor.imports);
+        ExampleNodeAssertionVisitor assertionVisitor = new ExampleNodeAssertionVisitor();
+        assertionVisitor.accept(exampleNode, modelVariableName);
+        imports.addAll(assertionVisitor.imports);
 
         this.assertionWriter = methodBlock -> {
-            visitor.assertions.forEach(methodBlock::line);
+            assertionVisitor.assertions.forEach(methodBlock::line);
         };
+
+        modelInitializationCode = modelInitializationVisitor.accept(exampleNode);
+        imports.addAll(modelInitializationVisitor.getImports());
     }
 
     public Set<String> getImports() {
         return imports;
     }
 
+    public Set<ExampleHelperFeature> getHelperFeatures() {
+        return modelInitializationVisitor.getHelperFeatures();
+    }
+
     public void writeAssertion(JavaBlock methodBlock) {
         assertionWriter.accept(methodBlock);
     }
 
-    private static class ExampleNodeReaderVisitor {
+    public String getModelInitializationCode() {
+        return modelInitializationCode;
+    }
+
+    public static void writeMapOfMethod(JavaClass classBlock) {
+        classBlock.annotation("SuppressWarnings(\"unchecked\")");
+        classBlock.method(JavaVisibility.Private, Collections.singletonList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
+            methodBlock.line("Map<String, T> map = new HashMap<>();");
+            methodBlock.line("for (int i = 0; i < inputs.length; i += 2) {");
+            methodBlock.indent(() -> {
+                methodBlock.line("String key = (String) inputs[i];");
+                methodBlock.line("T value = (T) inputs[i + 1];");
+                methodBlock.line("map.put(key, value);");
+            });
+            methodBlock.line("}");
+            methodBlock.line("return map;");
+        });
+    }
+
+    private static class ExampleNodeAssertionVisitor {
 
         private final Set<String> imports = new HashSet<>();
 
@@ -106,15 +139,22 @@ public class ModelExampleWriter {
         }
     }
 
-    public static class ExampleNodeWriterVisitor {
+    public static class ExampleNodeModelInitializationVisitor {
 
         protected final Set<String> imports = new HashSet<>();
         protected final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
 
-        protected void addSerializerImports(Set<String> imports) {
+        /**
+         * Extension to write code for deserialize JSON String to Object.
+         * @param jsonStr the JSON String.
+         */
+        protected String codeDeserializeJsonString(String jsonStr) {
             imports.add(com.azure.core.util.serializer.JacksonAdapter.class.getName());
             imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
             imports.add(java.io.IOException.class.getName());
+
+            return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
+                    ClassType.String.defaultValueExpression(jsonStr));
         }
 
         public Set<String> getImports() {
@@ -149,15 +189,12 @@ public class ModelExampleWriter {
                 if (simpleType != null) {
                     return simpleType.defaultValueExpression(node.getObjectValue().toString());
                 } else {
-                    addSerializerImports(imports);
-
                     helperFeatures.add(ExampleHelperFeature.ThrowsIOException);
 
                     try {
                         String jsonStr = OBJECT_MAPPER.writeValueAsString(node.getObjectValue());
 
-                        return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
-                                ClassType.String.defaultValueExpression(jsonStr));
+                        return codeDeserializeJsonString(jsonStr);
                     } catch (JsonProcessingException e) {
                         LOGGER.error("Failed to write JSON {}", node.getObjectValue());
                         throw new IllegalStateException(e);

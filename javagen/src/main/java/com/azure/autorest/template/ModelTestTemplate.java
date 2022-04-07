@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
@@ -64,12 +65,26 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writer.writeAssertion(methodBlock);
             });
 
-            classBlock.annotation("Test");
-            classBlock.publicMethod("void testSerialize()", methodBlock -> {
-                methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
-                        model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
-                writer.writeAssertion(methodBlock);
-            });
+            if (!JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
+                // model initialization with constructor is not supported
+
+                classBlock.annotation("Test");
+                String methodSignature = "void testSerialize()";
+                if (writer.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
+                    methodSignature += " throws IOException";
+                }
+                classBlock.publicMethod(methodSignature, methodBlock -> {
+                    methodBlock.line(String.format("%1$s model = %2$s;",
+                            model.getName(), writer.getModelInitializationCode()));
+                    methodBlock.line(String.format("model = BinaryData.fromObject(model).toObject(%1$s.class);",
+                            model.getName()));
+                    writer.writeAssertion(methodBlock);
+                });
+
+                if (writer.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
+                    ModelExampleWriter.writeMapOfMethod(classBlock);
+                }
+            }
         });
     }
 }

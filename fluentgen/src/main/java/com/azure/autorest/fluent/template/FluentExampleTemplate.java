@@ -3,8 +3,6 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentExample;
@@ -12,29 +10,20 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExam
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
-import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaModifier;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.CodeNamer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentExampleTemplate {
-
-    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentExampleTemplate.class);
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private static final FluentExampleTemplate INSTANCE = new FluentExampleTemplate();
 
@@ -74,23 +63,8 @@ public class FluentExampleTemplate {
             }
 
             if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
-                writeMapOfMethod(classBlock);
+                ModelExampleWriter.writeMapOfMethod(classBlock);
             }
-        });
-    }
-
-    public void writeMapOfMethod(JavaClass classBlock) {
-        classBlock.annotation("SuppressWarnings(\"unchecked\")");
-        classBlock.method(JavaVisibility.Private, Arrays.asList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
-            methodBlock.line("Map<String, T> map = new HashMap<>();");
-            methodBlock.line("for (int i = 0; i < inputs.length; i += 2) {");
-            methodBlock.indent(() -> {
-                methodBlock.line("String key = (String) inputs[i];");
-                methodBlock.line("T value = (T) inputs[i + 1];");
-                methodBlock.line("map.put(key, value);");
-            });
-            methodBlock.line("}");
-            methodBlock.line("return map;");
         });
     }
 
@@ -221,12 +195,16 @@ public class FluentExampleTemplate {
         return exampleMethod;
     }
 
-    private static class ExampleNodeVisitor extends ModelExampleWriter.ExampleNodeWriterVisitor {
+    private static class ExampleNodeVisitor extends ModelExampleWriter.ExampleNodeModelInitializationVisitor {
 
-        protected void addSerializerImports(Set<String> imports) {
-            imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
+        @Override
+        protected String codeDeserializeJsonString(String jsonStr) {
+            imports.add(com.azure.core.util.serializer.JacksonAdapter.class.getName());
             imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
             imports.add(java.io.IOException.class.getName());
+
+            return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
+                    ClassType.String.defaultValueExpression(jsonStr));
         }
     }
 

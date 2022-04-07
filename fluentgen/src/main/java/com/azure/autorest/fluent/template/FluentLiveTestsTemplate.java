@@ -9,6 +9,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.core.util.CoreUtils;
 import com.google.common.collect.Lists;
 
@@ -60,7 +61,7 @@ public class FluentLiveTestsTemplate {
                 });
             }
             if (liveTests.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
-                FluentExampleTemplate.getInstance().writeMapOfMethod(classBlock);
+                ModelExampleWriter.writeMapOfMethod(classBlock);
             }
         });
     }
