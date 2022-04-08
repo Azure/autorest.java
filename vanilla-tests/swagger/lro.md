@@ -10,11 +10,12 @@ required-parameter-client-methods: true
 sync-methods: all
 client-side-validations: true
 add-context-parameter: true
+context-client-method-parameter: true
 polling:
   default:
     strategy: >-
       new ChainedPollingStrategy<>(java.util.Arrays.asList(
-            new OperationResourcePollingStrategy<>({httpPipeline}, null, "Azure-AsyncOperation"),
-            new LocationPollingStrategy<>({httpPipeline}),
+            new OperationResourcePollingStrategy<>({httpPipeline}, null, "Azure-AsyncOperation", {context}),
+            new LocationPollingStrategy<>({httpPipeline}, null, {context}),
             new StatusCheckPollingStrategy<>()))
 ```
