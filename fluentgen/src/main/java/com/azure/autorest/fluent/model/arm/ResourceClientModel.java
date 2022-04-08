@@ -87,7 +87,7 @@ public class ResourceClientModel {
                             .description("Resource tags.")
                             .isRequired(false)
                             .isReadOnly(false)
-                            .wireType(ClassType.String)
+                            .wireType(new MapType(ClassType.String))
                             .clientType(new MapType(ClassType.String))
                             .build()
             ))

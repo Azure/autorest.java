@@ -13,4 +13,10 @@ public final class DateWrapperTests {
     public void testDeserialize() {
         DateWrapper model = BinaryData.fromString("{}").toObject(DateWrapper.class);
     }
+
+    @Test
+    public void testSerialize() {
+        DateWrapper model = new DateWrapper();
+        model = BinaryData.fromObject(model).toObject(DateWrapper.class);
+    }
 }

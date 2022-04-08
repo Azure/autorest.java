@@ -6,6 +6,7 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.ArrayWrapper;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,13 @@ public final class ArrayWrapperTests {
     @Test
     public void testDeserialize() {
         ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bc\"]}").toObject(ArrayWrapper.class);
+        Assertions.assertEquals("bc", model.getArray().get(0));
+    }
+
+    @Test
+    public void testSerialize() {
+        ArrayWrapper model = new ArrayWrapper().setArray(Arrays.asList("bc"));
+        model = BinaryData.fromObject(model).toObject(ArrayWrapper.class);
         Assertions.assertEquals("bc", model.getArray().get(0));
     }
 }

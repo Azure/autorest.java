@@ -17,4 +17,12 @@ public final class FloatWrapperTests {
         Assertions.assertEquals(32.06033f, model.getField1());
         Assertions.assertEquals(54.94055f, model.getField2());
     }
+
+    @Test
+    public void testSerialize() {
+        FloatWrapper model = new FloatWrapper().setField1(32.06033f).setField2(54.94055f);
+        model = BinaryData.fromObject(model).toObject(FloatWrapper.class);
+        Assertions.assertEquals(32.06033f, model.getField1());
+        Assertions.assertEquals(54.94055f, model.getField2());
+    }
 }

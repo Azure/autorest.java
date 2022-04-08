@@ -16,4 +16,12 @@ public final class PetTests {
         Assertions.assertEquals(920256064, model.getId());
         Assertions.assertEquals("rtfw", model.getName());
     }
+
+    @Test
+    public void testSerialize() {
+        Pet model = new Pet().setId(920256064).setName("rtfw");
+        model = BinaryData.fromObject(model).toObject(Pet.class);
+        Assertions.assertEquals(920256064, model.getId());
+        Assertions.assertEquals("rtfw", model.getName());
+    }
 }

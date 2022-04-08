@@ -21,4 +21,18 @@ public final class DoubleWrapperTests {
                 69.0779419799508,
                 model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
+
+    @Test
+    public void testSerialize() {
+        DoubleWrapper model =
+                new DoubleWrapper()
+                        .setField1(37.616192183070176)
+                        .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
+                                69.0779419799508);
+        model = BinaryData.fromObject(model).toObject(DoubleWrapper.class);
+        Assertions.assertEquals(37.616192183070176, model.getField1());
+        Assertions.assertEquals(
+                69.0779419799508,
+                model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
+    }
 }

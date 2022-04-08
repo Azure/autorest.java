@@ -20,4 +20,13 @@ public final class BasicTests {
         Assertions.assertEquals("quvgjxpybczme", model.getName());
         Assertions.assertEquals(CMYKColors.BLACK, model.getColor());
     }
+
+    @Test
+    public void testSerialize() {
+        Basic model = new Basic().setId(268043672).setName("quvgjxpybczme").setColor(CMYKColors.BLACK);
+        model = BinaryData.fromObject(model).toObject(Basic.class);
+        Assertions.assertEquals(268043672, model.getId());
+        Assertions.assertEquals("quvgjxpybczme", model.getName());
+        Assertions.assertEquals(CMYKColors.BLACK, model.getColor());
+    }
 }

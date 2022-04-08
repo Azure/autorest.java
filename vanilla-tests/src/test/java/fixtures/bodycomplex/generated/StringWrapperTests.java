@@ -19,4 +19,13 @@ public final class StringWrapperTests {
         Assertions.assertEquals("wnoi", model.getEmpty());
         Assertions.assertEquals("wlrxyb", model.getNullProperty());
     }
+
+    @Test
+    public void testSerialize() {
+        StringWrapper model = new StringWrapper().setField("htbmuf").setEmpty("wnoi").setNullProperty("wlrxyb");
+        model = BinaryData.fromObject(model).toObject(StringWrapper.class);
+        Assertions.assertEquals("htbmuf", model.getField());
+        Assertions.assertEquals("wnoi", model.getEmpty());
+        Assertions.assertEquals("wlrxyb", model.getNullProperty());
+    }
 }

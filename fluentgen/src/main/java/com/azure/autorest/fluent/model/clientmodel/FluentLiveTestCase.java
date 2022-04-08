@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.fluent.template.FluentExampleTemplate;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class FluentLiveTestCase {
 
-    private final Set<FluentExampleTemplate.HelperFeature> helperFeatures = new HashSet<>();
+    private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
     private final List<FluentLiveTestStep> steps = new ArrayList<>();
     private String methodName;
     private String description;
@@ -30,7 +30,7 @@ public class FluentLiveTestCase {
         return methodName;
     }
 
-    public Set<FluentExampleTemplate.HelperFeature> getHelperFeatures() {
+    public Set<ExampleHelperFeature> getHelperFeatures() {
         return helperFeatures;
     }
 
@@ -39,7 +39,7 @@ public class FluentLiveTestCase {
     }
 
     public static final class Builder {
-        private Set<FluentExampleTemplate.HelperFeature> helperFeatures = new HashSet<>();
+        private Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
         private List<FluentLiveTestStep> steps = new ArrayList<>();
         private String methodName;
         private String description;
@@ -47,11 +47,11 @@ public class FluentLiveTestCase {
         private Builder() {
         }
 
-        public Set<FluentExampleTemplate.HelperFeature> getHelperFeatures(){
+        public Set<ExampleHelperFeature> getHelperFeatures(){
             return Collections.unmodifiableSet(this.helperFeatures);
         }
 
-        public Builder addHelperFeatures(Set<FluentExampleTemplate.HelperFeature> helperFeatures) {
+        public Builder addHelperFeatures(Set<ExampleHelperFeature> helperFeatures) {
             if (helperFeatures != null) {
                 this.helperFeatures.addAll(helperFeatures);
             }

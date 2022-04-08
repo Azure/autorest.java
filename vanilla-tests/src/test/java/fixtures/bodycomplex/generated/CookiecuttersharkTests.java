@@ -6,7 +6,9 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Cookiecuttershark;
+import fixtures.bodycomplex.models.Fish;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,19 +17,299 @@ public final class CookiecuttersharkTests {
     public void testDeserialize() {
         Cookiecuttershark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"cookiecuttershark\",\"age\":1120772764,\"birthday\":\"2021-09-07T01:58:14Z\",\"species\":\"txfvjrbirph\",\"length\":65.93237,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vahfn\",\"length\":13.360113,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xjvuujqgidokg\",\"length\":68.45461,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xgvcl\",\"length\":91.293846},{\"fishtype\":\"Fish\",\"species\":\"ncghkje\",\"length\":7.7217636},{\"fishtype\":\"Fish\",\"species\":\"bijhtxfvgxbf\",\"length\":41.623993},{\"fishtype\":\"Fish\",\"species\":\"eh\",\"length\":56.621307}]}]}]}")
+                                "{\"fishtype\":\"cookiecuttershark\",\"age\":1141164896,\"birthday\":\"2021-07-12T12:37:48Z\",\"species\":\"odsfcpkvxodpuozm\",\"length\":97.604195,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gf\",\"length\":52.79117,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"zyiuokk\",\"length\":87.89758,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"xw\",\"length\":77.36053,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"mbsureximo\",\"length\":23.237425,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"sfksy\",\"length\":76.61667,\"siblings\":[]}]}]},{\"fishtype\":\"Fish\",\"species\":\"tki\",\"length\":17.255283,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"yudxorrqnbp\",\"length\":40.677643,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"i\",\"length\":33.69249,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"dvjsllrmvvdf\",\"length\":32.38682,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"n\",\"length\":65.75423,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"xbczwtruwiqz\",\"length\":77.4151,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"ovm\",\"length\":41.576214,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"spkwlhzdobpxjm\",\"length\":6.7253294,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"nchrkcciww\",\"length\":22.377777,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"hrsajiwkuofo\",\"length\":8.476538,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"auu\",\"length\":99.33306,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"xieduugidyjrr\",\"length\":19.964987,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"svexcsonpclhoco\",\"length\":43.222523,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"vleggzfbuhfmvfax\",\"length\":28.762817,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"ithlvmezyvshxm\",\"length\":27.717447,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"oggigrxwburv\",\"length\":66.636314,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"spyd\",\"length\":18.545479,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"nkoukn\",\"length\":51.713753,\"siblings\":[]}]}]},{\"fishtype\":\"Fish\",\"species\":\"iukbldngkpoci\",\"length\":62.192535,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"o\",\"length\":99.802826,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"jnpiucgyg\",\"length\":96.57761,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"typmrbpizcdrqjsd\",\"length\":80.39972,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"yhxdeoejzicwi\",\"length\":67.792435,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"gzfbishcbk\",\"length\":82.81528,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"yeamdphagalpb\",\"length\":7.554859,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"pwhonowkg\",\"length\":89.91048,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"kix\",\"length\":18.054146,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"eputtmrywnuzoqf\",\"length\":41.681313,\"siblings\":[]}]}]},{\"fishtype\":\"Fish\",\"species\":\"rnkcqvyxlw\",\"length\":34.815525,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"cohoq\",\"length\":97.65598,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ryavwhheunmmqh\",\"length\":24.221533,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"onocukok\",\"length\":85.763794,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"conuqszfkbeype\",\"length\":74.21013,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"wv\",\"length\":57.95068,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"cxsenhwlrsff\",\"length\":19.624447,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"lqdqgbiqylihka\",\"length\":82.805756,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"vfcivfsnkymuc\",\"length\":48.077213,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"bebrjcxerfuwuttt\",\"length\":82.11009,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"birphxepcyva\",\"length\":35.039818,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"kyqxjvuujqgidokg\",\"length\":68.45461,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"xgvcl\",\"length\":91.293846,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"c\",\"length\":56.956642,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"szzhbijhtxfvgxbf\",\"length\":41.623993,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"hmpvecx\",\"length\":79.49234,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"fqkkr\",\"length\":45.659298,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"gr\",\"length\":78.73024,\"siblings\":[]}]}]}]}")
                         .toObject(Cookiecuttershark.class);
-        Assertions.assertEquals("txfvjrbirph", model.getSpecies());
-        Assertions.assertEquals(65.93237f, model.getLength());
-        Assertions.assertEquals("vahfn", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(13.360113f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("xjvuujqgidokg", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(68.45461f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("odsfcpkvxodpuozm", model.getSpecies());
+        Assertions.assertEquals(97.604195f, model.getLength());
+        Assertions.assertEquals("gf", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(52.79117f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("zyiuokk", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(87.89758f, model.getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(
-                "xgvcl", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+                "xw", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
         Assertions.assertEquals(
-                91.293846f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(1120772764, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-09-07T01:58:14Z"), model.getBirthday());
+                77.36053f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(1141164896, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-12T12:37:48Z"), model.getBirthday());
+    }
+
+    @Test
+    public void testSerialize() {
+        Cookiecuttershark model =
+                new Cookiecuttershark(97.604195f, OffsetDateTime.parse("2021-07-12T12:37:48Z"))
+                        .setSpecies("odsfcpkvxodpuozm")
+                        .setSiblings(
+                                Arrays.asList(
+                                        new Fish(52.79117f)
+                                                .setSpecies("gf")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(87.89758f)
+                                                                        .setSpecies("zyiuokk")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(77.36053f)
+                                                                                                .setSpecies("xw")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(23.237425f)
+                                                                                                .setSpecies(
+                                                                                                        "mbsureximo")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(76.61667f)
+                                                                                                .setSpecies("sfksy")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))))),
+                                        new Fish(17.255283f)
+                                                .setSpecies("tki")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(40.677643f)
+                                                                        .setSpecies("yudxorrqnbp")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(33.69249f)
+                                                                                                .setSpecies("i")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(32.38682f)
+                                                                                                .setSpecies(
+                                                                                                        "dvjsllrmvvdf")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(65.75423f)
+                                                                                                .setSpecies("n")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(77.4151f)
+                                                                                                .setSpecies(
+                                                                                                        "xbczwtruwiqz")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(41.576214f)
+                                                                        .setSpecies("ovm")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(6.7253294f)
+                                                                                                .setSpecies(
+                                                                                                        "spkwlhzdobpxjm")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(22.377777f)
+                                                                                                .setSpecies(
+                                                                                                        "nchrkcciww")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(8.476538f)
+                                                                        .setSpecies("hrsajiwkuofo")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(99.33306f)
+                                                                                                .setSpecies("auu")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(19.964987f)
+                                                                                                .setSpecies(
+                                                                                                        "xieduugidyjrr")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(43.222523f)
+                                                                                                .setSpecies(
+                                                                                                        "svexcsonpclhoco")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(28.762817f)
+                                                                                                .setSpecies(
+                                                                                                        "vleggzfbuhfmvfax")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(27.717447f)
+                                                                        .setSpecies("ithlvmezyvshxm")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(66.636314f)
+                                                                                                .setSpecies(
+                                                                                                        "oggigrxwburv")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(18.545479f)
+                                                                                                .setSpecies("spyd")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(51.713753f)
+                                                                                                .setSpecies("nkoukn")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))))),
+                                        new Fish(62.192535f)
+                                                .setSpecies("iukbldngkpoci")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(99.802826f)
+                                                                        .setSpecies("o")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(96.57761f)
+                                                                                                .setSpecies("jnpiucgyg")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(80.39972f)
+                                                                        .setSpecies("typmrbpizcdrqjsd")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(67.792435f)
+                                                                                                .setSpecies(
+                                                                                                        "yhxdeoejzicwi")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(82.81528f)
+                                                                                                .setSpecies(
+                                                                                                        "gzfbishcbk")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(7.554859f)
+                                                                        .setSpecies("yeamdphagalpb")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(89.91048f)
+                                                                                                .setSpecies("pwhonowkg")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(18.054146f)
+                                                                                                .setSpecies("kix")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(41.681313f)
+                                                                                                .setSpecies(
+                                                                                                        "eputtmrywnuzoqf")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))))),
+                                        new Fish(34.815525f)
+                                                .setSpecies("rnkcqvyxlw")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(97.65598f)
+                                                                        .setSpecies("cohoq")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(24.221533f)
+                                                                                                .setSpecies(
+                                                                                                        "ryavwhheunmmqh")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(85.763794f)
+                                                                                                .setSpecies("onocukok")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(74.21013f)
+                                                                                                .setSpecies(
+                                                                                                        "conuqszfkbeype")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(57.95068f)
+                                                                                                .setSpecies("wv")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(19.624447f)
+                                                                        .setSpecies("cxsenhwlrsff")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(82.805756f)
+                                                                                                .setSpecies(
+                                                                                                        "lqdqgbiqylihka")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(48.077213f)
+                                                                                                .setSpecies(
+                                                                                                        "vfcivfsnkymuc")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(82.11009f)
+                                                                        .setSpecies("bebrjcxerfuwuttt")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(35.039818f)
+                                                                                                .setSpecies(
+                                                                                                        "birphxepcyva")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(68.45461f)
+                                                                                                .setSpecies(
+                                                                                                        "kyqxjvuujqgidokg")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(91.293846f)
+                                                                                                .setSpecies("xgvcl")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(56.956642f)
+                                                                                                .setSpecies("c")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()))),
+                                                                new Fish(41.623993f)
+                                                                        .setSpecies("szzhbijhtxfvgxbf")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(79.49234f)
+                                                                                                .setSpecies("hmpvecx")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(45.659298f)
+                                                                                                .setSpecies("fqkkr")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList()),
+                                                                                        new Fish(78.73024f)
+                                                                                                .setSpecies("gr")
+                                                                                                .setSiblings(
+                                                                                                        Arrays
+                                                                                                                .asList())))))))
+                        .setAge(1141164896);
+        model = BinaryData.fromObject(model).toObject(Cookiecuttershark.class);
+        Assertions.assertEquals("odsfcpkvxodpuozm", model.getSpecies());
+        Assertions.assertEquals(97.604195f, model.getLength());
+        Assertions.assertEquals("gf", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(52.79117f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("zyiuokk", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(87.89758f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                "xw", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(
+                77.36053f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(1141164896, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-12T12:37:48Z"), model.getBirthday());
     }
 }

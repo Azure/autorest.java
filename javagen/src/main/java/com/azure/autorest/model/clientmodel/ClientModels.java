@@ -12,7 +12,7 @@ import java.util.Map;
  * The collection of all client models stored for inheritance lookup.
  */
 public class ClientModels {
-    public static final ClientModels INSTANCE = new ClientModels();
+    private static final ClientModels INSTANCE = new ClientModels();
     private final Map<String, ClientModel> nameMap = new HashMap<>();
 //    private final Map<String, ArrayList<ClientModel>> derivedTypesMap = new HashMap<String, ArrayList<ClientModel>>();
     private ClientModels() {
@@ -22,6 +22,18 @@ public class ClientModels {
         nameMap.clear();
     }
 
+    public static ClientModels getInstance() {
+        return INSTANCE;
+    }
+
+    /**
+     * Gets the ClientModel instance from the name of the model.
+     * <p>
+     * Use {@link com.azure.autorest.util.ClientModelUtil#getClientModel(String)} unless ModelMapper or ClientModelUtil.
+     *
+     * @param modelName the name of the model.
+     * @return the ClientModel instance.
+     */
     public final ClientModel getModel(String modelName) {
         return nameMap.get(modelName);
     }
@@ -40,7 +52,7 @@ public class ClientModels {
 //        return getDerivedTypeList(parentModelName);
 //    }
 
-    public final List<ClientModel> getTypes() {
+    public final List<ClientModel> getModels() {
         return new ArrayList<>(nameMap.values());
     }
 

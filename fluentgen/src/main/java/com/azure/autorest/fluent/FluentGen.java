@@ -21,6 +21,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -65,6 +66,10 @@ public class FluentGen extends Javagen {
 
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
+
+    static {
+        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
+    }
 
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
@@ -354,7 +359,7 @@ public class FluentGen extends Javagen {
 
     void clear() {
         JavaSettings.clear();
-        ClientModels.INSTANCE.clear();
+        ClientModels.getInstance().clear();
         fluentJavaSettings = null;
         fluentMapper = null;
         fluentPremiumExamples = null;
