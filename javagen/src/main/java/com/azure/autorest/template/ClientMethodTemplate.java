@@ -438,6 +438,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningSync:
+                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
