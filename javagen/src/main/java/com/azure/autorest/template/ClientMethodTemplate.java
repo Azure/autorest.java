@@ -823,8 +823,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      */
     protected void generateProtocolLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock) {
         String contextParam = "requestOptions != null ? requestOptions.getContext() : Context.NONE";
-        String httpPipelineParam = clientMethod.getClientReference() + ".getHttpPipeline()";
-        String pollingStrategy = "new DefaultPollingStrategy<>(" + httpPipelineParam + ", null, " + contextParam + ")";
+        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
