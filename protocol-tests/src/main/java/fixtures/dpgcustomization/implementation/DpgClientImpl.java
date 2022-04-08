@@ -523,7 +523,10 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagesAsync(String mode, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
-        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
         return new PagedFlux<>(
                 () -> getPagesSinglePageAsync(mode, requestOptions),
                 nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
@@ -559,7 +562,10 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagesAsync(String mode, RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
-        requestOptionsForNextPage.setContext(requestOptions != null ? requestOptions.getContext() : Context.NONE);
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
         return new PagedFlux<>(
                 () -> getPagesSinglePageAsync(mode, requestOptions, context),
                 nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
@@ -682,7 +688,9 @@ public final class DpgClientImpl {
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
                         null,
-                        requestOptions != null ? requestOptions.getContext() : Context.NONE),
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -719,7 +727,9 @@ public final class DpgClientImpl {
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
                         null,
-                        requestOptions != null ? requestOptions.getContext() : Context.NONE),
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
