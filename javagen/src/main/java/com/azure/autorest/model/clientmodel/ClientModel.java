@@ -261,14 +261,14 @@ public class ClientModel {
     public static class Builder {
         protected String packageName;
         protected String name;
-        protected List<String> imports;
+        protected List<String> imports = Collections.emptyList();
         protected String description;
         protected boolean isPolymorphic;
         protected String polymorphicDiscriminator;
         protected String serializedName;
         protected boolean needsFlatten = false;
         protected String parentModelName;
-        protected List<ClientModel> derivedModels;
+        protected List<ClientModel> derivedModels = Collections.emptyList();
         protected String xmlName;
         protected List<ClientModelProperty> properties;
         protected String xmlNamespace;

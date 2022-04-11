@@ -65,10 +65,6 @@ public class ExampleParser {
 
     private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
 
-    static {
-        ModelExampleUtil.setGetClientModelFunction(FluentUtils::getClientModel);
-    }
-
     private final boolean aggregateExamples;
 
     public ExampleParser() {

@@ -19,4 +19,15 @@ public final class DatetimeWrapperTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z"), model.getField());
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z"), model.getNow());
     }
+
+    @Test
+    public void testSerialize() {
+        DatetimeWrapper model =
+                new DatetimeWrapper()
+                        .setField(OffsetDateTime.parse("2021-06-29T08:49:50Z"))
+                        .setNow(OffsetDateTime.parse("2021-06-25T01:54:31Z"));
+        model = BinaryData.fromObject(model).toObject(DatetimeWrapper.class);
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z"), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z"), model.getNow());
+    }
 }

@@ -6,6 +6,8 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DictionaryWrapper;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +16,37 @@ public final class DictionaryWrapperTests {
     public void testDeserialize() {
         DictionaryWrapper model =
                 BinaryData.fromString(
-                                "{\"defaultProgram\":{\"dznrbtcqq\":\"nq\",\"lhqgnufooojy\":\"ifsqesaagdfmg\",\"zlhjxrifkwmrvkt\":\"izntocipao\",\"ajpsquc\":\"poyfdkfogkn\"}}")
+                                "{\"defaultProgram\":{\"nq\":\"dznrbtcqq\",\"ifsqesaagdfmg\":\"lhqgnufooojy\",\"izntocipao\":\"zlhjxrifkwmrvkt\",\"poyfdkfogkn\":\"ajpsquc\"}}")
                         .toObject(DictionaryWrapper.class);
-        Assertions.assertEquals("nq", model.getDefaultProgram().get("dznrbtcqq"));
+        Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
+    }
+
+    @Test
+    public void testSerialize() {
+        DictionaryWrapper model =
+                new DictionaryWrapper()
+                        .setDefaultProgram(
+                                mapOf(
+                                        "nq",
+                                        "dznrbtcqq",
+                                        "ifsqesaagdfmg",
+                                        "lhqgnufooojy",
+                                        "izntocipao",
+                                        "zlhjxrifkwmrvkt",
+                                        "poyfdkfogkn",
+                                        "ajpsquc"));
+        model = BinaryData.fromObject(model).toObject(DictionaryWrapper.class);
+        Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
     }
 }

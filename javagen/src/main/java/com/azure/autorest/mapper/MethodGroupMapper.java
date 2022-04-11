@@ -53,7 +53,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.classBaseName(classBaseName);
         String interfaceName = CodeNamer.getPlural(classBaseName);
         final String interfaceNameForCheckDeduplicate = interfaceName;
-        if (ClientModels.INSTANCE.getTypes().stream().anyMatch(cm -> interfaceNameForCheckDeduplicate.equals(cm.getName()))
+        if (ClientModels.getInstance().getModels().stream().anyMatch(cm -> interfaceNameForCheckDeduplicate.equals(cm.getName()))
             || parsed.values().stream().anyMatch(mg -> interfaceNameForCheckDeduplicate.equals(mg.getInterfaceName()))) {
             interfaceName += "Operations";
         }

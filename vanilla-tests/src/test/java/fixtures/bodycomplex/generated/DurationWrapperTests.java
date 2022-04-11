@@ -16,4 +16,11 @@ public final class DurationWrapperTests {
         DurationWrapper model = BinaryData.fromString("{\"field\":\"PT208H24M29S\"}").toObject(DurationWrapper.class);
         Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
     }
+
+    @Test
+    public void testSerialize() {
+        DurationWrapper model = new DurationWrapper().setField(Duration.parse("PT208H24M29S"));
+        model = BinaryData.fromObject(model).toObject(DurationWrapper.class);
+        Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
+    }
 }

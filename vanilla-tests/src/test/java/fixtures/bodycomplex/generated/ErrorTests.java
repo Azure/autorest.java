@@ -17,4 +17,12 @@ public final class ErrorTests {
         Assertions.assertEquals(655985822, model.getStatus());
         Assertions.assertEquals("bsphrupidgsybbe", model.getMessage());
     }
+
+    @Test
+    public void testSerialize() {
+        Error model = new Error().setStatus(655985822).setMessage("bsphrupidgsybbe");
+        model = BinaryData.fromObject(model).toObject(Error.class);
+        Assertions.assertEquals(655985822, model.getStatus());
+        Assertions.assertEquals("bsphrupidgsybbe", model.getMessage());
+    }
 }

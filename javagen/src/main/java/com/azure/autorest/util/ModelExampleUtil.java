@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -33,7 +32,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ModelExampleUtil {
@@ -96,7 +94,7 @@ public class ModelExampleUtil {
         } else if (type == ClassType.Object) {
             node = new ObjectNode(type, objectValue);
         } else if (type instanceof ClassType && objectValue instanceof Map) {
-            ClientModel model = getClientModel(((ClassType) type).getName());
+            ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
                 if (model.getIsPolymorphic()) {
                     // polymorphic, need to get the correct subclass from discriminator
@@ -219,7 +217,7 @@ public class ModelExampleUtil {
         List<ClientModel> parentModels = new ArrayList<>();
         String parentModelName = model.getParentModelName();
         while (!CoreUtils.isNullOrEmpty(parentModelName)) {
-            ClientModel parentModel = getClientModel(parentModelName);
+            ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 parentModels.add(parentModel);
             }
@@ -279,15 +277,5 @@ public class ModelExampleUtil {
 
         // not found
         return null;
-    }
-
-    private static Function<String, ClientModel> getClientModelFunction = ClientModels.INSTANCE::getModel;
-
-    public static void setGetClientModelFunction(Function<String, ClientModel> function) {
-        getClientModelFunction = function;
-    }
-
-    private static ClientModel getClientModel(String name) {
-        return getClientModelFunction.apply(name);
     }
 }

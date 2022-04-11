@@ -46,6 +46,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -437,6 +438,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+
+        if (settings.isGenerateModels()) {
+            List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
+            List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
+            openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+        }
 
         return moduleInfo;
     }

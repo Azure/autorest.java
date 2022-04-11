@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
@@ -215,11 +216,19 @@ public class FluentUtils {
     }
 
     public static ClientModel getClientModel(String name) {
+        if (name == null) {
+            return null;
+        }
+
         ClientModel clientModel = null;
-        for (ClientModel model : FluentStatic.getClient().getModels()) {
-            if (name.equals(model.getName())) {
-                clientModel = model;
-                break;
+        if (FluentStatic.getClient() == null) {
+            clientModel = ClientModels.getInstance().getModel(name);
+        } else {
+            for (ClientModel model : FluentStatic.getClient().getModels()) {
+                if (name.equals(model.getName())) {
+                    clientModel = model;
+                    break;
+                }
             }
         }
         if (clientModel == null) {
