@@ -85,7 +85,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 ## Settings for minimal clients (low-level clients)
 
-`data-plane` option enables the generator to generate code for minimal clients.
+`data-plane` option enables the generator to generate code for minimal Data-Plane Clients.
 
 `data-plane` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
