@@ -30,7 +30,7 @@ pipeline:
     input: modelerfour/identity
 ```
 
-```yaml !$(low-level-client)
+```yaml !$(data-plane)
 pipeline:
   modelerfour:
     flatten-models: true
@@ -38,7 +38,7 @@ pipeline:
     group-parameters: true
 ```
 
-```yaml $(low-level-client)
+```yaml $(data-plane)
 license-header: MICROSOFT_MIT_SMALL
 generate-client-interfaces: false
 generate-client-as-impl: true
@@ -68,6 +68,6 @@ pipeline:
         id: Id
 ```
 
-```yaml $(low-level-client) && $(sdk-integration)
+```yaml $(data-plane) && $(sdk-integration)
 regenerate-pom: true
 ```

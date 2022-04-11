@@ -2,7 +2,7 @@
 
 ```yaml
 java: true
-low-level-client: true
+data-plane: true
 input-file: ../../node_modules/@microsoft.azure/autorest.testserver/swagger/head-exceptions.json
 output-folder: ..
 namespace: fixtures.headexceptions

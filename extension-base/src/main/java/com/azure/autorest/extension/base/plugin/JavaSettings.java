@@ -125,7 +125,7 @@ public class JavaSettings {
                 getStringValue(host, "customization-class"),
                 getBooleanValue(host, "model-override-setter-from-superclass", false),
                 getBooleanValue(host, "optional-constant-as-enum", false),
-                getBooleanValue(host, "low-level-client", false),
+                getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
                 host.getValue(List.class, "service-versions"),
                 getBooleanValue(host, "require-x-ms-flattened-to-flatten", false),

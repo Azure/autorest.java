@@ -23,7 +23,7 @@ input-file: ./specification/bodystring_updated.json
 java: true
 output-folder: ../../generated
 namespace: fixtures.bodystring
-low-level-client: true
+data-plane: true
 partial-update: true
 generate-builder-per-client: false
 ```
