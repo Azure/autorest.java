@@ -85,9 +85,9 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 ## Settings for minimal clients (low-level clients)
 
-`low-level-client` option enables the generator to generate code for minimal clients.
+`data-plane` option enables the generator to generate code for minimal Data-Plane Clients.
 
-`low-level-client` option will change the default value for some vanilla options.
+`data-plane` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
 `polling` is by default enabled as default settings globally (`polling={}`).
 
@@ -233,7 +233,7 @@ Notices how 404 changes from the default `com.azure.core.exception.ResourceNotFo
 
 # Minimal clients (low-level clients)
 
-You can generate the output as minimal clients, a.k.a., low-level clients with `--low-level-client` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods).
+You can generate the output as minimal clients, a.k.a., low-level clients with `--data-plane` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods).
 
 The generated code has the following structure:
 
@@ -363,7 +363,7 @@ help-content:
       - key: model-override-setter-from-superclass
         type: bool
         description: Indicates whether to override the superclass setter method in model. Default is false.
-      - key: low-level-client
+      - key: data-plane
         type: bool
         description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.
       - key: client-flattened-annotation-target
@@ -384,7 +384,7 @@ help-content:
       - key: partial-update
         type: bool
         description: Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.
-      - key: low-level-client
+      - key: data-plane
         type: bool
         description:  Indicates whether to generate code for minimal clients. Default is false.
 

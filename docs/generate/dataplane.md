@@ -3,7 +3,7 @@
 The Java generator offers the ability to generate [data-plane][data-plane] client libraries.
 
 Data-plane client libraries look like [this][data-plane-client].
-It can be enabled with the flag `--low-level-client`.
+It can be enabled with the flag `--data-plane`.
 
 There is additional options that can enhance the generated client library.
 
