@@ -70,8 +70,8 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
     assert path.exists(path.join(output_folder, 'CHANGELOG.md'))
     logging.info('pass CHANGELOG.md')
 
-    assert path.exists(path.join(output_folder, 'swagger/README_SPEC.md'))
-    logging.info('pass swagger/README_SPEC.md')
+#     assert path.exists(path.join(output_folder, 'swagger/README_SPEC.md'))
+#     logging.info('pass swagger/README_SPEC.md')
 
     assert path.exists(path.join(output_folder, f'src/samples/java/{package_relative_path}/generated'))
     logging.info('pass samples')
