@@ -76,11 +76,13 @@ public class SchemaCleanup {
                         String name = Utils.getJavaName(o);
                         return FluentType.nonSystemData(name) && FluentType.nonManagementError(name);
                     })
-                    .flatMap(s -> s.getProperties().stream())
-//                    .filter(Utils::nonFlattenedProperty)
-                    .map(Property::getSchema)
-                    .map(SchemaCleanup::schemaOrElementInCollection)
-                    .filter(Objects::nonNull)
+                    .flatMap(s -> s.getProperties().stream()
+//                                    .filter(Utils::nonFlattenedProperty)
+                                    .map(Property::getSchema)
+                                    .map(SchemaCleanup::schemaOrElementInCollection)
+                                    .filter(Objects::nonNull)
+                                    .filter(s1 -> !Objects.equals(s, s1))   // schema of property is not the same of itself, solve the simplest recursive reference case
+                    )
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
             choicesSchemasNotInUse.removeAll(schemasInUse);
