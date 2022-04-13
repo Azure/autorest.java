@@ -3,7 +3,6 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
 import java.util.Objects;
 
 /**

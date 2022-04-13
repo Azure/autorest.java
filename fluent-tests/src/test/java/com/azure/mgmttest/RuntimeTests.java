@@ -172,8 +172,8 @@ public class RuntimeTests {
 
         Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBodyNoRecursive"));
 
-//        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudError"));
-//        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBody"));
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudError"));
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBody"));
     }
 
     @Test
