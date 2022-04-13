@@ -4,6 +4,7 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 
+import java.util.Objects;
 
 /**
  * an individual choice in a ChoiceSchema
@@ -96,8 +97,6 @@ public class ChoiceValue {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.language == null)? 0 :this.language.hashCode()));
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
         result = ((result* 31)+((this.value == null)? 0 :this.value.hashCode()));
         return result;
     }
@@ -111,7 +110,7 @@ public class ChoiceValue {
             return false;
         }
         ChoiceValue rhs = ((ChoiceValue) other);
-        return ((((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.value == rhs.value)||((this.value!= null)&&this.value.equals(rhs.value))));
+        return Objects.equals(this.value, rhs.value);
     }
 
 }

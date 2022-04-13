@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "SchemaCleanUp"
+  },
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/applications": {
+      "get":{
+        "tags": [
+          "applications.application"
+        ],
+        "summary": "Get entities from applications",
+        "operationId": "applications.application_ListApplication",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "enum": [
+                "*",
+                "createdOnBehalfOf",
+                "owner"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Linked service reference type.",
+          "enum": ["LinkedServiceReference"],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference LinkedService name."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Arguments for LinkedService."
+        }
+      },
+      "required": ["type", "referenceName"]
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": ["error"]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "CloudErrorBodyNoRecursive": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        }
+      },
+      "required": ["code", "message"]
+    }
+  }
+}
