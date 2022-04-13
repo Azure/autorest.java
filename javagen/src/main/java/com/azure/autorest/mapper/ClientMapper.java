@@ -74,7 +74,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Client.Builder builder = new Client.Builder();
 
         // enum model
-        List<EnumType> enumTypes = new ArrayList<>();
+        final List<EnumType> enumTypes = new ArrayList<>();
         Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
@@ -118,7 +118,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
-        List<ClientModel> clientModels = autoRestModelTypes
+        final List<ClientModel> clientModels = autoRestModelTypes
                 .distinct()
                 .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
                 .filter(Objects::nonNull)
@@ -127,13 +127,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.models(clientModels);
 
         // response model (subclass of Response with headers)
-        builder.responseModels(codeModel.getOperationGroups().stream()
+        final List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .distinct()
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
                 .distinct()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        builder.responseModels(responseModels);
 
         // service client
         String serviceClientName = codeModel.getLanguage().getJava().getName();
@@ -196,7 +197,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
-                    && !clientModels.isEmpty()) {
+                    && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
 
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
