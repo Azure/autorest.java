@@ -4,13 +4,9 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.Language;
-import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
@@ -138,63 +134,63 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    /**
-     * Adds start operation for LROs (e.g. BeginCreateFoo for CreateFoo LRO).
-     *
-     * @param codeModel Code model.
-     * @return Processed code model.
-     */
-    protected CodeModel addStartOperationForLROs(CodeModel codeModel) {
-        codeModel.getOperationGroups().forEach(operationGroup -> {
-            if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::hasLongRunningOperationExtension)) {
-                List<Operation> operations = new ArrayList<>(operationGroup.getOperations());
-
-                for (Operation operation : operationGroup.getOperations()) {
-                    if (hasLongRunningOperationExtension(operation)) {
-                        Operation newOperation = new Operation();
-                        Utils.shallowCopy(operation, newOperation, Operation.class, logger);
-
-                        Language updatedDefault = new Language();
-                        Utils.shallowCopy(operation.getLanguage().getDefault(), updatedDefault, Language.class, logger);
-                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName() + "WithoutPolling");
-
-                        Languages updatedLanguages = new Languages();
-                        Utils.shallowCopy(operation.getLanguage(), updatedLanguages, Languages.class, logger);
-                        updatedLanguages.setDefault(updatedDefault);
-                        newOperation.setLanguage(updatedLanguages);
-
-                        XmsExtensions updatedExtensions = new XmsExtensions();
-                        Utils.shallowCopy(operation.getExtensions(), updatedExtensions, XmsExtensions.class, logger);
-                        updatedExtensions.setXmsLongRunningOperation(false);
-                        newOperation.setExtensions(updatedExtensions);
-
-                        List<Request> newRequests = new ArrayList<>();
-                        for (Request request : operation.getRequests()) {
-                            Request newRequest = new Request();
-                            Utils.shallowCopy(request, newRequest, Request.class, logger);
-
-                            // Transformer will change request.parameters
-                            newRequest.setParameters(new ArrayList<>(request.getParameters()));
-
-                            newRequests.add(newRequest);
-                        }
-                        newOperation.setRequests(newRequests);
-
-                        operations.add(newOperation);
-                    }
-                }
-
-                operationGroup.setOperations(operations);
-            }
-        });
-        return codeModel;
-    }
-
-    private static boolean hasLongRunningOperationExtension(Operation operation) {
-        return operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation();
-    }
-
-    private static boolean hasPaging(Operation operation) {
-        return operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null;
-    }
+//    /**
+//     * Adds start operation for LROs (e.g. BeginCreateFoo for CreateFoo LRO).
+//     *
+//     * @param codeModel Code model.
+//     * @return Processed code model.
+//     */
+//    protected CodeModel addStartOperationForLROs(CodeModel codeModel) {
+//        codeModel.getOperationGroups().forEach(operationGroup -> {
+//            if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::hasLongRunningOperationExtension)) {
+//                List<Operation> operations = new ArrayList<>(operationGroup.getOperations());
+//
+//                for (Operation operation : operationGroup.getOperations()) {
+//                    if (hasLongRunningOperationExtension(operation)) {
+//                        Operation newOperation = new Operation();
+//                        Utils.shallowCopy(operation, newOperation, Operation.class, logger);
+//
+//                        Language updatedDefault = new Language();
+//                        Utils.shallowCopy(operation.getLanguage().getDefault(), updatedDefault, Language.class, logger);
+//                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName() + "WithoutPolling");
+//
+//                        Languages updatedLanguages = new Languages();
+//                        Utils.shallowCopy(operation.getLanguage(), updatedLanguages, Languages.class, logger);
+//                        updatedLanguages.setDefault(updatedDefault);
+//                        newOperation.setLanguage(updatedLanguages);
+//
+//                        XmsExtensions updatedExtensions = new XmsExtensions();
+//                        Utils.shallowCopy(operation.getExtensions(), updatedExtensions, XmsExtensions.class, logger);
+//                        updatedExtensions.setXmsLongRunningOperation(false);
+//                        newOperation.setExtensions(updatedExtensions);
+//
+//                        List<Request> newRequests = new ArrayList<>();
+//                        for (Request request : operation.getRequests()) {
+//                            Request newRequest = new Request();
+//                            Utils.shallowCopy(request, newRequest, Request.class, logger);
+//
+//                            // Transformer will change request.parameters
+//                            newRequest.setParameters(new ArrayList<>(request.getParameters()));
+//
+//                            newRequests.add(newRequest);
+//                        }
+//                        newOperation.setRequests(newRequests);
+//
+//                        operations.add(newOperation);
+//                    }
+//                }
+//
+//                operationGroup.setOperations(operations);
+//            }
+//        });
+//        return codeModel;
+//    }
+//
+//    private static boolean hasLongRunningOperationExtension(Operation operation) {
+//        return operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation();
+//    }
+//
+//    private static boolean hasPaging(Operation operation) {
+//        return operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null;
+//    }
 }

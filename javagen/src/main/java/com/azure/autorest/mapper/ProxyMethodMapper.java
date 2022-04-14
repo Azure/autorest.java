@@ -81,8 +81,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .specialHeaders(operation.getSpecialHeaders())
                 .isResumable(false);
 
-        String operationId = null;
-        if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // "default" could be null for generated method like "listNext"
+        String operationId = operation.getOperationId();
+        if (CoreUtils.isNullOrEmpty(operationId) && operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // operationId or language.default could be null for generated method like "listNext"
             if (operationGroupNotNull(operation, settings)) {
                 operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_" + operation.getLanguage().getDefault().getName();
             } else {
