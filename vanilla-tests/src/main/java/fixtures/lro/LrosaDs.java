@@ -315,6 +315,29 @@ public final class LrosaDs {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putNonRetry400WithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putNonRetry400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -328,8 +351,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNonRetry400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putNonRetry400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -347,6 +395,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400(Product product) {
         return this.beginPutNonRetry400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNonRetry400(Product product, Context context) {
+        return this.beginPutNonRetry400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -376,6 +439,29 @@ public final class LrosaDs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putNonRetry201Creating400WithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putNonRetry201Creating400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -389,8 +475,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putNonRetry201Creating400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -408,6 +519,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400(Product product) {
         return this.beginPutNonRetry201Creating400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNonRetry201Creating400(Product product, Context context) {
+        return this.beginPutNonRetry201Creating400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -438,6 +564,30 @@ public final class LrosaDs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putNonRetry201Creating400InvalidJsonWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putNonRetry201Creating400InvalidJson(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -451,8 +601,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putNonRetry201Creating400InvalidJsonWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -470,6 +646,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson(Product product) {
         return this.beginPutNonRetry201Creating400InvalidJsonAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson(Product product, Context context) {
+        return this.beginPutNonRetry201Creating400InvalidJsonAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -501,6 +692,31 @@ public final class LrosaDs {
      * the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetry400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -514,8 +730,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetry400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -534,6 +776,22 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400(Product product) {
         return this.beginPutAsyncRelativeRetry400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400(Product product, Context context) {
+        return this.beginPutAsyncRelativeRetry400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -556,6 +814,25 @@ public final class LrosaDs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDeleteNonRetry400Response> deleteNonRetry400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteNonRetry400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -568,8 +845,32 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDeleteNonRetry400Async(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteNonRetry400WithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -585,6 +886,20 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteNonRetry400() {
         return this.beginDeleteNonRetry400Async().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDeleteNonRetry400(Context context) {
+        return this.beginDeleteNonRetry400Async(context).getSyncPoller();
     }
 
     /**
@@ -607,6 +922,25 @@ public final class LrosaDs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDelete202NonRetry400Response> delete202NonRetry400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.delete202NonRetry400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -619,8 +953,32 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDelete202NonRetry400Async(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.delete202NonRetry400WithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -636,6 +994,20 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete202NonRetry400() {
         return this.beginDelete202NonRetry400Async().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDelete202NonRetry400(Context context) {
+        return this.beginDelete202NonRetry400Async(context).getSyncPoller();
     }
 
     /**
@@ -661,6 +1033,27 @@ public final class LrosaDs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400WithResponseAsync(
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetry400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -673,8 +1066,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400Async(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteAsyncRelativeRetry400WithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -691,6 +1109,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400() {
         return this.beginDeleteAsyncRelativeRetry400Async().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400(Context context) {
+        return this.beginDeleteAsyncRelativeRetry400Async(context).getSyncPoller();
     }
 
     /**
@@ -720,6 +1153,29 @@ public final class LrosaDs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPostNonRetry400Response> postNonRetry400WithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postNonRetry400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -733,8 +1189,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postNonRetry400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -752,6 +1233,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400(Product product) {
         return this.beginPostNonRetry400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400(Product product, Context context) {
+        return this.beginPostNonRetry400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -781,6 +1277,30 @@ public final class LrosaDs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPost202NonRetry400Response> post202NonRetry400WithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.post202NonRetry400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -794,8 +1314,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.post202NonRetry400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -813,6 +1358,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400(Product product) {
         return this.beginPost202NonRetry400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400(Product product, Context context) {
+        return this.beginPost202NonRetry400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -844,6 +1404,31 @@ public final class LrosaDs {
      * Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetry400(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -857,8 +1442,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postAsyncRelativeRetry400WithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -877,6 +1488,22 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(Product product) {
         return this.beginPostAsyncRelativeRetry400Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(Product product, Context context) {
+        return this.beginPostAsyncRelativeRetry400Async(product, context).getSyncPoller();
     }
 
     /**
@@ -907,6 +1534,30 @@ public final class LrosaDs {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putError201NoProvisioningStatePayloadWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putError201NoProvisioningStatePayload(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -920,8 +1571,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putError201NoProvisioningStatePayloadWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -939,6 +1616,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload(Product product) {
         return this.beginPutError201NoProvisioningStatePayloadAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload(Product product, Context context) {
+        return this.beginPutError201NoProvisioningStatePayloadAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -973,6 +1665,32 @@ public final class LrosaDs {
      * status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryNoStatus(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -986,8 +1704,35 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetryNoStatusWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -1007,6 +1752,23 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus(Product product) {
         return this.beginPutAsyncRelativeRetryNoStatusAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus(Product product, Context context) {
+        return this.beginPutAsyncRelativeRetryNoStatusAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1042,6 +1804,32 @@ public final class LrosaDs {
      * status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPutAsyncRelativeRetryNoStatusPayloadResponse>
+            putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryNoStatusPayload(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1055,8 +1843,36 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -1079,6 +1895,23 @@ public final class LrosaDs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product, Context context) {
+        return this.beginPutAsyncRelativeRetryNoStatusPayloadAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1098,6 +1931,25 @@ public final class LrosaDs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> delete204SucceededWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.delete204Succeeded(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -1110,8 +1962,32 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.delete204SucceededWithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1127,6 +2003,20 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded() {
         return this.beginDelete204SucceededAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(Context context) {
+        return this.beginDelete204SucceededAsync(context).getSyncPoller();
     }
 
     /**
@@ -1152,6 +2042,27 @@ public final class LrosaDs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatusWithResponseAsync(
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryNoStatus(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -1164,8 +2075,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatusAsync(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1182,6 +2118,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus() {
         return this.beginDeleteAsyncRelativeRetryNoStatusAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus(Context context) {
+        return this.beginDeleteAsyncRelativeRetryNoStatusAsync(context).getSyncPoller();
     }
 
     /**
@@ -1211,6 +2162,29 @@ public final class LrosaDs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPost202NoLocationResponse> post202NoLocationWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.post202NoLocation(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1224,8 +2198,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.post202NoLocationWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1243,6 +2242,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation(Product product) {
         return this.beginPost202NoLocationAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation(Product product, Context context) {
+        return this.beginPost202NoLocationAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1277,6 +2291,32 @@ public final class LrosaDs {
      * status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryNoPayload(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1290,8 +2330,36 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postAsyncRelativeRetryNoPayloadWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1311,6 +2379,23 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(Product product) {
         return this.beginPostAsyncRelativeRetryNoPayloadAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(Product product, Context context) {
+        return this.beginPostAsyncRelativeRetryNoPayloadAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1340,6 +2425,29 @@ public final class LrosaDs {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> put200InvalidJsonWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.put200InvalidJson(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1353,8 +2461,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPut200InvalidJsonAsync(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.put200InvalidJsonWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -1372,6 +2505,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson(Product product) {
         return this.beginPut200InvalidJsonAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPut200InvalidJson(Product product, Context context) {
+        return this.beginPut200InvalidJsonAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1404,6 +2552,31 @@ public final class LrosaDs {
      * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryInvalidHeader(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1417,8 +2590,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -1437,6 +2636,22 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) {
         return this.beginPutAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader(Product product, Context context) {
+        return this.beginPutAsyncRelativeRetryInvalidHeaderAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1473,6 +2688,32 @@ public final class LrosaDs {
      * status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingResponse>
+            putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1486,8 +2727,36 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceProduct(),
+                new TypeReferenceProduct());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceProduct(),
                 new TypeReferenceProduct());
@@ -1507,6 +2776,23 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
         return this.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product, Context context) {
+        return this.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1532,6 +2818,27 @@ public final class LrosaDs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
      * 'Location' and 'Retry-After' headers.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeaderWithResponseAsync(
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.delete202RetryInvalidHeader(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+     * 'Location' and 'Retry-After' headers.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -1544,8 +2851,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+     * 'Location' and 'Retry-After' headers.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDelete202RetryInvalidHeaderAsync(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.delete202RetryInvalidHeaderWithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1562,6 +2894,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDelete202RetryInvalidHeader() {
         return this.beginDelete202RetryInvalidHeaderAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+     * 'Location' and 'Retry-After' headers.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDelete202RetryInvalidHeader(Context context) {
+        return this.beginDelete202RetryInvalidHeaderAsync(context).getSyncPoller();
     }
 
     /**
@@ -1588,6 +2935,27 @@ public final class LrosaDs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
      * Azure-AsyncOperation header is invalid.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderResponse>
+            deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryInvalidHeader(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+     * Azure-AsyncOperation header is invalid.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -1600,8 +2968,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+     * Azure-AsyncOperation header is invalid.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1618,6 +3011,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader() {
         return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+     * Azure-AsyncOperation header is invalid.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader(Context context) {
+        return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync(context).getSyncPoller();
     }
 
     /**
@@ -1644,6 +3052,27 @@ public final class LrosaDs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingResponse>
+            deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -1656,8 +3085,33 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1674,6 +3128,21 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
         return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling(Context context) {
+        return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(context).getSyncPoller();
     }
 
     /**
@@ -1705,6 +3174,31 @@ public final class LrosaDs {
      * 'Retry-After' headers.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithResponseAsync(
+            Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.post202RetryInvalidHeader(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
+     * 'Retry-After' headers.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1718,8 +3212,34 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
+     * 'Retry-After' headers.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync(Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.post202RetryInvalidHeaderWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1738,6 +3258,22 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader(Product product) {
         return this.beginPost202RetryInvalidHeaderAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
+     * 'Retry-After' headers.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader(Product product, Context context) {
+        return this.beginPost202RetryInvalidHeaderAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1771,6 +3307,31 @@ public final class LrosaDs {
      * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPostAsyncRelativeRetryInvalidHeaderResponse>
+            postAsyncRelativeRetryInvalidHeaderWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryInvalidHeader(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1784,8 +3345,35 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1804,6 +3392,23 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(Product product) {
         return this.beginPostAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(
+            Product product, Context context) {
+        return this.beginPostAsyncRelativeRetryInvalidHeaderAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1840,6 +3445,32 @@ public final class LrosaDs {
      * status.
      *
      * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingResponse>
+            postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1853,8 +3484,36 @@ public final class LrosaDs {
                 new ChainedPollingStrategy<>(
                         java.util.Arrays.asList(
                                 new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation"),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline()),
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                new TypeReferenceBinaryData(),
+                new TypeReferenceBinaryData());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(
+            Product product, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product, context),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -1874,6 +3533,24 @@ public final class LrosaDs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
         return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(
+            Product product, Context context) {
+        return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product, context).getSyncPoller();
     }
 
     private static final class TypeReferenceProduct extends TypeReference<Product> {

@@ -283,7 +283,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -344,7 +349,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -568,7 +578,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -629,7 +644,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -794,7 +814,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -836,7 +861,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -987,7 +1017,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1030,7 +1065,12 @@ public final class LrosCustomHeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }

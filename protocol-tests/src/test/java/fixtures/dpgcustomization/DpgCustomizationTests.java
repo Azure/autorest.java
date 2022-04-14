@@ -6,11 +6,16 @@ package fixtures.dpgcustomization;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.HttpPipelineCallContext;
+import com.azure.core.http.HttpPipelineNextPolicy;
 import com.azure.core.http.HttpRequest;
+import com.azure.core.http.HttpResponse;
+import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
+import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
@@ -29,6 +34,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.List;
@@ -94,6 +100,31 @@ public class DpgCustomizationTests {
         Assertions.assertEquals(ProductReceived.MODEL, modelList.get(0).getReceived());
     }
 
+    @Test
+    public void pagingContextValidation() {
+        ContextValidationPolicy contextValidationPolicy = new ContextValidationPolicy();
+        this.asyncClient = new DpgClientBuilder().addPolicy(contextValidationPolicy).buildAsyncClient();
+
+        Context context = new Context(
+                ContextValidationPolicy.CONTEXT_VALIDATION_KEY,
+                ContextValidationPolicy.CONTEXT_VALIDATION_VALUE);
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+
+        PagedFlux<BinaryData> pagedFlux = asyncClient.getPages("model", requestOptions);
+        // PagedFlux<BinaryData> to PagedFlux<Product>
+        PagedFlux<Product> modelPagedFlux = mapPage(pagedFlux, data -> data.toObject(Product.class));
+        // PagedIterable from PagedFlux
+        PagedIterable<Product> modelPagedIterable = new PagedIterable<>(modelPagedFlux);
+        Assertions.assertEquals(200, modelPagedIterable.iterableByPage().iterator().next().getStatusCode());
+        List<Product> modelList = modelPagedIterable.stream().collect(Collectors.toList());
+
+        Assertions.assertEquals(ProductReceived.MODEL, modelList.get(0).getReceived());
+
+        Assertions.assertTrue(contextValidationPolicy.hasCalledPolicy && contextValidationPolicy.hasContext);
+    }
+
     private static <T, S> PagedFlux<S> mapPage(PagedFlux<T> pagedFlux, Function<T, S> mapper) {
         Supplier<PageRetriever<String, PagedResponse<S>>> provider = () -> (continuationToken, pageSize) -> {
             Flux<PagedResponse<T>> flux = (continuationToken == null)
@@ -111,6 +142,28 @@ public class DpgCustomizationTests {
                 pagedResponse.getValue().stream().map(mapper).collect(Collectors.toList()),
                 pagedResponse.getContinuationToken(),
                 null);
+    }
+
+    @Test
+    public void lroContextValidation() {
+        ContextValidationPolicy contextValidationPolicy = new ContextValidationPolicy();
+        this.asyncClient = new DpgClientBuilder().addPolicy(contextValidationPolicy).buildAsyncClient();
+
+        Context context = new Context(
+                ContextValidationPolicy.CONTEXT_VALIDATION_KEY,
+                ContextValidationPolicy.CONTEXT_VALIDATION_VALUE);
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+
+        PollerFlux<BinaryData, BinaryData> poller = asyncClient.beginLro("raw", requestOptions);
+
+        BinaryData binaryData = poller.last().block().getFinalResult().block();
+        Map<String, String> rawModel = (Map<String, String>) binaryData.toObject(Object.class);
+        Assertions.assertEquals("raw", rawModel.get("received"));
+
+        Assertions.assertTrue(contextValidationPolicy.hasCalledPolicy && contextValidationPolicy.hasContext);
+
     }
 
     @Test
@@ -213,4 +266,29 @@ public class DpgCustomizationTests {
         Assertions.assertTrue(rawModel.containsKey("received"));
         Assertions.assertEquals("raw", rawModel.get("received"));
     }
+
+    static class ContextValidationPolicy implements HttpPipelinePolicy {
+
+        public static final String CONTEXT_VALIDATION_KEY = "CONTEXT_VALIDATION_KEY";
+        public static final String CONTEXT_VALIDATION_VALUE = "CONTEXT_VALIDATION_VALUE";
+        public boolean hasContext = true;
+        public boolean hasCalledPolicy = false;
+
+        ContextValidationPolicy() {
+        }
+
+        @Override
+        public Mono<HttpResponse> process(HttpPipelineCallContext httpPipelineCallContext, HttpPipelineNextPolicy httpPipelineNextPolicy) {
+            hasCalledPolicy = true;
+            if (httpPipelineCallContext.getData(CONTEXT_VALIDATION_KEY).isPresent() &&
+                httpPipelineCallContext.getData(CONTEXT_VALIDATION_KEY).get().equals(CONTEXT_VALIDATION_VALUE)){
+                hasContext = hasContext && true;
+            } else {
+                hasContext = false;
+            }
+            return httpPipelineNextPolicy.process();
+        }
+
+    }
+
 }

@@ -875,7 +875,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -934,7 +939,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1150,7 +1160,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch200SucceededIgnoreHeadersWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1209,7 +1224,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch200SucceededIgnoreHeadersWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1422,7 +1442,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1480,7 +1505,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1696,7 +1726,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1754,7 +1789,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -1968,7 +2008,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201SucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2027,7 +2072,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201SucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2193,7 +2243,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202ListWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2235,7 +2290,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202ListWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2435,7 +2495,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededNoStateWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2494,7 +2559,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededNoStateWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2708,7 +2778,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put202Retry200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2766,7 +2841,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put202Retry200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -2985,7 +3065,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3045,7 +3130,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3265,7 +3355,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200UpdatingSucceeded204WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3325,7 +3420,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200UpdatingSucceeded204WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3545,7 +3645,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingFailed200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3605,7 +3710,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingFailed200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3825,7 +3935,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200Acceptedcanceled200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -3885,7 +4000,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200Acceptedcanceled200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4102,7 +4222,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNoHeaderInRetryWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4161,7 +4286,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNoHeaderInRetryWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4380,7 +4510,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4440,7 +4575,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4660,7 +4800,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4720,7 +4865,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -4940,7 +5090,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetryFailedWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5000,7 +5155,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetryFailedWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5220,7 +5380,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrycanceledWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5280,7 +5445,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrycanceledWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5497,7 +5667,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoHeaderInRetryWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5556,7 +5731,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoHeaderInRetryWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5713,7 +5893,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonResourceWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5752,7 +5937,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonResourceWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5892,7 +6082,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNonResourceWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -5932,7 +6127,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNonResourceWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6088,7 +6288,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putSubResourceWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6133,7 +6338,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putSubResourceWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6297,7 +6507,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncSubResourceWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6343,7 +6558,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncSubResourceWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6499,7 +6719,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6541,7 +6766,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6693,7 +6923,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202DeletingFailed200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6735,7 +6970,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202DeletingFailed200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6888,7 +7128,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Deletingcanceled200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -6930,7 +7175,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Deletingcanceled200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7018,7 +7268,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7040,7 +7295,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7165,7 +7425,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7206,7 +7471,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7350,7 +7620,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NoRetry204WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7391,7 +7666,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NoRetry204WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7480,7 +7760,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNoHeaderInRetryWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7503,7 +7788,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNoHeaderInRetryWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7575,7 +7865,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7598,7 +7893,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7670,7 +7970,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7693,7 +7998,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7765,7 +8075,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7788,7 +8103,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7860,7 +8180,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetryFailedWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7883,7 +8208,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetryFailedWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7955,7 +8285,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -7978,7 +8313,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8077,7 +8417,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post200WithPayloadWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8109,7 +8454,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post200WithPayloadWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8242,7 +8592,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8283,7 +8638,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8481,7 +8841,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoRetry204WithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8540,7 +8905,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoRetry204WithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8704,7 +9074,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalLocationGetWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8745,7 +9120,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalLocationGetWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8892,7 +9272,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -8933,7 +9318,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9084,7 +9474,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9126,7 +9521,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9329,7 +9729,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9389,7 +9794,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9609,7 +10019,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncNoRetrySucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9669,7 +10084,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncNoRetrySucceededWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9834,7 +10254,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetryFailedWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -9876,7 +10301,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetryFailedWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -10024,7 +10454,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrycanceledWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -10066,7 +10501,12 @@ public final class LROsImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrycanceledWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }

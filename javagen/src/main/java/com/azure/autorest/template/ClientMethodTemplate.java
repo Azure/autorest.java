@@ -426,7 +426,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningBeginAsync:
-                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isLowLevelClient()) {
+                    generateProtocolLongRunningBeginAsync(clientMethod, typeBlock);
+                } else {
+                    generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case LongRunningBeginSync:
@@ -488,6 +492,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                if (settings.isLowLevelClient()) {
+                    function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
+                    function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+                }
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s),",
@@ -495,7 +503,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             clientMethod.getArgumentList());
                     function.line("nextLink -> %s(%s));",
                             clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentListWithoutRequestOptions());
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"));
                 });
             });
         } else {
@@ -786,12 +794,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         } else {
             contextParam = "Context.NONE";
         }
-        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
-                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
-                .replace("{context}", contextParam)
-                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
-                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+        String pollingStrategy = getPollingStrategy(clientMethod, contextParam);
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
@@ -801,6 +804,35 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
             function.decreaseIndent();
         });
+    }
+
+    /**
+     * Generate long running begin async method for protocol client
+     * @param clientMethod client method
+     * @param typeBlock type block
+     */
+    protected void generateProtocolLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock) {
+        String contextParam = "requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE";
+        String pollingStrategy = getPollingStrategy(clientMethod, contextParam);
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.decreaseIndent();
+        });
+    }
+
+    private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
+        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+        return pollingStrategy;
     }
 
     /**

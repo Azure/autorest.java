@@ -550,7 +550,12 @@ public final class HeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.paramRepeatabilityRequestLroWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -587,7 +592,12 @@ public final class HeadersImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.paramRepeatabilityRequestLroWithResponseAsync(requestOptions, context),
-                new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
+                new DefaultPollingStrategy<>(
+                        this.client.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
     }
@@ -762,9 +772,14 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> paramRepeatabilityRequestPageableAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
         return new PagedFlux<>(
                 () -> paramRepeatabilityRequestPageableSinglePageAsync(requestOptions),
-                nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, null));
+                nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -801,9 +816,16 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> paramRepeatabilityRequestPageableAsync(
             RequestOptions requestOptions, Context context) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
         return new PagedFlux<>(
                 () -> paramRepeatabilityRequestPageableSinglePageAsync(requestOptions, context),
-                nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, null, context));
+                nextLink ->
+                        paramRepeatabilityRequestPageableNextSinglePageAsync(
+                                nextLink, requestOptionsForNextPage, context));
     }
 
     /**
