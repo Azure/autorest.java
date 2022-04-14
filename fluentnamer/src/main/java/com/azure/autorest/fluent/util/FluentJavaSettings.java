@@ -42,6 +42,8 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForPreserveModel = new HashSet<>();
 
+    private final Set<String> javaNamesForRemoveOperationGroup = new HashSet<>();
+
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
 //     */
@@ -124,6 +126,10 @@ public class FluentJavaSettings {
         return javaNamesForPreserveModel;
     }
 
+    public Set<String> getJavaNamesForRemoveOperationGroup() {
+        return javaNamesForRemoveOperationGroup;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -165,25 +171,9 @@ public class FluentJavaSettings {
     }
 
     private void loadSettings() {
-        loadStringSetting("add-inner", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
-                javaNamesForAddInner.addAll(
-                        Arrays.stream(s.split(Pattern.quote(",")))
-                                .map(String::trim)
-                                .filter(s1 -> !s1.isEmpty())
-                                .collect(Collectors.toSet()));
-            }
-        });
+        loadStringSetting("add-inner", s -> splitStringToSet(s, javaNamesForAddInner));
 
-        loadStringSetting("remove-inner", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
-                javaNamesForRemoveInner.addAll(
-                        Arrays.stream(s.split(Pattern.quote(",")))
-                                .map(String::trim)
-                                .filter(s1 -> !s1.isEmpty())
-                                .collect(Collectors.toSet()));
-            }
-        });
+        loadStringSetting("remove-inner", s -> splitStringToSet(s, javaNamesForRemoveInner));
 
         loadStringSetting("rename-model", s -> {
             if (!CoreUtils.isNullOrEmpty(s)) {
@@ -201,25 +191,11 @@ public class FluentJavaSettings {
             }
         });
 
-        loadStringSetting("remove-model", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
-                javaNamesForRemoveModel.addAll(
-                        Arrays.stream(s.split(Pattern.quote(",")))
-                                .map(String::trim)
-                                .filter(s1 -> !s1.isEmpty())
-                                .collect(Collectors.toSet()));
-            }
-        });
+        loadStringSetting("remove-model", s -> splitStringToSet(s, javaNamesForRemoveModel));
 
-        loadStringSetting("preserve-model", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
-                javaNamesForPreserveModel.addAll(
-                        Arrays.stream(s.split(Pattern.quote(",")))
-                                .map(String::trim)
-                                .filter(s1 -> !s1.isEmpty())
-                                .collect(Collectors.toSet()));
-            }
-        });
+        loadStringSetting("preserve-model", s -> splitStringToSet(s, javaNamesForPreserveModel));
+
+        loadStringSetting("remove-operation-group", s -> splitStringToSet(s, javaNamesForRemoveOperationGroup));
 
 //        loadBooleanSetting("track1-naming", b -> track1Naming = b);
 //        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
@@ -236,6 +212,15 @@ public class FluentJavaSettings {
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
+        }
+    }
+
+    private void splitStringToSet(String s, Set<String> set) {
+        if (!CoreUtils.isNullOrEmpty(s)) {
+            set.addAll(Arrays.stream(s.split(Pattern.quote(",")))
+                    .map(String::trim)
+                    .filter(s1 -> !s1.isEmpty())
+                    .collect(Collectors.toSet()));
         }
     }
 

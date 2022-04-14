@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class Operation extends Metadata {
 
+    private String operationId;
+
     private List<Parameter> parameters = new ArrayList<Parameter>();
 
     private List<Parameter> signatureParameters = new ArrayList<>();
@@ -76,6 +78,14 @@ public class Operation extends Metadata {
 
     // internal
     private OperationGroup operationGroup;
+
+    public String getOperationId() {
+        return operationId;
+    }
+
+    public void setOperationId(String operationId) {
+        this.operationId = operationId;
+    }
 
     /**
      * 
