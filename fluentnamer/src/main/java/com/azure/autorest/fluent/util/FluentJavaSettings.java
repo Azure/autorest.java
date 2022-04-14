@@ -126,6 +126,10 @@ public class FluentJavaSettings {
         return javaNamesForPreserveModel;
     }
 
+    public Set<String> getJavaNamesForRemoveOperationGroup() {
+        return javaNamesForRemoveOperationGroup;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
