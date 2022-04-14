@@ -166,6 +166,17 @@ public class RuntimeTests {
     }
 
     @Test
+    public void testSchemaCleanUp() {
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.LinkedServiceReference"));
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.Type"));
+
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBodyNoRecursive"));
+
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudError"));
+        Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBody"));
+    }
+
+    @Test
     @Disabled("live test")
     public void testStorage() {
         ResourceManager resourceManager = authenticateResourceManager();

@@ -4,6 +4,7 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
@@ -11,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
@@ -18,6 +20,7 @@ import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -66,23 +69,25 @@ public class SchemaCleanup {
         choicesSchemasNotInUse.addAll(codeModel.getSchemas().getChoices());
 
         Set<Schema> schemasInUse;
-        if (!schemasNotInUse.isEmpty()) {
+        if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // properties of object
             schemasInUse = codeModel.getSchemas().getObjects().stream()
                     .filter(o -> {
                         String name = Utils.getJavaName(o);
                         return FluentType.nonSystemData(name) && FluentType.nonManagementError(name);
                     })
-                    .flatMap(s -> s.getProperties().stream())
-//                    .filter(Utils::nonFlattenedProperty)
-                    .map(Property::getSchema)
-                    .map(SchemaCleanup::schemaOrElementInCollection)
-                    .filter(Objects::nonNull)
+                    .flatMap(s -> s.getProperties().stream()
+//                                    .filter(Utils::nonFlattenedProperty)
+                                    .map(Property::getSchema)
+                                    .map(SchemaCleanup::schemaOrElementInCollection)
+                                    .filter(Objects::nonNull)
+                                    .filter(s1 -> !Objects.equals(s, s1))   // schema of property is not the same of itself, solve the simplest recursive reference case
+                    )
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
             choicesSchemasNotInUse.removeAll(schemasInUse);
         }
-        if (!schemasNotInUse.isEmpty()) {
+        if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation requests
             schemasInUse = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
@@ -93,9 +98,10 @@ public class SchemaCleanup {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
+            List<Schema> schemas = schemasInUse.stream().collect(Collectors.toList());
             choicesSchemasNotInUse.removeAll(schemasInUse);
         }
-        if (!schemasNotInUse.isEmpty()) {
+        if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation responses
             schemasInUse = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
@@ -107,7 +113,7 @@ public class SchemaCleanup {
             schemasNotInUse.removeAll(schemasInUse);
             choicesSchemasNotInUse.removeAll(schemasInUse);
         }
-        if (!schemasNotInUse.isEmpty()) {
+        if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation exception
             schemasInUse = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
@@ -157,8 +163,10 @@ public class SchemaCleanup {
             return schemaOrElementInCollection(((ArraySchema) schema).getElementType());
         } else if (schema instanceof DictionarySchema) {
             return schemaOrElementInCollection(((DictionarySchema) schema).getElementType());
-        } else {
+        } else if (schema instanceof ObjectSchema || schema instanceof ChoiceSchema || schema instanceof SealedChoiceSchema) {
             return schema;
+        } else {
+            return null;
         }
     }
 
