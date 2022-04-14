@@ -419,6 +419,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
+        if (settings.isFluent()
+                && method.getExtensions() != null && method.getExtensions().isXmsLongRunningOperation()) {
+            // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+            return null;
+        }
 
         ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
         return builder.name(classType.getName())
