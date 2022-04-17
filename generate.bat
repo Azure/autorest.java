@@ -81,8 +81,8 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json 
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
-call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
-call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
+call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-initial.json --namespace=fixtures.llcinitial
+call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
 call autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call autorest --version=3.6.6 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
@@ -93,8 +93,8 @@ del protocol-tests\src\main\java\module-info.java
 rem Protocol resilience
 rmdir /S /Q "protocol-resilience-test\llcinitial\src\main"
 rmdir /S /Q "protocol-resilience-test\llcupdate1\src\main"
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
