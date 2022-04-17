@@ -156,5 +156,11 @@ public class PagingTests {
         Assertions.assertEquals(1, count);
     }
 
+//    @Test
+//    public void duplicateParams() {
+//        long count = client.getPagings().duplicateParams("foo").stream().count();
+//        Assertions.assertTrue(count >= 1);
+//    }
+
     // getMultiplePagesLRO requires Fluent build
 }

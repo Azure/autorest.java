@@ -21,16 +21,16 @@ import com.azure.core.util.polling.SyncPoller;
 /** Initializes a new instance of the synchronous SpecialHeaderClient type. */
 @ServiceClient(builder = SpecialHeaderClientBuilder.class)
 public final class SpecialHeaderClient {
-    @Generated private final SpecialHeaderAsyncClient asyncClient;
+    @Generated private final SpecialHeaderAsyncClient client;
 
     /**
      * Initializes an instance of SpecialHeaderClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    SpecialHeaderClient(SpecialHeaderAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    SpecialHeaderClient(SpecialHeaderAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -61,7 +61,7 @@ public final class SpecialHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramRepeatabilityRequestWithResponse(requestOptions).block();
+        return this.client.paramRepeatabilityRequestWithResponse(requestOptions).block();
     }
 
     /**
@@ -92,7 +92,7 @@ public final class SpecialHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestPutWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramRepeatabilityRequestPutWithResponse(requestOptions).block();
+        return this.client.paramRepeatabilityRequestPutWithResponse(requestOptions).block();
     }
 
     /**
@@ -114,7 +114,7 @@ public final class SpecialHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestGetWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramRepeatabilityRequestGetWithResponse(requestOptions).block();
+        return this.client.paramRepeatabilityRequestGetWithResponse(requestOptions).block();
     }
 
     /**
@@ -145,7 +145,7 @@ public final class SpecialHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginParamRepeatabilityRequestLro(RequestOptions requestOptions) {
-        return this.asyncClient.beginParamRepeatabilityRequestLro(requestOptions).getSyncPoller();
+        return this.client.beginParamRepeatabilityRequestLro(requestOptions).getSyncPoller();
     }
 
     /**
@@ -181,6 +181,6 @@ public final class SpecialHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> paramRepeatabilityRequestPageable(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.paramRepeatabilityRequestPageable(requestOptions));
+        return new PagedIterable<>(this.client.paramRepeatabilityRequestPageable(requestOptions));
     }
 }

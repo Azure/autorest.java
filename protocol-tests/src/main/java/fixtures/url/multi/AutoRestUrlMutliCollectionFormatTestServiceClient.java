@@ -18,17 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestUrlMutliCollectionFormatTestServiceClient type. */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class)
 public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
-    @Generated private final AutoRestUrlMutliCollectionFormatTestServiceAsyncClient asyncClient;
+    @Generated private final AutoRestUrlMutliCollectionFormatTestServiceAsyncClient client;
 
     /**
      * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    AutoRestUrlMutliCollectionFormatTestServiceClient(
-            AutoRestUrlMutliCollectionFormatTestServiceAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    AutoRestUrlMutliCollectionFormatTestServiceClient(AutoRestUrlMutliCollectionFormatTestServiceAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -52,7 +51,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiNullWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.arrayStringMultiNullWithResponse(requestOptions).block();
+        return this.client.arrayStringMultiNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -76,7 +75,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.arrayStringMultiEmptyWithResponse(requestOptions).block();
+        return this.client.arrayStringMultiEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -101,6 +100,6 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.arrayStringMultiValidWithResponse(requestOptions).block();
+        return this.client.arrayStringMultiValidWithResponse(requestOptions).block();
     }
 }

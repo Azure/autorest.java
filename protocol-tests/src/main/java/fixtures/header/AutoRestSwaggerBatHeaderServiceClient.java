@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class)
 public final class AutoRestSwaggerBatHeaderServiceClient {
-    @Generated private final AutoRestSwaggerBatHeaderServiceAsyncClient asyncClient;
+    @Generated private final AutoRestSwaggerBatHeaderServiceAsyncClient client;
 
     /**
      * Initializes an instance of AutoRestSwaggerBatHeaderServiceClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    AutoRestSwaggerBatHeaderServiceClient(AutoRestSwaggerBatHeaderServiceAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    AutoRestSwaggerBatHeaderServiceClient(AutoRestSwaggerBatHeaderServiceAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -51,7 +51,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramExistingKeyWithResponse(requestOptions).block();
+        return this.client.paramExistingKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -67,7 +67,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseExistingKeyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseExistingKeyWithResponse(requestOptions).block();
+        return this.client.responseExistingKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -91,7 +91,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramProtectedKeyWithResponse(requestOptions).block();
+        return this.client.paramProtectedKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -107,7 +107,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseProtectedKeyWithResponse(requestOptions).block();
+        return this.client.responseProtectedKeyWithResponse(requestOptions).block();
     }
 
     /**
@@ -132,7 +132,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramIntegerWithResponse(requestOptions).block();
+        return this.client.paramIntegerWithResponse(requestOptions).block();
     }
 
     /**
@@ -156,7 +156,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseIntegerWithResponse(requestOptions).block();
+        return this.client.responseIntegerWithResponse(requestOptions).block();
     }
 
     /**
@@ -182,7 +182,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramLongWithResponse(requestOptions).block();
+        return this.client.paramLongWithResponse(requestOptions).block();
     }
 
     /**
@@ -206,7 +206,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseLongWithResponse(requestOptions).block();
+        return this.client.responseLongWithResponse(requestOptions).block();
     }
 
     /**
@@ -232,7 +232,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramFloatWithResponse(requestOptions).block();
+        return this.client.paramFloatWithResponse(requestOptions).block();
     }
 
     /**
@@ -256,7 +256,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseFloatWithResponse(requestOptions).block();
+        return this.client.responseFloatWithResponse(requestOptions).block();
     }
 
     /**
@@ -282,7 +282,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramDoubleWithResponse(requestOptions).block();
+        return this.client.paramDoubleWithResponse(requestOptions).block();
     }
 
     /**
@@ -306,7 +306,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseDoubleWithResponse(requestOptions).block();
+        return this.client.responseDoubleWithResponse(requestOptions).block();
     }
 
     /**
@@ -331,7 +331,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramBoolWithResponse(requestOptions).block();
+        return this.client.paramBoolWithResponse(requestOptions).block();
     }
 
     /**
@@ -355,7 +355,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseBoolWithResponse(requestOptions).block();
+        return this.client.responseBoolWithResponse(requestOptions).block();
     }
 
     /**
@@ -381,7 +381,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramStringWithResponse(requestOptions).block();
+        return this.client.paramStringWithResponse(requestOptions).block();
     }
 
     /**
@@ -406,7 +406,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseStringWithResponse(requestOptions).block();
+        return this.client.responseStringWithResponse(requestOptions).block();
     }
 
     /**
@@ -432,7 +432,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramDateWithResponse(requestOptions).block();
+        return this.client.paramDateWithResponse(requestOptions).block();
     }
 
     /**
@@ -456,7 +456,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseDateWithResponse(requestOptions).block();
+        return this.client.responseDateWithResponse(requestOptions).block();
     }
 
     /**
@@ -482,7 +482,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramDatetimeWithResponse(requestOptions).block();
+        return this.client.paramDatetimeWithResponse(requestOptions).block();
     }
 
     /**
@@ -507,7 +507,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseDatetimeWithResponse(requestOptions).block();
+        return this.client.responseDatetimeWithResponse(requestOptions).block();
     }
 
     /**
@@ -533,7 +533,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramDatetimeRfc1123WithResponse(requestOptions).block();
+        return this.client.paramDatetimeRfc1123WithResponse(requestOptions).block();
     }
 
     /**
@@ -558,7 +558,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseDatetimeRfc1123WithResponse(requestOptions).block();
+        return this.client.responseDatetimeRfc1123WithResponse(requestOptions).block();
     }
 
     /**
@@ -583,7 +583,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramDurationWithResponse(requestOptions).block();
+        return this.client.paramDurationWithResponse(requestOptions).block();
     }
 
     /**
@@ -607,7 +607,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseDurationWithResponse(requestOptions).block();
+        return this.client.responseDurationWithResponse(requestOptions).block();
     }
 
     /**
@@ -632,7 +632,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramByteWithResponse(requestOptions).block();
+        return this.client.paramByteWithResponse(requestOptions).block();
     }
 
     /**
@@ -656,7 +656,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseByteWithResponse(requestOptions).block();
+        return this.client.responseByteWithResponse(requestOptions).block();
     }
 
     /**
@@ -681,7 +681,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.paramEnumWithResponse(requestOptions).block();
+        return this.client.paramEnumWithResponse(requestOptions).block();
     }
 
     /**
@@ -705,7 +705,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.responseEnumWithResponse(requestOptions).block();
+        return this.client.responseEnumWithResponse(requestOptions).block();
     }
 
     /**
@@ -721,6 +721,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.customRequestIdWithResponse(requestOptions).block();
+        return this.client.customRequestIdWithResponse(requestOptions).block();
     }
 }

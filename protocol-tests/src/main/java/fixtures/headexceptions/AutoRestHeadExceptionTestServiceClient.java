@@ -18,16 +18,16 @@ import fixtures.headexceptions.models.CustomizedException;
 /** Initializes a new instance of the synchronous AutoRestHeadExceptionTestServiceClient type. */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class)
 public final class AutoRestHeadExceptionTestServiceClient {
-    @Generated private final AutoRestHeadExceptionTestServiceAsyncClient asyncClient;
+    @Generated private final AutoRestHeadExceptionTestServiceAsyncClient client;
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestServiceClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    AutoRestHeadExceptionTestServiceClient(AutoRestHeadExceptionTestServiceAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    AutoRestHeadExceptionTestServiceClient(AutoRestHeadExceptionTestServiceAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -43,7 +43,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head200WithResponse(requestOptions).block();
+        return this.client.head200WithResponse(requestOptions).block();
     }
 
     /**
@@ -59,7 +59,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head204WithResponse(requestOptions).block();
+        return this.client.head204WithResponse(requestOptions).block();
     }
 
     /**
@@ -75,6 +75,6 @@ public final class AutoRestHeadExceptionTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head404WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head404WithResponse(requestOptions).block();
+        return this.client.head404WithResponse(requestOptions).block();
     }
 }

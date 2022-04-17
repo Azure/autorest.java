@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpSuccessClientBuilder.class)
 public final class HttpSuccessClient {
-    @Generated private final HttpSuccessAsyncClient asyncClient;
+    @Generated private final HttpSuccessAsyncClient client;
 
     /**
      * Initializes an instance of HttpSuccessClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    HttpSuccessClient(HttpSuccessAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    HttpSuccessClient(HttpSuccessAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -43,7 +43,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head200WithResponse(requestOptions).block();
+        return this.client.head200WithResponse(requestOptions).block();
     }
 
     /**
@@ -65,7 +65,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200WithResponse(requestOptions).block();
+        return this.client.get200WithResponse(requestOptions).block();
     }
 
     /**
@@ -87,7 +87,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.options200WithResponse(requestOptions).block();
+        return this.client.options200WithResponse(requestOptions).block();
     }
 
     /**
@@ -109,7 +109,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put200WithResponse(requestOptions).block();
+        return this.client.put200WithResponse(requestOptions).block();
     }
 
     /**
@@ -131,7 +131,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch200WithResponse(requestOptions).block();
+        return this.client.patch200WithResponse(requestOptions).block();
     }
 
     /**
@@ -153,7 +153,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post200WithResponse(requestOptions).block();
+        return this.client.post200WithResponse(requestOptions).block();
     }
 
     /**
@@ -175,7 +175,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete200WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete200WithResponse(requestOptions).block();
+        return this.client.delete200WithResponse(requestOptions).block();
     }
 
     /**
@@ -197,7 +197,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put201WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put201WithResponse(requestOptions).block();
+        return this.client.put201WithResponse(requestOptions).block();
     }
 
     /**
@@ -219,7 +219,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post201WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post201WithResponse(requestOptions).block();
+        return this.client.post201WithResponse(requestOptions).block();
     }
 
     /**
@@ -241,7 +241,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put202WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put202WithResponse(requestOptions).block();
+        return this.client.put202WithResponse(requestOptions).block();
     }
 
     /**
@@ -263,7 +263,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch202WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch202WithResponse(requestOptions).block();
+        return this.client.patch202WithResponse(requestOptions).block();
     }
 
     /**
@@ -285,7 +285,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post202WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post202WithResponse(requestOptions).block();
+        return this.client.post202WithResponse(requestOptions).block();
     }
 
     /**
@@ -307,7 +307,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete202WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete202WithResponse(requestOptions).block();
+        return this.client.delete202WithResponse(requestOptions).block();
     }
 
     /**
@@ -323,7 +323,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head204WithResponse(requestOptions).block();
+        return this.client.head204WithResponse(requestOptions).block();
     }
 
     /**
@@ -345,7 +345,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put204WithResponse(requestOptions).block();
+        return this.client.put204WithResponse(requestOptions).block();
     }
 
     /**
@@ -367,7 +367,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch204WithResponse(requestOptions).block();
+        return this.client.patch204WithResponse(requestOptions).block();
     }
 
     /**
@@ -389,7 +389,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post204WithResponse(requestOptions).block();
+        return this.client.post204WithResponse(requestOptions).block();
     }
 
     /**
@@ -411,7 +411,7 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete204WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete204WithResponse(requestOptions).block();
+        return this.client.delete204WithResponse(requestOptions).block();
     }
 
     /**
@@ -432,6 +432,6 @@ public final class HttpSuccessClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head404WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head404WithResponse(requestOptions).block();
+        return this.client.head404WithResponse(requestOptions).block();
     }
 }
