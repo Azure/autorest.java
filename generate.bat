@@ -5,6 +5,8 @@ set PROTOCOL_ARGUMENTS=--version=3.8.1 --java --use=. --output-folder=protocol-t
 set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.8.1 --java --use=. --data-plane
 set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
+move /S vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java vanilla-tests\swagger\CoverageReporter.java
+rmdir /S /Q "vanilla-tests\src\main"
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-array.json --namespace=fixtures.bodyarray
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter --client-logger
@@ -43,6 +45,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --name
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
 call autorest --version=3.8.1 --use=./ vanilla-tests/swagger/lro.md
 call autorest --version=3.8.1 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+move vanilla-tests\swagger\CoverageReporter.java vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java
 
 rem local swagger
 call autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
