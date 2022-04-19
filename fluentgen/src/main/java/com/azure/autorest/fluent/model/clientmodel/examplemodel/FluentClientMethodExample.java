@@ -99,6 +99,8 @@ public class FluentClientMethodExample implements FluentMethodExample {
                 serviceClientReference = "subscriptionClient()";
             } else if (tag.contains("locks")) {
                 serviceClientReference = "managementLockClient()";
+            } else if (tag.contains("changes")) {
+                serviceClientReference = "resourceChangeClient()";
             }
         }
 
