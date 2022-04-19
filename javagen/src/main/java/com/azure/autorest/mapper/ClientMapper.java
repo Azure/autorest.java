@@ -369,6 +369,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
+        if (settings.isFluent()
+                && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
+            // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+            return null;
+        }
+
         String name = CodeNamer.getPlural(operation.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
@@ -417,11 +423,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
         if (headerSchema == null || settings.isGenericResponseTypes()) {
-            return null;
-        }
-        if (settings.isFluent()
-                && method.getExtensions() != null && method.getExtensions().isXmsLongRunningOperation()) {
-            // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
             return null;
         }
 
