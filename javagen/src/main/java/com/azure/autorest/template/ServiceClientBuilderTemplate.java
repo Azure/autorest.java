@@ -234,18 +234,16 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
-                List<ServiceClientProperty> allProperties = clientBuilder.getBuilderTraits()
-                        .stream()
-                        .flatMap(trait -> trait.getTraitMethods().stream())
-                        .map(ClientBuilderTraitMethod::getProperty)
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
-                Set<String> propertyNames = allProperties.stream()
-                        .map(ServiceClientProperty::getName)
-                        .collect(Collectors.toSet());
-                allProperties.addAll(clientProperties.stream()
-                        .filter(p -> !propertyNames.contains(p))    // filter out properties already contained in traits
-                        .collect(Collectors.toList()));
+                List<ServiceClientProperty> allProperties = new ArrayList<>();
+                if (!settings.isAzureOrFluent()) {
+                    allProperties.addAll(clientBuilder.getBuilderTraits()
+                            .stream()
+                            .flatMap(trait -> trait.getTraitMethods().stream())
+                            .map(ClientBuilderTraitMethod::getProperty)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList()));
+                }
+                allProperties.addAll(clientProperties);
 
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
