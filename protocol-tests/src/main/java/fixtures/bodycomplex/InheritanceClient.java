@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = InheritanceClientBuilder.class)
 public final class InheritanceClient {
-    @Generated private final InheritanceAsyncClient asyncClient;
+    @Generated private final InheritanceAsyncClient client;
 
     /**
      * Initializes an instance of InheritanceClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    InheritanceClient(InheritanceAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    InheritanceClient(InheritanceAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -62,7 +62,7 @@ public final class InheritanceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getValidWithResponse(requestOptions).block();
+        return this.client.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -99,6 +99,6 @@ public final class InheritanceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
+        return this.client.putValidWithResponse(complexBody, requestOptions).block();
     }
 }

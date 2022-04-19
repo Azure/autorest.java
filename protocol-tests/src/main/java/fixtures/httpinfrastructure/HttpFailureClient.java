@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpFailureClientBuilder.class)
 public final class HttpFailureClient {
-    @Generated private final HttpFailureAsyncClient asyncClient;
+    @Generated private final HttpFailureAsyncClient client;
 
     /**
      * Initializes an instance of HttpFailureClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    HttpFailureClient(HttpFailureAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    HttpFailureClient(HttpFailureAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -49,7 +49,7 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getEmptyErrorWithResponse(requestOptions).block();
+        return this.client.getEmptyErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -71,7 +71,7 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNoModelErrorWithResponse(requestOptions).block();
+        return this.client.getNoModelErrorWithResponse(requestOptions).block();
     }
 
     /**
@@ -93,6 +93,6 @@ public final class HttpFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNoModelEmptyWithResponse(requestOptions).block();
+        return this.client.getNoModelEmptyWithResponse(requestOptions).block();
     }
 }

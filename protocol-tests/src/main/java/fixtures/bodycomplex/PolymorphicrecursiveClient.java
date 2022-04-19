@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PolymorphicrecursiveClientBuilder.class)
 public final class PolymorphicrecursiveClient {
-    @Generated private final PolymorphicrecursiveAsyncClient asyncClient;
+    @Generated private final PolymorphicrecursiveAsyncClient client;
 
     /**
      * Initializes an instance of PolymorphicrecursiveClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    PolymorphicrecursiveClient(PolymorphicrecursiveAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    PolymorphicrecursiveClient(PolymorphicrecursiveAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -56,7 +56,7 @@ public final class PolymorphicrecursiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getValidWithResponse(requestOptions).block();
+        return this.client.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -91,6 +91,6 @@ public final class PolymorphicrecursiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
+        return this.client.putValidWithResponse(complexBody, requestOptions).block();
     }
 }

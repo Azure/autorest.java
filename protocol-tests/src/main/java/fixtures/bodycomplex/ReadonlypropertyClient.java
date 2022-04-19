@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = ReadonlypropertyClientBuilder.class)
 public final class ReadonlypropertyClient {
-    @Generated private final ReadonlypropertyAsyncClient asyncClient;
+    @Generated private final ReadonlypropertyAsyncClient client;
 
     /**
      * Initializes an instance of ReadonlypropertyClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    ReadonlypropertyClient(ReadonlypropertyAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    ReadonlypropertyClient(ReadonlypropertyAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -53,7 +53,7 @@ public final class ReadonlypropertyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getValidWithResponse(requestOptions).block();
+        return this.client.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -79,6 +79,6 @@ public final class ReadonlypropertyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
+        return this.client.putValidWithResponse(complexBody, requestOptions).block();
     }
 }

@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpServerFailureClientBuilder.class)
 public final class HttpServerFailureClient {
-    @Generated private final HttpServerFailureAsyncClient asyncClient;
+    @Generated private final HttpServerFailureAsyncClient client;
 
     /**
      * Initializes an instance of HttpServerFailureClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    HttpServerFailureClient(HttpServerFailureAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    HttpServerFailureClient(HttpServerFailureAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -43,7 +43,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head501WithResponse(requestOptions).block();
+        return this.client.head501WithResponse(requestOptions).block();
     }
 
     /**
@@ -59,7 +59,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get501WithResponse(requestOptions).block();
+        return this.client.get501WithResponse(requestOptions).block();
     }
 
     /**
@@ -81,7 +81,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post505WithResponse(requestOptions).block();
+        return this.client.post505WithResponse(requestOptions).block();
     }
 
     /**
@@ -103,6 +103,6 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete505WithResponse(requestOptions).block();
+        return this.client.delete505WithResponse(requestOptions).block();
     }
 }

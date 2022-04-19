@@ -22,7 +22,7 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
         return INSTANCE;
     }
 
-    private static final String ASYNC_CLIENT_VAR_NAME = "asyncClient";
+    private static final String ASYNC_CLIENT_VAR_NAME = "client";
 
     @Override
     protected void writeClass(AsyncSyncClient syncClient, JavaClass classBlock, JavaVisibility constructorVisibility) {
@@ -61,7 +61,8 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
             List<String> parameterNames = clientMethod.getMethodInputParameters().stream()
                     .map(ClientMethodParameter::getName).collect(Collectors.toList());
 
-            String methodInvoke = String.format("this.asyncClient.%1$s(%2$s)", clientMethod.getName(), String.join(", ", parameterNames));
+            String methodInvoke = String.format("this.%1$s.%2$s(%3$s)",
+                    ASYNC_CLIENT_VAR_NAME, clientMethod.getName(), String.join(", ", parameterNames));
             switch (clientMethod.getType()) {
                 case PagingSync:
                     methodInvoke = "new PagedIterable<>(" + methodInvoke + ")";
@@ -73,7 +74,8 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
 
                 case SendRequestSync:
                     parameterNames.remove("context");
-                    methodInvoke = String.format("this.asyncClient.%1$s(%2$s)", clientMethod.getName(), String.join(", ", parameterNames));
+                    methodInvoke = String.format("this.%1$s.%2$s(%3$s)",
+                            ASYNC_CLIENT_VAR_NAME, clientMethod.getName(), String.join(", ", parameterNames));
                     methodInvoke = methodInvoke + ".contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()";
                     break;
 

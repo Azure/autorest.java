@@ -39,7 +39,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNotExpandableWithResponse(requestOptions).block();
+        return this.client.getNotExpandableWithResponse(requestOptions).block();
     }
 
     /**
@@ -62,7 +62,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(BinaryData stringBodyUpdated, RequestOptions requestOptions) {
-        return this.asyncClient.putNotExpandableWithResponse(stringBodyUpdated, requestOptions).block();
+        return this.client.putNotExpandableWithResponse(stringBodyUpdated, requestOptions).block();
     }
 
     /**
@@ -85,7 +85,7 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getReferencedWithResponse(requestOptions).block();
+        return this.client.getReferencedWithResponse(requestOptions).block();
     }
 
     /**
@@ -108,18 +108,18 @@ public final class EnumClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return this.asyncClient.putReferencedWithResponse(enumStringBody, requestOptions).block();
+        return this.client.putReferencedWithResponse(enumStringBody, requestOptions).block();
     }
-
-    @Generated private final EnumAsyncClient asyncClient;
 
     /**
      * Initializes an instance of EnumClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    EnumClient(EnumAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    EnumClient(EnumAsyncClient client) {
+        this.client = client;
     }
+
+    @Generated private final EnumAsyncClient client;
 }

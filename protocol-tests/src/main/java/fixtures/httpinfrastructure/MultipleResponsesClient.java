@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = MultipleResponsesClientBuilder.class)
 public final class MultipleResponsesClient {
-    @Generated private final MultipleResponsesAsyncClient asyncClient;
+    @Generated private final MultipleResponsesAsyncClient client;
 
     /**
      * Initializes an instance of MultipleResponsesClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    MultipleResponsesClient(MultipleResponsesAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    MultipleResponsesClient(MultipleResponsesAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -52,7 +52,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model204NoModelDefaultError200ValidWithResponse(requestOptions).block();
+        return this.client.get200Model204NoModelDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -76,7 +76,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model204NoModelDefaultError204ValidWithResponse(requestOptions).block();
+        return this.client.get200Model204NoModelDefaultError204ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -100,7 +100,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model204NoModelDefaultError201InvalidWithResponse(requestOptions).block();
+        return this.client.get200Model204NoModelDefaultError201InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -124,7 +124,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model204NoModelDefaultError202NoneWithResponse(requestOptions).block();
+        return this.client.get200Model204NoModelDefaultError202NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -148,7 +148,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model204NoModelDefaultError400ValidWithResponse(requestOptions).block();
+        return this.client.get200Model204NoModelDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -172,7 +172,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model201ModelDefaultError200ValidWithResponse(requestOptions).block();
+        return this.client.get200Model201ModelDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -196,7 +196,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model201ModelDefaultError201ValidWithResponse(requestOptions).block();
+        return this.client.get200Model201ModelDefaultError201ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -220,7 +220,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200Model201ModelDefaultError400ValidWithResponse(requestOptions).block();
+        return this.client.get200Model201ModelDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -242,7 +242,7 @@ public final class MultipleResponsesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -264,7 +264,7 @@ public final class MultipleResponsesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -286,7 +286,7 @@ public final class MultipleResponsesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -308,7 +308,7 @@ public final class MultipleResponsesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -324,7 +324,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultError202NoneWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultError202NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -340,7 +340,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultError204NoneWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultError204NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -356,7 +356,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultError400ValidWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultError400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -372,7 +372,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultNone202InvalidWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultNone202InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -388,7 +388,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultNone204NoneWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultNone204NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -404,7 +404,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultNone400NoneWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultNone400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -420,7 +420,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get202None204NoneDefaultNone400InvalidWithResponse(requestOptions).block();
+        return this.client.get202None204NoneDefaultNone400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -444,7 +444,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultModelA200ValidWithResponse(requestOptions).block();
+        return this.client.getDefaultModelA200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -468,7 +468,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultModelA200NoneWithResponse(requestOptions).block();
+        return this.client.getDefaultModelA200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -484,7 +484,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultModelA400ValidWithResponse(requestOptions).block();
+        return this.client.getDefaultModelA400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -500,7 +500,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultModelA400NoneWithResponse(requestOptions).block();
+        return this.client.getDefaultModelA400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -516,7 +516,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultNone200InvalidWithResponse(requestOptions).block();
+        return this.client.getDefaultNone200InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -532,7 +532,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultNone200NoneWithResponse(requestOptions).block();
+        return this.client.getDefaultNone200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -548,7 +548,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultNone400InvalidWithResponse(requestOptions).block();
+        return this.client.getDefaultNone400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -564,7 +564,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getDefaultNone400NoneWithResponse(requestOptions).block();
+        return this.client.getDefaultNone400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -589,7 +589,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA200NoneWithResponse(requestOptions).block();
+        return this.client.get200ModelA200NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -613,7 +613,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA200ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA200ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -637,7 +637,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA200InvalidWithResponse(requestOptions).block();
+        return this.client.get200ModelA200InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -661,7 +661,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA400NoneWithResponse(requestOptions).block();
+        return this.client.get200ModelA400NoneWithResponse(requestOptions).block();
     }
 
     /**
@@ -685,7 +685,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA400ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA400ValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -709,7 +709,7 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA400InvalidWithResponse(requestOptions).block();
+        return this.client.get200ModelA400InvalidWithResponse(requestOptions).block();
     }
 
     /**
@@ -733,6 +733,6 @@ public final class MultipleResponsesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get200ModelA202ValidWithResponse(requestOptions).block();
+        return this.client.get200ModelA202ValidWithResponse(requestOptions).block();
     }
 }

@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = FlattencomplexClientBuilder.class)
 public final class FlattencomplexClient {
-    @Generated private final FlattencomplexAsyncClient asyncClient;
+    @Generated private final FlattencomplexAsyncClient client;
 
     /**
      * Initializes an instance of FlattencomplexClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    FlattencomplexClient(FlattencomplexAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    FlattencomplexClient(FlattencomplexAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -53,6 +53,6 @@ public final class FlattencomplexClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getValidWithResponse(requestOptions).block();
+        return this.client.getValidWithResponse(requestOptions).block();
     }
 }

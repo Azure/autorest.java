@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = ArrayClientBuilder.class)
 public final class ArrayClient {
-    @Generated private final ArrayAsyncClient asyncClient;
+    @Generated private final ArrayAsyncClient client;
 
     /**
      * Initializes an instance of ArrayClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    ArrayClient(ArrayAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    ArrayClient(ArrayAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -54,7 +54,7 @@ public final class ArrayClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getValidWithResponse(requestOptions).block();
+        return this.client.getValidWithResponse(requestOptions).block();
     }
 
     /**
@@ -82,7 +82,7 @@ public final class ArrayClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.asyncClient.putValidWithResponse(complexBody, requestOptions).block();
+        return this.client.putValidWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -108,7 +108,7 @@ public final class ArrayClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getEmptyWithResponse(requestOptions).block();
+        return this.client.getEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -135,7 +135,7 @@ public final class ArrayClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.asyncClient.putEmptyWithResponse(complexBody, requestOptions).block();
+        return this.client.putEmptyWithResponse(complexBody, requestOptions).block();
     }
 
     /**
@@ -162,6 +162,6 @@ public final class ArrayClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNotProvidedWithResponse(requestOptions).block();
+        return this.client.getNotProvidedWithResponse(requestOptions).block();
     }
 }

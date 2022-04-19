@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpClientFailureClientBuilder.class)
 public final class HttpClientFailureClient {
-    @Generated private final HttpClientFailureAsyncClient asyncClient;
+    @Generated private final HttpClientFailureAsyncClient client;
 
     /**
      * Initializes an instance of HttpClientFailureClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    HttpClientFailureClient(HttpClientFailureAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    HttpClientFailureClient(HttpClientFailureAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -43,7 +43,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head400WithResponse(requestOptions).block();
+        return this.client.head400WithResponse(requestOptions).block();
     }
 
     /**
@@ -59,7 +59,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get400WithResponse(requestOptions).block();
+        return this.client.get400WithResponse(requestOptions).block();
     }
 
     /**
@@ -75,7 +75,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.options400WithResponse(requestOptions).block();
+        return this.client.options400WithResponse(requestOptions).block();
     }
 
     /**
@@ -97,7 +97,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put400WithResponse(requestOptions).block();
+        return this.client.put400WithResponse(requestOptions).block();
     }
 
     /**
@@ -119,7 +119,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch400WithResponse(requestOptions).block();
+        return this.client.patch400WithResponse(requestOptions).block();
     }
 
     /**
@@ -141,7 +141,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post400WithResponse(requestOptions).block();
+        return this.client.post400WithResponse(requestOptions).block();
     }
 
     /**
@@ -163,7 +163,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete400WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete400WithResponse(requestOptions).block();
+        return this.client.delete400WithResponse(requestOptions).block();
     }
 
     /**
@@ -179,7 +179,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head401WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head401WithResponse(requestOptions).block();
+        return this.client.head401WithResponse(requestOptions).block();
     }
 
     /**
@@ -195,7 +195,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get402WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get402WithResponse(requestOptions).block();
+        return this.client.get402WithResponse(requestOptions).block();
     }
 
     /**
@@ -211,7 +211,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options403WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.options403WithResponse(requestOptions).block();
+        return this.client.options403WithResponse(requestOptions).block();
     }
 
     /**
@@ -227,7 +227,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get403WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get403WithResponse(requestOptions).block();
+        return this.client.get403WithResponse(requestOptions).block();
     }
 
     /**
@@ -249,7 +249,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put404WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put404WithResponse(requestOptions).block();
+        return this.client.put404WithResponse(requestOptions).block();
     }
 
     /**
@@ -271,7 +271,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch405WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch405WithResponse(requestOptions).block();
+        return this.client.patch405WithResponse(requestOptions).block();
     }
 
     /**
@@ -293,7 +293,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post406WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post406WithResponse(requestOptions).block();
+        return this.client.post406WithResponse(requestOptions).block();
     }
 
     /**
@@ -315,7 +315,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete407WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete407WithResponse(requestOptions).block();
+        return this.client.delete407WithResponse(requestOptions).block();
     }
 
     /**
@@ -337,7 +337,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put409WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put409WithResponse(requestOptions).block();
+        return this.client.put409WithResponse(requestOptions).block();
     }
 
     /**
@@ -353,7 +353,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head410WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head410WithResponse(requestOptions).block();
+        return this.client.head410WithResponse(requestOptions).block();
     }
 
     /**
@@ -369,7 +369,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get411WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get411WithResponse(requestOptions).block();
+        return this.client.get411WithResponse(requestOptions).block();
     }
 
     /**
@@ -385,7 +385,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options412WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.options412WithResponse(requestOptions).block();
+        return this.client.options412WithResponse(requestOptions).block();
     }
 
     /**
@@ -401,7 +401,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get412WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get412WithResponse(requestOptions).block();
+        return this.client.get412WithResponse(requestOptions).block();
     }
 
     /**
@@ -423,7 +423,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put413WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put413WithResponse(requestOptions).block();
+        return this.client.put413WithResponse(requestOptions).block();
     }
 
     /**
@@ -445,7 +445,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch414WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch414WithResponse(requestOptions).block();
+        return this.client.patch414WithResponse(requestOptions).block();
     }
 
     /**
@@ -467,7 +467,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post415WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post415WithResponse(requestOptions).block();
+        return this.client.post415WithResponse(requestOptions).block();
     }
 
     /**
@@ -483,7 +483,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get416WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get416WithResponse(requestOptions).block();
+        return this.client.get416WithResponse(requestOptions).block();
     }
 
     /**
@@ -505,7 +505,7 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete417WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete417WithResponse(requestOptions).block();
+        return this.client.delete417WithResponse(requestOptions).block();
     }
 
     /**
@@ -521,6 +521,6 @@ public final class HttpClientFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head429WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head429WithResponse(requestOptions).block();
+        return this.client.head429WithResponse(requestOptions).block();
     }
 }

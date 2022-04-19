@@ -24,16 +24,16 @@ import com.azure.core.util.polling.SyncPoller;
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {
-    @Generated private final DpgAsyncClient asyncClient;
+    @Generated private final DpgAsyncClient client;
 
     /**
      * Initializes an instance of DpgClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    DpgClient(DpgAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    DpgClient(DpgAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -60,7 +60,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(String mode, RequestOptions requestOptions) {
-        return this.asyncClient.getModelWithResponse(mode, requestOptions).block();
+        return this.client.getModelWithResponse(mode, requestOptions).block();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postModelWithResponse(String mode, BinaryData input, RequestOptions requestOptions) {
-        return this.asyncClient.postModelWithResponse(mode, input, requestOptions).block();
+        return this.client.postModelWithResponse(mode, input, requestOptions).block();
     }
 
     /**
@@ -128,7 +128,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPages(String mode, RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getPages(mode, requestOptions));
+        return new PagedIterable<>(this.client.getPages(mode, requestOptions));
     }
 
     /**
@@ -156,7 +156,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
-        return this.asyncClient.beginLro(mode, requestOptions).getSyncPoller();
+        return this.client.beginLro(mode, requestOptions).getSyncPoller();
     }
 
     /**
@@ -169,7 +169,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.asyncClient
+        return this.client
                 .sendRequest(httpRequest)
                 .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
                 .block();

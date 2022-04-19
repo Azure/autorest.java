@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous AutoRestPagingTestServiceClient type. */
 @ServiceClient(builder = AutoRestPagingTestServiceClientBuilder.class)
 public final class AutoRestPagingTestServiceClient {
-    @Generated private final AutoRestPagingTestServiceAsyncClient asyncClient;
+    @Generated private final AutoRestPagingTestServiceAsyncClient client;
 
     /**
      * Initializes an instance of AutoRestPagingTestServiceClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    AutoRestPagingTestServiceClient(AutoRestPagingTestServiceAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    AutoRestPagingTestServiceClient(AutoRestPagingTestServiceAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -60,7 +60,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getNoItemNamePages(requestOptions));
+        return new PagedIterable<>(this.client.getNoItemNamePages(requestOptions));
     }
 
     /**
@@ -92,7 +92,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getNullNextLinkNamePages(requestOptions));
+        return new PagedIterable<>(this.client.getNullNextLinkNamePages(requestOptions));
     }
 
     /**
@@ -124,7 +124,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getSinglePages(requestOptions));
+        return new PagedIterable<>(this.client.getSinglePages(requestOptions));
     }
 
     /**
@@ -157,7 +157,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.firstResponseEmpty(requestOptions));
+        return new PagedIterable<>(this.client.firstResponseEmpty(requestOptions));
     }
 
     /**
@@ -199,7 +199,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePages(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePages(requestOptions));
     }
 
     /**
@@ -241,7 +241,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getWithQueryParams(requestOptions));
+        return new PagedIterable<>(this.client.getWithQueryParams(requestOptions));
     }
 
     /**
@@ -283,7 +283,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getOdataMultiplePages(requestOptions));
+        return new PagedIterable<>(this.client.getOdataMultiplePages(requestOptions));
     }
 
     /**
@@ -326,7 +326,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesWithOffset(offset, requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesWithOffset(offset, requestOptions));
     }
 
     /**
@@ -359,7 +359,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesRetryFirst(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesRetryFirst(requestOptions));
     }
 
     /**
@@ -392,7 +392,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesRetrySecond(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesRetrySecond(requestOptions));
     }
 
     /**
@@ -424,7 +424,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getSinglePagesFailure(requestOptions));
+        return new PagedIterable<>(this.client.getSinglePagesFailure(requestOptions));
     }
 
     /**
@@ -456,7 +456,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesFailure(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesFailure(requestOptions));
     }
 
     /**
@@ -488,7 +488,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesFailureUri(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesFailureUri(requestOptions));
     }
 
     /**
@@ -529,7 +529,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesFragmentNextLink(tenant, requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesFragmentNextLink(tenant, requestOptions));
     }
 
     /**
@@ -571,8 +571,7 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
             String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(
-                this.asyncClient.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions));
     }
 
     /**
@@ -614,7 +613,7 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getMultiplePagesLro(requestOptions));
+        return new PagedIterable<>(this.client.getMultiplePagesLro(requestOptions));
     }
 
     /**
@@ -646,6 +645,6 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.asyncClient.getPagingModelWithItemNameWithXmsClientName(requestOptions));
+        return new PagedIterable<>(this.client.getPagingModelWithItemNameWithXmsClientName(requestOptions));
     }
 }

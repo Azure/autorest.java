@@ -18,16 +18,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpRetryClientBuilder.class)
 public final class HttpRetryClient {
-    @Generated private final HttpRetryAsyncClient asyncClient;
+    @Generated private final HttpRetryAsyncClient client;
 
     /**
      * Initializes an instance of HttpRetryClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    HttpRetryClient(HttpRetryAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    HttpRetryClient(HttpRetryAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -43,7 +43,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head408WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.head408WithResponse(requestOptions).block();
+        return this.client.head408WithResponse(requestOptions).block();
     }
 
     /**
@@ -65,7 +65,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put500WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put500WithResponse(requestOptions).block();
+        return this.client.put500WithResponse(requestOptions).block();
     }
 
     /**
@@ -87,7 +87,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch500WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch500WithResponse(requestOptions).block();
+        return this.client.patch500WithResponse(requestOptions).block();
     }
 
     /**
@@ -103,7 +103,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get502WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.get502WithResponse(requestOptions).block();
+        return this.client.get502WithResponse(requestOptions).block();
     }
 
     /**
@@ -125,7 +125,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> options502WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.options502WithResponse(requestOptions).block();
+        return this.client.options502WithResponse(requestOptions).block();
     }
 
     /**
@@ -147,7 +147,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post503WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.post503WithResponse(requestOptions).block();
+        return this.client.post503WithResponse(requestOptions).block();
     }
 
     /**
@@ -169,7 +169,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete503WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.delete503WithResponse(requestOptions).block();
+        return this.client.delete503WithResponse(requestOptions).block();
     }
 
     /**
@@ -191,7 +191,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put504WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.put504WithResponse(requestOptions).block();
+        return this.client.put504WithResponse(requestOptions).block();
     }
 
     /**
@@ -213,6 +213,6 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch504WithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.patch504WithResponse(requestOptions).block();
+        return this.client.patch504WithResponse(requestOptions).block();
     }
 }

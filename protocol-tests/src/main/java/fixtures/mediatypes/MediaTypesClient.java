@@ -19,16 +19,16 @@ import com.azure.core.util.BinaryData;
 /** Initializes a new instance of the synchronous MediaTypesClient type. */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {
-    @Generated private final MediaTypesAsyncClient asyncClient;
+    @Generated private final MediaTypesAsyncClient client;
 
     /**
      * Initializes an instance of MediaTypesClient class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      */
     @Generated
-    MediaTypesClient(MediaTypesAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+    MediaTypesClient(MediaTypesAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -65,7 +65,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.analyzeBodyWithResponse(requestOptions).block();
+        return this.client.analyzeBodyWithResponse(requestOptions).block();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.analyzeBodyNoAcceptHeaderWithResponse(requestOptions).block();
+        return this.client.analyzeBodyNoAcceptHeaderWithResponse(requestOptions).block();
     }
 
     /**
@@ -124,7 +124,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.contentTypeWithEncodingWithResponse(requestOptions).block();
+        return this.client.contentTypeWithEncodingWithResponse(requestOptions).block();
     }
 
     /**
@@ -164,7 +164,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
             BinaryData message, RequestOptions requestOptions) {
-        return this.asyncClient.binaryBodyWithTwoContentTypesWithResponse(message, requestOptions).block();
+        return this.client.binaryBodyWithTwoContentTypesWithResponse(message, requestOptions).block();
     }
 
     /**
@@ -204,7 +204,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
             BinaryData message, RequestOptions requestOptions) {
-        return this.asyncClient.binaryBodyWithThreeContentTypesWithResponse(message, requestOptions).block();
+        return this.client.binaryBodyWithThreeContentTypesWithResponse(message, requestOptions).block();
     }
 
     /**
@@ -241,6 +241,6 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putTextAndJsonBodyWithResponse(BinaryData message, RequestOptions requestOptions) {
-        return this.asyncClient.putTextAndJsonBodyWithResponse(message, requestOptions).block();
+        return this.client.putTextAndJsonBodyWithResponse(message, requestOptions).block();
     }
 }
