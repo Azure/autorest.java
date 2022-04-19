@@ -26,11 +26,11 @@ public final class StringOperationClient {
     /**
      * Initializes an instance of StringOperations class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      * @param test the parameter.
      */
-    StringOperationClient(StringOperationAsyncClient asyncClient, String test) {
-        this.asyncClient = asyncClient;
+    StringOperationClient(StringOperationAsyncClient client, String test) {
+        this.client = client;
     }
 
     /**
@@ -82,7 +82,7 @@ public final class StringOperationClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, String test) {
-        return this.asyncClient.putNullWithResponse(requestOptions).block();
+        return this.client.putNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -102,7 +102,7 @@ public final class StringOperationClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getEmptyWithResponse(requestOptions).block();
+        return this.client.getEmptyWithResponse(requestOptions).block();
     }
 
     /**

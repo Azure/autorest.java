@@ -15,7 +15,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
-import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
@@ -28,11 +27,11 @@ public final class StringOperationClient {
     /**
      * Initializes an instance of StringOperations class.
      *
-     * @param asyncClient the async client.
+     * @param client the async client.
      * @param test the parameter.
      */
-    StringOperationClient(StringOperationAsyncClient asyncClient, String test) {
-        this.asyncClient = asyncClient;
+    StringOperationClient(StringOperationAsyncClient client, String test) {
+        this.client = client;
     }
 
     /**
@@ -42,7 +41,7 @@ public final class StringOperationClient {
      */
     @Generated
     StringOperationClient(StringOperationAsyncClient asyncClient) {
-        this.asyncClient = asyncClient;
+        this.client = asyncClient;
     }
 
     /**
@@ -64,7 +63,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNullWithResponse(requestOptions).block();
+        return this.client.getNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -84,7 +83,7 @@ public final class StringOperationClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, String test) {
-        return this.asyncClient.putNullWithResponse(requestOptions).block();
+        return this.client.putNullWithResponse(requestOptions).block();
     }
 
     /**
@@ -104,7 +103,7 @@ public final class StringOperationClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getEmptyWithResponse(requestOptions).block();
+        return this.client.getEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -126,7 +125,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.putEmptyWithResponse(requestOptions).block();
+        return this.client.putEmptyWithResponse(requestOptions).block();
     }
 
     /**
@@ -149,7 +148,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getMbcsWithResponse(requestOptions).block();
+        return this.client.getMbcsWithResponse(requestOptions).block();
     }
 
     /**
@@ -171,7 +170,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.putMbcsWithResponse(requestOptions).block();
+        return this.client.putMbcsWithResponse(requestOptions).block();
     }
 
     /**
@@ -196,7 +195,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getWhitespaceWithResponse(requestOptions).block();
+        return this.client.getWhitespaceWithResponse(requestOptions).block();
     }
 
     /**
@@ -219,7 +218,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.putWhitespaceWithResponse(requestOptions).block();
+        return this.client.putWhitespaceWithResponse(requestOptions).block();
     }
 
     /**
@@ -241,7 +240,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNotProvidedWithResponse(requestOptions).block();
+        return this.client.getNotProvidedWithResponse(requestOptions).block();
     }
 
     /**
@@ -263,7 +262,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getBase64EncodedWithResponse(requestOptions).block();
+        return this.client.getBase64EncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -285,7 +284,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getBase64UrlEncodedWithResponse(requestOptions).block();
+        return this.client.getBase64UrlEncodedWithResponse(requestOptions).block();
     }
 
     /**
@@ -308,7 +307,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return this.asyncClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions).block();
+        return this.client.putBase64UrlEncodedWithResponse(stringBody, requestOptions).block();
     }
 
     /**
@@ -339,8 +338,8 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.asyncClient.getNullBase64UrlEncodedWithResponse(requestOptions).block();
+        return this.client.getNullBase64UrlEncodedWithResponse(requestOptions).block();
     }
 
-    @Generated private final StringOperationAsyncClient asyncClient;
+    @Generated private final StringOperationAsyncClient client;
 }
