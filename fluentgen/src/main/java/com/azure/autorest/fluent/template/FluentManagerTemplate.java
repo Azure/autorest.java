@@ -206,6 +206,7 @@ public class FluentManagerTemplate {
 
             manager.getProperties().forEach(property -> {
                 classBlock.javadocComment(comment -> {
+                    comment.description(String.format("Gets the resource collection API of %1$s.", property.getFluentType().getName()));
                     comment.methodReturns(String.format("Resource collection API of %1$s.", property.getFluentType().getName()));
                 });
 

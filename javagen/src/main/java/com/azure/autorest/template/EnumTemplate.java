@@ -64,6 +64,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
                 classBlock.javadocComment((comment) ->
                 {
+                    comment.description(String.format("Gets known %1$s values.", enumType.getName()));
                     comment.methodReturns(String.format("known %1$s values", enumType.getName()));
                 });
                 classBlock.publicStaticMethod(String.format("Collection<%1$s> values()", enumType.getName()), (function) ->
