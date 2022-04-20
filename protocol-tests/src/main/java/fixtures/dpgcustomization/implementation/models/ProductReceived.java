@@ -27,7 +27,11 @@ public final class ProductReceived extends ExpandableStringEnum<ProductReceived>
         return fromString(name, ProductReceived.class);
     }
 
-    /** @return known ProductReceived values. */
+    /**
+     * Gets known ProductReceived values.
+     *
+     * @return known ProductReceived values.
+     */
     public static Collection<ProductReceived> values() {
         return values(ProductReceived.class);
     }

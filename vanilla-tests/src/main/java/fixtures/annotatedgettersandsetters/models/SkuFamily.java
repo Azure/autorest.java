@@ -24,7 +24,11 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
         return fromString(name, SkuFamily.class);
     }
 
-    /** @return known SkuFamily values. */
+    /**
+     * Gets known SkuFamily values.
+     *
+     * @return known SkuFamily values.
+     */
     public static Collection<SkuFamily> values() {
         return values(SkuFamily.class);
     }

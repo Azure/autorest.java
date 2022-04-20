@@ -33,7 +33,11 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
         return fromString(name, Odatatype.class);
     }
 
-    /** @return known Odatatype values. */
+    /**
+     * Gets known Odatatype values.
+     *
+     * @return known Odatatype values.
+     */
     public static Collection<Odatatype> values() {
         return values(Odatatype.class);
     }

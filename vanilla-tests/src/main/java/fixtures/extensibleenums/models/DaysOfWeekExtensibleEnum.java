@@ -42,7 +42,11 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
         return fromString(name, DaysOfWeekExtensibleEnum.class);
     }
 
-    /** @return known DaysOfWeekExtensibleEnum values. */
+    /**
+     * Gets known DaysOfWeekExtensibleEnum values.
+     *
+     * @return known DaysOfWeekExtensibleEnum values.
+     */
     public static Collection<DaysOfWeekExtensibleEnum> values() {
         return values(DaysOfWeekExtensibleEnum.class);
     }

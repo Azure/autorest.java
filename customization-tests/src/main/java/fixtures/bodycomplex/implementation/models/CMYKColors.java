@@ -33,7 +33,11 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
         return fromString(name, CMYKColors.class);
     }
 
-    /** @return known CMYKColors values. */
+    /**
+     * Gets known CMYKColors values.
+     *
+     * @return known CMYKColors values.
+     */
     public static Collection<CMYKColors> values() {
         return values(CMYKColors.class);
     }

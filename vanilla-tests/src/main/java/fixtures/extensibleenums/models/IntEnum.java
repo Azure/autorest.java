@@ -30,7 +30,11 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
         return fromString(name, IntEnum.class);
     }
 
-    /** @return known IntEnum values. */
+    /**
+     * Gets known IntEnum values.
+     *
+     * @return known IntEnum values.
+     */
     public static Collection<IntEnum> values() {
         return values(IntEnum.class);
     }
