@@ -36,7 +36,11 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
         return fromString(name, GoblinSharkColor.class);
     }
 
-    /** @return known GoblinSharkColor values. */
+    /**
+     * Gets known GoblinSharkColor values.
+     *
+     * @return known GoblinSharkColor values.
+     */
     public static Collection<GoblinSharkColor> values() {
         return values(GoblinSharkColor.class);
     }

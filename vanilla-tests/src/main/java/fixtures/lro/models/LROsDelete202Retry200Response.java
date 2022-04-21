@@ -28,7 +28,11 @@ public final class LROsDelete202Retry200Response extends ResponseBase<LROsDelete
         super(request, statusCode, rawHeaders, value, headers);
     }
 
-    /** @return the deserialized response body. */
+    /**
+     * Gets the deserialized response body.
+     *
+     * @return the deserialized response body.
+     */
     @Override
     public Product getValue() {
         return super.getValue();

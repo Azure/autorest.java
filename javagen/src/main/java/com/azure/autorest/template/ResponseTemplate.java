@@ -73,11 +73,16 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
 
             if (!response.getBodyType().asNullable().equals(ClassType.Void)) {
                 if (response.getBodyType().equals(GenericType.FluxByteBuffer)) {
-                    classBlock.javadocComment(javadoc -> javadoc.methodReturns("the response content stream"));
+                    classBlock.javadocComment(javadoc -> {
+                        javadoc.description("Gets the response content stream.");
+                        javadoc.methodReturns("the response content stream");
+                    });
                 } else {
-                    classBlock.javadocComment(javadoc -> javadoc.methodReturns("the deserialized response body"));
+                    classBlock.javadocComment(javadoc -> {
+                        javadoc.description("Gets the deserialized response body.");
+                        javadoc.methodReturns("the deserialized response body");
+                    });
                 }
-
 
                 classBlock.annotation("Override");
                 classBlock.publicMethod(String.format("%1$s getValue()", response.getBodyType().asNullable()),

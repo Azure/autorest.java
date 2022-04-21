@@ -30,7 +30,11 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
         return fromString(name, PetFood.class);
     }
 
-    /** @return known PetFood values. */
+    /**
+     * Gets known PetFood values.
+     *
+     * @return known PetFood values.
+     */
     public static Collection<PetFood> values() {
         return values(PetFood.class);
     }

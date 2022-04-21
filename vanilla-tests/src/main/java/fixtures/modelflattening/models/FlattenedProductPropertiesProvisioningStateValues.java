@@ -55,7 +55,11 @@ public final class FlattenedProductPropertiesProvisioningStateValues
         return fromString(name, FlattenedProductPropertiesProvisioningStateValues.class);
     }
 
-    /** @return known FlattenedProductPropertiesProvisioningStateValues values. */
+    /**
+     * Gets known FlattenedProductPropertiesProvisioningStateValues values.
+     *
+     * @return known FlattenedProductPropertiesProvisioningStateValues values.
+     */
     public static Collection<FlattenedProductPropertiesProvisioningStateValues> values() {
         return values(FlattenedProductPropertiesProvisioningStateValues.class);
     }

@@ -36,7 +36,11 @@ public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
         return fromString(String.valueOf(name), FloatEnum.class);
     }
 
-    /** @return known FloatEnum values. */
+    /**
+     * Gets known FloatEnum values.
+     *
+     * @return known FloatEnum values.
+     */
     public static Collection<FloatEnum> values() {
         return values(FloatEnum.class);
     }
