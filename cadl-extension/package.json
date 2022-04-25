@@ -1,0 +1,65 @@
+{
+  "name": "@cadl-lang/java-client-emitter",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [
+    "cadl"
+  ],
+  "author": "weidxu",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/src/emitter.js",
+  "exports": {
+    ".": "./dist/src/emitter.js",
+    "./testing": "./dist/src/testing/index.js"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/src/emitter.d.ts"
+      ],
+      "testing": [
+        "./dist/src/testing/index.d.ts"
+      ]
+    }
+  },
+  "cadlMain": "dist/src/emitter.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist ./temp",
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "test": "mocha",
+    "test-official": "c8 mocha --forbid-only",
+    "lint": "eslint . --ext .ts --max-warnings=0",
+    "lint:fix": "eslint . --fix --ext .ts"
+  },
+  "files": [
+    "lib/*.cadl",
+    "dist/**",
+    "!dist/test/**"
+  ],
+  "peerDependencies": {
+    "@cadl-lang/compiler": "~0.30.0",
+    "@cadl-lang/rest": "~0.13.0",
+    "@cadl-lang/versioning": "~0.4.0"
+  },
+  "dependencies": {
+    "js-yaml": "~4.1.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "~9.1.0",
+    "@types/node": "~14.0.27",
+    "@types/js-yaml": "~4.0.1",
+    "@cadl-lang/compiler": "~0.30.0",
+    "@cadl-lang/rest": "~0.13.0",
+    "@cadl-lang/versioning": "~0.4.0",
+    "eslint": "^8.12.0",
+    "mocha": "~9.2.0",
+    "c8": "~7.11.0",
+    "rimraf": "~3.0.2",
+    "typescript": "~4.5.5"
+  }
+}
