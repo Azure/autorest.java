@@ -254,7 +254,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                    propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty));
+                    propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty, propertyReferences));
                 }
             }
 
@@ -340,8 +340,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         return new ClientModel.Builder();
     }
 
+    /**
+     * Collect property reference from flattened model.
+     *
+     * @param compositeType the model
+     * @param property the property of the model that specified to be flattened
+     * @param modelProperty the ClientModelProperty of the property
+     * @param existingPropertyReferences the list of existing property references from previously flattened models,
+     *                                   for disambiguate purpose
+     * @return the list of property references from flattened model.
+     */
     private List<ClientModelPropertyReference> collectPropertiesFromFlattenedModel(
-            ObjectSchema compositeType, Property property, ClientModelProperty modelProperty) {
+            ObjectSchema compositeType, Property property, ClientModelProperty modelProperty,
+            List<ClientModelPropertyReference> existingPropertyReferences) {
 
         List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
         ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
@@ -358,12 +369,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                 .map(p -> (ObjectSchema) p)
                                 .collect(Collectors.toList()));
             }
-            // gather property names
+            // gather property names for disambiguate
             Set<String> propertyNames = objectSchemaAndParents.stream()
                     .flatMap(o -> o.getProperties().stream())
                     .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
                     .map(p -> p.getLanguage().getJava().getName())
                     .collect(Collectors.toSet());
+            propertyNames.addAll(existingPropertyReferences.stream().map(ClientModelPropertyReference::getName).collect(Collectors.toList()));
             // additional properties
             if (compositeType.getParents() != null && compositeType.getParents().getAll() != null
                     && compositeType.getParents().getAll().stream().anyMatch(s -> s instanceof DictionarySchema)) {
@@ -420,7 +432,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                                 if (property1.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())) {
                                                     ClientModelProperty modelProperty1 = Mappers.getModelPropertyMapper().map(property1);
                                                     List<ClientModelPropertyReference> nestedReferences = collectPropertiesFromFlattenedModel(
-                                                            objectSchema1, property1, modelProperty1);
+                                                            objectSchema1, property1, modelProperty1, existingPropertyReferences);
                                                     nestedReferences.forEach(property2 -> {
                                                         String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property2.getName());
                                                         if (!referencePropertyNames.contains(name)) {
