@@ -32,6 +32,8 @@ import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmtlitetest.storage.models.StorageAccountListKeysResult;
 import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParameters;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
+import com.azure.mgmttest.education.fluent.models.LabDetailsInner;
 
 import java.time.Duration;
 
@@ -136,5 +138,16 @@ public class LiteCompilationTests {
 
         MediaService mediaService = mediaServicesManager.mediaservices().getById(anyString());
         mediaService.syncStorageKeys(any(SyncStorageKeysInput.class));
+    }
+
+    public void testModelFlatten() {
+        ExtendedProductInner extendedProduct = new ExtendedProductInner();
+        extendedProduct.uri();
+
+        LabDetailsInner labDetails = new LabDetailsInner();
+        labDetails.currency();
+        labDetails.value();
+        labDetails.currencyTotalAllocatedBudgetCurrency();
+        labDetails.valueTotalAllocatedBudgetValue();
     }
 }
