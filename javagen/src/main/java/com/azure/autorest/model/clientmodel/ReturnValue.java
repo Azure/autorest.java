@@ -9,6 +9,18 @@ import java.util.Set;
  * A return value from a ClientMethod.
  */
 public class ReturnValue {
+
+    public ReturnValue() {
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setType(IType type) {
+        this.type = type;
+    }
+
     /**
      * The description of the return value.
      */

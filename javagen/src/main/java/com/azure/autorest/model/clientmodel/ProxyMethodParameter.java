@@ -14,6 +14,38 @@ import java.util.Set;
  * A parameter for a ProxyMethod.
  */
 public class ProxyMethodParameter {
+
+    public ProxyMethodParameter() {
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setWireType(IType wireType) {
+        this.wireType = wireType;
+    }
+
+    public void setClientType(IType clientType) {
+        this.clientType = clientType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRequestParameterLocation(RequestParameterLocation requestParameterLocation) {
+        this.requestParameterLocation = requestParameterLocation;
+    }
+
+    public void setRequestParameterName(String requestParameterName) {
+        this.requestParameterName = requestParameterName;
+    }
+
+    public void setParameterReference(String parameterReference) {
+        this.parameterReference = parameterReference;
+    }
+
     /**
      * Get the description of this parameter.
      */

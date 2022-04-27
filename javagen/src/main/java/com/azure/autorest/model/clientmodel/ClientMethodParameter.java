@@ -15,6 +15,21 @@ import java.util.stream.Collectors;
  */
 public class ClientMethodParameter {
 
+    public ClientMethodParameter() {
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setWireType(IType wireType) {
+        this.wireType = wireType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static final ClientMethodParameter CONTEXT_PARAMETER = new ClientMethodParameter.Builder()
             .description("The context to associate with this operation.")
             .wireType(ClassType.Context)
@@ -78,7 +93,7 @@ public class ClientMethodParameter {
     /**
      * The annotations that should be part of this Parameter's declaration.
      */
-    private List<ClassType> annotations;
+    private List<ClassType> annotations = Collections.emptyList();
 
     private RequestParameterLocation location;
 

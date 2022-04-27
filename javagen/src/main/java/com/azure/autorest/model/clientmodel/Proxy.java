@@ -13,6 +13,26 @@ import java.util.Set;
  * Details that describe the dynamic proxy.
  */
 public class Proxy {
+
+    public Proxy() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setClientTypeName(String clientTypeName) {
+        this.clientTypeName = clientTypeName;
+    }
+
+    public void setBaseURL(String baseURL) {
+        this.baseURL = baseURL;
+    }
+
+    public void setMethods(List<ProxyMethod> methods) {
+        this.methods = methods;
+    }
+
     /**
      * Get the name of the REST API interface.
      */

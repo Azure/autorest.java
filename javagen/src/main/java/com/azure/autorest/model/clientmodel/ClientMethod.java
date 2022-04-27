@@ -34,6 +34,34 @@ import java.util.stream.Collectors;
  * A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
  */
 public class ClientMethod {
+
+    public ClientMethod() {
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setReturnValue(ReturnValue returnValue) {
+        this.returnValue = returnValue;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setParameters(List<ClientMethodParameter> parameters) {
+        this.parameters = parameters;
+    }
+
+    public void setType(ClientMethodType type) {
+        this.type = type;
+    }
+
+    public void setProxyMethod(ProxyMethod proxyMethod) {
+        this.proxyMethod = proxyMethod;
+    }
+
     /**
      * The description of this ClientMethod.
      */
@@ -49,11 +77,11 @@ public class ClientMethod {
     /**
      * The parameters of this ClientMethod.
      */
-    private List<ClientMethodParameter> parameters;
+    private List<ClientMethodParameter> parameters = Collections.emptyList();
     /**
      * Whether or not this ClientMethod has omitted optional parameters.
      */
-    private boolean onlyRequiredParameters;
+    private boolean onlyRequiredParameters = false;
     /**
      * The type of this ClientMethod.
      */
@@ -89,9 +117,9 @@ public class ClientMethod {
     /**
      * The parameter transformations before calling ProxyMethod.
      */
-    private List<MethodTransformationDetail> methodTransformationDetails;
+    private List<MethodTransformationDetail> methodTransformationDetails = Collections.emptyList();
 
-    private JavaVisibility methodVisibility;
+    private JavaVisibility methodVisibility = JavaVisibility.Public;
 
     private MethodPollingDetails methodPollingDetails;
 

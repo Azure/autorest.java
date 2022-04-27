@@ -10,6 +10,14 @@ import java.util.function.Function;
  * A basic type used by a client.
  */
 public class PrimitiveType implements IType {
+
+    public PrimitiveType() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase, "false");
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0");
@@ -23,13 +31,13 @@ public class PrimitiveType implements IType {
     /**
      * The name of this type.
      */
-    private final String name;
+    private String name;
     /**
      * The nullable version of this primitive type.
      */
-    private final ClassType nullableType;
-    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
-    private final String defaultValue;
+    private ClassType nullableType;
+    private java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private String defaultValue;
 
     /**
      * Create a new PrimitiveType from the provided properties.

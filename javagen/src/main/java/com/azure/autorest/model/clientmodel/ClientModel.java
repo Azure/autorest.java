@@ -14,6 +14,30 @@ import java.util.stream.Collectors;
  * A model that is defined by the client.
  */
 public class ClientModel {
+
+    public ClientModel() {
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSerializedName(String serializedName) {
+        this.serializedName = serializedName;
+    }
+
+    public void setProperties(List<ClientModelProperty> properties) {
+        this.properties = properties;
+    }
+
     /**
      * The package that this model class belongs to.
      */
@@ -25,7 +49,7 @@ public class ClientModel {
     /**
      * Get the imports for this model.
      */
-    private List<String> imports;
+    private List<String> imports = Collections.emptyList();
     /**
      * Get the description of this model.
      */
@@ -53,7 +77,7 @@ public class ClientModel {
     /**
      * Get the models that derive from this model.
      */
-    private List<ClientModel> derivedModels;
+    private List<ClientModel> derivedModels = Collections.emptyList();
     /**
      * Get the name that will be used for this model's XML element representation.
      */
@@ -62,12 +86,12 @@ public class ClientModel {
     /**
      * The xml namesapce for a model.
      */
-    private final String xmlNamespace;
+    private String xmlNamespace;
 
     /**
      * Get the properties for this model.
      */
-    private List<ClientModelProperty> properties;
+    private List<ClientModelProperty> properties = Collections.emptyList();
 
     private List<ClientModelPropertyReference> propertyReferences;
 
@@ -76,7 +100,7 @@ public class ClientModel {
     /*
      * Whether this model is a strongly-typed HTTP headers class.
      */
-    private final boolean stronglyTypedHeader;
+    private boolean stronglyTypedHeader;
 
     /**
      * Create a new ServiceModel with the provided properties.

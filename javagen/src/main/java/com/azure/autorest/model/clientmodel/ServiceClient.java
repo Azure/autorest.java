@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.ClientModelUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,50 @@ import java.util.Set;
  * The details of a ServiceClient.
  */
 public class ServiceClient {
+
+    public ServiceClient() {
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
+    }
+
+    public void setClientBaseName(String clientBaseName) {
+        this.clientBaseName = clientBaseName;
+    }
+
+    public void setProxy(Proxy proxy) {
+        this.proxy = proxy;
+    }
+
+    public void setClientMethods(List<ClientMethod> clientMethods) {
+        this.clientMethods = clientMethods;
+    }
+
+    public void setConstructors(List<Constructor> constructors) {
+        this.constructors = constructors;
+    }
+
+    public void setHttpPipelineParameter(ClientMethodParameter httpPipelineParameter) {
+        this.httpPipelineParameter = httpPipelineParameter;
+    }
+
+    public void setSerializerAdapterParameter(ClientMethodParameter serializerAdapterParameter) {
+        this.serializerAdapterParameter = serializerAdapterParameter;
+    }
+
     /**
      * The package that this service client belongs to.
      */
@@ -32,19 +77,19 @@ public class ServiceClient {
     /**
      * The MethodGroupClients that belong to this ServiceClient.
      */
-    private List<MethodGroupClient> methodGroupClients;
+    private List<MethodGroupClient> methodGroupClients = Collections.emptyList();
     /**
      * The properties of this ServiceClient.
      */
-    private List<ServiceClientProperty> properties;
+    private List<ServiceClientProperty> properties = Collections.emptyList();
     /**
      * The constructors for this ServiceClient.
      */
-    private List<Constructor> constructors;
+    private List<Constructor> constructors = Collections.emptyList();
     /**
      * The client method overloads for this ServiceClient.
      */
-    private List<ClientMethod> clientMethods;
+    private List<ClientMethod> clientMethods = Collections.emptyList();
     /**
      * The azure environment parameter.
      */
