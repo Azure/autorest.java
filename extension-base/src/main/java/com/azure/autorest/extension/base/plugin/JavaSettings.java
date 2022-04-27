@@ -85,7 +85,7 @@ public class JavaSettings {
             instance = new JavaSettings(
                 autorestSettings,
                 host.getValue(new TypeReference<Map<String, Object>>() {
-                }.getType(), "pipeline.modelerfour"),
+                }.getType(), "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),

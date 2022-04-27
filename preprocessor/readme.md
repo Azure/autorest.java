@@ -16,29 +16,43 @@ pipeline:
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
 
-    seal-single-value-enum-by-default: true
-
-    skip-special-headers:
-    - Repeatability-Request-ID
-    - Repeatability-First-Sent
-
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
     input: modelerfour
 
   preprocessor:
     input: modelerfour/identity
+
+modelerfour:
+  seal-single-value-enum-by-default: true
+
+  skip-special-headers:
+  - Repeatability-Request-ID
+  - Repeatability-First-Sent
 ```
 
 ```yaml !$(data-plane)
-pipeline:
-  modelerfour:
-    flatten-models: true
-    flatten-payloads: true
-    group-parameters: true
+modelerfour:
+  flatten-models: true
+  flatten-payloads: true
+  group-parameters: true
 ```
 
 ```yaml $(data-plane)
+modelerfour:
+  flatten-models: false
+  flatten-payloads: false
+  group-parameters: false
+
+  lenient-model-deduplication: true
+
+  naming:
+    choiceValue: upper
+    preserve-uppercase-max-length: 2
+    override:
+      ip: Ip
+      id: Id
+
 license-header: MICROSOFT_MIT_SMALL
 generate-client-interfaces: false
 generate-client-as-impl: true
@@ -52,20 +66,6 @@ models-subpackage: implementation.models
 client-logger: true
 model-override-setter-from-superclass: true
 polling: {}
-
-pipeline:
-  modelerfour:
-    flatten-models: false
-    flatten-payloads: false
-    group-parameters: false
-    lenient-model-deduplication: true
-
-    naming:
-      choiceValue: upper
-      preserve-uppercase-max-length: 2
-      override:
-        ip: Ip
-        id: Id
 ```
 
 ```yaml $(data-plane) && $(sdk-integration)
