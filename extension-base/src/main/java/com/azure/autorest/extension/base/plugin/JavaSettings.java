@@ -75,10 +75,6 @@ public class JavaSettings {
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
-            if (!autorestSettings.getJavaSdksFolder().isPresent() || autorestSettings.getJavaSdksFolder().get().isEmpty()) {
-                // TODO(weidxu): remove after script updated
-                loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setJavaSdksFolder);
-            }
             List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
@@ -89,7 +85,7 @@ public class JavaSettings {
             instance = new JavaSettings(
                 autorestSettings,
                 host.getValue(new TypeReference<Map<String, Object>>() {
-                }.getType(), "pipeline.modelerfour"),
+                }.getType(), "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
