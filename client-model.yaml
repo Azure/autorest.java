@@ -1,0 +1,245 @@
+name: Pet Store Service
+description: This is a sample server Petstore server.
+serviceClient:
+  packageName: petstore
+  clientBaseName: PetStoreService
+  interfaceName: PetStoreServiceClient
+  className: PetStoreServiceClient
+  httpPipelineParameter: &ref_0
+    name: httpPipeline
+    wireType: !!com.azure.autorest.model.clientmodel.ClassType
+      packageName: com.azure.core.http
+      name: HttpPipeline
+  serializerAdapterParameter: &ref_1
+    name: serializerAdapter
+    wireType: !!com.azure.autorest.model.clientmodel.ClassType
+      packageName: com.azure.core.util.serializer
+      name: SerializerAdapter
+  constructors:
+    - parameters:
+        - *ref_0
+        - *ref_1
+  proxy:
+    name: PetStoreServiceService
+    clientTypeName: PetStoreServiceClient
+    baseURL: '{$host}'
+    methods:
+      - &ref_6
+        httpMethod: DELETE
+        urlPath: /pets/{petId}
+        name: delete
+        requestContentType: application/json
+        returnType: !!com.azure.autorest.model.clientmodel.ClassType &ref_5
+          packageName: java.lang
+          name: Void
+        parameters:
+          - name: petId
+            requestParameterName: petId
+            parameterReference: petId
+            requestParameterLocation: PATH
+            wireType: !!com.azure.autorest.model.clientmodel.ClassType &ref_2
+              packageName: java.lang
+              name: Integer
+            clientType: *ref_2
+      - &ref_8
+        httpMethod: GET
+        urlPath: /pets
+        name: list
+        requestContentType: application/json
+        returnType: !!com.azure.autorest.model.clientmodel.ClassType &ref_7
+          packageName: petstore
+          name: ResponsePagePet
+        parameters:
+          - name: nextLink
+            requestParameterName: nextLink
+            parameterReference: nextLink
+            requestParameterLocation: QUERY
+            wireType: !!com.azure.autorest.model.clientmodel.ClassType &ref_3
+              packageName: java.lang
+              name: String
+            clientType: *ref_3
+      - &ref_9
+        httpMethod: GET
+        urlPath: /pets/{petId}
+        name: read
+        requestContentType: application/json
+        returnType: !!com.azure.autorest.model.clientmodel.ClassType &ref_4
+          packageName: petstore
+          name: Pet
+        parameters:
+          - name: petId
+            requestParameterName: petId
+            parameterReference: petId
+            requestParameterLocation: PATH
+            wireType: *ref_2
+            clientType: *ref_2
+      - &ref_11
+        httpMethod: POST
+        urlPath: /pets
+        name: create
+        requestContentType: application/json
+        returnType: *ref_4
+        parameters: []
+      - &ref_13
+        httpMethod: GET
+        urlPath: /pets/{petId}/toys
+        name: list
+        requestContentType: application/json
+        returnType: !!com.azure.autorest.model.clientmodel.ClassType &ref_12
+          packageName: petstore
+          name: ResponsePageToy
+        parameters:
+          - name: petId
+            requestParameterName: petId
+            parameterReference: petId
+            requestParameterLocation: PATH
+            wireType: *ref_3
+            clientType: *ref_3
+          - name: nameFilter
+            requestParameterName: nameFilter
+            parameterReference: nameFilter
+            requestParameterLocation: QUERY
+            wireType: *ref_3
+            clientType: *ref_3
+  clientMethods:
+    - name: deleteAsyncWithResponse
+      description: Delete a pet.
+      type: SimpleAsyncRestResponse
+      returnValue:
+        type: !!com.azure.autorest.model.clientmodel.GenericType
+          packageName: reactor.core.publisher
+          name: Mono
+          typeArguments:
+            - !!com.azure.autorest.model.clientmodel.GenericType
+              packageName: com.azure.core.http.rest
+              name: Response
+              typeArguments:
+                - *ref_5
+        description: completion
+      parameters:
+        - name: petId
+          wireType: *ref_2
+      proxyMethod: *ref_6
+    - name: listAsyncWithResponse
+      description: <blink>List pets.</blink>
+      type: SimpleAsyncRestResponse
+      returnValue:
+        type: !!com.azure.autorest.model.clientmodel.GenericType
+          packageName: reactor.core.publisher
+          name: Mono
+          typeArguments:
+            - !!com.azure.autorest.model.clientmodel.GenericType
+              packageName: com.azure.core.http.rest
+              name: Response
+              typeArguments:
+                - *ref_7
+      parameters:
+        - name: nextLink
+          wireType: *ref_3
+      proxyMethod: *ref_8
+    - name: readAsyncWithResponse
+      description: Returns a pet. Supports eTags.
+      type: SimpleAsyncRestResponse
+      returnValue:
+        type: !!com.azure.autorest.model.clientmodel.GenericType &ref_10
+          packageName: reactor.core.publisher
+          name: Mono
+          typeArguments:
+            - !!com.azure.autorest.model.clientmodel.GenericType
+              packageName: com.azure.core.http.rest
+              name: Response
+              typeArguments:
+                - *ref_4
+      parameters:
+        - name: petId
+          wireType: *ref_2
+      proxyMethod: *ref_9
+    - name: createAsyncWithResponse
+      type: SimpleAsyncRestResponse
+      returnValue:
+        type: *ref_10
+      parameters: []
+      proxyMethod: *ref_11
+    - name: listAsyncWithResponse
+      type: SimpleAsyncRestResponse
+      returnValue:
+        type: !!com.azure.autorest.model.clientmodel.GenericType
+          packageName: reactor.core.publisher
+          name: Mono
+          typeArguments:
+            - !!com.azure.autorest.model.clientmodel.GenericType
+              packageName: com.azure.core.http.rest
+              name: Response
+              typeArguments:
+                - *ref_12
+      parameters:
+        - name: petId
+          wireType: *ref_3
+        - name: nameFilter
+          wireType: *ref_3
+      proxyMethod: *ref_13
+models:
+  - packageName: petstore
+    name: Pet
+    properties:
+      - name: name
+        serializedName: name
+        wireType: *ref_3
+        clientType: *ref_3
+      - name: tag
+        serializedName: tag
+        wireType: *ref_3
+        clientType: *ref_3
+      - name: age
+        serializedName: age
+        wireType: *ref_2
+        clientType: *ref_2
+  - packageName: petstore
+    name: ResponsePagePet
+    properties:
+      - name: items
+        serializedName: items
+        wireType: !!com.azure.autorest.model.clientmodel.GenericType &ref_14
+          packageName: java.collection
+          name: List
+          typeArguments:
+            - *ref_4
+        clientType: *ref_14
+      - name: nextLink
+        serializedName: nextLink
+        wireType: *ref_3
+        clientType: *ref_3
+  - packageName: petstore
+    name: Toy
+    properties:
+      - name: id
+        serializedName: id
+        wireType: !!com.azure.autorest.model.clientmodel.ClassType &ref_15
+          packageName: java.lang
+          name: Long
+        clientType: *ref_15
+      - name: petId
+        serializedName: petId
+        wireType: *ref_15
+        clientType: *ref_15
+      - name: name
+        serializedName: name
+        wireType: *ref_3
+        clientType: *ref_3
+  - packageName: petstore
+    name: ResponsePageToy
+    properties:
+      - name: items
+        serializedName: items
+        wireType: !!com.azure.autorest.model.clientmodel.GenericType &ref_16
+          packageName: java.collection
+          name: List
+          typeArguments:
+            - !!com.azure.autorest.model.clientmodel.ClassType
+              packageName: petstore
+              name: Toy
+        clientType: *ref_16
+      - name: nextLink
+        serializedName: nextLink
+        wireType: *ref_3
+        clientType: *ref_3

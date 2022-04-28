@@ -3,7 +3,6 @@
 
 package com.azure.autorest;
 
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -29,8 +28,8 @@ import java.nio.charset.StandardCharsets;
 public class CadlMain {
 
     public static void main(String[] args) throws IOException {
-        Client client = loadClient("c:/github/autorest.java/javagen/code-model.yaml");
-
+        Client client = loadClient("client-model.yaml");
+//        Client client = loadClient("c:/github_lab/cadl_lab/cadl-output/client-model.yaml");
         Javagen javagen = new MockUnitJavagen();
         JavaPackage javaPackage = javagen.writeToTemplates(JavaSettings.getInstance(), null, client);
 
