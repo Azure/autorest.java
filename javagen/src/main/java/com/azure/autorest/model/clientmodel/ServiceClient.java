@@ -18,10 +18,6 @@ public class ServiceClient {
     public ServiceClient() {
     }
 
-    public String getPackageName() {
-        return packageName;
-    }
-
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
@@ -56,6 +52,18 @@ public class ServiceClient {
 
     public void setSerializerAdapterParameter(ClientMethodParameter serializerAdapterParameter) {
         this.serializerAdapterParameter = serializerAdapterParameter;
+    }
+
+    public void setProperties(List<ServiceClientProperty> properties) {
+        this.properties = properties;
+    }
+
+    public boolean isBuilderDisabled() {
+        return builderDisabled;
+    }
+
+    public void setBuilderDisabled(boolean builderDisabled) {
+        this.builderDisabled = builderDisabled;
     }
 
     /**

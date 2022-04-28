@@ -34,6 +34,77 @@ export async function $onEmit(program1: Program) {
   await program.host.writeFile(resolvePath(program.compilerOptions.outputPath || "", "./client-model.yaml"), dump(yamlMap, { schema }));
 }
 
+
+const parametersMap = new Map<HttpOperationParameter, any>();
+
+interface JavaType {
+}
+
+class ClassType implements JavaType {
+  packageName: string;
+  name: string;
+
+  constructor(packageName: string, name: string) {
+    this.packageName = packageName;
+    this.name = name;
+  }
+}
+
+const voidType = new ClassType("java.lang", "Void");
+const stringType = new ClassType("java.lang", "String");
+const integerType = new ClassType("java.lang", "Integer");
+const longType = new ClassType("java.lang", "Long");
+const httpPipelineType = new ClassType("com.azure.core.http", "HttpPipeline");
+const serializerAdapterType = new ClassType("com.azure.core.util.serializer", "SerializerAdapter");
+
+class GenericType implements JavaType {
+  packageName: string;
+  name: string;
+  typeArguments: JavaType[];
+
+  constructor(packageName: string, name: string, typeArguments: JavaType[]) {
+    this.packageName = packageName;
+    this.name = name;
+    this.typeArguments = typeArguments;
+  }
+}
+
+const typesMap = new Map<Type, JavaType>();
+const monoResponseTypesMap = new Map<JavaType, GenericType>();
+const listTypesMap = new Map<JavaType, GenericType>();
+
+const hostProxyParameter = {
+  name: "endpoint",
+  description: "service endpoint",
+  requestParameterName: "$host",
+  parameterReference: "getEndpoint()",
+  requestParameterLocation: "URI",
+  fromClient: true,
+  wireType: stringType,
+  clientType: stringType
+};
+
+const hostClientProperty = {
+  name: "endpoint",
+  description: "service endpoint",
+  type: stringType,
+  readOnly: false
+}
+
+const httpPipelineClientProperty = {
+  name: "httpPipeline",
+  description: "HTTP pipeline",
+  type: httpPipelineType,
+  readOnly: true
+}
+
+const serializerAdapterProperty = {
+  name: "serializerAdapter",
+  description: "serializer adapter",
+  type: serializerAdapterType,
+  readOnly: true
+}
+
 function createClientModel(): any {
   const serviceNamespace = getServiceNamespace(program);
   if (serviceNamespace === undefined) {
@@ -83,6 +154,12 @@ function createServiceClient(): any {
         ]
       }
     ],
+    properties: [
+      httpPipelineClientProperty,
+      serializerAdapterProperty,
+      hostClientProperty
+    ],
+    builderDisabled: true,
     proxy: {
       name: clientName + "Service",
       clientTypeName: clientName + "Client",
@@ -102,22 +179,21 @@ function createProxyMethod(operation: OperationDetails): any {
     urlPath: operation.path,
     name: operation.operation.name,
     requestContentType: "application/json",
-    returnType: getJavaType(response.responses[0].body?.type),
-    parameters: operation.parameters.parameters.map(getParameter)
+    returnType: monoResponseType(getJavaType(response.responses[0].body?.type)),
+    parameters: [hostProxyParameter, ...operation.parameters.parameters.map(getParameter)]
   }
   return method;
 }
 
 function createClientMethod(operation: OperationDetails): any {
   const response = operation.responses[0];
-  const responseType = getJavaType(response.responses[0].body?.type);
 
   const method = {
     name: operation.operation.name + "AsyncWithResponse",
     description: getDoc(program, operation.operation),
     type: "SimpleAsyncRestResponse",
     returnValue: {
-      type: responseType ? monoResponseType(responseType) : monoResponseType(voidType),
+      type: monoResponseType(getJavaType(response.responses[0].body?.type)),
       description: response.responses[0].body?.type ? getDoc(program, response.responses[0].body?.type) : "completion",
     },
     parameters: operation.parameters.parameters.map(p => {
@@ -130,8 +206,6 @@ function createClientMethod(operation: OperationDetails): any {
   }
   return method;
 }
-
-const parametersMap = new Map<HttpOperationParameter, any>();
 
 function getParameter(parameter: HttpOperationParameter): any {
   const cached = parametersMap.get(parameter);
@@ -149,42 +223,6 @@ function getParameter(parameter: HttpOperationParameter): any {
     return param;
   }
 }
-
-interface JavaType {
-}
-
-class ClassType implements JavaType {
-  packageName: string;
-  name: string;
-
-  constructor(packageName: string, name: string) {
-    this.packageName = packageName;
-    this.name = name;
-  }
-}
-
-const voidType = new ClassType("java.lang", "Void");
-const stringType = new ClassType("java.lang", "String");
-const integerType = new ClassType("java.lang", "Integer");
-const longType = new ClassType("java.lang", "Long");
-const httpPipelineType = new ClassType("com.azure.core.http", "HttpPipeline");
-const serializerAdapterType = new ClassType("com.azure.core.util.serializer", "SerializerAdapter");
-
-class GenericType implements JavaType {
-  packageName: string;
-  name: string;
-  typeArguments: JavaType[];
-
-  constructor(packageName: string, name: string, typeArguments: JavaType[]) {
-    this.packageName = packageName;
-    this.name = name;
-    this.typeArguments = typeArguments;
-  }
-}
-
-const typesMap = new Map<Type, JavaType>();
-const monoResponseTypesMap = new Map<JavaType, GenericType>();
-const listTypesMap = new Map<JavaType, GenericType>();
 
 function listType(javaType: JavaType): GenericType {
   const cached = listTypesMap.get(javaType);
@@ -289,7 +327,7 @@ function getProperty(name: string, property: ModelTypeProperty): any {
     const p = {
       name: property.name,
       serializedName: name,
-      description: getDoc(program, property.type),
+      description: getDoc(program, property),
       wireType: getJavaType(property.type),
       clientType: getJavaType(property.type)
     };

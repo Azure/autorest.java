@@ -46,6 +46,14 @@ public class ProxyMethodParameter {
         this.parameterReference = parameterReference;
     }
 
+    public boolean isFromClient() {
+        return fromClient;
+    }
+
+    public void setFromClient(boolean fromClient) {
+        this.fromClient = fromClient;
+    }
+
     /**
      * Get the description of this parameter.
      */
@@ -93,7 +101,7 @@ public class ProxyMethodParameter {
     /**
      * Whether or not this parameter's value comes from a ServiceClientProperty.
      */
-    private boolean fromClient;
+    private boolean fromClient = false;
     /**
      * The x-ms-header-collection-prefix extension value.
      */
