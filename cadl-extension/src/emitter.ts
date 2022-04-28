@@ -1,13 +1,9 @@
 import {
   getDoc,
-  getIntrinsicModelName,
-  getServiceHost,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
   getServiceVersion,
-  isErrorModel,
-  mapChildModels,
   ModelTypeProperty,
   Program,
   resolvePath,
@@ -17,14 +13,8 @@ import {
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
-  getContentTypes,
-  getDiscriminator,
   HttpOperationParameter,
-  HttpOperationParameters,
-  HttpOperationResponse,
-  HttpOperationResponseContent,
   OperationDetails,
-  rest,
 } from "@cadl-lang/rest";
 import {
   getVersions,
