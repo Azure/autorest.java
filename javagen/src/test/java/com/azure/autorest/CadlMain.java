@@ -42,8 +42,8 @@ public class CadlMain {
             } catch (Exception e) {
                 continue;
             }
-            new File("target/" + javaFile.getFilePath()).getParentFile().mkdirs();
-            writeFile("target/" + javaFile.getFilePath(), content);
+            new File("cadl-sample/" + javaFile.getFilePath()).getParentFile().mkdirs();
+            writeFile("cadl-sample/" + javaFile.getFilePath(), content);
         }
 
         int i = 1;

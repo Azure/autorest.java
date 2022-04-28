@@ -309,6 +309,7 @@ function getModelType(type: ModelType): JavaType {
     const model = {
       packageName: namespace,
       name: typeName,
+      description: getDoc(program, type),
       properties: Array.from(type.properties.entries()).map(([n, p]) => getProperty(n, p))
     };
     
