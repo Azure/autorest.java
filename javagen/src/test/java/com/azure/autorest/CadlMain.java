@@ -18,6 +18,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +42,8 @@ public class CadlMain {
             } catch (Exception e) {
                 continue;
             }
-            writeFile("c:/github/autorest.java/tmp/" + javaFile.getFilePath(), content);
+            new File("target/" + javaFile.getFilePath()).getParentFile().mkdirs();
+            writeFile("target/" + javaFile.getFilePath(), content);
         }
 
         int i = 1;

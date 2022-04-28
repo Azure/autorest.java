@@ -229,7 +229,7 @@ function listType(javaType: JavaType): GenericType {
   if (cached) {
     return cached;
   } else {
-    const type = new GenericType("java.collection", "List", [javaType]);
+    const type = new GenericType("java.util", "List", [javaType]);
     listTypesMap.set(javaType, type);
     return type;
   }

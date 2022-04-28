@@ -227,7 +227,7 @@ models:
       - name: items
         serializedName: items
         wireType: !!com.azure.autorest.model.clientmodel.GenericType &ref_17
-          packageName: java.collection
+          packageName: java.util
           name: List
           typeArguments:
             - *ref_16
@@ -259,7 +259,7 @@ models:
       - name: items
         serializedName: items
         wireType: !!com.azure.autorest.model.clientmodel.GenericType &ref_19
-          packageName: java.collection
+          packageName: java.util
           name: List
           typeArguments:
             - !!com.azure.autorest.model.clientmodel.ClassType
