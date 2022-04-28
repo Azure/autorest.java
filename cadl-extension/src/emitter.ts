@@ -182,6 +182,16 @@ function createProxyMethod(operation: OperationDetails): any {
     returnType: monoResponseType(getJavaType(response.responses[0].body?.type)),
     parameters: [hostProxyParameter, ...operation.parameters.parameters.map(getParameter)]
   }
+  if (operation.parameters.body) {
+    method.parameters.push({
+      name: operation.parameters.body.name,
+      requestParameterName: operation.parameters.body.name,
+      parameterReference: operation.parameters.body.name,
+      requestParameterLocation: "BODY",
+      wireType: getJavaType(operation.parameters.body.type),
+      clientType: getJavaType(operation.parameters.body.type)
+    });
+  }
   return method;
 }
 
@@ -203,6 +213,12 @@ function createClientMethod(operation: OperationDetails): any {
       };
     }),
     proxyMethod: createProxyMethod(operation)
+  }
+  if (operation.parameters.body) {
+    method.parameters.push({
+      name: operation.parameters.body.name,
+      wireType: getJavaType(operation.parameters.body.type)
+    });
   }
   return method;
 }

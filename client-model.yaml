@@ -40,12 +40,12 @@ serviceClient:
     clientTypeName: PetStoreServiceClient
     baseURL: '{$host}'
     methods:
-      - &ref_9
+      - &ref_10
         httpMethod: DELETE
         urlPath: /pets/{petId}
         name: delete
         requestContentType: application/json
-        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_8
+        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_9
           packageName: reactor.core.publisher
           name: Mono
           typeArguments:
@@ -74,12 +74,12 @@ serviceClient:
               packageName: java.lang
               name: Integer
             clientType: *ref_5
-      - &ref_11
+      - &ref_12
         httpMethod: GET
         urlPath: /pets
         name: list
         requestContentType: application/json
-        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_10
+        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_11
           packageName: reactor.core.publisher
           name: Mono
           typeArguments:
@@ -98,7 +98,7 @@ serviceClient:
             requestParameterLocation: QUERY
             wireType: *ref_4
             clientType: *ref_4
-      - &ref_12
+      - &ref_13
         httpMethod: GET
         urlPath: /pets/{petId}
         name: read
@@ -111,7 +111,7 @@ serviceClient:
               packageName: com.azure.core.http.rest
               name: Response
               typeArguments:
-                - !!com.azure.autorest.model.clientmodel.ClassType &ref_16
+                - !!com.azure.autorest.model.clientmodel.ClassType &ref_8
                   packageName: petstore
                   name: Pet
         parameters:
@@ -122,7 +122,7 @@ serviceClient:
             requestParameterLocation: PATH
             wireType: *ref_5
             clientType: *ref_5
-      - &ref_13
+      - &ref_14
         httpMethod: POST
         urlPath: /pets
         name: create
@@ -130,12 +130,18 @@ serviceClient:
         returnType: *ref_7
         parameters:
           - *ref_6
-      - &ref_15
+          - name: pet
+            requestParameterName: pet
+            parameterReference: pet
+            requestParameterLocation: BODY
+            wireType: *ref_8
+            clientType: *ref_8
+      - &ref_16
         httpMethod: GET
         urlPath: /pets/{petId}/toys
         name: list
         requestContentType: application/json
-        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_14
+        returnType: !!com.azure.autorest.model.clientmodel.GenericType &ref_15
           packageName: reactor.core.publisher
           name: Mono
           typeArguments:
@@ -165,21 +171,21 @@ serviceClient:
       description: Delete a pet.
       type: SimpleAsyncRestResponse
       returnValue:
-        type: *ref_8
+        type: *ref_9
         description: completion
       parameters:
         - name: petId
           wireType: *ref_5
-      proxyMethod: *ref_9
+      proxyMethod: *ref_10
     - name: listAsyncWithResponse
       description: <blink>List pets.</blink>
       type: SimpleAsyncRestResponse
       returnValue:
-        type: *ref_10
+        type: *ref_11
       parameters:
         - name: nextLink
           wireType: *ref_4
-      proxyMethod: *ref_11
+      proxyMethod: *ref_12
     - name: readAsyncWithResponse
       description: Returns a pet. Supports eTags.
       type: SimpleAsyncRestResponse
@@ -188,23 +194,25 @@ serviceClient:
       parameters:
         - name: petId
           wireType: *ref_5
-      proxyMethod: *ref_12
+      proxyMethod: *ref_13
     - name: createAsyncWithResponse
       type: SimpleAsyncRestResponse
       returnValue:
         type: *ref_7
-      parameters: []
-      proxyMethod: *ref_13
+      parameters:
+        - name: pet
+          wireType: *ref_8
+      proxyMethod: *ref_14
     - name: listAsyncWithResponse
       type: SimpleAsyncRestResponse
       returnValue:
-        type: *ref_14
+        type: *ref_15
       parameters:
         - name: petId
           wireType: *ref_4
         - name: nameFilter
           wireType: *ref_4
-      proxyMethod: *ref_15
+      proxyMethod: *ref_16
 models:
   - packageName: petstore
     name: Pet
@@ -230,7 +238,7 @@ models:
           packageName: java.util
           name: List
           typeArguments:
-            - *ref_16
+            - *ref_8
         clientType: *ref_17
       - name: nextLink
         serializedName: nextLink

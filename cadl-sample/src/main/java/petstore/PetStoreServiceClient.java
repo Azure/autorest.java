@@ -1,5 +1,6 @@
 package petstore;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
@@ -89,7 +90,7 @@ public final class PetStoreServiceClient {
         Mono<Response<Pet>> read(@HostParam("$host") String endpoint, @PathParam("petId") Integer petId);
 
         @Post("/pets")
-        Mono<Response<Pet>> create(@HostParam("$host") String endpoint);
+        Mono<Response<Pet>> create(@HostParam("$host") String endpoint, @BodyParam("application/json") Pet pet);
 
         @Get("/pets/{petId}/toys")
         Mono<Response<ResponsePageToy>> list(
@@ -135,10 +136,14 @@ public final class PetStoreServiceClient {
         return service.read(getEndpoint(), petId);
     }
 
-    /** @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent. */
+    /**
+     * @param pet The pet parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Pet>> createAsyncWithResponse() {
-        return service.create(getEndpoint());
+    public Mono<Response<Pet>> createAsyncWithResponse(Pet pet) {
+        return service.create(getEndpoint(), pet);
     }
 
     /**
