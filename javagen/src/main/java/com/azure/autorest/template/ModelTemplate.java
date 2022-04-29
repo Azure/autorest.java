@@ -624,15 +624,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         int headerPrefixLength = property.getHeaderCollectionPrefix().length();
         // HeaderCollections are always Maps that use String as the key.
         MapType wireType = (MapType) property.getWireType();
-        IType wireValueType = wireType.getValueType();
-        block.line("%s headerCollection = new HashMap<String, %s>();", wireType, wireValueType);
+        String collectionName = property.getName() + "HeaderCollection";
+
+        // Prefix the map with the property name for the cases where multiple header collections exist.
+        // TODO: If there are multiple header collections they can be combined into a single loop over the headers.
+        // Not a high priority as loop should be relatively cheap, and only constant time.
+        block.line("%s %s = new HashMap<>();", wireType, collectionName);
         block.line();
         block.block("for (HttpHeader header : rawHeaders)", body -> {
             body.ifBlock(String.format("!header.getName().startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
                 ifBlock -> ifBlock.line("continue;"));
-            body.line("headerCollection.put(header.getName().substring(%d), header.getValue());", headerPrefixLength);
+            body.line(collectionName + ".put(header.getName().substring(%d), header.getValue());", headerPrefixLength);
         });
-        block.line("this.%s = headerCollection;", property.getName());
+        block.line("this.%s = %s;", property.getName(), collectionName);
     }
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
@@ -643,31 +647,21 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         boolean needsToBeGuardedAgainstNull = false;
         String setter;
-        if (wireType == PrimitiveType.Boolean) {
+        if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
+            needsToBeGuardedAgainstNull = wireType == ClassType.Boolean;
             setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Boolean) {
-            needsToBeGuardedAgainstNull = true;
-            setter = String.format("Boolean.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Double) {
+        } else if (wireType == PrimitiveType.Double || wireType == ClassType.Double) {
+            needsToBeGuardedAgainstNull = wireType == ClassType.Double;
             setter = String.format("Double.parseDouble(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Double) {
-            needsToBeGuardedAgainstNull = true;
-            setter = String.format("Double.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Float) {
+        } else if (wireType == PrimitiveType.Float || wireType == ClassType.Float) {
+            needsToBeGuardedAgainstNull = wireType == ClassType.Float;
             setter = String.format("Float.parseFloat(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Float) {
-            needsToBeGuardedAgainstNull = true;
-            setter = String.format("Float.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Int) {
+        } else if (wireType == PrimitiveType.Int || wireType == ClassType.Integer) {
+            needsToBeGuardedAgainstNull = wireType == ClassType.Integer;
             setter = String.format("Integer.parseInt(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Integer) {
-            needsToBeGuardedAgainstNull = true;
-            setter = String.format("Integer.valueOf(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Long) {
+        } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
+            needsToBeGuardedAgainstNull = wireType == ClassType.Long;
             setter = String.format("Long.parseLong(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Long) {
-            needsToBeGuardedAgainstNull = true;
-            setter = String.format("Long.valueOf(%s)", rawHeaderAccess);
         } else if (wireType == ArrayType.ByteArray) {
             needsToBeGuardedAgainstNull = true;
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
