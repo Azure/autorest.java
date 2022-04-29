@@ -74,12 +74,14 @@ Then run `CadlMain.java` in IDE to generate Java files.
 Quick recap, in AutoRest.Java, data flow is,
 
 **preprocessor** module
+
 1. YAML from ModelerFour
 2. CodeModel of this YAML in Java
 3. Transformation (rename according to Java guideline, add nextLink method for pagination, etc.)
 4. Output YAML similar to ModelerFour
 
 **javagen** module
+
 5. YAML from preprocessor (similar to ModelerFour YAML)
 6. CodeModel of this YAML in Java
 7. Mapping to Client (client-model)
