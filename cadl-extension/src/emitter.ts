@@ -34,7 +34,6 @@ export async function $onEmit(program1: Program) {
   await program.host.writeFile(resolvePath(program.compilerOptions.outputPath || "", "./client-model.yaml"), dump(yamlMap, { schema }));
 }
 
-
 const parametersMap = new Map<HttpOperationParameter, any>();
 
 interface JavaType {
