@@ -25,7 +25,7 @@ public final class HeadersResponseIntegerHeaders {
      */
     public HeadersResponseIntegerHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
-            this.value = Integer.valueOf(rawHeaders.getValue("value"));
+            this.value = Integer.parseInt(rawHeaders.getValue("value"));
         }
     }
 

@@ -25,7 +25,7 @@ public final class HeadersResponseFloatHeaders {
      */
     public HeadersResponseFloatHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
-            this.value = Float.valueOf(rawHeaders.getValue("value"));
+            this.value = Float.parseFloat(rawHeaders.getValue("value"));
         }
     }
 
