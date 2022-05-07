@@ -88,8 +88,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             } else {
                 operationId = operation.getLanguage().getDefault().getName();
             }
-            builder.operationId(operationId);
         }
+        builder.operationId(operationId);
 
         List<Integer> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
