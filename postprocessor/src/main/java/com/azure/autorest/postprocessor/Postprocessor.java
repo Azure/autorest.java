@@ -255,7 +255,11 @@ public class Postprocessor extends NewPlugin {
         fileContents.replaceAll((path, generatedFileContent) -> {
             if (path.endsWith(".java")) { // only handle for .java file
                 // get existing file path
-                String projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
+                String projectBaseDirectoryPath = JavaSettings.getInstance().getAutorestSettings().getOutputFolder();
+                if (projectBaseDirectoryPath == null) {
+                    // take parent directory of swagger/readme.md
+                    projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
+                }
                 Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
                 // check if existingFile exists, if not, no need to handle partial update
                 if (Files.exists(existingFilePath)) {
