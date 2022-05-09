@@ -255,9 +255,10 @@ public class Postprocessor extends NewPlugin {
         fileContents.replaceAll((path, generatedFileContent) -> {
             if (path.endsWith(".java")) { // only handle for .java file
                 // get existing file path
+                // use output-folder from autorest, if exists
                 String projectBaseDirectoryPath = JavaSettings.getInstance().getAutorestSettings().getOutputFolder();
-                if (projectBaseDirectoryPath == null) {
-                    // take parent directory of swagger/readme.md
+                if (projectBaseDirectoryPath == null || !(new File(projectBaseDirectoryPath).isDirectory())) {
+                    // use parent directory of swagger/readme.md
                     projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
                 }
                 Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
