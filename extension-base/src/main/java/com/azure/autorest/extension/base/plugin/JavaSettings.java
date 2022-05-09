@@ -5,6 +5,7 @@ package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,8 @@ public class JavaSettings {
     private static String header;
 
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
+
+    private static Logger logger;
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -57,6 +60,7 @@ public class JavaSettings {
 
     static void setHost(NewPlugin host) {
         JavaSettings.host = host;
+        logger = new PluginLogger(host, JavaSettings.class);
     }
 
     public static void clear() {
@@ -79,6 +83,7 @@ public class JavaSettings {
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
                     inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                logger.info("List of input files : {}", autorestSettings.getInputFiles());
             }
 
             setHeader(getStringValue(host, "license-header"));
@@ -972,6 +977,7 @@ public class JavaSettings {
 
     private static void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
+        logger.info("Option, string, {} : {}", settingName, settingValue);
         if (settingValue != null) {
             action.accept(settingValue);
         }
@@ -980,6 +986,7 @@ public class JavaSettings {
     private static String getStringValue(NewPlugin host, String settingName) {
         String value = host.getStringValue(settingName);
         if (value != null) {
+            logger.info("Option, string, {} : {}", settingName, value);
             SIMPLE_JAVA_SETTINGS.put(settingName, value);
         }
         return value;
@@ -990,6 +997,7 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
+            logger.info("Option, string, {} : {}", settingName, ret);
             SIMPLE_JAVA_SETTINGS.put(settingName, ret);
             return ret;
         }
@@ -1000,6 +1008,7 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
+            logger.info("Option, boolean, {} : {}", settingName, ret);
             SIMPLE_JAVA_SETTINGS.put(settingName, ret);
             return ret;
         }
@@ -1010,9 +1019,11 @@ public class JavaSettings {
         List<String> settingValues = new ArrayList<>();
         Object settingValue = host.getValue(Object.class, settingName);
         if (settingValue instanceof String) {
+            logger.info("Option, string, {} : {}", settingName, settingValue);
             settingValues.add(settingValue.toString());
         } else if (settingValue instanceof List) {
             List<String> settingValueList = (List<String>) settingValue;
+            logger.info("Option, array, {} : {}", settingName, settingValueList);
             settingValues.addAll(settingValueList);
         }
         if (!settingValues.isEmpty()) {
