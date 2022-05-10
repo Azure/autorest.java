@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -234,7 +235,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     parameter.getRequestParameterLocation() != RequestParameterLocation.BODY &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                if (parameter.getExplode() == false) {
+                if (!parameter.getExplode()) {
                     parameterWireType = ClassType.String;
                 } else {
                     parameterWireType = new ListType(ClassType.String);
@@ -277,14 +278,33 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         String expression;
                         if (alwaysNull) {
                             expression = "null";
-                        } else if (!parameter.getExplode()){
-                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
-                                            ".serializeList(%s, CollectionFormat.%s)", parameterName,
-                                    parameter.getCollectionFormat().toString().toUpperCase());
-                            if (settings.shouldUseIterable()) {
-                                expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
-                                                ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
-                                        parameter.getCollectionFormat().toString().toUpperCase());
+                        } else if (!parameter.getExplode()) {
+                            if (parameter.getClientType() instanceof EnumType) {
+                                // EnumTypes should provide a toString implementation that represents the wire value.
+                                // Circumvent the use of JacksonAdapter and handle this manually.
+
+                                // If the parameter is null, the converted value is null.
+                                // Otherwise, convert the parameter to a string, mapping each element to the toString
+                                // value, finally joining with the collection format.
+                                expression =
+                                    "if (iterable == null) {\n" +
+                                    "            return null;\n" +
+                                    "        }\n" +
+                                    "\n" +
+                                    "return StreamSupport.stream(iterable.spliterator(), false)\n" +
+                                    "    .map(String::valueOf)\n" +
+                                    "    .map(serializedString -> serializedString == null ? \"\" : serializedString)\n" +
+                                    "    .collect(Collectors.joining(" + parameter.getCollectionFormat().getDelimiter() + "));";
+                            } else if (settings.shouldUseIterable()) {
+                                // Check if serializeIterable should be used.
+                                expression = String.format(
+                                    "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
+                                    parameterName, parameter.getCollectionFormat().toString().toUpperCase());
+                            } else {
+                                // Finally, just use serializeList.
+                                expression = String.format(
+                                    "JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)",
+                                    parameterName, parameter.getCollectionFormat().toString().toUpperCase());
                             }
                         } else {
                             expression = String.format("Optional.ofNullable(%s).map(Collection::stream)" +
