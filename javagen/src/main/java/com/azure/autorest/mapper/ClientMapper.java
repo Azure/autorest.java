@@ -200,7 +200,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                     && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
 
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-                if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
+                if (!packageInfos.containsKey(modelsPackage)) {
                     packageInfos.put(modelsPackage, new PackageInfo(
                             modelsPackage,
                             String.format("Package containing the data models for %s.\n%s", serviceClientName,
