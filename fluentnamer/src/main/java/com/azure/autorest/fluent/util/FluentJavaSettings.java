@@ -3,7 +3,6 @@
 
 package com.azure.autorest.fluent.util;
 
-import com.azure.autorest.extension.base.plugin.AutorestSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.core.util.CoreUtils;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -73,8 +71,6 @@ public class FluentJavaSettings {
     private SampleGeneration generateSamples = SampleGeneration.NONE;
 
     private boolean sdkIntegration = false;
-
-    private AutorestSettings autorestSettings;
 
     private enum SampleGeneration {
         NONE,
@@ -146,26 +142,6 @@ public class FluentJavaSettings {
         return sdkIntegration;
     }
 
-    public AutorestSettings getAutorestSettings() {
-        if (autorestSettings == null) {
-            autorestSettings = new AutorestSettings();
-
-            loadStringSetting("tag", autorestSettings::setTag);
-
-            loadStringSetting("base-folder", autorestSettings::setBaseFolder);
-            loadStringSetting("output-folder", autorestSettings::setOutputFolder);
-            loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
-
-            List<Object> inputFiles = host.getValue(List.class, "input-file");
-            if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
-                logger.info("List of input files : {}", autorestSettings.getInputFiles());
-            }
-        }
-
-        return autorestSettings;
-    }
-
     private void loadSettings() {
         loadStringSetting("add-inner", s -> splitStringToSet(s, javaNamesForAddInner));
 
@@ -222,16 +198,16 @@ public class FluentJavaSettings {
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
         Boolean settingValue = host.getBooleanValue(settingName);
-        logger.info("Option, boolean, {} : {}", settingName, settingValue);
         if (settingValue != null) {
+            logger.debug("Option, boolean, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
 
     private void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
-        logger.info("Option, string, {} : {}", settingName, settingValue);
         if (settingValue != null) {
+            logger.debug("Option, string, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
