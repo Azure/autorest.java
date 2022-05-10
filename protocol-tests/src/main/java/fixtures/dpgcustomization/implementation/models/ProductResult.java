@@ -6,6 +6,7 @@ package fixtures.dpgcustomization.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fixtures.dpgcustomization.models.Product;
 import java.util.List;
 
 /** The ProductResult model. */

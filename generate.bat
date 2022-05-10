@@ -1,8 +1,9 @@
-set VANILLA_ARGUMENTS=--version=3.8.1 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
-set AZURE_ARGUMENTS=--version=3.8.1 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
-set ARM_ARGUMENTS=--version=3.8.1 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
-set PROTOCOL_ARGUMENTS=--version=3.8.1 --java --use=. --output-folder=protocol-tests --data-plane --generate-samples
-set PROTOCOL_RESILIENCE_ARGUMENTS=--version=3.8.1 --java --use=. --data-plane
+set AUTOREST_CORE_VERSION=3.8.1
+set VANILLA_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
+set AZURE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
+set ARM_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
+set PROTOCOL_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=protocol-tests --data-plane --generate-samples
+set PROTOCOL_RESILIENCE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --data-plane
 set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
 move /Y vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java vanilla-tests\swagger\CoverageReporter.java
@@ -43,8 +44,8 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.js
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-call autorest --version=3.8.1 --use=./ vanilla-tests/swagger/lro.md
-call autorest --version=3.8.1 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+call autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/lro.md
+call autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 move vanilla-tests\swagger\CoverageReporter.java vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java
 
 rem local swagger
@@ -86,9 +87,9 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collect
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
-call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
 call autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
-call autorest --version=3.8.1 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
+call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
+call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models
 copy protocol-tests\swagger\CustomizedException.java protocol-tests\src\main\java\fixtures\headexceptions\models\CustomizedException.java
 del protocol-tests\src\main\java\module-info.java
@@ -102,10 +103,10 @@ del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
 rem customization
-call autorest --version=3.8.1 --use:. customization-tests/swagger
+call autorest --version=%AUTOREST_CORE_VERSION% --use:. customization-tests/swagger
 
 rem partial update tests
-call autorest --version=3.8.1 --use:. partial-update-tests/existing/swagger/README.md
+call autorest --version=%AUTOREST_CORE_VERSION% --use:. partial-update-tests/existing/swagger/README.md
 del partial-update-tests\generated\src\main\java\module-info.java
 
 rem docs
