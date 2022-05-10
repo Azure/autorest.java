@@ -2,11 +2,12 @@
 
 set -e
 
-VANILLA_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
-AZURE_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
-ARM_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
-PROTOCOL_ARGUMENTS='--version=3.8.1 --java --use=./ --output-folder=protocol-tests --data-plane --generate-samples'
-PROTOCOL_RESILIENCE_ARGUMENTS='--version=3.8.1 --java --use=./ --data-plane'
+AUTOREST_CORE_VERSION='3.8.1'
+VANILLA_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
+AZURE_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL'
+ARM_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
+PROTOCOL_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --output-folder=protocol-tests --data-plane --generate-samples'
+PROTOCOL_RESILIENCE_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --data-plane'
 SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
 # Vanilla
@@ -48,8 +49,8 @@ autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/non-string-enum.json --na
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 autorest $VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-autorest --version=3.8.1 --use=./ vanilla-tests/swagger/lro.md
-autorest --version=3.8.1 --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+autorest --version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md
+autorest --version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 mv -f vanilla-tests/swagger/CoverageReporter.java vanilla-tests/src/main/java/fixtures/report/CoverageReporter.java
 
 # local swagger
@@ -87,9 +88,9 @@ autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/url-multi-collectionForm
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_initial.json --namespace=fixtures.llcinitial
 autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
-autorest $PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-customization.json --namespace=fixtures.dpgcustomization --generate-send-request-method --generate-models
 autorest $PROTOCOL_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
-autorest --version=3.6.6 --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
+autorest --version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md
+autorest --version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests/src/main/java/fixtures/headexceptions/models
 cp protocol-tests/swagger/CustomizedException.java protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java
 # Java 8 does not support module. Remove it to pass CI.
@@ -104,8 +105,8 @@ rm ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
 rm ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java
 
 # customization
-autorest --version=3.8.1 --use:. customization-tests/swagger
+autorest --version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger
 
 # partial update tests
-autorest --version=3.8.1 --use:. partial-update-tests/existing/swagger/README.md
+autorest --version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md
 rm ./partial-update-tests/generated/src/main/java/module-info.java

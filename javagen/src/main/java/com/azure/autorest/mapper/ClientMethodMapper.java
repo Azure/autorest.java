@@ -757,7 +757,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             1. Only generate "WithResponse" method for simple API (hence exclude SimpleAsync and SimpleSync).
             2. For sync method, Context is included in "RequestOptions", hence do not generate method with Context parameter.
-            3. For async method, Context is not included in the first place (this rule is valid for all clients).
+            3. For async method, Context is not included in method (this rule is valid for all clients).
              */
 
             return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
