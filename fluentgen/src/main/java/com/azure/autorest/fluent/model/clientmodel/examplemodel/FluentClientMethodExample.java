@@ -5,7 +5,6 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
-import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -77,7 +76,9 @@ public class FluentClientMethodExample implements FluentMethodExample {
 
     @Override
     public String getMethodReference() {
-        String namespace = JavaSettings.getInstance().getPackage();
+        JavaSettings settings = JavaSettings.getInstance();
+
+        String namespace = settings.getPackage();
         String[] identifiers = namespace.split(Pattern.quote("."));
         String lastIdentifier = identifiers[identifiers.length - 1];
 
@@ -90,7 +91,7 @@ public class FluentClientMethodExample implements FluentMethodExample {
         if ("authorization".equals(lastIdentifier)) {
             serviceClientReference = "roleServiceClient()";
         } else if ("resources".equals(lastIdentifier)) {
-            String tag = FluentStatic.getFluentJavaSettings().getAutorestSettings().getTag();
+            String tag = settings.getAutorestSettings().getTag();
             if (tag.contains("feature")) {
                 serviceClientReference = "featureClient()";
             } else if (tag.contains("policy")) {
