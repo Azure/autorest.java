@@ -421,7 +421,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
         if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
             function.line(String.format("String %1$s = UUID.randomUUID().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
-            function.line(String.format("String %1$s = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
+            function.line(String.format("String %1$s = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
         }
     }
 
