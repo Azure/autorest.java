@@ -200,7 +200,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                     && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
 
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-                if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
+                if (!packageInfos.containsKey(modelsPackage)) {
                     packageInfos.put(modelsPackage, new PackageInfo(
                             modelsPackage,
                             String.format("Package containing the data models for %s.\n%s", serviceClientName,
@@ -447,9 +447,24 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
 
         if (settings.isGenerateModels()) {
+            // export if models is not in implementation
+            final String implementationSubpackagePrefix = "implementation.";
+            if (!CoreUtils.isNullOrEmpty(settings.getModelsSubpackage()) && !settings.getModelsSubpackage().startsWith(implementationSubpackagePrefix)) {
+                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
+            }
+            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage()) && !settings.getCustomTypesSubpackage().startsWith(implementationSubpackagePrefix)) {
+                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getCustomTypesSubpackage())));
+            }
+
+            // open models package to azure-core and jaskson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
             openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+
+            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage())
+                    && !settings.getCustomTypesSubpackage().equals(settings.getModelsSubpackage())) {
+                openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getCustomTypesSubpackage()), openToModules));
+            }
         }
 
         return moduleInfo;
