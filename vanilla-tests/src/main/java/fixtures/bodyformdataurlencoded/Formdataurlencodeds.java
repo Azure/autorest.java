@@ -95,13 +95,13 @@ public final class Formdataurlencodeds {
             int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter petType is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter petType is required and cannot be null."));
         }
         if (petFood == null) {
-            return Mono.error(new IllegalArgumentException("Parameter petFood is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter petFood is required and cannot be null."));
         }
         return FluxUtil.withContext(
                 context ->
@@ -201,13 +201,13 @@ public final class Formdataurlencodeds {
     public Mono<Response<Void>> partialConstantBodyWithResponseAsync(String serviceParam, String accessToken) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (serviceParam == null) {
-            return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter serviceParam is required and cannot be null."));
         }
         if (accessToken == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accessToken is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter accessToken is required and cannot be null."));
         }
         final String grantType = "access_token";
         return FluxUtil.withContext(

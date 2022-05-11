@@ -128,20 +128,18 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathItemStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter pathItemStringPath is required and cannot be null."));
         }
         if (this.client.getGlobalStringPath() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
+                    new NullPointerException(
                             "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
         }
         if (localStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter localStringPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -257,20 +255,18 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathItemStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter pathItemStringPath is required and cannot be null."));
         }
         if (this.client.getGlobalStringPath() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
+                    new NullPointerException(
                             "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
         }
         if (localStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter localStringPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -386,20 +382,18 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathItemStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter pathItemStringPath is required and cannot be null."));
         }
         if (this.client.getGlobalStringPath() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
+                    new NullPointerException(
                             "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
         }
         if (localStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter localStringPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -517,20 +511,18 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathItemStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter pathItemStringPath is required and cannot be null."));
         }
         if (this.client.getGlobalStringPath() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
+                    new NullPointerException(
                             "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
         }
         if (localStringPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter localStringPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

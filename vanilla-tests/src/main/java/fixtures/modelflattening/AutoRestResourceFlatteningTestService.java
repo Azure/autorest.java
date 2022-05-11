@@ -232,7 +232,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayWithResponseAsync(List<Resource> resourceArray) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
@@ -303,7 +303,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<FlattenedProduct>>> getArrayWithResponseAsync() {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArray(this.getHost(), accept, context));
@@ -346,7 +346,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedArrayWithResponseAsync(List<WrappedProduct> resourceArray) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
@@ -422,7 +422,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getWrappedArray(this.getHost(), accept, context));
@@ -466,7 +466,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryWithResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceDictionary != null) {
             resourceDictionary
@@ -545,7 +545,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionary(this.getHost(), accept, context));
@@ -587,7 +587,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putResourceCollectionWithResponseAsync(ResourceCollection resourceComplexObject) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceComplexObject != null) {
             resourceComplexObject.validate();
@@ -660,7 +660,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync() {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getResourceCollection(this.getHost(), accept, context));
@@ -702,7 +702,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (simpleBodyProduct != null) {
             simpleBodyProduct.validate();
@@ -790,10 +790,10 @@ public final class AutoRestResourceFlatteningTestService {
             String genericValue,
             String odataValue) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (productId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter productId is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter productId is required and cannot be null."));
         }
         final String accept = "application/json";
         SimpleProduct simpleBodyProductInternal = null;
@@ -928,11 +928,11 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<Response<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(
             FlattenParameterGroup flattenParameterGroup) {
         if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter this.getHost() is required and cannot be null."));
         }
         if (flattenParameterGroup == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+                    new NullPointerException("Parameter flattenParameterGroup is required and cannot be null."));
         } else {
             flattenParameterGroup.validate();
         }

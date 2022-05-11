@@ -198,7 +198,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head300(this.client.getHost(), accept, context));
@@ -238,7 +238,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get300(this.client.getHost(), accept, context));
@@ -279,7 +279,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head301(this.client.getHost(), accept, context));
@@ -319,7 +319,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get301(this.client.getHost(), accept, context));
@@ -360,7 +360,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -403,7 +403,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head302(this.client.getHost(), accept, context));
@@ -443,7 +443,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get302(this.client.getHost(), accept, context));
@@ -484,7 +484,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -528,7 +528,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -571,7 +571,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head307(this.client.getHost(), accept, context));
@@ -611,7 +611,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get307(this.client.getHost(), accept, context));
@@ -651,7 +651,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.options307(this.client.getHost(), accept, context));
@@ -691,7 +691,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -732,7 +732,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -773,7 +773,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -814,7 +814,7 @@ public final class HttpRedirects {
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";

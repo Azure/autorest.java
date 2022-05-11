@@ -17,6 +17,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -303,6 +304,7 @@ public class ClientMethod {
             imports.add("com.azure.core.http.rest.Response");
             imports.add("com.azure.core.http.rest.RequestOptions");
             imports.add("com.azure.core.util.BinaryData");
+            imports.add(DateTimeRfc1123.class.getName());
 
             if (includeImplementationImports) {
                 imports.add("com.azure.core.http.rest.SimpleResponse");

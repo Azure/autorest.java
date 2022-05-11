@@ -78,7 +78,7 @@ public final class FloatOperationsImpl {
     public Mono<Response<String>> putWithResponseAsync(FloatEnum input) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.put(this.client.getHost(), input, accept, context));
@@ -149,7 +149,7 @@ public final class FloatOperationsImpl {
     public Mono<Response<FloatEnum>> getWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));

@@ -103,11 +103,11 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlSinglePageAsync(String accountName) {
         if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -165,11 +165,11 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationSinglePageAsync(String accountName) {
         if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -231,14 +231,14 @@ public final class Pagings {
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(
             String accountName, String nextLink) {
         if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter nextLink is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -269,14 +269,14 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlNextSinglePageAsync(String nextLink, String accountName) {
         if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter nextLink is required and cannot be null."));
         }
         if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

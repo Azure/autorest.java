@@ -28,6 +28,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
@@ -35,10 +36,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -193,10 +191,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                 context -> service.paramRepeatabilityRequest(this.client.getHost(), requestOptionsLocal, context));
     }
@@ -233,10 +228,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return service.paramRepeatabilityRequest(this.client.getHost(), requestOptionsLocal, context);
     }
 
@@ -300,10 +292,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                 context -> service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context));
     }
@@ -340,10 +329,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context);
     }
 
@@ -473,10 +459,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                 context -> service.paramRepeatabilityRequestLro(this.client.getHost(), requestOptionsLocal, context));
     }
@@ -513,10 +496,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return service.paramRepeatabilityRequestLro(this.client.getHost(), requestOptionsLocal, context);
     }
 
@@ -668,10 +648,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                         context ->
                                 service.paramRepeatabilityRequestPageable(
@@ -724,10 +701,7 @@ public final class HeadersImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
-                "repeatability-first-sent",
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now()));
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return service.paramRepeatabilityRequestPageable(this.client.getHost(), requestOptionsLocal, context)
                 .map(
                         res ->

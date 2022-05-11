@@ -77,8 +77,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             // 2. Assumes that the client method returns a reactive response.
             // 3. Assumes that the reactive response is a Mono.
             JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
-                // TODO (alzimmer): Should this be a NullPointerException?
-                ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
+                ifBlock.line("return Mono.error(new NullPointerException(\"Parameter %s is required and "
                     + "cannot be null.\"));", expressionToCheck));
 
             String potentialValidateExpression = validateExpressions.get(expressionToCheck);
@@ -210,8 +209,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 if (outParameter.getIsRequired() && outParameter.getClientType() instanceof ClassType) {
                     function.line("%1$s %2$s = new %1$s();", outParameter.getClientType(), outParameter.getName());
                 } else {
-                    // TODO (alzimmer): This is making the assumption that the client type is nullable.
-                    // Is that always the case? What if the client type is a primitive?
                     function.line("%1$s %2$s = null;", outParameter.getClientType(), outParameter.getName());
                 }
 
@@ -416,8 +413,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
             function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
-            // TODO (alzimmer): Can this be replaced with DateTimeRfc1123.toRfc1123String(OffsetDateTime)?
-            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
         }
         return requestOptionsLocal;
     }
@@ -425,8 +421,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
         if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
             function.line(String.format("String %1$s = UUID.randomUUID().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
-            // TODO (alzimmer): Can this be replaced with DateTimeRfc1123.toRfc1123String(OffsetDateTime)?
-            function.line(String.format("String %1$s = DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
+            function.line(String.format("String %1$s = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
         }
     }
 
@@ -951,11 +946,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.methodReturn(
-                String.format("FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context)\n"
-                    + ".flatMap(response -> BinaryData.fromFlux(response.getBody())\n"
-                    + ".map(body -> new SimpleResponse<>(response, body))))",
-                    clientMethod.getClientReference(), clientMethod.getArgumentList()));
+            function.line("return FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context)",
+                clientMethod.getClientReference(), clientMethod.getArgumentList());
+            function.indent(() -> {
+                function.line(".flatMap(response -> BinaryData.fromFlux(response.getBody())");
+                function.line(".map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body))));");
+            });
         });
     }
 

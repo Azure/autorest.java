@@ -72,7 +72,7 @@ public final class HttpSuccess {
     public Mono<Response<Boolean>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head200(this.client.getHost(), context));
     }
@@ -117,7 +117,7 @@ public final class HttpSuccess {
     public Mono<Response<Boolean>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head204(this.client.getHost(), context));
     }
@@ -162,7 +162,7 @@ public final class HttpSuccess {
     public Mono<Response<Boolean>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head404(this.client.getHost(), context));
     }

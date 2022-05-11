@@ -73,7 +73,7 @@ public final class Odatas {
     public Mono<Response<Void>> getWithFilterWithResponseAsync(String filter, Integer top, String orderby) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -97,7 +97,7 @@ public final class Odatas {
             String filter, Integer top, String orderby, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getWithFilter(this.client.getHost(), filter, top, orderby, accept, context);

@@ -159,7 +159,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<String>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -202,7 +202,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<Void>> putNullWithResponseAsync(String stringBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, accept, context));
@@ -271,7 +271,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<String>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -312,7 +312,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<Void>> putEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "";
         final String accept = "application/json";
@@ -354,7 +354,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<String>> getMbcsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), accept, context));
@@ -396,7 +396,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<Void>> putMbcsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         final String accept = "application/json";
@@ -440,7 +440,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<String>> getWhitespaceWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), accept, context));
@@ -487,7 +487,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<Void>> putWhitespaceWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         final String accept = "application/json";
@@ -532,7 +532,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<String>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
@@ -573,7 +573,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBase64Encoded(this.client.getHost(), accept, context));
@@ -614,7 +614,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<byte[]>> getBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBase64UrlEncoded(this.client.getHost(), accept, context));
@@ -657,10 +657,10 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter stringBody is required and cannot be null."));
         }
         final String accept = "application/json";
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
@@ -707,7 +707,7 @@ public final class StringOperationsImpl implements StringOperations {
     public Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNullBase64UrlEncoded(this.client.getHost(), accept, context));

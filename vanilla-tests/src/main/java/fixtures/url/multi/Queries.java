@@ -92,7 +92,7 @@ public final class Queries {
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
@@ -169,7 +169,7 @@ public final class Queries {
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
@@ -247,7 +247,7 @@ public final class Queries {
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =

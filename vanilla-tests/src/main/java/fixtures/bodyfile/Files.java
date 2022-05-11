@@ -82,7 +82,7 @@ public final class Files {
     public Mono<StreamResponse> getFileWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), accept, context));
@@ -101,7 +101,7 @@ public final class Files {
     public Mono<StreamResponse> getFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getFile(this.client.getHost(), accept, context);
@@ -184,7 +184,7 @@ public final class Files {
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), accept, context));
@@ -203,7 +203,7 @@ public final class Files {
     public Mono<StreamResponse> getFileLargeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getFileLarge(this.client.getHost(), accept, context);
@@ -286,7 +286,7 @@ public final class Files {
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), accept, context));
@@ -305,7 +305,7 @@ public final class Files {
     public Mono<StreamResponse> getEmptyFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getEmptyFile(this.client.getHost(), accept, context);

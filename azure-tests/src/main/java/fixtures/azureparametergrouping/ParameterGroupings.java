@@ -124,11 +124,11 @@ public final class ParameterGroupings {
             ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (parameterGroupingPostRequiredParameters == null) {
             return Mono.error(
-                    new IllegalArgumentException(
+                    new NullPointerException(
                             "Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
         } else {
             parameterGroupingPostRequiredParameters.validate();
@@ -185,7 +185,7 @@ public final class ParameterGroupings {
             ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (parameterGroupingPostOptionalParameters != null) {
             parameterGroupingPostOptionalParameters.validate();
@@ -272,7 +272,7 @@ public final class ParameterGroupings {
             ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (parameterGroupingPostReservedWordsParameters != null) {
             parameterGroupingPostReservedWordsParameters.validate();
@@ -365,7 +365,7 @@ public final class ParameterGroupings {
                     parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (firstParameterGroup != null) {
             firstParameterGroup.validate();
@@ -482,7 +482,7 @@ public final class ParameterGroupings {
             FirstParameterGroup firstParameterGroup) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (firstParameterGroup != null) {
             firstParameterGroup.validate();

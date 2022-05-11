@@ -75,7 +75,7 @@ public final class XMsClientRequestIds {
     public Mono<Response<Void>> getWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get(this.client.getHost(), context));
     }
@@ -94,7 +94,7 @@ public final class XMsClientRequestIds {
     public Mono<Response<Void>> getWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.get(this.client.getHost(), context);
     }
@@ -168,11 +168,10 @@ public final class XMsClientRequestIds {
     public Mono<Response<Void>> paramGetWithResponseAsync(String xMsClientRequestId) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (xMsClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter xMsClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -195,11 +194,10 @@ public final class XMsClientRequestIds {
     public Mono<Response<Void>> paramGetWithResponseAsync(String xMsClientRequestId, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (xMsClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter xMsClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.paramGet(this.client.getHost(), xMsClientRequestId, accept, context);

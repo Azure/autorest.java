@@ -120,11 +120,10 @@ public final class Pets {
     public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
@@ -174,11 +173,10 @@ public final class Pets {
     public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
@@ -228,11 +226,10 @@ public final class Pets {
     public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
@@ -282,11 +279,10 @@ public final class Pets {
     public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
@@ -336,11 +332,10 @@ public final class Pets {
     public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
@@ -391,11 +386,10 @@ public final class Pets {
             PetAPInPropertiesWithAPString createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (createParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+            return Mono.error(new NullPointerException("Parameter createParameters is required and cannot be null."));
         } else {
             createParameters.validate();
         }
