@@ -251,14 +251,7 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
         return validationOfMethodParametersWithResponseAsync(resourceGroupName, id)
-                .flatMap(
-                        (Response<Product> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -331,14 +324,7 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
         return validationOfBodyWithResponseAsync(resourceGroupName, id, body)
-                .flatMap(
-                        (Response<Product> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -355,14 +341,7 @@ public final class AutoRestValidationTest {
     public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id) {
         final Product body = null;
         return validationOfBodyWithResponseAsync(resourceGroupName, id, body)
-                .flatMap(
-                        (Response<Product> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -418,7 +397,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getWithConstantInPathAsync() {
-        return getWithConstantInPathWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getWithConstantInPathWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -460,15 +439,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> postWithConstantInBodyAsync(Product body) {
-        return postWithConstantInBodyWithResponseAsync(body)
-                .flatMap(
-                        (Response<Product> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return postWithConstantInBodyWithResponseAsync(body).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -479,15 +450,7 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Product> postWithConstantInBodyAsync() {
         final Product body = null;
-        return postWithConstantInBodyWithResponseAsync(body)
-                .flatMap(
-                        (Response<Product> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return postWithConstantInBodyWithResponseAsync(body).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

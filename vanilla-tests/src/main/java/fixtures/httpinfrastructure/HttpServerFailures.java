@@ -103,7 +103,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head501Async() {
-        return head501WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head501WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -143,7 +143,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get501Async() {
-        return get501WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get501WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -184,7 +184,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post505Async() {
-        return post505WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post505WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -225,7 +225,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete505Async() {
-        return delete505WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return delete505WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

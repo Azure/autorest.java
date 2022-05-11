@@ -160,7 +160,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredPathAsync(String pathParameter) {
-        return getRequiredPathWithResponseAsync(pathParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredPathWithResponseAsync(pathParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -207,7 +207,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync(String queryParameter) {
-        return putOptionalQueryWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalQueryWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -220,7 +220,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync() {
         final String queryParameter = null;
-        return putOptionalQueryWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalQueryWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -279,7 +279,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync(String queryParameter) {
-        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -292,7 +292,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync() {
         final String queryParameter = null;
-        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -351,7 +351,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync(String bodyParameter) {
-        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -364,7 +364,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync() {
         final String bodyParameter = null;
-        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -428,8 +428,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -443,8 +442,7 @@ public final class Implicits {
     public Mono<Void> putOptionalBinaryBodyAsync() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -508,7 +506,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalPathAsync() {
-        return getRequiredGlobalPathWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredGlobalPathWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -556,7 +554,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalQueryAsync() {
-        return getRequiredGlobalQueryWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredGlobalQueryWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -599,7 +597,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getOptionalGlobalQueryAsync() {
-        return getOptionalGlobalQueryWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getOptionalGlobalQueryWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

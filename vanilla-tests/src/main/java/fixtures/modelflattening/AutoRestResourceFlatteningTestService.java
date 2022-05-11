@@ -252,7 +252,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayAsync(List<Resource> resourceArray) {
-        return putArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
+        return putArrayWithResponseAsync(resourceArray).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -265,7 +265,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayAsync() {
         final List<Resource> resourceArray = null;
-        return putArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
+        return putArrayWithResponseAsync(resourceArray).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -318,15 +318,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<FlattenedProduct>> getArrayAsync() {
-        return getArrayWithResponseAsync()
-                .flatMap(
-                        (Response<List<FlattenedProduct>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -375,7 +367,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
-        return putWrappedArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
+        return putWrappedArrayWithResponseAsync(resourceArray).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -389,7 +381,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedArrayAsync() {
         final List<WrappedProduct> resourceArray = null;
-        return putWrappedArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
+        return putWrappedArrayWithResponseAsync(resourceArray).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -446,15 +438,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<ProductWrapper>> getWrappedArrayAsync() {
-        return getWrappedArrayWithResponseAsync()
-                .flatMap(
-                        (Response<List<ProductWrapper>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getWrappedArrayWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -510,7 +494,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
-        return putDictionaryWithResponseAsync(resourceDictionary).flatMap((Response<Void> res) -> Mono.empty());
+        return putDictionaryWithResponseAsync(resourceDictionary).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -523,7 +507,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
-        return putDictionaryWithResponseAsync(resourceDictionary).flatMap((Response<Void> res) -> Mono.empty());
+        return putDictionaryWithResponseAsync(resourceDictionary).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -576,15 +560,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, FlattenedProduct>> getDictionaryAsync() {
-        return getDictionaryWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, FlattenedProduct>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -632,8 +608,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
-        return putResourceCollectionWithResponseAsync(resourceComplexObject)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putResourceCollectionWithResponseAsync(resourceComplexObject).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -646,8 +621,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putResourceCollectionAsync() {
         final ResourceCollection resourceComplexObject = null;
-        return putResourceCollectionWithResponseAsync(resourceComplexObject)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putResourceCollectionWithResponseAsync(resourceComplexObject).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -701,15 +675,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResourceCollection> getResourceCollectionAsync() {
-        return getResourceCollectionWithResponseAsync()
-                .flatMap(
-                        (Response<ResourceCollection> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getResourceCollectionWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -757,15 +723,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductWithResponseAsync(simpleBodyProduct)
-                .flatMap(
-                        (Response<SimpleProduct> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putSimpleProductWithResponseAsync(simpleBodyProduct).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -778,15 +736,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductAsync() {
         final SimpleProduct simpleBodyProduct = null;
-        return putSimpleProductWithResponseAsync(simpleBodyProduct)
-                .flatMap(
-                        (Response<SimpleProduct> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putSimpleProductWithResponseAsync(simpleBodyProduct).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -890,14 +840,7 @@ public final class AutoRestResourceFlatteningTestService {
             String odataValue) {
         return postFlattenedSimpleProductWithResponseAsync(
                         productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
-                .flatMap(
-                        (Response<SimpleProduct> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -919,14 +862,7 @@ public final class AutoRestResourceFlatteningTestService {
         final String odataValue = null;
         return postFlattenedSimpleProductWithResponseAsync(
                         productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
-                .flatMap(
-                        (Response<SimpleProduct> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1026,14 +962,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup)
-                .flatMap(
-                        (Response<SimpleProduct> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

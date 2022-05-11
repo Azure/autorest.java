@@ -98,7 +98,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
-        return head200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -140,7 +140,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
-        return head204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -182,7 +182,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head404Async() {
-        return head404WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head404WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

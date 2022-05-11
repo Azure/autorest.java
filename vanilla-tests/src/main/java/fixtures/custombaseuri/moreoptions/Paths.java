@@ -123,8 +123,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
-        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -141,8 +140,7 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String vault, String secret, String keyName) {
         final String keyVersion = null;
-        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion).flatMap(ignored -> Mono.empty());
     }
 
     /**

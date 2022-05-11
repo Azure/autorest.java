@@ -80,15 +80,7 @@ public final class MetricAlerts {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MetricAlertResource> getAsync() {
-        return getWithResponseAsync()
-                .flatMap(
-                        (Response<MetricAlertResource> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

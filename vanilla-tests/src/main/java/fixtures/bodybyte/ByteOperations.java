@@ -108,15 +108,7 @@ public final class ByteOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -157,15 +149,7 @@ public final class ByteOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -207,15 +191,7 @@ public final class ByteOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNonAsciiAsync() {
-        return getNonAsciiWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNonAsciiWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -263,7 +239,7 @@ public final class ByteOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNonAsciiAsync(byte[] byteBody) {
-        return putNonAsciiWithResponseAsync(byteBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putNonAsciiWithResponseAsync(byteBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -305,15 +281,7 @@ public final class ByteOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

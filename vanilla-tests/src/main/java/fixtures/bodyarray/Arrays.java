@@ -560,15 +560,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -609,15 +601,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -658,15 +642,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -714,7 +690,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(List<String> arrayBody) {
-        return putEmptyWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -757,15 +733,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Boolean>> getBooleanTfftAsync() {
-        return getBooleanTfftWithResponseAsync()
-                .flatMap(
-                        (Response<List<Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanTfftWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -814,7 +782,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBooleanTfftAsync(List<Boolean> arrayBody) {
-        return putBooleanTfftWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBooleanTfftWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -857,15 +825,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Boolean>> getBooleanInvalidNullAsync() {
-        return getBooleanInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -907,15 +867,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Boolean>> getBooleanInvalidStringAsync() {
-        return getBooleanInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<List<Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -956,15 +908,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getIntegerValidAsync() {
-        return getIntegerValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntegerValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1013,7 +957,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntegerValidAsync(List<Integer> arrayBody) {
-        return putIntegerValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putIntegerValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1055,15 +999,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getIntInvalidNullAsync() {
-        return getIntInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1105,15 +1041,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Integer>> getIntInvalidStringAsync() {
-        return getIntInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<List<Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1154,15 +1082,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Long>> getLongValidAsync() {
-        return getLongValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1210,7 +1130,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongValidAsync(List<Long> arrayBody) {
-        return putLongValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putLongValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1252,15 +1172,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Long>> getLongInvalidNullAsync() {
-        return getLongInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1301,15 +1213,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Long>> getLongInvalidStringAsync() {
-        return getLongInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<List<Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1351,15 +1255,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatValidAsync() {
-        return getFloatValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1408,7 +1304,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatValidAsync(List<Float> arrayBody) {
-        return putFloatValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putFloatValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1451,15 +1347,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatInvalidNullAsync() {
-        return getFloatInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1501,15 +1389,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Float>> getFloatInvalidStringAsync() {
-        return getFloatInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<List<Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1551,15 +1431,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleValidAsync() {
-        return getDoubleValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1608,7 +1480,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleValidAsync(List<Double> arrayBody) {
-        return putDoubleValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDoubleValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1651,15 +1523,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleInvalidNullAsync() {
-        return getDoubleInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1701,15 +1565,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Double>> getDoubleInvalidStringAsync() {
-        return getDoubleInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<List<Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1751,15 +1607,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> getStringValidAsync() {
-        return getStringValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1808,7 +1656,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringValidAsync(List<String> arrayBody) {
-        return putStringValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putStringValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1851,15 +1699,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<FooEnum>> getEnumValidAsync() {
-        return getEnumValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<FooEnum>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEnumValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1907,7 +1747,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEnumValidAsync(List<FooEnum> arrayBody) {
-        return putEnumValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putEnumValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1950,15 +1790,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Enum0>> getStringEnumValidAsync() {
-        return getStringEnumValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Enum0>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringEnumValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2007,7 +1839,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringEnumValidAsync(List<Enum1> arrayBody) {
-        return putStringEnumValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putStringEnumValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2050,15 +1882,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> getStringWithNullAsync() {
-        return getStringWithNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2100,15 +1924,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> getStringWithInvalidAsync() {
-        return getStringWithInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<List<String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2153,15 +1969,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<UUID>> getUuidValidAsync() {
-        return getUuidValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<UUID>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUuidValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2215,7 +2023,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUuidValidAsync(List<UUID> arrayBody) {
-        return putUuidValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putUuidValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2261,15 +2069,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<UUID>> getUuidInvalidCharsAsync() {
-        return getUuidInvalidCharsWithResponseAsync()
-                .flatMap(
-                        (Response<List<UUID>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUuidInvalidCharsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2311,15 +2111,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<LocalDate>> getDateValidAsync() {
-        return getDateValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2367,7 +2159,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateValidAsync(List<LocalDate> arrayBody) {
-        return putDateValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2410,15 +2202,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<LocalDate>> getDateInvalidNullAsync() {
-        return getDateInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2460,15 +2244,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<LocalDate>> getDateInvalidCharsAsync() {
-        return getDateInvalidCharsWithResponseAsync()
-                .flatMap(
-                        (Response<List<LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateInvalidCharsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2511,15 +2287,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<OffsetDateTime>> getDateTimeValidAsync() {
-        return getDateTimeValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2570,7 +2338,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeValidAsync(List<OffsetDateTime> arrayBody) {
-        return putDateTimeValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2614,15 +2382,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<OffsetDateTime>> getDateTimeInvalidNullAsync() {
-        return getDateTimeInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2664,15 +2424,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<OffsetDateTime>> getDateTimeInvalidCharsAsync() {
-        return getDateTimeInvalidCharsWithResponseAsync()
-                .flatMap(
-                        (Response<List<OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeInvalidCharsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2717,15 +2469,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
-        return getDateTimeRfc1123ValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeRfc1123ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2782,7 +2526,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123ValidAsync(List<OffsetDateTime> arrayBody) {
-        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2827,15 +2571,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Duration>> getDurationValidAsync() {
-        return getDurationValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Duration>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDurationValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2884,7 +2620,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationValidAsync(List<Duration> arrayBody) {
-        return putDurationValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDurationValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2928,15 +2664,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<byte[]>> getByteValidAsync() {
-        return getByteValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2986,7 +2714,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteValidAsync(List<byte[]> arrayBody) {
-        return putByteValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putByteValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3031,15 +2759,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<byte[]>> getByteInvalidNullAsync() {
-        return getByteInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3084,15 +2804,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<byte[]>> getBase64UrlAsync() {
-        return getBase64UrlWithResponseAsync()
-                .flatMap(
-                        (Response<List<byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBase64UrlWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3135,15 +2847,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Product>> getComplexNullAsync() {
-        return getComplexNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Product>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3184,15 +2888,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Product>> getComplexEmptyAsync() {
-        return getComplexEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<Product>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3235,15 +2931,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Product>> getComplexItemNullAsync() {
-        return getComplexItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Product>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3286,15 +2974,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Product>> getComplexItemEmptyAsync() {
-        return getComplexItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<Product>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3339,15 +3019,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Product>> getComplexValidAsync() {
-        return getComplexValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Product>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3404,7 +3076,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexValidAsync(List<Product> arrayBody) {
-        return putComplexValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putComplexValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3448,15 +3120,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<List<String>>> getArrayNullAsync() {
-        return getArrayNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3497,15 +3161,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<List<String>>> getArrayEmptyAsync() {
-        return getArrayEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3548,15 +3204,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<List<String>>> getArrayItemNullAsync() {
-        return getArrayItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3599,15 +3247,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<List<String>>> getArrayItemEmptyAsync() {
-        return getArrayItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3650,15 +3290,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<List<String>>> getArrayValidAsync() {
-        return getArrayValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3707,7 +3339,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayValidAsync(List<List<String>> arrayBody) {
-        return putArrayValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putArrayValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3750,15 +3382,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Map<String, String>>> getDictionaryNullAsync() {
-        return getDictionaryNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3801,15 +3425,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Map<String, String>>> getDictionaryEmptyAsync() {
-        return getDictionaryEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3855,15 +3471,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Map<String, String>>> getDictionaryItemNullAsync() {
-        return getDictionaryItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<List<Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3911,15 +3519,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
-        return getDictionaryItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<List<Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3968,15 +3568,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Map<String, String>>> getDictionaryValidAsync() {
-        return getDictionaryValidWithResponseAsync()
-                .flatMap(
-                        (Response<List<Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -4035,7 +3627,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
-        return putDictionaryValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDictionaryValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**

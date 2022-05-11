@@ -155,8 +155,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredAsync(
             ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -218,8 +217,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalAsync(
             ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -232,8 +230,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalAsync() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
-        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -308,7 +305,7 @@ public final class ParameterGroupings {
     public Mono<Void> postReservedWordsAsync(
             ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
         return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -322,7 +319,7 @@ public final class ParameterGroupings {
     public Mono<Void> postReservedWordsAsync() {
         final ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null;
         return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -420,7 +417,7 @@ public final class ParameterGroupings {
                     parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithResponseAsync(
                         firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -437,7 +434,7 @@ public final class ParameterGroupings {
                 parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         return postMultiParamGroupsWithResponseAsync(
                         firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -518,8 +515,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
-        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -532,8 +528,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSharedParameterGroupObjectAsync() {
         final FirstParameterGroup firstParameterGroup = null;
-        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup).flatMap(ignored -> Mono.empty());
     }
 
     /**

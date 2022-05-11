@@ -101,15 +101,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getByPetIdAsync(String petId) {
-        return getByPetIdWithResponseAsync(petId)
-                .flatMap(
-                        (Response<Pet> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByPetIdWithResponseAsync(petId).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -159,15 +151,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> addPetAsync(Pet petParam) {
-        return addPetWithResponseAsync(petParam)
-                .flatMap(
-                        (Response<Pet> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return addPetWithResponseAsync(petParam).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -180,15 +164,7 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> addPetAsync() {
         final Pet petParam = null;
-        return addPetWithResponseAsync(petParam)
-                .flatMap(
-                        (Response<Pet> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return addPetWithResponseAsync(petParam).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

@@ -102,15 +102,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Siamese> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<Siamese> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -124,15 +116,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Siamese> getValidAsync(Context context) {
-        return getValidWithResponseAsync(context)
-                .flatMap(
-                        (Response<Siamese> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -209,7 +193,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Siamese complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -226,7 +210,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Siamese complexBody, Context context) {
-        return putValidWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

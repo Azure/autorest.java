@@ -225,15 +225,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Horse> getHorseAsync() {
-        return getHorseWithResponseAsync()
-                .flatMap(
-                        (Response<Horse> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getHorseWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -282,15 +274,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putHorseAsync(Horse horse) {
-        return putHorseWithResponseAsync(horse)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putHorseWithResponseAsync(horse).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -332,15 +316,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getPetAsync() {
-        return getPetWithResponseAsync()
-                .flatMap(
-                        (Response<Pet> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getPetWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -389,15 +365,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putPetAsync(Pet pet) {
-        return putPetWithResponseAsync(pet)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putPetWithResponseAsync(pet).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -440,15 +408,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Feline> getFelineAsync() {
-        return getFelineWithResponseAsync()
-                .flatMap(
-                        (Response<Feline> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFelineWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -497,15 +457,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putFelineAsync(Feline feline) {
-        return putFelineWithResponseAsync(feline)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putFelineWithResponseAsync(feline).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -549,15 +501,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Cat> getCatAsync() {
-        return getCatWithResponseAsync()
-                .flatMap(
-                        (Response<Cat> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getCatWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -606,15 +550,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putCatAsync(Cat cat) {
-        return putCatWithResponseAsync(cat)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putCatWithResponseAsync(cat).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -658,15 +594,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Kitten> getKittenAsync() {
-        return getKittenWithResponseAsync()
-                .flatMap(
-                        (Response<Kitten> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getKittenWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -715,15 +643,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putKittenAsync(Kitten kitten) {
-        return putKittenWithResponseAsync(kitten)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putKittenWithResponseAsync(kitten).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

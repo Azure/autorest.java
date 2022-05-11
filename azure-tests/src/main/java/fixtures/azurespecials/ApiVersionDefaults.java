@@ -135,7 +135,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodGlobalValidAsync() {
-        return getMethodGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -149,7 +149,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodGlobalValidAsync(Context context) {
-        return getMethodGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -228,7 +228,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodGlobalNotProvidedValidAsync() {
-        return getMethodGlobalNotProvidedValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodGlobalNotProvidedValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -242,7 +242,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodGlobalNotProvidedValidAsync(Context context) {
-        return getMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -320,7 +320,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathGlobalValidAsync() {
-        return getPathGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getPathGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -334,7 +334,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathGlobalValidAsync(Context context) {
-        return getPathGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -412,7 +412,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerGlobalValidAsync() {
-        return getSwaggerGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -426,7 +426,7 @@ public final class ApiVersionDefaults {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerGlobalValidAsync(Context context) {
-        return getSwaggerGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**

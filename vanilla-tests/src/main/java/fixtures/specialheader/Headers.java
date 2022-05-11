@@ -152,15 +152,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestAsync() {
-        return paramRepeatabilityRequestWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -213,15 +205,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestPutAsync() {
-        return paramRepeatabilityRequestPutWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestPutWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -263,15 +247,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestGetAsync() {
-        return paramRepeatabilityRequestGetWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestGetWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -324,15 +300,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestLROAsync() {
-        return paramRepeatabilityRequestLROWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestLROWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

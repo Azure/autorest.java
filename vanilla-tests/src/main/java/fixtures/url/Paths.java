@@ -327,7 +327,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanTrueAsync() {
-        return getBooleanTrueWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanTrueWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -369,7 +369,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanFalseAsync() {
-        return getBooleanFalseWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanFalseWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -411,7 +411,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntOneMillionAsync() {
-        return getIntOneMillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getIntOneMillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -453,7 +453,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNegativeOneMillionAsync() {
-        return getIntNegativeOneMillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getIntNegativeOneMillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -494,7 +494,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getTenBillionAsync() {
-        return getTenBillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getTenBillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -536,7 +536,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getNegativeTenBillionAsync() {
-        return getNegativeTenBillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getNegativeTenBillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -578,7 +578,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositiveAsync() {
-        return floatScientificPositiveWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return floatScientificPositiveWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -620,7 +620,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegativeAsync() {
-        return floatScientificNegativeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return floatScientificNegativeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -662,7 +662,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositiveAsync() {
-        return doubleDecimalPositiveWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return doubleDecimalPositiveWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -704,7 +704,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegativeAsync() {
-        return doubleDecimalNegativeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return doubleDecimalNegativeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -747,7 +747,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUnicodeAsync() {
-        return stringUnicodeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringUnicodeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -789,7 +789,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync() {
-        return stringUrlEncodedWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringUrlEncodedWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -831,7 +831,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlNonEncodedAsync() {
-        return stringUrlNonEncodedWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringUrlNonEncodedWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -872,7 +872,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringEmptyAsync() {
-        return stringEmptyWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringEmptyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -919,7 +919,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringNullAsync(String stringPath) {
-        return stringNullWithResponseAsync(stringPath).flatMap((Response<Void> res) -> Mono.empty());
+        return stringNullWithResponseAsync(stringPath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -969,7 +969,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumValidAsync(UriColor enumPath) {
-        return enumValidWithResponseAsync(enumPath).flatMap((Response<Void> res) -> Mono.empty());
+        return enumValidWithResponseAsync(enumPath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1020,7 +1020,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath) {
-        return enumNullWithResponseAsync(enumPath).flatMap((Response<Void> res) -> Mono.empty());
+        return enumNullWithResponseAsync(enumPath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1072,7 +1072,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync(byte[] bytePath) {
-        return byteMultiByteWithResponseAsync(bytePath).flatMap((Response<Void> res) -> Mono.empty());
+        return byteMultiByteWithResponseAsync(bytePath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1117,7 +1117,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteEmptyAsync() {
-        return byteEmptyWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return byteEmptyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1166,7 +1166,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync(byte[] bytePath) {
-        return byteNullWithResponseAsync(bytePath).flatMap((Response<Void> res) -> Mono.empty());
+        return byteNullWithResponseAsync(bytePath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1209,7 +1209,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateValidAsync() {
-        return dateValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return dateValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1258,7 +1258,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath) {
-        return dateNullWithResponseAsync(datePath).flatMap((Response<Void> res) -> Mono.empty());
+        return dateNullWithResponseAsync(datePath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1302,7 +1302,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeValidAsync() {
-        return dateTimeValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return dateTimeValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1352,7 +1352,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath) {
-        return dateTimeNullWithResponseAsync(dateTimePath).flatMap((Response<Void> res) -> Mono.empty());
+        return dateTimeNullWithResponseAsync(dateTimePath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1404,7 +1404,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> base64UrlAsync(byte[] base64UrlPath) {
-        return base64UrlWithResponseAsync(base64UrlPath).flatMap((Response<Void> res) -> Mono.empty());
+        return base64UrlWithResponseAsync(base64UrlPath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1460,7 +1460,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath) {
-        return arrayCsvInPathWithResponseAsync(arrayPath).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayCsvInPathWithResponseAsync(arrayPath).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1514,7 +1514,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> unixTimeUrlAsync(OffsetDateTime unixTimeUrlPath) {
-        return unixTimeUrlWithResponseAsync(unixTimeUrlPath).flatMap((Response<Void> res) -> Mono.empty());
+        return unixTimeUrlWithResponseAsync(unixTimeUrlPath).flatMap(ignored -> Mono.empty());
     }
 
     /**

@@ -755,13 +755,7 @@ public final class ParamsImpl {
                                 .flatMap(
                                         response ->
                                                 BinaryData.fromFlux(response.getBody())
-                                                        .map(
-                                                                body ->
-                                                                        new SimpleResponse<>(
-                                                                                response.getRequest(),
-                                                                                response.getStatusCode(),
-                                                                                response.getHeaders(),
-                                                                                body))));
+                                                        .map(body -> new SimpleResponse<>(response, body))));
     }
 
     /**

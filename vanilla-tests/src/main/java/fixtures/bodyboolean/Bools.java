@@ -136,15 +136,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getTrueAsync() {
-        return getTrueWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getTrueWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -158,15 +150,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getTrueAsync(Context context) {
-        return getTrueWithResponseAsync(context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getTrueWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -247,7 +231,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putTrueAsync() {
-        return putTrueWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putTrueWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -261,7 +245,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putTrueAsync(Context context) {
-        return putTrueWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return putTrueWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -334,15 +318,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getFalseAsync() {
-        return getFalseWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFalseWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -356,15 +332,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getFalseAsync(Context context) {
-        return getFalseWithResponseAsync(context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFalseWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -445,7 +413,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFalseAsync() {
-        return putFalseWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putFalseWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -459,7 +427,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFalseAsync(Context context) {
-        return putFalseWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return putFalseWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -532,15 +500,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -554,15 +514,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNullAsync(Context context) {
-        return getNullWithResponseAsync(context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -641,15 +593,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -663,15 +607,7 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getInvalidAsync(Context context) {
-        return getInvalidWithResponseAsync(context)
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

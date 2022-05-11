@@ -317,8 +317,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -332,8 +331,7 @@ public final class Explicits {
     public Mono<Void> putOptionalBinaryBodyAsync() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -402,8 +400,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putRequiredBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, long contentLength) {
-        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -451,8 +448,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerParameterAsync(int bodyParameter) {
-        return postRequiredIntegerParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredIntegerParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -499,8 +495,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
-        return postOptionalIntegerParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -513,8 +508,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerParameterAsync() {
         final Integer bodyParameter = null;
-        return postOptionalIntegerParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -580,8 +574,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -632,8 +625,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
-        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -646,8 +638,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerPropertyAsync() {
         final IntOptionalWrapper bodyParameter = null;
-        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -708,8 +699,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerHeaderAsync(int headerParameter) {
-        return postRequiredIntegerHeaderWithResponseAsync(headerParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredIntegerHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -757,8 +747,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
-        return postOptionalIntegerHeaderWithResponseAsync(headerParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -771,8 +760,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerHeaderAsync() {
         final Integer headerParameter = null;
-        return postOptionalIntegerHeaderWithResponseAsync(headerParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -834,8 +822,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringParameterAsync(String bodyParameter) {
-        return postRequiredStringParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredStringParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -882,8 +869,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringParameterAsync(String bodyParameter) {
-        return postOptionalStringParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -896,8 +882,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringParameterAsync() {
         final String bodyParameter = null;
-        return postOptionalStringParameterWithResponseAsync(bodyParameter)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -963,7 +948,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredStringPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1014,7 +999,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
-        return postOptionalStringPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1027,7 +1012,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringPropertyAsync() {
         final StringOptionalWrapper bodyParameter = null;
-        return postOptionalStringPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1092,7 +1077,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringHeaderAsync(String headerParameter) {
-        return postRequiredStringHeaderWithResponseAsync(headerParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredStringHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1140,7 +1125,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringHeaderAsync(String bodyParameter) {
-        return postOptionalStringHeaderWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1153,7 +1138,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringHeaderAsync() {
         final String bodyParameter = null;
-        return postOptionalStringHeaderWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1219,7 +1204,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredClassParameterAsync(Product bodyParameter) {
-        return postRequiredClassParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredClassParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1270,7 +1255,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassParameterAsync(Product bodyParameter) {
-        return postOptionalClassParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalClassParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1283,7 +1268,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassParameterAsync() {
         final Product bodyParameter = null;
-        return postOptionalClassParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalClassParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1349,7 +1334,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredClassPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1400,7 +1385,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
-        return postOptionalClassPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1413,7 +1398,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassPropertyAsync() {
         final ClassOptionalWrapper bodyParameter = null;
-        return postOptionalClassPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1475,7 +1460,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayParameterAsync(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredArrayParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1522,7 +1507,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
-        return postOptionalArrayParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1535,7 +1520,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayParameterAsync() {
         final List<String> bodyParameter = null;
-        return postOptionalArrayParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1601,7 +1586,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredArrayPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1652,7 +1637,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
-        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1665,7 +1650,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayPropertyAsync() {
         final ArrayOptionalWrapper bodyParameter = null;
-        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1734,7 +1719,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayHeaderAsync(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithResponseAsync(headerParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postRequiredArrayHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1786,7 +1771,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
-        return postOptionalArrayHeaderWithResponseAsync(headerParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1799,7 +1784,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayHeaderAsync() {
         final List<String> headerParameter = null;
-        return postOptionalArrayHeaderWithResponseAsync(headerParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**

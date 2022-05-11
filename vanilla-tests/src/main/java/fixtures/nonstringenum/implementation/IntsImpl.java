@@ -94,15 +94,7 @@ public final class IntsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putAsync(IntEnum input) {
-        return putWithResponseAsync(input)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putWithResponseAsync(input).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -115,15 +107,7 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putAsync() {
         final IntEnum input = null;
-        return putWithResponseAsync(input)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putWithResponseAsync(input).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -179,15 +163,7 @@ public final class IntsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<IntEnum> getAsync() {
-        return getWithResponseAsync()
-                .flatMap(
-                        (Response<IntEnum> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

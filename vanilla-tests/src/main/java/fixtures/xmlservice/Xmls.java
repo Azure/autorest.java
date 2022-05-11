@@ -340,15 +340,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndNoMeta> getComplexTypeRefNoMetaAsync() {
-        return getComplexTypeRefNoMetaWithResponseAsync()
-                .flatMap(
-                        (Response<RootWithRefAndNoMeta> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexTypeRefNoMetaWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -397,7 +389,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model) {
-        return putComplexTypeRefNoMetaWithResponseAsync(model).flatMap((Response<Void> res) -> Mono.empty());
+        return putComplexTypeRefNoMetaWithResponseAsync(model).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -441,15 +433,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndMeta> getComplexTypeRefWithMetaAsync() {
-        return getComplexTypeRefWithMetaWithResponseAsync()
-                .flatMap(
-                        (Response<RootWithRefAndMeta> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexTypeRefWithMetaWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -499,7 +483,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexTypeRefWithMetaAsync(RootWithRefAndMeta model) {
-        return putComplexTypeRefWithMetaWithResponseAsync(model).flatMap((Response<Void> res) -> Mono.empty());
+        return putComplexTypeRefWithMetaWithResponseAsync(model).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -541,15 +525,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Slideshow> getSimpleAsync() {
-        return getSimpleWithResponseAsync()
-                .flatMap(
-                        (Response<Slideshow> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getSimpleWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -599,7 +575,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSimpleAsync(Slideshow slideshow) {
-        return putSimpleWithResponseAsync(slideshow).flatMap((Response<Void> res) -> Mono.empty());
+        return putSimpleWithResponseAsync(slideshow).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -642,15 +618,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AppleBarrel> getWrappedListsAsync() {
-        return getWrappedListsWithResponseAsync()
-                .flatMap(
-                        (Response<AppleBarrel> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getWrappedListsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -701,7 +669,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedListsAsync(AppleBarrel wrappedLists) {
-        return putWrappedListsWithResponseAsync(wrappedLists).flatMap((Response<Void> res) -> Mono.empty());
+        return putWrappedListsWithResponseAsync(wrappedLists).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -742,7 +710,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getHeadersAsync() {
-        return getHeadersWithResponseAsync().flatMap((XmlsGetHeadersResponse res) -> Mono.empty());
+        return getHeadersWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -782,15 +750,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Slideshow> getEmptyListAsync() {
-        return getEmptyListWithResponseAsync()
-                .flatMap(
-                        (Response<Slideshow> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyListWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -839,7 +799,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyListAsync(Slideshow slideshow) {
-        return putEmptyListWithResponseAsync(slideshow).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyListWithResponseAsync(slideshow).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -881,15 +841,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AppleBarrel> getEmptyWrappedListsAsync() {
-        return getEmptyWrappedListsWithResponseAsync()
-                .flatMap(
-                        (Response<AppleBarrel> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWrappedListsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -939,7 +891,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyWrappedListsAsync(AppleBarrel appleBarrel) {
-        return putEmptyWrappedListsWithResponseAsync(appleBarrel).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWrappedListsWithResponseAsync(appleBarrel).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -981,15 +933,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getRootListAsync() {
-        return getRootListWithResponseAsync()
-                .flatMap(
-                        (Response<List<Banana>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getRootListWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1039,7 +983,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putRootListAsync(List<Banana> bananas) {
-        return putRootListWithResponseAsync(bananas).flatMap((Response<Void> res) -> Mono.empty());
+        return putRootListWithResponseAsync(bananas).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1081,15 +1025,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getRootListSingleItemAsync() {
-        return getRootListSingleItemWithResponseAsync()
-                .flatMap(
-                        (Response<List<Banana>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getRootListSingleItemWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1140,7 +1076,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putRootListSingleItemAsync(List<Banana> bananas) {
-        return putRootListSingleItemWithResponseAsync(bananas).flatMap((Response<Void> res) -> Mono.empty());
+        return putRootListSingleItemWithResponseAsync(bananas).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1182,15 +1118,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getEmptyRootListAsync() {
-        return getEmptyRootListWithResponseAsync()
-                .flatMap(
-                        (Response<List<Banana>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyRootListWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1241,7 +1169,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyRootListAsync(List<Banana> bananas) {
-        return putEmptyRootListWithResponseAsync(bananas).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyRootListWithResponseAsync(bananas).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1284,15 +1212,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Banana> getEmptyChildElementAsync() {
-        return getEmptyChildElementWithResponseAsync()
-                .flatMap(
-                        (Response<Banana> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyChildElementWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1341,7 +1261,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyChildElementAsync(Banana banana) {
-        return putEmptyChildElementWithResponseAsync(banana).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyChildElementWithResponseAsync(banana).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1384,15 +1304,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ListContainersResponse> listContainersAsync() {
-        return listContainersWithResponseAsync()
-                .flatMap(
-                        (Response<ListContainersResponse> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return listContainersWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1436,15 +1348,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StorageServiceProperties> getServicePropertiesAsync() {
-        return getServicePropertiesWithResponseAsync()
-                .flatMap(
-                        (Response<StorageServiceProperties> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getServicePropertiesWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1496,7 +1400,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putServicePropertiesAsync(StorageServiceProperties properties) {
-        return putServicePropertiesWithResponseAsync(properties).flatMap((Response<Void> res) -> Mono.empty());
+        return putServicePropertiesWithResponseAsync(properties).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1540,15 +1444,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<SignedIdentifier>> getAclsAsync() {
-        return getAclsWithResponseAsync()
-                .flatMap(
-                        (Response<List<SignedIdentifier>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getAclsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1601,7 +1497,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putAclsAsync(List<SignedIdentifier> properties) {
-        return putAclsWithResponseAsync(properties).flatMap((Response<Void> res) -> Mono.empty());
+        return putAclsWithResponseAsync(properties).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1646,15 +1542,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ListBlobsResponse> listBlobsAsync() {
-        return listBlobsWithResponseAsync()
-                .flatMap(
-                        (Response<ListBlobsResponse> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return listBlobsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1703,7 +1591,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> jsonInputAsync(JsonInput properties) {
-        return jsonInputWithResponseAsync(properties).flatMap((Response<Void> res) -> Mono.empty());
+        return jsonInputWithResponseAsync(properties).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1745,15 +1633,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<JsonOutput> jsonOutputAsync() {
-        return jsonOutputWithResponseAsync()
-                .flatMap(
-                        (Response<JsonOutput> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return jsonOutputWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1800,15 +1680,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ObjectWithXMsTextProperty> getXMsTextAsync() {
-        return getXMsTextWithResponseAsync()
-                .flatMap(
-                        (Response<ObjectWithXMsTextProperty> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getXMsTextWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1852,15 +1724,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ModelWithByteProperty> getBytesAsync() {
-        return getBytesWithResponseAsync()
-                .flatMap(
-                        (Response<ModelWithByteProperty> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBytesWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1910,7 +1774,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBinaryAsync(ModelWithByteProperty slideshow) {
-        return putBinaryWithResponseAsync(slideshow).flatMap((Response<Void> res) -> Mono.empty());
+        return putBinaryWithResponseAsync(slideshow).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1952,15 +1816,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ModelWithUrlProperty> getUriAsync() {
-        return getUriWithResponseAsync()
-                .flatMap(
-                        (Response<ModelWithUrlProperty> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUriWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2010,7 +1866,7 @@ public final class Xmls {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUriAsync(ModelWithUrlProperty model) {
-        return putUriWithResponseAsync(model).flatMap((Response<Void> res) -> Mono.empty());
+        return putUriWithResponseAsync(model).flatMap(ignored -> Mono.empty());
     }
 
     /**
