@@ -424,93 +424,88 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(proxyMethod.getOperationId());
 
                 MethodPollingDetails methodPollingDetails = null;
+                MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
                 if (pollingDetails != null) {
                     methodPollingDetails = new MethodPollingDetails(
                         pollingDetails.getStrategy(),
                         getPollingIntermediateType(pollingDetails, syncReturnType),
                         getPollingFinalType(pollingDetails, syncReturnType),
                         pollingDetails.getPollIntervalInSeconds());
-                    builder = builder.methodPollingDetails(methodPollingDetails);
-                }
 
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    // begin method async
-                    methods.add(builder
-                        .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
-                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningBeginAsync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
-                        .build());
+                    if (settings.isLowLevelClient() &&
+                            !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
+                                    && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
+                        // a new method to be added as implementation only (not exposed to client) for developer
+                        dpgMethodPollingDetailsWithModel = methodPollingDetails;
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
-                            parameters);
+                        // DPG keep the method with BinaryData
+                        methodPollingDetails = new MethodPollingDetails(
+                                dpgMethodPollingDetailsWithModel.getPollingStrategy(),
+                                ClassType.BinaryData, ClassType.BinaryData,
+                                dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
                     }
                 }
 
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    // begin method sync
-                    methods.add(builder
-                        .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
-                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningBeginSync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
-                        .build());
+                addLroMethods(operation, builder, methods,
+                        "begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()),
+                        "begin" + CodeNamer.toPascalCase(proxyMethod.getName()),
+                        parameters, proxyMethod, syncReturnType, methodPollingDetails, settings);
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
-                    }
+                if (dpgMethodPollingDetailsWithModel != null) {
+                    builder = builder.implementationOnly(true);
+
+                    String modelSuffix = "WithModel";
+                    addLroMethods(operation, builder, methods,
+                            "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix + "Async"),
+                            "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
+                            parameters, proxyMethod, syncReturnType, dpgMethodPollingDetailsWithModel, settings);
+
+                    builder = builder.implementationOnly(false);
                 }
 
-                if (settings.isFluent()
-                    && settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    methods.add(builder
-                        .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
-                        .name(proxyMethod.getSimpleAsyncMethodName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningAsync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
-                        .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
+                if (settings.isFluent()) {
+                    if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                         methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
+                                .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
+                                .name(proxyMethod.getSimpleAsyncMethodName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.LongRunningAsync)
+                                .isGroupedParameterRequired(false)
+                                .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
+                                .build());
+
+                        if (generateClientMethodWithOnlyRequiredParameters) {
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
+                        }
+
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods,
+                                    builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
+                                    parameters);
+                        }
                     }
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                        builder.methodVisibility(VISIBLE);
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
-                            parameters);
-                    }
-                }
-
-                if (settings.isFluent()
-                    && settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    builder.methodVisibility(VISIBLE);
-
-                    methods.add(builder
-                        .returnValue(createLongRunningSyncReturnValue(operation, syncReturnType))
-                        .name(proxyMethod.getName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningSync)
-                        .isGroupedParameterRequired(false)
-                        .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
-                    }
+                                .returnValue(createLongRunningSyncReturnValue(operation, syncReturnType))
+                                .name(proxyMethod.getName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.LongRunningSync)
+                                .isGroupedParameterRequired(false)
+                                .build());
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
+                        if (generateClientMethodWithOnlyRequiredParameters) {
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
+                        }
+
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods, builder, parameters);
+                        }
                     }
                 }
             } else {
@@ -606,6 +601,47 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return methods.stream()
             .filter(m -> m.getMethodVisibility() != NOT_GENERATE)
             .collect(Collectors.toList());
+    }
+
+    private void addLroMethods(Operation operation, ClientMethod.Builder builder, List<ClientMethod> methods,
+                               String asyncMethodName, String syncMethodName,
+                               List<ClientMethodParameter> parameters, ProxyMethod proxyMethod,
+                               IType syncReturnType, MethodPollingDetails methodPollingDetails,
+                               JavaSettings settings) {
+        builder.methodPollingDetails(methodPollingDetails);
+        if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+            // begin method async
+            methods.add(builder
+                    .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
+                    .name(asyncMethodName)
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.LongRunningBeginAsync)
+                    .isGroupedParameterRequired(false)
+                    .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
+                    .build());
+
+            if (settings.isContextClientMethodParameter()) {
+                addClientMethodWithContext(methods,
+                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
+                        parameters);
+            }
+        }
+
+        if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+            // begin method sync
+            methods.add(builder
+                    .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
+                    .name(syncMethodName)
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.LongRunningBeginSync)
+                    .isGroupedParameterRequired(false)
+                    .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
+                    .build());
+
+            if (settings.isContextClientMethodParameter()) {
+                addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
+            }
+        }
     }
 
     protected IType getContextType() {

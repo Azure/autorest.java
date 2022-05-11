@@ -43,6 +43,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
+import fixtures.dpgcustomization.models.LroProduct;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -762,6 +763,109 @@ public final class DpgClientImpl {
     }
 
     /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model)
+     *     provisioningState: String
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(String mode, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponseAsync(mode, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                new TypeReferenceLroProduct(),
+                new TypeReferenceLroProduct());
+    }
+
+    /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model)
+     *     provisioningState: String
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(
+            String mode, RequestOptions requestOptions, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponseAsync(mode, requestOptions, context),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                new TypeReferenceLroProduct(),
+                new TypeReferenceLroProduct());
+    }
+
+    /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model)
+     *     provisioningState: String
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LroProduct, LroProduct> beginLroWithModel(String mode, RequestOptions requestOptions) {
+        return this.beginLroWithModelAsync(mode, requestOptions).getSyncPoller();
+    }
+
+    /**
      * Get the next page of items.
      *
      * <p><strong>Response Body Schema</strong>
@@ -875,6 +979,10 @@ public final class DpgClientImpl {
         return this.sendRequestAsync(httpRequest)
                 .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
                 .block();
+    }
+
+    private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {
+        // empty
     }
 
     private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {

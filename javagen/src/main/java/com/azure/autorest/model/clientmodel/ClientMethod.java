@@ -93,6 +93,8 @@ public class ClientMethod {
 
     private JavaVisibility methodVisibility;
 
+    private boolean implementationOnly = false;
+
     private MethodPollingDetails methodPollingDetails;
 
     /**
@@ -112,7 +114,15 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails) {
+    protected ClientMethod(String description, ReturnValue returnValue, String name,
+                           List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
+                           ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions,
+                           String clientReference, List<String> requiredNullableParameterExpressions,
+                           boolean isGroupedParameterRequired, String groupedParameterTypeName,
+                           MethodPageDetails methodPageDetails,
+                           List<MethodTransformationDetail> methodTransformationDetails,
+                           JavaVisibility methodVisibility, boolean implementationOnly,
+                           MethodPollingDetails methodPollingDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -128,6 +138,7 @@ public class ClientMethod {
         this.methodPageDetails = methodPageDetails;
         this.methodTransformationDetails = methodTransformationDetails;
         this.methodVisibility = methodVisibility;
+        this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
     }
 
@@ -279,6 +290,10 @@ public class ClientMethod {
 
     public JavaVisibility getMethodVisibility() {
         return methodVisibility;
+    }
+
+    public boolean isImplementationOnly() {
+        return implementationOnly;
     }
 
     public MethodPollingDetails getMethodPollingDetails() {
@@ -453,6 +468,7 @@ public class ClientMethod {
         protected MethodPageDetails methodPageDetails;
         protected List<MethodTransformationDetail> methodTransformationDetails;
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
+        protected boolean implementationOnly = false;
         protected MethodPollingDetails methodPollingDetails;
 
         /**
@@ -616,6 +632,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets whether the method is only in implementation.
+         * @param implementationOnly whether the method is only in implementation
+         * @return the Builder itself
+         */
+        public Builder implementationOnly(boolean implementationOnly) {
+            this.implementationOnly = implementationOnly;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -635,6 +661,7 @@ public class ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
+                    implementationOnly,
                     methodPollingDetails);
         }
     }

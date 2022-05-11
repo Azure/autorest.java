@@ -12,4 +12,9 @@ generate-models: true
 
 custom-types: Input,LroProduct,Product,ProductReceived
 custom-types-subpackage: models
+
+polling:
+  lro:
+    intermediate-type: fixtures.dpgcustomization.models.LroProduct
+    final-type: fixtures.dpgcustomization.models.LroProduct
 ```
