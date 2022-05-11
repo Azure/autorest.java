@@ -312,6 +312,9 @@ public class ClientMethod {
         imports.add("com.azure.core.annotation.ServiceMethod");
         imports.add("com.azure.core.annotation.ReturnType");
 
+        imports.add("java.util.Objects");
+        imports.add("java.util.stream.Collectors");
+
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         if (settings.isLowLevelClient()) {
@@ -341,7 +344,6 @@ public class ClientMethod {
                 imports.add("com.azure.core.http.rest.PagedIterable");
                 imports.add("java.util.List");
                 imports.add("java.util.Map");
-                imports.add("java.util.stream.Collectors");
             }
         } else {
             for (ClientMethodParameter parameter : getParameters()) {
@@ -359,11 +361,9 @@ public class ClientMethod {
                         parameter.getClientType().addImportsTo(imports, true);
 
                         if (parameter.getExplode()) {
-                            imports.add("java.util.Objects");
                             imports.add("java.util.Optional");
                             imports.add("java.util.stream.Stream");
                             imports.add(ArrayList.class.getName());
-                            imports.add("java.util.stream.Collectors");
                             imports.add("java.util.Collection");
                         }
                     }

@@ -360,6 +360,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
                     addedConversion = true;
                 } else if (parameterClientType instanceof ListType) {
+                    boolean alreadyNullChecked = clientMethod.getRequiredNullableParameterExpressions()
+                        .contains(parameterName);
                     String expression;
                     if (alwaysNull) {
                         expression = "null";
@@ -372,10 +374,17 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             // If the parameter is null, the converted value is null.
                             // Otherwise, convert the parameter to a string, mapping each element to the toString
                             // value, finally joining with the collection format.
-                            expression =
-                                "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                "    .map(value -> Objects.toString(value, \"\"))\n" +
-                                "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                            if (alreadyNullChecked) {
+                                expression =
+                                    parameterName + ".stream()\n" +
+                                    "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                    "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                            } else {
+                                expression =
+                                    "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
+                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                            }
                         } else {
                             expression = String.format(
                                 "JacksonAdapter.createDefaultSerializerAdapter().serialize%s(%s, CollectionFormat.%s)",
@@ -383,8 +392,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 collectionFormat.toString().toUpperCase());
                         }
                     } else {
-                        expression = "(" + parameterName + " == null) ? new ArrayList<>()\n"
-                            + ": " + parameterName + ".stream().map(item -> Objects.toString(item, \"\")).collect(Collectors.toList())";
+                        if (alreadyNullChecked) {
+                            expression = parameterName + ".stream()\n"
+                                + "    .map(item -> Objects.toString(item, \"\"))\n"
+                                + "    .collect(Collectors.toList())";
+                        } else {
+                            expression = "(" + parameterName + " == null) ? new ArrayList<>()\n"
+                                + ": " + parameterName + ".stream().map(item -> Objects.toString(item, \"\")).collect(Collectors.toList())";
+                        }
                     }
                     function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
                     addedConversion = true;
