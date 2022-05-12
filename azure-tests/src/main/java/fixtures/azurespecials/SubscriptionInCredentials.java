@@ -111,11 +111,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -139,11 +139,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -217,11 +217,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -245,11 +245,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -323,11 +323,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalNotProvidedValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -355,11 +355,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postMethodGlobalNotProvidedValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -434,11 +434,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postPathGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -462,11 +462,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postPathGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -540,11 +540,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postSwaggerGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -568,11 +568,11 @@ public final class SubscriptionInCredentials {
     public Mono<Response<Void>> postSwaggerGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";

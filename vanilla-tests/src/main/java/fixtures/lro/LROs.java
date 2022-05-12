@@ -449,7 +449,7 @@ public final class LROs {
     public Mono<Response<Product>> put200SucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -474,7 +474,7 @@ public final class LROs {
     public Mono<Response<Product>> put200SucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -580,7 +580,7 @@ public final class LROs {
             Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -606,7 +606,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -711,7 +711,7 @@ public final class LROs {
             Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -736,7 +736,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -837,7 +837,7 @@ public final class LROs {
             patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -864,7 +864,7 @@ public final class LROs {
             patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -966,7 +966,7 @@ public final class LROs {
     public Mono<Response<Product>> put201SucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -991,7 +991,7 @@ public final class LROs {
     public Mono<Response<Product>> put201SucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1094,7 +1094,7 @@ public final class LROs {
     public Mono<LROsPost202ListResponse> post202ListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.post202List(this.client.getHost(), accept, context));
@@ -1114,7 +1114,7 @@ public final class LROs {
     public Mono<LROsPost202ListResponse> post202ListWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.post202List(this.client.getHost(), accept, context);
@@ -1218,7 +1218,7 @@ public final class LROs {
     public Mono<Response<Product>> put200SucceededNoStateWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1243,7 +1243,7 @@ public final class LROs {
     public Mono<Response<Product>> put200SucceededNoStateWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1348,7 +1348,7 @@ public final class LROs {
     public Mono<Response<Product>> put202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1372,7 +1372,7 @@ public final class LROs {
     public Mono<Response<Product>> put202Retry200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1478,7 +1478,7 @@ public final class LROs {
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1504,7 +1504,7 @@ public final class LROs {
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1614,7 +1614,7 @@ public final class LROs {
     public Mono<Response<Product>> put200UpdatingSucceeded204WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1640,7 +1640,7 @@ public final class LROs {
     public Mono<Response<Product>> put200UpdatingSucceeded204WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1750,7 +1750,7 @@ public final class LROs {
     public Mono<Response<Product>> put201CreatingFailed200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1776,7 +1776,7 @@ public final class LROs {
     public Mono<Response<Product>> put201CreatingFailed200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1886,7 +1886,7 @@ public final class LROs {
     public Mono<Response<Product>> put200Acceptedcanceled200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -1912,7 +1912,7 @@ public final class LROs {
     public Mono<Response<Product>> put200Acceptedcanceled200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2021,7 +2021,7 @@ public final class LROs {
     public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2046,7 +2046,7 @@ public final class LROs {
     public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2152,7 +2152,7 @@ public final class LROs {
     public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2179,7 +2179,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2289,7 +2289,7 @@ public final class LROs {
     public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2316,7 +2316,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2426,7 +2426,7 @@ public final class LROs {
     public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2453,7 +2453,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2563,7 +2563,7 @@ public final class LROs {
     public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2590,7 +2590,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2699,7 +2699,7 @@ public final class LROs {
     public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2725,7 +2725,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -2829,7 +2829,7 @@ public final class LROs {
     public Mono<Response<Sku>> putNonResourceWithResponseAsync(Sku sku) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (sku != null) {
             sku.validate();
@@ -2852,7 +2852,7 @@ public final class LROs {
     public Mono<Response<Sku>> putNonResourceWithResponseAsync(Sku sku, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (sku != null) {
             sku.validate();
@@ -2952,7 +2952,7 @@ public final class LROs {
     public Mono<Response<Sku>> putAsyncNonResourceWithResponseAsync(Sku sku) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (sku != null) {
             sku.validate();
@@ -2976,7 +2976,7 @@ public final class LROs {
     public Mono<Response<Sku>> putAsyncNonResourceWithResponseAsync(Sku sku, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (sku != null) {
             sku.validate();
@@ -3076,7 +3076,7 @@ public final class LROs {
     public Mono<Response<SubProduct>> putSubResourceWithResponseAsync(SubProduct product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -3099,7 +3099,7 @@ public final class LROs {
     public Mono<Response<SubProduct>> putSubResourceWithResponseAsync(SubProduct product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -3199,7 +3199,7 @@ public final class LROs {
     public Mono<Response<SubProduct>> putAsyncSubResourceWithResponseAsync(SubProduct product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -3223,7 +3223,7 @@ public final class LROs {
     public Mono<Response<SubProduct>> putAsyncSubResourceWithResponseAsync(SubProduct product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -3324,7 +3324,7 @@ public final class LROs {
             deleteProvisioning202Accepted200SucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -3347,7 +3347,7 @@ public final class LROs {
             deleteProvisioning202Accepted200SucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteProvisioning202Accepted200Succeeded(this.client.getHost(), accept, context);
@@ -3447,7 +3447,7 @@ public final class LROs {
             deleteProvisioning202DeletingFailed200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -3470,7 +3470,7 @@ public final class LROs {
             deleteProvisioning202DeletingFailed200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteProvisioning202DeletingFailed200(this.client.getHost(), accept, context);
@@ -3570,7 +3570,7 @@ public final class LROs {
             deleteProvisioning202Deletingcanceled200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -3593,7 +3593,7 @@ public final class LROs {
             deleteProvisioning202Deletingcanceled200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteProvisioning202Deletingcanceled200(this.client.getHost(), accept, context);
@@ -3690,7 +3690,7 @@ public final class LROs {
     public Mono<Response<Void>> delete204SucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.delete204Succeeded(this.client.getHost(), accept, context));
@@ -3709,7 +3709,7 @@ public final class LROs {
     public Mono<Response<Void>> delete204SucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.delete204Succeeded(this.client.getHost(), accept, context);
@@ -3799,7 +3799,7 @@ public final class LROs {
     public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.delete202Retry200(this.client.getHost(), accept, context));
@@ -3819,7 +3819,7 @@ public final class LROs {
     public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.delete202Retry200(this.client.getHost(), accept, context);
@@ -3913,7 +3913,7 @@ public final class LROs {
     public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.delete202NoRetry204(this.client.getHost(), accept, context));
@@ -3933,7 +3933,7 @@ public final class LROs {
     public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.delete202NoRetry204(this.client.getHost(), accept, context);
@@ -4027,7 +4027,7 @@ public final class LROs {
     public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.deleteNoHeaderInRetry(this.client.getHost(), accept, context));
@@ -4047,7 +4047,7 @@ public final class LROs {
     public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteNoHeaderInRetry(this.client.getHost(), accept, context);
@@ -4141,7 +4141,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -4162,7 +4162,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteAsyncNoHeaderInRetry(this.client.getHost(), accept, context);
@@ -4256,7 +4256,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -4277,7 +4277,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteAsyncRetrySucceeded(this.client.getHost(), accept, context);
@@ -4371,7 +4371,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -4392,7 +4392,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteAsyncNoRetrySucceeded(this.client.getHost(), accept, context);
@@ -4486,7 +4486,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.deleteAsyncRetryFailed(this.client.getHost(), accept, context));
@@ -4506,7 +4506,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteAsyncRetryFailed(this.client.getHost(), accept, context);
@@ -4600,7 +4600,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -4621,7 +4621,7 @@ public final class LROs {
     public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.deleteAsyncRetrycanceled(this.client.getHost(), accept, context);
@@ -4715,7 +4715,7 @@ public final class LROs {
     public Mono<Response<Sku>> post200WithPayloadWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.post200WithPayload(this.client.getHost(), accept, context));
@@ -4735,7 +4735,7 @@ public final class LROs {
     public Mono<Response<Sku>> post200WithPayloadWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.post200WithPayload(this.client.getHost(), accept, context);
@@ -4831,7 +4831,7 @@ public final class LROs {
     public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -4856,7 +4856,7 @@ public final class LROs {
     public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -4961,7 +4961,7 @@ public final class LROs {
     public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -4986,7 +4986,7 @@ public final class LROs {
     public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5089,7 +5089,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalLocationGetWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -5110,7 +5110,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalLocationGetWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.postDoubleHeadersFinalLocationGet(this.client.getHost(), accept, context);
@@ -5204,7 +5204,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -5225,7 +5225,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.postDoubleHeadersFinalAzureHeaderGet(this.client.getHost(), accept, context);
@@ -5320,7 +5320,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -5342,7 +5342,7 @@ public final class LROs {
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.getHost(), accept, context);
@@ -5443,7 +5443,7 @@ public final class LROs {
     public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5470,7 +5470,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5580,7 +5580,7 @@ public final class LROs {
     public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5607,7 +5607,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5717,7 +5717,7 @@ public final class LROs {
     public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5744,7 +5744,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5854,7 +5854,7 @@ public final class LROs {
     public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -5881,7 +5881,7 @@ public final class LROs {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();

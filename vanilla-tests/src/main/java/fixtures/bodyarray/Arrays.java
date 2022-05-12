@@ -545,7 +545,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -586,7 +586,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -627,7 +627,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -670,10 +670,10 @@ public final class Arrays {
     public Mono<Response<Void>> putEmptyWithResponseAsync(List<String> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, accept, context));
@@ -718,7 +718,7 @@ public final class Arrays {
     public Mono<Response<List<Boolean>>> getBooleanTfftWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), accept, context));
@@ -761,10 +761,10 @@ public final class Arrays {
     public Mono<Response<Void>> putBooleanTfftWithResponseAsync(List<Boolean> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -810,7 +810,7 @@ public final class Arrays {
     public Mono<Response<List<Boolean>>> getBooleanInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), accept, context));
@@ -852,7 +852,7 @@ public final class Arrays {
     public Mono<Response<List<Boolean>>> getBooleanInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), accept, context));
@@ -893,7 +893,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getIntegerValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), accept, context));
@@ -936,10 +936,10 @@ public final class Arrays {
     public Mono<Response<Void>> putIntegerValidWithResponseAsync(List<Integer> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -984,7 +984,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getIntInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), accept, context));
@@ -1026,7 +1026,7 @@ public final class Arrays {
     public Mono<Response<List<Integer>>> getIntInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), accept, context));
@@ -1067,7 +1067,7 @@ public final class Arrays {
     public Mono<Response<List<Long>>> getLongValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), accept, context));
@@ -1110,10 +1110,10 @@ public final class Arrays {
     public Mono<Response<Void>> putLongValidWithResponseAsync(List<Long> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, accept, context));
@@ -1157,7 +1157,7 @@ public final class Arrays {
     public Mono<Response<List<Long>>> getLongInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), accept, context));
@@ -1198,7 +1198,7 @@ public final class Arrays {
     public Mono<Response<List<Long>>> getLongInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), accept, context));
@@ -1240,7 +1240,7 @@ public final class Arrays {
     public Mono<Response<List<Float>>> getFloatValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), accept, context));
@@ -1283,10 +1283,10 @@ public final class Arrays {
     public Mono<Response<Void>> putFloatValidWithResponseAsync(List<Float> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1332,7 +1332,7 @@ public final class Arrays {
     public Mono<Response<List<Float>>> getFloatInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), accept, context));
@@ -1374,7 +1374,7 @@ public final class Arrays {
     public Mono<Response<List<Float>>> getFloatInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), accept, context));
@@ -1416,7 +1416,7 @@ public final class Arrays {
     public Mono<Response<List<Double>>> getDoubleValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), accept, context));
@@ -1459,10 +1459,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDoubleValidWithResponseAsync(List<Double> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1508,7 +1508,7 @@ public final class Arrays {
     public Mono<Response<List<Double>>> getDoubleInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), accept, context));
@@ -1550,7 +1550,7 @@ public final class Arrays {
     public Mono<Response<List<Double>>> getDoubleInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), accept, context));
@@ -1592,7 +1592,7 @@ public final class Arrays {
     public Mono<Response<List<String>>> getStringValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), accept, context));
@@ -1635,10 +1635,10 @@ public final class Arrays {
     public Mono<Response<Void>> putStringValidWithResponseAsync(List<String> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1684,7 +1684,7 @@ public final class Arrays {
     public Mono<Response<List<FooEnum>>> getEnumValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEnumValid(this.client.getHost(), accept, context));
@@ -1727,10 +1727,10 @@ public final class Arrays {
     public Mono<Response<Void>> putEnumValidWithResponseAsync(List<FooEnum> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putEnumValid(this.client.getHost(), arrayBody, accept, context));
@@ -1775,7 +1775,7 @@ public final class Arrays {
     public Mono<Response<List<Enum0>>> getStringEnumValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getStringEnumValid(this.client.getHost(), accept, context));
@@ -1818,10 +1818,10 @@ public final class Arrays {
     public Mono<Response<Void>> putStringEnumValidWithResponseAsync(List<Enum1> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1867,7 +1867,7 @@ public final class Arrays {
     public Mono<Response<List<String>>> getStringWithNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), accept, context));
@@ -1909,7 +1909,7 @@ public final class Arrays {
     public Mono<Response<List<String>>> getStringWithInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), accept, context));
@@ -1952,7 +1952,7 @@ public final class Arrays {
     public Mono<Response<List<UUID>>> getUuidValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUuidValid(this.client.getHost(), accept, context));
@@ -2001,10 +2001,10 @@ public final class Arrays {
     public Mono<Response<Void>> putUuidValidWithResponseAsync(List<UUID> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putUuidValid(this.client.getHost(), arrayBody, accept, context));
@@ -2053,7 +2053,7 @@ public final class Arrays {
     public Mono<Response<List<UUID>>> getUuidInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUuidInvalidChars(this.client.getHost(), accept, context));
@@ -2096,7 +2096,7 @@ public final class Arrays {
     public Mono<Response<List<LocalDate>>> getDateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), accept, context));
@@ -2139,10 +2139,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDateValidWithResponseAsync(List<LocalDate> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, accept, context));
@@ -2187,7 +2187,7 @@ public final class Arrays {
     public Mono<Response<List<LocalDate>>> getDateInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), accept, context));
@@ -2229,7 +2229,7 @@ public final class Arrays {
     public Mono<Response<List<LocalDate>>> getDateInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), accept, context));
@@ -2271,7 +2271,7 @@ public final class Arrays {
     public Mono<Response<List<OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), accept, context));
@@ -2316,10 +2316,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDateTimeValidWithResponseAsync(List<OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -2367,7 +2367,7 @@ public final class Arrays {
     public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), accept, context));
@@ -2409,7 +2409,7 @@ public final class Arrays {
     public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), accept, context));
@@ -2452,7 +2452,7 @@ public final class Arrays {
     public Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), accept, context));
@@ -2501,10 +2501,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(List<OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         List<DateTimeRfc1123> arrayBodyConverted =
@@ -2556,7 +2556,7 @@ public final class Arrays {
     public Mono<Response<List<Duration>>> getDurationValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), accept, context));
@@ -2599,10 +2599,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDurationValidWithResponseAsync(List<Duration> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -2648,7 +2648,7 @@ public final class Arrays {
     public Mono<Response<List<byte[]>>> getByteValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), accept, context));
@@ -2693,10 +2693,10 @@ public final class Arrays {
     public Mono<Response<Void>> putByteValidWithResponseAsync(List<byte[]> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, accept, context));
@@ -2743,7 +2743,7 @@ public final class Arrays {
     public Mono<Response<List<byte[]>>> getByteInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), accept, context));
@@ -2787,7 +2787,7 @@ public final class Arrays {
     public Mono<Response<List<byte[]>>> getBase64UrlWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), accept, context));
@@ -2832,7 +2832,7 @@ public final class Arrays {
     public Mono<Response<List<Product>>> getComplexNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), accept, context));
@@ -2873,7 +2873,7 @@ public final class Arrays {
     public Mono<Response<List<Product>>> getComplexEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), accept, context));
@@ -2915,7 +2915,7 @@ public final class Arrays {
     public Mono<Response<List<Product>>> getComplexItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), accept, context));
@@ -2958,7 +2958,7 @@ public final class Arrays {
     public Mono<Response<List<Product>>> getComplexItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), accept, context));
@@ -3002,7 +3002,7 @@ public final class Arrays {
     public Mono<Response<List<Product>>> getComplexValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), accept, context));
@@ -3051,10 +3051,10 @@ public final class Arrays {
     public Mono<Response<Void>> putComplexValidWithResponseAsync(List<Product> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         } else {
             arrayBody.forEach(e -> e.validate());
         }
@@ -3105,7 +3105,7 @@ public final class Arrays {
     public Mono<Response<List<List<String>>>> getArrayNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), accept, context));
@@ -3146,7 +3146,7 @@ public final class Arrays {
     public Mono<Response<List<List<String>>>> getArrayEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), accept, context));
@@ -3188,7 +3188,7 @@ public final class Arrays {
     public Mono<Response<List<List<String>>>> getArrayItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), accept, context));
@@ -3231,7 +3231,7 @@ public final class Arrays {
     public Mono<Response<List<List<String>>>> getArrayItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), accept, context));
@@ -3274,7 +3274,7 @@ public final class Arrays {
     public Mono<Response<List<List<String>>>> getArrayValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), accept, context));
@@ -3318,10 +3318,10 @@ public final class Arrays {
     public Mono<Response<Void>> putArrayValidWithResponseAsync(List<List<String>> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -3367,7 +3367,7 @@ public final class Arrays {
     public Mono<Response<List<Map<String, String>>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), accept, context));
@@ -3409,7 +3409,7 @@ public final class Arrays {
     public Mono<Response<List<Map<String, String>>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), accept, context));
@@ -3454,7 +3454,7 @@ public final class Arrays {
     public Mono<Response<List<Map<String, String>>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), accept, context));
@@ -3502,7 +3502,7 @@ public final class Arrays {
     public Mono<Response<List<Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), accept, context));
@@ -3550,7 +3550,7 @@ public final class Arrays {
     public Mono<Response<List<Map<String, String>>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), accept, context));
@@ -3602,10 +3602,10 @@ public final class Arrays {
     public Mono<Response<Void>> putDictionaryValidWithResponseAsync(List<Map<String, String>> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            return Mono.error(new NullPointerException("Parameter arrayBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

@@ -23,6 +23,7 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
+import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.specialheader.models.ErrorException;
 import fixtures.specialheader.models.ProductResultValue;
@@ -122,7 +123,7 @@ public final class Headers {
     public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -172,7 +173,7 @@ public final class Headers {
     public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -222,7 +223,7 @@ public final class Headers {
     public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -264,7 +265,7 @@ public final class Headers {
     public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -314,7 +315,7 @@ public final class Headers {
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -376,11 +377,11 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            return Mono.error(new NullPointerException("Parameter nextLink is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

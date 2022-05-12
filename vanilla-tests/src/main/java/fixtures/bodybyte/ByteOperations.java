@@ -93,7 +93,7 @@ public final class ByteOperations {
     public Mono<Response<byte[]>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -134,7 +134,7 @@ public final class ByteOperations {
     public Mono<Response<byte[]>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -176,7 +176,7 @@ public final class ByteOperations {
     public Mono<Response<byte[]>> getNonAsciiWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), accept, context));
@@ -219,10 +219,10 @@ public final class ByteOperations {
     public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (byteBody == null) {
-            return Mono.error(new NullPointerException("Parameter byteBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putNonAscii(this.client.getHost(), byteBody, accept, context));
@@ -266,7 +266,7 @@ public final class ByteOperations {
     public Mono<Response<byte[]>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));

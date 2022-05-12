@@ -231,7 +231,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -272,7 +272,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -313,7 +313,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getOverflowWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), accept, context));
@@ -354,7 +354,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getUnderflowWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), accept, context));
@@ -397,10 +397,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -447,10 +447,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putUtcMaxDateTime7DigitsWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -496,7 +496,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -539,7 +539,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -581,7 +581,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7DigitsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -625,10 +625,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putLocalPositiveOffsetMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -676,7 +676,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -721,7 +721,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -767,10 +767,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putLocalNegativeOffsetMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -818,7 +818,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -863,7 +863,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -909,10 +909,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -958,7 +958,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), accept, context));
@@ -1001,10 +1001,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putLocalPositiveOffsetMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1052,7 +1052,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1096,10 +1096,10 @@ public final class DatetimeOperations {
     public Mono<Response<Void>> putLocalNegativeOffsetMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            return Mono.error(new NullPointerException("Parameter datetimeBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1147,7 +1147,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1190,7 +1190,7 @@ public final class DatetimeOperations {
     public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

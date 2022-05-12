@@ -163,7 +163,7 @@ public final class Ints {
     public Mono<Response<Integer>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -209,7 +209,7 @@ public final class Ints {
     public Mono<Response<Integer>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -255,7 +255,7 @@ public final class Ints {
     public Mono<Response<Integer>> getOverflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOverflowInt32(this.client.getHost(), accept, context));
@@ -301,7 +301,7 @@ public final class Ints {
     public Mono<Response<Integer>> getUnderflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnderflowInt32(this.client.getHost(), accept, context));
@@ -347,7 +347,7 @@ public final class Ints {
     public Mono<Response<Long>> getOverflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOverflowInt64(this.client.getHost(), accept, context));
@@ -393,7 +393,7 @@ public final class Ints {
     public Mono<Response<Long>> getUnderflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnderflowInt64(this.client.getHost(), accept, context));
@@ -441,7 +441,7 @@ public final class Ints {
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMax32(this.client.getHost(), intBody, accept, context));
@@ -487,7 +487,7 @@ public final class Ints {
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMax64(this.client.getHost(), intBody, accept, context));
@@ -533,7 +533,7 @@ public final class Ints {
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMin32(this.client.getHost(), intBody, accept, context));
@@ -579,7 +579,7 @@ public final class Ints {
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMin64(this.client.getHost(), intBody, accept, context));
@@ -623,7 +623,7 @@ public final class Ints {
     public Mono<Response<OffsetDateTime>> getUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnixTime(this.client.getHost(), accept, context));
@@ -666,10 +666,10 @@ public final class Ints {
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (intBody == null) {
-            return Mono.error(new NullPointerException("Parameter intBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
         }
         final String accept = "application/json";
         long intBodyConverted = intBody.toEpochSecond();
@@ -715,7 +715,7 @@ public final class Ints {
     public Mono<Response<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalidUnixTime(this.client.getHost(), accept, context));
@@ -756,7 +756,7 @@ public final class Ints {
     public Mono<Response<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNullUnixTime(this.client.getHost(), accept, context));

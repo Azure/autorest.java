@@ -310,7 +310,7 @@ public final class Paths {
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = true;
         final String accept = "application/json";
@@ -352,7 +352,7 @@ public final class Paths {
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = false;
         final String accept = "application/json";
@@ -394,7 +394,7 @@ public final class Paths {
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = 1000000;
         final String accept = "application/json";
@@ -436,7 +436,7 @@ public final class Paths {
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = -1000000;
         final String accept = "application/json";
@@ -478,7 +478,7 @@ public final class Paths {
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = 10000000000L;
         final String accept = "application/json";
@@ -519,7 +519,7 @@ public final class Paths {
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = -10000000000L;
         final String accept = "application/json";
@@ -561,7 +561,7 @@ public final class Paths {
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = 103400000000000000000f;
         final String accept = "application/json";
@@ -603,7 +603,7 @@ public final class Paths {
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = -1.034E-20f;
         final String accept = "application/json";
@@ -645,7 +645,7 @@ public final class Paths {
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = 9999999.999;
         final String accept = "application/json";
@@ -687,7 +687,7 @@ public final class Paths {
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = -9999999.999;
         final String accept = "application/json";
@@ -730,7 +730,7 @@ public final class Paths {
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
@@ -772,7 +772,7 @@ public final class Paths {
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
@@ -814,7 +814,7 @@ public final class Paths {
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@&=+$,end";
         final String accept = "application/json";
@@ -856,7 +856,7 @@ public final class Paths {
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "";
         final String accept = "application/json";
@@ -899,10 +899,10 @@ public final class Paths {
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringPath == null) {
-            return Mono.error(new NullPointerException("Parameter stringPath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), stringPath, accept, context));
@@ -949,10 +949,10 @@ public final class Paths {
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
-            return Mono.error(new NullPointerException("Parameter enumPath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), enumPath, accept, context));
@@ -999,10 +999,10 @@ public final class Paths {
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
-            return Mono.error(new NullPointerException("Parameter enumPath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), enumPath, accept, context));
@@ -1050,10 +1050,10 @@ public final class Paths {
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
-            return Mono.error(new NullPointerException("Parameter bytePath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
@@ -1099,7 +1099,7 @@ public final class Paths {
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] bytePath = "".getBytes();
         final String accept = "application/json";
@@ -1144,10 +1144,10 @@ public final class Paths {
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
-            return Mono.error(new NullPointerException("Parameter bytePath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
@@ -1193,7 +1193,7 @@ public final class Paths {
     public Mono<Response<Void>> dateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         final String accept = "application/json";
@@ -1237,10 +1237,10 @@ public final class Paths {
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datePath == null) {
-            return Mono.error(new NullPointerException("Parameter datePath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), datePath, accept, context));
@@ -1285,7 +1285,7 @@ public final class Paths {
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
@@ -1330,10 +1330,10 @@ public final class Paths {
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (dateTimePath == null) {
-            return Mono.error(new NullPointerException("Parameter dateTimePath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -1382,10 +1382,10 @@ public final class Paths {
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (base64UrlPath == null) {
-            return Mono.error(new NullPointerException("Parameter base64UrlPath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null."));
         }
         final String accept = "application/json";
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
@@ -1435,10 +1435,10 @@ public final class Paths {
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayPath == null) {
-            return Mono.error(new NullPointerException("Parameter arrayPath is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter arrayPath is required and cannot be null."));
         }
         final String accept = "application/json";
         String arrayPathConverted =
@@ -1491,10 +1491,11 @@ public final class Paths {
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (unixTimeUrlPath == null) {
-            return Mono.error(new NullPointerException("Parameter unixTimeUrlPath is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
         }
         final String accept = "application/json";
         long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();

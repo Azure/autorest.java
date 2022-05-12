@@ -425,6 +425,7 @@ public class ClientMethod {
             imports.add(Locale.class.getName());
             imports.add(ZoneId.class.getName());
             imports.add(OffsetDateTime.class.getName());
+            imports.add(DateTimeRfc1123.class.getName());
         }
     }
 

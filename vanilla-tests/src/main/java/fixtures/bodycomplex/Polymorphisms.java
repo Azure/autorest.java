@@ -130,7 +130,7 @@ public final class Polymorphisms {
     public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -178,10 +178,10 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new NullPointerException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -238,7 +238,7 @@ public final class Polymorphisms {
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDotSyntax(this.client.getHost(), accept, context));
@@ -281,7 +281,7 @@ public final class Polymorphisms {
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -329,7 +329,7 @@ public final class Polymorphisms {
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -376,7 +376,7 @@ public final class Polymorphisms {
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplicated(this.client.getHost(), accept, context));
@@ -421,10 +421,10 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new NullPointerException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -473,10 +473,10 @@ public final class Polymorphisms {
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new NullPointerException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -531,10 +531,10 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new NullPointerException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }

@@ -97,7 +97,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getMethodGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -120,7 +120,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getMethodGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMethodGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);
@@ -189,7 +189,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getMethodGlobalNotProvidedValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -212,7 +212,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getMethodGlobalNotProvidedValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMethodGlobalNotProvidedValid(
@@ -282,7 +282,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getPathGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -305,7 +305,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getPathGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPathGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);
@@ -374,7 +374,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getSwaggerGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -397,7 +397,7 @@ public final class ApiVersionDefaults {
     public Mono<Response<Void>> getSwaggerGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getSwaggerGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);

@@ -139,10 +139,10 @@ public final class Implicits {
     public Mono<Response<Void>> getRequiredPathWithResponseAsync(String pathParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathParameter == null) {
-            return Mono.error(new NullPointerException("Parameter pathParameter is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -189,7 +189,7 @@ public final class Implicits {
     public Mono<Response<Void>> putOptionalQueryWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -261,7 +261,7 @@ public final class Implicits {
     public Mono<Response<Void>> putOptionalHeaderWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -333,7 +333,7 @@ public final class Implicits {
     public Mono<Response<Void>> putOptionalBodyWithResponseAsync(String bodyParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -407,7 +407,7 @@ public final class Implicits {
             Flux<ByteBuffer> bodyParameter, Long contentLength) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -483,11 +483,11 @@ public final class Implicits {
     public Mono<Response<Void>> getRequiredGlobalPathWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalPath() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -531,11 +531,11 @@ public final class Implicits {
     public Mono<Response<Void>> getRequiredGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalQuery() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -579,7 +579,7 @@ public final class Implicits {
     public Mono<Response<Void>> getOptionalGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

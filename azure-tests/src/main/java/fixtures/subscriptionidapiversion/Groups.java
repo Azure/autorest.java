@@ -73,15 +73,16 @@ public final class Groups {
     public Mono<Response<SampleResourceGroup>> getSampleResourceGroupWithResponseAsync(String resourceGroupName) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
-            return Mono.error(new NullPointerException("Parameter resourceGroupName is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(

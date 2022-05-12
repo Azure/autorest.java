@@ -77,17 +77,18 @@ public final class AvailabilitySets {
             String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
-            return Mono.error(new NullPointerException("Parameter resourceGroupName is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (avset == null) {
-            return Mono.error(new NullPointerException("Parameter avset is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter avset is required and cannot be null."));
         }
         if (availabilitySetUpdateParametersTags == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter availabilitySetUpdateParametersTags is required and cannot be null."));
         }
         AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();

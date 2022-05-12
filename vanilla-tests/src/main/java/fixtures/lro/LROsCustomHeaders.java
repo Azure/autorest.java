@@ -116,7 +116,7 @@ public final class LROsCustomHeaders {
             Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -144,7 +144,7 @@ public final class LROsCustomHeaders {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -259,7 +259,7 @@ public final class LROsCustomHeaders {
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -286,7 +286,7 @@ public final class LROsCustomHeaders {
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -400,7 +400,7 @@ public final class LROsCustomHeaders {
     public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -427,7 +427,7 @@ public final class LROsCustomHeaders {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -539,7 +539,7 @@ public final class LROsCustomHeaders {
             Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -567,7 +567,7 @@ public final class LROsCustomHeaders {
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();

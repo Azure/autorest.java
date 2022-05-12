@@ -77,7 +77,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             // 2. Assumes that the client method returns a reactive response.
             // 3. Assumes that the reactive response is a Mono.
             JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
-                ifBlock.line("return Mono.error(new NullPointerException(\"Parameter %s is required and "
+                // TODO (alzimmer): Need to discuss if this can be changed to the more appropriate NullPointerException.
+                ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
                     + "cannot be null.\"));", expressionToCheck));
 
             String potentialValidateExpression = validateExpressions.get(expressionToCheck);

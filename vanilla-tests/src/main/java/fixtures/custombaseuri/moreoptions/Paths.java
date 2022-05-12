@@ -77,21 +77,22 @@ public final class Paths {
     public Mono<Response<Void>> getEmptyWithResponseAsync(
             String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
-            return Mono.error(new NullPointerException("Parameter vault is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter vault is required and cannot be null."));
         }
         if (secret == null) {
-            return Mono.error(new NullPointerException("Parameter secret is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter secret is required and cannot be null."));
         }
         if (this.client.getDnsSuffix() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
+                    new IllegalArgumentException(
+                            "Parameter this.client.getDnsSuffix() is required and cannot be null."));
         }
         if (keyName == null) {
-            return Mono.error(new NullPointerException("Parameter keyName is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(
-                    new NullPointerException(
+                    new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";

@@ -97,7 +97,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -119,7 +119,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -192,7 +192,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -215,7 +215,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context);
@@ -319,7 +319,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -341,7 +341,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -411,7 +411,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -433,7 +433,7 @@ public final class ApiVersionLocals {
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
-                    new NullPointerException("Parameter this.client.getHost() is required and cannot be null."));
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
