@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.customization.implementation;
+package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 
@@ -13,13 +12,13 @@ import java.net.URI;
  * Base class for all code based customizations.
  */
 public abstract class CodeCustomization {
-    protected final Editor editor;
-    protected final EclipseLanguageClient languageClient;
-    protected final SymbolInformation symbol;
-    protected final URI fileUri;
-    protected final String fileName;
+    final Editor editor;
+    final EclipseLanguageClient languageClient;
+    final SymbolInformation symbol;
+    final URI fileUri;
+    final String fileName;
 
-    protected CodeCustomization(Editor editor, EclipseLanguageClient languageClient, SymbolInformation symbol) {
+    CodeCustomization(Editor editor, EclipseLanguageClient languageClient, SymbolInformation symbol) {
         this.editor = editor;
         this.languageClient = languageClient;
         this.symbol = symbol;
@@ -33,7 +32,7 @@ public abstract class CodeCustomization {
      *
      * @return The Editor.
      */
-    Editor getEditor() {
+    public final Editor getEditor() {
         return editor;
     }
 
@@ -42,7 +41,7 @@ public abstract class CodeCustomization {
      *
      * @return The EclipseLanguageClient.
      */
-    EclipseLanguageClient getLanguageClient() {
+    public final EclipseLanguageClient getLanguageClient() {
         return languageClient;
     }
 
@@ -51,7 +50,7 @@ public abstract class CodeCustomization {
      *
      * @return The SymbolInformation.
      */
-    SymbolInformation getSymbol() {
+    public final SymbolInformation getSymbol() {
         return symbol;
     }
 
@@ -60,7 +59,7 @@ public abstract class CodeCustomization {
      *
      * @return The URI of the file.
      */
-    URI getFileUri() {
+    public final URI getFileUri() {
         return fileUri;
     }
 
@@ -69,7 +68,7 @@ public abstract class CodeCustomization {
      *
      * @return The name of the file.
      */
-    public String getFileName() {
+    public final String getFileName() {
         return fileName;
     }
 }

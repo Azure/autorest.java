@@ -81,6 +81,10 @@ public final class JavadocCustomization {
         parseJavadoc(symbolLine);
     }
 
+    Range getJavadocRange() {
+        return javadocRange;
+    }
+
     public JavadocCustomization replace(JavadocCustomization other) {
         this.descriptionDocs = other.descriptionDocs;
 

@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;

@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
@@ -38,10 +37,6 @@ public final class MethodCustomization extends CodeCustomization {
         this.className = className;
         this.methodName = methodName;
         this.methodSignature = methodSignature;
-    }
-
-    SymbolInformation getSymbol() {
-        return symbol;
     }
 
     /**

@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
@@ -368,26 +367,12 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The current ClassCustomization.
      */
     public ClassCustomization removeMethod(String methodNameOrSignature) {
-        // Begin by getting the method.
-        SymbolInformation methodSymbol = getMethod(methodNameOrSignature).getSymbol();
+        MethodCustomization methodCustomization = getMethod(methodNameOrSignature);
 
-        int methodSignatureLine = methodSymbol.getLocation().getRange().getStart().getLine();
+        int methodSignatureLine = methodCustomization.getSymbol().getLocation().getRange().getStart().getLine();
 
-        // Find the beginning location of the method being removed.
-        // If the method has a multi-line Javadoc walk until the start line is found.
-        // Else if the method has a single line Javadoc use the beginning of that line.
-        // Else using the beginning of the method signature.
-        Position start;
-        String lineAboveMethodSignature = editor.getFileLine(fileName, methodSignatureLine - 1);
-        if (Utils.JAVADOC_END_PATTERN.matcher(lineAboveMethodSignature).matches()) {
-            int startLine = Utils.walkUpFileUntilLineMatches(editor, fileName, methodSignatureLine - 2,
-                lineContent -> Utils.JAVADOC_START_PATTERN.matcher(lineContent).matches());
-            start = new Position(startLine, 0);
-        } else if (Utils.SINGLE_LINE_JAVADOC_PATTERN.matcher(lineAboveMethodSignature).matches()) {
-            start = new Position(methodSignatureLine - 1, 0);
-        } else {
-            start = new Position(methodSignatureLine, 0);
-        }
+        // Begin by getting the method's Javadoc to determine where to begin removal of the method.
+        Position start = methodCustomization.getJavadoc().getJavadocRange().getStart();
 
         // Find the ending location of the method being removed.
         String bodyPositionFinder = editor.getFileLine(fileName, methodSignatureLine);
