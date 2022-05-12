@@ -16,6 +16,7 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.polling.AsyncPollResponse;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
@@ -44,14 +45,13 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                         comment.description("Gets default client context.");
                         comment.methodReturns("the default client context.");
                     })
-                    .method(method -> {
-                        method.methodReturn("Context.NONE");
-                    })
+                    .method(method -> method.methodReturn("Context.NONE"))
                     .build();
 
             MethodTemplate mergeContextMethod = MethodTemplate.builder()
                     .imports(Arrays.asList(
                             Context.class.getName(),
+                            CoreUtils.class.getName(),
                             Map.class.getName()))
                     .methodSignature("Context mergeContext(Context context)")
                     .comment(comment -> {
@@ -59,12 +59,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                         comment.param("context", "the context to be merged with default client context.");
                         comment.methodReturns("the merged context.");
                     })
-                    .method(method -> {
-                        method.block("for (Map.Entry<Object, Object> entry : this.getContext().getValues().entrySet())", block -> {
-                            block.line("context = context.addData(entry.getKey(), entry.getValue());");
-                        });
-                        method.methodReturn("context");
-                    })
+                    .method(method -> method.methodReturn("CoreUtils.mergeContexts(this.getContext(), context)"))
                     .build();
 
             MethodTemplate getLroResultMethod = MethodTemplate.builder()
@@ -89,9 +84,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                         comment.param("<U>", "type of final result.");
                         comment.methodReturns("poller flux for poll result and final result.");
                     })
-                    .method(method -> {
-                        method.methodReturn("PollerFactory.create(serializerAdapter, httpPipeline, pollResultType, finalResultType, defaultPollInterval, activationResponse, context)");
-                    })
+                    .method(method -> method.methodReturn("PollerFactory.create(serializerAdapter, httpPipeline, pollResultType, finalResultType, defaultPollInterval, activationResponse, context)"))
                     .build();
 
             MethodTemplate getLroFinalResultOrErrorMethod = MethodTemplate.builder()
