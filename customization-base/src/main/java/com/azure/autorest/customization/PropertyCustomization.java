@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 
 
 /**
- * The Javadoc customization for an AutoRest generated classes and methods.
+ * Customization for an AutoRest generated instance property.
+ * <p>
+ * For constant property customizations use {@link ConstantCustomization}.
  */
 public final class PropertyCustomization extends CodeCustomization {
     private static final Pattern METHOD_PARAMS_CAPTURE = Pattern.compile("\\(.*\\)");

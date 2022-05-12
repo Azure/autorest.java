@@ -9,6 +9,7 @@ import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 
 import java.lang.reflect.Modifier;
+import java.util.List;
 
 /**
  * The constructor level customization for an AutoRest generated constructor.
@@ -63,19 +64,19 @@ public final class ConstructorCustomization extends CodeCustomization {
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
         return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
-            .getConstructors()
-            .stream()
-            .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
-            .findFirst().get()
-            .getAnnotationByName(Utils.cleanAnnotationName(annotation)),
+                .getConstructors()
+                .stream()
+                .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
+                .findFirst().get()
+                .getAnnotationByName(Utils.cleanAnnotationName(annotation)),
             () -> refreshCustomization(constructorSignature));
     }
 
     /**
      * Replace the modifier for this constructor.
      * <p>
-     * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers, {@code
-     * Modifier.PUBLIC | Modifier.ABSTRACT}.
+     * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers,
+     * {@code Modifier.PUBLIC | Modifier.ABSTRACT}.
      * <p>
      * Pass {@code 0} for {@code modifiers} to indicate that the constructor has no modifiers.
      *
@@ -98,8 +99,28 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceParameters(String newParameters) {
-        return Utils.replaceParameters(newParameters, this,
-            () -> refreshCustomization(String.format("%s(%s)", className, newParameters)));
+        return replaceParameters(newParameters, null);
+    }
+
+    /**
+     * Replaces the parameters of the constructor and adds any additional imports required by the new parameters.
+     *
+     * @param newParameters New constructor parameters.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return A new ConstructorCustomization representing the updated constructor.
+     */
+    public ConstructorCustomization replaceParameters(String newParameters, List<String> importsToAdd) {
+        String newSignature = className + "(" + newParameters + ")";
+
+        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className);
+
+        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
+            classCustomization::refreshSymbol);
+
+        return Utils.replaceParameters(newParameters, updatedClassCustomization.getConstructor(constructorSignature),
+            () -> updatedClassCustomization.getConstructor(newSignature));
     }
 
     /**
@@ -109,7 +130,26 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceBody(String newBody) {
-        return Utils.replaceBody(newBody, this, () -> refreshCustomization(constructorSignature));
+        return replaceBody(newBody, null);
+    }
+
+    /**
+     * Replaces the body of the constructor and adds any additional imports required by the new body.
+     *
+     * @param newBody New constructor body.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return A new ConstructorCustomization representing the updated constructor.
+     */
+    public ConstructorCustomization replaceBody(String newBody, List<String> importsToAdd) {
+        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className);
+
+        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
+            classCustomization::refreshSymbol);
+
+        return Utils.replaceBody(newBody, updatedClassCustomization.getConstructor(constructorSignature),
+            () -> updatedClassCustomization.getConstructor(constructorSignature));
     }
 
     private ConstructorCustomization refreshCustomization(String constructorSignature) {
