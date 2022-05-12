@@ -144,15 +144,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters) {
-        return createAPTrueWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<PetAPTrue> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return createAPTrueWithResponseAsync(createParameters).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -206,15 +198,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters) {
-        return createCatAPTrueWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<CatAPTrue> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return createCatAPTrueWithResponseAsync(createParameters).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -268,15 +252,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters) {
-        return createAPObjectWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<PetAPObject> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return createAPObjectWithResponseAsync(createParameters).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -330,15 +306,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPString> createAPStringAsync(PetAPString createParameters) {
-        return createAPStringWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<PetAPString> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return createAPStringWithResponseAsync(createParameters).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -392,15 +360,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters) {
-        return createAPInPropertiesWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<PetAPInProperties> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return createAPInPropertiesWithResponseAsync(createParameters).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -459,14 +419,7 @@ public final class Pets {
     public Mono<PetAPInPropertiesWithAPString> createAPInPropertiesWithAPStringAsync(
             PetAPInPropertiesWithAPString createParameters) {
         return createAPInPropertiesWithAPStringWithResponseAsync(createParameters)
-                .flatMap(
-                        (Response<PetAPInPropertiesWithAPString> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

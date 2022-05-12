@@ -88,7 +88,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String accountName) {
-        return getEmptyWithResponseAsync(accountName).flatMap((Response<Void> res) -> Mono.empty());
+        return getEmptyWithResponseAsync(accountName).flatMap(ignored -> Mono.empty());
     }
 
     /**

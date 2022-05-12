@@ -17,10 +17,12 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -310,6 +312,9 @@ public class ClientMethod {
         imports.add("com.azure.core.annotation.ServiceMethod");
         imports.add("com.azure.core.annotation.ReturnType");
 
+        imports.add("java.util.Objects");
+        imports.add("java.util.stream.Collectors");
+
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         if (settings.isLowLevelClient()) {
@@ -317,6 +322,7 @@ public class ClientMethod {
             imports.add("com.azure.core.http.rest.Response");
             imports.add("com.azure.core.http.rest.RequestOptions");
             imports.add("com.azure.core.util.BinaryData");
+            imports.add(DateTimeRfc1123.class.getName());
 
             if (includeImplementationImports) {
                 imports.add("com.azure.core.http.rest.SimpleResponse");
@@ -338,7 +344,6 @@ public class ClientMethod {
                 imports.add("com.azure.core.http.rest.PagedIterable");
                 imports.add("java.util.List");
                 imports.add("java.util.Map");
-                imports.add("java.util.stream.Collectors");
             }
         } else {
             for (ClientMethodParameter parameter : getParameters()) {
@@ -356,10 +361,9 @@ public class ClientMethod {
                         parameter.getClientType().addImportsTo(imports, true);
 
                         if (parameter.getExplode()) {
-                            imports.add("java.util.Objects");
                             imports.add("java.util.Optional");
                             imports.add("java.util.stream.Stream");
-                            imports.add("java.util.stream.Collectors");
+                            imports.add(ArrayList.class.getName());
                             imports.add("java.util.Collection");
                         }
                     }
@@ -421,6 +425,7 @@ public class ClientMethod {
             imports.add(Locale.class.getName());
             imports.add(ZoneId.class.getName());
             imports.add(OffsetDateTime.class.getName());
+            imports.add(DateTimeRfc1123.class.getName());
         }
     }
 

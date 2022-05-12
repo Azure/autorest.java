@@ -160,7 +160,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalValidAsync() {
-        return postMethodGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -175,7 +175,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalValidAsync(Context context) {
-        return postMethodGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -266,7 +266,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalNullAsync() {
-        return postMethodGlobalNullWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalNullWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -281,7 +281,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalNullAsync(Context context) {
-        return postMethodGlobalNullWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalNullWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -377,7 +377,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalNotProvidedValidAsync() {
-        return postMethodGlobalNotProvidedValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalNotProvidedValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -392,7 +392,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodGlobalNotProvidedValidAsync(Context context) {
-        return postMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -483,7 +483,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postPathGlobalValidAsync() {
-        return postPathGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return postPathGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -498,7 +498,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postPathGlobalValidAsync(Context context) {
-        return postPathGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return postPathGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -589,7 +589,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSwaggerGlobalValidAsync() {
-        return postSwaggerGlobalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return postSwaggerGlobalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -604,7 +604,7 @@ public final class SubscriptionInCredentials {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSwaggerGlobalValidAsync(Context context) {
-        return postSwaggerGlobalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return postSwaggerGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**

@@ -213,7 +213,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async() {
-        return head300WithResponseAsync().flatMap((HttpRedirectsHead300Response res) -> Mono.empty());
+        return head300WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -253,15 +253,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> get300Async() {
-        return get300WithResponseAsync()
-                .flatMap(
-                        (HttpRedirectsGet300Response res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get300WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -302,7 +294,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async() {
-        return head301WithResponseAsync().flatMap((HttpRedirectsHead301Response res) -> Mono.empty());
+        return head301WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -342,7 +334,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async() {
-        return get301WithResponseAsync().flatMap((HttpRedirectsGet301Response res) -> Mono.empty());
+        return get301WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -385,7 +377,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async() {
-        return put301WithResponseAsync().flatMap((HttpRedirectsPut301Response res) -> Mono.empty());
+        return put301WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -426,7 +418,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async() {
-        return head302WithResponseAsync().flatMap((HttpRedirectsHead302Response res) -> Mono.empty());
+        return head302WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -466,7 +458,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async() {
-        return get302WithResponseAsync().flatMap((HttpRedirectsGet302Response res) -> Mono.empty());
+        return get302WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -509,7 +501,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async() {
-        return patch302WithResponseAsync().flatMap((HttpRedirectsPatch302Response res) -> Mono.empty());
+        return patch302WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -553,7 +545,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async() {
-        return post303WithResponseAsync().flatMap((HttpRedirectsPost303Response res) -> Mono.empty());
+        return post303WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -594,7 +586,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async() {
-        return head307WithResponseAsync().flatMap((HttpRedirectsHead307Response res) -> Mono.empty());
+        return head307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -634,7 +626,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async() {
-        return get307WithResponseAsync().flatMap((HttpRedirectsGet307Response res) -> Mono.empty());
+        return get307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -674,7 +666,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> options307Async() {
-        return options307WithResponseAsync().flatMap((HttpRedirectsOptions307Response res) -> Mono.empty());
+        return options307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -715,7 +707,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async() {
-        return put307WithResponseAsync().flatMap((HttpRedirectsPut307Response res) -> Mono.empty());
+        return put307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -756,7 +748,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async() {
-        return patch307WithResponseAsync().flatMap((HttpRedirectsPatch307Response res) -> Mono.empty());
+        return patch307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -797,7 +789,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async() {
-        return post307WithResponseAsync().flatMap((HttpRedirectsPost307Response res) -> Mono.empty());
+        return post307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -838,7 +830,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async() {
-        return delete307WithResponseAsync().flatMap((HttpRedirectsDelete307Response res) -> Mono.empty());
+        return delete307WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

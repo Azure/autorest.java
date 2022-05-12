@@ -23,13 +23,11 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
+import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.specialheader.models.ErrorException;
 import fixtures.specialheader.models.ProductResultValue;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.UUID;
 import reactor.core.publisher.Mono;
 
@@ -129,10 +127,7 @@ public final class Headers {
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent =
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now());
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(
                 context ->
                         service.paramRepeatabilityRequest(
@@ -152,15 +147,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestAsync() {
-        return paramRepeatabilityRequestWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -190,10 +177,7 @@ public final class Headers {
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent =
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now());
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(
                 context ->
                         service.paramRepeatabilityRequestPut(
@@ -213,15 +197,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestPutAsync() {
-        return paramRepeatabilityRequestPutWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestPutWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -263,15 +239,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestGetAsync() {
-        return paramRepeatabilityRequestGetWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestGetWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -301,10 +269,7 @@ public final class Headers {
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent =
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now());
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(
                 context ->
                         service.paramRepeatabilityRequestLRO(
@@ -324,15 +289,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestLROAsync() {
-        return paramRepeatabilityRequestLROWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return paramRepeatabilityRequestLROWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -362,10 +319,7 @@ public final class Headers {
         }
         final String accept = "application/json";
         String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent =
-                DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
-                        .withZone(ZoneId.of("GMT"))
-                        .format(OffsetDateTime.now());
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(
                         context ->
                                 service.paramRepeatabilityRequestPageable(

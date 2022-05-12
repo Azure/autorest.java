@@ -175,7 +175,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodPathValidAsync(String unencodedPathParam) {
-        return getMethodPathValidWithResponseAsync(unencodedPathParam).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodPathValidWithResponseAsync(unencodedPathParam).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -191,8 +191,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodPathValidAsync(String unencodedPathParam, Context context) {
-        return getMethodPathValidWithResponseAsync(unencodedPathParam, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodPathValidWithResponseAsync(unencodedPathParam, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -285,7 +284,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathValidAsync(String unencodedPathParam) {
-        return getPathValidWithResponseAsync(unencodedPathParam).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathValidWithResponseAsync(unencodedPathParam).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -301,7 +300,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathValidAsync(String unencodedPathParam, Context context) {
-        return getPathValidWithResponseAsync(unencodedPathParam, context).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathValidWithResponseAsync(unencodedPathParam, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -383,7 +382,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerPathValidAsync() {
-        return getSwaggerPathValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerPathValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -398,7 +397,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerPathValidAsync(Context context) {
-        return getSwaggerPathValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerPathValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -485,7 +484,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodQueryValidAsync(String q1) {
-        return getMethodQueryValidWithResponseAsync(q1).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodQueryValidWithResponseAsync(q1).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -501,7 +500,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodQueryValidAsync(String q1, Context context) {
-        return getMethodQueryValidWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodQueryValidWithResponseAsync(q1, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -585,7 +584,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodQueryNullAsync(String q1) {
-        return getMethodQueryNullWithResponseAsync(q1).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodQueryNullWithResponseAsync(q1).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -598,7 +597,7 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodQueryNullAsync() {
         final String q1 = null;
-        return getMethodQueryNullWithResponseAsync(q1).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodQueryNullWithResponseAsync(q1).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -613,7 +612,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodQueryNullAsync(String q1, Context context) {
-        return getMethodQueryNullWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodQueryNullWithResponseAsync(q1, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -715,7 +714,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathQueryValidAsync(String q1) {
-        return getPathQueryValidWithResponseAsync(q1).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathQueryValidWithResponseAsync(q1).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -731,7 +730,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathQueryValidAsync(String q1, Context context) {
-        return getPathQueryValidWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathQueryValidWithResponseAsync(q1, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -814,7 +813,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerQueryValidAsync() {
-        return getSwaggerQueryValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerQueryValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -829,7 +828,7 @@ public final class SkipUrlEncodings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerQueryValidAsync(Context context) {
-        return getSwaggerQueryValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerQueryValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**

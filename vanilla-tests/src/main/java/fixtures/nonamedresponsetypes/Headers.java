@@ -388,7 +388,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramExistingKeyAsync(String userAgent) {
-        return paramExistingKeyWithResponseAsync(userAgent).flatMap((Response<Void> res) -> Mono.empty());
+        return paramExistingKeyWithResponseAsync(userAgent).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -403,7 +403,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramExistingKeyAsync(String userAgent, Context context) {
-        return paramExistingKeyWithResponseAsync(userAgent, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramExistingKeyWithResponseAsync(userAgent, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -482,8 +482,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseExistingKeyAsync() {
-        return responseExistingKeyWithResponseAsync()
-                .flatMap((ResponseBase<HeadersResponseExistingKeyHeaders, Void> res) -> Mono.empty());
+        return responseExistingKeyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -497,8 +496,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseExistingKeyAsync(Context context) {
-        return responseExistingKeyWithResponseAsync(context)
-                .flatMap((ResponseBase<HeadersResponseExistingKeyHeaders, Void> res) -> Mono.empty());
+        return responseExistingKeyWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -583,7 +581,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramProtectedKeyAsync(String contentType) {
-        return paramProtectedKeyWithResponseAsync(contentType).flatMap((Response<Void> res) -> Mono.empty());
+        return paramProtectedKeyWithResponseAsync(contentType).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -598,7 +596,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramProtectedKeyAsync(String contentType, Context context) {
-        return paramProtectedKeyWithResponseAsync(contentType, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramProtectedKeyWithResponseAsync(contentType, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -677,8 +675,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseProtectedKeyAsync() {
-        return responseProtectedKeyWithResponseAsync()
-                .flatMap((ResponseBase<HeadersResponseProtectedKeyHeaders, Void> res) -> Mono.empty());
+        return responseProtectedKeyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -692,8 +689,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseProtectedKeyAsync(Context context) {
-        return responseProtectedKeyWithResponseAsync(context)
-                .flatMap((ResponseBase<HeadersResponseProtectedKeyHeaders, Void> res) -> Mono.empty());
+        return responseProtectedKeyWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -781,7 +777,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramIntegerAsync(String scenario, int value) {
-        return paramIntegerWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramIntegerWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -797,7 +793,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramIntegerAsync(String scenario, int value, Context context) {
-        return paramIntegerWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramIntegerWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -890,8 +886,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseIntegerAsync(String scenario) {
-        return responseIntegerWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseIntegerHeaders, Void> res) -> Mono.empty());
+        return responseIntegerWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -906,8 +901,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseIntegerAsync(String scenario, Context context) {
-        return responseIntegerWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseIntegerHeaders, Void> res) -> Mono.empty());
+        return responseIntegerWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1002,7 +996,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramLongAsync(String scenario, long value) {
-        return paramLongWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramLongWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1019,7 +1013,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramLongAsync(String scenario, long value, Context context) {
-        return paramLongWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramLongWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1113,8 +1107,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseLongAsync(String scenario) {
-        return responseLongWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseLongHeaders, Void> res) -> Mono.empty());
+        return responseLongWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1129,8 +1122,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseLongAsync(String scenario, Context context) {
-        return responseLongWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseLongHeaders, Void> res) -> Mono.empty());
+        return responseLongWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1224,7 +1216,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramFloatAsync(String scenario, float value) {
-        return paramFloatWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramFloatWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1241,7 +1233,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramFloatAsync(String scenario, float value, Context context) {
-        return paramFloatWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramFloatWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1335,8 +1327,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloatAsync(String scenario) {
-        return responseFloatWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseFloatHeaders, Void> res) -> Mono.empty());
+        return responseFloatWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1351,8 +1342,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseFloatAsync(String scenario, Context context) {
-        return responseFloatWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseFloatHeaders, Void> res) -> Mono.empty());
+        return responseFloatWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1446,7 +1436,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDoubleAsync(String scenario, double value) {
-        return paramDoubleWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDoubleWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1463,7 +1453,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDoubleAsync(String scenario, double value, Context context) {
-        return paramDoubleWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDoubleWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1558,8 +1548,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDoubleAsync(String scenario) {
-        return responseDoubleWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseDoubleHeaders, Void> res) -> Mono.empty());
+        return responseDoubleWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1574,8 +1563,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDoubleAsync(String scenario, Context context) {
-        return responseDoubleWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseDoubleHeaders, Void> res) -> Mono.empty());
+        return responseDoubleWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1667,7 +1655,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramBoolAsync(String scenario, boolean value) {
-        return paramBoolWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramBoolWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1683,7 +1671,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramBoolAsync(String scenario, boolean value, Context context) {
-        return paramBoolWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramBoolWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1775,8 +1763,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseBoolAsync(String scenario) {
-        return responseBoolWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseBoolHeaders, Void> res) -> Mono.empty());
+        return responseBoolWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1791,8 +1778,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseBoolAsync(String scenario, Context context) {
-        return responseBoolWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseBoolHeaders, Void> res) -> Mono.empty());
+        return responseBoolWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1886,7 +1872,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramStringAsync(String scenario, String value) {
-        return paramStringWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramStringWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1902,7 +1888,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramStringAsync(String scenario) {
         final String value = null;
-        return paramStringWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramStringWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1919,7 +1905,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramStringAsync(String scenario, String value, Context context) {
-        return paramStringWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramStringWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2030,8 +2016,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseStringAsync(String scenario) {
-        return responseStringWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseStringHeaders, Void> res) -> Mono.empty());
+        return responseStringWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2047,8 +2032,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseStringAsync(String scenario, Context context) {
-        return responseStringWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseStringHeaders, Void> res) -> Mono.empty());
+        return responseStringWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2150,7 +2134,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDateAsync(String scenario, LocalDate value) {
-        return paramDateWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDateWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2167,7 +2151,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDateAsync(String scenario, LocalDate value, Context context) {
-        return paramDateWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDateWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2261,8 +2245,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDateAsync(String scenario) {
-        return responseDateWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseDateHeaders, Void> res) -> Mono.empty());
+        return responseDateWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2277,8 +2260,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDateAsync(String scenario, Context context) {
-        return responseDateWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseDateHeaders, Void> res) -> Mono.empty());
+        return responseDateWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2378,7 +2360,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeAsync(String scenario, OffsetDateTime value) {
-        return paramDatetimeWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDatetimeWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2395,7 +2377,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeAsync(String scenario, OffsetDateTime value, Context context) {
-        return paramDatetimeWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDatetimeWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2491,8 +2473,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeAsync(String scenario) {
-        return responseDatetimeWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseDatetimeHeaders, Void> res) -> Mono.empty());
+        return responseDatetimeWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2508,8 +2489,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeAsync(String scenario, Context context) {
-        return responseDatetimeWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseDatetimeHeaders, Void> res) -> Mono.empty());
+        return responseDatetimeWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2612,7 +2592,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeRfc1123Async(String scenario, OffsetDateTime value) {
-        return paramDatetimeRfc1123WithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDatetimeRfc1123WithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2628,7 +2608,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeRfc1123Async(String scenario) {
         final OffsetDateTime value = null;
-        return paramDatetimeRfc1123WithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDatetimeRfc1123WithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2646,8 +2626,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDatetimeRfc1123Async(String scenario, OffsetDateTime value, Context context) {
-        return paramDatetimeRfc1123WithResponseAsync(scenario, value, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return paramDatetimeRfc1123WithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2761,8 +2740,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeRfc1123Async(String scenario) {
-        return responseDatetimeRfc1123WithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseDatetimeRfc1123Headers, Void> res) -> Mono.empty());
+        return responseDatetimeRfc1123WithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2778,8 +2756,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeRfc1123Async(String scenario, Context context) {
-        return responseDatetimeRfc1123WithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseDatetimeRfc1123Headers, Void> res) -> Mono.empty());
+        return responseDatetimeRfc1123WithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2878,7 +2855,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDurationAsync(String scenario, Duration value) {
-        return paramDurationWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDurationWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2894,7 +2871,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramDurationAsync(String scenario, Duration value, Context context) {
-        return paramDurationWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramDurationWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2987,8 +2964,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDurationAsync(String scenario) {
-        return responseDurationWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseDurationHeaders, Void> res) -> Mono.empty());
+        return responseDurationWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3003,8 +2979,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDurationAsync(String scenario, Context context) {
-        return responseDurationWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseDurationHeaders, Void> res) -> Mono.empty());
+        return responseDurationWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3104,7 +3079,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramByteAsync(String scenario, byte[] value) {
-        return paramByteWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramByteWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3120,7 +3095,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramByteAsync(String scenario, byte[] value, Context context) {
-        return paramByteWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramByteWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3212,8 +3187,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseByteAsync(String scenario) {
-        return responseByteWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseByteHeaders, Void> res) -> Mono.empty());
+        return responseByteWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3228,8 +3202,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseByteAsync(String scenario, Context context) {
-        return responseByteWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseByteHeaders, Void> res) -> Mono.empty());
+        return responseByteWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3320,7 +3293,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
-        return paramEnumWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramEnumWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3335,7 +3308,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramEnumAsync(String scenario) {
         final GreyscaleColors value = null;
-        return paramEnumWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+        return paramEnumWithResponseAsync(scenario, value).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3351,7 +3324,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramEnumAsync(String scenario, GreyscaleColors value, Context context) {
-        return paramEnumWithResponseAsync(scenario, value, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramEnumWithResponseAsync(scenario, value, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3457,8 +3430,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseEnumAsync(String scenario) {
-        return responseEnumWithResponseAsync(scenario)
-                .flatMap((ResponseBase<HeadersResponseEnumHeaders, Void> res) -> Mono.empty());
+        return responseEnumWithResponseAsync(scenario).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3473,8 +3445,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseEnumAsync(String scenario, Context context) {
-        return responseEnumWithResponseAsync(scenario, context)
-                .flatMap((ResponseBase<HeadersResponseEnumHeaders, Void> res) -> Mono.empty());
+        return responseEnumWithResponseAsync(scenario, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3550,7 +3521,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customRequestIdAsync() {
-        return customRequestIdWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return customRequestIdWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3564,7 +3535,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customRequestIdAsync(Context context) {
-        return customRequestIdWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return customRequestIdWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**

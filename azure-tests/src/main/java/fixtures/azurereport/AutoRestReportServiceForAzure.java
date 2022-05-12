@@ -158,15 +158,7 @@ public final class AutoRestReportServiceForAzure {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getReportAsync(String qualifier) {
-        return getReportWithResponseAsync(qualifier)
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getReportWithResponseAsync(qualifier).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -179,15 +171,7 @@ public final class AutoRestReportServiceForAzure {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getReportAsync() {
         final String qualifier = null;
-        return getReportWithResponseAsync(qualifier)
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getReportWithResponseAsync(qualifier).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

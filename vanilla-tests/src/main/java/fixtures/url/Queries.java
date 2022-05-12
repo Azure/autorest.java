@@ -397,7 +397,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanTrueAsync() {
-        return getBooleanTrueWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanTrueWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -439,7 +439,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanFalseAsync() {
-        return getBooleanFalseWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanFalseWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -485,7 +485,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanNullAsync(Boolean boolQuery) {
-        return getBooleanNullWithResponseAsync(boolQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanNullWithResponseAsync(boolQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -498,7 +498,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanNullAsync() {
         final Boolean boolQuery = null;
-        return getBooleanNullWithResponseAsync(boolQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getBooleanNullWithResponseAsync(boolQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -554,7 +554,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntOneMillionAsync() {
-        return getIntOneMillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getIntOneMillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -596,7 +596,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNegativeOneMillionAsync() {
-        return getIntNegativeOneMillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getIntNegativeOneMillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -641,7 +641,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNullAsync(Integer intQuery) {
-        return getIntNullWithResponseAsync(intQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getIntNullWithResponseAsync(intQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -654,7 +654,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNullAsync() {
         final Integer intQuery = null;
-        return getIntNullWithResponseAsync(intQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getIntNullWithResponseAsync(intQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -710,7 +710,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getTenBillionAsync() {
-        return getTenBillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getTenBillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -752,7 +752,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getNegativeTenBillionAsync() {
-        return getNegativeTenBillionWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getNegativeTenBillionWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -797,7 +797,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getLongNullAsync(Long longQuery) {
-        return getLongNullWithResponseAsync(longQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getLongNullWithResponseAsync(longQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -810,7 +810,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getLongNullAsync() {
         final Long longQuery = null;
-        return getLongNullWithResponseAsync(longQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return getLongNullWithResponseAsync(longQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -866,7 +866,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositiveAsync() {
-        return floatScientificPositiveWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return floatScientificPositiveWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -908,7 +908,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegativeAsync() {
-        return floatScientificNegativeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return floatScientificNegativeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -953,7 +953,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatNullAsync(Float floatQuery) {
-        return floatNullWithResponseAsync(floatQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return floatNullWithResponseAsync(floatQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -966,7 +966,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatNullAsync() {
         final Float floatQuery = null;
-        return floatNullWithResponseAsync(floatQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return floatNullWithResponseAsync(floatQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1022,7 +1022,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositiveAsync() {
-        return doubleDecimalPositiveWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return doubleDecimalPositiveWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1064,7 +1064,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegativeAsync() {
-        return doubleDecimalNegativeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return doubleDecimalNegativeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1109,7 +1109,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleNullAsync(Double doubleQuery) {
-        return doubleNullWithResponseAsync(doubleQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return doubleNullWithResponseAsync(doubleQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1122,7 +1122,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleNullAsync() {
         final Double doubleQuery = null;
-        return doubleNullWithResponseAsync(doubleQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return doubleNullWithResponseAsync(doubleQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1179,7 +1179,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUnicodeAsync() {
-        return stringUnicodeWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringUnicodeWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1221,7 +1221,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync() {
-        return stringUrlEncodedWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringUrlEncodedWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1263,7 +1263,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringEmptyAsync() {
-        return stringEmptyWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return stringEmptyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1307,7 +1307,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringNullAsync(String stringQuery) {
-        return stringNullWithResponseAsync(stringQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return stringNullWithResponseAsync(stringQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1320,7 +1320,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringNullAsync() {
         final String stringQuery = null;
-        return stringNullWithResponseAsync(stringQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return stringNullWithResponseAsync(stringQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1379,7 +1379,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumValidAsync(UriColor enumQuery) {
-        return enumValidWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return enumValidWithResponseAsync(enumQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1392,7 +1392,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumValidAsync() {
         final UriColor enumQuery = null;
-        return enumValidWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return enumValidWithResponseAsync(enumQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1450,7 +1450,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumQuery) {
-        return enumNullWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return enumNullWithResponseAsync(enumQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1463,7 +1463,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync() {
         final UriColor enumQuery = null;
-        return enumNullWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return enumNullWithResponseAsync(enumQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1524,7 +1524,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync(byte[] byteQuery) {
-        return byteMultiByteWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return byteMultiByteWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1537,7 +1537,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync() {
         final byte[] byteQuery = new byte[0];
-        return byteMultiByteWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return byteMultiByteWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1594,7 +1594,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteEmptyAsync() {
-        return byteEmptyWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return byteEmptyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1641,7 +1641,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync(byte[] byteQuery) {
-        return byteNullWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return byteNullWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1654,7 +1654,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync() {
         final byte[] byteQuery = new byte[0];
-        return byteNullWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return byteNullWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1709,7 +1709,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateValidAsync() {
-        return dateValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return dateValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1754,7 +1754,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate dateQuery) {
-        return dateNullWithResponseAsync(dateQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return dateNullWithResponseAsync(dateQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1767,7 +1767,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync() {
         final LocalDate dateQuery = null;
-        return dateNullWithResponseAsync(dateQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return dateNullWithResponseAsync(dateQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1823,7 +1823,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeValidAsync() {
-        return dateTimeValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return dateTimeValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1869,7 +1869,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
-        return dateTimeNullWithResponseAsync(dateTimeQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return dateTimeNullWithResponseAsync(dateTimeQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1882,7 +1882,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync() {
         final OffsetDateTime dateTimeQuery = null;
-        return dateTimeNullWithResponseAsync(dateTimeQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return dateTimeNullWithResponseAsync(dateTimeQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1947,7 +1947,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
-        return arrayStringCsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1961,7 +1961,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringCsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2024,7 +2024,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
-        return arrayStringCsvNullWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvNullWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2037,7 +2037,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvNullAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringCsvNullWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvNullWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2099,7 +2099,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
-        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2112,7 +2112,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvEmptyAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2177,8 +2177,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringNoCollectionFormatEmptyAsync(List<String> arrayQuery) {
-        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2192,8 +2191,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringNoCollectionFormatEmptyAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2260,7 +2258,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
-        return arrayStringSsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringSsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2274,7 +2272,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringSsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringSsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2340,7 +2338,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
-        return arrayStringTsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringTsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2354,7 +2352,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringTsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringTsvValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2422,7 +2420,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
-        return arrayStringPipesValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringPipesValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2437,7 +2435,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringPipesValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringPipesValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**

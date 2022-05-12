@@ -238,14 +238,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -262,14 +255,7 @@ public final class MediaTypesClient {
         final Flux<ByteBuffer> input = null;
         final Long contentLength = null;
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -339,15 +325,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(String source) {
-        return analyzeBodyWithResponseAsync(source)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return analyzeBodyWithResponseAsync(source).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -360,15 +338,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync() {
         final String source = null;
-        return analyzeBodyWithResponseAsync(source)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return analyzeBodyWithResponseAsync(source).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -438,7 +408,7 @@ public final class MediaTypesClient {
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(
             ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -455,7 +425,7 @@ public final class MediaTypesClient {
         final Flux<ByteBuffer> input = null;
         final Long contentLength = null;
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -522,7 +492,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(String source) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap((Response<Void> res) -> Mono.empty());
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -535,7 +505,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync() {
         final String source = null;
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap((Response<Void> res) -> Mono.empty());
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(source).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -592,15 +562,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync(String input) {
-        return contentTypeWithEncodingWithResponseAsync(input)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return contentTypeWithEncodingWithResponseAsync(input).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -613,15 +575,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync() {
         final String input = null;
-        return contentTypeWithEncodingWithResponseAsync(input)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return contentTypeWithEncodingWithResponseAsync(input).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -698,14 +652,7 @@ public final class MediaTypesClient {
     public Mono<String> binaryBodyWithTwoContentTypesAsync(
             ContentType1 contentType, Flux<ByteBuffer> message, long contentLength) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -773,14 +720,7 @@ public final class MediaTypesClient {
     public Mono<String> binaryBodyWithThreeContentTypesAsync(
             ContentType1AutoGenerated contentType, Flux<ByteBuffer> message, long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -841,14 +781,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putTextAndJsonBodyAsync(ContentType1AutoGenerated2 contentType, String message) {
         return putTextAndJsonBodyWithResponseAsync(contentType, message)
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

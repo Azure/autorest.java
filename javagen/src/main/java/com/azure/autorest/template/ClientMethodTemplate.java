@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -29,9 +30,12 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.serializer.CollectionFormat;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -48,55 +52,105 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         return INSTANCE;
     }
 
-    protected static void addValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
-        if (settings.shouldClientSideValidations()) {
-            for (String expressionToCheck : expressionsToCheck) {
-                JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
-                        ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
-                            + "cannot be null.\"));", expressionToCheck));
-                if (validateExpressions.containsKey(expressionToCheck)) {
-                    nullCheck.elseBlock(elseBlock ->
-                            elseBlock.line(validateExpressions.get(expressionToCheck) + ";"));
-                }
+    /**
+     * Adds validations to the client method.
+     *
+     * @param function The client method code block.
+     * @param expressionsToCheck Expressions to validate as non-null.
+     * @param validateExpressions Expressions to validate with a custom validation (key is the expression, value is the
+     * validation).
+     * @param settings AutoRest generation settings, used to determine if validations should be added.
+     */
+    protected static void addValidations(JavaBlock function, List<String> expressionsToCheck,
+        Map<String, String> validateExpressions, JavaSettings settings) {
+        if (!settings.shouldClientSideValidations()) {
+            return;
+        }
+
+        // Iteration of validateExpressions uses expressionsToCheck effectively as a set lookup, may as well turn the
+        // expressionsToCheck to a set.
+        Set<String> expressionsToCheckSet = new LinkedHashSet<>(expressionsToCheck);
+
+        for (String expressionToCheck : expressionsToCheckSet) {
+            // TODO (alzimmer): Determine if the assumption being made here are always true.
+            // 1. Assumes that the expression is nullable.
+            // 2. Assumes that the client method returns a reactive response.
+            // 3. Assumes that the reactive response is a Mono.
+            JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
+                // TODO (alzimmer): Need to discuss if this can be changed to the more appropriate NullPointerException.
+                ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
+                    + "cannot be null.\"));", expressionToCheck));
+
+            String potentialValidateExpression = validateExpressions.get(expressionToCheck);
+            if (potentialValidateExpression != null) {
+                nullCheck.elseBlock(elseBlock -> elseBlock.line(potentialValidateExpression + ";"));
             }
-            for (Map.Entry<String, String> validateExpression : validateExpressions.entrySet()) {
-                if (!expressionsToCheck.contains(validateExpression.getKey())) {
-                    function.ifBlock(validateExpression.getKey() + " != null", ifBlock ->
-                            ifBlock.line(validateExpression.getValue() + ";"));
-                }
+        }
+
+        for (Map.Entry<String, String> validateExpression : validateExpressions.entrySet()) {
+            if (!expressionsToCheckSet.contains(validateExpression.getKey())) {
+                function.ifBlock(validateExpression.getKey() + " != null",
+                    ifBlock -> ifBlock.line(validateExpression.getValue() + ";"));
             }
         }
     }
 
-    protected static void addOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
-        if (clientMethod.getOnlyRequiredParameters()) {
-            for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
-                if (!parameter.getIsRequired()) {
-                    IType parameterClientType = parameter.getClientType();
-                    String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
-                    function.line("final %s %s = %s;", parameterClientType, parameter.getName(), defaultValue == null ? "null" : defaultValue);
-                }
+    /**
+     * Adds optional variable instantiations into the client method.
+     *
+     * @param function The client method code block.
+     * @param clientMethod The client method.
+     * @param proxyMethodAndConstantParameters Proxy method constant parameters.
+     * @param settings AutoRest generation settings.
+     */
+    protected static void addOptionalVariables(JavaBlock function, ClientMethod clientMethod,
+        List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+        if (!clientMethod.getOnlyRequiredParameters()) {
+            return;
+        }
+
+        for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
+            // Parameter is required and will be part of the method signature.
+            if (parameter.getIsRequired()) {
+                continue;
             }
+
+            IType parameterClientType = parameter.getClientType();
+            String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
+            function.line("final %s %s = %s;", parameterClientType, parameter.getName(),
+                defaultValue == null ? "null" : defaultValue);
         }
     }
 
-    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
-        addOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true, true);
+    /**
+     * Adds optional variable instantiations and constant variables into the client method.
+     *
+     * @param function The client method code block.
+     * @param clientMethod The client method.
+     * @param proxyMethodAndConstantParameters Proxy method constant parameters.
+     * @param settings AutoRest generation settings.
+     */
+    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod,
+        List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+        addOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true,
+            true);
     }
 
     /**
      * Add optional and constant variables.
      *
-     * @param function
-     * @param clientMethod
-     * @param proxyMethodAndConstantParameters
-     * @param settings
-     * @param addOptional Whether add optional variables, init to default or null
-     * @param addConstant Whether add constant variables, init to default
-     * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
+     * @param function The client method code block.
+     * @param clientMethod The client method.
+     * @param proxyMethodAndConstantParameters Proxy method constant parameters.
+     * @param settings AutoRest generation settings.
+     * @param addOptional Whether optional variable instantiations are added, initialized to default or null.
+     * @param addConstant Whether constant variables are added, initialized to default.
+     * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from
+     * client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
      */
-    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
-                                                          boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
+    protected static void addOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod,
+        List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings, boolean addOptional,
+        boolean addConstant, boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
@@ -104,55 +158,84 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
             IType parameterClientType = parameter.getClientType();
 
-            if (parameterWireType != ClassType.Base64Url &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.BODY &&
-                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
-                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+            // TODO (alzimmer): There are a few similar transforms like this but they all have slight nuances on output.
+            // This always turns ArrayType and ListType into String, the case further down this file may not.
+            if (parameterWireType != ClassType.Base64Url
+                && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY
+                //&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData
+                && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
-            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
+            // If the parameter isn't required and the client method only uses required parameters optional
+            // parameters are omitted and will need to instantiated in the method.
+            boolean optionalOmitted = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+
+            // Optional variables and constants are always null if their wire type and client type differ and applying
+            // conversions between the types is ignored.
+            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType
+                && optionalOmitted;
+
+            // Constants should be included if the parameter is a constant and it's either required or optional
+            // constants aren't generated as enums.
+            boolean includeConstant = parameter.getIsConstant() &&
+                (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired());
+
+            // Client methods only add local variable instantiations when the parameter isn't passed by the caller,
+            // isn't always null, is an optional parameter that was omitted or is a constant that is either required
+            // or AutoRest isn't generating with optional constant as enums.
             if (!parameter.getFromClient()
-                    && !alwaysNull
-                    && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired())
-                    || (addConstant && parameter.getIsConstant() && (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired())))) {
+                && !alwaysNull
+                && ((addOptional && optionalOmitted) || (addConstant && includeConstant))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
-                function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
+                function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(),
+                    defaultValue == null ? "null" : defaultValue);
             }
         }
     }
 
-    protected static void applyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
+    /**
+     * Applies parameter transformations to the client method parameters.
+     *
+     * @param function The client method code block.
+     * @param clientMethod The client method.
+     * @param settings AutoRest generation settings.
+     */
+    protected static void applyParameterTransformations(JavaBlock function, ClientMethod clientMethod,
+        JavaSettings settings) {
         for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails()) {
             if (transformation.getParameterMappings().isEmpty()) {
                 // the case that this flattened parameter is not original parameter from any other parameters
                 ClientMethodParameter outParameter = transformation.getOutParameter();
                 if (outParameter.getIsRequired() && outParameter.getClientType() instanceof ClassType) {
-                    function.line("%1$s %2$s = new %1$s();",
-                            outParameter.getClientType(),
-                            outParameter.getName());
+                    function.line("%1$s %2$s = new %1$s();", outParameter.getClientType(), outParameter.getName());
                 } else {
-                    function.line("%1$s %2$s = null;",
-                            outParameter.getClientType(),
-                            outParameter.getName());
+                    function.line("%1$s %2$s = null;", outParameter.getClientType(), outParameter.getName());
                 }
+
+                // TODO (alzimmer): Should this break here? What if there are subsequent method transformation details?
                 break;
             }
 
-            String nullCheck = transformation.getParameterMappings().stream().filter(m -> !m.getInputParameter().getIsRequired())
-                    .map((ParameterMapping m) -> {
-                        ClientMethodParameter parameter = m.getInputParameter();
+            String nullCheck = transformation.getParameterMappings().stream()
+                .filter(m -> !m.getInputParameter().getIsRequired())
+                .map(m -> {
+                    ClientMethodParameter parameter = m.getInputParameter();
 
-                        String parameterName;
-                        if (!parameter.getFromClient()) {
-                            parameterName = parameter.getName();
-                        } else {
-                            parameterName = m.getInputParameterProperty().getName();
-                        }
+                    String parameterName;
+                    if (!parameter.getFromClient()) {
+                        parameterName = parameter.getName();
+                    } else {
+                        parameterName = m.getInputParameterProperty().getName();
+                    }
 
-                        return parameterName + " != null";
-                    }).collect(Collectors.joining(" || "));
-            boolean conditionalAssignment = !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
+                    return parameterName + " != null";
+                }).collect(Collectors.joining(" || "));
+
+            boolean conditionalAssignment = !nullCheck.isEmpty()
+                && !transformation.getOutParameter().getIsRequired()
+                && !clientMethod.getOnlyRequiredParameters();
+
             // Use a mutable internal variable, leave the original name for effectively final variable
             String outParameterName = conditionalAssignment
                     ? transformation.getOutParameter().getName() + "Internal"
@@ -221,98 +304,121 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    protected static void convertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
+    /**
+     * Converts the type represented to the client into the type that is sent over the wire to the service.
+     *
+     * @param function The client method code block.
+     * @param clientMethod The client method.
+     * @param autoRestMethodRetrofitParameters Rest API method parameters.
+     * @param methodClientReference Client method client reference (can be removed as it is metadata on ClientMethod).
+     * @param settings AutoRest generation settings.
+     */
+    protected static void convertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod,
+        List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference,
+        JavaSettings settings) {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
 
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
+
             IType parameterClientType = parameter.getClientType();
 
-            if (parameterWireType != ClassType.Base64Url &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.BODY &&
-                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+            // TODO (alzimmer): Reconcile the logic here with that earlier in the file.
+            // This check parameter explosion but earlier in the file it doesn't.
+            if (parameterWireType != ClassType.Base64Url
+                && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY
+                //&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+                parameterWireType = (parameter.getExplode()) ? new ListType(ClassType.String) : ClassType.String;
+            }
+
+            // If the wire type and client type are the same there is no conversion needed.
+            if (parameterWireType == parameterClientType) {
+                continue;
+            }
+
+            String parameterName = parameter.getParameterReference();
+            String parameterWireName = parameter.getParameterReferenceConverted();
+
+            boolean addedConversion = false;
+            boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+
+            RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
+            if (parameterLocation != RequestParameterLocation.BODY &&
+                    //parameterLocation != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                if (parameter.getExplode() == false) {
-                    parameterWireType = ClassType.String;
-                } else {
-                    parameterWireType = new ListType(ClassType.String);
+
+                if (parameterClientType == ArrayType.ByteArray) {
+                    String expression = "null";
+                    if (!alwaysNull) {
+                        expression = String.format("%s(%s)",
+                            parameterWireType == ClassType.String ? "Base64Util.encodeToString" : "Base64Url.encode",
+                            parameterName);
+                    }
+
+                    function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
+                    addedConversion = true;
+                } else if (parameterClientType instanceof ListType) {
+                    boolean alreadyNullChecked = clientMethod.getRequiredNullableParameterExpressions()
+                        .contains(parameterName);
+                    String expression;
+                    if (alwaysNull) {
+                        expression = "null";
+                    } else if (!parameter.getExplode()) {
+                        CollectionFormat collectionFormat = parameter.getCollectionFormat();
+                        if (((ListType) parameterClientType).getElementType() instanceof EnumType) {
+                            // EnumTypes should provide a toString implementation that represents the wire value.
+                            // Circumvent the use of JacksonAdapter and handle this manually.
+
+                            // If the parameter is null, the converted value is null.
+                            // Otherwise, convert the parameter to a string, mapping each element to the toString
+                            // value, finally joining with the collection format.
+                            if (alreadyNullChecked) {
+                                expression =
+                                    parameterName + ".stream()\n" +
+                                    "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                    "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                            } else {
+                                expression =
+                                    "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
+                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                            }
+                        } else {
+                            expression = String.format(
+                                "JacksonAdapter.createDefaultSerializerAdapter().serialize%s(%s, CollectionFormat.%s)",
+                                settings.shouldUseIterable() ? "Iterable" : "List", parameterName,
+                                collectionFormat.toString().toUpperCase());
+                        }
+                    } else {
+                        if (alreadyNullChecked) {
+                            expression = parameterName + ".stream()\n"
+                                + "    .map(item -> Objects.toString(item, \"\"))\n"
+                                + "    .collect(Collectors.toList())";
+                        } else {
+                            expression = "(" + parameterName + " == null) ? new ArrayList<>()\n"
+                                + ": " + parameterName + ".stream().map(item -> Objects.toString(item, \"\")).collect(Collectors.toList())";
+                        }
+                    }
+                    function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
+                    addedConversion = true;
                 }
             }
 
-            if (parameterWireType != parameterClientType) {
-                String parameterName = parameter.getParameterReference();
-                String parameterWireName = parameter.getParameterReferenceConverted();
+            if (settings.shouldGenerateXmlSerialization()
+                && parameterClientType instanceof ListType
+                && (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
+                function.line("%s %s = new %s(%s);", parameter.getWireType(), parameterWireName,
+                    parameter.getWireType(), alwaysNull ? "null" : parameterName);
+                addedConversion = true;
+            }
 
-                boolean addedConversion = false;
-                boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
-
-                RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
-                if (parameterLocation != RequestParameterLocation.BODY &&
-                        //parameterLocation != RequestParameterLocation.FormData &&
-                        (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                    String parameterWireTypeName = parameterWireType.toString();
-
-                    if (parameterClientType == ArrayType.ByteArray) {
-                        if (parameterWireType == ClassType.String) {
-                            String expression;
-                            if (alwaysNull) {
-                                expression = "null";
-                            } else {
-                                expression = String.format("Base64Util.encodeToString(%s)", parameterName);
-                            }
-                            function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
-                        } else {
-                            String expression;
-                            if (alwaysNull) {
-                                expression = "null";
-                            } else {
-                                expression = String.format("Base64Url.encode(%s)", parameterName);
-                            }
-                            function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
-                        }
-                        addedConversion = true;
-                    } else if (parameterClientType instanceof ListType) {
-                        String expression;
-                        if (alwaysNull) {
-                            expression = "null";
-                        } else if (!parameter.getExplode()){
-                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
-                                            ".serializeList(%s, CollectionFormat.%s)", parameterName,
-                                    parameter.getCollectionFormat().toString().toUpperCase());
-                            if (settings.shouldUseIterable()) {
-                                expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
-                                                ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
-                                        parameter.getCollectionFormat().toString().toUpperCase());
-                            }
-                        } else {
-                            expression = String.format("Optional.ofNullable(%s).map(Collection::stream)" +
-                                    ".orElseGet(Stream::empty).map((item) -> Objects.toString(item, \"\"))" +
-                                    ".collect(Collectors.toList())",
-                                    parameterName);
-                        }
-                        function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
-                        addedConversion = true;
-                    }
-                }
-
-                if (settings.shouldGenerateXmlSerialization() &&
-                        parameterClientType instanceof ListType &&
-                        (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
-                    function.line("%s %s = new %s(%s);",
-                            parameter.getWireType(),
-                            parameterWireName,
-                            parameter.getWireType(),
-                            alwaysNull ? "null" : parameterName);
-                    addedConversion = true;
-                }
-
-                if (!addedConversion) {
-                    function.line(parameter.convertFromClientType(parameterName, parameterWireName,
-                            clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired(),
-                            parameter.getIsConstant() || alwaysNull));
-                }
+            if (!addedConversion) {
+                function.line(parameter.convertFromClientType(parameterName, parameterWireName,
+                        clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired(),
+                        parameter.getIsConstant() || alwaysNull));
             }
         }
     }
@@ -323,7 +429,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
             function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
-            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
+            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
         }
         return requestOptionsLocal;
     }
@@ -331,18 +437,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
         if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
             function.line(String.format("String %1$s = UUID.randomUUID().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
-            function.line(String.format("String %1$s = DateTimeFormatter.ofPattern(\"EEE, dd MMM yyyy HH:mm:ss z\", Locale.ENGLISH).withZone(ZoneId.of(\"GMT\")).format(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
+            function.line(String.format("String %1$s = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
         }
     }
 
     protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
         if (visibility == JavaVisibility.Public) {
             typeBlock.publicMethod(methodSignature, method);
-        } else {
-            if (typeBlock instanceof JavaClass) {
-                JavaClass classBlock = (JavaClass) typeBlock;
-                classBlock.method(visibility, null, methodSignature, method);
-            }
+        } else if (typeBlock instanceof JavaClass) {
+            JavaClass classBlock = (JavaClass) typeBlock;
+            classBlock.method(visibility, null, methodSignature, method);
         }
     }
 
@@ -533,28 +637,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
-            function.indent((() -> {
-                GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
-                IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.getTypeArguments()[0];
+            function.indent(() -> {
                 if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
                     function.text(".flatMapMany(StreamResponse::getValue);");
                 } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
                         !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
-                    function.text(".flatMap(");
-                    function.lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
-                        lambda.ifBlock("res.getValue() != null", ifAction -> {
-                            ifAction.methodReturn("Mono.just(res.getValue())");
-                        }).elseBlock(elseAction -> {
-                            elseAction.methodReturn("Mono.empty()");
-                        });
-                    });
-                    function.line(");");
+                    function.text(".flatMap(res -> Mono.justOrEmpty(res.getValue()));");
                 } else {
-                    function.text(".flatMap(");
-                    function.lambda(returnValueTypeArgumentClientType.toString(), "res", "Mono.empty()");
-                    function.line(");");
+                    function.text(".flatMap(ignored -> Mono.empty());");
                 }
-            }));
+            });
         }));
     }
 
@@ -697,8 +789,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     } else {
                         function.line("null,");
                     }
-                    IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                    if (responseType instanceof ClassType) {
+
+                    if (responseTypeHasDeserializedHeaders(clientMethod.getProxyMethod().getReturnType())) {
                         function.line("res.getDeserializedHeaders()));");
                     } else {
                         function.line("null));");
@@ -706,6 +798,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 });
             });
         });
+    }
+
+    private static boolean responseTypeHasDeserializedHeaders(IType type) {
+        if (type instanceof GenericType && "Mono".equals(((GenericType) type).getName())) {
+            type = ((GenericType) type).getTypeArguments()[0];
+        }
+
+        // TODO (alzimmer): ClassTypes should maintain reference to any super class or interface they extend/implement.
+        // This code is based on the previous implementation that assume if the T type for Mono<T> is a class that
+        // it has deserialized headers. This won't always be the case, but ClassType also isn't able to maintain
+        // whether the class is an extension of ResponseBase.
+        if (type instanceof ClassType) {
+            return true;
+        } else if (type instanceof GenericType && "ResponseBase".equals(((GenericType) type).getName())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, boolean useLocalRequestOptions, JavaSettings settings) {
@@ -750,8 +860,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);
                 } else {
-                    function.methodReturn(String.format("FluxUtil.withContext(context -> %s)",
-                        serviceMethodCall));
+                    function.methodReturn(String.format("FluxUtil.withContext(context -> %s)", serviceMethodCall));
                 }
             } else {
                 function.methodReturn(serviceMethodCall);
@@ -807,7 +916,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     /**
-     * Generate long running begin async method for protocol client
+     * Generate long-running begin async method for protocol client
      * @param clientMethod client method
      * @param typeBlock type block
      */
@@ -826,13 +935,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
-        String pollingStrategy = clientMethod.getMethodPollingDetails().getPollingStrategy()
+        return clientMethod.getMethodPollingDetails().getPollingStrategy()
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{context}", contextParam)
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
                 .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
-        return pollingStrategy;
     }
 
     /**
@@ -846,16 +954,20 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.methodReturn(String.format("this.%s(%s).getSyncPoller()",
-                    clientMethod.getName() + "Async", clientMethod.getArgumentList()));
+            function.methodReturn(String.format("this.%sAsync(%s).getSyncPoller()",
+                clientMethod.getName(), clientMethod.getArgumentList()));
         });
     }
 
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            function.methodReturn(String.format("FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context).flatMap(response -> BinaryData.fromFlux(response.getBody()).map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body))))",
-                    clientMethod.getClientReference(), clientMethod.getArgumentList()));
+            function.line("return FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context)",
+                clientMethod.getClientReference(), clientMethod.getArgumentList());
+            function.indent(() -> {
+                function.line(".flatMap(response -> BinaryData.fromFlux(response.getBody())");
+                function.line(".map(body -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), body))));");
+            });
         });
     }
 

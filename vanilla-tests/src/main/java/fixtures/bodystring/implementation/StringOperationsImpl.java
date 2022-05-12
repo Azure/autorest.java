@@ -174,15 +174,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -227,7 +219,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(String stringBody) {
-        return putNullWithResponseAsync(stringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putNullWithResponseAsync(stringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -240,7 +232,7 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync() {
         final String stringBody = null;
-        return putNullWithResponseAsync(stringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putNullWithResponseAsync(stringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -294,15 +286,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -344,7 +328,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync() {
-        return putEmptyWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -386,15 +370,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getMbcsAsync() {
-        return getMbcsWithResponseAsync()
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getMbcsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -436,7 +412,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync() {
-        return putMbcsWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putMbcsWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -482,15 +458,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getWhitespaceAsync() {
-        return getWhitespaceWithResponseAsync()
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getWhitespaceWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -537,7 +505,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync() {
-        return putWhitespaceWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putWhitespaceWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -579,15 +547,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotProvidedAsync() {
-        return getNotProvidedWithResponseAsync()
-                .flatMap(
-                        (Response<String> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -628,15 +588,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync() {
-        return getBase64EncodedWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBase64EncodedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -677,15 +629,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64UrlEncodedAsync() {
-        return getBase64UrlEncodedWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBase64UrlEncodedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -735,7 +679,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
-        return putBase64UrlEncodedWithResponseAsync(stringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBase64UrlEncodedWithResponseAsync(stringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -778,15 +722,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNullBase64UrlEncodedAsync() {
-        return getNullBase64UrlEncodedWithResponseAsync()
-                .flatMap(
-                        (Response<byte[]> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullBase64UrlEncodedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

@@ -122,15 +122,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -144,15 +136,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getValidAsync(Context context) {
-        return getValidWithResponseAsync(context)
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -226,7 +210,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ArrayWrapper complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -242,7 +226,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ArrayWrapper complexBody, Context context) {
-        return putValidWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -314,15 +298,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -336,15 +312,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getEmptyAsync(Context context) {
-        return getEmptyWithResponseAsync(context)
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -415,7 +383,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(ArrayWrapper complexBody) {
-        return putEmptyWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -430,7 +398,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(ArrayWrapper complexBody, Context context) {
-        return putEmptyWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -501,15 +469,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getNotProvidedAsync() {
-        return getNotProvidedWithResponseAsync()
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -524,15 +484,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getNotProvidedAsync(Context context) {
-        return getNotProvidedWithResponseAsync(context)
-                .flatMap(
-                        (Response<ArrayWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

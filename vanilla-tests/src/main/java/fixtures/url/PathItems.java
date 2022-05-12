@@ -177,7 +177,7 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         return getAllWithValuesWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -198,7 +198,7 @@ public final class PathItems {
         final String localStringQuery = null;
         return getAllWithValuesWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -306,7 +306,7 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         return getGlobalQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -327,7 +327,7 @@ public final class PathItems {
         final String localStringQuery = null;
         return getGlobalQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -435,7 +435,7 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         return getGlobalAndLocalQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -456,7 +456,7 @@ public final class PathItems {
         final String localStringQuery = null;
         return getGlobalAndLocalQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -566,7 +566,7 @@ public final class PathItems {
             String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
         return getLocalPathItemQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -587,7 +587,7 @@ public final class PathItems {
         final String localStringQuery = null;
         return getLocalPathItemQueryNullWithResponseAsync(
                         pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**

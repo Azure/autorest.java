@@ -104,15 +104,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Duration> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -161,7 +153,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
-        return putPositiveDurationWithResponseAsync(durationBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putPositiveDurationWithResponseAsync(durationBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -203,15 +195,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getPositiveDurationAsync() {
-        return getPositiveDurationWithResponseAsync()
-                .flatMap(
-                        (Response<Duration> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getPositiveDurationWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -252,15 +236,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Duration> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

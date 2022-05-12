@@ -275,14 +275,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -325,14 +318,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -375,14 +361,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -425,14 +404,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -475,14 +447,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -525,14 +490,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -575,14 +533,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -625,14 +576,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -677,14 +621,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -729,14 +666,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -781,14 +711,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -833,14 +756,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync()
-                .flatMap(
-                        (Response<Object> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -882,7 +798,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError202NoneAsync() {
-        return get202None204NoneDefaultError202NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultError202NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -923,7 +839,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError204NoneAsync() {
-        return get202None204NoneDefaultError204NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultError204NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -964,7 +880,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError400ValidAsync() {
-        return get202None204NoneDefaultError400ValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultError400ValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1004,7 +920,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone202InvalidAsync() {
-        return get202None204NoneDefaultNone202InvalidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultNone202InvalidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1044,7 +960,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone204NoneAsync() {
-        return get202None204NoneDefaultNone204NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultNone204NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1084,7 +1000,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400NoneAsync() {
-        return get202None204NoneDefaultNone400NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultNone400NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1124,7 +1040,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400InvalidAsync() {
-        return get202None204NoneDefaultNone400InvalidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get202None204NoneDefaultNone400InvalidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1165,15 +1081,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200ValidAsync() {
-        return getDefaultModelA200ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDefaultModelA200ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1214,15 +1122,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200NoneAsync() {
-        return getDefaultModelA200NoneWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDefaultModelA200NoneWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1264,7 +1164,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400ValidAsync() {
-        return getDefaultModelA400ValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultModelA400ValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1304,7 +1204,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400NoneAsync() {
-        return getDefaultModelA400NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultModelA400NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1343,7 +1243,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200InvalidAsync() {
-        return getDefaultNone200InvalidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultNone200InvalidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1382,7 +1282,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200NoneAsync() {
-        return getDefaultNone200NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultNone200NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1421,7 +1321,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400InvalidAsync() {
-        return getDefaultNone400InvalidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultNone400InvalidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1460,7 +1360,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400NoneAsync() {
-        return getDefaultNone400NoneWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getDefaultNone400NoneWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1502,15 +1402,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200NoneAsync() {
-        return get200ModelA200NoneWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA200NoneWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1552,15 +1444,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200ValidAsync() {
-        return get200ModelA200ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA200ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1601,15 +1485,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200InvalidAsync() {
-        return get200ModelA200InvalidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA200InvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1650,15 +1526,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400NoneAsync() {
-        return get200ModelA400NoneWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA400NoneWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1699,15 +1567,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400ValidAsync() {
-        return get200ModelA400ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA400ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1748,15 +1608,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400InvalidAsync() {
-        return get200ModelA400InvalidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA400InvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1797,15 +1649,7 @@ public final class MultipleResponses {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA202ValidAsync() {
-        return get200ModelA202ValidWithResponseAsync()
-                .flatMap(
-                        (Response<MyException> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200ModelA202ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

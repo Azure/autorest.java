@@ -109,7 +109,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getAsync() {
-        return getWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -124,7 +124,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getAsync(Context context) {
-        return getWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -218,7 +218,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramGetAsync(String xMsClientRequestId) {
-        return paramGetWithResponseAsync(xMsClientRequestId).flatMap((Response<Void> res) -> Mono.empty());
+        return paramGetWithResponseAsync(xMsClientRequestId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -235,7 +235,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> paramGetAsync(String xMsClientRequestId, Context context) {
-        return paramGetWithResponseAsync(xMsClientRequestId, context).flatMap((Response<Void> res) -> Mono.empty());
+        return paramGetWithResponseAsync(xMsClientRequestId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

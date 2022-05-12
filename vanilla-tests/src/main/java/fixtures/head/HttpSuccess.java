@@ -86,15 +86,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head200Async() {
-        return head200WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return head200WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -139,15 +131,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head204Async() {
-        return head204WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return head204WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -192,15 +176,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async() {
-        return head404WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return head404WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

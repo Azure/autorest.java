@@ -135,7 +135,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodLocalValidAsync() {
-        return getMethodLocalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodLocalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -149,7 +149,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodLocalValidAsync(Context context) {
-        return getMethodLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodLocalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -233,7 +233,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodLocalNullAsync(String apiVersion) {
-        return getMethodLocalNullWithResponseAsync(apiVersion).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodLocalNullWithResponseAsync(apiVersion).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -246,7 +246,7 @@ public final class ApiVersionLocals {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodLocalNullAsync() {
         final String apiVersion = null;
-        return getMethodLocalNullWithResponseAsync(apiVersion).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodLocalNullWithResponseAsync(apiVersion).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -262,7 +262,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodLocalNullAsync(String apiVersion, Context context) {
-        return getMethodLocalNullWithResponseAsync(apiVersion, context).flatMap((Response<Void> res) -> Mono.empty());
+        return getMethodLocalNullWithResponseAsync(apiVersion, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -357,7 +357,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathLocalValidAsync() {
-        return getPathLocalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getPathLocalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -371,7 +371,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getPathLocalValidAsync(Context context) {
-        return getPathLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getPathLocalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -449,7 +449,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerLocalValidAsync() {
-        return getSwaggerLocalValidWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerLocalValidWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -463,7 +463,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerLocalValidAsync(Context context) {
-        return getSwaggerLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+        return getSwaggerLocalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
     }
 
     /**

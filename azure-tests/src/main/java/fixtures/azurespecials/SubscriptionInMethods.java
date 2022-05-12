@@ -145,7 +145,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodLocalValidAsync(String subscriptionId) {
-        return postMethodLocalValidWithResponseAsync(subscriptionId).flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodLocalValidWithResponseAsync(subscriptionId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -161,8 +161,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodLocalValidAsync(String subscriptionId, Context context) {
-        return postMethodLocalValidWithResponseAsync(subscriptionId, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodLocalValidWithResponseAsync(subscriptionId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -258,7 +257,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodLocalNullAsync(String subscriptionId) {
-        return postMethodLocalNullWithResponseAsync(subscriptionId).flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodLocalNullWithResponseAsync(subscriptionId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -275,8 +274,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postMethodLocalNullAsync(String subscriptionId, Context context) {
-        return postMethodLocalNullWithResponseAsync(subscriptionId, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postMethodLocalNullWithResponseAsync(subscriptionId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -371,7 +369,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postPathLocalValidAsync(String subscriptionId) {
-        return postPathLocalValidWithResponseAsync(subscriptionId).flatMap((Response<Void> res) -> Mono.empty());
+        return postPathLocalValidWithResponseAsync(subscriptionId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -387,8 +385,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postPathLocalValidAsync(String subscriptionId, Context context) {
-        return postPathLocalValidWithResponseAsync(subscriptionId, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postPathLocalValidWithResponseAsync(subscriptionId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -481,7 +478,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSwaggerLocalValidAsync(String subscriptionId) {
-        return postSwaggerLocalValidWithResponseAsync(subscriptionId).flatMap((Response<Void> res) -> Mono.empty());
+        return postSwaggerLocalValidWithResponseAsync(subscriptionId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -497,8 +494,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postSwaggerLocalValidAsync(String subscriptionId, Context context) {
-        return postSwaggerLocalValidWithResponseAsync(subscriptionId, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return postSwaggerLocalValidWithResponseAsync(subscriptionId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

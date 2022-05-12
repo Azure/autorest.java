@@ -129,15 +129,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -151,15 +143,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getValidAsync(Context context) {
-        return getValidWithResponseAsync(context)
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -233,7 +217,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Basic complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -248,7 +232,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Basic complexBody, Context context) {
-        return putValidWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -318,15 +302,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -340,15 +316,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getInvalidAsync(Context context) {
-        return getInvalidWithResponseAsync(context)
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -414,15 +382,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -436,15 +396,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getEmptyAsync(Context context) {
-        return getEmptyWithResponseAsync(context)
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -512,15 +464,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -534,15 +478,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNullAsync(Context context) {
-        return getNullWithResponseAsync(context)
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -611,15 +547,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync() {
-        return getNotProvidedWithResponseAsync()
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -634,15 +562,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync(Context context) {
-        return getNotProvidedWithResponseAsync(context)
-                .flatMap(
-                        (Response<Basic> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
