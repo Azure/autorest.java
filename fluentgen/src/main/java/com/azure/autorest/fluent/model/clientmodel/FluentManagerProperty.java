@@ -6,6 +6,9 @@ package com.azure.autorest.fluent.model.clientmodel;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.util.CodeNamer;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class FluentManagerProperty {
 
     private final String name;
@@ -14,7 +17,11 @@ public class FluentManagerProperty {
     private final ClassType fluentImplementType;
     private final String innerClientGetMethod;
 
+    private final FluentResourceCollection resourceCollection;
+
     public FluentManagerProperty(FluentResourceCollection collection) {
+        this.resourceCollection = collection;
+
         this.fluentType = collection.getInterfaceType();
         this.fluentImplementType = collection.getImplementationType();
 
@@ -42,5 +49,11 @@ public class FluentManagerProperty {
 
     public String getInnerClientGetMethod() {
         return innerClientGetMethod;
+    }
+
+    public List<ClassType> getResourceModelTypes() {
+        return this.resourceCollection.getResourceCreates().stream()
+                .map(rc -> rc.getResourceModel().getInterfaceType())
+                .collect(Collectors.toList());
     }
 }
