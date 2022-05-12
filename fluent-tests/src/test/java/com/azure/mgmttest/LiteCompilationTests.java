@@ -107,6 +107,10 @@ public class LiteCompilationTests {
                 .authenticate(any(TokenCredential.class), any(AzureProfile.class));
 
         storageManager = StorageManager.authenticate(any(HttpPipeline.class), any(AzureProfile.class));
+
+        // resourceGroupName method
+        storageAccount.resourceGroupName();
+        blobContainer.resourceGroupName();
     }
 
     public void testResources() {

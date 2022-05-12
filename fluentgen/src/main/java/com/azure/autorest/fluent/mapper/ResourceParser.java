@@ -13,6 +13,8 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
@@ -74,10 +76,12 @@ public class ResourceParser {
     }
 
     private static void processAdditionalProperties(FluentResourceModel model) {
+        List<MethodTemplate> methods = model.getAdditionalMethods();
+
+        // region() from location()
         if (model.getCategory() != ModelCategory.IMMUTABLE) {
-            if (FluentUtils.modelHasLocationProperty(model) && model.getProperty("region") == null) {
+            if (FluentUtils.modelHasLocationProperty(model) && !model.hasProperty("region")) {
                 // if resource instance has location property, add region() method
-                List<MethodTemplate> methods = model.getAdditionalMethods();
                 methods.add(MethodTemplate.builder()
                         .imports(Collections.singletonList(Region.class.getName()))
                         .comment(commentBlock -> {
@@ -100,6 +104,44 @@ public class ResourceParser {
                         })
                         .build());
             }
+        }
+
+        // resourceGroupName() from class variable
+        if ((model.getCategory() == ModelCategory.RESOURCE_GROUP_AS_PARENT || model.getCategory() == ModelCategory.NESTED_CHILD)
+                && model.getResourceCreate() != null
+                // here we use class variable "resourceGroupName", and hence we need the FluentConstructorByInner that parses the resource ID to resourceGroupName
+                // for a create-only resource, "resourceGroupName" variable would be null, if the resource is retrieved via Get or List from collection
+                // alternatively, we can parse resourceGroupName from resource ID in method implementation
+                && model.getResourceUpdate() != null
+                && !model.hasProperty("resourceGroupName")) {
+            UrlPathSegments urlPathSegments = model.getResourceCreate().getUrlPathSegments();
+            urlPathSegments.getReverseParameterSegments().stream()
+                    .filter(s -> s.getType() == UrlPathSegments.ParameterSegmentType.RESOURCE_GROUP)
+                    .findFirst().ifPresent(segment -> {
+                        ResourceLocalVariables localVariables = model.getResourceCreate().getResourceLocalVariables();
+
+                        Map<String, MethodParameter> pathParametersMap = model.getResourceCreate().getPathParameters().stream()
+                                .collect(Collectors.toMap(p -> p.getClientMethodParameter().getName(), Function.identity()));
+                        localVariables.getLocalVariablesMap().entrySet().stream()
+                                .filter(e -> e.getKey().getClientType() == ClassType.String)
+                                // match url path segment to method parameter to local variable
+                                .filter(e -> {
+                                    MethodParameter pathParameter = pathParametersMap.get(e.getKey().getName());
+                                    return pathParameter != null && pathParameter.getProxyMethodParameter() != null
+                                            && segment.getParameterName().equalsIgnoreCase(pathParameter.getSerializedName());
+                                })
+                                .map(Map.Entry::getValue)
+                                .findFirst().ifPresent(var -> {
+                                    methods.add(MethodTemplate.builder()
+                                            .comment(commentBlock -> {
+                                                commentBlock.description("Gets the name of the resource group.");
+                                                commentBlock.methodReturns("the name of the resource group.");
+                                            })
+                                            .methodSignature("String resourceGroupName()")
+                                            .method(methodBlock -> methodBlock.methodReturn(var.getName()))
+                                            .build());
+                                });
+                    });
         }
     }
 
