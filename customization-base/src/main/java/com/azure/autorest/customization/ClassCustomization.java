@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
@@ -19,6 +18,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +71,20 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public String getClassName() {
         return className;
+    }
+
+    /**
+     * Adds imports to the class.
+     *
+     * @param imports Imports to add.
+     * @return A new {@link ClassCustomization} updated with the new imports for chaining.
+     */
+    public ClassCustomization addImports(String... imports) {
+        if (imports != null) {
+            return Utils.addImports(Arrays.asList(imports), this, this::refreshSymbol);
+        }
+
+        return this;
     }
 
     /**
@@ -171,6 +185,8 @@ public final class ClassCustomization extends CodeCustomization {
 
     /**
      * Gets the property level customization for a property in the class.
+     * <p>
+     * For constant properties use {@link #getConstant(String)}.
      *
      * @param propertyName the property name
      * @return the property level customization
@@ -186,6 +202,27 @@ public final class ClassCustomization extends CodeCustomization {
 
         return new PropertyCustomization(editor, languageClient, packageName, className, propertySymbol.get(),
             propertyName);
+    }
+
+    /**
+     * Gets the constant level customization for a constant in the class.
+     * <p>
+     * For instance properties use {@link #getProperty(String)}.
+     *
+     * @param constantName The constant name.
+     * @return The constant level customization.
+     */
+    public ConstantCustomization getConstant(String constantName) {
+        Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
+            .stream().filter(si -> si.getName().equals(constantName) && si.getKind() == SymbolKind.CONSTANT)
+            .findFirst();
+
+        if (!propertySymbol.isPresent()) {
+            throw new IllegalArgumentException("Constant " + constantName + " does not exist in class " + className);
+        }
+
+        return new ConstantCustomization(editor, languageClient, packageName, className, propertySymbol.get(),
+            constantName);
     }
 
     /**
@@ -330,26 +367,12 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The current ClassCustomization.
      */
     public ClassCustomization removeMethod(String methodNameOrSignature) {
-        // Begin by getting the method.
-        SymbolInformation methodSymbol = getMethod(methodNameOrSignature).getSymbol();
+        MethodCustomization methodCustomization = getMethod(methodNameOrSignature);
 
-        int methodSignatureLine = methodSymbol.getLocation().getRange().getStart().getLine();
+        int methodSignatureLine = methodCustomization.getSymbol().getLocation().getRange().getStart().getLine();
 
-        // Find the beginning location of the method being removed.
-        // If the method has a multi-line Javadoc walk until the start line is found.
-        // Else if the method has a single line Javadoc use the beginning of that line.
-        // Else using the beginning of the method signature.
-        Position start;
-        String lineAboveMethodSignature = editor.getFileLine(fileName, methodSignatureLine - 1);
-        if (Utils.JAVADOC_END_PATTERN.matcher(lineAboveMethodSignature).matches()) {
-            int startLine = Utils.walkUpFileUntilLineMatches(editor, fileName, methodSignatureLine - 2,
-                lineContent -> Utils.JAVADOC_START_PATTERN.matcher(lineContent).matches());
-            start = new Position(startLine, 0);
-        } else if (Utils.SINGLE_LINE_JAVADOC_PATTERN.matcher(lineAboveMethodSignature).matches()) {
-            start = new Position(methodSignatureLine - 1, 0);
-        } else {
-            start = new Position(methodSignatureLine, 0);
-        }
+        // Begin by getting the method's Javadoc to determine where to begin removal of the method.
+        Position start = methodCustomization.getJavadoc().getJavadocRange().getStart();
 
         // Find the ending location of the method being removed.
         String bodyPositionFinder = editor.getFileLine(fileName, methodSignatureLine);
@@ -521,7 +544,7 @@ public final class ClassCustomization extends CodeCustomization {
         return refreshSymbol();
     }
 
-    private ClassCustomization refreshSymbol() {
+    ClassCustomization refreshSymbol() {
         return new PackageCustomization(editor, languageClient, packageName).getClass(className);
     }
 }

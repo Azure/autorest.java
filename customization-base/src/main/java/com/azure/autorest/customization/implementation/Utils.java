@@ -4,6 +4,7 @@
 package com.azure.autorest.customization.implementation;
 
 import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.CodeCustomization;
 import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;

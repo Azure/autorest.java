@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
@@ -38,10 +37,6 @@ public final class MethodCustomization extends CodeCustomization {
         this.className = className;
         this.methodName = methodName;
         this.methodSignature = methodSignature;
-    }
-
-    SymbolInformation getSymbol() {
-        return symbol;
     }
 
     /**
@@ -138,8 +133,28 @@ public final class MethodCustomization extends CodeCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceParameters(String newParameters) {
-        return Utils.replaceParameters(newParameters, this,
-            () -> refreshCustomization(String.format("%s(%s)", methodName, newParameters)));
+        return replaceParameters(newParameters, null);
+    }
+
+    /**
+     * Replaces the parameters of the method and adds any additional imports required by the new parameters.
+     *
+     * @param newParameters New method parameters.
+     * @param importsToAdd Any additional imports required by the method. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return A new MethodCustomization representing the updated method.
+     */
+    public MethodCustomization replaceParameters(String newParameters, List<String> importsToAdd) {
+        String newSignature = methodName + "(" + newParameters + ")";
+
+        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className);
+
+        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
+            classCustomization::refreshSymbol);
+
+        return Utils.replaceParameters(newParameters, updatedClassCustomization.getMethod(methodSignature),
+            () -> updatedClassCustomization.getMethod(newSignature));
     }
 
     /**
@@ -149,11 +164,30 @@ public final class MethodCustomization extends CodeCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceBody(String newBody) {
-        return Utils.replaceBody(newBody, this, () -> refreshCustomization(methodSignature));
+        return replaceBody(newBody, null);
     }
 
     /**
-     * Change the return type of a method. The new return type will be automatically imported.
+     * Replaces the body of the method and adds any additional imports required by the new body.
+     *
+     * @param newBody New method body.
+     * @param importsToAdd Any additional imports required by the method. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return A new MethodCustomization representing the updated method.
+     */
+    public MethodCustomization replaceBody(String newBody, List<String> importsToAdd) {
+        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className);
+
+        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
+            classCustomization::refreshSymbol);
+
+        return Utils.replaceBody(newBody, updatedClassCustomization.getMethod(methodSignature),
+            () -> updatedClassCustomization.getMethod(methodSignature));
+    }
+
+    /**
+     * Change the return type of the method. The new return type will be automatically imported.
      *
      * <p>
      * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
@@ -187,7 +221,8 @@ public final class MethodCustomization extends CodeCustomization {
      * parentheses, opening and closing of code blocks have to be taken care of in the {@code returnValueFormatter}.
      * @return the current method customization for chaining
      */
-    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter, boolean replaceReturnStatement) {
+    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter,
+        boolean replaceReturnStatement) {
         List<TextEdit> edits = new ArrayList<>();
 
         int line = symbol.getLocation().getRange().getStart().getLine();
