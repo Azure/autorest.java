@@ -208,30 +208,15 @@ public class PartialUpdateHandler {
         NodeList<ModuleDirective> opensDirectivesForExistingFile = new NodeList<>();
         NodeList<ModuleDirective> usesDirectivesForExistingFile = new NodeList<>();
         NodeList<ModuleDirective> providesDirectivesForExistingFile = new NodeList<>();
-        for (Iterator<ModuleDirective> it = directivesForExistingFile.stream().iterator(); it.hasNext(); ) {
-            ModuleDirective directive = it.next();
-            if (directive.isModuleRequiresDirective()) {
-                requiresDirectivesForExistingFile.add(directive);
-            }
-            if (directive.isModuleExportsDirective()) {
-                exportsDirectivesForExistingFile.add(directive);
-            }
-            if (directive.isModuleOpensDirective()) {
-                opensDirectivesForExistingFile.add(directive);
-            }
-            if (directive.isModuleUsesDirective()) {
-                usesDirectivesForExistingFile.add(directive);
-            }
-            if (directive.isModuleProvidesDirective()) {
-                providesDirectivesForExistingFile.add(directive);
-            }
-        }
+        addToEachTypeOfDirectiveList(directivesForExistingFile, requiresDirectivesForExistingFile, exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile, providesDirectivesForExistingFile);
 
+        // generated file directives
         NodeList<ModuleDirective> requiresDirectiveNodeList = mergeDirectiveNodeList(requiresDirectivesForGeneratedFile, requiresDirectivesForExistingFile);
         NodeList<ModuleDirective> exportsDirectiveNodeList = mergeDirectiveNodeList(exportsDirectivesForGeneratedFile, exportsDirectivesForExistingFile);
         NodeList<ModuleDirective> opensDirectiveNodeList = mergeDirectiveNodeList(opensDirectivesForGeneratedFile, opensDirectivesForExistingFile);
         NodeList<ModuleDirective> usesDirectiveNodeList = mergeDirectiveNodeList(usesDirectivesForGeneratedFile, usesDirectivesForExistingFile);
         NodeList<ModuleDirective> providesDirectiveNodeList = mergeDirectiveNodeList(providesDirectivesForGeneratedFile, providesDirectivesForExistingFile);
+        addToEachTypeOfDirectiveList(directivesForGeneratedFile, requiresDirectivesForExistingFile, exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile, providesDirectivesForExistingFile);
 
         NodeList<ModuleDirective> moduleDirectives = new NodeList<>();
         moduleDirectives.addAll(requiresDirectiveNodeList);
@@ -254,7 +239,7 @@ public class PartialUpdateHandler {
         for (ModuleDirective directive2 : list2) {
             boolean isInList1 = false;
             for (ModuleDirective directive1 : list1) {
-                if(directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent() &&
+                if (directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent() &&
                         directive1.getTokenRange().get().toString().equals(directive2.getTokenRange().get().toString())) {
                     isInList1 = true;
                 }
@@ -264,6 +249,32 @@ public class PartialUpdateHandler {
             }
         }
         return res;
+    }
+
+    private static void addToEachTypeOfDirectiveList(NodeList<ModuleDirective> allDirectives,
+                                                     NodeList<ModuleDirective> requiresDirectiveNodeList,
+                                                     NodeList<ModuleDirective> exportsDirectiveNodeList,
+                                                     NodeList<ModuleDirective> opensDirectiveNodeList,
+                                                     NodeList<ModuleDirective> usesDirectiveNodeList,
+                                                     NodeList<ModuleDirective> providesDirectiveNodeList) {
+        for (Iterator<ModuleDirective> it = allDirectives.stream().iterator(); it.hasNext(); ) {
+            ModuleDirective directive = it.next();
+            if (directive.isModuleRequiresDirective()) {
+                requiresDirectiveNodeList.add(directive);
+            }
+            if (directive.isModuleExportsDirective()) {
+                exportsDirectiveNodeList.add(directive);
+            }
+            if (directive.isModuleOpensDirective()) {
+                opensDirectiveNodeList.add(directive);
+            }
+            if (directive.isModuleUsesDirective()) {
+                usesDirectiveNodeList.add(directive);
+            }
+            if (directive.isModuleProvidesDirective()) {
+                providesDirectiveNodeList.add(directive);
+            }
+        }
 
     }
 
