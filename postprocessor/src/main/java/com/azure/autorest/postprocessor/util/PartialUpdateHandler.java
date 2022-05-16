@@ -9,9 +9,11 @@ import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.SimpleName;
+import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.github.javaparser.StaticJavaParser.parse;
@@ -160,11 +162,109 @@ public class PartialUpdateHandler {
      * @return the content after handling partial update
      */
     private static String handlePartialUpdateForModuleInfoFile(String generatedFileContent, String existingFileContent) {
-        if (!generatedFileContent.equals(existingFileContent)) {
-            return existingFileContent;
-        } else {
-            return generatedFileContent;
+        return mergeModuleFileContent(generatedFileContent, existingFileContent);
+    }
+
+    private static String mergeModuleFileContent(String generatedFileContent, String existingFileContent) {
+        CompilationUnit compilationUnitForGeneratedFile = parse(generatedFileContent);
+        CompilationUnit compilationUnitForExistingFile = parse(existingFileContent);
+
+        if (!compilationUnitForExistingFile.getModule().isPresent() || !compilationUnitForGeneratedFile.getModule().isPresent()) {
+            throw new RuntimeException("Generated file or existing file is not module-info file");
         }
+
+        NodeList<ModuleDirective> directivesForGeneratedFile = compilationUnitForGeneratedFile.getModule().get().getDirectives();
+
+        NodeList<ModuleDirective> directivesForExistingFile = compilationUnitForExistingFile.getModule().get().getDirectives();
+
+        // generated file directives
+        NodeList<ModuleDirective> requiresDirectivesForGeneratedFile = new NodeList<>();
+        NodeList<ModuleDirective> exportsDirectivesForGeneratedFile = new NodeList<>();
+        NodeList<ModuleDirective> opensDirectivesForGeneratedFile = new NodeList<>();
+        NodeList<ModuleDirective> usesDirectivesForGeneratedFile = new NodeList<>();
+        NodeList<ModuleDirective> providesDirectivesForGeneratedFile = new NodeList<>();
+        for (Iterator<ModuleDirective> it = directivesForGeneratedFile.stream().iterator(); it.hasNext(); ) {
+            ModuleDirective directive = it.next();
+            if (directive.isModuleRequiresDirective()) {
+                requiresDirectivesForGeneratedFile.add(directive);
+            }
+            if (directive.isModuleExportsDirective()) {
+                exportsDirectivesForGeneratedFile.add(directive);
+            }
+            if (directive.isModuleOpensDirective()) {
+                opensDirectivesForGeneratedFile.add(directive);
+            }
+            if (directive.isModuleUsesDirective()) {
+                usesDirectivesForGeneratedFile.add(directive);
+            }
+            if (directive.isModuleProvidesDirective()) {
+                providesDirectivesForGeneratedFile.add(directive);
+            }
+        }
+
+        // existing file directives
+        NodeList<ModuleDirective> requiresDirectivesForExistingFile = new NodeList<>();
+        NodeList<ModuleDirective> exportsDirectivesForExistingFile = new NodeList<>();
+        NodeList<ModuleDirective> opensDirectivesForExistingFile = new NodeList<>();
+        NodeList<ModuleDirective> usesDirectivesForExistingFile = new NodeList<>();
+        NodeList<ModuleDirective> providesDirectivesForExistingFile = new NodeList<>();
+        for (Iterator<ModuleDirective> it = directivesForExistingFile.stream().iterator(); it.hasNext(); ) {
+            ModuleDirective directive = it.next();
+            if (directive.isModuleRequiresDirective()) {
+                requiresDirectivesForExistingFile.add(directive);
+            }
+            if (directive.isModuleExportsDirective()) {
+                exportsDirectivesForExistingFile.add(directive);
+            }
+            if (directive.isModuleOpensDirective()) {
+                opensDirectivesForExistingFile.add(directive);
+            }
+            if (directive.isModuleUsesDirective()) {
+                usesDirectivesForExistingFile.add(directive);
+            }
+            if (directive.isModuleProvidesDirective()) {
+                providesDirectivesForExistingFile.add(directive);
+            }
+        }
+
+        NodeList<ModuleDirective> requiresDirectiveNodeList = mergeDirectiveNodeList(requiresDirectivesForGeneratedFile, requiresDirectivesForExistingFile);
+        NodeList<ModuleDirective> exportsDirectiveNodeList = mergeDirectiveNodeList(exportsDirectivesForGeneratedFile, exportsDirectivesForExistingFile);
+        NodeList<ModuleDirective> opensDirectiveNodeList = mergeDirectiveNodeList(opensDirectivesForGeneratedFile, opensDirectivesForExistingFile);
+        NodeList<ModuleDirective> usesDirectiveNodeList = mergeDirectiveNodeList(usesDirectivesForGeneratedFile, usesDirectivesForExistingFile);
+        NodeList<ModuleDirective> providesDirectiveNodeList = mergeDirectiveNodeList(providesDirectivesForGeneratedFile, providesDirectivesForExistingFile);
+
+        NodeList<ModuleDirective> moduleDirectives = new NodeList<>();
+        moduleDirectives.addAll(requiresDirectiveNodeList);
+        moduleDirectives.addAll(exportsDirectiveNodeList);
+        moduleDirectives.addAll(opensDirectiveNodeList);
+        moduleDirectives.addAll(usesDirectiveNodeList);
+        moduleDirectives.addAll(providesDirectiveNodeList);
+
+        ModuleDeclaration moduleDeclaration = compilationUnitForGeneratedFile.getModule().get();
+        moduleDeclaration.setDirectives(moduleDirectives);
+
+        compilationUnitForGeneratedFile.setModule(moduleDeclaration);
+
+        return compilationUnitForGeneratedFile.toString();
+    }
+
+    private static NodeList<ModuleDirective> mergeDirectiveNodeList(NodeList<ModuleDirective> list1, NodeList<ModuleDirective> list2) {
+        NodeList<ModuleDirective> res = new NodeList<>();
+        res.addAll(list1);
+        for (ModuleDirective directive2 : list2) {
+            boolean isInList1 = false;
+            for (ModuleDirective directive1 : list1) {
+                if(directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent() &&
+                        directive1.getTokenRange().get().toString().equals(directive2.getTokenRange().get().toString())) {
+                    isInList1 = true;
+                }
+            }
+            if (!isInList1) {
+                res.add(directive2);
+            }
+        }
+        return res;
+
     }
 
     private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
