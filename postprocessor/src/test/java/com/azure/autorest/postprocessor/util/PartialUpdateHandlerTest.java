@@ -277,18 +277,18 @@ public class PartialUpdateHandlerTest extends TestCase {
                 "}";
         String generatedFileContent =
                 "module com.azure.communication.phonenumbersdemo {\n" +
-                "    requires transitive com.azure.core;\n" +
-                "\n" +
-                "    exports com.azure.communication.phonenumbersdemo;\n" +
-                "    exports com.azure.communication.phonenumbersdemo.models;\n" +
-                "\n" +
-                "    opens com.azure.communication.phonenumbersdemo.implementation.models to\n" +
-                "            com.azure.core,\n" +
-                "            com.fasterxml.jackson.databind;\n" +
-                "    opens com.azure.communication.phonenumbersdemo.models to\n" +
-                "            com.azure.core,\n" +
-                "            com.fasterxml.jackson.databind;\n" +
-                "}";
+                        "    requires transitive com.azure.core;\n" +
+                        "\n" +
+                        "    exports com.azure.communication.phonenumbersdemo;\n" +
+                        "    exports com.azure.communication.phonenumbersdemo.models;\n" +
+                        "\n" +
+                        "    opens com.azure.communication.phonenumbersdemo.implementation.models to\n" +
+                        "            com.azure.core,\n" +
+                        "            com.fasterxml.jackson.databind;\n" +
+                        "    opens com.azure.communication.phonenumbersdemo.models to\n" +
+                        "            com.azure.core,\n" +
+                        "            com.fasterxml.jackson.databind;\n" +
+                        "}";
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
         CompilationUnit compilationUnit = parse(output);
@@ -302,6 +302,34 @@ public class PartialUpdateHandlerTest extends TestCase {
         assertEquals("opens com.azure.communication.phonenumbersdemo.models to com.azure.core, com.fasterxml.jackson.databind;", compilationUnit.getModule().get().getDirectives().get(4).asModuleOpensDirective().getTokenRange().get().toString());
     }
 
+    @Test
+    public void testModuleInfoFile_MergeExistingFileAndGeneratedFile_IgnoreEmptyLineAndWhiteSpace() {
+        String existingFileContent = "module com.azure.communication.phonenumbersdemo {\n" +
+                "    requires transitive com.azure.core;\n" +
+                "\n" +
+                "\n" +
+                "    exports com.azure.communication.phonenumbersdemo;     \n" +
+                "    exports com.azure.communication.phonenumbersdemo.models;\n" +
+                "\n" +
+                "}";
+        String generatedFileContent =
+                "module com.azure.communication.phonenumbersdemo {\n" +
+                        "    requires transitive com.azure.core;\n" +
+                        "\n" +
+                        "    exports com.azure.communication.phonenumbersdemo;\n" +
+                        "    exports com.azure.communication.phonenumbersdemo.models;\n" +
+                        "\n" +
+                        "}";
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(true, compilationUnit.getModule().isPresent());
+        assertEquals("com.azure.communication.phonenumbersdemo", compilationUnit.getModule().get().getName().toString());
+        assertEquals(3, compilationUnit.getModule().get().getDirectives().size());
+        assertEquals("requires transitive com.azure.core;", compilationUnit.getModule().get().getDirectives().get(0).asModuleRequiresDirective().getTokenRange().get().toString());
+        assertEquals("exports com.azure.communication.phonenumbersdemo;", compilationUnit.getModule().get().getDirectives().get(1).asModuleExportsDirective().getTokenRange().get().toString());
+        assertEquals("exports com.azure.communication.phonenumbersdemo.models;", compilationUnit.getModule().get().getDirectives().get(2).asModuleExportsDirective().getTokenRange().get().toString());
+    }
 
 
 }
