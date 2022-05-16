@@ -61,4 +61,13 @@ public final class ParmaterizedEndpointAsyncClient {
     public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
         return this.serviceClient.sendRequestAsync(httpRequest);
     }
+
+    /**
+     * Gets the service endpoint that is connected to by clients.
+     *
+     * @return the service endpoint that will be connected to by clients.
+     */
+    public String getEndpoint() {
+        return this.serviceClient.getEndpoint();
+    }
 }
