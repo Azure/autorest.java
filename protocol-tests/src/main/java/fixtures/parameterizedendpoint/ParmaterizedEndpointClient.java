@@ -67,9 +67,9 @@ public final class ParmaterizedEndpointClient {
     }
 
     /**
-     * Gets the service endpoint that is connected to by clients.
+     * Gets the service endpoint that the client is connected to.
      *
-     * @return the service endpoint that will be connected to by clients.
+     * @return the service endpoint that the client is connected to.
      */
     public String getEndpoint() {
         return this.client.getEndpoint();

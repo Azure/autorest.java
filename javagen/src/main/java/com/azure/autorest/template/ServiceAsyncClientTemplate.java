@@ -146,8 +146,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
           .map(t -> t.getTraitMethods().iterator().next().getProperty())
           .findAny().ifPresent(serviceClientProperty -> {
             classBlock.javadocComment(comment -> {
-              comment.description("Gets the service endpoint that is connected to by clients.");
-              comment.methodReturns("the service endpoint that will be connected to by clients.");
+              comment.description("Gets the service endpoint that the client is connected to.");
+              comment.methodReturns("the service endpoint that the client is connected to.");
             });
             String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
             classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
