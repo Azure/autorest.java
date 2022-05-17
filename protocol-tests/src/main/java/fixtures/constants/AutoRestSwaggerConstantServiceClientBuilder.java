@@ -148,7 +148,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
      * Constant header property on the client that is a required parameter for
      * operation 'constants_putClientConstants'
      */
-    @Generated private boolean headerConstant;
+    @Generated private boolean headerConstant = true;
 
     /**
      * Sets Constant header property on the client that is a required parameter for operation
@@ -167,7 +167,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
      * Constant query property on the client that is a required parameter for
      * operation 'constants_putClientConstants'
      */
-    @Generated private int queryConstant;
+    @Generated private int queryConstant = 100;
 
     /**
      * Sets Constant query property on the client that is a required parameter for operation
@@ -245,12 +245,6 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     private AutoRestSwaggerConstantServiceClientImpl buildInnerClient() {
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
-        }
-        if (headerConstant == null) {
-            this.headerConstant = true;
-        }
-        if (queryConstant == null) {
-            this.queryConstant = 100;
         }
         if (pathConstant == null) {
             this.pathConstant = "path";
