@@ -35,6 +35,7 @@ import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -155,7 +156,16 @@ public class JavaPackage {
 
     public final void addModel(String packageKeyword, String name, ClientModel model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
-        Templates.getModelTemplate().write(model, javaFile);
+
+        // If the model isn't XML and stream-style serialization is being used, use StreamSerializationModelTemplate
+        // to write the ClientModel. Eventually, this check will only validate if stream-style is being used but
+        // stream-style XML isn't ready yet.
+        if (CoreUtils.isNullOrEmpty(model.getXmlName()) && settings.isStreamStyleSerialization()) {
+            Templates.getStreamStyleModelTemplate().write(model, javaFile);
+        } else {
+            Templates.getModelTemplate().write(model, javaFile);
+        }
+
         addJavaFile(javaFile);
     }
 
@@ -207,7 +217,7 @@ public class JavaPackage {
         this.checkDuplicateFile(xmlFile.getFilePath());
         xmlFiles.add(xmlFile);
     }
-    
+
     protected void addJavaFile(JavaFile javaFile) {
         this.checkDuplicateFile(javaFile.getFilePath());
         filePaths.add(javaFile.getFilePath());

@@ -120,11 +120,13 @@ public class ClassType implements IType {
     }
 
     public final boolean isBoxedType() {
+        // TODO (alzimmer): This should be a property on the ClassType
         return this.equals(ClassType.Void)
                 || this.equals(ClassType.Boolean)
                 || this.equals(ClassType.Byte)
                 || this.equals(ClassType.Integer)
                 || this.equals(ClassType.Long)
+                || this.equals(ClassType.Float)
                 || this.equals(ClassType.Double);
     }
 

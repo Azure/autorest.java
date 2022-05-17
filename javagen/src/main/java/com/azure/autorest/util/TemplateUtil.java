@@ -173,7 +173,9 @@ public class TemplateUtil {
      * @param propertyName The JSON property name for the JsonGetter.
      */
     public static void addJsonGetter(JavaClass classBlock, JavaSettings settings, String propertyName) {
-        addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonGetter(\"" + propertyName + "\")");
+        if (!settings.isStreamStyleSerialization()) {
+            addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonGetter(\"" + propertyName + "\")");
+        }
     }
 
     /**
@@ -184,7 +186,9 @@ public class TemplateUtil {
      * @param propertyName The JSON property name for the JsonSetter.
      */
     public static void addJsonSetter(JavaClass classBlock, JavaSettings settings, String propertyName) {
-        addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonSetter(\"" + propertyName + "\")");
+        if (!settings.isStreamStyleSerialization()) {
+            addJsonGetterOrJsonSetter(classBlock, settings, () -> "JsonSetter(\"" + propertyName + "\")");
+        }
     }
 
     private static void addJsonGetterOrJsonSetter(JavaClass classBlock, JavaSettings settings,
