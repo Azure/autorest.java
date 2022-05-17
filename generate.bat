@@ -87,6 +87,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collect
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
+call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameterized-endpoint.json --namespace=fixtures.parameterizedendpoint --generate-send-request-method
 call autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md

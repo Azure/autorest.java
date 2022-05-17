@@ -134,6 +134,17 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
             writeMethod(clientMethod, classBlock);
           });
     }
+
+    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), this.clientReference());
+  }
+
+  /**
+   * Extension for client reference. Usually be either "this.serviceClient" or "this.client".
+   *
+   * @return the code for client reference.
+   */
+  protected String clientReference() {
+    return "this.serviceClient";
   }
 
   /**
