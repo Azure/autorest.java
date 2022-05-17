@@ -44,6 +44,7 @@ call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.js
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
+call autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/lro.md
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 move vanilla-tests\swagger\CoverageReporter.java vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java
