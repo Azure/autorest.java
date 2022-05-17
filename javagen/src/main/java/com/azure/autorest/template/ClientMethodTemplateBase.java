@@ -42,10 +42,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
                     // ignore if synthesized by modelerfour, i.e. api-version
                     .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
-                    // ignore if the query parameter is provided by client property or is constant
+                    // ignore if the query parameter is provided by client property
                     // currently, RequestOptions.addQueryParam cannot change a query parameter
                     // we can remove this filter after RequestOptions add feature to replace a query parameter
-                    .filter(p -> !p.getFromClient() && !p.getIsConstant())
+                    .filter(p -> !p.getFromClient())
                     .collect(Collectors.toList());
             if (!queryParameters.isEmpty()) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
