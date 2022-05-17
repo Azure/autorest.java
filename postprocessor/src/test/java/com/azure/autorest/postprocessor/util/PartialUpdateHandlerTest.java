@@ -308,7 +308,7 @@ public class PartialUpdateHandlerTest extends TestCase {
                 "    requires transitive com.azure.core;\n" +
                 "\n" +
                 "\n" +
-                "    exports com.azure.communication.phonenumbersdemo;     \n" +
+                "    exports      com.azure.communication.phonenumbersdemo;     \n" +
                 "    exports com.azure.communication.phonenumbersdemo.models;\n" +
                 "\n" +
                 "}";

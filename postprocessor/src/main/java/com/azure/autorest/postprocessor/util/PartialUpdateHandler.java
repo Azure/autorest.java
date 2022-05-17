@@ -3,13 +3,15 @@
 
 package com.azure.autorest.postprocessor.util;
 
+import com.github.javaparser.JavaToken;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.SimpleName;
-import com.github.javaparser.ast.modules.*;
+import com.github.javaparser.ast.modules.ModuleDeclaration;
+import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import java.util.ArrayList;
@@ -239,9 +241,29 @@ public class PartialUpdateHandler {
         for (ModuleDirective directive2 : list2) {
             boolean isInList1 = false;
             for (ModuleDirective directive1 : list1) {
-                if (directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent() &&
-                        directive1.getTokenRange().get().toString().equals(directive2.getTokenRange().get().toString())) {
-                    isInList1 = true;
+                if (directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent()) {
+                    List<JavaToken> tokenList1 = new ArrayList<>();
+                    List<JavaToken> tokenList2 = new ArrayList<>();
+                    for (JavaToken token1 : directive1.getTokenRange().get()) {
+                        if (!token1.asString().trim().isEmpty()) {
+                            tokenList1.add(token1);
+                        }
+                    }
+                    for (JavaToken token2 : directive2.getTokenRange().get()) {
+                        if (!token2.asString().trim().isEmpty()) {
+                            tokenList2.add(token2);
+                        }
+                    }
+                    if (tokenList1.size() == tokenList2.size()) {
+                        boolean isTokenList1EqualsTokenList2 = true;
+                        for (int i = 0; i < tokenList1.size(); ++i) {
+                            if (!tokenList1.get(i).asString().trim().equals(tokenList2.get(i).asString().trim())) {
+                                isTokenList1EqualsTokenList2 = false;
+                                break;
+                            }
+                        }
+                        isInList1 = isTokenList1EqualsTokenList2;
+                    }
                 }
             }
             if (!isInList1) {
