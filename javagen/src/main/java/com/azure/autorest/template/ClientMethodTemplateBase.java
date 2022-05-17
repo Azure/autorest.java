@@ -68,7 +68,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
             // Response body
             IType responseBodyType;
-            if (JavaSettings.getInstance().isLowLevelClient()) {
+            if (JavaSettings.getInstance().isDataPlaneClient()) {
                 responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
             } else {
                 responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();

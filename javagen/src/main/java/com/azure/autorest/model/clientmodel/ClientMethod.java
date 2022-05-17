@@ -317,7 +317,7 @@ public class ClientMethod {
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             imports.add("com.azure.core.http.HttpMethod");
             imports.add("com.azure.core.http.rest.Response");
             imports.add("com.azure.core.http.rest.RequestOptions");

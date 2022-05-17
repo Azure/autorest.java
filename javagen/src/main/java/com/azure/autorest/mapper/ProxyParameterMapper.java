@@ -62,7 +62,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         builder.rawType(wireType);
 
         IType clientType = wireType.getClientType();
-        if (settings.isLowLevelClient() && !(clientType instanceof PrimitiveType)) {
+        if (settings.isDataPlaneClient() && !(clientType instanceof PrimitiveType)) {
             if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 clientType = ClassType.BinaryData;
             } else {
@@ -90,7 +90,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             } else {
                 wireType = ClassType.String;
             }
-        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+        } else if (settings.isDataPlaneClient() && !(wireType instanceof PrimitiveType)) {
             if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.BinaryData;
             } else {
@@ -133,7 +133,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
             boolean isServiceVersion = false;
-            if (settings.isLowLevelClient() && clientPropertyName.equals("apiVersion")) {
+            if (settings.isDataPlaneClient() && clientPropertyName.equals("apiVersion")) {
                 isServiceVersion = true;
                 clientPropertyName = "serviceVersion";
             }

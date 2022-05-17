@@ -105,7 +105,7 @@ public class ClientModelUtil {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             // mandate ending Client for LLC
             if (!serviceClientInterfaceName.endsWith("Client")) {
                 String serviceName = settings.getServiceName();
@@ -175,7 +175,7 @@ public class ClientModelUtil {
         if (!settings.isFluent()
                 && settings.shouldGenerateClientAsImpl()
                 && !settings.shouldGenerateSyncAsyncClients()
-                && !settings.isLowLevelClient()) {
+                && !settings.isDataPlaneClient()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
@@ -185,7 +185,7 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if ((settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) && !settings.isFluent()) {
+        if ((settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) && !settings.isFluent()) {
             builderPackage = settings.getPackage();
         } else if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -256,7 +256,7 @@ public class ClientModelUtil {
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = settings.getArtifactId();
-        if (settings.isLowLevelClient() && CoreUtils.isNullOrEmpty(artifactId)) {
+        if (settings.isDataPlaneClient() && CoreUtils.isNullOrEmpty(artifactId)) {
             // convert package/namespace to artifact
             artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
                     .replace("com.", "")
