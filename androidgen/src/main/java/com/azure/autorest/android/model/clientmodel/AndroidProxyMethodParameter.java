@@ -6,6 +6,7 @@ package com.azure.autorest.android.model.clientmodel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
@@ -64,7 +65,8 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
                 parameterReference,
                 defaultValue,
                 collectionFormat,
-                explode);
+                explode,
+                ParameterSynthesizedOrigin.NONE);
     }
 
     @Override
