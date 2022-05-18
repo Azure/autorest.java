@@ -17,7 +17,6 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 
