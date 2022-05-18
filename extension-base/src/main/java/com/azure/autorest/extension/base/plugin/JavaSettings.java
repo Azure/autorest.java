@@ -138,7 +138,7 @@ public class JavaSettings {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
-                getBooleanValue(host, "generate-send-request-method", false),
+                false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
