@@ -271,7 +271,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 }
 
                 final String serializerExpression;
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     serializerExpression = JACKSON_SERIALIZER;
                 } else {
                     serializerExpression = getSerializerMemberName();
@@ -379,7 +379,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                               String buildMethodName, boolean wrapServiceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
-                && settings.isLowLevelClient()
+                && settings.isDataPlaneClient()
                 && asyncClient != null;
         if (syncClientWrapAsync) {
             writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
@@ -531,7 +531,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         }
 
         // Low-level client does not need serializer. It returns BinaryData.
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isDataPlaneClient()) {
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
                     ClassType.SerializerAdapter, getSerializerMemberName(), false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));

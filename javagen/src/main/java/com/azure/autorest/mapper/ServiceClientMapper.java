@@ -140,7 +140,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
             boolean serviceClientPropertyRequired = p.isRequired();
 
-            if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
+            if (settings.isDataPlaneClient() && serviceClientPropertyName.equals("apiVersion")) {
                 String enumTypeName = ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()

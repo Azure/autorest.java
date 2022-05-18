@@ -115,7 +115,7 @@ public class TemplateUtil {
         }
 
         // helper methods for LLC
-        if (settings.isLowLevelClient() &&
+        if (settings.isDataPlaneClient() &&
                 clientMethods.stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
             writePagingHelperMethods(classBlock);
         }

@@ -245,7 +245,7 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.Base64Util");
             } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
-                if (!settings.isLowLevelClient()) {
+                if (!settings.isDataPlaneClient()) {
                     imports.add("com.azure.core.util.serializer.JacksonAdapter");
                 }
             } else if (getClientType() instanceof ListType && getExplode()) {

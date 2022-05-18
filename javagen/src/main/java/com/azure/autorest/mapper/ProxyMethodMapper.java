@@ -99,7 +99,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
             if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                 responseBodyType = ClassType.BinaryData;
@@ -109,7 +109,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
         builder.responseBodyType(responseBodyType);
 
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             IType singleValueType;
             if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
@@ -170,7 +170,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             requests = Collections.singletonList(requests.get(0));
         }
 
@@ -210,7 +210,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
                 }
                 allParameters.add(proxyMethodParameter);
-                if (!settings.isLowLevelClient()) {
+                if (!settings.isDataPlaneClient()) {
                     parameters.add(proxyMethodParameter);
                 } else {
                     // LLC move most query and header parameters to RequestOptions
@@ -225,7 +225,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 }
             }
             List<ProxyMethodParameter> specialParameters = getSpecialParameters(operation);
-            if (!settings.isLowLevelClient()) {
+            if (!settings.isDataPlaneClient()) {
                 parameters.addAll(specialParameters);
             }
             allParameters.addAll(specialParameters);
@@ -234,7 +234,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.name(name);
 
             // RequestOptions
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
                         .description("The options to configure the HTTP request before HTTP client sends it")
                         .wireType(ClassType.RequestOptions)
@@ -392,7 +392,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         ClassType swaggerDefaultExceptionType = null;
         Map<Integer, ClassType> swaggerExceptionTypeMap = new HashMap<>();
 
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             // LLC does not use model, hence exception from swagger
             swaggerDefaultExceptionType = ClassType.HttpResponseException;
             exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;

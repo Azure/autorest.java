@@ -467,21 +467,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     generateProtocolPagingSync(clientMethod, typeBlock, restAPIMethod, settings);
                 } else {
                     generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
             case PagingAsync:
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     generateProtocolPagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 } else {
                     generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
             case PagingAsyncSinglePage:
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     generateProtocolPagingAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
                 } else {
                     generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
@@ -530,7 +530,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningBeginAsync:
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     generateProtocolLongRunningBeginAsync(clientMethod, typeBlock);
                 } else {
                     generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
@@ -596,7 +596,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
                     function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
                 }
@@ -703,7 +703,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
         // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
         typeBlock.javadocComment(comment -> {
-            if (JavaSettings.getInstance().isLowLevelClient()) {
+            if (JavaSettings.getInstance().isDataPlaneClient()) {
                 generateProtocolMethodJavadoc(clientMethod, comment);
             } else {
                 generateJavadoc(clientMethod, comment, restAPIMethod, useFullClassName);
@@ -751,7 +751,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             boolean requestOptionsLocal = false;
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
             } else {
                 addSpecialHeadersToLocalVariables(function, clientMethod);
@@ -775,13 +775,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.line("res.getRequest(),");
                     function.line("res.getStatusCode(),");
                     function.line("res.getHeaders(),");
-                    if (settings.isLowLevelClient()) {
+                    if (settings.isDataPlaneClient()) {
                         function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawItemName());
                     } else {
                         function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                     }
                     if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-                        if (settings.isLowLevelClient()) {
+                        if (settings.isDataPlaneClient()) {
                             function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawNextLinkName());
                         } else {
                             function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
@@ -849,7 +849,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             boolean requestOptionsLocal = false;
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
             } else {
                 addSpecialHeadersToLocalVariables(function, clientMethod);

@@ -230,7 +230,7 @@ public class JavaSettings {
         String customizationClass,
         boolean overrideSetterFromSuperclass,
         boolean optionalConstantAsEnum,
-        boolean lowLevelClient,
+        boolean dataPlaneClient,
         boolean useIterable,
         List<String> serviceVersions,
         boolean requireXMsFlattenedToFlatten,
@@ -285,7 +285,7 @@ public class JavaSettings {
         this.artifactId = artifactId;
         this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
-        this.lowLevelClient = lowLevelClient;
+        this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
         this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
@@ -750,10 +750,10 @@ public class JavaSettings {
         return optionalConstantAsEnum;
     }
 
-    private final boolean lowLevelClient;
+    private final boolean dataPlaneClient;
 
-    public boolean isLowLevelClient() {
-        return lowLevelClient;
+    public boolean isDataPlaneClient() {
+        return dataPlaneClient;
     }
 
     private final boolean useIterable;
