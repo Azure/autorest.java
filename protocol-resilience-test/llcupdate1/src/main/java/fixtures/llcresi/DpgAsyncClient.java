@@ -81,6 +81,7 @@ public final class DpgAsyncClient {
      * Object
      * }</pre>
      *
+     * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,8 +91,8 @@ public final class DpgAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getRequiredWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
+        return this.serviceClient.getRequiredWithResponseAsync(parameter, requestOptions);
     }
 
     /**
@@ -113,6 +114,7 @@ public final class DpgAsyncClient {
      * Object
      * }</pre>
      *
+     * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -122,8 +124,9 @@ public final class DpgAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putRequiredOptionalWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> putRequiredOptionalWithResponse(
+            String requiredParam, RequestOptions requestOptions) {
+        return this.serviceClient.putRequiredOptionalWithResponseAsync(requiredParam, requestOptions);
     }
 
     /**

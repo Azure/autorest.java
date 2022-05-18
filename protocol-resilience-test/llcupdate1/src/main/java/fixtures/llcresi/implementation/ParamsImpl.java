@@ -9,10 +9,12 @@ import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -67,7 +69,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> headNoParams(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/serviceDriven/parameters")
         @ExpectedResponses({200})
@@ -82,7 +87,11 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRequired(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("parameter") String parameter,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/serviceDriven/parameters")
         @ExpectedResponses({200})
@@ -97,7 +106,11 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putRequiredOptional(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("requiredParam") String requiredParam,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/serviceDriven/parameters")
         @ExpectedResponses({200})
@@ -114,6 +127,7 @@ public final class ParamsImpl {
         Mono<Response<BinaryData>> postParameters(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData parameter,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -145,7 +159,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOptional(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/serviceDriven/newPath")
         @ExpectedResponses({200})
@@ -160,7 +177,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNewOperation(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -189,7 +209,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> headNoParamsWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.headNoParams(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.headNoParams(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -219,7 +241,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> headNoParamsWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.headNoParams(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.headNoParams(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -269,6 +292,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -277,8 +301,10 @@ public final class ParamsImpl {
      * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getRequiredWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getRequired(this.client.getHost(), requestOptions, context));
+    public Mono<Response<BinaryData>> getRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getRequired(this.client.getHost(), parameter, accept, requestOptions, context));
     }
 
     /**
@@ -299,6 +325,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -308,8 +335,10 @@ public final class ParamsImpl {
      * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getRequiredWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getRequired(this.client.getHost(), requestOptions, context);
+    public Mono<Response<BinaryData>> getRequiredWithResponseAsync(
+            String parameter, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.getRequired(this.client.getHost(), parameter, accept, requestOptions, context);
     }
 
     /**
@@ -330,6 +359,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -338,8 +368,8 @@ public final class ParamsImpl {
      * @return true Boolean value on path along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
-        return getRequiredWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
+        return getRequiredWithResponseAsync(parameter, requestOptions).block();
     }
 
     /**
@@ -361,6 +391,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -369,9 +400,13 @@ public final class ParamsImpl {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putRequiredOptionalWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> putRequiredOptionalWithResponseAsync(
+            String requiredParam, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putRequiredOptional(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.putRequiredOptional(
+                                this.client.getHost(), requiredParam, accept, requestOptions, context));
     }
 
     /**
@@ -393,6 +428,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -403,8 +439,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putRequiredOptionalWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.putRequiredOptional(this.client.getHost(), requestOptions, context);
+            String requiredParam, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.putRequiredOptional(this.client.getHost(), requiredParam, accept, requestOptions, context);
     }
 
     /**
@@ -426,6 +463,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -434,8 +472,8 @@ public final class ParamsImpl {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
-        return putRequiredOptionalWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
+        return putRequiredOptionalWithResponseAsync(requiredParam, requestOptions).block();
     }
 
     /**
@@ -467,8 +505,9 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
             BinaryData parameter, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postParameters(this.client.getHost(), parameter, requestOptions, context));
+                context -> service.postParameters(this.client.getHost(), parameter, accept, requestOptions, context));
     }
 
     /**
@@ -501,7 +540,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
             BinaryData parameter, RequestOptions requestOptions, Context context) {
-        return service.postParameters(this.client.getHost(), parameter, requestOptions, context);
+        final String accept = "application/json";
+        return service.postParameters(this.client.getHost(), parameter, accept, requestOptions, context);
     }
 
     /**
@@ -609,7 +649,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getOptional(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getOptional(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -640,7 +682,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getOptional(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getOptional(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -691,7 +734,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNewOperationWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getNewOperation(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getNewOperation(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -713,7 +758,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNewOperationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNewOperation(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNewOperation(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

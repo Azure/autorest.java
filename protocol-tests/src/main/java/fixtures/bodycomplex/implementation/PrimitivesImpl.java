@@ -7,6 +7,7 @@ package fixtures.bodycomplex.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -65,7 +66,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getInt(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
@@ -82,6 +86,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putInt(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -98,7 +103,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getLong(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
@@ -115,6 +123,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putLong(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -131,7 +140,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getFloat(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
@@ -148,6 +160,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putFloat(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -164,7 +177,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDouble(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
@@ -181,6 +197,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putDouble(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -197,7 +214,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getBool(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
@@ -214,6 +234,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putBool(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -230,7 +251,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getString(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
@@ -247,6 +271,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -263,7 +288,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDate(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
@@ -280,6 +308,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putDate(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -296,7 +325,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDateTime(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
@@ -313,6 +345,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -329,7 +362,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDateTimeRfc1123(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
@@ -346,6 +382,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putDateTimeRfc1123(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -362,7 +399,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDuration(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
@@ -379,6 +419,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putDuration(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -395,7 +436,10 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getByte(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
@@ -412,6 +456,7 @@ public final class PrimitivesImpl {
         Mono<Response<Void>> putByte(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -438,7 +483,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getInt(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInt(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -464,7 +510,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getInt(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getInt(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -513,8 +560,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putInt(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putInt(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -541,7 +589,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putInt(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putInt(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -590,7 +639,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getLong(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLong(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -615,7 +665,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLongWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getLong(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getLong(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -664,8 +715,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putLong(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putLong(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -692,7 +744,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putLong(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putLong(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -741,7 +794,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getFloat(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getFloat(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -766,7 +821,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getFloat(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getFloat(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -815,8 +871,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putFloat(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putFloat(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -843,7 +900,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putFloat(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putFloat(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -893,7 +951,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getDouble(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getDouble(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -919,7 +979,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDouble(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getDouble(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -968,8 +1029,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putDouble(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putDouble(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -996,7 +1058,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putDouble(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putDouble(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1045,7 +1108,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getBool(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBool(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1070,7 +1134,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getBool(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getBool(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1119,8 +1184,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putBool(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putBool(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1147,7 +1213,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putBool(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putBool(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1198,7 +1265,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getString(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getString(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1225,7 +1294,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getString(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getString(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1276,8 +1346,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putString(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putString(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1305,7 +1376,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putString(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putString(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1355,7 +1427,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getDate(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDate(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1380,7 +1453,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDate(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getDate(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1429,8 +1503,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putDate(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putDate(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1457,7 +1532,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putDate(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putDate(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1507,7 +1583,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getDateTime(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getDateTime(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1533,7 +1611,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDateTime(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getDateTime(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1582,8 +1661,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putDateTime(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putDateTime(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1610,7 +1690,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putDateTime(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putDateTime(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1660,8 +1741,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getDateTimeRfc1123(this.client.getHost(), requestOptions, context));
+                context -> service.getDateTimeRfc1123(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1688,7 +1770,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getDateTimeRfc1123(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1738,8 +1821,11 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, requestOptions, context));
+                context ->
+                        service.putDateTimeRfc1123(
+                                this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1766,7 +1852,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putDateTimeRfc1123(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1815,7 +1902,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getDuration(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getDuration(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1840,7 +1929,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDuration(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getDuration(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1887,8 +1977,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putDuration(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putDuration(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -1914,7 +2005,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putDuration(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putDuration(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -1961,7 +2053,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getByte(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByte(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1985,7 +2078,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getByte(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getByte(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2032,8 +2126,9 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putByte(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putByte(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -2059,7 +2154,8 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putByte(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putByte(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**

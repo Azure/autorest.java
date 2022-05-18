@@ -232,6 +232,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -241,8 +242,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
-        return this.serviceClient.getWithQueryParamsAsync(requestOptions);
+    public PagedFlux<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParamsAsync(requiredQueryParameter, requestOptions);
     }
 
     /**
@@ -519,6 +520,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -529,8 +531,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions);
+    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions);
     }
 
     /**
@@ -560,6 +563,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -571,8 +575,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions);
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions);
     }
 
     /**

@@ -7,6 +7,7 @@ package fixtures.httpinfrastructure.implementation;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Options;
@@ -66,7 +67,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -79,7 +84,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Options("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -93,7 +102,10 @@ public final class HttpClientFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> options400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -106,7 +118,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -119,7 +135,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -132,7 +152,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/failure/client/400")
         @UnexpectedResponseExceptionType(
@@ -145,7 +169,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete400(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete400(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Head("/http/failure/client/401")
         @UnexpectedResponseExceptionType(
@@ -158,7 +186,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head401(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head401(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/402")
         @UnexpectedResponseExceptionType(
@@ -171,7 +203,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get402(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get402(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Options("/http/failure/client/403")
         @UnexpectedResponseExceptionType(
@@ -185,7 +221,10 @@ public final class HttpClientFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> options403(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/403")
         @UnexpectedResponseExceptionType(
@@ -198,7 +237,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get403(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get403(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/failure/client/404")
         @UnexpectedResponseExceptionType(
@@ -211,7 +254,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put404(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put404(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/failure/client/405")
         @UnexpectedResponseExceptionType(
@@ -224,7 +271,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch405(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch405(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/failure/client/406")
         @UnexpectedResponseExceptionType(
@@ -237,7 +288,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post406(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post406(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/failure/client/407")
         @UnexpectedResponseExceptionType(
@@ -250,7 +305,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete407(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete407(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/failure/client/409")
         @UnexpectedResponseExceptionType(
@@ -263,7 +322,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put409(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put409(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Head("/http/failure/client/410")
         @UnexpectedResponseExceptionType(
@@ -276,7 +339,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head410(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head410(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/411")
         @UnexpectedResponseExceptionType(
@@ -289,7 +356,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get411(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get411(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Options("/http/failure/client/412")
         @UnexpectedResponseExceptionType(
@@ -303,7 +374,10 @@ public final class HttpClientFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> options412(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/412")
         @UnexpectedResponseExceptionType(
@@ -316,7 +390,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get412(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get412(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/failure/client/413")
         @UnexpectedResponseExceptionType(
@@ -329,7 +407,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put413(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put413(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/failure/client/414")
         @UnexpectedResponseExceptionType(
@@ -342,7 +424,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch414(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch414(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/failure/client/415")
         @UnexpectedResponseExceptionType(
@@ -355,7 +441,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post415(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post415(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/client/416")
         @UnexpectedResponseExceptionType(
@@ -368,7 +458,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get416(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get416(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/failure/client/417")
         @UnexpectedResponseExceptionType(
@@ -381,7 +475,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete417(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete417(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Head("/http/failure/client/429")
         @UnexpectedResponseExceptionType(
@@ -394,7 +492,11 @@ public final class HttpClientFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head429(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head429(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -409,7 +511,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -425,7 +528,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -455,7 +559,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -471,7 +576,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -501,7 +607,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.options400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.options400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -517,7 +625,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.options400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.options400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -553,7 +662,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -575,7 +685,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -617,7 +728,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -639,7 +752,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -681,7 +795,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -703,7 +818,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -745,7 +861,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -767,7 +885,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -803,7 +922,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head401WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head401(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head401(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -819,7 +939,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head401WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head401(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head401(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -849,7 +970,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get402(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get402(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -865,7 +987,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get402(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get402(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -895,7 +1018,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options403WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.options403(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.options403(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -911,7 +1036,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options403WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.options403(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.options403(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -941,7 +1067,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get403WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get403(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get403(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -957,7 +1084,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get403WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get403(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get403(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -993,7 +1121,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put404(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put404(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1015,7 +1144,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put404(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put404(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1057,7 +1187,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch405(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch405(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1079,7 +1211,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch405(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch405(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1121,7 +1254,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post406(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post406(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1143,7 +1277,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post406(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post406(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1185,7 +1320,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete407(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete407(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1207,7 +1344,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete407(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete407(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1249,7 +1387,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put409(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put409(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1271,7 +1410,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put409(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put409(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1307,7 +1447,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head410WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head410(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head410(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1323,7 +1464,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head410WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head410(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head410(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1353,7 +1495,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get411(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get411(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1369,7 +1512,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get411(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get411(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1399,7 +1543,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options412WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.options412(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.options412(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1415,7 +1561,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options412WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.options412(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.options412(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1445,7 +1592,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get412WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get412(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get412(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1461,7 +1609,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get412WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get412(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get412(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1497,7 +1646,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put413(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put413(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1519,7 +1669,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put413(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put413(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1561,7 +1712,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch414(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch414(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1583,7 +1736,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch414(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch414(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1625,7 +1779,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post415(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post415(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1647,7 +1802,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post415(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post415(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1683,7 +1839,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get416WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get416(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get416(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1699,7 +1856,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get416WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get416(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get416(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1735,7 +1893,9 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete417(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete417(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1757,7 +1917,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete417(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete417(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1793,7 +1954,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head429WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head429(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head429(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1809,7 +1971,8 @@ public final class HttpClientFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head429WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head429(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head429(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

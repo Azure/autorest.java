@@ -6,6 +6,7 @@ package fixtures.url.multi.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -61,7 +62,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringMultiNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/multi/string/empty")
         @ExpectedResponses({200})
@@ -76,7 +80,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringMultiEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/multi/string/valid")
         @ExpectedResponses({200})
@@ -91,7 +98,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringMultiValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -115,8 +125,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiNull(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringMultiNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -141,7 +152,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringMultiNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringMultiNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -188,8 +200,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiEmpty(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringMultiEmpty(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -214,7 +227,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringMultiEmpty(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringMultiEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -261,8 +275,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiValid(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringMultiValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -287,7 +302,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringMultiValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringMultiValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

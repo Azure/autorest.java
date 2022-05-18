@@ -141,6 +141,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -150,8 +151,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -165,6 +167,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -174,8 +177,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -333,6 +337,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -342,8 +347,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -357,6 +363,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -366,8 +373,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putModelAsStringRequiredTwoValueDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -381,6 +389,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -390,8 +399,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -405,6 +415,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -414,8 +425,9 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putModelAsStringRequiredOneValueDefaultWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.serviceClient.putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**

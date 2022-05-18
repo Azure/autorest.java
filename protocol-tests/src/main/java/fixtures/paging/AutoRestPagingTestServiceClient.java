@@ -231,6 +231,7 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -240,8 +241,8 @@ public final class AutoRestPagingTestServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.getWithQueryParams(requestOptions));
+    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.getWithQueryParams(requiredQueryParameter, requestOptions));
     }
 
     /**
@@ -518,6 +519,7 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -528,8 +530,9 @@ public final class AutoRestPagingTestServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.getMultiplePagesFragmentNextLink(tenant, requestOptions));
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.getMultiplePagesFragmentNextLink(apiVersion, tenant, requestOptions));
     }
 
     /**
@@ -559,6 +562,7 @@ public final class AutoRestPagingTestServiceClient {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -570,8 +574,9 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.getMultiplePagesFragmentWithGroupingNextLink(tenant, requestOptions));
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(
+                this.client.getMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, requestOptions));
     }
 
     /**

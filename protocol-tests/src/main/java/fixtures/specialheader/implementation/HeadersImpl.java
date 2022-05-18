@@ -6,6 +6,7 @@ package fixtures.specialheader.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -80,7 +81,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> paramRepeatabilityRequest(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/status/500")
         @ExpectedResponses({200})
@@ -95,7 +99,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> paramRepeatabilityRequestPut(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/status/500")
         @ExpectedResponses({200})
@@ -110,7 +117,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> paramRepeatabilityRequestGet(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/specialHeader/repeatabilityRequestLRO")
         @ExpectedResponses({200, 202})
@@ -125,7 +135,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> paramRepeatabilityRequestLro(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/specialHeader/repeatabilityRequestPageable")
         @ExpectedResponses({200})
@@ -140,7 +153,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> paramRepeatabilityRequestPageable(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
@@ -157,6 +173,7 @@ public final class HeadersImpl {
         Mono<Response<BinaryData>> paramRepeatabilityRequestPageableNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -188,12 +205,14 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
-                context -> service.paramRepeatabilityRequest(this.client.getHost(), requestOptionsLocal, context));
+                context ->
+                        service.paramRepeatabilityRequest(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -225,11 +244,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync(
             RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
-        return service.paramRepeatabilityRequest(this.client.getHost(), requestOptionsLocal, context);
+        return service.paramRepeatabilityRequest(this.client.getHost(), accept, requestOptionsLocal, context);
     }
 
     /**
@@ -289,12 +309,15 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
-                context -> service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context));
+                context ->
+                        service.paramRepeatabilityRequestPut(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -326,11 +349,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync(
             RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
-        return service.paramRepeatabilityRequestPut(this.client.getHost(), requestOptionsLocal, context);
+        return service.paramRepeatabilityRequestPut(this.client.getHost(), accept, requestOptionsLocal, context);
     }
 
     /**
@@ -381,8 +405,10 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestGetWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramRepeatabilityRequestGet(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.paramRepeatabilityRequestGet(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -405,7 +431,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestGetWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.paramRepeatabilityRequestGet(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.paramRepeatabilityRequestGet(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -456,12 +483,15 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
-                context -> service.paramRepeatabilityRequestLro(this.client.getHost(), requestOptionsLocal, context));
+                context ->
+                        service.paramRepeatabilityRequestLro(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -493,11 +523,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(
             RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
-        return service.paramRepeatabilityRequestLro(this.client.getHost(), requestOptionsLocal, context);
+        return service.paramRepeatabilityRequestLro(this.client.getHost(), accept, requestOptionsLocal, context);
     }
 
     /**
@@ -645,6 +676,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
@@ -652,7 +684,7 @@ public final class HeadersImpl {
         return FluxUtil.withContext(
                         context ->
                                 service.paramRepeatabilityRequestPageable(
-                                        this.client.getHost(), requestOptionsLocal, context))
+                                        this.client.getHost(), accept, requestOptionsLocal, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -698,11 +730,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
             RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
-        return service.paramRepeatabilityRequestPageable(this.client.getHost(), requestOptionsLocal, context)
+        return service.paramRepeatabilityRequestPageable(this.client.getHost(), accept, requestOptionsLocal, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -862,10 +895,11 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.paramRepeatabilityRequestPageableNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -903,7 +937,9 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.paramRepeatabilityRequestPageableNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.paramRepeatabilityRequestPageableNext(
+                        nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
