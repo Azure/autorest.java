@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
@@ -38,7 +39,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
                 .name(name)
                 .isRequired(parameter.isRequired())
-                .isNullable(parameter.isNullable());
+                .isNullable(parameter.isNullable())
+                .origin(ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()));
 
         String headerCollectionPrefix = null;
         if (parameter.getExtensions() != null && parameter.getExtensions().getXmsHeaderCollectionPrefix() != null) {

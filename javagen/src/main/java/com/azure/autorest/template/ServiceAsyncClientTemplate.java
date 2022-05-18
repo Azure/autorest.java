@@ -6,12 +6,16 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.ModelNamer;
+import com.azure.core.client.traits.EndpointTrait;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -111,6 +115,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
       }
+
+      ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), "this.serviceClient");
     });
   }
 
@@ -121,5 +127,34 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
     classBlock.annotation("Generated");
+  }
+
+  /**
+   * Adds "getEndpoint" method, if necessary.
+   * <p>
+   * This method is companion to "sendRequest" method. Without endpoint, the URL in sendRequest is hard to compose.
+   *
+   * @param classBlock the class block for writing the method.
+   * @param clientBuilder the client builder.
+   * @param clientReference the code for client reference. E.g. "this.serviceClient" or "this.client".
+   */
+  static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, String clientReference) {
+    // expose "getEndpoint" as public, as companion to "sendRequest" method
+    if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
+      clientBuilder.getBuilderTraits().stream()
+          .filter(t -> EndpointTrait.class.getSimpleName().equals(t.getTraitInterfaceName()))
+          .map(t -> t.getTraitMethods().iterator().next().getProperty())
+          .findAny().ifPresent(serviceClientProperty -> {
+            classBlock.javadocComment(comment -> {
+              comment.description("Gets the service endpoint that the client is connected to.");
+              comment.methodReturns("the service endpoint that the client is connected to.");
+            });
+            String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
+            classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
+                serviceClientProperty.getType(), methodName), function -> {
+              function.methodReturn(String.format("%1$s.%2$s()", clientReference, methodName));
+            });
+          });
+    }
   }
 }

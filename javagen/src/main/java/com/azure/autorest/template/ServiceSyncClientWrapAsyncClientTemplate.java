@@ -47,6 +47,10 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
         writeMethods(syncClient, classBlock);
     }
 
+    protected String clientReference() {
+        return "this." + ASYNC_CLIENT_VAR_NAME;
+    }
+
     @Override
     protected void writeMethod(ClientMethod clientMethod, JavaClass classBlock) {
         METHOD_TEMPLATE_INSTANCE.write(clientMethod, classBlock);
@@ -56,13 +60,17 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
 
     private static class ClientMethodTemplateImpl extends WrapperClientMethodTemplate {
 
+        private String clientReference() {
+            return "this." + ASYNC_CLIENT_VAR_NAME;
+        }
+
         @Override
         protected void writeMethodInvocation(ClientMethod clientMethod, JavaBlock function, boolean shouldReturn) {
             List<String> parameterNames = clientMethod.getMethodInputParameters().stream()
                     .map(ClientMethodParameter::getName).collect(Collectors.toList());
 
-            String methodInvoke = String.format("this.%1$s.%2$s(%3$s)",
-                    ASYNC_CLIENT_VAR_NAME, clientMethod.getName(), String.join(", ", parameterNames));
+            String methodInvoke = String.format("%1$s.%2$s(%3$s)",
+                    this.clientReference(), clientMethod.getName(), String.join(", ", parameterNames));
             switch (clientMethod.getType()) {
                 case PagingSync:
                     methodInvoke = "new PagedIterable<>(" + methodInvoke + ")";
@@ -74,8 +82,8 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
 
                 case SendRequestSync:
                     parameterNames.remove("context");
-                    methodInvoke = String.format("this.%1$s.%2$s(%3$s)",
-                            ASYNC_CLIENT_VAR_NAME, clientMethod.getName(), String.join(", ", parameterNames));
+                    methodInvoke = String.format("%1$s.%2$s(%3$s)",
+                            this.clientReference(), clientMethod.getName(), String.join(", ", parameterNames));
                     methodInvoke = methodInvoke + ".contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()";
                     break;
 
