@@ -17,6 +17,7 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 
@@ -269,13 +270,15 @@ public class PartialUpdateHandler {
                     List<String> tokenList1 = new ArrayList<>();
                     List<String> tokenList2 = new ArrayList<>();
                     for (JavaToken token1 : directive1.getTokenRange().get()) {
-                        if (!token1.asString().trim().isEmpty()) {
-                            tokenList1.add(token1.asString().trim());
+                        String trimmedToken1 = token1.asString().trim();
+                        if (!trimmedToken1.isEmpty()) {
+                            tokenList1.add(trimmedToken1);
                         }
                     }
                     for (JavaToken token2 : directive2.getTokenRange().get()) {
-                        if (!token2.asString().trim().isEmpty()) {
-                            tokenList2.add(token2.asString().trim());
+                        String trimmedToken2 = token2.asString().trim();
+                        if (!trimmedToken2.isEmpty()) {
+                            tokenList2.add(trimmedToken2);
                         }
                     }
                     if(tokenList1.equals(tokenList2)) {
