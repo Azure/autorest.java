@@ -213,13 +213,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 if (!settings.isLowLevelClient()) {
                     parameters.add(proxyMethodParameter);
                 } else {
-                    // LLC move most query and header parameters to RequestOptions
-                    final boolean parameterIsRequiredAndPathOrBody = parameter.isRequired()
-                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.HEADER
-                            && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.QUERY;
+                    // LLC will put required path, body, query, header parameters to method signature
+                    final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion");
-                    if (parameterIsRequiredAndPathOrBody || parameterIsClientOrApiVersion) {
+                    if (parameterIsRequired || parameterIsClientOrApiVersion) {
                         parameters.add(proxyMethodParameter);
                     }
                 }
