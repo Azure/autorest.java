@@ -121,15 +121,15 @@ public class DpgUpdateTests {
     }
 
 
-    @Test
-    public void testSendRequestMethod() {
-        HttpRequest request = new HttpRequest(HttpMethod.DELETE, "http://localhost:3000/serviceDriven/parameters");
-        Response<BinaryData> response = client2.sendRequest(request, Context.NONE);
-        Assertions.assertEquals(204, response.getStatusCode());
-        Assertions.assertEquals(0, response.getValue().getLength());
-
-        response = asyncClient2.sendRequest(request).block();
-        Assertions.assertEquals(204, response.getStatusCode());
-        Assertions.assertEquals(0, response.getValue().getLength());
-    }
+//    @Test
+//    public void testSendRequestMethod() {
+//        HttpRequest request = new HttpRequest(HttpMethod.DELETE, "http://localhost:3000/serviceDriven/parameters");
+//        Response<BinaryData> response = client2.sendRequest(request, Context.NONE);
+//        Assertions.assertEquals(204, response.getStatusCode());
+//        Assertions.assertEquals(0, response.getValue().getLength());
+//
+//        response = asyncClient2.sendRequest(request).block();
+//        Assertions.assertEquals(204, response.getStatusCode());
+//        Assertions.assertEquals(0, response.getValue().getLength());
+//    }
 }

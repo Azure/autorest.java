@@ -12,12 +12,8 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
 
 /** Initializes a new instance of the synchronous ParmaterizedEndpointClient type. */
 @ServiceClient(builder = ParmaterizedEndpointClientBuilder.class)
@@ -48,30 +44,5 @@ public final class ParmaterizedEndpointClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
         return this.client.getWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.client
-                .sendRequest(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
-    }
-
-    /**
-     * Gets the service endpoint that the client is connected to.
-     *
-     * @return the service endpoint that the client is connected to.
-     */
-    public String getEndpoint() {
-        return this.client.getEndpoint();
     }
 }
