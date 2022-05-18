@@ -12,12 +12,9 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
@@ -226,21 +223,5 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
         return this.client.getNewOperationWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.client
-                .sendRequest(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
     }
 }
