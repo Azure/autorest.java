@@ -167,6 +167,17 @@ public class PartialUpdateHandler {
         return mergeModuleFileContent(generatedFileContent, existingFileContent);
     }
 
+    /**
+     *
+     * The basic logic is as below:
+     * 1. Parse the directives from the two files
+     * 2. Create requires, exports, opens, uses, provides directive lists from the generated file and existing file
+     * 3. Merge the requires, exports, opens, uses, provides directive lists one by one
+     * 4. Add the directive lists to ModuleDeclaration in generated file, then use generated file as return value
+     * @param generatedFileContent
+     * @param existingFileContent
+     * @return merged module-info.java file content
+     */
     private static String mergeModuleFileContent(String generatedFileContent, String existingFileContent) {
         CompilationUnit compilationUnitForGeneratedFile = parse(generatedFileContent);
         CompilationUnit compilationUnitForExistingFile = parse(existingFileContent);
@@ -235,6 +246,16 @@ public class PartialUpdateHandler {
         return compilationUnitForGeneratedFile.toString();
     }
 
+
+    /**
+     *
+     * Merge two directive list. The logic is as below:
+     * 1. Add all the directives in list1 to the returned list.
+     * 2. For each directive in list2, check if it is in list1, if it is in list1, then we don't need to add it to returned list, otherwise, we need to add it to the returned list
+     * @param list1 first directive list
+     * @param list2 second directive list
+     * @return the merged directive list
+     */
     private static NodeList<ModuleDirective> mergeDirectiveNodeList(NodeList<ModuleDirective> list1, NodeList<ModuleDirective> list2) {
         NodeList<ModuleDirective> res = new NodeList<>();
         res.addAll(list1);
@@ -242,6 +263,9 @@ public class PartialUpdateHandler {
             boolean isInList1 = false;
             for (ModuleDirective directive1 : list1) {
                 if (directive1.getTokenRange().isPresent() && directive2.getTokenRange().isPresent()) {
+                    // 1. build two token lists from the two directives, only put in non-empty tokens
+                    // 2. compare the tokens one by one in the token lists
+                    // 3. if the two token lists are the same, then we consider directive2 is in list1, otherwise, we consider directive2 is not in list1
                     List<JavaToken> tokenList1 = new ArrayList<>();
                     List<JavaToken> tokenList2 = new ArrayList<>();
                     for (JavaToken token1 : directive1.getTokenRange().get()) {
