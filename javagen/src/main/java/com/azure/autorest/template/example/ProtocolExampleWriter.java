@@ -133,7 +133,7 @@ public class ProtocolExampleWriter {
                                     // collectionFormat: multi
                                     for (Object element : elements) {
                                         requestOptionsStmts.add(
-                                                String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                                String.format(".addQueryParam(\"%s\", %s)",
                                                         parameterName,
                                                         p.getClientType().defaultValueExpression(element.toString())));
                                     }
@@ -144,13 +144,13 @@ public class ProtocolExampleWriter {
                                             .map(Object::toString)
                                             .collect(Collectors.joining(delimiter));
                                     requestOptionsStmts.add(
-                                            String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                            String.format(".addQueryParam(\"%s\", %s)",
                                                     parameterName,
                                                     p.getClientType().defaultValueExpression(exampleValue)));
                                 }
                             } else {
                                 requestOptionsStmts.add(
-                                        String.format("requestOptions.addQueryParam(\"%s\", %s);",
+                                        String.format(".addQueryParam(\"%s\", %s)",
                                                 parameterName,
                                                 p.getClientType().defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
                             }
@@ -158,14 +158,14 @@ public class ProtocolExampleWriter {
 
                         case HEADER:
                             requestOptionsStmts.add(
-                                    String.format("requestOptions.addHeader(\"%s\", %s);",
+                                    String.format(".addHeader(\"%s\", %s)",
                                             parameterName,
                                             p.getClientType().defaultValueExpression(parameterValue.getObjectValue().toString())));
                             break;
 
                         case BODY:
                             requestOptionsStmts.add(
-                                    String.format("requestOptions.setBody(BinaryData.fromString(%s));",
+                                    String.format(".setBody(BinaryData.fromString(%s))",
                                             ClassType.String.defaultValueExpression(parameterValue.getJsonString())));
                             break;
 
@@ -236,8 +236,14 @@ public class ProtocolExampleWriter {
                 methodBlock.line(binaryDataStmt.toString());
             }
             // requestOptions and context
-            methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
-            requestOptionsStmts.forEach(methodBlock::line);
+            if (requestOptionsStmts.isEmpty()) {
+                methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
+            } else {
+                StringBuilder sb = new StringBuilder("RequestOptions requestOptions = new RequestOptions()");
+                requestOptionsStmts.forEach(sb::append);
+                sb.append(";");
+                methodBlock.line(sb.toString());
+            }
             for (int i = 0; i < numParam; i++) {
                 ClientMethodParameter parameter = method.getParameters().get(i);
                 if (parameter.getClientType() == ClassType.RequestOptions) {
