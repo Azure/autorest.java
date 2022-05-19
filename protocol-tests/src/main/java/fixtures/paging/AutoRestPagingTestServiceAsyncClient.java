@@ -212,8 +212,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -501,7 +499,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -544,7 +541,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>

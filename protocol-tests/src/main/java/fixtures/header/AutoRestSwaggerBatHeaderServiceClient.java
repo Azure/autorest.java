@@ -38,7 +38,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>User-Agent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
      * </table>
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
@@ -79,7 +78,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
      * </table>
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
@@ -120,8 +118,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -147,7 +143,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -173,8 +168,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -200,7 +193,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -226,8 +218,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -253,7 +243,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -279,8 +268,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -306,7 +293,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -331,8 +317,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
@@ -358,7 +342,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
@@ -384,7 +367,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
@@ -410,7 +392,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
@@ -437,8 +418,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -464,7 +443,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -490,8 +468,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -517,7 +493,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -544,7 +519,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
@@ -570,7 +544,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -596,8 +569,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -623,7 +594,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -648,8 +618,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -675,7 +643,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -700,7 +667,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
      *
@@ -726,7 +692,6 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".

@@ -245,7 +245,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -284,7 +283,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -324,7 +322,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -361,7 +358,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -394,7 +390,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -427,7 +422,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      *     <tr><td>Content-Length</td><td>String</td><td>No</td><td>The contentLength parameter</td></tr>
      * </table>
      *
@@ -545,8 +539,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -590,8 +582,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -638,8 +628,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -680,8 +668,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -725,8 +711,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -773,8 +757,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -814,7 +796,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -856,7 +837,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -896,7 +876,6 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
