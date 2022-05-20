@@ -690,3 +690,19 @@ public CreateFooResponse createFoo(Foo foo) {
     return null;
 }
 ```
+
+# Troubleshooting
+
+## AutoRest fails with "Unable to format output file"
+
+The cause is that the customized Java code has syntax error.
+
+Possible root cause:
+* Bug in customization code.
+* Bug in the `customization-base` package.
+
+Steps to diagnose and fix:
+1. Add `skip-formatting` flag to skip Java code formatting, and hence not checking the syntax error.
+2. Compile or inspect the generated code, find the error.
+3. Determine the root cause. If it is caused by bug in customization code, fix it. If it is caused by bug in `customization-base` package, report it in GitHub issues.
+4. Remove `skip-formatting` flag.
