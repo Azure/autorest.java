@@ -280,7 +280,7 @@ public class Javagen extends NewPlugin {
             // Readme, Changelog
             if (settings.isSdkIntegration()) {
                 javaPackage.addReadmeMarkdown(project);
-                //javaPackage.addSwaggerReadmeMarkdown(project);    // use readme in spec repo instead
+                javaPackage.addSwaggerReadmeMarkdown(project);    // use readme in spec repo instead
                 javaPackage.addChangelogMarkdown(project);
 
                 // Blank readme sample
