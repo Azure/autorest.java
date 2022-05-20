@@ -308,8 +308,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     /**
      * Separate all immediate parents into: one to keep, and the rest to flatten.
      * <p>
-     * If schema is not polymorphic, the first parent of type ObjectSchema is taken.
-     * If schema is polymorphic (but not the supertype), take the parent in polymorphic hierarchy.
+     * If schema is not polymorphic, keep the first parent of type ObjectSchema.
+     * If schema is polymorphic (but not the supertype), keep the parent in polymorphic hierarchy.
      *
      * @param compositeType the object schema
      * @return the info on parent schema.
