@@ -242,7 +242,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 // service client builder per service client
                 for (int i = 0; i < asyncClients.size(); ++i) {
                     AsyncSyncClient asyncClient = asyncClients.get(i);
-                    AsyncSyncClient syncClient = (i > syncClients.size()) ? null : syncClients.get(i);
+                    AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
                     String clientName = ((syncClient != null)
                             ? syncClient.getClassName()
                             : asyncClient.getClassName().replace("AsyncClient", "Client"));
