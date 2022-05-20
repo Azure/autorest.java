@@ -97,7 +97,7 @@ For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-
 `generate-tests` option can be used for generating tests for client.
 `generate-models` option can be used for generating models.
 
-See [documentation](docs/generate/dataplane.md) for frequent used options, and their effect on generated clients.
+See [documentation](docs/generate/dataplane.md) for frequently used options, and their effect on generated clients.
 
 ## Additional settings for Fluent
 
