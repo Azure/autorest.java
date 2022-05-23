@@ -388,20 +388,19 @@ public class ClientMethod {
                     }
                 }
             }
-        }
 
-        if (includeImplementationImports
-                && (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync)) {
-            imports.add(SimpleResponse.class.getName());
-            ClassType.BinaryData.addImportsTo(imports, false);
-            ClassType.HttpRequest.addImportsTo(imports, false);
-        }
+            if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
+                // Repeatable Requests
+                imports.add(UUID.class.getName());
+                imports.add(OffsetDateTime.class.getName());
+                imports.add(DateTimeRfc1123.class.getName());
+            }
 
-        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
-            // Repeatable Requests
-            imports.add(UUID.class.getName());
-            imports.add(OffsetDateTime.class.getName());
-            imports.add(DateTimeRfc1123.class.getName());
+            if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
+                imports.add(SimpleResponse.class.getName());
+                ClassType.BinaryData.addImportsTo(imports, false);
+                ClassType.HttpRequest.addImportsTo(imports, false);
+            }
         }
     }
 
