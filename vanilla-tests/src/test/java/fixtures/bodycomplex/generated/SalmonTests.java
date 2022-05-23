@@ -16,74 +16,31 @@ public final class SalmonTests {
     public void testDeserialize() {
         Salmon model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"salmon\",\"location\":\"syyp\",\"iswild\":false,\"species\":\"sgcbac\",\"length\":73.0321,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ot\",\"length\":64.57916,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ulzndlikwyqk\",\"length\":70.784225,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"madgakeqsrxyb\",\"length\":85.363914,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"qytbciq\",\"length\":13.756079,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"mmnkzsmodmgl\",\"length\":34.71329,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"kwtmutduqktapspw\",\"length\":37.104095,\"siblings\":[]}]}]}]}")
+                                "{\"fishtype\":\"salmon\",\"location\":\"xaolth\",\"iswild\":true,\"species\":\"qjbpfzfsin\",\"length\":25.12173,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"jrwzox\",\"length\":2.6165128,\"siblings\":[]}]}")
                         .toObject(Salmon.class);
-        Assertions.assertEquals("sgcbac", model.getSpecies());
-        Assertions.assertEquals(73.0321f, model.getLength());
-        Assertions.assertEquals("ot", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(64.57916f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("ulzndlikwyqk", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(70.784225f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(
-                "madgakeqsrxyb", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(
-                85.363914f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("syyp", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertEquals("qjbpfzfsin", model.getSpecies());
+        Assertions.assertEquals(25.12173f, model.getLength());
+        Assertions.assertEquals("jrwzox", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(2.6165128f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("xaolth", model.getLocation());
+        Assertions.assertEquals(true, model.iswild());
     }
 
     @Test
     public void testSerialize() {
         Salmon model =
-                new Salmon(73.0321f)
-                        .setSpecies("sgcbac")
+                new Salmon(25.12173f)
+                        .setSpecies("qjbpfzfsin")
                         .setSiblings(
-                                Arrays.asList(
-                                        new Fish(64.57916f)
-                                                .setSpecies("ot")
-                                                .setSiblings(
-                                                        Arrays.asList(
-                                                                new Fish(70.784225f)
-                                                                        .setSpecies("ulzndlikwyqk")
-                                                                        .setSiblings(
-                                                                                Arrays.asList(
-                                                                                        new Fish(85.363914f)
-                                                                                                .setSpecies(
-                                                                                                        "madgakeqsrxyb")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(13.756079f)
-                                                                                                .setSpecies("qytbciq")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(34.71329f)
-                                                                                                .setSpecies(
-                                                                                                        "mmnkzsmodmgl")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(37.104095f)
-                                                                                                .setSpecies(
-                                                                                                        "kwtmutduqktapspw")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList())))))))
-                        .setLocation("syyp")
-                        .setIswild(false);
+                                Arrays.asList(new Fish(2.6165128f).setSpecies("jrwzox").setSiblings(Arrays.asList())))
+                        .setLocation("xaolth")
+                        .setIswild(true);
         model = BinaryData.fromObject(model).toObject(Salmon.class);
-        Assertions.assertEquals("sgcbac", model.getSpecies());
-        Assertions.assertEquals(73.0321f, model.getLength());
-        Assertions.assertEquals("ot", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(64.57916f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("ulzndlikwyqk", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(70.784225f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(
-                "madgakeqsrxyb", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(
-                85.363914f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("syyp", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertEquals("qjbpfzfsin", model.getSpecies());
+        Assertions.assertEquals(25.12173f, model.getLength());
+        Assertions.assertEquals("jrwzox", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(2.6165128f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("xaolth", model.getLocation());
+        Assertions.assertEquals(true, model.iswild());
     }
 }

@@ -13,15 +13,15 @@ public final class DotFishTests {
     @Test
     public void testDeserialize() {
         DotFish model =
-                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"bnjbiksqrglssain\"}")
+                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"gejspodmailzyde\"}")
                         .toObject(DotFish.class);
-        Assertions.assertEquals("bnjbiksqrglssain", model.getSpecies());
+        Assertions.assertEquals("gejspodmailzyde", model.getSpecies());
     }
 
     @Test
     public void testSerialize() {
-        DotFish model = new DotFish().setSpecies("bnjbiksqrglssain");
+        DotFish model = new DotFish().setSpecies("gejspodmailzyde");
         model = BinaryData.fromObject(model).toObject(DotFish.class);
-        Assertions.assertEquals("bnjbiksqrglssain", model.getSpecies());
+        Assertions.assertEquals("gejspodmailzyde", model.getSpecies());
     }
 }

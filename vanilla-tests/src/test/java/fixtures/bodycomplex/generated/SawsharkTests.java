@@ -17,106 +17,32 @@ public final class SawsharkTests {
     public void testDeserialize() {
         Sawshark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"sawshark\",\"age\":1713707644,\"birthday\":\"2021-12-07T01:46:53Z\",\"species\":\"pbobjo\",\"length\":11.501741,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"u\",\"length\":1.2596011,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"rzayv\",\"length\":4.7570705,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"dfgiot\",\"length\":93.27336,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"qxlngx\",\"length\":44.588726,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"gnxkrxdqmidtth\",\"length\":36.5727,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"rabhjybigeho\",\"length\":58.948177,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"skanyk\",\"length\":95.11301,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"iywgqywgndrvynh\",\"length\":50.444126,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"rcgyn\",\"length\":68.073944,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"cfvmmco\",\"length\":87.195946,\"siblings\":[]}]},{\"fishtype\":\"Fish\",\"species\":\"zevgb\",\"length\":82.54625,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"bcypmi\",\"length\":79.7023,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"uvcc\",\"length\":44.622604,\"siblings\":[]}]}]}]}")
+                                "{\"fishtype\":\"sawshark\",\"age\":1317068560,\"birthday\":\"2021-02-25T06:04:33Z\",\"species\":\"e\",\"length\":90.10362,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"b\",\"length\":0.13743639,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"mjqulngsn\",\"length\":75.88975,\"siblings\":[]}]}")
                         .toObject(Sawshark.class);
-        Assertions.assertEquals("pbobjo", model.getSpecies());
-        Assertions.assertEquals(11.501741f, model.getLength());
-        Assertions.assertEquals("u", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(1.2596011f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("rzayv", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(4.7570705f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(
-                "dfgiot", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(
-                93.27336f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(1713707644, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-12-07T01:46:53Z"), model.getBirthday());
+        Assertions.assertEquals("e", model.getSpecies());
+        Assertions.assertEquals(90.10362f, model.getLength());
+        Assertions.assertEquals("b", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.13743639f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(1317068560, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-02-25T06:04:33Z"), model.getBirthday());
     }
 
     @Test
     public void testSerialize() {
         Sawshark model =
-                new Sawshark(11.501741f, OffsetDateTime.parse("2021-12-07T01:46:53Z"))
-                        .setSpecies("pbobjo")
+                new Sawshark(90.10362f, OffsetDateTime.parse("2021-02-25T06:04:33Z"))
+                        .setSpecies("e")
                         .setSiblings(
                                 Arrays.asList(
-                                        new Fish(1.2596011f)
-                                                .setSpecies("u")
-                                                .setSiblings(
-                                                        Arrays.asList(
-                                                                new Fish(4.7570705f)
-                                                                        .setSpecies("rzayv")
-                                                                        .setSiblings(
-                                                                                Arrays.asList(
-                                                                                        new Fish(93.27336f)
-                                                                                                .setSpecies("dfgiot")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(44.588726f)
-                                                                                                .setSpecies("qxlngx")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(36.5727f)
-                                                                                                .setSpecies(
-                                                                                                        "gnxkrxdqmidtth")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(58.948177f)
-                                                                                                .setSpecies(
-                                                                                                        "rabhjybigeho")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()))),
-                                                                new Fish(95.11301f)
-                                                                        .setSpecies("skanyk")
-                                                                        .setSiblings(
-                                                                                Arrays.asList(
-                                                                                        new Fish(50.444126f)
-                                                                                                .setSpecies(
-                                                                                                        "iywgqywgndrvynh")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(68.073944f)
-                                                                                                .setSpecies("rcgyn")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(87.195946f)
-                                                                                                .setSpecies("cfvmmco")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()))),
-                                                                new Fish(82.54625f)
-                                                                        .setSpecies("zevgb")
-                                                                        .setSiblings(
-                                                                                Arrays.asList(
-                                                                                        new Fish(79.7023f)
-                                                                                                .setSpecies("bcypmi")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList()),
-                                                                                        new Fish(44.622604f)
-                                                                                                .setSpecies("uvcc")
-                                                                                                .setSiblings(
-                                                                                                        Arrays
-                                                                                                                .asList())))))))
-                        .setAge(1713707644);
+                                        new Fish(0.13743639f).setSpecies("b").setSiblings(Arrays.asList()),
+                                        new Fish(75.88975f).setSpecies("mjqulngsn").setSiblings(Arrays.asList())))
+                        .setAge(1317068560);
         model = BinaryData.fromObject(model).toObject(Sawshark.class);
-        Assertions.assertEquals("pbobjo", model.getSpecies());
-        Assertions.assertEquals(11.501741f, model.getLength());
-        Assertions.assertEquals("u", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(1.2596011f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("rzayv", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(4.7570705f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(
-                "dfgiot", model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(
-                93.27336f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(1713707644, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-12-07T01:46:53Z"), model.getBirthday());
+        Assertions.assertEquals("e", model.getSpecies());
+        Assertions.assertEquals(90.10362f, model.getLength());
+        Assertions.assertEquals("b", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(0.13743639f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(1317068560, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-02-25T06:04:33Z"), model.getBirthday());
     }
 }

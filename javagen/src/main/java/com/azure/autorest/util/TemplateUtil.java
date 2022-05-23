@@ -64,18 +64,18 @@ public class TemplateUtil {
                 if (!text.isEmpty()) {
                     text += System.lineSeparator();
                 }
-            }
 
-            if (replacements.length > 0) {
-                if (replacements.length % 2 == 0) {
-                    // replacement in template
-                    for (int i = 0; i < replacements.length; i += 2) {
-                        String key = replacements[i];
-                        String value = replacements[i+1];
-                        text = text.replace("{{" + key + "}}", value);
+                if (replacements.length > 0) {
+                    if (replacements.length % 2 == 0) {
+                        // replacement in template
+                        for (int i = 0; i < replacements.length; i += 2) {
+                            String key = replacements[i];
+                            String value = replacements[i+1];
+                            text = text.replace("{{" + key + "}}", value);
+                        }
+                    } else {
+                        LOGGER.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                     }
-                } else {
-                    LOGGER.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                 }
             }
             return text;

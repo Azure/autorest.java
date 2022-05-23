@@ -14,19 +14,19 @@ public final class DotSalmonTests {
     public void testDeserialize() {
         DotSalmon model =
                 BinaryData.fromString(
-                                "{\"fish.type\":\"DotSalmon\",\"location\":\"tyxolniwpwc\",\"iswild\":true,\"species\":\"kgiawxklryplwck\"}")
+                                "{\"fish.type\":\"DotSalmon\",\"location\":\"fdfdosygexpa\",\"iswild\":true,\"species\":\"hmsbzjhcrzevdp\"}")
                         .toObject(DotSalmon.class);
-        Assertions.assertEquals("kgiawxklryplwck", model.getSpecies());
-        Assertions.assertEquals("tyxolniwpwc", model.getLocation());
+        Assertions.assertEquals("hmsbzjhcrzevdp", model.getSpecies());
+        Assertions.assertEquals("fdfdosygexpa", model.getLocation());
         Assertions.assertEquals(true, model.iswild());
     }
 
     @Test
     public void testSerialize() {
-        DotSalmon model = new DotSalmon().setSpecies("kgiawxklryplwck").setLocation("tyxolniwpwc").setIswild(true);
+        DotSalmon model = new DotSalmon().setSpecies("hmsbzjhcrzevdp").setLocation("fdfdosygexpa").setIswild(true);
         model = BinaryData.fromObject(model).toObject(DotSalmon.class);
-        Assertions.assertEquals("kgiawxklryplwck", model.getSpecies());
-        Assertions.assertEquals("tyxolniwpwc", model.getLocation());
+        Assertions.assertEquals("hmsbzjhcrzevdp", model.getSpecies());
+        Assertions.assertEquals("fdfdosygexpa", model.getLocation());
         Assertions.assertEquals(true, model.iswild());
     }
 }

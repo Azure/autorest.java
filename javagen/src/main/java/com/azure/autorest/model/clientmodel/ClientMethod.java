@@ -20,13 +20,10 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -317,115 +314,90 @@ public class ClientMethod {
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        if (settings.isDataPlaneClient()) {
-            imports.add("com.azure.core.http.HttpMethod");
-            imports.add("com.azure.core.http.rest.Response");
-            imports.add("com.azure.core.http.rest.RequestOptions");
-            imports.add("com.azure.core.util.BinaryData");
-            imports.add(DateTimeRfc1123.class.getName());
-
-            if (includeImplementationImports) {
-                imports.add("com.azure.core.http.rest.SimpleResponse");
-                imports.add("com.azure.core.http.HttpRequest");
-                if (settings.getAddContextParameter() || settings.isContextClientMethodParameter()) {
-                    imports.add("com.azure.core.util.FluxUtil");
-                }
-            }
-
-            if (settings.isContextClientMethodParameter()) {
-                imports.add("com.azure.core.util.Context");
-            }
-
-            // Paging
-            if (getMethodPageDetails() != null) {
-                imports.add("com.azure.core.http.rest.PagedResponseBase");
-                imports.add("com.azure.core.http.rest.PagedResponse");
-                imports.add("com.azure.core.http.rest.PagedFlux");
-                imports.add("com.azure.core.http.rest.PagedIterable");
-                imports.add("java.util.List");
-                imports.add("java.util.Map");
-            }
-        } else {
-            for (ClientMethodParameter parameter : getParameters()) {
-                parameter.addImportsTo(imports, includeImplementationImports);
-            }
-
-            if (getMethodPageDetails() != null) {
-                imports.add("com.azure.core.http.rest.PagedResponseBase");
-            }
-
-            if (includeImplementationImports) {
-                if (proxyMethod != null) {
-                    proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
-                    for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
-                        parameter.getClientType().addImportsTo(imports, true);
-
-                        if (parameter.getExplode()) {
-                            imports.add("java.util.Optional");
-                            imports.add("java.util.stream.Stream");
-                            imports.add(ArrayList.class.getName());
-                            imports.add("java.util.Collection");
-                        }
-                    }
-                }
-
-                if (getReturnValue().getType() == ClassType.InputStream) {
-                    imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
-                    imports.add("java.io.SequenceInputStream");
-                    imports.add("java.util.Enumeration");
-                    imports.add("java.util.Iterator");
-                }
-
-                if (settings.getAddContextParameter()
-                        && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                        && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
-                        && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                        || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                        || this.getType() == ClientMethodType.LongRunningAsync)) {
-                    imports.add("com.azure.core.util.FluxUtil");
-                }
-            }
+        for (ClientMethodParameter parameter : getParameters()) {
+            parameter.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (type == ClientMethodType.LongRunningBeginAsync) {
-            if (settings.isFluent()) {
-                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
-                }
-            } else {
-                imports.add("com.azure.core.util.serializer.TypeReference");
-                imports.add("java.time.Duration");
+        if (includeImplementationImports) {
+            ClassType.Context.addImportsTo(imports, false);
 
-                if (getMethodPollingDetails().getPollingStrategy() != null) {
-                    List<String> knownPollingStrategies = Arrays.asList(
-                            "DefaultPollingStrategy",
-                            "ChainedPollingStrategy",
-                            "OperationResourcePollingStrategy",
-                            "LocationPollingStrategy",
-                            "StatusCheckPollingStrategy");
-                    for (String pollingStrategy : knownPollingStrategies) {
-                        if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
-                            imports.add("com.azure.core.util.polling." + pollingStrategy);
+            if (proxyMethod != null) {
+                proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+                for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                    parameter.getClientType().addImportsTo(imports, true);
+
+                    if (parameter.getExplode()) {
+                        imports.add("java.util.Optional");
+                        imports.add("java.util.stream.Stream");
+                        imports.add(ArrayList.class.getName());
+                        imports.add("java.util.Collection");
+                    }
+                }
+            }
+
+            if (getReturnValue().getType() == ClassType.InputStream) {
+                imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
+                imports.add("java.io.SequenceInputStream");
+                imports.add("java.util.Enumeration");
+                imports.add("java.util.Iterator");
+            }
+
+            if (settings.getAddContextParameter()
+                    && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                    && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
+                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
+                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
+                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+                imports.add("com.azure.core.util.FluxUtil");
+            }
+
+            if (getMethodPageDetails() != null) {
+                imports.add("com.azure.core.http.rest.PagedResponseBase");
+
+                if (settings.isDataPlaneClient()) {
+                    imports.add("java.util.List");
+                    imports.add("java.util.Map");
+                    ClassType.BinaryData.addImportsTo(imports, includeImplementationImports);
+                }
+            }
+
+            if (type == ClientMethodType.LongRunningBeginAsync) {
+                if (settings.isFluent()) {
+                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                    }
+                } else {
+                    imports.add("com.azure.core.util.serializer.TypeReference");
+                    imports.add("java.time.Duration");
+
+                    if (getMethodPollingDetails().getPollingStrategy() != null) {
+                        List<String> knownPollingStrategies = Arrays.asList(
+                                "DefaultPollingStrategy",
+                                "ChainedPollingStrategy",
+                                "OperationResourcePollingStrategy",
+                                "LocationPollingStrategy",
+                                "StatusCheckPollingStrategy");
+                        for (String pollingStrategy : knownPollingStrategies) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                                imports.add("com.azure.core.util.polling." + pollingStrategy);
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if (includeImplementationImports
-                && (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync)) {
-            imports.add(SimpleResponse.class.getName());
-            ClassType.BinaryData.addImportsTo(imports, false);
-        }
+            if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
+                // Repeatable Requests
+                imports.add(UUID.class.getName());
+                imports.add(OffsetDateTime.class.getName());
+                imports.add(DateTimeRfc1123.class.getName());
+            }
 
-        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
-            // Repeatable Requests
-            imports.add(UUID.class.getName());
-            imports.add(DateTimeFormatter.class.getName());
-            imports.add(Locale.class.getName());
-            imports.add(ZoneId.class.getName());
-            imports.add(OffsetDateTime.class.getName());
-            imports.add(DateTimeRfc1123.class.getName());
+            if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
+                imports.add(SimpleResponse.class.getName());
+                ClassType.BinaryData.addImportsTo(imports, false);
+                ClassType.HttpRequest.addImportsTo(imports, false);
+            }
         }
     }
 

@@ -38,7 +38,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     public void write(ClientModel model, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports, JavaSettings.getInstance());
-        imports.add(ClassType.BinaryData.getFullName());
+        ClassType.BinaryData.addImportsTo(imports, false);
         imports.add("org.junit.jupiter.api.Test");
 
         String jsonStr;
