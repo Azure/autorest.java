@@ -40,7 +40,8 @@
     ],
     "group": "purview",
     "module": "azure-analytics-purview-scanning",
-    "security-scopes": "https://purview.azure.net/.default"
+    "security-scopes": "https://purview.azure.net/.default",
+    "skip": true
   },
   "deviceupdate": {
     "input": [

@@ -63,6 +63,8 @@ public class ProtocolExampleWriter {
 
         // import
         this.imports = new HashSet<>();
+        ClassType.BinaryData.addImportsTo(imports, false);
+
         syncClient.addImportsTo(imports, false);
         syncClient.getClientBuilder().addImportsTo(imports, false);
         method.addImportsTo(imports, false, settings);
