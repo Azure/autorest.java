@@ -7,10 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -47,11 +44,20 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             wireType = wireType.asNullable();
         }
         builder.rawType(wireType);
-        if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+
+        if (settings.isLowLevelClient()) {
             if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY) {
                 wireType = ClassType.BinaryData;
-            } else {
-                wireType = ClassType.String;
+            } else if(!(wireType instanceof PrimitiveType)) {
+                if(wireType instanceof EnumType) {
+                    wireType = ClassType.String;
+                }
+                if(wireType instanceof IterableType && ((IterableType) wireType).getElementType() instanceof EnumType) {
+                    wireType = new IterableType(ClassType.String);
+                }
+                if(wireType instanceof ListType && ((ListType) wireType).getElementType() instanceof EnumType) {
+                    wireType = new ListType(ClassType.String);
+                }
             }
         }
         builder.wireType(wireType);
