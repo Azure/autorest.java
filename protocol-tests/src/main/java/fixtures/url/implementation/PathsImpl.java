@@ -21,8 +21,12 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Url;
+import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Paths. */
@@ -520,7 +524,7 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64Url(
                 @HostParam("$host") String host,
-                @PathParam("base64UrlPath") String base64UrlPath,
+                @PathParam("base64UrlPath") Base64Url base64UrlPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -1475,10 +1479,13 @@ public final class PathsImpl {
      *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponseAsync(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), bytePath, accept, requestOptions, context));
+                context ->
+                        service.byteMultiByte(
+                                this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1496,9 +1503,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(
-            String bytePath, RequestOptions requestOptions, Context context) {
+            byte[] bytePath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.byteMultiByte(this.client.getHost(), bytePath, accept, requestOptions, context);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteMultiByte(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1513,7 +1521,7 @@ public final class PathsImpl {
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return byteMultiByteWithResponseAsync(bytePath, requestOptions).block();
     }
 
@@ -1529,10 +1537,12 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String bytePath = "";
+        final byte[] bytePath = "".getBytes();
         final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteEmpty(this.client.getHost(), bytePath, accept, requestOptions, context));
+                context ->
+                        service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1548,9 +1558,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String bytePath = "";
+        final byte[] bytePath = "".getBytes();
         final String accept = "application/json";
-        return service.byteEmpty(this.client.getHost(), bytePath, accept, requestOptions, context);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1580,10 +1591,11 @@ public final class PathsImpl {
      * @return null as byte array (should throw) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponseAsync(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), bytePath, accept, requestOptions, context));
+                context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1600,9 +1612,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(
-            String bytePath, RequestOptions requestOptions, Context context) {
+            byte[] bytePath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.byteNull(this.client.getHost(), bytePath, accept, requestOptions, context);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1617,7 +1630,7 @@ public final class PathsImpl {
      * @return null as byte array (should throw) along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return byteNullWithResponseAsync(bytePath, requestOptions).block();
     }
 
@@ -1848,10 +1861,13 @@ public final class PathsImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponseAsync(String base64UrlPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath, RequestOptions requestOptions) {
         final String accept = "application/json";
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return FluxUtil.withContext(
-                context -> service.base64Url(this.client.getHost(), base64UrlPath, accept, requestOptions, context));
+                context ->
+                        service.base64Url(
+                                this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1869,9 +1885,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(
-            String base64UrlPath, RequestOptions requestOptions, Context context) {
+            byte[] base64UrlPath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.base64Url(this.client.getHost(), base64UrlPath, accept, requestOptions, context);
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        return service.base64Url(this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1886,7 +1903,7 @@ public final class PathsImpl {
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+    public Response<Void> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         return base64UrlWithResponseAsync(base64UrlPath, requestOptions).block();
     }
 
@@ -1904,10 +1921,14 @@ public final class PathsImpl {
      *     format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(String arrayPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String arrayPathConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayCsvInPath(this.client.getHost(), arrayPath, accept, requestOptions, context));
+                context ->
+                        service.arrayCsvInPath(
+                                this.client.getHost(), arrayPathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1926,9 +1947,11 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(
-            String arrayPath, RequestOptions requestOptions, Context context) {
+            List<String> arrayPath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.arrayCsvInPath(this.client.getHost(), arrayPath, accept, requestOptions, context);
+        String arrayPathConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1945,7 +1968,7 @@ public final class PathsImpl {
      *     format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+    public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions).block();
     }
 
