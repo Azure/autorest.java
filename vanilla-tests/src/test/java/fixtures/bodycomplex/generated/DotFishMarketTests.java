@@ -17,16 +17,16 @@ public final class DotFishMarketTests {
     public void testDeserialize() {
         DotFishMarket model =
                 BinaryData.fromString(
-                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"wnzlljfmppeeb\",\"iswild\":false,\"species\":\"sabkyqduujitcjcz\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"ndhkrw\",\"iswild\":false,\"species\":\"p\"},{\"fish.type\":\"DotSalmon\",\"location\":\"bdkvwrwjf\",\"iswild\":false,\"species\":\"hutje\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"rl\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"jzzd\"},{\"fish.type\":\"DotFish\",\"species\":\"qxhocdgeablgphut\"},{\"fish.type\":\"DotFish\",\"species\":\"ndv\"},{\"fish.type\":\"DotFish\",\"species\":\"ozwyiftyhxhuro\"}]}")
+                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"wyahuxinpmqnja\",\"iswild\":true,\"species\":\"jsprozvcpute\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"mfdatscmdvpj\",\"iswild\":true,\"species\":\"uuvmkjozkrwfnd\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"jpslwejd\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"yoqpsoaccta\"},{\"fish.type\":\"DotFish\",\"species\":\"kljla\"},{\"fish.type\":\"DotFish\",\"species\":\"cr\"}]}")
                         .toObject(DotFishMarket.class);
-        Assertions.assertEquals("sabkyqduujitcjcz", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("wnzlljfmppeeb", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(false, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("p", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("ndhkrw", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(false, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("rl", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("jzzd", model.getFishes().get(0).getSpecies());
+        Assertions.assertEquals("jsprozvcpute", model.getSampleSalmon().getSpecies());
+        Assertions.assertEquals("wyahuxinpmqnja", model.getSampleSalmon().getLocation());
+        Assertions.assertEquals(true, model.getSampleSalmon().iswild());
+        Assertions.assertEquals("uuvmkjozkrwfnd", model.getSalmons().get(0).getSpecies());
+        Assertions.assertEquals("mfdatscmdvpj", model.getSalmons().get(0).getLocation());
+        Assertions.assertEquals(true, model.getSalmons().get(0).iswild());
+        Assertions.assertEquals("jpslwejd", model.getSampleFish().getSpecies());
+        Assertions.assertEquals("yoqpsoaccta", model.getFishes().get(0).getSpecies());
     }
 
     @Test
@@ -35,28 +35,29 @@ public final class DotFishMarketTests {
                 new DotFishMarket()
                         .setSampleSalmon(
                                 new DotSalmon()
-                                        .setSpecies("sabkyqduujitcjcz")
-                                        .setLocation("wnzlljfmppeeb")
-                                        .setIswild(false))
+                                        .setSpecies("jsprozvcpute")
+                                        .setLocation("wyahuxinpmqnja")
+                                        .setIswild(true))
                         .setSalmons(
                                 Arrays.asList(
-                                        new DotSalmon().setSpecies("p").setLocation("ndhkrw").setIswild(false),
-                                        new DotSalmon().setSpecies("hutje").setLocation("bdkvwrwjf").setIswild(false)))
-                        .setSampleFish(new DotFish().setSpecies("rl"))
+                                        new DotSalmon()
+                                                .setSpecies("uuvmkjozkrwfnd")
+                                                .setLocation("mfdatscmdvpj")
+                                                .setIswild(true)))
+                        .setSampleFish(new DotFish().setSpecies("jpslwejd"))
                         .setFishes(
                                 Arrays.asList(
-                                        new DotFish().setSpecies("jzzd"),
-                                        new DotFish().setSpecies("qxhocdgeablgphut"),
-                                        new DotFish().setSpecies("ndv"),
-                                        new DotFish().setSpecies("ozwyiftyhxhuro")));
+                                        new DotFish().setSpecies("yoqpsoaccta"),
+                                        new DotFish().setSpecies("kljla"),
+                                        new DotFish().setSpecies("cr")));
         model = BinaryData.fromObject(model).toObject(DotFishMarket.class);
-        Assertions.assertEquals("sabkyqduujitcjcz", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("wnzlljfmppeeb", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(false, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("p", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("ndhkrw", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(false, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("rl", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("jzzd", model.getFishes().get(0).getSpecies());
+        Assertions.assertEquals("jsprozvcpute", model.getSampleSalmon().getSpecies());
+        Assertions.assertEquals("wyahuxinpmqnja", model.getSampleSalmon().getLocation());
+        Assertions.assertEquals(true, model.getSampleSalmon().iswild());
+        Assertions.assertEquals("uuvmkjozkrwfnd", model.getSalmons().get(0).getSpecies());
+        Assertions.assertEquals("mfdatscmdvpj", model.getSalmons().get(0).getLocation());
+        Assertions.assertEquals(true, model.getSalmons().get(0).iswild());
+        Assertions.assertEquals("jpslwejd", model.getSampleFish().getSpecies());
+        Assertions.assertEquals("yoqpsoaccta", model.getFishes().get(0).getSpecies());
     }
 }
