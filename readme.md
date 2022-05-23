@@ -4,9 +4,9 @@ This is the next gen (v4) of AutoRest Java generator. It's built on AutoRest v3,
 # Prerequisites
 You need to have the following installed on your machine:
 
-- Node.JS v10.x - v13.x
+- Node.JS v12+
 - Java 8+
-- Maven 3.x
+- Maven 3
 
 You need to have [autorest](https://www.npmjs.com/package/autorest) installed through NPM:
 
@@ -83,9 +83,9 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header objects will use custom desrialization instead of Jackson Databind's convertValue method, providing substantial performance benefits.|
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
 
-## Settings for minimal clients (low-level clients)
+## Settings for minimal data-plane clients
 
-`data-plane` option enables the generator to generate code for minimal Data-Plane Clients.
+`data-plane` option enables the generator to generate code for minimal data-plane clients.
 
 `data-plane` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
@@ -96,6 +96,8 @@ For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-
 `generate-samples` option can be used for generating samples for client.
 `generate-tests` option can be used for generating tests for client.
 `generate-models` option can be used for generating models.
+
+See [documentation](docs/generate/dataplane.md) for frequently used options, and their effect on generated clients.
 
 ## Additional settings for Fluent
 
@@ -232,9 +234,10 @@ This results in the following error HTTP response to exception type mapping:
 Notices how 404 changes from the default `com.azure.core.exception.ResourceNotFoundException` to
 `com.azure.core.exception.ResourceExistsException`.
 
-# Minimal clients (low-level clients)
+# Minimal Data-Plane Clients
 
-You can generate the output as minimal clients, a.k.a., low-level clients with `--data-plane` flag. The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods).
+You can generate the output as minimal data-plane clients with `--data-plane` flag.
+The models will not be generated and the methods in the clients will be generated as [protocol methods](https://github.com/Azure/azure-sdk-for-java/wiki/Protocol-Methods).
 
 The generated code has the following structure:
 
@@ -253,7 +256,7 @@ The generated code has the following structure:
       - <Service>ClientImpl.java
 ```
 
-and requires `azure-core` 1.19.0-beta.1 as a dependency.
+and requires latest `azure-core` as a dependency.
 
 # Customizations
 
