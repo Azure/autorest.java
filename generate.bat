@@ -91,6 +91,7 @@ call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json 
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameterized-endpoint.json --namespace=fixtures.parameterizedendpoint --generate-send-request-method
 call autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
 call autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
+call autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/required-header-query.json --namespace=fixtures.requiredheaderquery --use-iterable
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
 call autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models
