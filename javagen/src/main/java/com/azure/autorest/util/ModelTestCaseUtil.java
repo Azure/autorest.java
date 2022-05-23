@@ -29,7 +29,7 @@ public class ModelTestCaseUtil {
     private static final class Configuration {
         private final float nullableProbability = 0.0f;
 
-        private final int maxDepth = 10;
+        private final int maxDepth = 5;
 
         private final int maxStringLen = 16 + 1;
         private final int maxList = 4 + 1;
