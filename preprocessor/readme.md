@@ -55,6 +55,8 @@ modelerfour:
 
 require:
   - $(this-folder)data-plane.md
+  
+use-iterable: true
 ```
 
 ```yaml $(data-plane) && $(sdk-integration)
