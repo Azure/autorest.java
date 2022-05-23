@@ -12,10 +12,8 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.BinaryData;
 import fixtures.parameterizedendpoint.implementation.ParmaterizedEndpointClientImpl;
 import reactor.core.publisher.Mono;
 
@@ -48,26 +46,5 @@ public final class ParmaterizedEndpointAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
-        return this.serviceClient.sendRequestAsync(httpRequest);
-    }
-
-    /**
-     * Gets the service endpoint that the client is connected to.
-     *
-     * @return the service endpoint that the client is connected to.
-     */
-    public String getEndpoint() {
-        return this.serviceClient.getEndpoint();
     }
 }

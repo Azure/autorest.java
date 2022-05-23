@@ -37,7 +37,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
     }
 
     private IType createPrimitiveType(PrimitiveSchema primaryType) {
-        boolean isLowLevelClient = JavaSettings.getInstance().isLowLevelClient();
+        boolean isLowLevelClient = JavaSettings.getInstance().isDataPlaneClient();
         switch (primaryType.getType()) {
 //            case null:
 //                iType = PrimitiveType.Void;

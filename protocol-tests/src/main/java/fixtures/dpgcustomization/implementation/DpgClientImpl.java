@@ -23,7 +23,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
@@ -34,7 +33,6 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -959,44 +957,6 @@ public final class DpgClientImpl {
                                         getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
-        return FluxUtil.withContext(
-                context ->
-                        this.getHttpPipeline()
-                                .send(httpRequest, context)
-                                .flatMap(
-                                        response ->
-                                                BinaryData.fromFlux(response.getBody())
-                                                        .map(
-                                                                body ->
-                                                                        new SimpleResponse<>(
-                                                                                response.getRequest(),
-                                                                                response.getStatusCode(),
-                                                                                response.getHeaders(),
-                                                                                body))));
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.sendRequestAsync(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
     }
 
     private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {

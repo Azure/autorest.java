@@ -65,14 +65,14 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(String::valueOf).collect(Collectors.joining(", "))));
                     }
 
-                    if (!settings.isLowLevelClient()) {
+                    if (!settings.isDataPlaneClient()) {
                         if (restAPIMethod.getReturnValueWireType() != null) {
                             interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
                                     restAPIMethod.getReturnValueWireType()));
                         }
                     }
 
-                    if (!settings.isLowLevelClient() || isExceptionCustomized()) {
+                    if (!settings.isDataPlaneClient() || isExceptionCustomized()) {
                         // write @UnexpectedResponseExceptionType
 
                         if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
