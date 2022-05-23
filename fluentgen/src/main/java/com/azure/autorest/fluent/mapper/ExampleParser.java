@@ -542,21 +542,22 @@ public class ExampleParser {
             List<String> elements;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(",")));
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
                     break;
                 case SSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(" ")));
+                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
                     break;
                 case PIPES:
-                    elements = Arrays.asList(value.split(Pattern.quote("|")));
+                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
                     break;
                 case TSV:
-                    elements = Arrays.asList(value.split(Pattern.quote("\t")));
+                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
                     LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+                    break;
             }
             for (String childObjectValue : elements) {
                 ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);
