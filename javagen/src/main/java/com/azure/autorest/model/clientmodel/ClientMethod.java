@@ -320,11 +320,16 @@ public class ClientMethod {
         if (settings.isDataPlaneClient()) {
             imports.add("com.azure.core.http.HttpMethod");
             imports.add("com.azure.core.http.rest.Response");
-            imports.add("com.azure.core.http.rest.RequestOptions");
-            imports.add("com.azure.core.util.BinaryData");
-            imports.add(DateTimeRfc1123.class.getName());
+            imports.add(ClassType.RequestOptions.getFullName());
+            imports.add(ClassType.BinaryData.getFullName());
+            imports.add(ClassType.DateTimeRfc1123.getFullName());
+
+            for (ClientMethodParameter parameter : getParameters()) {
+                parameter.addImportsTo(imports, includeImplementationImports);
+            }
 
             if (includeImplementationImports) {
+                imports.add(ClassType.Context.getFullName());
                 imports.add("com.azure.core.http.rest.SimpleResponse");
                 imports.add("com.azure.core.http.HttpRequest");
                 if (settings.getAddContextParameter() || settings.isContextClientMethodParameter()) {
@@ -355,6 +360,8 @@ public class ClientMethod {
             }
 
             if (includeImplementationImports) {
+                imports.add(ClassType.Context.getFullName());
+
                 if (proxyMethod != null) {
                     proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
                     for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
