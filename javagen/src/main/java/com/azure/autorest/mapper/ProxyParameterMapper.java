@@ -10,15 +10,14 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
@@ -69,15 +68,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 clientType = ClassType.BinaryData;
             } else if(!(clientType instanceof PrimitiveType)){
-                if(clientType instanceof EnumType) {
-                    clientType = ClassType.String;
-                }
-                if(clientType instanceof IterableType && ((IterableType) clientType).getElementType() instanceof EnumType) {
-                    clientType = new IterableType(ClassType.String);
-                }
-                if(clientType instanceof ListType && ((ListType) clientType).getElementType() instanceof EnumType) {
-                    clientType = new ListType(ClassType.String);
-                }
+                clientType = SchemaUtil.mapDataPlaneNonPrimitiveParameterType(clientType);
             }
         }
         builder.clientType(clientType);
@@ -105,15 +96,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.BinaryData;
             } else if (!(wireType instanceof PrimitiveType)) {
-                if (wireType instanceof EnumType) {
-                    wireType = ClassType.String;
-                }
-                if (wireType instanceof IterableType && ((IterableType) wireType).getElementType() instanceof EnumType) {
-                    wireType = new IterableType(ClassType.String);
-                }
-                if (wireType instanceof ListType && ((ListType) wireType).getElementType() instanceof EnumType) {
-                    wireType = new ListType(ClassType.String);
-                }
+                wireType = SchemaUtil.mapDataPlaneNonPrimitiveParameterType(wireType);
             }
         }
         builder.wireType(wireType);

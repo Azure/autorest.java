@@ -9,12 +9,10 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.IterableType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,15 +53,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY) {
                 wireType = ClassType.BinaryData;
             } else if(!(wireType instanceof PrimitiveType)) {
-                if(wireType instanceof EnumType) {
-                    wireType = ClassType.String;
-                }
-                if(wireType instanceof IterableType && ((IterableType) wireType).getElementType() instanceof EnumType) {
-                    wireType = new IterableType(ClassType.String);
-                }
-                if(wireType instanceof ListType && ((ListType) wireType).getElementType() instanceof EnumType) {
-                    wireType = new ListType(ClassType.String);
-                }
+                wireType = SchemaUtil.mapDataPlaneNonPrimitiveParameterType(wireType);
             }
         }
         builder.wireType(wireType);

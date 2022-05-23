@@ -11,7 +11,11 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -154,5 +158,19 @@ public class SchemaUtil {
             parts.add(description);
         }
         return String.join(" ", parts);
+    }
+
+    public static IType mapDataPlaneNonPrimitiveParameterType(IType type) {
+        IType returnType = type;
+        if(type instanceof EnumType) {
+            returnType = ClassType.String;
+        }
+        if(type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
+            returnType = new IterableType(ClassType.String);
+        }
+        if(type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
+            returnType = new ListType(ClassType.String);
+        }
+        return returnType;
     }
 }
