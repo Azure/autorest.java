@@ -321,18 +321,6 @@ public class ClientMethod {
             parameter.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (getMethodPageDetails() != null) {
-            imports.add("com.azure.core.http.rest.PagedResponseBase");
-
-            if (settings.isDataPlaneClient()) {
-                imports.add("com.azure.core.http.rest.PagedResponse");
-                imports.add("com.azure.core.http.rest.PagedFlux");
-                imports.add("com.azure.core.http.rest.PagedIterable");
-                imports.add("java.util.List");
-                imports.add("java.util.Map");
-            }
-        }
-
         if (includeImplementationImports) {
             ClassType.Context.addImportsTo(imports, false);
 
@@ -365,27 +353,37 @@ public class ClientMethod {
                     || this.getType() == ClientMethodType.LongRunningAsync)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
-        }
 
-        if (type == ClientMethodType.LongRunningBeginAsync) {
-            if (settings.isFluent()) {
-                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
+            if (getMethodPageDetails() != null) {
+                imports.add("com.azure.core.http.rest.PagedResponseBase");
+
+                if (settings.isDataPlaneClient()) {
+                    imports.add("java.util.List");
+                    imports.add("java.util.Map");
+                    ClassType.BinaryData.addImportsTo(imports, includeImplementationImports);
                 }
-            } else {
-                imports.add("com.azure.core.util.serializer.TypeReference");
-                imports.add("java.time.Duration");
+            }
 
-                if (getMethodPollingDetails().getPollingStrategy() != null) {
-                    List<String> knownPollingStrategies = Arrays.asList(
-                            "DefaultPollingStrategy",
-                            "ChainedPollingStrategy",
-                            "OperationResourcePollingStrategy",
-                            "LocationPollingStrategy",
-                            "StatusCheckPollingStrategy");
-                    for (String pollingStrategy : knownPollingStrategies) {
-                        if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
-                            imports.add("com.azure.core.util.polling." + pollingStrategy);
+            if (type == ClientMethodType.LongRunningBeginAsync) {
+                if (settings.isFluent()) {
+                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                    }
+                } else {
+                    imports.add("com.azure.core.util.serializer.TypeReference");
+                    imports.add("java.time.Duration");
+
+                    if (getMethodPollingDetails().getPollingStrategy() != null) {
+                        List<String> knownPollingStrategies = Arrays.asList(
+                                "DefaultPollingStrategy",
+                                "ChainedPollingStrategy",
+                                "OperationResourcePollingStrategy",
+                                "LocationPollingStrategy",
+                                "StatusCheckPollingStrategy");
+                        for (String pollingStrategy : knownPollingStrategies) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                                imports.add("com.azure.core.util.polling." + pollingStrategy);
+                            }
                         }
                     }
                 }
@@ -402,9 +400,6 @@ public class ClientMethod {
         if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
             // Repeatable Requests
             imports.add(UUID.class.getName());
-            imports.add(DateTimeFormatter.class.getName());
-            imports.add(Locale.class.getName());
-            imports.add(ZoneId.class.getName());
             imports.add(OffsetDateTime.class.getName());
             imports.add(DateTimeRfc1123.class.getName());
         }
