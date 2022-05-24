@@ -23,6 +23,8 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.time.Duration;
+import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Headers. */
@@ -411,7 +413,7 @@ public final class HeadersImpl {
         Mono<Response<Void>> paramDatetime(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
+                @HeaderParam("value") OffsetDateTime value,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -488,7 +490,7 @@ public final class HeadersImpl {
         Mono<Response<Void>> paramDuration(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
+                @HeaderParam("value") Duration value,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -1975,7 +1977,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions) {
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -2005,7 +2007,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions, Context context) {
+            String scenario, OffsetDateTime value, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
@@ -2031,7 +2033,8 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(String scenario, String value, RequestOptions requestOptions) {
+    public Response<Void> paramDatetimeWithResponse(
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
         return paramDatetimeWithResponseAsync(scenario, value, requestOptions).block();
     }
 
@@ -2121,7 +2124,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -2149,7 +2152,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -2177,7 +2180,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -2294,7 +2297,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions) {
+            String scenario, Duration value, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -2323,7 +2326,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions, Context context) {
+            String scenario, Duration value, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
@@ -2348,7 +2351,7 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDurationWithResponse(String scenario, String value, RequestOptions requestOptions) {
+    public Response<Void> paramDurationWithResponse(String scenario, Duration value, RequestOptions requestOptions) {
         return paramDurationWithResponseAsync(scenario, value, requestOptions).block();
     }
 

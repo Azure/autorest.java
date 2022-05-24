@@ -24,6 +24,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -548,7 +549,7 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeValid(
                 @HostParam("$host") String host,
-                @QueryParam("dateTimeQuery") String dateTimeQuery,
+                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -2639,7 +2640,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final String dateTimeQuery = "2012-01-01T01:01:01Z";
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -2666,7 +2667,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String dateTimeQuery = "2012-01-01T01:01:01Z";
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context);
     }
@@ -2701,7 +2702,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2727,7 +2728,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2753,7 +2754,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

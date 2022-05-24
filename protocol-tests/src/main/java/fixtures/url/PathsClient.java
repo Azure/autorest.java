@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
@@ -420,7 +421,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return this.client.dateTimeNullWithResponse(dateTimePath, requestOptions).block();
     }
 

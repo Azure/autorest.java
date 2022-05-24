@@ -26,6 +26,8 @@ import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import java.time.OffsetDateTime;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -486,7 +488,7 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeValid(
                 @HostParam("$host") String host,
-                @PathParam("dateTimePath") String dateTimePath,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -505,7 +507,7 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeNull(
                 @HostParam("$host") String host,
-                @PathParam("dateTimePath") String dateTimePath,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -1753,7 +1755,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final String dateTimePath = "2012-01-01T01:01:01Z";
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
@@ -1772,7 +1774,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String dateTimePath = "2012-01-01T01:01:01Z";
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context);
     }
@@ -1805,7 +1807,8 @@ public final class PathsImpl {
      *     {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponseAsync(String dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponseAsync(
+            OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context));
@@ -1826,7 +1829,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(
-            String dateTimePath, RequestOptions requestOptions, Context context) {
+            OffsetDateTime dateTimePath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context);
     }
@@ -1844,7 +1847,7 @@ public final class PathsImpl {
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return dateTimeNullWithResponseAsync(dateTimePath, requestOptions).block();
     }
 

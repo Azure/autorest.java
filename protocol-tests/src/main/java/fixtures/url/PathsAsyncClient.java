@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.PathsImpl;
+import java.time.OffsetDateTime;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -426,7 +427,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponseAsync(dateTimePath, requestOptions);
     }
 

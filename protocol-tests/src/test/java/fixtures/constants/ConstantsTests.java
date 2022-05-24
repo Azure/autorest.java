@@ -21,7 +21,6 @@ public class ConstantsTests {
     public void putClientConstantsTests() {
         RequestOptions options = new RequestOptions()
                 // we should not set these parameters, as they are from client
-                .addQueryParam("query-constant", "100")
                 .addHeader("header-constant", "true");
         Assertions.assertEquals(200, client.putClientConstantsWithResponse(options).getStatusCode());
     }

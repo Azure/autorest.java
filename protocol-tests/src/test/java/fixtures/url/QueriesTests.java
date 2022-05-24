@@ -26,14 +26,12 @@ public class QueriesTests {
     @Test
     public void getBooleanTrue() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("boolQuery", "true");
         client.getBooleanTrueWithResponse(requestOptions);
     }
 
     @Test
     public void getBooleanFalse() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("boolQuery", "false");
         client.getBooleanFalseWithResponse(requestOptions);
     }
 
@@ -45,14 +43,12 @@ public class QueriesTests {
     @Test
     public void getIntOneMillion() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("intQuery", "1000000");
         client.getIntOneMillionWithResponse(requestOptions);
     }
 
     @Test
     public void getIntNegativeOneMillion() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("intQuery", "-1000000");
         client.getIntNegativeOneMillionWithResponse(requestOptions);
     }
 
@@ -64,14 +60,12 @@ public class QueriesTests {
     @Test
     public void getTenBillion() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("longQuery", "10000000000");
         client.getTenBillionWithResponse(requestOptions);
     }
 
     @Test
     public void getNegativeTenBillion() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("longQuery", "-10000000000");
         client.getNegativeTenBillionWithResponse(requestOptions);
     }
 
@@ -83,14 +77,12 @@ public class QueriesTests {
     @Test
     public void floatScientificPositive() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("floatQuery", "1.034E+20");
         client.floatScientificPositiveWithResponse(requestOptions);
     }
 
     @Test
     public void floatScientificNegative() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("floatQuery", "-1.034E-20");
         client.floatScientificNegativeWithResponse(requestOptions);
     }
 
@@ -102,14 +94,12 @@ public class QueriesTests {
     @Test
     public void doubleDecimalPositive() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("doubleQuery", "9999999.999");
         client.doubleDecimalPositiveWithResponse(requestOptions);
     }
 
     @Test
     public void doubleDecimalNegative() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("doubleQuery", "-9999999.999");
         client.doubleDecimalNegativeWithResponse(requestOptions);
     }
 
@@ -121,21 +111,18 @@ public class QueriesTests {
     @Test
     public void stringUnicode() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("stringQuery", "啊齄丂狛狜隣郎隣兀﨩");
         client.stringUnicodeWithResponse(requestOptions);
     }
 
     @Test
     public void stringUrlEncoded() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("stringQuery", "begin!*'();:@ &=+$,/?#[]end");
         client.stringUrlEncodedWithResponse(requestOptions);
     }
 
     @Test
     public void stringEmpty() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("stringQuery", "");
         client.stringEmptyWithResponse(requestOptions);
     }
 
@@ -166,7 +153,6 @@ public class QueriesTests {
     @Test
     public void byteEmpty() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("byteQuery", "");
         client.byteEmptyWithResponse(requestOptions);
     }
 
@@ -178,7 +164,6 @@ public class QueriesTests {
     @Test
     public void dateValid() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("dateQuery", "2012-01-01");
         client.dateValidWithResponse(requestOptions);
     }
 
@@ -190,7 +175,6 @@ public class QueriesTests {
     @Test
     public void dateTimeValid() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("dateTimeQuery", "2012-01-01T01:01:01Z");
         client.dateTimeValidWithResponse(requestOptions);
     }
 

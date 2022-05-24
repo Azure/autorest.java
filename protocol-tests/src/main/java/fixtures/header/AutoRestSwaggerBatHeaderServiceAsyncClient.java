@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.header.implementation.HeadersImpl;
+import java.time.Duration;
+import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBatHeaderServiceClient type. */
@@ -492,7 +494,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDatetimeWithResponse(
-            String scenario, String value, RequestOptions requestOptions) {
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
         return this.serviceClient.paramDatetimeWithResponseAsync(scenario, value, requestOptions);
     }
 
@@ -530,7 +532,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -594,7 +596,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramDurationWithResponse(
-            String scenario, String value, RequestOptions requestOptions) {
+            String scenario, Duration value, RequestOptions requestOptions) {
         return this.serviceClient.paramDurationWithResponseAsync(scenario, value, requestOptions);
     }
 
