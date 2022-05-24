@@ -57,7 +57,10 @@ public class ClassCustomizationTests {
         final String fileName = "src/main/java/foo/Foo.java";
         final String fileContent = String.join(System.lineSeparator(),
                 "public class Foo {",
-                "    ",
+                "   private String foo; ",
+                "   public Foo(String foo) { ",
+                "      this.foo = foo;",
+                "   }",
                 "}");
         final String pathToLanguageServerPlugin = Paths.get(ClassCustomizationTests.class.getResource("").toURI())
                 .resolve("../../../../../../../postprocessor")
@@ -67,7 +70,11 @@ public class ClassCustomizationTests {
         final String expectedFileContent = String.join(System.lineSeparator(),
                 "import com.azure.core.util.BinaryData;",
                 "public class Foo {",
+                "    private String foo;",
                 "    static { String a = \"foo\"; }",
+                "    public Foo(String foo) {",
+                "      this.foo = foo;",
+                "   }",
                 "}");
 
         Customization customization = new Customization() {
