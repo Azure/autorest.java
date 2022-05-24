@@ -14,6 +14,8 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
@@ -27,9 +29,11 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +43,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProtocolExampleWriter {
@@ -64,6 +69,7 @@ public class ProtocolExampleWriter {
         // import
         this.imports = new HashSet<>();
         ClassType.BinaryData.addImportsTo(imports, false);
+        imports.add(java.util.Arrays.class.getName());
 
         syncClient.addImportsTo(imports, false);
         syncClient.getClientBuilder().addImportsTo(imports, false);
@@ -103,8 +109,24 @@ public class ProtocolExampleWriter {
                     if (getSerializedName(proxyMethodParameter).equalsIgnoreCase(parameterName)) {
                         // parameter in example found in method signature
 
-                        if (proxyMethodParameter.getClientType() != ClassType.BinaryData) {
-                            // ignore query with array, query parameter is not included in LLC method signature
+                        if (proxyMethodParameter.getCollectionFormat() != null
+                                && (proxyMethodParameter.getClientType() instanceof ListType || proxyMethodParameter.getClientType() instanceof IterableType)) {
+                            // query with array
+
+                            List<Object> elements = getParameterValueAsList(
+                                    proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
+                                            ? parameterValue.getUnescapedQueryValue()
+                                            : parameterValue.getObjectValue(),
+                                    proxyMethodParameter.getCollectionFormat());
+                            if (elements != null) {
+                                IType elementType = ((GenericType) proxyMethodParameter.getClientType()).getTypeArguments()[0];
+                                String exampleValue = String.format(
+                                        "Arrays.asList(%s);",
+                                        elements.stream().map(value -> elementType.defaultValueExpression(value.toString())).collect(Collectors.joining(", ")));
+                                params.set(parameterIndex, exampleValue);
+                            }
+                        } else if (proxyMethodParameter.getClientType() != ClassType.BinaryData) {
+                            // type like String, int, boolean, date-time
 
                             String exampleValue = proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
                                     ? parameterValue.getUnescapedQueryValue().toString()
@@ -129,40 +151,46 @@ public class ProtocolExampleWriter {
                 method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
                         case QUERY:
-                            if (parameterValue.getUnescapedQueryValue() instanceof List && p.getCollectionFormat() != null) {
-                                List<Object> elements = (List<Object>) parameterValue.getUnescapedQueryValue();
-                                if (p.getExplode()) {
-                                    // collectionFormat: multi
-                                    for (Object element : elements) {
+                            if (p.getCollectionFormat() != null) {
+                                List<Object> elements = getParameterValueAsList(
+                                        parameterValue.getUnescapedQueryValue(),
+                                        p.getCollectionFormat());
+                                if (elements != null) {
+                                    if (p.getExplode()) {
+                                        // collectionFormat: multi
+                                        for (Object element : elements) {
+                                            requestOptionsStmts.add(
+                                                    String.format(".addQueryParam(\"%s\", %s)",
+                                                            parameterName,
+                                                            ClassType.String.defaultValueExpression(element.toString())));
+                                        }
+                                    } else {
+                                        // collectionFormat: csv, ssv, tsv, pipes
+                                        String delimiter = p.getCollectionFormat().getDelimiter();
+                                        String exampleValue = elements.stream()
+                                                .map(Object::toString)
+                                                .collect(Collectors.joining(delimiter));
                                         requestOptionsStmts.add(
                                                 String.format(".addQueryParam(\"%s\", %s)",
                                                         parameterName,
-                                                        p.getClientType().defaultValueExpression(element.toString())));
+                                                        ClassType.String.defaultValueExpression(exampleValue)));
                                     }
-                                } else {
-                                    // collectionFormat: csv, ssv, tsv, pipes
-                                    String delimiter = p.getCollectionFormat().getDelimiter();
-                                    String exampleValue = elements.stream()
-                                            .map(Object::toString)
-                                            .collect(Collectors.joining(delimiter));
-                                    requestOptionsStmts.add(
-                                            String.format(".addQueryParam(\"%s\", %s)",
-                                                    parameterName,
-                                                    p.getClientType().defaultValueExpression(exampleValue)));
                                 }
                             } else {
                                 requestOptionsStmts.add(
                                         String.format(".addQueryParam(\"%s\", %s)",
                                                 parameterName,
-                                                p.getClientType().defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
+                                                ClassType.String.defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
                             }
                             break;
 
                         case HEADER:
+                            // TODO (weidxu): header could have csv etc.
+
                             requestOptionsStmts.add(
                                     String.format(".addHeader(\"%s\", %s)",
                                             parameterName,
-                                            p.getClientType().defaultValueExpression(parameterValue.getObjectValue().toString())));
+                                            ClassType.String.defaultValueExpression(parameterValue.getObjectValue().toString())));
                             break;
 
                         case BODY:
@@ -377,5 +405,34 @@ public class ProtocolExampleWriter {
             }
         }
         return proxyMethodParameters;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<Object> getParameterValueAsList(Object parameterValue, CollectionFormat collectionFormat) {
+        List<Object> elements = null;
+        if (parameterValue instanceof String) {
+            String value = (String) parameterValue;
+            switch (collectionFormat) {
+                case CSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    break;
+                case SSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
+                    break;
+                case PIPES:
+                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
+                    break;
+                case TSV:
+                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
+                    break;
+                default:
+                    // TODO (weidxu): CollectionFormat.MULTI
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    break;
+            }
+        } else if (parameterValue instanceof List) {
+            elements = (List<Object>) parameterValue;
+        }
+        return elements;
     }
 }
