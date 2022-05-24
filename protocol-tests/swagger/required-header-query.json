@@ -147,6 +147,14 @@
             "type": "string",
             "format": "date-time",
             "required": true
+          },
+          {
+            "name": "parameter_duration",
+            "description": "The duration parameter",
+            "in": "header",
+            "type": "string",
+            "format": "duration",
+            "required": true
           }
         ],
         "responses": {
