@@ -19,9 +19,7 @@ public class ConstantsTests {
 
     @Test
     public void putClientConstantsTests() {
-        RequestOptions options = new RequestOptions()
-                // we should not set these parameters, as they are from client
-                .addHeader("header-constant", "true");
+        RequestOptions options = new RequestOptions();
         Assertions.assertEquals(200, client.putClientConstantsWithResponse(options).getStatusCode());
     }
 }
