@@ -48,10 +48,6 @@ public final class ClassCustomization extends CodeCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
-
-    private static final Pattern CLASS_DECLARATION_PATTERN =
-            Pattern.compile("^\\s*[\\w*\\s*]*class\\s+[\\w*\\s*]*\\{?$", Pattern.MULTILINE);
-
     private static final Pattern BLOCK_OPEN = Pattern.compile("\\) *\\{");
     private static final Pattern PUBLIC_MODIFIER = Pattern.compile(" *public ");
     private static final Pattern PRIVATE_MODIFIER = Pattern.compile(" *private ");
