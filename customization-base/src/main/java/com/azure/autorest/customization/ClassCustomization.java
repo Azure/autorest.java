@@ -121,7 +121,7 @@ public final class ClassCustomization extends CodeCustomization {
                 .filter(symbol -> symbol.getKind() == SymbolKind.FIELD)
                 .reduce((first, second) -> second);
 
-        int indentAmount = 4;
+        int indentAmount = INDENT_LENGTH;
         if (lastSymbol.isPresent()) {
             // the line number of the last field declaration
             lastSymbolLine = lastSymbol.get().getLocation().getRange().getStart().getLine();

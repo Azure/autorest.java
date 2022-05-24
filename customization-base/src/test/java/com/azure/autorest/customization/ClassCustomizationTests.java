@@ -41,8 +41,6 @@ public class ClassCustomizationTests {
 
                 classCustomization.addStaticBlock("static { String a = \"foo\"; }");
 
-                System.out.println(libraryCustomization.getRawEditor()
-                        .getFileContent(classCustomization.getFileName()));
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                         standardizeFileForComparison(libraryCustomization.getRawEditor()
                                 .getFileContent(classCustomization.getFileName())));
@@ -87,8 +85,6 @@ public class ClassCustomizationTests {
                 classCustomization.addStaticBlock("String a = \"foo\";", Arrays.asList("com.azure.core" +
                         ".util.BinaryData"));
 
-                System.out.println(libraryCustomization.getRawEditor()
-                        .getFileContent(classCustomization.getFileName()));
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                         standardizeFileForComparison(libraryCustomization.getRawEditor()
                                 .getFileContent(classCustomization.getFileName())));
