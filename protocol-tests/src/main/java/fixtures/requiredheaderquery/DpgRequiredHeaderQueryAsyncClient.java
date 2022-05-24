@@ -72,7 +72,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
             int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
-            List<String> parameterCsvIntArray,
+            List<Integer> parameterCsvIntArray,
             List<String> parameterMultiStringArray,
             List<Integer> parameterMultiIntArray,
             List<String> parameterMultiEnumArray,
