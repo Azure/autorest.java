@@ -48,6 +48,10 @@ public final class ClassCustomization extends CodeCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
+
+    private static final Pattern CLASS_DECLARATION_PATTERN =
+            Pattern.compile("^\\s*[\\w*\\s*]*class\\s+[\\w*\\s*]*\\{?$", Pattern.MULTILINE);
+
     private static final Pattern BLOCK_OPEN = Pattern.compile("\\) *\\{");
     private static final Pattern PUBLIC_MODIFIER = Pattern.compile(" *public ");
     private static final Pattern PRIVATE_MODIFIER = Pattern.compile(" *private ");
@@ -84,6 +88,51 @@ public final class ClassCustomization extends CodeCustomization {
             return Utils.addImports(Arrays.asList(imports), this, this::refreshSymbol);
         }
 
+        return this;
+    }
+
+    /**
+     * Adds a static block to the class. The {@code staticCodeBlock} should include the static keyword followed by
+     * the static code.
+     * @param staticCodeBlock The static code block including the static keyword.
+     * @return The updated {@link ClassCustomization}.
+     */
+    public ClassCustomization addStaticBlock(String staticCodeBlock) {
+        return addStaticBlock(staticCodeBlock, null);
+    }
+
+    /**
+     * Adds a static block to the class. The {@code staticCodeBlock} should include the static keyword followed by
+     * the static code.
+     * @param staticCodeBlock The static code block including the static keyword.
+     * @param importsToAdd The list of imports to add to the class.
+     * @return The updated {@link ClassCustomization}.
+     */
+    public ClassCustomization addStaticBlock(String staticCodeBlock, List<String> importsToAdd) {
+        int staticBlockStartLine;
+        // Find all constructor and field symbols.
+        List<SymbolInformation> staticBlockLocationFinder = languageClient.listDocumentSymbols(fileUri).stream()
+                .filter(symbol -> symbol.getKind() == SymbolKind.FIELD)
+                .collect(Collectors.toList());
+
+        if (Utils.isNullOrEmpty(staticBlockLocationFinder)) {
+            staticBlockStartLine = symbol.getLocation().getRange().getStart().getLine();
+        } else {
+            SymbolInformation symbol = staticBlockLocationFinder.get(staticBlockLocationFinder.size() - 1);
+            staticBlockStartLine = symbol.getLocation().getRange().getStart().getLine();
+        }
+        int indentAmount = Utils.getIndent(editor.getFileLine(fileName, staticBlockStartLine)).length();
+
+        editor.insertBlankLine(fileName, ++staticBlockStartLine, false);
+        Position staticBlockPosition = editor.insertBlankLineWithIndent(fileName, ++staticBlockStartLine, indentAmount);
+
+        // replace
+        editor.replaceWithIndentedContent(fileName, staticBlockPosition, staticBlockPosition, staticCodeBlock,
+                staticBlockPosition.getCharacter());
+        
+        if (importsToAdd != null) {
+            return Utils.addImports(importsToAdd, this, this::refreshSymbol);
+        }
         return this;
     }
 
