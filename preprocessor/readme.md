@@ -55,7 +55,6 @@ modelerfour:
 
 require:
   - $(this-folder)data-plane.md
-  
 ```
 
 ```yaml $(data-plane) && $(sdk-integration)
