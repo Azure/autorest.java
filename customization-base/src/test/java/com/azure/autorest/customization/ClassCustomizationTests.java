@@ -22,7 +22,6 @@ public class ClassCustomizationTests {
         final String fileName = "src/main/java/foo/Foo.java";
         final String fileContent = String.join(System.lineSeparator(),
                 "public class Foo {",
-                "    ",
                 "}");
         final String pathToLanguageServerPlugin = Paths.get(ClassCustomizationTests.class.getResource("").toURI())
                 .resolve("../../../../../../../postprocessor")
@@ -42,6 +41,8 @@ public class ClassCustomizationTests {
 
                 classCustomization.addStaticBlock("static { String a = \"foo\"; }");
 
+                System.out.println(libraryCustomization.getRawEditor()
+                        .getFileContent(classCustomization.getFileName()));
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                         standardizeFileForComparison(libraryCustomization.getRawEditor()
                                 .getFileContent(classCustomization.getFileName())));
@@ -57,10 +58,10 @@ public class ClassCustomizationTests {
         final String fileName = "src/main/java/foo/Foo.java";
         final String fileContent = String.join(System.lineSeparator(),
                 "public class Foo {",
-                "   private String foo; ",
-                "   public Foo(String foo) { ",
-                "      this.foo = foo;",
-                "   }",
+                "    private String foo; ",
+                "    public Foo(String foo) { ",
+                "       this.foo = foo;",
+                "    }",
                 "}");
         final String pathToLanguageServerPlugin = Paths.get(ClassCustomizationTests.class.getResource("").toURI())
                 .resolve("../../../../../../../postprocessor")
@@ -83,9 +84,11 @@ public class ClassCustomizationTests {
                 ClassCustomization classCustomization = libraryCustomization.getPackage("foo")
                         .getClass("Foo");
 
-                classCustomization.addStaticBlock("static { String a = \"foo\"; }", Arrays.asList("com.azure.core" +
+                classCustomization.addStaticBlock("String a = \"foo\";", Arrays.asList("com.azure.core" +
                         ".util.BinaryData"));
 
+                System.out.println(libraryCustomization.getRawEditor()
+                        .getFileContent(classCustomization.getFileName()));
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                         standardizeFileForComparison(libraryCustomization.getRawEditor()
                                 .getFileContent(classCustomization.getFileName())));
