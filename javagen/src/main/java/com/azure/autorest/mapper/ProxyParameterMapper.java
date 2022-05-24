@@ -65,11 +65,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         IType clientType = wireType.getClientType();
 
         if (settings.isDataPlaneClient()) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                clientType = ClassType.BinaryData;
-            } else if(!(clientType instanceof PrimitiveType)){
-                clientType = SchemaUtil.mapDataPlaneNonPrimitiveParameterType(clientType);
-            }
+            clientType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, clientType);
         }
         builder.clientType(clientType);
 
@@ -93,11 +89,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 wireType = ClassType.String;
             }
         } else if (settings.isDataPlaneClient()) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                wireType = ClassType.BinaryData;
-            } else if (!(wireType instanceof PrimitiveType)) {
-                wireType = SchemaUtil.mapDataPlaneNonPrimitiveParameterType(wireType);
-            }
+            wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
         }
         builder.wireType(wireType);
 

@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.mapper.Mappers;
@@ -160,16 +161,20 @@ public class SchemaUtil {
         return String.join(" ", parts);
     }
 
-    public static IType mapDataPlaneNonPrimitiveParameterType(IType type) {
+    public static IType removeModelFromParameter(RequestParameterLocation parameterRequestLocation, IType type) {
         IType returnType = type;
-        if(type instanceof EnumType) {
-            returnType = ClassType.String;
-        }
-        if(type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
-            returnType = new IterableType(ClassType.String);
-        }
-        if(type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
-            returnType = new ListType(ClassType.String);
+        if (parameterRequestLocation == RequestParameterLocation.BODY) {
+            returnType = ClassType.BinaryData;
+        } else if (!(returnType instanceof PrimitiveType)) {
+            if(type instanceof EnumType) {
+                returnType = ClassType.String;
+            }
+            if(type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
+                returnType = new IterableType(ClassType.String);
+            }
+            if(type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
+                returnType = new ListType(ClassType.String);
+            }
         }
         return returnType;
     }
