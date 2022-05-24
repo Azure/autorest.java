@@ -20,6 +20,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -2448,10 +2449,13 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions) {
+            String scenario, byte[] value, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String valueConverted = Base64Util.encodeToString(value);
         return FluxUtil.withContext(
-                context -> service.paramByte(this.client.getHost(), scenario, value, accept, requestOptions, context));
+                context ->
+                        service.paramByte(
+                                this.client.getHost(), scenario, valueConverted, accept, requestOptions, context));
     }
 
     /**
@@ -2476,9 +2480,10 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramByteWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions, Context context) {
+            String scenario, byte[] value, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.paramByte(this.client.getHost(), scenario, value, accept, requestOptions, context);
+        String valueConverted = Base64Util.encodeToString(value);
+        return service.paramByte(this.client.getHost(), scenario, valueConverted, accept, requestOptions, context);
     }
 
     /**
@@ -2501,7 +2506,7 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(String scenario, String value, RequestOptions requestOptions) {
+    public Response<Void> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
         return paramByteWithResponseAsync(scenario, value, requestOptions).block();
     }
 

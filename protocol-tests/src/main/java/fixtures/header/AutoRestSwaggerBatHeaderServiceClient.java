@@ -631,7 +631,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(String scenario, String value, RequestOptions requestOptions) {
+    public Response<Void> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
         return this.client.paramByteWithResponse(scenario, value, requestOptions).block();
     }
 

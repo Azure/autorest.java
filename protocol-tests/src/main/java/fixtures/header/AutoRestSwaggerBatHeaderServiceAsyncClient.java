@@ -644,7 +644,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponse(String scenario, String value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
         return this.serviceClient.paramByteWithResponseAsync(scenario, value, requestOptions);
     }
 

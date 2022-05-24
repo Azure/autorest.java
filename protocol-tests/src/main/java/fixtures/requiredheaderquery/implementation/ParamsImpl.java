@@ -24,6 +24,12 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Params. */
@@ -67,14 +73,14 @@ public final class ParamsImpl {
                 @HostParam("$host") String host,
                 @QueryParam("parameter_int") int parameterInt,
                 @QueryParam("parameter_boolean") boolean parameterBoolean,
-                @QueryParam("parameter_csv_string_array") Iterable<String> parameterCsvStringArray,
-                @QueryParam("parameter_csv_int_array") Iterable<String> parameterCsvIntArray,
+                @QueryParam("parameter_csv_string_array") String parameterCsvStringArray,
+                @QueryParam("parameter_csv_int_array") String parameterCsvIntArray,
                 @QueryParam(value = "parameter_multi_string_array", multipleQueryParams = true)
-                        Iterable<String> parameterMultiStringArray,
+                        List<String> parameterMultiStringArray,
                 @QueryParam(value = "parameter_multi_int_array", multipleQueryParams = true)
-                        Iterable<Integer> parameterMultiIntArray,
+                        List<String> parameterMultiIntArray,
                 @QueryParam(value = "parameter_multi_enum_array", multipleQueryParams = true)
-                        Iterable<String> parameterMultiEnumArray,
+                        List<String> parameterMultiEnumArray,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -95,9 +101,10 @@ public final class ParamsImpl {
                 @HostParam("$host") String host,
                 @HeaderParam("parameter_int") int parameterInt,
                 @HeaderParam("parameter_boolean") boolean parameterBoolean,
-                @HeaderParam("parameter_csv_string_array") Iterable<String> parameterCsvStringArray,
-                @HeaderParam("parameter_csv_int_array") Iterable<Integer> parameterCsvIntArray,
-                @HeaderParam("parameter_datetime") String parameterDatetime,
+                @HeaderParam("parameter_csv_string_array") String parameterCsvStringArray,
+                @HeaderParam("parameter_csv_int_array") String parameterCsvIntArray,
+                @HeaderParam("parameter_datetime") OffsetDateTime parameterDatetime,
+                @HeaderParam("parameter_duration") Duration parameterDuration,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -137,24 +144,35 @@ public final class ParamsImpl {
     public Mono<Response<BinaryData>> getRequiredQueryParamWithResponseAsync(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<String> parameterCsvIntArray,
-            Iterable<String> parameterMultiStringArray,
-            Iterable<Integer> parameterMultiIntArray,
-            Iterable<String> parameterMultiEnumArray,
+            List<String> parameterCsvStringArray,
+            List<String> parameterCsvIntArray,
+            List<String> parameterMultiStringArray,
+            List<Integer> parameterMultiIntArray,
+            List<String> parameterMultiEnumArray,
             RequestOptions requestOptions) {
         final String accept = "application/json";
-        Iterable<String> parameterMultiEnumArrayConverted = parameterMultiEnumArray;
+        String parameterCsvStringArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+        List<String> parameterMultiStringArrayConverted =
+                parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiIntArrayConverted =
+                parameterMultiIntArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiEnumArrayConverted =
+                parameterMultiEnumArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context ->
                         service.getRequiredQueryParam(
                                 this.client.getHost(),
                                 parameterInt,
                                 parameterBoolean,
-                                parameterCsvStringArray,
-                                parameterCsvIntArray,
-                                parameterMultiStringArray,
-                                parameterMultiIntArray,
+                                parameterCsvStringArrayConverted,
+                                parameterCsvIntArrayConverted,
+                                parameterMultiStringArrayConverted,
+                                parameterMultiIntArrayConverted,
                                 parameterMultiEnumArrayConverted,
                                 accept,
                                 requestOptions,
@@ -196,23 +214,34 @@ public final class ParamsImpl {
     public Mono<Response<BinaryData>> getRequiredQueryParamWithResponseAsync(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<String> parameterCsvIntArray,
-            Iterable<String> parameterMultiStringArray,
-            Iterable<Integer> parameterMultiIntArray,
-            Iterable<String> parameterMultiEnumArray,
+            List<String> parameterCsvStringArray,
+            List<String> parameterCsvIntArray,
+            List<String> parameterMultiStringArray,
+            List<Integer> parameterMultiIntArray,
+            List<String> parameterMultiEnumArray,
             RequestOptions requestOptions,
             Context context) {
         final String accept = "application/json";
-        Iterable<String> parameterMultiEnumArrayConverted = parameterMultiEnumArray;
+        String parameterCsvStringArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+        List<String> parameterMultiStringArrayConverted =
+                parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiIntArrayConverted =
+                parameterMultiIntArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiEnumArrayConverted =
+                parameterMultiEnumArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.getRequiredQueryParam(
                 this.client.getHost(),
                 parameterInt,
                 parameterBoolean,
-                parameterCsvStringArray,
-                parameterCsvIntArray,
-                parameterMultiStringArray,
-                parameterMultiIntArray,
+                parameterCsvStringArrayConverted,
+                parameterCsvIntArrayConverted,
+                parameterMultiStringArrayConverted,
+                parameterMultiIntArrayConverted,
                 parameterMultiEnumArrayConverted,
                 accept,
                 requestOptions,
@@ -253,11 +282,11 @@ public final class ParamsImpl {
     public Response<BinaryData> getRequiredQueryParamWithResponse(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<String> parameterCsvIntArray,
-            Iterable<String> parameterMultiStringArray,
-            Iterable<Integer> parameterMultiIntArray,
-            Iterable<String> parameterMultiEnumArray,
+            List<String> parameterCsvStringArray,
+            List<String> parameterCsvIntArray,
+            List<String> parameterMultiStringArray,
+            List<Integer> parameterMultiIntArray,
+            List<String> parameterMultiEnumArray,
             RequestOptions requestOptions) {
         return getRequiredQueryParamWithResponseAsync(
                         parameterInt,
@@ -292,6 +321,7 @@ public final class ParamsImpl {
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
      * @param parameterDatetime The datetime parameter.
+     * @param parameterDuration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -303,20 +333,28 @@ public final class ParamsImpl {
     public Mono<Response<BinaryData>> getRequiredHeaderWithResponseAsync(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<Integer> parameterCsvIntArray,
-            String parameterDatetime,
+            List<String> parameterCsvStringArray,
+            List<Integer> parameterCsvIntArray,
+            OffsetDateTime parameterDatetime,
+            Duration parameterDuration,
             RequestOptions requestOptions) {
         final String accept = "application/json";
+        String parameterCsvStringArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
         return FluxUtil.withContext(
                 context ->
                         service.getRequiredHeader(
                                 this.client.getHost(),
                                 parameterInt,
                                 parameterBoolean,
-                                parameterCsvStringArray,
-                                parameterCsvIntArray,
+                                parameterCsvStringArrayConverted,
+                                parameterCsvIntArrayConverted,
                                 parameterDatetime,
+                                parameterDuration,
                                 accept,
                                 requestOptions,
                                 context));
@@ -343,6 +381,7 @@ public final class ParamsImpl {
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
      * @param parameterDatetime The datetime parameter.
+     * @param parameterDuration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -355,19 +394,27 @@ public final class ParamsImpl {
     public Mono<Response<BinaryData>> getRequiredHeaderWithResponseAsync(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<Integer> parameterCsvIntArray,
-            String parameterDatetime,
+            List<String> parameterCsvStringArray,
+            List<Integer> parameterCsvIntArray,
+            OffsetDateTime parameterDatetime,
+            Duration parameterDuration,
             RequestOptions requestOptions,
             Context context) {
         final String accept = "application/json";
+        String parameterCsvStringArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
         return service.getRequiredHeader(
                 this.client.getHost(),
                 parameterInt,
                 parameterBoolean,
-                parameterCsvStringArray,
-                parameterCsvIntArray,
+                parameterCsvStringArrayConverted,
+                parameterCsvIntArrayConverted,
                 parameterDatetime,
+                parameterDuration,
                 accept,
                 requestOptions,
                 context);
@@ -394,6 +441,7 @@ public final class ParamsImpl {
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
      * @param parameterDatetime The datetime parameter.
+     * @param parameterDuration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -405,9 +453,10 @@ public final class ParamsImpl {
     public Response<BinaryData> getRequiredHeaderWithResponse(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<Integer> parameterCsvIntArray,
-            String parameterDatetime,
+            List<String> parameterCsvStringArray,
+            List<Integer> parameterCsvIntArray,
+            OffsetDateTime parameterDatetime,
+            Duration parameterDuration,
             RequestOptions requestOptions) {
         return getRequiredHeaderWithResponseAsync(
                         parameterInt,
@@ -415,6 +464,7 @@ public final class ParamsImpl {
                         parameterCsvStringArray,
                         parameterCsvIntArray,
                         parameterDatetime,
+                        parameterDuration,
                         requestOptions)
                 .block();
     }

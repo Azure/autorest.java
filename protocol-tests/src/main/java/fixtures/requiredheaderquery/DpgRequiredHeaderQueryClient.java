@@ -15,6 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous DpgRequiredHeaderQueryClient type. */
 @ServiceClient(builder = DpgRequiredHeaderQueryClientBuilder.class)
@@ -66,11 +69,11 @@ public final class DpgRequiredHeaderQueryClient {
     public Response<BinaryData> getRequiredQueryParamWithResponse(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<String> parameterCsvIntArray,
-            Iterable<String> parameterMultiStringArray,
-            Iterable<Integer> parameterMultiIntArray,
-            Iterable<String> parameterMultiEnumArray,
+            List<String> parameterCsvStringArray,
+            List<String> parameterCsvIntArray,
+            List<String> parameterMultiStringArray,
+            List<Integer> parameterMultiIntArray,
+            List<String> parameterMultiEnumArray,
             RequestOptions requestOptions) {
         return this.client
                 .getRequiredQueryParamWithResponse(
@@ -106,6 +109,7 @@ public final class DpgRequiredHeaderQueryClient {
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
      * @param parameterDatetime The datetime parameter.
+     * @param parameterDuration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -118,9 +122,10 @@ public final class DpgRequiredHeaderQueryClient {
     public Response<BinaryData> getRequiredHeaderWithResponse(
             int parameterInt,
             boolean parameterBoolean,
-            Iterable<String> parameterCsvStringArray,
-            Iterable<Integer> parameterCsvIntArray,
-            String parameterDatetime,
+            List<String> parameterCsvStringArray,
+            List<Integer> parameterCsvIntArray,
+            OffsetDateTime parameterDatetime,
+            Duration parameterDuration,
             RequestOptions requestOptions) {
         return this.client
                 .getRequiredHeaderWithResponse(
@@ -129,6 +134,7 @@ public final class DpgRequiredHeaderQueryClient {
                         parameterCsvStringArray,
                         parameterCsvIntArray,
                         parameterDatetime,
+                        parameterDuration,
                         requestOptions)
                 .block();
     }
