@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "DPGRequiredHeaderQueryClient",
+    "description": "DPG required header and query parameter client"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/required/query/parameters": {
+      "get": {
+        "operationId": "params_getRequiredQueryParam",
+        "description": "Get Required Query Parameters",
+        "parameters": [
+          {
+            "name": "parameter_int",
+            "in": "query",
+            "description": "I am a required int parameter",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "parameter_boolean",
+            "in": "query",
+            "description": "I am a required boolean parameter",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "parameter_csv_string_array",
+            "in": "query",
+            "description": "I am a required csv string array parameter",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "required": true,
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "parameter_csv_int_array",
+            "in": "query",
+            "description": "I am a required csv int array parameter",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "required": true,
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "parameter_multi_string_array",
+            "in": "query",
+            "description": "The array of string collect by multi",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "required": true,
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "parameter_multi_int_array",
+            "description": "The array of integer collect by multi",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "required": true,
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "parameter_multi_enum_array",
+            "description": "The array of enum collect by multi",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["a", "b"]
+            },
+            "required": true,
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer from service",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/required/header/parameters": {
+      "get": {
+        "operationId": "params_getRequiredHeader",
+        "description": "Get Required Header Parameters",
+        "parameters": [
+          {
+            "name": "parameter_int",
+            "in": "header",
+            "description": "I am a required int parameter",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "parameter_boolean",
+            "in": "header",
+            "description": "I am a required boolean parameter",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "parameter_csv_string_array",
+            "in": "header",
+            "description": "The array of string collect by csv",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "required": true,
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "parameter_csv_int_array",
+            "description": "The array of integer collect by csv",
+            "in": "header",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "required": true,
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "parameter_datetime",
+            "description": "The datetime parameter",
+            "in": "header",
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          },
+          {
+            "name": "parameter_duration",
+            "description": "The duration parameter",
+            "in": "header",
+            "type": "string",
+            "format": "duration",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer from service",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RequestObject": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+

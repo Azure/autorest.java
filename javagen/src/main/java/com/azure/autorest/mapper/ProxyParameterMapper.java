@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
@@ -62,12 +63,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         builder.rawType(wireType);
 
         IType clientType = wireType.getClientType();
-        if (settings.isDataPlaneClient() && !(clientType instanceof PrimitiveType)) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                clientType = ClassType.BinaryData;
-            } else {
-                clientType = ClassType.String;
-            }
+
+        if (settings.isDataPlaneClient()) {
+            clientType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, clientType);
         }
         builder.clientType(clientType);
 
@@ -90,12 +88,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             } else {
                 wireType = ClassType.String;
             }
-        } else if (settings.isDataPlaneClient() && !(wireType instanceof PrimitiveType)) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                wireType = ClassType.BinaryData;
-            } else {
-                wireType = ClassType.String;
-            }
+        } else if (settings.isDataPlaneClient()) {
+            wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
         }
         builder.wireType(wireType);
 
@@ -187,4 +181,5 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
     protected ProxyMethodParameter.Builder createProxyMethodParameterBuilder() {
         return new ProxyMethodParameter.Builder();
     }
+
 }

@@ -7,6 +7,7 @@ package fixtures.bodystring.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -66,7 +67,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/null")
         @ExpectedResponses({200})
@@ -80,7 +84,11 @@ public final class StringOperationsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/string/empty")
         @ExpectedResponses({200})
@@ -95,7 +103,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
@@ -112,6 +123,7 @@ public final class StringOperationsImpl {
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -128,7 +140,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMbcs(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
@@ -145,6 +160,7 @@ public final class StringOperationsImpl {
         Mono<Response<Void>> putMbcs(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -161,7 +177,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getWhitespace(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
@@ -178,6 +197,7 @@ public final class StringOperationsImpl {
         Mono<Response<Void>> putWhitespace(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -194,7 +214,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNotProvided(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
@@ -209,7 +232,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<byte[]>> getBase64Encoded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/string/getStringAdded")
         @ExpectedResponses({200})
@@ -224,7 +250,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getStringAdded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
@@ -239,7 +268,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getBase64UrlEncoded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
@@ -256,6 +288,7 @@ public final class StringOperationsImpl {
         Mono<Response<Void>> putBase64UrlEncoded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -272,7 +305,10 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNullBase64UrlEncoded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -293,7 +329,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -315,7 +352,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -357,7 +395,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -379,7 +418,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.putNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -421,7 +461,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getEmpty(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -443,7 +485,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getEmpty(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -486,8 +529,9 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody = BinaryData.fromObject("");
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putEmpty(this.client.getHost(), stringBody, requestOptions, context));
+                context -> service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -510,7 +554,8 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody = BinaryData.fromObject("");
-        return service.putEmpty(this.client.getHost(), stringBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -553,7 +598,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -576,7 +622,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getMbcs(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getMbcs(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -621,8 +668,9 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody =
                 BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putMbcs(this.client.getHost(), stringBody, requestOptions, context));
+                context -> service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -646,7 +694,8 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody =
                 BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-        return service.putMbcs(this.client.getHost(), stringBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -691,7 +740,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getWhitespace(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -716,7 +767,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getWhitespace(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getWhitespace(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -764,8 +816,9 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions) {
         final BinaryData stringBody =
                 BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putWhitespace(this.client.getHost(), stringBody, requestOptions, context));
+                context -> service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -790,7 +843,8 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
         final BinaryData stringBody =
                 BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
-        return service.putWhitespace(this.client.getHost(), stringBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -834,7 +888,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getNotProvided(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -857,7 +913,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNotProvided(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNotProvided(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -899,8 +956,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBase64Encoded(this.client.getHost(), requestOptions, context));
+                context -> service.getBase64Encoded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -922,7 +980,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getBase64Encoded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getBase64Encoded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -964,7 +1023,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringAddedWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getStringAdded(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getStringAdded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -986,7 +1047,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringAddedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getStringAdded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getStringAdded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1028,8 +1090,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBase64UrlEncoded(this.client.getHost(), requestOptions, context));
+                context -> service.getBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1052,7 +1115,8 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getBase64UrlEncoded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1096,8 +1160,11 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putBase64UrlEncoded(this.client.getHost(), stringBody, requestOptions, context));
+                context ->
+                        service.putBase64UrlEncoded(
+                                this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -1121,7 +1188,8 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
-        return service.putBase64UrlEncoded(this.client.getHost(), stringBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putBase64UrlEncoded(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -1165,8 +1233,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNullBase64UrlEncoded(this.client.getHost(), requestOptions, context));
+                context -> service.getNullBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1190,7 +1259,8 @@ public final class StringOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getNullBase64UrlEncoded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNullBase64UrlEncoded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

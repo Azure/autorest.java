@@ -51,14 +51,10 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
             case CHAR: return PrimitiveType.Char;
             case DATE: return isLowLevelClient ? ClassType.String : ClassType.LocalDate;
             case DATE_TIME:
-                if (isLowLevelClient) {
-                    return ClassType.String;
-                } else {
-                    DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
-                    return (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123)
-                        ? ClassType.DateTimeRfc1123
-                        : ClassType.DateTime;
-                }
+                DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
+                return (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123)
+                    ? ClassType.DateTimeRfc1123
+                    : ClassType.DateTime;
             case TIME:
 //                TimeSchema timeSchema = (TimeSchema) primaryType;
                 return ClassType.String;
@@ -87,7 +83,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
 //                break;
             case STRING: return ClassType.String;
             case URI: return isLowLevelClient ? ClassType.String : ClassType.URL;
-            case DURATION: return isLowLevelClient ? ClassType.String : ClassType.Duration;
+            case DURATION: return ClassType.Duration;
             case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
             case UUID: return isLowLevelClient ? ClassType.String : ClassType.UUID;
             case OBJECT: return ClassType.Object;

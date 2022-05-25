@@ -7,6 +7,7 @@ package fixtures.bodystring.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -64,7 +65,10 @@ public final class EnumsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> getNotExpandable(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
@@ -81,6 +85,7 @@ public final class EnumsImpl {
         Mono<Response<Void>> putNotExpandable(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBodyUpdated,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -97,7 +102,10 @@ public final class EnumsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> getReferenced(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
@@ -114,6 +122,7 @@ public final class EnumsImpl {
         Mono<Response<Void>> putReferenced(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData enumStringBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -137,8 +146,9 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNotExpandable(this.client.getHost(), requestOptions, context));
+                context -> service.getNotExpandable(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -161,7 +171,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNotExpandable(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNotExpandable(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -206,8 +217,11 @@ public final class EnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBodyUpdated, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putNotExpandable(this.client.getHost(), stringBodyUpdated, requestOptions, context));
+                context ->
+                        service.putNotExpandable(
+                                this.client.getHost(), stringBodyUpdated, accept, requestOptions, context));
     }
 
     /**
@@ -231,7 +245,8 @@ public final class EnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBodyUpdated, RequestOptions requestOptions, Context context) {
-        return service.putNotExpandable(this.client.getHost(), stringBodyUpdated, requestOptions, context);
+        final String accept = "application/json";
+        return service.putNotExpandable(this.client.getHost(), stringBodyUpdated, accept, requestOptions, context);
     }
 
     /**
@@ -275,7 +290,9 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getReferenced(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -298,7 +315,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getReferenced(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getReferenced(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -343,8 +361,10 @@ public final class EnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putReferenced(this.client.getHost(), enumStringBody, requestOptions, context));
+                context ->
+                        service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
@@ -368,7 +388,8 @@ public final class EnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
-        return service.putReferenced(this.client.getHost(), enumStringBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context);
     }
 
     /**

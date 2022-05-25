@@ -402,8 +402,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     now: String
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
      * }
      * }</pre>
      *
@@ -428,8 +428,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     now: String
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
      * }
      * }</pre>
      *
@@ -454,8 +454,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     now: String
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
      * }
      * }</pre>
      *
@@ -480,8 +480,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     now: String
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
      * }
      * }</pre>
      *
@@ -506,7 +506,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
+     *     field: Duration
      * }
      * }</pre>
      *
@@ -531,7 +531,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
+     *     field: Duration
      * }
      * }</pre>
      *

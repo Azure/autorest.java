@@ -6,6 +6,7 @@ package fixtures.url.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -68,6 +69,7 @@ public final class PathItemsImpl {
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -89,6 +91,7 @@ public final class PathItemsImpl {
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -110,6 +113,7 @@ public final class PathItemsImpl {
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -131,6 +135,7 @@ public final class PathItemsImpl {
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -162,6 +167,7 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getAllWithValues(
@@ -169,6 +175,7 @@ public final class PathItemsImpl {
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -201,11 +208,13 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getAllWithValues(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -267,6 +276,7 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalQueryNull(
@@ -274,6 +284,7 @@ public final class PathItemsImpl {
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -306,11 +317,13 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getGlobalQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -372,6 +385,7 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalAndLocalQueryNull(
@@ -379,6 +393,7 @@ public final class PathItemsImpl {
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -411,11 +426,13 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getGlobalAndLocalQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -477,6 +494,7 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getLocalPathItemQueryNull(
@@ -484,6 +502,7 @@ public final class PathItemsImpl {
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -516,11 +535,13 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getLocalPathItemQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }

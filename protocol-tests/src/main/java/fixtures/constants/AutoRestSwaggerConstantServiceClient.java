@@ -134,9 +134,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -146,8 +146,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(requestOptions).block();
+    public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -158,9 +159,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -170,8 +171,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredTwoValueDefaultWithResponse(requestOptions).block();
+    public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putNoModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -182,7 +184,6 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -206,7 +207,6 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -326,9 +326,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -338,8 +338,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredTwoValueNoDefaultWithResponse(requestOptions).block();
+    public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -350,9 +351,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -362,8 +363,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredTwoValueDefaultWithResponse(requestOptions).block();
+    public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -374,9 +376,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -386,8 +388,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredOneValueNoDefaultWithResponse(requestOptions).block();
+    public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putModelAsStringRequiredOneValueNoDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -398,9 +401,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>Yes</td><td>The input parameter</td></tr>
      * </table>
      *
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -410,8 +413,9 @@ public final class AutoRestSwaggerConstantServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredOneValueDefaultWithResponse(requestOptions).block();
+    public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
+            String input, RequestOptions requestOptions) {
+        return this.client.putModelAsStringRequiredOneValueDefaultWithResponse(input, requestOptions).block();
     }
 
     /**
@@ -422,7 +426,6 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-constant</td><td>int</td><td>Yes</td><td>Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'</td></tr>
      * </table>
      *
      * <p><strong>Header Parameters</strong>
@@ -430,7 +433,6 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-constant</td><td>boolean</td><td>Yes</td><td>Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
