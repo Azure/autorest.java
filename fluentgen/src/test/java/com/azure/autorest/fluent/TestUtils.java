@@ -23,11 +23,12 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,17 +92,11 @@ public class TestUtils {
     }
 
     public static String loadYaml(String filename) {
-        final int bufferSize = 1024;
-        final char[] buffer = new char[bufferSize];
-        final StringBuilder out = new StringBuilder();
-        try (InputStream inputStream = ResourceParserTests.class.getClassLoader().getResourceAsStream(filename);
-             Reader in = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
-            int charsRead;
-            while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
-                out.append(buffer, 0, charsRead);
-            }
-            return out.toString();
-        } catch (IOException e) {
+        try {
+            Path path = Paths.get(ResourceParserTests.class.getClassLoader().getResource(filename).toURI());
+
+            return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+        } catch (IOException | URISyntaxException e) {
             Assertions.fail(e);
             return null;
         }
