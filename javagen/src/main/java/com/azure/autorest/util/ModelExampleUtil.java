@@ -160,18 +160,34 @@ public class ModelExampleUtil {
             LiteralNode literalNode = new LiteralNode(type, objectValue);
             node = literalNode;
 
-            // see ClassType.convertToClientType and PrimitiveType.convertToClientType
-            String literalValue = objectValue.toString();
-            if (wireType == ClassType.DateTimeRfc1123) {
-                literalValue = new DateTimeRfc1123(literalValue).getDateTime().toString();
-            } else if (wireType == ClassType.Base64Url) {
-                literalValue = new Base64Url(literalValue).toString();
-            } else if (wireType == PrimitiveType.UnixTimeLong) {
-                literalValue = OffsetDateTime.from(Instant.ofEpochSecond(Long.parseLong(literalValue))).toString();
-            }
+            String literalValue = convertLiteralToClientValue(wireType, objectValue.toString());
             literalNode.setLiteralsValue(literalValue);
         }
         return node;
+    }
+
+    /**
+     * Convert literal value in wire type, to literal value in client type
+     * <p>
+     * date-time in RFC1123 to RFC3339
+     * date-time in Unix epoch to RFC3339
+     * bytes in base64URL to bytes in string
+     *
+     * @param wireType the wire type
+     * @param literalInWireType the literal value in wire type
+     * @return the literal value in client type
+     */
+    public static String convertLiteralToClientValue(IType wireType, String literalInWireType) {
+        // see ClassType.convertToClientType and PrimitiveType.convertToClientType
+        String literalValue = literalInWireType;
+        if (wireType == ClassType.DateTimeRfc1123) {
+            literalValue = new DateTimeRfc1123(literalValue).getDateTime().toString();
+        } else if (wireType == ClassType.Base64Url) {
+            literalValue = new Base64Url(literalValue).toString();
+        } else if (wireType == PrimitiveType.UnixTimeLong) {
+            literalValue = OffsetDateTime.from(Instant.ofEpochSecond(Long.parseLong(literalValue))).toString();
+        }
+        return literalValue;
     }
 
     @SuppressWarnings("unchecked")

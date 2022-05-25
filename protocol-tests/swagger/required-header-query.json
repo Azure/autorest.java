@@ -83,9 +83,37 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["a", "b"]
+              "enum": ["alpha", "beta", "gamma"]
             },
             "required": true,
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "parameter_datetime",
+            "description": "The datetime parameter",
+            "in": "query",
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          },
+          {
+            "name": "parameter_optional_csv_int_array",
+            "in": "query",
+            "description": "I am a required csv int array parameter",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "parameter_optional_multi_int_array",
+            "description": "The array of integer collect by multi",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
             "collectionFormat": "multi"
           }
         ],
@@ -95,6 +123,11 @@
             "schema": {
               "type": "object"
             }
+          }
+        },
+        "x-ms-examples": {
+          "QueryParamters": {
+            "$ref": "./examples/dpg-query-parameters.json"
           }
         }
       }
@@ -145,7 +178,7 @@
             "description": "The datetime parameter",
             "in": "header",
             "type": "string",
-            "format": "date-time",
+            "format": "date-time-rfc1123",
             "required": true
           },
           {
@@ -163,6 +196,11 @@
             "schema": {
               "type": "object"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HeaderParamters": {
+            "$ref": "./examples/dpg-header-parameters.json"
           }
         }
       }

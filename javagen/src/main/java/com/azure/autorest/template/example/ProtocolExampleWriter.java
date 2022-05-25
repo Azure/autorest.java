@@ -24,6 +24,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
@@ -130,6 +131,7 @@ public class ProtocolExampleWriter {
                             String exampleValue = proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
                                     ? parameterValue.getUnescapedQueryValue().toString()
                                     : parameterValue.getObjectValue().toString();
+                            exampleValue = ModelExampleUtil.convertLiteralToClientValue(proxyMethodParameter.getWireType(), exampleValue);
                             params.set(parameterIndex, proxyMethodParameter.getClientType().defaultValueExpression(exampleValue));
                         } else {
                             // BinaryData

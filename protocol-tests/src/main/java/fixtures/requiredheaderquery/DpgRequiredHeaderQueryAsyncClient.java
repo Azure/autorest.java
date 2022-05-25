@@ -44,6 +44,8 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -59,6 +61,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * @param parameterMultiStringArray The array of string collect by multi.
      * @param parameterMultiIntArray The array of integer collect by multi.
      * @param parameterMultiEnumArray The array of enum collect by multi.
+     * @param parameterDatetime The datetime parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -76,6 +79,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
             List<String> parameterMultiStringArray,
             List<Integer> parameterMultiIntArray,
             List<String> parameterMultiEnumArray,
+            OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
         return this.serviceClient.getRequiredQueryParamWithResponseAsync(
                 parameterInt,
@@ -85,6 +89,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
                 parameterMultiStringArray,
                 parameterMultiIntArray,
                 parameterMultiEnumArray,
+                parameterDatetime,
                 requestOptions);
     }
 
