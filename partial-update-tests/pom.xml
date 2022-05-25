@@ -3,53 +3,53 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.azure.tools</groupId>
-        <artifactId>azure-autorest-parent</artifactId>
-        <version>1.0.0-beta.1</version>
-    </parent>
-
+  <parent>
     <groupId>com.azure.tools</groupId>
-    <artifactId>partial-update-tests</artifactId>
-    <version>1.0.0-beta.1</version>
-    <packaging>pom</packaging>
+    <artifactId>azure-autorest-parent</artifactId>
+    <version>1.0.0-beta.2</version>
+  </parent>
+
+  <groupId>com.azure.tools</groupId>
+  <artifactId>partial-update-tests</artifactId>
+  <version>1.0.0-beta.1</version>
+  <packaging>pom</packaging>
 
 
-    <modules>
-        <module>existing</module>
-        <module>generated</module>
-    </modules>
+  <modules>
+    <module>existing</module>
+    <module>generated</module>
+  </modules>
 
-    <licenses>
-        <license>
-            <name>The MIT License (MIT)</name>
-            <url>http://opensource.org/licenses/MIT</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-core</artifactId>
-            <version>1.28.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-identity</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-            </plugin>
-        </plugins>
-    </build>
+  <dependencies>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core</artifactId>
+      <version>1.28.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-identity</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

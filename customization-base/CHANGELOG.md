@@ -17,8 +17,9 @@
   - Rename constant.
   - Set constant modifier.
 - Added remove method to class customization.
-- Support for adding imports when performing customizations.
+- Support for adding imports to a class when performing customizations.
 - Added ability to customize the class abstract syntax tree to cover scenarios that haven't been developed yet.
+- Support for adding a static initializer to a class.
 
 ### Bugs Fixed
 
