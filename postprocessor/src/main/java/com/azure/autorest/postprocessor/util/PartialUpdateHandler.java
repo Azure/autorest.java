@@ -26,12 +26,12 @@ import static com.github.javaparser.StaticJavaParser.parse;
  * <p>Below partial update use cases are supported:
  *
  * <ul>
- * <li>Manually add class member (field / method / constructor) -> keep the added member
- * <li>Manually update method signature, e.g. parameter change, method access level change -> keep the manual changed signature, and not generate the corresponding method with the same method name
- * <li>Manually remove one class member -> if the member's definition is in swagger, this member will be auto generated again
- * <li>Swagger add a new api -> add the new api to generated file
- * <li>Swagger update an existing api -> if the api is auto generated, then the existing generated member will be replaced to the new one. If it is manual updated, we will keep the manual updated member.
- * <li>Swagger delete an existing api -> if the existing api is auto generated, then it should be removed. If it is manual updated, we will keep the manual updated member.
+ * <li>Manually add class member (field / method / constructor) -&gt; keep the added member
+ * <li>Manually update method signature, e.g. parameter change, method access level change -&gt; keep the manual changed signature, and not generate the corresponding method with the same method name
+ * <li>Manually remove one class member -&gt; if the member's definition is in swagger, this member will be auto generated again
+ * <li>Swagger add a new api -&gt; add the new api to generated file
+ * <li>Swagger update an existing api -&gt; if the api is auto generated, then the existing generated member will be replaced to the new one. If it is manual updated, we will keep the manual updated member.
+ * <li>Swagger delete an existing api -&gt; if the existing api is auto generated, then it should be removed. If it is manual updated, we will keep the manual updated member.
  * </ul>
  */
 public class PartialUpdateHandler {
