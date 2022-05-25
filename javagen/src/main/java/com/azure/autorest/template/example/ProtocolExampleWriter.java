@@ -86,10 +86,9 @@ public class ProtocolExampleWriter {
 
         // method invocation
         // parameter values and required invocation on RequestOptions
-        int numParam = method.getParameters().size();
         List<String> params = new ArrayList<>();
-        for (int i = 0; i < numParam; i++) {
-            params.add("null");
+        for (ClientMethodParameter parameter : method.getParameters()) {
+            params.add(parameter.getClientType().defaultValueExpression());
         }
 
         StringBuilder binaryDataStmt = new StringBuilder();
@@ -100,7 +99,7 @@ public class ProtocolExampleWriter {
         Set<ServiceClientProperty> processedServiceClientProperties = new HashSet<>();
 
         List<ProxyMethodParameter> proxyMethodParameters = getProxyMethodParameters(method.getProxyMethod(), method.getParameters());
-
+        final int numParam = method.getParameters().size();
         proxyMethodExample.getParameters().forEach((parameterName, parameterValue) -> {
             boolean matchRequiredParameter = false;
             for (int parameterIndex = 0; parameterIndex < numParam; parameterIndex++) {
