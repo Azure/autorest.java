@@ -21,8 +21,7 @@ public class HeaderOperationsTests {
     @Disabled("fail, does not take effect on \"User-Agent\", high-level has same issue")
     public void paramExistingKey() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("User-Agent", "overwrite");
-        client.paramExistingKeyWithResponse(requestOptions);
+        client.paramExistingKeyWithResponse("overwrite", requestOptions);
     }
 
     @Test
@@ -34,8 +33,7 @@ public class HeaderOperationsTests {
     @Test
     public void paramProtectedKey() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("Content-Type", "text/html");
-        asyncClient.paramProtectedKeyWithResponse(requestOptions).block();
+        asyncClient.paramProtectedKeyWithResponse("text/html", requestOptions).block();
     }
 
     @Test
@@ -47,24 +45,20 @@ public class HeaderOperationsTests {
     @Test
     public void paramInteger() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("scenario", "positive").addHeader("value", "1");
-        client.paramIntegerWithResponse(requestOptions);
+        client.paramIntegerWithResponse("positive", 1, requestOptions);
 
         requestOptions = new RequestOptions();
-        requestOptions.addHeader("scenario", "negative").addHeader("value", "-2");
-        client.paramIntegerWithResponse(requestOptions);
+        client.paramIntegerWithResponse("negative", -2, requestOptions);
     }
 
     @Test
     public void responseInteger() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("scenario", "positive");
-        Response<Void> response = client.responseIntegerWithResponse(requestOptions);
+        Response<Void> response = client.responseIntegerWithResponse("positive", requestOptions);
         Assertions.assertEquals("1", response.getHeaders().getValue("value"));
 
         requestOptions = new RequestOptions();
-        requestOptions.addHeader("scenario", "negative");
-        response = client.responseIntegerWithResponse(requestOptions);
+        response = client.responseIntegerWithResponse("negative", requestOptions);
         Assertions.assertEquals("-2", response.getHeaders().getValue("value"));
     }
 

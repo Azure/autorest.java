@@ -120,7 +120,7 @@ public class PathsTests {
 
     @Test
     public void byteMultiByte() {
-        client.byteMultiByteWithResponse(Base64Util.encodeToString("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8)), null);
+        client.byteMultiByteWithResponse("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8), null);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class PathsTests {
 
     @Test
     public void base64Url() {
-        client.base64UrlWithResponse(Base64Url.encode("lorem".getBytes(StandardCharsets.UTF_8)).toString(), null);
+        client.base64UrlWithResponse("lorem".getBytes(StandardCharsets.UTF_8), null);
     }
 
     @Test
@@ -178,8 +178,7 @@ public class PathsTests {
         list.add("begin!*'();:@ &=+$,/?#[]end");
         list.add(null);
         list.add("");
-        String path = JacksonAdapter.createDefaultSerializerAdapter().serializeList(list, CollectionFormat.CSV);
-        client.arrayCsvInPathWithResponse(path, null);
+        client.arrayCsvInPathWithResponse(list, null);
     }
 
     @Test

@@ -117,8 +117,7 @@ public class PagingTests {
     @Disabled
     public void getMultiplePagesFragmentNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("api_version", "1.6");
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("test_user", requestOptions);
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user", requestOptions);
         Assertions.assertEquals(10, response.stream().count());
     }
 
@@ -126,7 +125,7 @@ public class PagingTests {
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("api_version", "1.6");
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("test_user", requestOptions);
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("1.6","test_user", requestOptions);
         Assertions.assertEquals(10, response.stream().count());
     }
 
@@ -145,8 +144,8 @@ public class PagingTests {
     @Disabled("NextLink has parameters")
     public void getWithQueryParams() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("requiredQueryParameter", "100").addQueryParam("queryConstant", "true");
-        long count = client.getWithQueryParams(requestOptions).stream().count();
+        requestOptions.addQueryParam("queryConstant", "true");
+        long count = client.getWithQueryParams(100, requestOptions).stream().count();
         Assertions.assertEquals(2, count);
     }
 

@@ -49,14 +49,11 @@ public class DpgUpdateTests {
     @Test
     public void getRequired() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("parameter", "parameter");
 
-        Response<BinaryData> response = client.getRequiredWithResponse(requestOptions);
+        Response<BinaryData> response = client.getRequiredWithResponse("parameter", requestOptions);
         Assertions.assertEquals(200, response.getStatusCode());
 
-        requestOptions.addQueryParam("new_parameter", "new_parameter");
-
-        response = client2.getRequiredWithResponse(requestOptions);
+        response = client2.getRequiredWithResponse("new_parameter", requestOptions);
         Assertions.assertEquals(200, response.getStatusCode());
     }
 
@@ -64,15 +61,12 @@ public class DpgUpdateTests {
     @Disabled("not implemented in testserver")
     public void putRequiredOptional() {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("requiredParam", "requiredParam");
         requestOptions.addQueryParam("optionalParam", "optionalParam");
         requestOptions.setBody(BinaryData.fromString("{}"));
 
-        client.putRequiredOptionalWithResponse(requestOptions);
+        client.putRequiredOptionalWithResponse("requiredParam", requestOptions);
 
-        requestOptions.addQueryParam("new_parameter", "new_parameter");
-
-        client2.putRequiredOptionalWithResponse(requestOptions);
+        client2.putRequiredOptionalWithResponse("new_parameter", requestOptions);
     }
 
     @Test

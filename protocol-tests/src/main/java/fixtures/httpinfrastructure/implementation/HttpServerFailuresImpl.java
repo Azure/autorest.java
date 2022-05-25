@@ -7,6 +7,7 @@ package fixtures.httpinfrastructure.implementation;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -63,7 +64,11 @@ public final class HttpServerFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head501(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head501(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/failure/server/501")
         @UnexpectedResponseExceptionType(
@@ -76,7 +81,11 @@ public final class HttpServerFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get501(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get501(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/failure/server/505")
         @UnexpectedResponseExceptionType(
@@ -89,7 +98,11 @@ public final class HttpServerFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post505(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post505(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/failure/server/505")
         @UnexpectedResponseExceptionType(
@@ -102,7 +115,11 @@ public final class HttpServerFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete505(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete505(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -117,7 +134,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -133,7 +151,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head501(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head501(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -163,7 +182,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -179,7 +199,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get501(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get501(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -215,7 +236,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -237,7 +259,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post505(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post505(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -279,7 +302,9 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete505(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete505(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -301,7 +326,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete505(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete505(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

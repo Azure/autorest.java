@@ -7,6 +7,7 @@ package fixtures.bodycomplex.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -65,7 +66,10 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
@@ -82,6 +86,7 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -98,7 +103,10 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
@@ -115,6 +123,7 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -131,7 +140,10 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
@@ -146,7 +158,10 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNotProvided(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -172,7 +187,9 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -199,7 +216,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -251,8 +269,9 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -281,7 +300,8 @@ public final class DictionariesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putValid(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -334,7 +354,9 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getEmpty(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -361,7 +383,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getEmpty(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -412,8 +435,9 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putEmpty(this.client.getHost(), complexBody, requestOptions, context));
+                context -> service.putEmpty(this.client.getHost(), complexBody, accept, requestOptions, context));
     }
 
     /**
@@ -441,7 +465,8 @@ public final class DictionariesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return service.putEmpty(this.client.getHost(), complexBody, requestOptions, context);
+        final String accept = "application/json";
+        return service.putEmpty(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**
@@ -493,7 +518,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -520,7 +546,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -571,7 +598,9 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getNotProvided(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -598,7 +627,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNotProvided(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getNotProvided(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

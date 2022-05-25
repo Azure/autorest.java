@@ -6,6 +6,7 @@ package fixtures.lro.implementation;
 
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -69,7 +70,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNonRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201})
@@ -84,7 +88,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNonRetry201Creating400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201})
@@ -99,7 +106,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNonRetry201Creating400InvalidJson(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200})
@@ -114,7 +124,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRelativeRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/nonretryerror/delete/400")
         @ExpectedResponses({202})
@@ -129,7 +142,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteNonRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({202})
@@ -144,7 +160,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete202NonRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({202})
@@ -159,7 +178,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRelativeRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/nonretryerror/post/400")
         @ExpectedResponses({202})
@@ -174,7 +196,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postNonRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({202})
@@ -189,7 +214,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post202NonRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({202})
@@ -204,7 +232,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRelativeRetry400(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201})
@@ -219,7 +250,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putError201NoProvisioningStatePayload(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200})
@@ -234,7 +268,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatus(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200})
@@ -249,7 +286,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusPayload(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/error/delete/204/nolocation")
         @ExpectedResponses({204})
@@ -264,7 +304,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete204Succeeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({202})
@@ -279,7 +322,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRelativeRetryNoStatus(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/error/post/202/nolocation")
         @ExpectedResponses({202})
@@ -294,7 +340,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post202NoLocation(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/error/postasync/retry/nopayload")
         @ExpectedResponses({202})
@@ -309,7 +358,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRelativeRetryNoPayload(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 204})
@@ -324,7 +376,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200InvalidJson(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200})
@@ -339,7 +394,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200})
@@ -354,7 +412,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidJsonPolling(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({202})
@@ -369,7 +430,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete202RetryInvalidHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({202})
@@ -384,7 +448,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
@@ -399,7 +466,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRelativeRetryInvalidJsonPolling(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({202})
@@ -414,7 +484,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post202RetryInvalidHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({202})
@@ -429,7 +502,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRelativeRetryInvalidHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
@@ -444,7 +520,10 @@ public final class LrosaDsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRelativeRetryInvalidJsonPolling(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -495,7 +574,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.putNonRetry400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putNonRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -547,7 +628,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.putNonRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putNonRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -772,8 +854,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putNonRetry201Creating400(this.client.getHost(), requestOptions, context));
+                context -> service.putNonRetry201Creating400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -826,7 +909,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNonRetry201Creating400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putNonRetry201Creating400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1053,9 +1137,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400InvalidJsonWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.putNonRetry201Creating400InvalidJson(this.client.getHost(), requestOptions, context));
+                        service.putNonRetry201Creating400InvalidJson(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1108,7 +1194,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNonRetry201Creating400InvalidJsonWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNonRetry201Creating400InvalidJson(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putNonRetry201Creating400InvalidJson(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1336,8 +1423,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncRelativeRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1391,7 +1479,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetry400WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRelativeRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1584,8 +1673,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteNonRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteNonRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.deleteNonRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1601,7 +1691,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteNonRetry400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.deleteNonRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteNonRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1683,8 +1774,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202NonRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete202NonRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.delete202NonRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1700,7 +1792,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202NonRetry400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete202NonRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete202NonRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1783,8 +1876,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncRelativeRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1802,7 +1896,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetry400WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRelativeRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1905,7 +2000,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postNonRetry400WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.postNonRetry400(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.postNonRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1939,7 +2036,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postNonRetry400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.postNonRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postNonRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2093,8 +2191,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NonRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.post202NonRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.post202NonRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2128,7 +2227,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NonRetry400WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post202NonRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post202NonRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2283,8 +2383,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetry400WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRelativeRetry400(this.client.getHost(), requestOptions, context));
+                context -> service.postAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2320,7 +2421,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetry400WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRelativeRetry400(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetry400(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2496,9 +2598,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putError201NoProvisioningStatePayloadWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.putError201NoProvisioningStatePayload(this.client.getHost(), requestOptions, context));
+                        service.putError201NoProvisioningStatePayload(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2551,7 +2655,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putError201NoProvisioningStatePayloadWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putError201NoProvisioningStatePayload(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putError201NoProvisioningStatePayload(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2781,8 +2886,10 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncRelativeRetryNoStatus(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.putAsyncRelativeRetryNoStatus(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2837,7 +2944,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRelativeRetryNoStatus(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryNoStatus(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3072,9 +3180,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.putAsyncRelativeRetryNoStatusPayload(this.client.getHost(), requestOptions, context));
+                        service.putAsyncRelativeRetryNoStatusPayload(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3129,7 +3239,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRelativeRetryNoStatusPayload(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryNoStatusPayload(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3326,8 +3437,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete204Succeeded(this.client.getHost(), requestOptions, context));
+                context -> service.delete204Succeeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3343,7 +3455,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete204Succeeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete204Succeeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3426,8 +3539,11 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryNoStatusWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncRelativeRetryNoStatus(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.deleteAsyncRelativeRetryNoStatus(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3445,7 +3561,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryNoStatusWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRelativeRetryNoStatus(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryNoStatus(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3549,8 +3666,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NoLocationWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.post202NoLocation(this.client.getHost(), requestOptions, context));
+                context -> service.post202NoLocation(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3584,7 +3702,8 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NoLocationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post202NoLocation(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post202NoLocation(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3740,8 +3859,11 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryNoPayloadWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRelativeRetryNoPayload(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.postAsyncRelativeRetryNoPayload(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3778,7 +3900,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryNoPayloadWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRelativeRetryNoPayload(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryNoPayload(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3956,8 +4079,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put200InvalidJsonWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put200InvalidJson(this.client.getHost(), requestOptions, context));
+                context -> service.put200InvalidJson(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4010,7 +4134,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put200InvalidJsonWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put200InvalidJson(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put200InvalidJson(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4238,8 +4363,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.putAsyncRelativeRetryInvalidHeader(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4293,7 +4421,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryInvalidHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4526,10 +4655,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.putAsyncRelativeRetryInvalidJsonPolling(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4584,7 +4714,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4783,8 +4914,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202RetryInvalidHeaderWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete202RetryInvalidHeader(this.client.getHost(), requestOptions, context));
+                context -> service.delete202RetryInvalidHeader(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4802,7 +4934,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202RetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.delete202RetryInvalidHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete202RetryInvalidHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4888,9 +5021,11 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.deleteAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context));
+                        service.deleteAsyncRelativeRetryInvalidHeader(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4908,7 +5043,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryInvalidHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4997,10 +5133,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.deleteAsyncRelativeRetryInvalidJsonPolling(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5018,7 +5155,9 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRelativeRetryInvalidJsonPolling(
+                this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5124,8 +5263,9 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202RetryInvalidHeaderWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.post202RetryInvalidHeader(this.client.getHost(), requestOptions, context));
+                context -> service.post202RetryInvalidHeader(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5161,7 +5301,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202RetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.post202RetryInvalidHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post202RetryInvalidHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5319,8 +5460,11 @@ public final class LrosaDsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidHeaderWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.postAsyncRelativeRetryInvalidHeader(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5356,7 +5500,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRelativeRetryInvalidHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryInvalidHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5517,10 +5662,11 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postAsyncRelativeRetryInvalidJsonPolling(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5557,7 +5703,8 @@ public final class LrosaDsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRelativeRetryInvalidJsonPolling(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
