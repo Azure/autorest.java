@@ -16,7 +16,8 @@ jobs:
       NodeVersion: '14.x'
 
     pool:
-      vmImage: ubuntu-latest
+      name: "azsdk-pool-mms-ubuntu-2004-general"
+      vmImage: "MMSUbuntu20.04"
 
     steps:
       - task: NodeTool@0
