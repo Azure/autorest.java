@@ -121,7 +121,7 @@ public class ProtocolExampleWriter {
                             if (elements != null) {
                                 IType elementType = ((GenericType) proxyMethodParameter.getClientType()).getTypeArguments()[0];
                                 String exampleValue = String.format(
-                                        "Arrays.asList(%s);",
+                                        "Arrays.asList(%s)",
                                         elements.stream().map(value -> elementType.defaultValueExpression(value.toString())).collect(Collectors.joining(", ")));
                                 params.set(parameterIndex, exampleValue);
                             }
