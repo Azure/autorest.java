@@ -62,7 +62,6 @@ public class DotSalmon extends DotFish {
      * Set the iswild property: The iswild property.
      *
      * @param iswild the iswild value to set.
-     * @return the DotSalmon object itself.
      */
     public void setWild(Boolean iswild) {
         this.isWild = iswild;

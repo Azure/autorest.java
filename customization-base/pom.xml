@@ -29,6 +29,10 @@
     </repository>
   </repositories>
 
+  <properties>
+    <codesnippet.skip>false</codesnippet.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -75,31 +79,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <source>8</source>
-          <detectJavaApiLink>false</detectJavaApiLink>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.azure.tools</groupId>
-        <artifactId>codesnippet-maven-plugin</artifactId>
-        <version>1.0.0-beta.6</version>
-        <executions>
-          <execution>
-            <id>update-codesnippets</id>
-            <goals>
-              <goal>update-codesnippet</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>
