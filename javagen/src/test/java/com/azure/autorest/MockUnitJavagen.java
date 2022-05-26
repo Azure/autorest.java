@@ -12,10 +12,17 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
-public class MockUnitJavagen extends Javagen{
+public class MockUnitJavagen extends Javagen {
+
+    public static class MockConnection extends Connection {
+
+        public MockConnection() {
+            super(null, null);
+        }
+    }
 
     public MockUnitJavagen() {
-        super(new Connection(System.out, System.in), "dummy", "dummy");
+        super(new MockConnection(), "dummy", "dummy");
         JavaSettingsAccessor.setHost(this);
     }
 

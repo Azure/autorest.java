@@ -35,6 +35,13 @@ import java.util.Map;
 
 public class TestUtils {
 
+    public static class MockConnection extends Connection {
+
+        public MockConnection() {
+            super(null, null);
+        }
+    }
+
     public static class MockFluentGen extends FluentGen {
 
         private static final Map<String, Object> DEFAULT_SETTINGS = new HashMap<>();
@@ -57,14 +64,14 @@ public class TestUtils {
         private Javagen javagen;
 
         public MockFluentGen() {
-            super(new Connection(System.out, System.in), "dummy", "dummy");
+            super(new MockConnection(), "dummy", "dummy");
             instance = this;
 
             JavaSettingsAccessor.setHost(this);
 
             FluentStatic.setFluentJavaSettings(new FluentJavaSettings(this));
 
-            javagen = new MockJavagen();
+            javagen = new MockJavagen(this.connection);
         }
 
         @Override

@@ -127,7 +127,7 @@ public final class ClassCustomization extends CodeCustomization {
             lastSymbolLine = lastSymbol.get().getLocation().getRange().getStart().getLine();
             indentAmount = Utils.getIndent(editor.getFileLine(fileName, lastSymbolLine)).length();
         }
-        System.out.println("indent amount " + indentAmount);
+//        System.out.println("indent amount " + indentAmount);
 
         // start the static block from the next line of the last field or the line after class declaration
         int staticBlockStartLine = lastSymbolLine + 1;
