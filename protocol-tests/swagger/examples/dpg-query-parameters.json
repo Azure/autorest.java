@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "parameter_int": 17,
+    "parameter_boolean": true,
+    "parameter_csv_string_array": [
+      "one",
+      "two",
+      "three"
+    ],
+    "parameter_csv_int_array": "1,2,3",
+    "parameter_multi_string_array": [
+      "four",
+      "five"
+    ],
+    "parameter_multi_int_array": [
+      4,
+      5
+    ],
+    "parameter_multi_enum_array": "gamma,beta",
+    "parameter_datetime": "1985-04-12T23:20:50Z",
+    "parameter_optional_csv_int_array": "6,7,8",
+    "parameter_optional_multi_int_array": [
+      9,
+      10
+    ]
+  },
+  "responses": {
+    "200": {
+
+    }
+  }
+}

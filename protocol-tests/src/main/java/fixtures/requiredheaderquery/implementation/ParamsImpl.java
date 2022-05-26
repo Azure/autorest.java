@@ -23,6 +23,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -82,6 +83,7 @@ public final class ParamsImpl {
                         List<String> parameterMultiIntArray,
                 @QueryParam(value = "parameter_multi_enum_array", multipleQueryParams = true)
                         List<String> parameterMultiEnumArray,
+                @QueryParam("parameter_datetime") OffsetDateTime parameterDatetime,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -104,7 +106,7 @@ public final class ParamsImpl {
                 @HeaderParam("parameter_boolean") boolean parameterBoolean,
                 @HeaderParam("parameter_csv_string_array") String parameterCsvStringArray,
                 @HeaderParam("parameter_csv_int_array") String parameterCsvIntArray,
-                @HeaderParam("parameter_datetime") OffsetDateTime parameterDatetime,
+                @HeaderParam("parameter_datetime") DateTimeRfc1123 parameterDatetime,
                 @HeaderParam("parameter_duration") Duration parameterDuration,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -119,6 +121,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -134,6 +138,7 @@ public final class ParamsImpl {
      * @param parameterMultiStringArray The array of string collect by multi.
      * @param parameterMultiIntArray The array of integer collect by multi.
      * @param parameterMultiEnumArray The array of enum collect by multi.
+     * @param parameterDatetime The datetime parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -150,6 +155,7 @@ public final class ParamsImpl {
             List<String> parameterMultiStringArray,
             List<Integer> parameterMultiIntArray,
             List<String> parameterMultiEnumArray,
+            OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
@@ -175,6 +181,7 @@ public final class ParamsImpl {
                                 parameterMultiStringArrayConverted,
                                 parameterMultiIntArrayConverted,
                                 parameterMultiEnumArrayConverted,
+                                parameterDatetime,
                                 accept,
                                 requestOptions,
                                 context));
@@ -188,6 +195,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -203,6 +212,7 @@ public final class ParamsImpl {
      * @param parameterMultiStringArray The array of string collect by multi.
      * @param parameterMultiIntArray The array of integer collect by multi.
      * @param parameterMultiEnumArray The array of enum collect by multi.
+     * @param parameterDatetime The datetime parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -220,6 +230,7 @@ public final class ParamsImpl {
             List<String> parameterMultiStringArray,
             List<Integer> parameterMultiIntArray,
             List<String> parameterMultiEnumArray,
+            OffsetDateTime parameterDatetime,
             RequestOptions requestOptions,
             Context context) {
         final String accept = "application/json";
@@ -244,6 +255,7 @@ public final class ParamsImpl {
                 parameterMultiStringArrayConverted,
                 parameterMultiIntArrayConverted,
                 parameterMultiEnumArrayConverted,
+                parameterDatetime,
                 accept,
                 requestOptions,
                 context);
@@ -257,6 +269,8 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -272,6 +286,7 @@ public final class ParamsImpl {
      * @param parameterMultiStringArray The array of string collect by multi.
      * @param parameterMultiIntArray The array of integer collect by multi.
      * @param parameterMultiEnumArray The array of enum collect by multi.
+     * @param parameterDatetime The datetime parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -288,6 +303,7 @@ public final class ParamsImpl {
             List<String> parameterMultiStringArray,
             List<Integer> parameterMultiIntArray,
             List<String> parameterMultiEnumArray,
+            OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
         return getRequiredQueryParamWithResponseAsync(
                         parameterInt,
@@ -297,6 +313,7 @@ public final class ParamsImpl {
                         parameterMultiStringArray,
                         parameterMultiIntArray,
                         parameterMultiEnumArray,
+                        parameterDatetime,
                         requestOptions)
                 .block();
     }
@@ -346,6 +363,7 @@ public final class ParamsImpl {
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+        DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return FluxUtil.withContext(
                 context ->
                         service.getRequiredHeader(
@@ -354,7 +372,7 @@ public final class ParamsImpl {
                                 parameterBoolean,
                                 parameterCsvStringArrayConverted,
                                 parameterCsvIntArrayConverted,
-                                parameterDatetime,
+                                parameterDatetimeConverted,
                                 parameterDuration,
                                 accept,
                                 requestOptions,
@@ -408,13 +426,14 @@ public final class ParamsImpl {
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+        DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return service.getRequiredHeader(
                 this.client.getHost(),
                 parameterInt,
                 parameterBoolean,
                 parameterCsvStringArrayConverted,
                 parameterCsvIntArrayConverted,
-                parameterDatetime,
+                parameterDatetimeConverted,
                 parameterDuration,
                 accept,
                 requestOptions,
