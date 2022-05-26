@@ -103,6 +103,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
+        if(!hasOptionalParameters(parameters)) {
+            return;
+        }
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
@@ -119,6 +122,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
         }
         commentBlock.line("</table>");
+    }
+
+    private static boolean hasOptionalParameters(List<ProxyMethodParameter> parameters) {
+        return parameters.stream().anyMatch(parameter -> !parameter.getIsRequired());
     }
 
     private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {

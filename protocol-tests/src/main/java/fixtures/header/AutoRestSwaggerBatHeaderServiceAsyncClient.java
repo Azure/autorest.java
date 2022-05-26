@@ -37,13 +37,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -77,13 +70,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -119,13 +105,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -143,13 +122,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header value "value": 1 or -2.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -170,13 +142,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -194,13 +159,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header value "value": 105 or -2.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -221,13 +179,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -245,13 +196,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -272,13 +216,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -296,13 +233,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -322,13 +252,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -346,13 +269,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header value "value": true or false.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -398,13 +314,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -424,13 +333,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -448,13 +350,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -475,13 +370,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -500,13 +388,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -552,13 +433,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -576,13 +450,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
@@ -603,13 +470,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -628,13 +488,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -652,13 +505,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -702,13 +548,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Get a response with header values "GREY" or null.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
