@@ -1,9 +1,12 @@
 package fixtures.mediatypes;
 
 import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.nio.charset.StandardCharsets;
 
 public class MediaTypesTests {
     private static MediaTypesAsyncClient asyncClient;
@@ -31,5 +34,12 @@ public class MediaTypesTests {
         requestOptions.addHeader("Content-Length", "3");
         requestOptions.setBody(BinaryData.fromString("PDF"));
         client.analyzeBodyWithResponse(requestOptions);
+    }
+
+    @Test
+    public void binaryBodyWithTwoContentTypes() {
+        RequestOptions requestOptions = new RequestOptions();
+        Response<BinaryData> response = client.binaryBodyWithTwoContentTypesWithResponse("application/octet-stream", BinaryData.fromBytes("Hello World!".getBytes(StandardCharsets.UTF_8)), 12L, requestOptions);
+        System.out.println(response.getValue());
     }
 }

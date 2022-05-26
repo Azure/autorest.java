@@ -133,15 +133,6 @@ public final class MediaTypesAsyncClient {
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -173,15 +164,6 @@ public final class MediaTypesAsyncClient {
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     *     <tr><td>Content-Length</td><td>long</td><td>Yes</td><td>The contentLength parameter</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -211,14 +193,6 @@ public final class MediaTypesAsyncClient {
 
     /**
      * Body that's either text/plain or application/json.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Upload file type</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
