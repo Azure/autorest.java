@@ -207,13 +207,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -494,13 +487,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -535,13 +521,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *

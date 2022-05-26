@@ -125,12 +125,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static boolean hasOptionalParameters(List<ProxyMethodParameter> parameters) {
-        for (ProxyMethodParameter parameter : parameters) {
-            if (!parameter.getIsRequired()) {
-                return true;
-            }
-        }
-        return false;
+        return parameters.stream().anyMatch(parameter -> !parameter.getIsRequired());
     }
 
     private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {
