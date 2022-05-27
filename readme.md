@@ -72,14 +72,14 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. Default is false.|
-|`--skip-formatting`|Indicates whether to skip formatting Java file. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
+|`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 |`--service-name`|Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).|
 |`--partial-update`|Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.|
 |`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
-|`--default-http-exception-type`|Indicates the fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
+|`--default-http-exception-type`|The fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
-|`--http-status-code-to-exception-type-mapping`|Indicates the HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
+|`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
 |`--custom-strongly-typed-header-deserialization`|Indicates whether strongly-typed HTTP header objects will use custom desrialization instead of Jackson Databind's convertValue method, providing substantial performance benefits.|
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
 
