@@ -133,9 +133,7 @@ public final class DpgAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     url: String
-     * }
+     * Flux<ByteBuffer>
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -144,6 +142,7 @@ public final class DpgAsyncClient {
      * Object
      * }</pre>
      *
+     * @param contentLength The contentLength parameter.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -155,8 +154,9 @@ public final class DpgAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return this.serviceClient.postParametersWithResponseAsync(parameter, requestOptions);
+    public Mono<Response<BinaryData>> postParametersWithResponse(
+            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+        return this.serviceClient.postParametersWithResponseAsync(contentLength, parameter, requestOptions);
     }
 
     /**

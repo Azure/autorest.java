@@ -189,8 +189,8 @@ public final class MediaTypesClientImpl {
         Mono<Response<BinaryData>> binaryBodyWithTwoContentTypes(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
                 @HeaderParam("Content-Length") long contentLength,
+                @BodyParam("application/octet-stream") BinaryData message,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -210,8 +210,8 @@ public final class MediaTypesClientImpl {
         Mono<Response<BinaryData>> binaryBodyWithThreeContentTypes(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
                 @HeaderParam("Content-Length") long contentLength,
+                @BodyParam("application/octet-stream") BinaryData message,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -547,8 +547,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -558,12 +558,12 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
         final String accept = "text/plain";
         return FluxUtil.withContext(
                 context ->
                         service.binaryBodyWithTwoContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, requestOptions, context));
+                                this.getHost(), contentType, contentLength, message, accept, requestOptions, context));
     }
 
     /**
@@ -583,8 +583,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -596,13 +596,13 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponseAsync(
             String contentType,
-            BinaryData message,
             long contentLength,
+            BinaryData message,
             RequestOptions requestOptions,
             Context context) {
         final String accept = "text/plain";
         return service.binaryBodyWithTwoContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, requestOptions, context);
+                this.getHost(), contentType, contentLength, message, accept, requestOptions, context);
     }
 
     /**
@@ -622,8 +622,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -633,8 +633,8 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
-        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, requestOptions)
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
+        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, contentLength, message, requestOptions)
                 .block();
     }
 
@@ -655,8 +655,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -666,12 +666,12 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
         final String accept = "text/plain";
         return FluxUtil.withContext(
                 context ->
                         service.binaryBodyWithThreeContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, requestOptions, context));
+                                this.getHost(), contentType, contentLength, message, accept, requestOptions, context));
     }
 
     /**
@@ -691,8 +691,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -704,13 +704,13 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponseAsync(
             String contentType,
-            BinaryData message,
             long contentLength,
+            BinaryData message,
             RequestOptions requestOptions,
             Context context) {
         final String accept = "text/plain";
         return service.binaryBodyWithThreeContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, requestOptions, context);
+                this.getHost(), contentType, contentLength, message, accept, requestOptions, context);
     }
 
     /**
@@ -730,8 +730,8 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -741,8 +741,8 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
-        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, requestOptions)
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
+        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, contentLength, message, requestOptions)
                 .block();
     }
 

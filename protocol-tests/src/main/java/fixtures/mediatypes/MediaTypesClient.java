@@ -144,8 +144,8 @@ public final class MediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,9 +156,9 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
         return this.client
-                .binaryBodyWithTwoContentTypesWithResponse(contentType, message, contentLength, requestOptions)
+                .binaryBodyWithTwoContentTypesWithResponse(contentType, contentLength, message, requestOptions)
                 .block();
     }
 
@@ -179,8 +179,8 @@ public final class MediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param message The payload body.
      * @param contentLength The contentLength parameter.
+     * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -191,9 +191,9 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
         return this.client
-                .binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, requestOptions)
+                .binaryBodyWithThreeContentTypesWithResponse(contentType, contentLength, message, requestOptions)
                 .block();
     }
 

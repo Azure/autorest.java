@@ -126,7 +126,8 @@ public final class ParamsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postParameters(
                 @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData parameter,
+                @HeaderParam("Content-Length") long contentLength,
+                @BodyParam("image/jpeg") BinaryData parameter,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -476,9 +477,7 @@ public final class ParamsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     url: String
-     * }
+     * Flux<ByteBuffer>
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -487,6 +486,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentLength The contentLength parameter.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -498,10 +498,12 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            BinaryData parameter, RequestOptions requestOptions) {
+            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postParameters(this.client.getHost(), parameter, accept, requestOptions, context));
+                context ->
+                        service.postParameters(
+                                this.client.getHost(), contentLength, parameter, accept, requestOptions, context));
     }
 
     /**
@@ -510,9 +512,7 @@ public final class ParamsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     url: String
-     * }
+     * Flux<ByteBuffer>
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -521,6 +521,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentLength The contentLength parameter.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -533,9 +534,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            BinaryData parameter, RequestOptions requestOptions, Context context) {
+            long contentLength, BinaryData parameter, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.postParameters(this.client.getHost(), parameter, accept, requestOptions, context);
+        return service.postParameters(this.client.getHost(), contentLength, parameter, accept, requestOptions, context);
     }
 
     /**
@@ -544,9 +545,7 @@ public final class ParamsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     url: String
-     * }
+     * Flux<ByteBuffer>
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -555,6 +554,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentLength The contentLength parameter.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -565,8 +565,9 @@ public final class ParamsImpl {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(parameter, requestOptions).block();
+    public Response<BinaryData> postParametersWithResponse(
+            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+        return postParametersWithResponseAsync(contentLength, parameter, requestOptions).block();
     }
 
     /**
