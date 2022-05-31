@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -37,15 +38,20 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         commentBlock.description(clientMethod.getDescription());
 
         if (clientMethod.getProxyMethod() != null) {
-            List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters()
-                    .stream().filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
+            List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters().stream()
+                    .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
+                    // ignore if synthesized by modelerfour, i.e. api-version
+                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
                     .collect(Collectors.toList());
             if (!queryParameters.isEmpty()) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
             }
 
-            List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
-                    .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
+            List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters().stream()
+                    .filter(p -> RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
+                    // ignore if synthesized by modelerfour and is constant
+                    // we would want user to provide a correct "content-type" if it is not a constant
+                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE || !p.getIsConstant())
                     .collect(Collectors.toList());
             if (!headerParameters.isEmpty()) {
                 optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
@@ -62,7 +68,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
             // Response body
             IType responseBodyType;
-            if (JavaSettings.getInstance().isLowLevelClient()) {
+            if (JavaSettings.getInstance().isDataPlaneClient()) {
                 responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
             } else {
                 responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
@@ -97,19 +103,29 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
+        if(!hasOptionalParameters(parameters)) {
+            return;
+        }
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
         commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>");
         for (ProxyMethodParameter parameter : parameters) {
-            commentBlock.line(String.format(
-                    "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                    parameter.getRequestParameterName(),
-                    CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
-                    parameter.getIsRequired() ? "Yes" : "No",
-                    parameterDescriptionOrDefault(parameter)));
+            if (!parameter.getIsRequired()) {
+                commentBlock.line(String.format(
+                        "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                        parameter.getRequestParameterName(),
+                        CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
+                        parameter.getIsRequired() ? "Yes" : "No",
+                        parameterDescriptionOrDefault(parameter)));
+            }
+
         }
         commentBlock.line("</table>");
+    }
+
+    private static boolean hasOptionalParameters(List<ProxyMethodParameter> parameters) {
+        return parameters.stream().anyMatch(parameter -> !parameter.getIsRequired());
     }
 
     private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {

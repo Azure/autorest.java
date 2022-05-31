@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTraitMethod;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
@@ -198,10 +199,16 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     comment.line(serviceClientProperty.getDescription());
                 });
                 addGeneratedAnnotation(classBlock);
-                classBlock.privateMemberVariable(String.format("%1$s%2$s %3$s",
+                String propertyVariableInit = String.format("%1$s%2$s %3$s",
                         serviceClientProperty.isReadOnly() ? "final " : "",
                         serviceClientProperty.getType(),
-                        serviceClientProperty.getName()));
+                        serviceClientProperty.getName());
+                if (serviceClientProperty.getDefaultValueExpression() != null
+                        && serviceClientProperty.getType() instanceof PrimitiveType) {
+                    // init to default value
+                    propertyVariableInit += String.format(" = %1$s", serviceClientProperty.getDefaultValueExpression());
+                }
+                classBlock.privateMemberVariable(propertyVariableInit);
 
                 if (!serviceClientProperty.isReadOnly()) {
                     classBlock.javadocComment(comment ->
@@ -246,9 +253,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 allProperties.addAll(clientProperties);
 
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
-                    if (serviceClientProperty.getDefaultValueExpression() != null) {
-                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
-                        {
+                    if (serviceClientProperty.getDefaultValueExpression() != null
+                            && !(serviceClientProperty.getType() instanceof PrimitiveType)) {
+                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock -> {
                             function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
                         });
                     }
@@ -264,7 +271,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 }
 
                 final String serializerExpression;
-                if (settings.isLowLevelClient()) {
+                if (settings.isDataPlaneClient()) {
                     serializerExpression = JACKSON_SERIALIZER;
                 } else {
                     serializerExpression = getSerializerMemberName();
@@ -372,7 +379,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                               String buildMethodName, boolean wrapServiceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
-                && settings.isLowLevelClient()
+                && settings.isDataPlaneClient()
                 && asyncClient != null;
         if (syncClientWrapAsync) {
             writeSyncClientBuildMethodFromAsyncClient(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
@@ -524,7 +531,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         }
 
         // Low-level client does not need serializer. It returns BinaryData.
-        if (!settings.isLowLevelClient()) {
+        if (!settings.isDataPlaneClient()) {
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
                     ClassType.SerializerAdapter, getSerializerMemberName(), false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));

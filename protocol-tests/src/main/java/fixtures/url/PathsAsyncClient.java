@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.PathsImpl;
+import java.time.OffsetDateTime;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestUrlTestServiceClient type. */
@@ -324,7 +326,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteMultiByteWithResponseAsync(bytePath, requestOptions);
     }
 
@@ -357,7 +359,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteNullWithResponseAsync(bytePath, requestOptions);
     }
 
@@ -425,7 +427,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponseAsync(dateTimePath, requestOptions);
     }
 
@@ -443,7 +445,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         return this.serviceClient.base64UrlWithResponseAsync(base64UrlPath, requestOptions);
     }
 
@@ -462,7 +464,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         return this.serviceClient.arrayCsvInPathWithResponseAsync(arrayPath, requestOptions);
     }
 

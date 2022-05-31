@@ -14,6 +14,8 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import java.time.Duration;
+import java.time.OffsetDateTime;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class)
@@ -33,14 +35,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>User-Agent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
-     * </table>
-     *
+     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -50,8 +45,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
-        return this.client.paramExistingKeyWithResponse(requestOptions).block();
+    public Response<Void> paramExistingKeyWithResponse(String userAgent, RequestOptions requestOptions) {
+        return this.client.paramExistingKeyWithResponse(userAgent, requestOptions).block();
     }
 
     /**
@@ -73,14 +68,7 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
-     * </table>
-     *
+     * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,8 +78,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return this.client.paramProtectedKeyWithResponse(requestOptions).block();
+    public Response<Void> paramProtectedKeyWithResponse(String contentType, RequestOptions requestOptions) {
+        return this.client.paramProtectedKeyWithResponse(contentType, requestOptions).block();
     }
 
     /**
@@ -113,15 +101,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -131,21 +112,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
-        return this.client.paramIntegerWithResponse(requestOptions).block();
+    public Response<Void> paramIntegerWithResponse(String scenario, int value, RequestOptions requestOptions) {
+        return this.client.paramIntegerWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 1 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -155,23 +129,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
-        return this.client.responseIntegerWithResponse(requestOptions).block();
+    public Response<Void> responseIntegerWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseIntegerWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -181,21 +148,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
-        return this.client.paramLongWithResponse(requestOptions).block();
+    public Response<Void> paramLongWithResponse(String scenario, long value, RequestOptions requestOptions) {
+        return this.client.paramLongWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 105 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -205,23 +165,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
-        return this.client.responseLongWithResponse(requestOptions).block();
+    public Response<Void> responseLongWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseLongWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -231,21 +184,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
-        return this.client.paramFloatWithResponse(requestOptions).block();
+    public Response<Void> paramFloatWithResponse(String scenario, float value, RequestOptions requestOptions) {
+        return this.client.paramFloatWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -255,23 +201,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
-        return this.client.responseFloatWithResponse(requestOptions).block();
+    public Response<Void> responseFloatWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseFloatWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -281,21 +220,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
-        return this.client.paramDoubleWithResponse(requestOptions).block();
+    public Response<Void> paramDoubleWithResponse(String scenario, double value, RequestOptions requestOptions) {
+        return this.client.paramDoubleWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -305,22 +237,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
-        return this.client.responseDoubleWithResponse(requestOptions).block();
+    public Response<Void> responseDoubleWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseDoubleWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -330,21 +255,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
-        return this.client.paramBoolWithResponse(requestOptions).block();
+    public Response<Void> paramBoolWithResponse(String scenario, boolean value, RequestOptions requestOptions) {
+        return this.client.paramBoolWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": true or false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -354,8 +272,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
-        return this.client.responseBoolWithResponse(requestOptions).block();
+    public Response<Void> responseBoolWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseBoolWithResponse(scenario, requestOptions).block();
     }
 
     /**
@@ -367,10 +285,10 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -380,21 +298,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
-        return this.client.paramStringWithResponse(requestOptions).block();
+    public Response<Void> paramStringWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.paramStringWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -405,23 +316,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
-        return this.client.responseStringWithResponse(requestOptions).block();
+    public Response<Void> responseStringWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseStringWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -431,21 +335,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
-        return this.client.paramDateWithResponse(requestOptions).block();
+    public Response<Void> paramDateWithResponse(String scenario, String value, RequestOptions requestOptions) {
+        return this.client.paramDateWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -455,23 +352,16 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
-        return this.client.responseDateWithResponse(requestOptions).block();
+    public Response<Void> responseDateWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseDateWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -481,21 +371,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.client.paramDatetimeWithResponse(requestOptions).block();
+    public Response<Void> paramDatetimeWithResponse(
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
+        return this.client.paramDatetimeWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -506,8 +390,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
-        return this.client.responseDatetimeWithResponse(requestOptions).block();
+    public Response<Void> responseDatetimeWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseDatetimeWithResponse(scenario, requestOptions).block();
     }
 
     /**
@@ -519,10 +403,10 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -532,21 +416,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.client.paramDatetimeRfc1123WithResponse(requestOptions).block();
+    public Response<Void> paramDatetimeRfc1123WithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.paramDatetimeRfc1123WithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -557,22 +434,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.client.responseDatetimeRfc1123WithResponse(requestOptions).block();
+    public Response<Void> responseDatetimeRfc1123WithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseDatetimeRfc1123WithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -582,21 +452,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
-        return this.client.paramDurationWithResponse(requestOptions).block();
+    public Response<Void> paramDurationWithResponse(String scenario, Duration value, RequestOptions requestOptions) {
+        return this.client.paramDurationWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -606,22 +469,15 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
-        return this.client.responseDurationWithResponse(requestOptions).block();
+    public Response<Void> responseDurationWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseDurationWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -631,21 +487,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
-        return this.client.paramByteWithResponse(requestOptions).block();
+    public Response<Void> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
+        return this.client.paramByteWithResponse(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -655,8 +504,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
-        return this.client.responseByteWithResponse(requestOptions).block();
+    public Response<Void> responseByteWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseByteWithResponse(scenario, requestOptions).block();
     }
 
     /**
@@ -667,10 +516,10 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -680,21 +529,14 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
-        return this.client.paramEnumWithResponse(requestOptions).block();
+    public Response<Void> paramEnumWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.paramEnumWithResponse(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "GREY" or null.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -704,8 +546,8 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
-        return this.client.responseEnumWithResponse(requestOptions).block();
+    public Response<Void> responseEnumWithResponse(String scenario, RequestOptions requestOptions) {
+        return this.client.responseEnumWithResponse(scenario, requestOptions).block();
     }
 
     /**

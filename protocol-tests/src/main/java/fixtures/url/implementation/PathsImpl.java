@@ -6,6 +6,7 @@ package fixtures.url.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -20,8 +21,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Url;
+import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import java.time.OffsetDateTime;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Paths. */
@@ -64,6 +71,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getBooleanTrue(
                 @HostParam("$host") String host,
                 @PathParam("boolPath") boolean boolPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -82,6 +90,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getBooleanFalse(
                 @HostParam("$host") String host,
                 @PathParam("boolPath") boolean boolPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -100,6 +109,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getIntOneMillion(
                 @HostParam("$host") String host,
                 @PathParam("intPath") int intPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -118,6 +128,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getIntNegativeOneMillion(
                 @HostParam("$host") String host,
                 @PathParam("intPath") int intPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -136,6 +147,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getTenBillion(
                 @HostParam("$host") String host,
                 @PathParam("longPath") long longPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -154,6 +166,7 @@ public final class PathsImpl {
         Mono<Response<Void>> getNegativeTenBillion(
                 @HostParam("$host") String host,
                 @PathParam("longPath") long longPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -172,6 +185,7 @@ public final class PathsImpl {
         Mono<Response<Void>> floatScientificPositive(
                 @HostParam("$host") String host,
                 @PathParam("floatPath") float floatPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -190,6 +204,7 @@ public final class PathsImpl {
         Mono<Response<Void>> floatScientificNegative(
                 @HostParam("$host") String host,
                 @PathParam("floatPath") float floatPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -208,6 +223,7 @@ public final class PathsImpl {
         Mono<Response<Void>> doubleDecimalPositive(
                 @HostParam("$host") String host,
                 @PathParam("doublePath") double doublePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -226,6 +242,7 @@ public final class PathsImpl {
         Mono<Response<Void>> doubleDecimalNegative(
                 @HostParam("$host") String host,
                 @PathParam("doublePath") double doublePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -244,6 +261,7 @@ public final class PathsImpl {
         Mono<Response<Void>> stringUnicode(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -262,6 +280,7 @@ public final class PathsImpl {
         Mono<Response<Void>> stringUrlEncoded(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -280,6 +299,7 @@ public final class PathsImpl {
         Mono<Response<Void>> stringUrlNonEncoded(
                 @HostParam("$host") String host,
                 @PathParam(value = "stringPath", encoded = true) String stringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -298,6 +318,7 @@ public final class PathsImpl {
         Mono<Response<Void>> stringEmpty(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -316,6 +337,7 @@ public final class PathsImpl {
         Mono<Response<Void>> stringNull(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -334,6 +356,7 @@ public final class PathsImpl {
         Mono<Response<Void>> enumValid(
                 @HostParam("$host") String host,
                 @PathParam("enumPath") String enumPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -352,6 +375,7 @@ public final class PathsImpl {
         Mono<Response<Void>> enumNull(
                 @HostParam("$host") String host,
                 @PathParam("enumPath") String enumPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -370,6 +394,7 @@ public final class PathsImpl {
         Mono<Response<Void>> byteMultiByte(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -388,6 +413,7 @@ public final class PathsImpl {
         Mono<Response<Void>> byteEmpty(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -406,6 +432,7 @@ public final class PathsImpl {
         Mono<Response<Void>> byteNull(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -424,6 +451,7 @@ public final class PathsImpl {
         Mono<Response<Void>> dateValid(
                 @HostParam("$host") String host,
                 @PathParam("datePath") String datePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -442,6 +470,7 @@ public final class PathsImpl {
         Mono<Response<Void>> dateNull(
                 @HostParam("$host") String host,
                 @PathParam("datePath") String datePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -459,7 +488,8 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeValid(
                 @HostParam("$host") String host,
-                @PathParam("dateTimePath") String dateTimePath,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -477,7 +507,8 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeNull(
                 @HostParam("$host") String host,
-                @PathParam("dateTimePath") String dateTimePath,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -495,7 +526,8 @@ public final class PathsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64Url(
                 @HostParam("$host") String host,
-                @PathParam("base64UrlPath") String base64UrlPath,
+                @PathParam("base64UrlPath") Base64Url base64UrlPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -515,6 +547,7 @@ public final class PathsImpl {
         Mono<Response<Void>> arrayCsvInPath(
                 @HostParam("$host") String host,
                 @PathParam("arrayPath") String arrayPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -533,6 +566,7 @@ public final class PathsImpl {
         Mono<Response<Void>> unixTimeUrl(
                 @HostParam("$host") String host,
                 @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -550,8 +584,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions) {
         final boolean boolPath = true;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanTrue(this.client.getHost(), boolPath, requestOptions, context));
+                context -> service.getBooleanTrue(this.client.getHost(), boolPath, accept, requestOptions, context));
     }
 
     /**
@@ -568,7 +603,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions, Context context) {
         final boolean boolPath = true;
-        return service.getBooleanTrue(this.client.getHost(), boolPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getBooleanTrue(this.client.getHost(), boolPath, accept, requestOptions, context);
     }
 
     /**
@@ -599,8 +635,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions) {
         final boolean boolPath = false;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanFalse(this.client.getHost(), boolPath, requestOptions, context));
+                context -> service.getBooleanFalse(this.client.getHost(), boolPath, accept, requestOptions, context));
     }
 
     /**
@@ -617,7 +654,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions, Context context) {
         final boolean boolPath = false;
-        return service.getBooleanFalse(this.client.getHost(), boolPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getBooleanFalse(this.client.getHost(), boolPath, accept, requestOptions, context);
     }
 
     /**
@@ -648,8 +686,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions) {
         final int intPath = 1000000;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), intPath, requestOptions, context));
+                context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context));
     }
 
     /**
@@ -666,7 +705,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions, Context context) {
         final int intPath = 1000000;
-        return service.getIntOneMillion(this.client.getHost(), intPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context);
     }
 
     /**
@@ -697,8 +737,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(RequestOptions requestOptions) {
         final int intPath = -1000000;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntNegativeOneMillion(this.client.getHost(), intPath, requestOptions, context));
+                context ->
+                        service.getIntNegativeOneMillion(
+                                this.client.getHost(), intPath, accept, requestOptions, context));
     }
 
     /**
@@ -716,7 +759,8 @@ public final class PathsImpl {
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final int intPath = -1000000;
-        return service.getIntNegativeOneMillion(this.client.getHost(), intPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getIntNegativeOneMillion(this.client.getHost(), intPath, accept, requestOptions, context);
     }
 
     /**
@@ -747,8 +791,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions) {
         final long longPath = 10000000000L;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getTenBillion(this.client.getHost(), longPath, requestOptions, context));
+                context -> service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context));
     }
 
     /**
@@ -765,7 +810,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
         final long longPath = 10000000000L;
-        return service.getTenBillion(this.client.getHost(), longPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context);
     }
 
     /**
@@ -796,8 +842,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions) {
         final long longPath = -10000000000L;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNegativeTenBillion(this.client.getHost(), longPath, requestOptions, context));
+                context ->
+                        service.getNegativeTenBillion(
+                                this.client.getHost(), longPath, accept, requestOptions, context));
     }
 
     /**
@@ -814,7 +863,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
         final long longPath = -10000000000L;
-        return service.getNegativeTenBillion(this.client.getHost(), longPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.getNegativeTenBillion(this.client.getHost(), longPath, accept, requestOptions, context);
     }
 
     /**
@@ -845,8 +895,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(RequestOptions requestOptions) {
         final float floatPath = 103400000000000000000f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificPositive(this.client.getHost(), floatPath, requestOptions, context));
+                context ->
+                        service.floatScientificPositive(
+                                this.client.getHost(), floatPath, accept, requestOptions, context));
     }
 
     /**
@@ -864,7 +917,8 @@ public final class PathsImpl {
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final float floatPath = 103400000000000000000f;
-        return service.floatScientificPositive(this.client.getHost(), floatPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.floatScientificPositive(this.client.getHost(), floatPath, accept, requestOptions, context);
     }
 
     /**
@@ -895,8 +949,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(RequestOptions requestOptions) {
         final float floatPath = -1.034E-20f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificNegative(this.client.getHost(), floatPath, requestOptions, context));
+                context ->
+                        service.floatScientificNegative(
+                                this.client.getHost(), floatPath, accept, requestOptions, context));
     }
 
     /**
@@ -914,7 +971,8 @@ public final class PathsImpl {
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final float floatPath = -1.034E-20f;
-        return service.floatScientificNegative(this.client.getHost(), floatPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.floatScientificNegative(this.client.getHost(), floatPath, accept, requestOptions, context);
     }
 
     /**
@@ -945,8 +1003,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions) {
         final double doublePath = 9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalPositive(this.client.getHost(), doublePath, requestOptions, context));
+                context ->
+                        service.doubleDecimalPositive(
+                                this.client.getHost(), doublePath, accept, requestOptions, context));
     }
 
     /**
@@ -963,7 +1024,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions, Context context) {
         final double doublePath = 9999999.999;
-        return service.doubleDecimalPositive(this.client.getHost(), doublePath, requestOptions, context);
+        final String accept = "application/json";
+        return service.doubleDecimalPositive(this.client.getHost(), doublePath, accept, requestOptions, context);
     }
 
     /**
@@ -994,8 +1056,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions) {
         final double doublePath = -9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalNegative(this.client.getHost(), doublePath, requestOptions, context));
+                context ->
+                        service.doubleDecimalNegative(
+                                this.client.getHost(), doublePath, accept, requestOptions, context));
     }
 
     /**
@@ -1012,7 +1077,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions, Context context) {
         final double doublePath = -9999999.999;
-        return service.doubleDecimalNegative(this.client.getHost(), doublePath, requestOptions, context);
+        final String accept = "application/json";
+        return service.doubleDecimalNegative(this.client.getHost(), doublePath, accept, requestOptions, context);
     }
 
     /**
@@ -1044,8 +1110,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUnicode(this.client.getHost(), stringPath, requestOptions, context));
+                context -> service.stringUnicode(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
@@ -1063,7 +1130,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
-        return service.stringUnicode(this.client.getHost(), stringPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.stringUnicode(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1094,8 +1162,10 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions) {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUrlEncoded(this.client.getHost(), stringPath, requestOptions, context));
+                context ->
+                        service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
@@ -1112,7 +1182,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
-        return service.stringUrlEncoded(this.client.getHost(), stringPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1143,8 +1214,11 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync(RequestOptions requestOptions) {
         final String stringPath = "begin!*'();:@&=+$,end";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUrlNonEncoded(this.client.getHost(), stringPath, requestOptions, context));
+                context ->
+                        service.stringUrlNonEncoded(
+                                this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
@@ -1161,7 +1235,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "begin!*'();:@&=+$,end";
-        return service.stringUrlNonEncoded(this.client.getHost(), stringPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.stringUrlNonEncoded(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1192,8 +1267,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions) {
         final String stringPath = "";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringEmpty(this.client.getHost(), stringPath, requestOptions, context));
+                context -> service.stringEmpty(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
@@ -1210,7 +1286,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String stringPath = "";
-        return service.stringEmpty(this.client.getHost(), stringPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.stringEmpty(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1241,8 +1318,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringNull(this.client.getHost(), stringPath, requestOptions, context));
+                context -> service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
@@ -1260,7 +1338,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(
             String stringPath, RequestOptions requestOptions, Context context) {
-        return service.stringNull(this.client.getHost(), stringPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1293,8 +1372,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(String enumPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.enumValid(this.client.getHost(), enumPath, requestOptions, context));
+                context -> service.enumValid(this.client.getHost(), enumPath, accept, requestOptions, context));
     }
 
     /**
@@ -1313,7 +1393,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(
             String enumPath, RequestOptions requestOptions, Context context) {
-        return service.enumValid(this.client.getHost(), enumPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.enumValid(this.client.getHost(), enumPath, accept, requestOptions, context);
     }
 
     /**
@@ -1346,8 +1427,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(String enumPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.enumNull(this.client.getHost(), enumPath, requestOptions, context));
+                context -> service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context));
     }
 
     /**
@@ -1366,7 +1448,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(
             String enumPath, RequestOptions requestOptions, Context context) {
-        return service.enumNull(this.client.getHost(), enumPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context);
     }
 
     /**
@@ -1398,9 +1481,13 @@ public final class PathsImpl {
      *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponseAsync(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), bytePath, requestOptions, context));
+                context ->
+                        service.byteMultiByte(
+                                this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1418,8 +1505,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(
-            String bytePath, RequestOptions requestOptions, Context context) {
-        return service.byteMultiByte(this.client.getHost(), bytePath, requestOptions, context);
+            byte[] bytePath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteMultiByte(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1434,7 +1523,7 @@ public final class PathsImpl {
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return byteMultiByteWithResponseAsync(bytePath, requestOptions).block();
     }
 
@@ -1450,9 +1539,12 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String bytePath = "";
+        final byte[] bytePath = "".getBytes();
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteEmpty(this.client.getHost(), bytePath, requestOptions, context));
+                context ->
+                        service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1468,8 +1560,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String bytePath = "";
-        return service.byteEmpty(this.client.getHost(), bytePath, requestOptions, context);
+        final byte[] bytePath = "".getBytes();
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1499,9 +1593,11 @@ public final class PathsImpl {
      * @return null as byte array (should throw) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponseAsync(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), bytePath, requestOptions, context));
+                context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1518,8 +1614,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(
-            String bytePath, RequestOptions requestOptions, Context context) {
-        return service.byteNull(this.client.getHost(), bytePath, requestOptions, context);
+            byte[] bytePath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1534,7 +1632,7 @@ public final class PathsImpl {
      * @return null as byte array (should throw) along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return byteNullWithResponseAsync(bytePath, requestOptions).block();
     }
 
@@ -1551,8 +1649,9 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions) {
         final String datePath = "2012-01-01";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateValid(this.client.getHost(), datePath, requestOptions, context));
+                context -> service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context));
     }
 
     /**
@@ -1569,7 +1668,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions, Context context) {
         final String datePath = "2012-01-01";
-        return service.dateValid(this.client.getHost(), datePath, requestOptions, context);
+        final String accept = "application/json";
+        return service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context);
     }
 
     /**
@@ -1601,8 +1701,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(String datePath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateNull(this.client.getHost(), datePath, requestOptions, context));
+                context -> service.dateNull(this.client.getHost(), datePath, accept, requestOptions, context));
     }
 
     /**
@@ -1621,7 +1722,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(
             String datePath, RequestOptions requestOptions, Context context) {
-        return service.dateNull(this.client.getHost(), datePath, requestOptions, context);
+        final String accept = "application/json";
+        return service.dateNull(this.client.getHost(), datePath, accept, requestOptions, context);
     }
 
     /**
@@ -1653,9 +1755,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final String dateTimePath = "2012-01-01T01:01:01Z";
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateTimeValid(this.client.getHost(), dateTimePath, requestOptions, context));
+                context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
     }
 
     /**
@@ -1671,8 +1774,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String dateTimePath = "2012-01-01T01:01:01Z";
-        return service.dateTimeValid(this.client.getHost(), dateTimePath, requestOptions, context);
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
+        return service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context);
     }
 
     /**
@@ -1703,9 +1807,11 @@ public final class PathsImpl {
      *     {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponseAsync(String dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponseAsync(
+            OffsetDateTime dateTimePath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateTimeNull(this.client.getHost(), dateTimePath, requestOptions, context));
+                context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context));
     }
 
     /**
@@ -1723,8 +1829,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(
-            String dateTimePath, RequestOptions requestOptions, Context context) {
-        return service.dateTimeNull(this.client.getHost(), dateTimePath, requestOptions, context);
+            OffsetDateTime dateTimePath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context);
     }
 
     /**
@@ -1740,7 +1847,7 @@ public final class PathsImpl {
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return dateTimeNullWithResponseAsync(dateTimePath, requestOptions).block();
     }
 
@@ -1757,9 +1864,13 @@ public final class PathsImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponseAsync(String base64UrlPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return FluxUtil.withContext(
-                context -> service.base64Url(this.client.getHost(), base64UrlPath, requestOptions, context));
+                context ->
+                        service.base64Url(
+                                this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1777,8 +1888,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(
-            String base64UrlPath, RequestOptions requestOptions, Context context) {
-        return service.base64Url(this.client.getHost(), base64UrlPath, requestOptions, context);
+            byte[] base64UrlPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        return service.base64Url(this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1793,7 +1906,7 @@ public final class PathsImpl {
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+    public Response<Void> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         return base64UrlWithResponseAsync(base64UrlPath, requestOptions).block();
     }
 
@@ -1811,9 +1924,14 @@ public final class PathsImpl {
      *     format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(String arrayPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String arrayPathConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayCsvInPath(this.client.getHost(), arrayPath, requestOptions, context));
+                context ->
+                        service.arrayCsvInPath(
+                                this.client.getHost(), arrayPathConverted, accept, requestOptions, context));
     }
 
     /**
@@ -1832,8 +1950,11 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(
-            String arrayPath, RequestOptions requestOptions, Context context) {
-        return service.arrayCsvInPath(this.client.getHost(), arrayPath, requestOptions, context);
+            List<String> arrayPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        String arrayPathConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1850,7 +1971,7 @@ public final class PathsImpl {
      *     format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+    public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions).block();
     }
 
@@ -1868,8 +1989,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(long unixTimeUrlPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, requestOptions, context));
+                context ->
+                        service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context));
     }
 
     /**
@@ -1888,7 +2011,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(
             long unixTimeUrlPath, RequestOptions requestOptions, Context context) {
-        return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, requestOptions, context);
+        final String accept = "application/json";
+        return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context);
     }
 
     /**

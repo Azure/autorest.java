@@ -148,7 +148,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -193,7 +193,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
+        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
@@ -242,7 +242,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 // service client builder per service client
                 for (int i = 0; i < asyncClients.size(); ++i) {
                     AsyncSyncClient asyncClient = asyncClients.get(i);
-                    AsyncSyncClient syncClient = (i > syncClients.size()) ? null : syncClients.get(i);
+                    AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
                     String clientName = ((syncClient != null)
                             ? syncClient.getClassName()
                             : asyncClient.getClassName().replace("AsyncClient", "Client"));
@@ -276,7 +276,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         // example/test
-        if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
+        if (settings.isDataPlaneClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
             List<ProtocolExample> protocolExamples = new ArrayList<>();
             Set<String> protocolExampleNameSet = new HashSet<>();
 

@@ -251,21 +251,21 @@ public class DpgCustomizationTests {
         }
     }
 
-    @Test
-    public void testSendRequestMethod() {
-        HttpRequest request = new HttpRequest(HttpMethod.GET, "http://localhost:3000/customization/model/raw");
-        Response<BinaryData> response = client.sendRequest(request, Context.NONE);
-        Assertions.assertEquals(200, response.getStatusCode());
-        Map<String, String> rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
-        Assertions.assertTrue(rawModel.containsKey("received"));
-        Assertions.assertEquals("raw", rawModel.get("received"));
-
-        response = asyncClient.sendRequest(request).block();
-        Assertions.assertEquals(200, response.getStatusCode());
-        rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
-        Assertions.assertTrue(rawModel.containsKey("received"));
-        Assertions.assertEquals("raw", rawModel.get("received"));
-    }
+//    @Test
+//    public void testSendRequestMethod() {
+//        HttpRequest request = new HttpRequest(HttpMethod.GET, "http://localhost:3000/customization/model/raw");
+//        Response<BinaryData> response = client.sendRequest(request, Context.NONE);
+//        Assertions.assertEquals(200, response.getStatusCode());
+//        Map<String, String> rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
+//        Assertions.assertTrue(rawModel.containsKey("received"));
+//        Assertions.assertEquals("raw", rawModel.get("received"));
+//
+//        response = asyncClient.sendRequest(request).block();
+//        Assertions.assertEquals(200, response.getStatusCode());
+//        rawModel = (Map<String, String>) response.getValue().toObject(Object.class);
+//        Assertions.assertTrue(rawModel.containsKey("received"));
+//        Assertions.assertEquals("raw", rawModel.get("received"));
+//    }
 
     static class ContextValidationPolicy implements HttpPipelinePolicy {
 

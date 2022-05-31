@@ -268,7 +268,7 @@ public class JavaPackage {
     }
 
     public void addSwaggerReadmeMarkdown(Project project) {
-        TextFile textFile = new TextFile("swagger/README_SPEC.md", new SwaggerReadmeTemplate().write(project));
+        TextFile textFile = new TextFile("swagger/README.md", new SwaggerReadmeTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

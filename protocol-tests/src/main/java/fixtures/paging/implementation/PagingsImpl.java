@@ -6,10 +6,12 @@ package fixtures.paging.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -71,7 +73,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNoItemNamePages(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/nullnextlink")
         @ExpectedResponses({200})
@@ -86,7 +91,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNullNextLinkNamePages(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/single")
         @ExpectedResponses({200})
@@ -101,7 +109,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getSinglePages(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/firstResponseEmpty/1")
         @ExpectedResponses({200})
@@ -116,7 +127,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> firstResponseEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple")
         @ExpectedResponses({200})
@@ -131,7 +145,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePages(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/getWithQueryParams")
         @ExpectedResponses({200})
@@ -146,7 +163,12 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getWithQueryParams(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("requiredQueryParameter") int requiredQueryParameter,
+                @QueryParam("queryConstant") boolean queryConstant,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/nextOperationWithQueryParams")
         @ExpectedResponses({200})
@@ -161,7 +183,11 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> nextOperationWithQueryParams(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("queryConstant") boolean queryConstant,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/odata")
         @ExpectedResponses({200})
@@ -176,7 +202,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOdataMultiplePages(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/withpath/{offset}")
         @ExpectedResponses({200})
@@ -193,6 +222,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesWithOffset(
                 @HostParam("$host") String host,
                 @PathParam("offset") int offset,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -209,7 +239,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesRetryFirst(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/retrysecond")
         @ExpectedResponses({200})
@@ -224,7 +257,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesRetrySecond(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/single/failure")
         @ExpectedResponses({200})
@@ -239,7 +275,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getSinglePagesFailure(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/failure")
         @ExpectedResponses({200})
@@ -254,7 +293,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesFailure(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/failureuri")
         @ExpectedResponses({200})
@@ -269,7 +311,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesFailureUri(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/fragment/{tenant}")
         @ExpectedResponses({200})
@@ -285,7 +330,9 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -303,7 +350,9 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -320,7 +369,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMultiplePagesLro(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         @ExpectedResponses({200})
@@ -336,8 +388,10 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -355,8 +409,10 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
+                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -373,7 +429,10 @@ public final class PagingsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientName(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
@@ -390,6 +449,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getNoItemNamePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -408,6 +468,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getSinglePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -426,6 +487,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> firstResponseEmptyNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -444,6 +506,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -462,6 +525,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getOdataMultiplePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -480,6 +544,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesWithOffsetNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -498,6 +563,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesRetryFirstNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -516,6 +582,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesRetrySecondNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -534,6 +601,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getSinglePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -552,6 +620,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -570,6 +639,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesFailureUriNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -588,6 +658,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getMultiplePagesLroNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -606,6 +677,7 @@ public final class PagingsImpl {
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -638,8 +710,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getNoItemNamePages(this.client.getHost(), requestOptions, context))
+                        context -> service.getNoItemNamePages(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -681,7 +754,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getNoItemNamePages(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getNoItemNamePages(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -829,8 +903,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getNullNextLinkNamePages(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getNullNextLinkNamePages(
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -872,7 +949,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getNullNextLinkNamePages(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getNullNextLinkNamePages(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1006,7 +1084,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), requestOptions, context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getSinglePages(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1048,7 +1128,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getSinglePages(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getSinglePages(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1197,8 +1278,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.firstResponseEmpty(this.client.getHost(), requestOptions, context))
+                        context -> service.firstResponseEmpty(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1241,7 +1323,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.firstResponseEmpty(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.firstResponseEmpty(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1373,8 +1456,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1402,7 +1485,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getMultiplePages(this.client.getHost(), requestOptions, context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getMultiplePages(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1423,8 +1508,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1454,7 +1539,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePages(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePages(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1475,8 +1561,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1523,8 +1609,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1572,8 +1658,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1608,15 +1694,6 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1633,6 +1710,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1641,9 +1719,19 @@ public final class PagingsImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
+            int requiredQueryParameter, RequestOptions requestOptions) {
+        final boolean queryConstant = true;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getWithQueryParams(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getWithQueryParams(
+                                        this.client.getHost(),
+                                        requiredQueryParameter,
+                                        queryConstant,
+                                        accept,
+                                        requestOptions,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1659,15 +1747,6 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1684,6 +1763,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1694,8 +1774,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.getWithQueryParams(this.client.getHost(), requestOptions, context)
+            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
+        final boolean queryConstant = true;
+        final String accept = "application/json";
+        return service.getWithQueryParams(
+                        this.client.getHost(), requiredQueryParameter, queryConstant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1711,15 +1794,6 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1736,6 +1810,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1744,29 +1819,20 @@ public final class PagingsImpl {
      * @return the paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(int requiredQueryParameter, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requestOptions),
+                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions),
                 nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptionsForNextPage));
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1784,6 +1850,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1793,29 +1860,21 @@ public final class PagingsImpl {
      * @return the paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(
+            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requestOptions, context),
+                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions, context),
                 nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptionsForNextPage, context));
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredQueryParameter</td><td>int</td><td>Yes</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1833,6 +1892,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1841,20 +1901,12 @@ public final class PagingsImpl {
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions));
+    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter, requestOptions));
     }
 
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1881,8 +1933,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
+        final boolean queryConstant = true;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.nextOperationWithQueryParams(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.nextOperationWithQueryParams(
+                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1896,14 +1952,6 @@ public final class PagingsImpl {
 
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>queryConstant</td><td>boolean</td><td>Yes</td><td>A constant. Must be True</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1932,7 +1980,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.nextOperationWithQueryParams(this.client.getHost(), requestOptions, context)
+        final boolean queryConstant = true;
+        final String accept = "application/json";
+        return service.nextOperationWithQueryParams(
+                        this.client.getHost(), queryConstant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1953,8 +2004,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1982,8 +2033,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getOdataMultiplePages(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getOdataMultiplePages(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2004,8 +2057,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2035,7 +2088,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getOdataMultiplePages(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getOdataMultiplePages(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2056,8 +2110,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2104,8 +2158,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2153,8 +2207,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2194,8 +2248,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2225,10 +2279,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
             int offset, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffset(
-                                        this.client.getHost(), offset, requestOptions, context))
+                                        this.client.getHost(), offset, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2249,8 +2304,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2281,7 +2336,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
             int offset, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesWithOffset(this.client.getHost(), offset, requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesWithOffset(this.client.getHost(), offset, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2302,8 +2358,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2351,8 +2407,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2403,8 +2459,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2465,8 +2521,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesRetryFirst(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getMultiplePagesRetryFirst(
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2509,7 +2568,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesRetryFirst(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesRetryFirst(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2662,8 +2722,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesRetrySecond(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getMultiplePagesRetrySecond(
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2706,7 +2769,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesRetrySecond(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesRetrySecond(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2858,8 +2922,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getSinglePagesFailure(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getSinglePagesFailure(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2901,7 +2967,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getSinglePagesFailure(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getSinglePagesFailure(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3049,8 +3116,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesFailure(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getMultiplePagesFailure(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3092,7 +3161,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFailure(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesFailure(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3240,8 +3310,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesFailureUri(this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getMultiplePagesFailureUri(
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3283,7 +3356,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFailureUri(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesFailureUri(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3407,14 +3481,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3431,6 +3497,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3441,11 +3508,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String tenant, RequestOptions requestOptions) {
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), tenant, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3460,14 +3528,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3484,6 +3544,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -3495,8 +3556,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String tenant, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), tenant, requestOptions, context)
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.getMultiplePagesFragmentNextLink(
+                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3511,14 +3574,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3535,6 +3590,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3544,27 +3600,20 @@ public final class PagingsImpl {
      * @return the paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptionsForNextPage));
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
+                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptionsForNextPage));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3582,6 +3631,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -3593,27 +3643,20 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
-            String tenant, RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions, context),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptionsForNextPage, context));
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions, context),
+                nextLink ->
+                        nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptionsForNextPage, context));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3631,6 +3674,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3640,20 +3684,13 @@ public final class PagingsImpl {
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions));
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3671,6 +3708,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3681,11 +3719,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String tenant, RequestOptions requestOptions) {
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), tenant, requestOptions, context))
+                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3699,14 +3738,6 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3724,6 +3755,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -3735,9 +3767,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String tenant, RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getMultiplePagesFragmentWithGroupingNextLink(
-                        this.client.getHost(), tenant, requestOptions, context)
+                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3752,14 +3785,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3776,6 +3801,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3786,27 +3812,21 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String tenant, RequestOptions requestOptions) {
+            String apiVersion, String tenant, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptionsForNextPage));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
+                nextLink ->
+                        nextFragmentWithGroupingSinglePageAsync(
+                                apiVersion, tenant, nextLink, requestOptionsForNextPage));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3824,6 +3844,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -3835,28 +3856,23 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String tenant, RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions, context),
+                () ->
+                        getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
+                                apiVersion, tenant, requestOptions, context),
                 nextLink ->
-                        nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptionsForNextPage, context));
+                        nextFragmentWithGroupingSinglePageAsync(
+                                apiVersion, tenant, nextLink, requestOptionsForNextPage, context));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3874,6 +3890,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3884,8 +3901,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions));
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(
+                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions));
     }
 
     /**
@@ -3897,8 +3915,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3926,8 +3944,9 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLroSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesLro(this.client.getHost(), requestOptions, context))
+                        context -> service.getMultiplePagesLro(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -3948,8 +3967,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3979,7 +3998,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLroSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesLro(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesLro(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4000,8 +4020,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4048,8 +4068,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4097,8 +4117,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4132,14 +4152,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4156,6 +4168,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -4167,10 +4180,18 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String tenant, String nextLink, RequestOptions requestOptions) {
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
-                                service.nextFragment(this.client.getHost(), tenant, nextLink, requestOptions, context))
+                                service.nextFragment(
+                                        this.client.getHost(),
+                                        apiVersion,
+                                        tenant,
+                                        nextLink,
+                                        accept,
+                                        requestOptions,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4185,14 +4206,6 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4209,6 +4222,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -4221,8 +4235,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        return service.nextFragment(this.client.getHost(), tenant, nextLink, requestOptions, context)
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.nextFragment(
+                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4236,14 +4252,6 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4261,6 +4269,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -4272,11 +4281,18 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String tenant, String nextLink, RequestOptions requestOptions) {
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(), tenant, nextLink, requestOptions, context))
+                                        this.client.getHost(),
+                                        apiVersion,
+                                        tenant,
+                                        nextLink,
+                                        accept,
+                                        requestOptions,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4290,14 +4306,6 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api_version</td><td>String</td><td>Yes</td><td>Sets the api version to use.</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4315,6 +4323,7 @@ public final class PagingsImpl {
      * }
      * }</pre>
      *
+     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -4327,8 +4336,10 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
-        return service.nextFragmentWithGrouping(this.client.getHost(), tenant, nextLink, requestOptions, context)
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.nextFragmentWithGrouping(
+                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4369,10 +4380,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getPagingModelWithItemNameWithXmsClientName(
-                                        this.client.getHost(), requestOptions, context))
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4414,7 +4426,9 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getPagingModelWithItemNameWithXmsClientName(this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getPagingModelWithItemNameWithXmsClientName(
+                        this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4569,10 +4583,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getNoItemNamePagesNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4615,7 +4630,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getNoItemNamePagesNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getNoItemNamePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4657,8 +4673,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getSinglePagesNext(nextLink, this.client.getHost(), requestOptions, context))
+                        context ->
+                                service.getSinglePagesNext(
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4701,7 +4720,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getSinglePagesNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getSinglePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4743,10 +4763,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.firstResponseEmptyNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4789,7 +4810,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.firstResponseEmptyNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.firstResponseEmptyNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4810,8 +4832,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4841,9 +4863,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
-                                service.getMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context))
+                                service.getMultiplePagesNext(
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4864,8 +4888,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4896,7 +4920,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4917,8 +4942,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4948,10 +4973,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getOdataMultiplePagesNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -4972,8 +4998,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5004,7 +5030,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getOdataMultiplePagesNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getOdataMultiplePagesNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5025,8 +5052,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5056,10 +5083,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffsetNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5080,8 +5108,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5112,7 +5140,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesWithOffsetNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesWithOffsetNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5154,10 +5183,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesRetryFirstNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5200,7 +5230,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesRetryFirstNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesRetryFirstNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5242,10 +5273,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesRetrySecondNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5288,7 +5320,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesRetrySecondNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesRetrySecondNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5330,10 +5363,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getSinglePagesFailureNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5376,7 +5410,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getSinglePagesFailureNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getSinglePagesFailureNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5418,10 +5453,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFailureNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5464,7 +5500,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5506,10 +5543,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFailureUriNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5552,7 +5590,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesFailureUriNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesFailureUriNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5573,8 +5612,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5604,10 +5643,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLroNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesLroNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5628,8 +5668,8 @@ public final class PagingsImpl {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>String</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>String</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5660,7 +5700,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesLroNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getMultiplePagesLroNext(nextLink, this.client.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getMultiplePagesLroNext(nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5702,10 +5743,11 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getPagingModelWithItemNameWithXmsClientNameNext(
-                                        nextLink, this.client.getHost(), requestOptions, context))
+                                        nextLink, this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -5748,8 +5790,9 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getPagingModelWithItemNameWithXmsClientNameNext(
-                        nextLink, this.client.getHost(), requestOptions, context)
+                        nextLink, this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(

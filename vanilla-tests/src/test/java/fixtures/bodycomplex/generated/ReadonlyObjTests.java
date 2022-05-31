@@ -13,14 +13,14 @@ public final class ReadonlyObjTests {
     @Test
     public void testDeserialize() {
         ReadonlyObj model =
-                BinaryData.fromString("{\"id\":\"tumkdosvqwhbm\",\"size\":1497620633}").toObject(ReadonlyObj.class);
-        Assertions.assertEquals(1497620633, model.getSize());
+                BinaryData.fromString("{\"id\":\"lluwfzitonpeq\",\"size\":1432370634}").toObject(ReadonlyObj.class);
+        Assertions.assertEquals(1432370634, model.getSize());
     }
 
     @Test
     public void testSerialize() {
-        ReadonlyObj model = new ReadonlyObj().setSize(1497620633);
+        ReadonlyObj model = new ReadonlyObj().setSize(1432370634);
         model = BinaryData.fromObject(model).toObject(ReadonlyObj.class);
-        Assertions.assertEquals(1497620633, model.getSize());
+        Assertions.assertEquals(1432370634, model.getSize());
     }
 }

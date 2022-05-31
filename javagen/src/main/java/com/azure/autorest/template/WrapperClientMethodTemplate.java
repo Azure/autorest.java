@@ -39,7 +39,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         if (clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage) return;
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             typeBlock.javadocComment(comment -> generateProtocolMethodJavadoc(clientMethod, comment));
         } else {
             generateJavadoc(clientMethod, typeBlock, restAPIMethod);

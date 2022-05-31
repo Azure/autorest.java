@@ -15,7 +15,6 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.postprocessor.util.PartialUpdateHandler;
 import com.google.googlejavaformat.java.Formatter;
-import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -30,9 +29,13 @@ import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -71,7 +74,7 @@ public class Postprocessor extends NewPlugin {
         if (className == null) {
             try {
                 writeToFiles(fileContents);
-            } catch (FormatterException e) {
+            } catch (Exception e) {
                 return false;
             }
             return true;
@@ -101,7 +104,7 @@ public class Postprocessor extends NewPlugin {
                 }
                 if (jarUrl == null || !new File(jarUrl.getFile()).exists()) {
                     new PluginLogger(this, Postprocessor.class, "LoadCustomizationJar")
-                            .warn("Customization JAR {} not found. Customization skipped.", jarPath);
+                        .warn("Customization JAR {} not found. Customization skipped.", jarPath);
                     return true;
                 }
                 URLClassLoader loader = URLClassLoader.newInstance(new URL[]{jarUrl}, ClassLoader.getSystemClassLoader());
@@ -109,8 +112,8 @@ public class Postprocessor extends NewPlugin {
                     customizationClass = (Class<? extends Customization>) Class.forName(className, true, loader);
                 } catch (Exception e) {
                     new PluginLogger(this, Postprocessor.class, "LoadCustomizationClass")
-                            .warn("Customization class " + className +
-                                    " not found in customization jar. Customization skipped.", e);
+                        .warn("Customization class " + className +
+                            " not found in customization jar. Customization skipped.", e);
                     return true;
                 }
             } else if (className.startsWith("src") && className.endsWith(".java")) {
@@ -137,26 +140,42 @@ public class Postprocessor extends NewPlugin {
         return true;
     }
 
-    private void writeToFiles(Map<String, String> fileContents) throws FormatterException {
+    private void writeToFiles(Map<String, String> fileContents) throws Exception {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isHandlePartialUpdate()) {
             handlePartialUpdate(fileContents);
         }
+
+        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
+        List<CompletableFuture<Void>> formattingTasks = new ArrayList<>();
+
         Formatter formatter = new Formatter();
         for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
-            String formattedSource = javaFile.getValue();
-            if (javaFile.getKey().endsWith(".java")) {
-                if (!settings.isSkipFormatting()) {
-                    try {
-                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-                    } catch (Exception e) {
-                        logger.error("Unable to format output file " + javaFile.getKey(), e);
-                        throw e;
+            // Formatting Java source files can be expensive but can be run in parallel.
+            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+            // complete.
+            formattingTasks.add(CompletableFuture.runAsync(() -> {
+                String formattedSource = javaFile.getValue();
+                if (javaFile.getKey().endsWith(".java")) {
+                    if (!settings.isSkipFormatting()) {
+                        try {
+                            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                        } catch (Exception e) {
+                            logger.error("Unable to format output file " + javaFile.getKey(), e);
+                            throw new CompletionException(e);
+                        }
                     }
                 }
-            }
-            writeFile(javaFile.getKey(), formattedSource, null);
+
+                formattedFiles.put(javaFile.getKey(), formattedSource);
+            }));
         }
+
+        CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).get();
+
+        // Then for each formatted file write the file. This is done synchronously as there is potential race
+        // conditions that can lead to deadlocking.
+        formattedFiles.forEach((fileName, formattedSource) -> writeFile(fileName, formattedSource, null));
     }
 
     private String getReadme() {
@@ -230,8 +249,8 @@ public class Postprocessor extends NewPlugin {
         try (EclipseLanguageClient languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString())) {
             languageClient.initialize();
             SymbolInformation classSymbol = languageClient.findWorkspaceSymbol(className)
-                    .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
-                    .findFirst().get();
+                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
+                .findFirst().get();
             URI fileUri = classSymbol.getLocation().getUri();
             Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
             BuildWorkspaceStatus status = languageClient.buildWorkspace(true);

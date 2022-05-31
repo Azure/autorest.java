@@ -14,6 +14,8 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
 @ServiceClient(builder = PathsClientBuilder.class)
@@ -318,7 +320,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.client.byteMultiByteWithResponse(bytePath, requestOptions).block();
     }
 
@@ -351,7 +353,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Response<Void> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.client.byteNullWithResponse(bytePath, requestOptions).block();
     }
 
@@ -419,7 +421,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return this.client.dateTimeNullWithResponse(dateTimePath, requestOptions).block();
     }
 
@@ -436,7 +438,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+    public Response<Void> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         return this.client.base64UrlWithResponse(base64UrlPath, requestOptions).block();
     }
 
@@ -455,7 +457,7 @@ public final class PathsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+    public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         return this.client.arrayCsvInPathWithResponse(arrayPath, requestOptions).block();
     }
 

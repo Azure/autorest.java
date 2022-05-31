@@ -116,7 +116,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
                 asyncReturnType = createProtocolPagedAsyncReturnType();
                 syncReturnType = createProtocolPagedSyncReturnType();
@@ -128,7 +128,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         } else {
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
@@ -137,7 +137,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                && !settings.isLowLevelClient() /* TODO: #1059 */) {
+                && !settings.isDataPlaneClient() /* TODO: #1059 */) {
                 asyncReturnType = createAsyncBinaryReturnType();
             } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                 asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
@@ -145,7 +145,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createAsyncVoidReturnType();
             }
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                && !settings.isLowLevelClient() /* TODO: #1059 */) {
+                && !settings.isDataPlaneClient() /* TODO: #1059 */) {
                 syncReturnType = ClassType.InputStream;
             } else {
                 syncReturnType = responseBodyType.getClientType();
@@ -160,7 +160,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             requests = Collections.singletonList(requests.get(0));
         }
 
@@ -174,11 +174,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
             List<Parameter> codeModelParameters;
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 // Required path and body parameters are allowed
                 codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
                         (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
-                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY))
+                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY ||
+                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER ||
+                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY))
                     .collect(Collectors.toList());
             } else {
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
@@ -227,7 +229,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 // Transformations
                 if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
-                    && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isLowLevelClient()) {
+                    && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isDataPlaneClient()) {
                     ClientMethodParameter outParameter;
                     if (parameter.getOriginalParameter() != null) {
                         originalParameters.add(parameter.getOriginalParameter());
@@ -269,7 +271,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
             }
 
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 ClientMethodParameter requestOptions = new ClientMethodParameter.Builder()
                     .description("The options to configure the HTTP request before HTTP client sends it")
                     .wireType(ClassType.RequestOptions)
@@ -432,7 +434,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         getPollingFinalType(pollingDetails, syncReturnType),
                         pollingDetails.getPollIntervalInSeconds());
 
-                    if (settings.isLowLevelClient() &&
+                    if (settings.isDataPlaneClient() &&
                             !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
                                     && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
                         // a new method to be added as implementation only (not exposed to client) for developer
@@ -586,7 +588,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
                             builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
                         }
-                        if (settings.isLowLevelClient()) {
+                        if (settings.isDataPlaneClient()) {
                             // SimpleSyncRestResponse with RequestOptions but without Context
                             methods.add(builder.build());
                         }
@@ -654,7 +656,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // If LLC is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>
         // Else named response types are being used and return that.
-        if (settings.isLowLevelClient() || !responseContainsHeaders) {
+        if (settings.isDataPlaneClient() || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
@@ -787,7 +789,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return method visibility, null if do not generate.
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
-        if (JavaSettings.getInstance().isLowLevelClient()) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
             /*
             Rule for LLC
 

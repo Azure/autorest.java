@@ -90,7 +90,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
             } else {
                 wireType = ClassType.String;
             }
-        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+        } else if (settings.isDataPlaneClient() && !(wireType instanceof PrimitiveType)) {
             wireType = ClassType.String;
         }
         if (parameter.getProtocol().getHttp().getExplode()) {

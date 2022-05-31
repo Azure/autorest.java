@@ -32,6 +32,8 @@ import java.util.stream.Collectors;
  * The class level customization for an AutoRest generated class.
  */
 public final class ClassCustomization extends CodeCustomization {
+    private static final int INDENT_LENGTH = 4;
+
     /*
      * This pattern attempts to find the first line of a method string that doesn't have a first non-space character of
      * '*' or '/'. From there it captures all word and space characters before and inside '( )' ignoring any trailing
@@ -84,6 +86,62 @@ public final class ClassCustomization extends CodeCustomization {
             return Utils.addImports(Arrays.asList(imports), this, this::refreshSymbol);
         }
 
+        return this;
+    }
+
+    /**
+     * Adds a static block to the class. The {@code staticCodeBlock} should include the static keyword followed by
+     * the static code.
+     * @param staticCodeBlock The static code block including the static keyword.
+     * @return The updated {@link ClassCustomization}.
+     */
+    public ClassCustomization addStaticBlock(String staticCodeBlock) {
+        return addStaticBlock(staticCodeBlock, null);
+    }
+
+    /**
+     * Adds a static block to the class.
+     *
+     * @param staticCodeBlock The static code block. If this is {@code null} or an empty string, the class is not
+     * modified and the {@link ClassCustomization} instance is returned without any change.
+     * @param importsToAdd The list of imports to add to the class.
+     * @return The updated {@link ClassCustomization}.
+     */
+    public ClassCustomization addStaticBlock(String staticCodeBlock, List<String> importsToAdd) {
+
+        if (Utils.isNullOrEmpty(staticCodeBlock)) {
+            return this;
+        }
+
+        // the class declaration line
+        int lastSymbolLine = symbol.getLocation().getRange().getStart().getLine();
+
+        // Find the last field symbol.
+        Optional<SymbolInformation> lastSymbol = languageClient.listDocumentSymbols(fileUri).stream()
+                .filter(symbol -> symbol.getKind() == SymbolKind.FIELD)
+                .reduce((first, second) -> second);
+
+        int indentAmount = INDENT_LENGTH;
+        if (lastSymbol.isPresent()) {
+            // the line number of the last field declaration
+            lastSymbolLine = lastSymbol.get().getLocation().getRange().getStart().getLine();
+            indentAmount = Utils.getIndent(editor.getFileLine(fileName, lastSymbolLine)).length();
+        }
+//        System.out.println("indent amount " + indentAmount);
+
+        // start the static block from the next line of the last field or the line after class declaration
+        int staticBlockStartLine = lastSymbolLine + 1;
+        editor.insertBlankLine(fileName, staticBlockStartLine, false);
+        Position staticBlockPosition = editor.insertBlankLineWithIndent(fileName, staticBlockStartLine, indentAmount);
+        if(!staticCodeBlock.trim().startsWith("static")) {
+            staticCodeBlock = "static { " + System.lineSeparator() + staticCodeBlock + System.lineSeparator() +  "}";
+        }
+
+        editor.replaceWithIndentedContent(fileName, staticBlockPosition, staticBlockPosition, staticCodeBlock,
+                staticBlockPosition.getCharacter());
+        if (importsToAdd != null) {
+            return Utils.addImports(importsToAdd, this, this::refreshSymbol);
+        }
         return this;
     }
 

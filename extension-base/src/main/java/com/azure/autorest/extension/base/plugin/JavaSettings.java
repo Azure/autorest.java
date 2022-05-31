@@ -138,7 +138,7 @@ public class JavaSettings {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
-                getBooleanValue(host, "generate-send-request-method", false),
+                false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
@@ -226,7 +226,7 @@ public class JavaSettings {
         String customizationClass,
         boolean overrideSetterFromSuperclass,
         boolean optionalConstantAsEnum,
-        boolean lowLevelClient,
+        boolean dataPlaneClient,
         boolean useIterable,
         List<String> serviceVersions,
         boolean requireXMsFlattenedToFlatten,
@@ -282,7 +282,7 @@ public class JavaSettings {
         this.artifactId = artifactId;
         this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
-        this.lowLevelClient = lowLevelClient;
+        this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
         this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
@@ -749,10 +749,10 @@ public class JavaSettings {
         return optionalConstantAsEnum;
     }
 
-    private final boolean lowLevelClient;
+    private final boolean dataPlaneClient;
 
-    public boolean isLowLevelClient() {
-        return lowLevelClient;
+    public boolean isDataPlaneClient() {
+        return dataPlaneClient;
     }
 
     private final boolean useIterable;

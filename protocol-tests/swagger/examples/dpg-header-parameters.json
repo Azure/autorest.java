@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "parameter_int": 31,
+    "parameter_boolean": false,
+    "parameter_csv_string_array": "one,two,three",
+    "parameter_csv_int_array": [
+      1,
+      2,
+      3
+    ],
+    "parameter_multi_string_array": "four,five",
+    "parameter_multi_int_array": "4,5",
+    "parameter_multi_enum_array": "gamma,beta",
+    "parameter_datetime": "Fri, 01 Mar 2019 15:00:00 GMT",
+    "parameter_duration": "P1DT30H4S"
+  },
+  "responses": {
+    "200": {
+
+    }
+  }
+}

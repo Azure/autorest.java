@@ -44,28 +44,28 @@ public class DpgSendRequestTests {
                 .buildAsyncClient();
     }
 
-    @Test
-    public void testSendRequestMethodWithContext() {
-        String requestIdKey = "x-ms-client-request-id";
-        String requestIdValue = UUID.randomUUID().toString();
-        HttpHeaders requestHeaders = new HttpHeaders().set(requestIdKey, requestIdValue);
-
-        HttpRequest request = new HttpRequest(HttpMethod.GET, "https://httpbin.org/headers");
-        Response<BinaryData> response = client.sendRequest(request,
-                new Context(AddHeadersFromContextPolicy.AZURE_REQUEST_HTTP_HEADERS_KEY, requestHeaders));
-        Assertions.assertEquals(200, response.getStatusCode());
-        Map<String, Object> responseJson = (Map<String, Object>) response.getValue().toObject(Object.class);
-        Map<String, String> headersJson = (Map<String, String>) responseJson.get("headers");
-        String requestIdKeyInResponse = headersJson.keySet().stream()
-                .filter(requestIdKey::equalsIgnoreCase)
-                .findFirst().get();
-        Assertions.assertEquals(requestIdValue, headersJson.get(requestIdKeyInResponse));
-
-        response = asyncClient.sendRequest(request)
-                .contextWrite(context -> context.put(AddHeadersFromContextPolicy.AZURE_REQUEST_HTTP_HEADERS_KEY, requestHeaders)).block();
-        Assertions.assertEquals(200, response.getStatusCode());
-        responseJson = (Map<String, Object>) response.getValue().toObject(Object.class);
-        headersJson = (Map<String, String>) responseJson.get("headers");
-        Assertions.assertEquals(requestIdValue, headersJson.get(requestIdKeyInResponse));
-    }
+//    @Test
+//    public void testSendRequestMethodWithContext() {
+//        String requestIdKey = "x-ms-client-request-id";
+//        String requestIdValue = UUID.randomUUID().toString();
+//        HttpHeaders requestHeaders = new HttpHeaders().set(requestIdKey, requestIdValue);
+//
+//        HttpRequest request = new HttpRequest(HttpMethod.GET, "https://httpbin.org/headers");
+//        Response<BinaryData> response = client.sendRequest(request,
+//                new Context(AddHeadersFromContextPolicy.AZURE_REQUEST_HTTP_HEADERS_KEY, requestHeaders));
+//        Assertions.assertEquals(200, response.getStatusCode());
+//        Map<String, Object> responseJson = (Map<String, Object>) response.getValue().toObject(Object.class);
+//        Map<String, String> headersJson = (Map<String, String>) responseJson.get("headers");
+//        String requestIdKeyInResponse = headersJson.keySet().stream()
+//                .filter(requestIdKey::equalsIgnoreCase)
+//                .findFirst().get();
+//        Assertions.assertEquals(requestIdValue, headersJson.get(requestIdKeyInResponse));
+//
+//        response = asyncClient.sendRequest(request)
+//                .contextWrite(context -> context.put(AddHeadersFromContextPolicy.AZURE_REQUEST_HTTP_HEADERS_KEY, requestHeaders)).block();
+//        Assertions.assertEquals(200, response.getStatusCode());
+//        responseJson = (Map<String, Object>) response.getValue().toObject(Object.class);
+//        headersJson = (Map<String, String>) responseJson.get("headers");
+//        Assertions.assertEquals(requestIdValue, headersJson.get(requestIdKeyInResponse));
+//    }
 }

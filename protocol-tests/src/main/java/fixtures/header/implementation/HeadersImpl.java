@@ -5,6 +5,7 @@
 package fixtures.header.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -19,8 +20,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.time.Duration;
+import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Headers. */
@@ -61,7 +65,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramExistingKey(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("User-Agent") String userAgent,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/existingkey")
         @ExpectedResponses({200})
@@ -76,7 +84,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseExistingKey(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/protectedkey")
         @ExpectedResponses({200})
@@ -91,7 +102,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramProtectedKey(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/protectedkey")
         @ExpectedResponses({200})
@@ -106,7 +121,10 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseProtectedKey(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/integer")
         @ExpectedResponses({200})
@@ -121,7 +139,12 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramInteger(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") int value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/integer")
         @ExpectedResponses({200})
@@ -136,7 +159,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseInteger(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/long")
         @ExpectedResponses({200})
@@ -150,7 +177,13 @@ public final class HeadersImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramLong(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> paramLong(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") long value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/long")
         @ExpectedResponses({200})
@@ -165,7 +198,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseLong(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/float")
         @ExpectedResponses({200})
@@ -180,7 +217,12 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramFloat(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") float value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/float")
         @ExpectedResponses({200})
@@ -195,7 +237,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseFloat(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/double")
         @ExpectedResponses({200})
@@ -210,7 +256,12 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramDouble(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") double value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/double")
         @ExpectedResponses({200})
@@ -225,7 +276,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseDouble(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/bool")
         @ExpectedResponses({200})
@@ -239,7 +294,13 @@ public final class HeadersImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramBool(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> paramBool(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") boolean value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/bool")
         @ExpectedResponses({200})
@@ -254,7 +315,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseBool(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/string")
         @ExpectedResponses({200})
@@ -269,7 +334,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramString(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/string")
         @ExpectedResponses({200})
@@ -284,7 +353,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseString(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/date")
         @ExpectedResponses({200})
@@ -298,7 +371,13 @@ public final class HeadersImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDate(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> paramDate(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") String value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/date")
         @ExpectedResponses({200})
@@ -313,7 +392,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseDate(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/datetime")
         @ExpectedResponses({200})
@@ -328,7 +411,12 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramDatetime(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") OffsetDateTime value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/datetime")
         @ExpectedResponses({200})
@@ -343,7 +431,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseDatetime(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
@@ -358,7 +450,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramDatetimeRfc1123(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
@@ -373,7 +469,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseDatetimeRfc1123(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/duration")
         @ExpectedResponses({200})
@@ -388,7 +488,12 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> paramDuration(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") Duration value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/duration")
         @ExpectedResponses({200})
@@ -403,7 +508,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseDuration(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/byte")
         @ExpectedResponses({200})
@@ -417,7 +526,13 @@ public final class HeadersImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramByte(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> paramByte(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("value") String value,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/byte")
         @ExpectedResponses({200})
@@ -432,7 +547,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseByte(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/param/prim/enum")
         @ExpectedResponses({200})
@@ -446,7 +565,12 @@ public final class HeadersImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> paramEnum(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/response/prim/enum")
         @ExpectedResponses({200})
@@ -461,7 +585,11 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> responseEnum(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
@@ -476,20 +604,16 @@ public final class HeadersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> customRequestId(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>User-Agent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
-     * </table>
-     *
+     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -498,22 +622,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(String userAgent, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramExistingKey(this.client.getHost(), requestOptions, context));
+                context -> service.paramExistingKey(this.client.getHost(), userAgent, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>User-Agent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
-     * </table>
-     *
+     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -523,21 +641,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramExistingKey(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(
+            String userAgent, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramExistingKey(this.client.getHost(), userAgent, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>User-Agent</td><td>String</td><td>Yes</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
-     * </table>
-     *
+     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -546,8 +659,8 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramExistingKeyWithResponse(RequestOptions requestOptions) {
-        return paramExistingKeyWithResponseAsync(requestOptions).block();
+    public Response<Void> paramExistingKeyWithResponse(String userAgent, RequestOptions requestOptions) {
+        return paramExistingKeyWithResponseAsync(userAgent, requestOptions).block();
     }
 
     /**
@@ -563,8 +676,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseExistingKey(this.client.getHost(), requestOptions, context));
+                context -> service.responseExistingKey(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -581,7 +695,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseExistingKey(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.responseExistingKey(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -602,14 +717,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
-     * </table>
-     *
+     * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -618,22 +726,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(String contentType, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramProtectedKey(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.paramProtectedKey(this.client.getHost(), contentType, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
-     * </table>
-     *
+     * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -643,21 +746,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramProtectedKey(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(
+            String contentType, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramProtectedKey(this.client.getHost(), contentType, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>Yes</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
-     * </table>
-     *
+     * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -666,8 +764,8 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramProtectedKeyWithResponse(RequestOptions requestOptions) {
-        return paramProtectedKeyWithResponseAsync(requestOptions).block();
+    public Response<Void> paramProtectedKeyWithResponse(String contentType, RequestOptions requestOptions) {
+        return paramProtectedKeyWithResponseAsync(contentType, requestOptions).block();
     }
 
     /**
@@ -683,8 +781,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseProtectedKey(this.client.getHost(), requestOptions, context));
+                context -> service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -701,7 +800,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseProtectedKey(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -722,15 +822,8 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -739,22 +832,19 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramIntegerWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramInteger(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramIntegerWithResponseAsync(
+            String scenario, int value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.paramInteger(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -764,22 +854,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramIntegerWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramInteger(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramIntegerWithResponseAsync(
+            String scenario, int value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramInteger(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>int</td><td>Yes</td><td>Send a post request with header values 1 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -788,21 +873,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramIntegerWithResponse(RequestOptions requestOptions) {
-        return paramIntegerWithResponseAsync(requestOptions).block();
+    public Response<Void> paramIntegerWithResponse(String scenario, int value, RequestOptions requestOptions) {
+        return paramIntegerWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 1 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -812,21 +890,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseIntegerWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseInteger(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseIntegerWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 1 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -837,21 +910,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseIntegerWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseInteger(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseIntegerWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header value "value": 1 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -860,23 +928,16 @@ public final class HeadersImpl {
      * @return a response with header value "value": 1 or -2 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseIntegerWithResponse(RequestOptions requestOptions) {
-        return responseIntegerWithResponseAsync(requestOptions).block();
+    public Response<Void> responseIntegerWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseIntegerWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -885,23 +946,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramLongWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramLong(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramLongWithResponseAsync(String scenario, long value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramLong(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -911,23 +967,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramLongWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramLong(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramLongWithResponseAsync(
+            String scenario, long value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramLong(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>long</td><td>Yes</td><td>Send a post request with header values 105 or -2</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -936,21 +987,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramLongWithResponse(RequestOptions requestOptions) {
-        return paramLongWithResponseAsync(requestOptions).block();
+    public Response<Void> paramLongWithResponse(String scenario, long value, RequestOptions requestOptions) {
+        return paramLongWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 105 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -960,21 +1004,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseLongWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseLong(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseLongWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 105 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -985,21 +1024,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseLongWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseLong(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseLongWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header value "value": 105 or -2.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1008,23 +1042,16 @@ public final class HeadersImpl {
      * @return a response with header value "value": 105 or -2 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseLongWithResponse(RequestOptions requestOptions) {
-        return responseLongWithResponseAsync(requestOptions).block();
+    public Response<Void> responseLongWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseLongWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1033,23 +1060,19 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramFloatWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramFloat(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramFloatWithResponseAsync(
+            String scenario, float value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramFloat(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1059,23 +1082,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramFloat(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramFloatWithResponseAsync(
+            String scenario, float value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramFloat(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>float</td><td>Yes</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1084,21 +1102,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramFloatWithResponse(RequestOptions requestOptions) {
-        return paramFloatWithResponseAsync(requestOptions).block();
+    public Response<Void> paramFloatWithResponse(String scenario, float value, RequestOptions requestOptions) {
+        return paramFloatWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1108,21 +1119,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseFloatWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseFloat(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseFloatWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1133,21 +1139,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseFloatWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseFloat(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseFloatWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1156,23 +1157,16 @@ public final class HeadersImpl {
      * @return a response with header value "value": 0.07 or -3.0 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseFloatWithResponse(RequestOptions requestOptions) {
-        return responseFloatWithResponseAsync(requestOptions).block();
+    public Response<Void> responseFloatWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseFloatWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1181,23 +1175,20 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDoubleWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramDouble(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramDoubleWithResponseAsync(
+            String scenario, double value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.paramDouble(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1207,23 +1198,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramDouble(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramDoubleWithResponseAsync(
+            String scenario, double value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramDouble(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     *     <tr><td>value</td><td>double</td><td>Yes</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1232,21 +1218,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDoubleWithResponse(RequestOptions requestOptions) {
-        return paramDoubleWithResponseAsync(requestOptions).block();
+    public Response<Void> paramDoubleWithResponse(String scenario, double value, RequestOptions requestOptions) {
+        return paramDoubleWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1256,21 +1235,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDoubleWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseDouble(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseDoubleWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1281,21 +1255,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDoubleWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseDouble(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseDoubleWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1304,22 +1273,15 @@ public final class HeadersImpl {
      * @return a response with header value "value": 7e120 or -3.0 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDoubleWithResponse(RequestOptions requestOptions) {
-        return responseDoubleWithResponseAsync(requestOptions).block();
+    public Response<Void> responseDoubleWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseDoubleWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1328,22 +1290,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramBoolWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramBool(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramBoolWithResponseAsync(
+            String scenario, boolean value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramBool(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1353,22 +1311,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramBool(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramBoolWithResponseAsync(
+            String scenario, boolean value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramBool(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     *     <tr><td>value</td><td>boolean</td><td>Yes</td><td>Send a post request with header values true or false</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1377,21 +1330,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramBoolWithResponse(RequestOptions requestOptions) {
-        return paramBoolWithResponseAsync(requestOptions).block();
+    public Response<Void> paramBoolWithResponse(String scenario, boolean value, RequestOptions requestOptions) {
+        return paramBoolWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header value "value": true or false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1401,21 +1347,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseBoolWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseBool(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseBoolWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": true or false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1426,21 +1367,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseBoolWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseBool(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseBoolWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header value "value": true or false.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1449,8 +1385,8 @@ public final class HeadersImpl {
      * @return a response with header value "value": true or false along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseBoolWithResponse(RequestOptions requestOptions) {
-        return responseBoolWithResponseAsync(requestOptions).block();
+    public Response<Void> responseBoolWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseBoolWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
@@ -1462,10 +1398,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1474,8 +1410,10 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramStringWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramString(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramStringWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramString(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
@@ -1487,10 +1425,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1500,8 +1438,10 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramStringWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramString(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramStringWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramString(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1513,10 +1453,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1525,21 +1465,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramStringWithResponse(RequestOptions requestOptions) {
-        return paramStringWithResponseAsync(requestOptions).block();
+    public Response<Void> paramStringWithResponse(String scenario, RequestOptions requestOptions) {
+        return paramStringWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1549,21 +1482,16 @@ public final class HeadersImpl {
      *     {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseStringWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseString(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseStringWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseString(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1574,21 +1502,16 @@ public final class HeadersImpl {
      *     {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseStringWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseString(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseStringWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseString(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1598,23 +1521,16 @@ public final class HeadersImpl {
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseStringWithResponse(RequestOptions requestOptions) {
-        return responseStringWithResponseAsync(requestOptions).block();
+    public Response<Void> responseStringWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseStringWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1623,23 +1539,19 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDateWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramDate(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramDateWithResponseAsync(
+            String scenario, String value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramDate(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1649,23 +1561,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDateWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramDate(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramDateWithResponseAsync(
+            String scenario, String value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramDate(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1674,21 +1581,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDateWithResponse(RequestOptions requestOptions) {
-        return paramDateWithResponseAsync(requestOptions).block();
+    public Response<Void> paramDateWithResponse(String scenario, String value, RequestOptions requestOptions) {
+        return paramDateWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1698,21 +1598,16 @@ public final class HeadersImpl {
      *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDateWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseDate(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseDateWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1723,21 +1618,16 @@ public final class HeadersImpl {
      *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDateWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseDate(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseDateWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1746,23 +1636,16 @@ public final class HeadersImpl {
      * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDateWithResponse(RequestOptions requestOptions) {
-        return responseDateWithResponseAsync(requestOptions).block();
+    public Response<Void> responseDateWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseDateWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1771,23 +1654,20 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramDatetime(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramDatetimeWithResponseAsync(
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1797,23 +1677,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramDatetime(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramDatetimeWithResponseAsync(
+            String scenario, OffsetDateTime value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1822,21 +1697,15 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(RequestOptions requestOptions) {
-        return paramDatetimeWithResponseAsync(requestOptions).block();
+    public Response<Void> paramDatetimeWithResponse(
+            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
+        return paramDatetimeWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1846,22 +1715,16 @@ public final class HeadersImpl {
      *     Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> responseDatetimeWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDatetime(this.client.getHost(), requestOptions, context));
+                context -> service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1872,21 +1735,16 @@ public final class HeadersImpl {
      *     Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseDatetime(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseDatetimeWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1896,8 +1754,8 @@ public final class HeadersImpl {
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeWithResponse(RequestOptions requestOptions) {
-        return responseDatetimeWithResponseAsync(requestOptions).block();
+    public Response<Void> responseDatetimeWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseDatetimeWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
@@ -1909,10 +1767,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1921,9 +1779,11 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramDatetimeRfc1123(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.paramDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
@@ -1935,10 +1795,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1948,8 +1808,10 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramDatetimeRfc1123(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1961,10 +1823,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1973,21 +1835,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return paramDatetimeRfc1123WithResponseAsync(requestOptions).block();
+    public Response<Void> paramDatetimeRfc1123WithResponse(String scenario, RequestOptions requestOptions) {
+        return paramDatetimeRfc1123WithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1997,22 +1852,19 @@ public final class HeadersImpl {
      *     with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(
+            String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDatetimeRfc1123(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.responseDatetimeRfc1123(
+                                this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2024,21 +1876,15 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.responseDatetimeRfc1123(this.client.getHost(), requestOptions, context);
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2048,22 +1894,15 @@ public final class HeadersImpl {
      *     with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDatetimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return responseDatetimeRfc1123WithResponseAsync(requestOptions).block();
+    public Response<Void> responseDatetimeRfc1123WithResponse(String scenario, RequestOptions requestOptions) {
+        return responseDatetimeRfc1123WithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2072,22 +1911,19 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDurationWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramDuration(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramDurationWithResponseAsync(
+            String scenario, Duration value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2097,22 +1933,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramDuration(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramDurationWithResponseAsync(
+            String scenario, Duration value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2121,21 +1952,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDurationWithResponse(RequestOptions requestOptions) {
-        return paramDurationWithResponseAsync(requestOptions).block();
+    public Response<Void> paramDurationWithResponse(String scenario, Duration value, RequestOptions requestOptions) {
+        return paramDurationWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2145,22 +1969,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDurationWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> responseDurationWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDuration(this.client.getHost(), requestOptions, context));
+                context -> service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2171,21 +1989,16 @@ public final class HeadersImpl {
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDurationWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseDuration(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseDurationWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2194,22 +2007,15 @@ public final class HeadersImpl {
      * @return a response with header values "P123DT22H14M12.011S" along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseDurationWithResponse(RequestOptions requestOptions) {
-        return responseDurationWithResponseAsync(requestOptions).block();
+    public Response<Void> responseDurationWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseDurationWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2218,22 +2024,21 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramByte(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramByteWithResponseAsync(
+            String scenario, byte[] value, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String valueConverted = Base64Util.encodeToString(value);
+        return FluxUtil.withContext(
+                context ->
+                        service.paramByte(
+                                this.client.getHost(), scenario, valueConverted, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2243,22 +2048,18 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramByte(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramByteWithResponseAsync(
+            String scenario, byte[] value, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        String valueConverted = Base64Util.encodeToString(value);
+        return service.paramByte(this.client.getHost(), scenario, valueConverted, accept, requestOptions, context);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     *     <tr><td>value</td><td>String</td><td>Yes</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2267,21 +2068,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramByteWithResponse(RequestOptions requestOptions) {
-        return paramByteWithResponseAsync(requestOptions).block();
+    public Response<Void> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
+        return paramByteWithResponseAsync(scenario, value, requestOptions).block();
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2291,21 +2085,16 @@ public final class HeadersImpl {
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseByteWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseByte(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseByteWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2316,21 +2105,16 @@ public final class HeadersImpl {
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseByte(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseByteWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2339,8 +2123,8 @@ public final class HeadersImpl {
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseByteWithResponse(RequestOptions requestOptions) {
-        return responseByteWithResponseAsync(requestOptions).block();
+    public Response<Void> responseByteWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseByteWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
@@ -2351,10 +2135,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2363,8 +2147,10 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramEnumWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.paramEnum(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> paramEnumWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramEnum(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
@@ -2375,10 +2161,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2388,8 +2174,10 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramEnumWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.paramEnum(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> paramEnumWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.paramEnum(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -2400,10 +2188,10 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' </td></tr>
      * </table>
      *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2412,21 +2200,14 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramEnumWithResponse(RequestOptions requestOptions) {
-        return paramEnumWithResponseAsync(requestOptions).block();
+    public Response<Void> paramEnumWithResponse(String scenario, RequestOptions requestOptions) {
+        return paramEnumWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
      * Get a response with header values "GREY" or null.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2436,21 +2217,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseEnumWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.responseEnum(this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>> responseEnumWithResponseAsync(String scenario, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseEnum(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "GREY" or null.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2461,21 +2237,16 @@ public final class HeadersImpl {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseEnumWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.responseEnum(this.client.getHost(), requestOptions, context);
+    public Mono<Response<Void>> responseEnumWithResponseAsync(
+            String scenario, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.responseEnum(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
      * Get a response with header values "GREY" or null.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>scenario</td><td>String</td><td>Yes</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
-     * </table>
-     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2484,8 +2255,8 @@ public final class HeadersImpl {
      * @return a response with header values "GREY" or null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> responseEnumWithResponse(RequestOptions requestOptions) {
-        return responseEnumWithResponseAsync(requestOptions).block();
+    public Response<Void> responseEnumWithResponse(String scenario, RequestOptions requestOptions) {
+        return responseEnumWithResponseAsync(scenario, requestOptions).block();
     }
 
     /**
@@ -2500,7 +2271,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.customRequestId(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.customRequestId(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2516,7 +2289,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.customRequestId(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.customRequestId(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

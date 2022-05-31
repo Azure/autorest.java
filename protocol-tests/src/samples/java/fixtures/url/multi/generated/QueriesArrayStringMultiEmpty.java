@@ -16,8 +16,7 @@ public class QueriesArrayStringMultiEmpty {
                         .host("http://localhost:3000")
                         .buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("arrayQuery", "");
+        RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "");
         Response<Void> response =
                 autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty

@@ -159,7 +159,7 @@ public class Javagen extends NewPlugin {
         for (AsyncSyncClient syncClient : client.getSyncClients()) {
             boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
                     // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
-                    && settings.isLowLevelClient()
+                    && settings.isDataPlaneClient()
                     // 1-1 match of SyncClient and AsyncClient
                     && client.getAsyncClients().size() == client.getSyncClients().size();
             javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
@@ -179,14 +179,14 @@ public class Javagen extends NewPlugin {
         }
 
         // Sample
-        if (settings.isLowLevelClient() && settings.isGenerateSamples()) {
+        if (settings.isDataPlaneClient() && settings.isGenerateSamples()) {
             for (ProtocolExample protocolExample : client.getProtocolExamples()) {
                 javaPackage.addProtocolExamples(protocolExample);
             }
         }
 
         // Test
-        if (settings.isLowLevelClient() && settings.isGenerateTests()) {
+        if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
             if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
                 TestContext testContext = new TestContext(client.getServiceClient(), client.getSyncClients());
 
@@ -201,7 +201,7 @@ public class Javagen extends NewPlugin {
         }
 
         // Service version
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             List<String> serviceVersions = settings.getServiceVersions();
             if (serviceVersions == null) {
                 String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
@@ -222,7 +222,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
-        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
+        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
             // Response
             for (ClientResponse response : client.getResponseModels()) {
                 javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
@@ -251,7 +251,7 @@ public class Javagen extends NewPlugin {
         }
 
         // Unit tests on client model
-        if (settings.isGenerateTests() && (!settings.isLowLevelClient() || settings.isGenerateModels())) {
+        if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
             for (ClientModel model : client.getModels()) {
                 javaPackage.addModelUnitTest(model);
             }
@@ -262,7 +262,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
         }
 
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
             if (settings.isSdkIntegration()) {
                 project.integrateWithSdk();
@@ -280,7 +280,7 @@ public class Javagen extends NewPlugin {
             // Readme, Changelog
             if (settings.isSdkIntegration()) {
                 javaPackage.addReadmeMarkdown(project);
-                //javaPackage.addSwaggerReadmeMarkdown(project);    // use readme in spec repo instead
+                javaPackage.addSwaggerReadmeMarkdown(project);    // use readme in spec repo instead
                 javaPackage.addChangelogMarkdown(project);
 
                 // Blank readme sample

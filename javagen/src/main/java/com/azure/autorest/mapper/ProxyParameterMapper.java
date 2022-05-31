@@ -12,10 +12,12 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
@@ -38,7 +40,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
                 .name(name)
                 .isRequired(parameter.isRequired())
-                .isNullable(parameter.isNullable());
+                .isNullable(parameter.isNullable())
+                .origin(ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()));
 
         String headerCollectionPrefix = null;
         if (parameter.getExtensions() != null && parameter.getExtensions().getXmsHeaderCollectionPrefix() != null) {
@@ -60,12 +63,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         builder.rawType(wireType);
 
         IType clientType = wireType.getClientType();
-        if (settings.isLowLevelClient() && !(clientType instanceof PrimitiveType)) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                clientType = ClassType.BinaryData;
-            } else {
-                clientType = ClassType.String;
-            }
+
+        if (settings.isDataPlaneClient()) {
+            clientType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, clientType);
         }
         builder.clientType(clientType);
 
@@ -88,12 +88,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             } else {
                 wireType = ClassType.String;
             }
-        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
-            if (parameterRequestLocation == RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                wireType = ClassType.BinaryData;
-            } else {
-                wireType = ClassType.String;
-            }
+        } else if (settings.isDataPlaneClient()) {
+            wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
         }
         builder.wireType(wireType);
 
@@ -131,7 +127,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
             boolean isServiceVersion = false;
-            if (settings.isLowLevelClient() && clientPropertyName.equals("apiVersion")) {
+            if (settings.isDataPlaneClient() && clientPropertyName.equals("apiVersion")) {
                 isServiceVersion = true;
                 clientPropertyName = "serviceVersion";
             }
@@ -185,4 +181,5 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
     protected ProxyMethodParameter.Builder createProxyMethodParameterBuilder() {
         return new ProxyMethodParameter.Builder();
     }
+
 }

@@ -10,89 +10,93 @@ set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
 move /Y vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java vanilla-tests\swagger\CoverageReporter.java
 rmdir /S /Q "vanilla-tests\src\main"
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/additionalProperties.json --namespace=fixtures.additionalproperties
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-array.json --namespace=fixtures.bodyarray
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter --client-logger
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger --generate-tests
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.streamstyleserialization --stream-style-serialization --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile --context-client-method-parameter
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring --generate-client-interfaces
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl.json --namespace=fixtures.custombaseuri
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-more-options.json --namespace=fixtures.custombaseuri.moreoptions
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head.json --namespace=fixtures.head
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head-exceptions.json --namespace=fixtures.headexceptions
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header --context-client-method-parameter
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.customheaderdeserialization --context-client-method-parameter --custom-strongly-typed-header-deserialization
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.nonamedresponsetypes --context-client-method-parameter --generic-response-type
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-duration.json --namespace=fixtures.bodyduration
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-integer.json --namespace=fixtures.bodyinteger
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-number.json --namespace=fixtures.bodynumber --disable-client-builder
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-byte.json --namespace=fixtures.bodybyte
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-date.json --namespace=fixtures.bodydate
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-datetime.json --namespace=fixtures.bodydatetime
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-datetime-rfc1123.json --namespace=fixtures.bodydatetimerfc1123
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/extensible-enums-swagger.json --namespace=fixtures.extensibleenums
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/required-optional.json --namespace=fixtures.requiredoptional
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/xml-service.json --namespace=fixtures.xmlservice --enable-xml
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameter-flattening.json --namespace=fixtures.parameterflattening --payload-flattening-threshold=1
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/model-flattening.json --namespace=fixtures.modelflattening --payload-flattening-threshold=1 --optional-constant-as-enum=true
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1 --modelerfour.lenient-model-deduplication
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/validation.json --namespace=fixtures.validation
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.json --namespace=fixtures.nonstringenum --generate-sync-async-clients --disable-client-builder
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/lro.md
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/additionalProperties.json --namespace=fixtures.additionalproperties
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-array.json --namespace=fixtures.bodyarray
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter --client-logger
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger --generate-tests
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.streamstyleserialization --stream-style-serialization --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile --context-client-method-parameter
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring --generate-client-interfaces
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl.json --namespace=fixtures.custombaseuri
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-more-options.json --namespace=fixtures.custombaseuri.moreoptions
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head.json --namespace=fixtures.head
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head-exceptions.json --namespace=fixtures.headexceptions
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header --context-client-method-parameter
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.customheaderdeserialization --context-client-method-parameter --custom-strongly-typed-header-deserialization
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.nonamedresponsetypes --context-client-method-parameter --generic-response-type
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-duration.json --namespace=fixtures.bodyduration
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-integer.json --namespace=fixtures.bodyinteger
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-number.json --namespace=fixtures.bodynumber --disable-client-builder
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-byte.json --namespace=fixtures.bodybyte
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-date.json --namespace=fixtures.bodydate
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-datetime.json --namespace=fixtures.bodydatetime
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-datetime-rfc1123.json --namespace=fixtures.bodydatetimerfc1123
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/extensible-enums-swagger.json --namespace=fixtures.extensibleenums
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/required-optional.json --namespace=fixtures.requiredoptional
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/xml-service.json --namespace=fixtures.xmlservice --enable-xml
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameter-flattening.json --namespace=fixtures.parameterflattening --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/model-flattening.json --namespace=fixtures.modelflattening --payload-flattening-threshold=1 --optional-constant-as-enum=true
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1 --modelerfour.lenient-model-deduplication
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/validation.json --namespace=fixtures.validation
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/non-string-enum.json --namespace=fixtures.nonstringenum --generate-sync-async-clients --disable-client-builder
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/multiple-inheritance.json --namespace=fixtures.multipleinheritance
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/report.json --namespace=fixtures.report --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/lro.md
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md
 move vanilla-tests\swagger\CoverageReporter.java vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java
 
 rem local swagger
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.requirexmsflattened --require-x-ms-flattened-to-flatten=true
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.noflatten --modelerfour.flatten-models=false
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.clientflatten --modelerfour.flatten-models=false --client-flattened-annotation-target=NONE
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.clientdefaultvalue --modelerfour.flatten-models=false
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.donotpassdiscriminator
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.passdiscriminator --pass-discriminator-to-child-deserialization=true
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
-call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening --client-flattened-annotation-target=FIELD
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.requirexmsflattened --require-x-ms-flattened-to-flatten=true
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.noflatten --modelerfour.flatten-models=false
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening.clientflatten --modelerfour.flatten-models=false --client-flattened-annotation-target=NONE
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.clientdefaultvalue --modelerfour.flatten-models=false
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.donotpassdiscriminator
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.passdiscriminator --pass-discriminator-to-child-deserialization=true
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 
 rem Azure
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-paging.json --namespace=fixtures.custombaseuri.paging --payload-flattening-threshold=1
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-special-properties.json --namespace=fixtures.azurespecials --payload-flattening-threshold=1 --context-client-method-parameter
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1
-call:logandcallautorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-paging.json --namespace=fixtures.custombaseuri.paging --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-special-properties.json --namespace=fixtures.azurespecials --payload-flattening-threshold=1 --context-client-method-parameter
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
 
-rem call:logandcallautorest autorest %ARM_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
-rem call:logandcallautorest autorest %ARM_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
+rem call :log-and-call-autorest autorest %ARM_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
+rem call :log-and-call-autorest autorest %ARM_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
 rem Protocol
 rmdir /S /Q "protocol-tests\src\main"
 rmdir /S /Q "protocol-tests\src\samples"
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
-call:logandcallautorest autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/httpInfrastructure.json --namespace=fixtures.httpinfrastructure
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameterized-endpoint.json --namespace=fixtures.parameterizedendpoint --generate-send-request-method
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/required-header-query.json --namespace=fixtures.requiredheaderquery
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models
 copy protocol-tests\swagger\CustomizedException.java protocol-tests\src\main\java\fixtures\headexceptions\models\CustomizedException.java
 del protocol-tests\src\main\java\module-info.java
@@ -100,28 +104,29 @@ del protocol-tests\src\main\java\module-info.java
 rem Protocol resilience
 rmdir /S /Q "protocol-resilience-test\llcinitial\src\main"
 rmdir /S /Q "protocol-resilience-test\llcupdate1\src\main"
-call:logandcallautorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call:logandcallautorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 
 rem customization
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use:. customization-tests/swagger
+
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use:. customization-tests/swagger
 
 rem partial update tests
-call:logandcallautorest autorest --version=%AUTOREST_CORE_VERSION% --use:. partial-update-tests/existing/swagger/README.md
+call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use:. partial-update-tests/existing/swagger/README.md
 del partial-update-tests\generated\src\main\java\module-info.java
 
 rem docs
-call:logandcallautorest autorest --use:. docs/samples/specification/azure_key_credential/readme.md
-call:logandcallautorest autorest --use:. docs/samples/specification/basic/readme.md
-call:logandcallautorest autorest --use:. docs/samples/specification/management/readme.md
+call :log-and-call-autorest autorest --use:. docs/samples/specification/azure_key_credential/readme.md
+call :log-and-call-autorest autorest --use:. docs/samples/specification/basic/readme.md
+call :log-and-call-autorest autorest --use:. docs/samples/specification/management/readme.md
 
 exit /B %ERRORLEVEL%
 
-:logandcallautorest
-echo =================================================
+:log-and-call-autorest
+echo ========================
 echo %*
-echo =================================================
+echo ========================
 call %*
 exit /B 0

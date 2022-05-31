@@ -14,8 +14,8 @@ public class MockJavagen extends Javagen {
 
     private static final Map<String, Object> DEFAULT_SETTINGS = new HashMap<>();
 
-    public MockJavagen() {
-        super(new Connection(System.out, System.in), "dummy", "dummy");
+    public MockJavagen(Connection connection) {
+        super(connection, "dummy", "dummy");
         instance = this;
     }
 
