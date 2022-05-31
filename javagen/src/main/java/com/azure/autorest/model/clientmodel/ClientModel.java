@@ -3,9 +3,11 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -78,6 +80,8 @@ public class ClientModel {
      */
     private final boolean stronglyTypedHeader;
 
+    private final Set<SchemaContext> usages;
+
     /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
@@ -99,7 +103,7 @@ public class ClientModel {
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-            IType modelType, boolean stronglyTypedHeader) {
+            IType modelType, boolean stronglyTypedHeader, Set<SchemaContext> usages) {
         packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
@@ -116,6 +120,7 @@ public class ClientModel {
         this.propertyReferences = propertyReferences;
         this.modelType = modelType;
         this.stronglyTypedHeader = stronglyTypedHeader;
+        this.usages = usages;
     }
 
     public final String getPackage() {
@@ -192,6 +197,13 @@ public class ClientModel {
      */
     public boolean isStronglyTypedHeader() {
         return stronglyTypedHeader;
+    }
+
+    /**
+     * @return the usages of the model.
+     */
+    public Set<SchemaContext> getUsages() {
+        return usages;
     }
 
     /**
@@ -275,6 +287,7 @@ public class ClientModel {
         protected List<ClientModelPropertyReference> propertyReferences;
         protected IType modelType;
         protected boolean stronglyTypedHeader;
+        protected Set<SchemaContext> usages = new HashSet<>();
 
         /**
          * Sets the package that this model class belongs to.
@@ -438,6 +451,17 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets the usage of the model.
+         *
+         * @param usages the usage of the model.
+         * @return the Builder itself
+         */
+        public Builder usages(Set<SchemaContext> usages) {
+            this.usages = usages;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -454,7 +478,8 @@ public class ClientModel {
                     properties,
                     propertyReferences,
                     modelType,
-                    stronglyTypedHeader);
+                    stronglyTypedHeader,
+                    usages);
         }
     }
 }

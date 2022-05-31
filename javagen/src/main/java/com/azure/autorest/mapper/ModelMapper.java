@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -64,7 +65,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     .name(modelName)
                     .packageName(modelType.getPackage())
                     .type(modelType)
-                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader());
+                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+                    .usages(compositeType.getUsage());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.isPolymorphic(isPolymorphic);
@@ -244,6 +246,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
+                if (settings.isOutputImmutable() && !compositeType.getUsage().contains(SchemaContext.INPUT)) {
+                    modelProperty = modelProperty.newBuilder().isReadOnly(true).build();
+                }
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {

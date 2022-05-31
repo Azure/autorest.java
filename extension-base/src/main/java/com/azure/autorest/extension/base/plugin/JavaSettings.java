@@ -148,7 +148,8 @@ public class JavaSettings {
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "custom-strongly-typed-header-deserialization", false),
-                getBooleanValue(host, "generic-response-type", false)
+                getBooleanValue(host, "generic-response-type", false),
+                getBooleanValue(host, "model-output-immutable", false)
             );
         }
         return instance;
@@ -250,7 +251,8 @@ public class JavaSettings {
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
         boolean customStronglyTypedHeaderDeserialization,
-        boolean genericResponseTypes) {
+        boolean genericResponseTypes,
+        boolean outputImmutable) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -339,6 +341,8 @@ public class JavaSettings {
 
         this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
         this.genericResponseTypes = genericResponseTypes;
+
+        this.outputImmutable = outputImmutable;
     }
 
     private String keyCredentialHeaderName;
@@ -728,6 +732,7 @@ public class JavaSettings {
     }
 
     boolean overrideSetterFromParent;
+    boolean outputImmutable;
     boolean skipFormatting;
 
     /**
@@ -735,6 +740,13 @@ public class JavaSettings {
      */
     public boolean isOverrideSetterFromSuperclass() {
         return overrideSetterFromParent;
+    }
+
+    /**
+     * @return whether to make model immutable if only used as API output.
+     */
+    public boolean isOutputImmutable() {
+        return outputImmutable;
     }
 
     /**

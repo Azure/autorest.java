@@ -145,6 +145,31 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.isXmlText = isXmlText;
     }
 
+    public ClientModelProperty.Builder newBuilder() {
+        return new Builder()
+                .name(name)
+                .description(description)
+                .annotationArguments(annotationArguments)
+                .isXmlAttribute(isXmlAttribute)
+                .xmlName(xmlName)
+                .xmlNamespace(xmlNamespace)
+                .serializedName(serializedName)
+                .isXmlWrapper(isXmlWrapper)
+                .wireType(wireType)
+                .clientType(clientType)
+                .isConstant(isConstant)
+                .defaultValue(defaultValue)
+                .isReadOnly(isReadOnly)
+                .mutabilities(mutabilities)
+                .isRequired(isRequired)
+                .headerCollectionPrefix(headerCollectionPrefix)
+                .isAdditionalProperties(isAdditionalProperties)
+                .needsFlatten(needsFlatten)
+                .clientFlatten(clientFlatten)
+                .polymorphicDiscriminator(polymorphicDiscriminator)
+                .isXmlText(isXmlText);
+    }
+
     public final String getName() {
         return name;
     }
