@@ -9,8 +9,8 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.JsonCapable;
 import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 
 import java.util.Set;
@@ -30,7 +30,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     @Override
     protected void addSerializationImports(Set<String> imports, JavaSettings settings) {
-        imports.add(JsonCapable.class.getName());
+        imports.add(JsonSerializable.class.getName());
         imports.add(JsonWriter.class.getName());
         imports.add(JsonReader.class.getName());
         imports.add(JsonUtils.class.getName());

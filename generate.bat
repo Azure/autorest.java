@@ -15,6 +15,7 @@ call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter --client-logger
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger --generate-tests
+call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.streamstyleserialization --stream-style-serialization --required-fields-as-ctor-args --model-override-setter-from-superclass --client-logger
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile --context-client-method-parameter
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring --generate-client-interfaces
 call:logandcallautorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl.json --namespace=fixtures.custombaseuri

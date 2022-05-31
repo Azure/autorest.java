@@ -8,8 +8,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.PageDetails;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.JsonCapable;
 import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,7 +46,7 @@ public class PageTemplate implements IJavaTemplate<PageDetails, JavaFile> {
             imports.add(JsonGetter.class.getName());
             imports.add(JsonSetter.class.getName());
         } else {
-            imports.add(JsonCapable.class.getName());
+            imports.add(JsonSerializable.class.getName());
             imports.add(JsonWriter.class.getName());
             imports.add(JsonReader.class.getName());
             imports.add(JsonUtils.class.getName());
