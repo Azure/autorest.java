@@ -5,6 +5,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
@@ -161,7 +162,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            requests = Collections.singletonList(requests.get(0));
+            // if there is request with binary type, find the request consumes binary type
+            // if all requests are non-binary type, get the first request
+            Request selectedRequest = requests.get(0);
+            for (Request request : requests) {
+                if (request.getProtocol().getHttp().getKnownMediaType() != null
+                        && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
+                    selectedRequest = request;
+                    break;
+                }
+            }
+            requests = Collections.singletonList(selectedRequest);
         }
 
         for (Request request : requests) {

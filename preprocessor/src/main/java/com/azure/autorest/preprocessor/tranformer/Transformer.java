@@ -96,6 +96,7 @@ public class Transformer {
             Parameter parameter = request.getParameters().get(i);
             parameter.setOperation(operation);
             renameVariable(parameter);
+
             // add Content-Length for Flux<ByteBuffer> if not already present
             if (parameter.getSchema() instanceof BinarySchema) {
               if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
@@ -103,7 +104,8 @@ public class Transformer {
                       && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER
                       && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
                 Parameter contentLength = createContentLengthParameter(operation, parameter);
-                request.getParameters().add(++i, contentLength);
+                // put contentLength parameter before input body
+                request.getParameters().add(i++, contentLength);
                 request.getSignatureParameters().add(request.getSignatureParameters().indexOf(parameter) + 1, contentLength);
               }
             }

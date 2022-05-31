@@ -4,6 +4,7 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.Javagen;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
@@ -28,6 +29,7 @@ import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -171,7 +173,17 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            requests = Collections.singletonList(requests.get(0));
+            // if there is request with binary type, find the request consumes binary type
+            // if all requests are non-binary type, get the first request
+            Request selectedRequest = requests.get(0);
+            for (Request request : requests) {
+                if (request.getProtocol().getHttp().getKnownMediaType() != null
+                        && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
+                    selectedRequest = request;
+                    break;
+                }
+            }
+             requests = Collections.singletonList(selectedRequest);
         }
 
         // Used to deduplicate method with same signature.
@@ -290,6 +302,21 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
         return result;
     }
+
+    private boolean containsParameter(List<Parameter> parameters, Parameter parameter) {
+        boolean res = false;
+        if (parameters != null && parameters.size() > 0) {
+            res = parameters.stream().anyMatch(p -> {
+                if (p.getLanguage() != null && parameter.getLanguage() != null && p.getLanguage().getJava() != null && parameter.getLanguage().getJava() != null && p.getLanguage().getJava().getName().equals(parameter.getLanguage().getJava().getName())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
+        return res;
+    }
+
 
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
         return operation.getOperationGroup() != null
