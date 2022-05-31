@@ -303,21 +303,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         return result;
     }
 
-    private boolean containsParameter(List<Parameter> parameters, Parameter parameter) {
-        boolean res = false;
-        if (parameters != null && parameters.size() > 0) {
-            res = parameters.stream().anyMatch(p -> {
-                if (p.getLanguage() != null && parameter.getLanguage() != null && p.getLanguage().getJava() != null && parameter.getLanguage().getJava() != null && p.getLanguage().getJava().getName().equals(parameter.getLanguage().getJava().getName())) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        }
-        return res;
-    }
-
-
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
         return operation.getOperationGroup() != null
                 && operation.getOperationGroup().getLanguage() != null

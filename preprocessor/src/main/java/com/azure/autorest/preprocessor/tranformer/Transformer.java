@@ -96,7 +96,6 @@ public class Transformer {
             Parameter parameter = request.getParameters().get(i);
             parameter.setOperation(operation);
             renameVariable(parameter);
-
             // add Content-Length for Flux<ByteBuffer> if not already present
             if (parameter.getSchema() instanceof BinarySchema) {
               if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
