@@ -6,7 +6,6 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Error;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class ErrorTests {
@@ -14,15 +13,11 @@ public final class ErrorTests {
     public void testDeserialize() {
         Error model =
                 BinaryData.fromString("{\"status\":655985822,\"message\":\"bsphrupidgsybbe\"}").toObject(Error.class);
-        Assertions.assertEquals(655985822, model.getStatus());
-        Assertions.assertEquals("bsphrupidgsybbe", model.getMessage());
     }
 
     @Test
     public void testSerialize() {
-        Error model = new Error().setStatus(655985822).setMessage("bsphrupidgsybbe");
+        Error model = new Error();
         model = BinaryData.fromObject(model).toObject(Error.class);
-        Assertions.assertEquals(655985822, model.getStatus());
-        Assertions.assertEquals("bsphrupidgsybbe", model.getMessage());
     }
 }

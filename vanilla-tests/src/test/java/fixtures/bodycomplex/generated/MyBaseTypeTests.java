@@ -6,7 +6,6 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.MyBaseType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class MyBaseTypeTests {
@@ -16,15 +15,11 @@ public final class MyBaseTypeTests {
                 BinaryData.fromString(
                                 "{\"kind\":\"MyBaseType\",\"propB1\":\"jlxofpdvhpfxxyp\",\"helper\":{\"propBH1\":\"i\"}}")
                         .toObject(MyBaseType.class);
-        Assertions.assertEquals("jlxofpdvhpfxxyp", model.getPropB1());
-        Assertions.assertEquals("i", model.getPropBH1());
     }
 
     @Test
     public void testSerialize() {
-        MyBaseType model = new MyBaseType().setPropB1("jlxofpdvhpfxxyp").setPropBH1("i");
+        MyBaseType model = new MyBaseType();
         model = BinaryData.fromObject(model).toObject(MyBaseType.class);
-        Assertions.assertEquals("jlxofpdvhpfxxyp", model.getPropB1());
-        Assertions.assertEquals("i", model.getPropBH1());
     }
 }

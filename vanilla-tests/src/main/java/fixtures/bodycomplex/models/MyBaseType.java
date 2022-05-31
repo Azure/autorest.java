@@ -4,7 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("MyBaseType")
 @JsonSubTypes({@JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class)})
 @JsonFlatten
-@Fluent
+@Immutable
 public class MyBaseType {
     /*
      * The propB1 property.
@@ -44,34 +44,12 @@ public class MyBaseType {
     }
 
     /**
-     * Set the propB1 property: The propB1 property.
-     *
-     * @param propB1 the propB1 value to set.
-     * @return the MyBaseType object itself.
-     */
-    public MyBaseType setPropB1(String propB1) {
-        this.propB1 = propB1;
-        return this;
-    }
-
-    /**
      * Get the propBH1 property: The propBH1 property.
      *
      * @return the propBH1 value.
      */
     public String getPropBH1() {
         return this.propBH1;
-    }
-
-    /**
-     * Set the propBH1 property: The propBH1 property.
-     *
-     * @param propBH1 the propBH1 value to set.
-     * @return the MyBaseType object itself.
-     */
-    public MyBaseType setPropBH1(String propBH1) {
-        this.propBH1 = propBH1;
-        return this;
     }
 
     /**

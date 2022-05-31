@@ -5,11 +5,7 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.models.DotFish;
 import fixtures.bodycomplex.models.DotFishMarket;
-import fixtures.bodycomplex.models.DotSalmon;
-import java.util.Arrays;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class DotFishMarketTests {
@@ -19,45 +15,11 @@ public final class DotFishMarketTests {
                 BinaryData.fromString(
                                 "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"wyahuxinpmqnja\",\"iswild\":true,\"species\":\"jsprozvcpute\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"mfdatscmdvpj\",\"iswild\":true,\"species\":\"uuvmkjozkrwfnd\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"jpslwejd\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"yoqpsoaccta\"},{\"fish.type\":\"DotFish\",\"species\":\"kljla\"},{\"fish.type\":\"DotFish\",\"species\":\"cr\"}]}")
                         .toObject(DotFishMarket.class);
-        Assertions.assertEquals("jsprozvcpute", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("wyahuxinpmqnja", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(true, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("uuvmkjozkrwfnd", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("mfdatscmdvpj", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(true, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("jpslwejd", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("yoqpsoaccta", model.getFishes().get(0).getSpecies());
     }
 
     @Test
     public void testSerialize() {
-        DotFishMarket model =
-                new DotFishMarket()
-                        .setSampleSalmon(
-                                new DotSalmon()
-                                        .setSpecies("jsprozvcpute")
-                                        .setLocation("wyahuxinpmqnja")
-                                        .setIswild(true))
-                        .setSalmons(
-                                Arrays.asList(
-                                        new DotSalmon()
-                                                .setSpecies("uuvmkjozkrwfnd")
-                                                .setLocation("mfdatscmdvpj")
-                                                .setIswild(true)))
-                        .setSampleFish(new DotFish().setSpecies("jpslwejd"))
-                        .setFishes(
-                                Arrays.asList(
-                                        new DotFish().setSpecies("yoqpsoaccta"),
-                                        new DotFish().setSpecies("kljla"),
-                                        new DotFish().setSpecies("cr")));
+        DotFishMarket model = new DotFishMarket();
         model = BinaryData.fromObject(model).toObject(DotFishMarket.class);
-        Assertions.assertEquals("jsprozvcpute", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("wyahuxinpmqnja", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(true, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("uuvmkjozkrwfnd", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("mfdatscmdvpj", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(true, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("jpslwejd", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("yoqpsoaccta", model.getFishes().get(0).getSpecies());
     }
 }

@@ -6,7 +6,6 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DotSalmon;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class DotSalmonTests {
@@ -16,17 +15,11 @@ public final class DotSalmonTests {
                 BinaryData.fromString(
                                 "{\"fish.type\":\"DotSalmon\",\"location\":\"fdfdosygexpa\",\"iswild\":true,\"species\":\"hmsbzjhcrzevdp\"}")
                         .toObject(DotSalmon.class);
-        Assertions.assertEquals("hmsbzjhcrzevdp", model.getSpecies());
-        Assertions.assertEquals("fdfdosygexpa", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
     }
 
     @Test
     public void testSerialize() {
-        DotSalmon model = new DotSalmon().setSpecies("hmsbzjhcrzevdp").setLocation("fdfdosygexpa").setIswild(true);
+        DotSalmon model = new DotSalmon();
         model = BinaryData.fromObject(model).toObject(DotSalmon.class);
-        Assertions.assertEquals("hmsbzjhcrzevdp", model.getSpecies());
-        Assertions.assertEquals("fdfdosygexpa", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
     }
 }

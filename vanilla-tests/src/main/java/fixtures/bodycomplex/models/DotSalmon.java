@@ -4,7 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type")
 @JsonTypeName("DotSalmon")
 @JsonFlatten
-@Fluent
+@Immutable
 public class DotSalmon extends DotFish {
     /*
      * The location property.
@@ -38,41 +38,12 @@ public class DotSalmon extends DotFish {
     }
 
     /**
-     * Set the location property: The location property.
-     *
-     * @param location the location value to set.
-     * @return the DotSalmon object itself.
-     */
-    public DotSalmon setLocation(String location) {
-        this.location = location;
-        return this;
-    }
-
-    /**
      * Get the iswild property: The iswild property.
      *
      * @return the iswild value.
      */
     public Boolean iswild() {
         return this.iswild;
-    }
-
-    /**
-     * Set the iswild property: The iswild property.
-     *
-     * @param iswild the iswild value to set.
-     * @return the DotSalmon object itself.
-     */
-    public DotSalmon setIswild(Boolean iswild) {
-        this.iswild = iswild;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public DotSalmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
     }
 
     /**

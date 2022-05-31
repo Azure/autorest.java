@@ -4,7 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /** The MyDerivedType model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("Kind1")
-@Fluent
+@Immutable
 public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.
@@ -27,31 +27,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public String getPropD1() {
         return this.propD1;
-    }
-
-    /**
-     * Set the propD1 property: The propD1 property.
-     *
-     * @param propD1 the propD1 value to set.
-     * @return the MyDerivedType object itself.
-     */
-    public MyDerivedType setPropD1(String propD1) {
-        this.propD1 = propD1;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyDerivedType setPropB1(String propB1) {
-        super.setPropB1(propB1);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyDerivedType setPropBH1(String propBH1) {
-        super.setPropBH1(propBH1);
-        return this;
     }
 
     /**
