@@ -4,7 +4,10 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonCapable;
 import com.azure.json.JsonReader;
@@ -34,8 +37,35 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
+    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
+        boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
+        // no-op as stream-style serialization doesn't need to add anything for polymorphic types.
+    }
+
+    @Override
+    protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
+        // no-op as stream-style serialization doesn't add any class-level annotations.
+    }
+
+    @Override
+    protected String addSerializationImplementations(String classSignature, ClientModel model, JavaSettings settings) {
+        // TODO (alzimmer): Once XML stream-style serialization is supported this will need to determine whether
+        //  JsonCapable and/or XmlCapable need to be added as an implemented interface.
+        if (settings.isStreamStyleSerialization()) {
+            classSignature += " implements JsonCapable<" + model.getName() + ">";
+        }
+
+        return classSignature;
+    }
+
+    @Override
     protected void addModelConstructorParameter(ClientModelProperty property,
         StringBuilder constructorSignatureBuilder) {
         constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
+    }
+
+    @Override
+    protected void addFieldAnnotations(ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
+        // no-op as stream-style serialization doesn't add any field-level annotations.
     }
 }

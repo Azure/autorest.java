@@ -15,7 +15,6 @@ public class IterableType extends GenericType {
         super("java.lang", "Iterable", elementType);
     }
 
-
     /**
      * The type of elements that are stored in this iterable.
      */
@@ -37,7 +36,7 @@ public class IterableType extends GenericType {
     public String validate(String expression, int depth) {
         String var = depth == 0 ? "e" : "e" + depth;
         String elementValidation = getElementType() instanceof GenericType
-                ? ((GenericType) getElementType()).validate(var, ++depth)
+                ? ((GenericType) getElementType()).validate(var, depth + 1)
                 : getElementType().validate(var);
         if (elementValidation != null) {
             return String.format("%s.forEach(%s -> %s)", expression, var, elementValidation);

@@ -7,9 +7,15 @@ package com.azure.autorest.model.javamodel;
  * Modifiers that can be applied to Java types or members.
  */
 public enum JavaModifier {
-    Final,
+    Final("final"),
 
-    Static;
+    Static("static");
+
+    private final String keyword;
+
+    JavaModifier(String keyword) {
+        this.keyword = keyword;
+    }
 
     public static final int SIZE = java.lang.Integer.SIZE;
 
@@ -19,5 +25,10 @@ public enum JavaModifier {
 
     public int getValue() {
         return this.ordinal();
+    }
+
+    @Override
+    public String toString() {
+        return keyword;
     }
 }

@@ -35,12 +35,14 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -86,25 +88,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             comment -> comment.description(model.getDescription()));
 
         boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
+
+        // Handle adding annotations if the model is polymorphic.
         handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
 
-        if (settings.shouldGenerateXmlSerialization()) {
-            if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
-                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
-                    model.getXmlName(), model.getXmlNamespace()));
-            } else {
-                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
-            }
+        // Add class level annotations for serialization formats such as XML.
+        addClassLevelAnnotations(model, javaFile, settings);
+
+        // Add Fluent or Immutable based on whether the model only has read-only properties.
+        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
+            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
+            javaFile.annotation("Fluent");
+        } else {
+            javaFile.annotation("Immutable");
         }
 
-        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && model.getNeedsFlatten()) {
-            javaFile.annotation("JsonFlatten");
-        }
-
-        ArrayList<JavaModifier> classModifiers = new ArrayList<>();
+        // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
+        List<JavaModifier> classModifiers = null;
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
             if (!settings.isFluent() || !model.getName().endsWith("Identity")) {    // bug https://github.com/Azure/azure-sdk-for-java/issues/8372
-                classModifiers.add(JavaModifier.Final);
+                classModifiers = Collections.singletonList(JavaModifier.Final);
             }
         }
 
@@ -113,78 +116,68 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classNameWithBaseType += " extends " + model.getParentModelName();
         }
 
-        if (settings.isStreamStyleSerialization()) {
-            classNameWithBaseType += " implements JsonCapable<" + model.getName() + ">";
-        }
+        classNameWithBaseType = addSerializationImplementations(classNameWithBaseType, model, settings);
 
-        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
-            javaFile.annotation("Fluent");
-        } else {
-            javaFile.annotation("Immutable");
-        }
+        javaFile.publicClass(classModifiers, classNameWithBaseType, classBlock -> {
+            // If the model has any additional properties, needs to be flattened, and isn't being generated with
+            // stream-style serialization add a constant Pattern that will be used to escape the additional property
+            // keys. Certain versions of the JVM will compile a Pattern each time '.replace' is called which is very
+            // expensive.
+            if (model.getProperties().stream().anyMatch(ClientModelProperty::isAdditionalProperties)
+                && model.getNeedsFlatten()
+                && !settings.isStreamStyleSerialization()) {
+                classBlock.privateStaticFinalVariable("Pattern KEY_ESCAPER = Pattern.compile(\"\\\\.\");");
+            }
 
-        javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) -> {
             addProperties(model, classBlock, settings);
 
             addModelConstructor(model, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
-                IType propertyType = property.getWireType();
-                IType propertyClientType = propertyType.getClientType();
+                IType propertyWireType = property.getWireType();
+                IType propertyClientType = propertyWireType.getClientType();
 
-                JavaVisibility methodVisibility = property.getClientFlatten() ? JavaVisibility.Private : JavaVisibility.Public;
+                JavaVisibility methodVisibility = property.getClientFlatten()
+                    ? JavaVisibility.Private
+                    : JavaVisibility.Public;
 
                 generateGetterJavadoc(classBlock, model, property);
-                if (property.isAdditionalProperties()) {
+                if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
                 if (!property.getIsReadOnly()) {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                classBlock.method(methodVisibility, null, String.format("%1$s %2$s()", propertyClientType,
-                    getGetterName(model, property)), methodBlock -> addGetterMethod(propertyType, propertyClientType,
-                    property, settings, methodBlock));
+                classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
 
-                if (!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
+                // If the property isn't read-only or required and part of the constructor, and it isn't private,
+                // add a setter.
+                if (!property.getIsReadOnly()
+                    && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())
+                    && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
-                    classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
-                            model.getName(), property.getSetterName(), propertyClientType, property.getName()),
-                        (methodBlock) -> {
-                            String expression;
-                            if (propertyClientType.equals(ArrayType.ByteArray)) {
-                                expression = String.format("CoreUtils.clone(%s)", property.getName());
-                            } else {
-                                expression = property.getName();
-                            }
-                            if (propertyClientType != propertyType) {
-                                methodBlock.ifBlock(String.format("%s == null", property.getName()),
-                                        (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
-                                    .elseBlock((elseBlock) -> {
-                                        String propertyConversion = propertyType.convertFromClientType(expression);
-                                        elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
-                                    });
-                            } else {
-                                if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                                    methodBlock.line("this.%s = new %s(%s);", property.getName(),
-                                        getPropertyXmlWrapperClassName(property), expression);
-                                } else {
-                                    methodBlock.line("this.%s = %s;", property.getName(), expression);
-                                }
-                            }
-                            methodBlock.methodReturn("this");
-                        });
+                    classBlock.method(methodVisibility, null,
+                        model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
+                        methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
                 }
 
-                if (property.isAdditionalProperties()) {
+                // If the property is additional properties, and stream-style serialization isn't being used, add a
+                // package-private setter that Jackson can use to set values as it deserializes the key-value pairs.
+                if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
                     classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
-                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock ->
-                            ifBlock.line("%s = new HashMap<>();", property.getName()));
-                        methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
+                        // The additional properties are null by default, so if this is the first time the value is
+                        // being added create the containing map.
+                        // TODO (alzimmer): Should we use LinkedHashMap to retain insertion order?
+                        methodBlock.ifBlock(property.getName() + " == null",
+                            ifBlock -> ifBlock.line("%s = new HashMap<>();", property.getName()));
+
+                        methodBlock.line("%s.put(%s, value);", property.getName(),
+                            model.getNeedsFlatten() ? "KEY_ESCAPER.matcher(key).replaceAll(\".\")" : "key");
                     });
                 }
             }
@@ -300,6 +293,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             imports.add(JsonGetter.class.getName());
             imports.add(JsonSetter.class.getName());
         }
+
+        imports.add(Pattern.class.getName());
     }
 
     /**
@@ -309,8 +304,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
      */
-    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
-        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName).collect(Collectors.toSet());
+    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings,
+        List<ClientModelPropertyReference> propertyReferences) {
+        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName)
+            .collect(Collectors.toSet());
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
@@ -331,11 +328,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @param model The client model.
      * @param hasDerivedModels Whether this model has children types.
-     * @param isDiscriminatorPassedToChildDeserialization Whether the deserialization discriminator, such as odata.type,
-     * is passed to children types during deserialization.
+     * @param isDiscriminatorPassedToChildDeserialization Whether the deserialization discriminator, such as
+     * {@code odata.type}, is passed to children types during deserialization.
      * @param javaFile The JavaFile being generated.
      */
-    private static void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
+    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
         boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
         // Model isn't polymorphic, no work to do here.
         if (!model.getIsPolymorphic()) {
@@ -388,104 +385,162 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Adds class level annotations such as XML root element, JsonFlatten, and Fluent/Immutable based on the
+     * configurations of the model.
+     *
+     * @param model The client model.
+     * @param javaFile The Java class file.
+     * @param settings Autorest generation settings.
+     */
+    protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
+        if (settings.shouldGenerateXmlSerialization()) {
+            if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
+                    model.getXmlName(), model.getXmlNamespace()));
+            } else {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+            }
+        }
+
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE
+            && model.getNeedsFlatten()) {
+            javaFile.annotation("JsonFlatten");
+        }
+    }
+
+    /**
+     * Adds serialization implementations to the class signature.
+     *
+     * @param classSignature The class signature.
+     * @param model The client model.
+     * @param settings Autorest generation settings.
+     * @return The updated class signature with serialization implementations added.
+     */
+    protected String addSerializationImplementations(String classSignature, ClientModel model, JavaSettings settings) {
+        // no-op as this is an entry point for subclasses of ModelTemplate that provide more specific code generation.
+        return classSignature;
+    }
+
+    /**
      * Adds the property fields to a class.
      *
      * @param model The client model.
      * @param classBlock The Java class.
      * @param settings AutoRest configuration settings.
      */
-    private static void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
+    private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
-            String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+            addFieldAnnotations(property, classBlock, settings);
 
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
-                // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
-                // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
-                // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
-                // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
-                // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
-                // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
-                // XML node name if the class doesn't have a root name annotation which results in an addition XML level
-                // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
-                // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
-                // the element name but this breaks down in cases where the same element name is used in two different
-                // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
-                // block lists.
-                classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass -> {
-                    IType propertyClientType = property.getWireType().getClientType();
+            String propertyName = property.getName();
+            IType propertyType = property.getWireType();
 
-                    String listElementName = property.getXmlListElementName();
-                    String jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName);
-                    if (property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                        jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = " +
-                            "\"%2$s\")", listElementName, property.getXmlNamespace());
-                    }
-                    innerClass.annotation(jacksonAnnotation);
-                    innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
-
-                    innerClass.annotation("JsonCreator");
-                    innerClass.privateConstructor(String.format("%1$s(@%2$s %3$s items)", xmlWrapperClassName, jacksonAnnotation, propertyClientType), constructor -> constructor.line("this.items = items;"));
-                });
-            }
-
-            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                comment.line(property.getDescription()));
-
-            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
-                classBlock.annotation("JsonFlatten");
-            }
-
-            // If the property is a polymorphic discriminator for the class add the annotation @JsonTypeId.
-            // This will indicate to Jackson that the discriminator serialization is determined by the property
-            // instead of the class level @JsonTypeName annotation. This prevents the discriminator property from
-            // being serialized twice, once for the class level annotation and again for the property annotation.
-            if (property.isPolymorphicDiscriminator()) {
-                classBlock.annotation("JsonTypeId");
-            }
-
-            if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
-                classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-            } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
-                classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
-                    property.getXmlName()));
-            } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-                classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
-                    property.getXmlName(), property.getXmlNamespace()));
-            } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
-                classBlock.annotation("JacksonXmlText");
-            } else if (property.isAdditionalProperties()) {
-                classBlock.annotation("JsonIgnore");
-            } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
-                classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
-            } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
-                classBlock.annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
-            }
-
+            String fieldSignature;
             if (settings.shouldGenerateXmlSerialization()) {
                 if (property.getIsXmlWrapper()) {
-                    classBlock.privateMemberVariable(String.format("%1$s %2$s", xmlWrapperClassName, property.getName()));
-                } else if (property.getWireType() instanceof ListType) {
-                    classBlock.privateMemberVariable(String.format("%1$s %2$s = new ArrayList<>()", property.getWireType(), property.getName()));
+                    String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+                    fieldSignature = xmlWrapperClassName + " " + propertyName;
+                } else if (propertyType instanceof ListType) {
+                    fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
-                    classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                    fieldSignature = propertyType + " " + propertyName;
                 }
             } else {
-                if (!property.isAdditionalProperties() && property.getClientType() instanceof MapType && settings.isFluent()) {
-                    classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
-                }
                 if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
                     // if the property of flattened model is required, initialize it
-                    classBlock.privateMemberVariable(String.format("%1$s %2$s = new %1$s()", property.getWireType(), property.getName()));
+                    fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
                 } else {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null) {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s = %3$s", property.getWireType(), property.getName(), property.getDefaultValue()));
+                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
                     } else {
-                        classBlock.privateMemberVariable(String.format("%1$s %2$s", property.getWireType(), property.getName()));
+                        fieldSignature = propertyType + " " + propertyName;
                     }
                 }
             }
+
+            classBlock.privateMemberVariable(fieldSignature);
+        }
+    }
+
+    /**
+     * Adds the annotations for a model field.
+     *
+     * @param property The property that represents the field.
+     * @param classBlock The Java class.
+     * @param settings Autorest generation settings.
+     */
+    protected void addFieldAnnotations(ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
+        String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+
+        if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+            // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
+            // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
+            // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
+            // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
+            // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
+            // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
+            // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
+            // XML node name if the class doesn't have a root name annotation which results in an addition XML level
+            // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
+            // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
+            // the element name but this breaks down in cases where the same element name is used in two different
+            // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
+            // block lists.
+            classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass -> {
+                IType propertyClientType = property.getWireType().getClientType();
+
+                String listElementName = property.getXmlListElementName();
+                String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
+                    ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
+                    : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
+
+                innerClass.annotation(jacksonAnnotation);
+                innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+
+                innerClass.annotation("JsonCreator");
+                innerClass.privateConstructor(
+                    xmlWrapperClassName + "(@" + jacksonAnnotation + " " + propertyClientType + " items)",
+                    constructor -> constructor.line("this.items = items;"));
+            });
+        }
+
+        classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
+            comment -> comment.line(property.getDescription()));
+
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
+            classBlock.annotation("JsonFlatten");
+        }
+
+        // If the property is a polymorphic discriminator for the class add the annotation @JsonTypeId.
+        // This will indicate to Jackson that the discriminator serialization is determined by the property
+        // instead of the class level @JsonTypeName annotation. This prevents the discriminator property from
+        // being serialized twice, once for the class level annotation and again for the property annotation.
+        if (property.isPolymorphicDiscriminator()) {
+            classBlock.annotation("JsonTypeId");
+        }
+
+        if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+            classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
+        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
+            classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
+        } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+            classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
+        } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+            classBlock.annotation("JacksonXmlText");
+        } else if (property.isAdditionalProperties()) {
+            classBlock.annotation("JsonIgnore");
+        } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
+            classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
+        } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
+            classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
+        }
+
+        if (!settings.shouldGenerateXmlSerialization() &&
+            !property.isAdditionalProperties()
+            && property.getClientType() instanceof MapType
+            && settings.isFluent()) {
+            classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
         }
     }
 
@@ -650,18 +705,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Adds a getter method.
      *
-     * @param propertyType The property type.
+     * @param propertyWireType The property wire type.
      * @param propertyClientType The client property type.
      * @param property The property.
      * @param settings AutoRest configuration settings.
      * @param methodBlock Where the getter method is being added.
      */
-    private static void addGetterMethod(IType propertyType, IType propertyClientType, ClientModelProperty property,
+    private static void addGetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         JavaSettings settings, JavaBlock methodBlock) {
-        String sourceTypeName = propertyType.toString();
+        String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = String.format("this.%s", property.getName());
-        if (propertyType.equals(ArrayType.ByteArray)) {
+        if (propertyWireType.equals(ArrayType.ByteArray)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }
 
@@ -679,14 +734,49 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             // If the wire type was null, return null as the returned conversion could, and most likely would, result
             // in a NullPointerException.
-            methodBlock.ifBlock(String.format("%s == null", expression),
-                (ifBlock) -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+            methodBlock.ifBlock(expression + " == null",
+                ifBlock -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
 
             // Return the conversion of the wire type to the client type. An example would be a wire type of
             // DateTimeRfc1123 and a client type of OffsetDateTime (type a consumer would use), this makes the return
             // "this.value.getDateTime()".
-            methodBlock.methodReturn(propertyType.convertToClientType(expression));
+            methodBlock.methodReturn(propertyWireType.convertToClientType(expression));
         }
+    }
+
+    /**
+     * Adds a setter method.
+     *
+     * @param propertyWireType The property wire type.
+     * @param propertyClientType The client property type.
+     * @param property The property.
+     * @param settings AutoRest configuration settings.
+     * @param methodBlock Where the setter method is being added.
+     */
+    private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
+        JavaSettings settings, JavaBlock methodBlock) {
+        String expression = (propertyClientType.equals(ArrayType.ByteArray))
+            ? "CoreUtils.clone(" + property.getName() + ")"
+            : property.getName();
+
+        if (propertyClientType != propertyWireType) {
+            // If the property needs to be converted and the passed value is null, set the field to null as the
+            // converter will likely throw a NullPointerException.
+            // Otherwise, just convert the value.
+            methodBlock.ifBlock(property.getName() + " == null",
+                    ifBlock -> ifBlock.line("this.%s = null;", property.getName()))
+                .elseBlock(elseBlock ->
+                    elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
+        } else {
+            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                methodBlock.line("this.%s = new %s(%s);", property.getName(),
+                    getPropertyXmlWrapperClassName(property), expression);
+            } else {
+                methodBlock.line("this.%s = %s;", property.getName(), expression);
+            }
+        }
+
+        methodBlock.methodReturn("this");
     }
 
     private static void generateHeaderCollectionDeserialization(ClientModelProperty property, JavaBlock block) {
@@ -869,17 +959,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 if (parentModel.getProperties() != null) {
-                    propertyReferences.addAll(parentModel.getProperties().stream()
+                    parentModel.getProperties().stream()
                         .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
                         .map(ClientModelPropertyReference::ofParentProperty)
-                        .collect(Collectors.toList()));
+                        .forEach(propertyReferences::add);
                 }
 
                 if (parentModel.getPropertyReferences() != null) {
-                    propertyReferences.addAll(parentModel.getPropertyReferences().stream()
+                    parentModel.getPropertyReferences().stream()
                         .filter(ClientModelPropertyReference::isFromFlattenedProperty)
                         .map(ClientModelPropertyReference::ofParentProperty)
-                        .collect(Collectors.toList()));
+                        .forEach(propertyReferences::add);
                 }
             }
 
