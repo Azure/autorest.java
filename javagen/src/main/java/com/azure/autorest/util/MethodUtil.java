@@ -3,6 +3,8 @@
 
 package com.azure.autorest.util;
 
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
+import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -54,5 +56,19 @@ public class MethodUtil {
 
     public static boolean isHttpMethodSupportRepeatableRequestHeaders(HttpMethod httpMethod) {
         return REPEATABILITY_REQUEST_HTTP_METHODS.contains(httpMethod);
+    }
+
+    public static Request findDPGRequestTobeProcessed(List<Request> requests) {
+        // if there is request with binary type, find the request consumes binary type
+        // if all requests are non-binary type, get the first request
+        Request selectedRequest = requests.get(0);
+        for (Request request : requests) {
+            if (request.getProtocol().getHttp().getKnownMediaType() != null
+                    && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
+                selectedRequest = request;
+                break;
+            }
+        }
+        return selectedRequest;
     }
 }

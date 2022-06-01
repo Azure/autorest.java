@@ -172,17 +172,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            // if there is request with binary type, find the request consumes binary type
-            // if all requests are non-binary type, get the first request
-            Request selectedRequest = requests.get(0);
-            for (Request request : requests) {
-                if (request.getProtocol().getHttp().getKnownMediaType() != null
-                        && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
-                    selectedRequest = request;
-                    break;
-                }
-            }
-             requests = Collections.singletonList(selectedRequest);
+            Request selectedRequest = MethodUtil.findDPGRequestTobeProcessed(requests);
+            requests = Collections.singletonList(selectedRequest);
         }
 
         // Used to deduplicate method with same signature.
