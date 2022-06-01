@@ -96,8 +96,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addClassLevelAnnotations(model, javaFile, settings);
 
         // Add Fluent or Immutable based on whether the model only has read-only properties.
-        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
+        boolean isFluent = model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
+            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly());
+        if (isFluent) {
             javaFile.annotation("Fluent");
         } else {
             javaFile.annotation("Immutable");
@@ -114,9 +115,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String classNameWithBaseType = model.getName();
         if (model.getParentModelName() != null) {
             classNameWithBaseType += " extends " + model.getParentModelName();
+        } else {
+            classNameWithBaseType = addSerializationImplementations(classNameWithBaseType, model, settings);
         }
-
-        classNameWithBaseType = addSerializationImplementations(classNameWithBaseType, model, settings);
 
         javaFile.publicClass(classModifiers, classNameWithBaseType, classBlock -> {
             // If the model has any additional properties, needs to be flattened, and isn't being generated with
@@ -183,7 +184,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (settings.isOverrideSetterFromSuperclass()) {
-                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings, propertyReferences);
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+                    propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     classBlock.annotation("Override");
@@ -193,7 +195,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             parentProperty.getClientType(),
                             parentProperty.getName()),
                         methodBlock -> {
-                            methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                            methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
+                                parentProperty.getName()));
                             methodBlock.methodReturn("this");
                         });
                 }
@@ -243,6 +246,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
+
+            writeStreamStyleSerialization(classBlock, model, model.getProperties(), propertyReferences, isFluent,
+                settings);
         });
     }
 
@@ -637,7 +643,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
         // implicitly used as the JsonCreator if the class doesn't indicate one.
-        if (constructorProperties.length() > 0) {
+        if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()) {
             classBlock.annotation("JsonCreator");
         }
 
@@ -977,6 +983,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
         return propertyReferences;
+    }
+
+    /**
+     * Writes stream-style serialization logic for serializing to and deserializing from the serialization format
+     * that the model uses.
+     *
+     * @param classBlock The class block where serialization methods will be written.
+     * @param model The model.
+     * @param propertiesDeclaredByModel Properties declared by the model.
+     * @param propertiesDeclaredBySuperTypes Properties declared by the super types of the model.
+     * @param isFluent Whether the property uses fluent getters and setters.
+     * @param settings Autorest generation settings.
+     */
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model,
+        List<ClientModelProperty> propertiesDeclaredByModel,
+        List<ClientModelPropertyReference> propertiesDeclaredBySuperTypes, boolean isFluent, JavaSettings settings) {
+        // No-op, meant for StreamSerializationModelTemplate.
     }
 
     // Javadoc for getter method

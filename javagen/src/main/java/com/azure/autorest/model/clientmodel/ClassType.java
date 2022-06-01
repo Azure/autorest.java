@@ -182,7 +182,7 @@ public class ClassType implements IType {
             if (getDefaultValueExpressionConverter() != null) {
                 result = defaultValueExpressionConverter.apply(sourceExpression);
             } else {
-                result = java.lang.String.format("new %1$s()", toString());
+                result = java.lang.String.format("new %1$s()", this);
             }
         }
         return result;

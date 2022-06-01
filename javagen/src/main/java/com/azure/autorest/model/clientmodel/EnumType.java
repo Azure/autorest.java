@@ -37,7 +37,8 @@ public class EnumType implements IType {
      * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
+    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values,
+        IType elementType) {
         this.name = name;
         packageName = packageKeyword;
         this.expandable = expandable;
