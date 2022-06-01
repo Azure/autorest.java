@@ -11,6 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -58,15 +59,15 @@ public final class Sawshark extends Shark {
 
     /** {@inheritDoc} */
     @Override
-    public Sawshark setSpecies(String species) {
-        super.setSpecies(species);
+    public Sawshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Sawshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public Sawshark setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
@@ -89,34 +90,60 @@ public final class Sawshark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Sawshark deserializedValue = new Sawshark();
+                    boolean lengthFound = false;
+                    float length = 0.0f;
+                    boolean birthdayFound = false;
+                    OffsetDateTime birthday = null;
+                    List<Fish> siblings = null;
+                    String species = null;
+                    Integer age = null;
+                    byte[] picture = new byte[0];
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("picture".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setPicture(Base64.getDecoder().decode(reader.getStringValue()));
-                            }
-                        } else if ("age".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setAge(reader.getIntValue());
-                            }
+                        if ("length".equals(fieldName)) {
+                            length = reader.getFloatValue();
+                            lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setBirthday(OffsetDateTime.parse(reader.getStringValue()));
+                                birthday = OffsetDateTime.parse(reader.getStringValue());
+                                birthdayFound = true;
                             }
-                        } else if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
-                        } else if ("length".equals(fieldName)) {
-                            deserializedValue.setLength(reader.getFloatValue());
                         } else if ("siblings".equals(fieldName)) {
-                            List<Fish> value = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
-                            deserializedValue.setSiblings(value);
+                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
+                        } else if ("age".equals(fieldName)) {
+                            if (reader.currentToken() != JsonToken.NULL) {
+                                age = reader.getIntValue();
+                            }
+                        } else if ("picture".equals(fieldName)) {
+                            if (reader.currentToken() != JsonToken.NULL) {
+                                picture = Base64.getDecoder().decode(reader.getStringValue());
+                            }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lengthFound) {
+                        missingProperties.add("length");
+                    }
+                    if (!birthdayFound) {
+                        missingProperties.add("birthday");
+                    }
+
+                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
+                        throw new IllegalStateException(
+                                "Missing required property/properties: " + String.join(", ", missingProperties));
+                    }
+                    Sawshark deserializedValue = new Sawshark(length, birthday);
+                    deserializedValue.setSiblings(siblings);
+                    deserializedValue.setSpecies(species);
+                    deserializedValue.setAge(age);
+                    deserializedValue.setPicture(picture);
+
                     return deserializedValue;
                 });
     }

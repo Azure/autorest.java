@@ -5,11 +5,13 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /** The Fish model. */
@@ -99,22 +101,38 @@ public class Fish implements JsonSerializable<Fish> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Fish deserializedValue = new Fish();
+                    boolean lengthFound = false;
+                    float length = 0.0f;
+                    String species = null;
+                    List<Fish> siblings = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
-                        } else if ("length".equals(fieldName)) {
-                            deserializedValue.setLength(reader.getFloatValue());
+                        if ("length".equals(fieldName)) {
+                            length = reader.getFloatValue();
+                            lengthFound = true;
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
-                            List<Fish> value = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
-                            deserializedValue.setSiblings(value);
+                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lengthFound) {
+                        missingProperties.add("length");
+                    }
+
+                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
+                        throw new IllegalStateException(
+                                "Missing required property/properties: " + String.join(", ", missingProperties));
+                    }
+                    Fish deserializedValue = new Fish(length);
+                    deserializedValue.setSpecies(species);
+                    deserializedValue.setSiblings(siblings);
+
                     return deserializedValue;
                 });
     }

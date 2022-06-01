@@ -98,25 +98,32 @@ public final class Basic implements JsonSerializable<Basic> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Basic deserializedValue = new Basic();
+                    Integer id = null;
+                    String name = null;
+                    CMYKColors color = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setId(reader.getIntValue());
+                                id = reader.getIntValue();
                             }
                         } else if ("name".equals(fieldName)) {
-                            deserializedValue.setName(reader.getStringValue());
+                            name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setColor(CMYKColors.fromString(reader.getStringValue()));
+                                color = CMYKColors.fromString(reader.getStringValue());
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    Basic deserializedValue = new Basic();
+                    deserializedValue.setId(id);
+                    deserializedValue.setName(name);
+                    deserializedValue.setColor(color);
+
                     return deserializedValue;
                 });
     }

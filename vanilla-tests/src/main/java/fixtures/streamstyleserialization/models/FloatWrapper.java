@@ -74,23 +74,28 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    FloatWrapper deserializedValue = new FloatWrapper();
+                    Float field1 = null;
+                    Float field2 = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField1(reader.getFloatValue());
+                                field1 = reader.getFloatValue();
                             }
                         } else if ("field2".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField2(reader.getFloatValue());
+                                field2 = reader.getFloatValue();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    FloatWrapper deserializedValue = new FloatWrapper();
+                    deserializedValue.setField1(field1);
+                    deserializedValue.setField2(field2);
+
                     return deserializedValue;
                 });
     }

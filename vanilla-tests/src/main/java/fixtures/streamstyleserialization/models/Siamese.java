@@ -83,28 +83,38 @@ public final class Siamese extends Cat {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Siamese deserializedValue = new Siamese();
+                    Integer id = null;
+                    String name = null;
+                    String color = null;
+                    List<Dog> hates = null;
+                    String breed = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("breed".equals(fieldName)) {
-                            deserializedValue.setBreed(reader.getStringValue());
-                        } else if ("color".equals(fieldName)) {
-                            deserializedValue.setColor(reader.getStringValue());
-                        } else if ("hates".equals(fieldName)) {
-                            List<Dog> value = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
-                            deserializedValue.setHates(value);
-                        } else if ("id".equals(fieldName)) {
+                        if ("id".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setId(reader.getIntValue());
+                                id = reader.getIntValue();
                             }
                         } else if ("name".equals(fieldName)) {
-                            deserializedValue.setName(reader.getStringValue());
+                            name = reader.getStringValue();
+                        } else if ("color".equals(fieldName)) {
+                            color = reader.getStringValue();
+                        } else if ("hates".equals(fieldName)) {
+                            hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
+                        } else if ("breed".equals(fieldName)) {
+                            breed = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    Siamese deserializedValue = new Siamese();
+                    deserializedValue.setId(id);
+                    deserializedValue.setName(name);
+                    deserializedValue.setColor(color);
+                    deserializedValue.setHates(hates);
+                    deserializedValue.setBreed(breed);
+
                     return deserializedValue;
                 });
     }

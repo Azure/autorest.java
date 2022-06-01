@@ -74,19 +74,24 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    MyBaseType deserializedValue = new MyBaseType();
+                    String propB1 = null;
+                    String propBH1 = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("propB1".equals(fieldName)) {
-                            deserializedValue.setPropB1(reader.getStringValue());
+                            propB1 = reader.getStringValue();
                         } else if ("helper.propBH1".equals(fieldName)) {
-                            deserializedValue.setPropBH1(reader.getStringValue());
+                            propBH1 = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    MyBaseType deserializedValue = new MyBaseType();
+                    deserializedValue.setPropB1(propB1);
+                    deserializedValue.setPropBH1(propBH1);
+
                     return deserializedValue;
                 });
     }

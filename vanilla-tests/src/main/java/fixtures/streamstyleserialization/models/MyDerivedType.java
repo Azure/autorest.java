@@ -68,21 +68,28 @@ public final class MyDerivedType extends MyBaseType {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    MyDerivedType deserializedValue = new MyDerivedType();
+                    String propB1 = null;
+                    String propBH1 = null;
+                    String propD1 = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("propD1".equals(fieldName)) {
-                            deserializedValue.setPropD1(reader.getStringValue());
-                        } else if ("propB1".equals(fieldName)) {
-                            deserializedValue.setPropB1(reader.getStringValue());
+                        if ("propB1".equals(fieldName)) {
+                            propB1 = reader.getStringValue();
                         } else if ("helper.propBH1".equals(fieldName)) {
-                            deserializedValue.setPropBH1(reader.getStringValue());
+                            propBH1 = reader.getStringValue();
+                        } else if ("propD1".equals(fieldName)) {
+                            propD1 = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    MyDerivedType deserializedValue = new MyDerivedType();
+                    deserializedValue.setPropB1(propB1);
+                    deserializedValue.setPropBH1(propBH1);
+                    deserializedValue.setPropD1(propD1);
+
                     return deserializedValue;
                 });
     }

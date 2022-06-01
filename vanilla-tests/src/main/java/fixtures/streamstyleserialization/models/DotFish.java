@@ -52,17 +52,20 @@ public class DotFish implements JsonSerializable<DotFish> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DotFish deserializedValue = new DotFish();
+                    String species = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
+                            species = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DotFish deserializedValue = new DotFish();
+                    deserializedValue.setSpecies(species);
+
                     return deserializedValue;
                 });
     }

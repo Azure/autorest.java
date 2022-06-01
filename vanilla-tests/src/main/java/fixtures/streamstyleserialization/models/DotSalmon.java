@@ -83,23 +83,30 @@ public class DotSalmon extends DotFish {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DotSalmon deserializedValue = new DotSalmon();
+                    String species = null;
+                    String location = null;
+                    Boolean iswild = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("location".equals(fieldName)) {
-                            deserializedValue.setLocation(reader.getStringValue());
+                        if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
+                        } else if ("location".equals(fieldName)) {
+                            location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setIswild(reader.getBooleanValue());
+                                iswild = reader.getBooleanValue();
                             }
-                        } else if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DotSalmon deserializedValue = new DotSalmon();
+                    deserializedValue.setSpecies(species);
+                    deserializedValue.setLocation(location);
+                    deserializedValue.setIswild(iswild);
+
                     return deserializedValue;
                 });
     }

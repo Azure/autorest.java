@@ -79,26 +79,32 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DoubleWrapper deserializedValue = new DoubleWrapper();
+                    Double field1 = null;
+                    Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField1(reader.getDoubleValue());
+                                field1 = reader.getDoubleValue();
                             }
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue
-                                        .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
-                                                reader.getDoubleValue());
+                                field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
+                                        reader.getDoubleValue();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DoubleWrapper deserializedValue = new DoubleWrapper();
+                    deserializedValue.setField1(field1);
+                    deserializedValue
+                            .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
+                                    field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
+
                     return deserializedValue;
                 });
     }

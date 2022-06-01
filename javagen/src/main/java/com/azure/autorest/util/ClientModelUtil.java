@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -302,6 +303,28 @@ public class ClientModelUtil {
         return getClientModelFunction.apply(name);
     }
 
+    /**
+     * Gets all parent properties.
+     *
+     * @param model The client model.
+     * @return Returns all properties that are defined by super types of the client model.
+     */
+    public static List<ClientModelProperty> getParentProperties(ClientModel model) {
+        String lastParentName = model.getName();
+        ClientModel parentModel = getClientModel(model.getParentModelName());
+        List<ClientModelProperty> parentProperties = new ArrayList<>();
+        while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
+            List<ClientModelProperty> parentProps = parentModel.getProperties();
+            Collections.reverse(parentProps);
+            parentProperties.addAll(parentProps);
+
+            lastParentName = parentModel.getName();
+            parentModel = getClientModel(parentModel.getParentModelName());
+        }
+        Collections.reverse(parentProperties);
+        return parentProperties;
+    }
+
     public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {
         String lastParentName = model.getName();
         ClientModel parentModel = getClientModel(model.getParentModelName());
@@ -317,9 +340,26 @@ public class ClientModelUtil {
             requiredParentProperties.addAll(ctorArgs);
 
             lastParentName = parentModel.getName();
-            parentModel = ClientModelUtil.getClientModel(parentModel.getParentModelName());
+            parentModel = getClientModel(parentModel.getParentModelName());
         }
         Collections.reverse(requiredParentProperties);
         return requiredParentProperties;
+    }
+
+    /**
+     * Indicates whether the property will have a setter method generated for it.
+     *
+     * @param property The client model property.
+     * @param settings Autorest generation settings.
+     * @return Whether the property will have a setter method.
+     */
+    public static boolean hasSetter(ClientModelProperty property, JavaSettings settings) {
+        JavaVisibility methodVisibility = property.getClientFlatten() ? JavaVisibility.Private : JavaVisibility.Public;
+
+        // If the property isn't read-only or required and part of the constructor, and it isn't private,
+        // add a setter.
+        return !property.getIsReadOnly()
+            && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())
+            && methodVisibility == JavaVisibility.Public;
     }
 }

@@ -74,23 +74,28 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    BooleanWrapper deserializedValue = new BooleanWrapper();
+                    Boolean fieldTrue = null;
+                    Boolean fieldFalse = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field_true".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setFieldTrue(reader.getBooleanValue());
+                                fieldTrue = reader.getBooleanValue();
                             }
                         } else if ("field_false".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setFieldFalse(reader.getBooleanValue());
+                                fieldFalse = reader.getBooleanValue();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    BooleanWrapper deserializedValue = new BooleanWrapper();
+                    deserializedValue.setFieldTrue(fieldTrue);
+                    deserializedValue.setFieldFalse(fieldFalse);
+
                     return deserializedValue;
                 });
     }

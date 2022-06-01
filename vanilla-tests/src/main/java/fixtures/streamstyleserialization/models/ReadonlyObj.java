@@ -63,21 +63,26 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    ReadonlyObj deserializedValue = new ReadonlyObj();
+                    String id = null;
+                    Integer size = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            deserializedValue.setId(reader.getStringValue());
+                            id = reader.getStringValue();
                         } else if ("size".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setSize(reader.getIntValue());
+                                size = reader.getIntValue();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    ReadonlyObj deserializedValue = new ReadonlyObj();
+                    deserializedValue.id = id;
+                    deserializedValue.setSize(size);
+
                     return deserializedValue;
                 });
     }

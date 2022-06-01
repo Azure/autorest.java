@@ -153,11 +153,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
 
-                // If the property isn't read-only or required and part of the constructor, and it isn't private,
-                // add a setter.
-                if (!property.getIsReadOnly()
-                    && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())
-                    && methodVisibility == JavaVisibility.Public) {
+                if (ClientModelUtil.hasSetter(property, settings)) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
@@ -247,8 +243,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
 
-            writeStreamStyleSerialization(classBlock, model, model.getProperties(), propertyReferences, isFluent,
-                settings);
+            writeStreamStyleSerialization(classBlock, model, settings);
         });
     }
 
@@ -991,14 +986,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @param classBlock The class block where serialization methods will be written.
      * @param model The model.
-     * @param propertiesDeclaredByModel Properties declared by the model.
-     * @param propertiesDeclaredBySuperTypes Properties declared by the super types of the model.
-     * @param isFluent Whether the property uses fluent getters and setters.
      * @param settings Autorest generation settings.
      */
-    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model,
-        List<ClientModelProperty> propertiesDeclaredByModel,
-        List<ClientModelPropertyReference> propertiesDeclaredBySuperTypes, boolean isFluent, JavaSettings settings) {
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         // No-op, meant for StreamSerializationModelTemplate.
     }
 

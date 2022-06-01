@@ -96,21 +96,28 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    StringWrapper deserializedValue = new StringWrapper();
+                    String field = null;
+                    String empty = null;
+                    String nullProperty = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            deserializedValue.setField(reader.getStringValue());
+                            field = reader.getStringValue();
                         } else if ("empty".equals(fieldName)) {
-                            deserializedValue.setEmpty(reader.getStringValue());
+                            empty = reader.getStringValue();
                         } else if ("null".equals(fieldName)) {
-                            deserializedValue.setNullProperty(reader.getStringValue());
+                            nullProperty = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    StringWrapper deserializedValue = new StringWrapper();
+                    deserializedValue.setField(field);
+                    deserializedValue.setEmpty(empty);
+                    deserializedValue.setNullProperty(nullProperty);
+
                     return deserializedValue;
                 });
     }

@@ -90,23 +90,28 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Datetimerfc1123Wrapper deserializedValue = new Datetimerfc1123Wrapper();
+                    OffsetDateTime field = null;
+                    OffsetDateTime now = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField(new DateTimeRfc1123(reader.getStringValue()));
+                                field = new DateTimeRfc1123(reader.getStringValue()).getDateTime();
                             }
                         } else if ("now".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setNow(new DateTimeRfc1123(reader.getStringValue()));
+                                now = new DateTimeRfc1123(reader.getStringValue()).getDateTime();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    Datetimerfc1123Wrapper deserializedValue = new Datetimerfc1123Wrapper();
+                    deserializedValue.setField(field);
+                    deserializedValue.setNow(now);
+
                     return deserializedValue;
                 });
     }

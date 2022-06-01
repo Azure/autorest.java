@@ -74,23 +74,28 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    IntWrapper deserializedValue = new IntWrapper();
+                    Integer field1 = null;
+                    Integer field2 = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField1(reader.getIntValue());
+                                field1 = reader.getIntValue();
                             }
                         } else if ("field2".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField2(reader.getIntValue());
+                                field2 = reader.getIntValue();
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    IntWrapper deserializedValue = new IntWrapper();
+                    deserializedValue.setField1(field1);
+                    deserializedValue.setField2(field2);
+
                     return deserializedValue;
                 });
     }

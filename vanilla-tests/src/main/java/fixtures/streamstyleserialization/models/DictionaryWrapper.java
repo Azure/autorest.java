@@ -54,14 +54,16 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DictionaryWrapper deserializedValue = new DictionaryWrapper();
+                    Map<String, String> defaultProgram = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                Map<String, String> defaultProgram = new LinkedHashMap<>();
+                                if (defaultProgram == null) {
+                                    defaultProgram = new LinkedHashMap<>();
+                                }
 
                                 while (reader.nextToken() != JsonToken.END_OBJECT) {
                                     fieldName = reader.getFieldName();
@@ -70,13 +72,14 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                                     String value = reader.getStringValue();
                                     defaultProgram.put(fieldName, value);
                                 }
-
-                                deserializedValue.setDefaultProgram(defaultProgram);
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DictionaryWrapper deserializedValue = new DictionaryWrapper();
+                    deserializedValue.setDefaultProgram(defaultProgram);
+
                     return deserializedValue;
                 });
     }

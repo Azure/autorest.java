@@ -132,25 +132,32 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DotFishMarket deserializedValue = new DotFishMarket();
+                    DotSalmon sampleSalmon = null;
+                    List<DotSalmon> salmons = null;
+                    DotFish sampleFish = null;
+                    List<DotFish> fishes = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("sampleSalmon".equals(fieldName)) {
-                            deserializedValue.setSampleSalmon(DotSalmon.fromJson(reader));
+                            sampleSalmon = DotSalmon.fromJson(reader);
                         } else if ("salmons".equals(fieldName)) {
-                            List<DotSalmon> value = JsonUtils.readArray(reader, r -> DotSalmon.fromJson(reader));
-                            deserializedValue.setSalmons(value);
+                            salmons = JsonUtils.readArray(reader, r -> DotSalmon.fromJson(reader));
                         } else if ("sampleFish".equals(fieldName)) {
-                            deserializedValue.setSampleFish(DotFish.fromJson(reader));
+                            sampleFish = DotFish.fromJson(reader);
                         } else if ("fishes".equals(fieldName)) {
-                            List<DotFish> value = JsonUtils.readArray(reader, r -> DotFish.fromJson(reader));
-                            deserializedValue.setFishes(value);
+                            fishes = JsonUtils.readArray(reader, r -> DotFish.fromJson(reader));
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DotFishMarket deserializedValue = new DotFishMarket();
+                    deserializedValue.setSampleSalmon(sampleSalmon);
+                    deserializedValue.setSalmons(salmons);
+                    deserializedValue.setSampleFish(sampleFish);
+                    deserializedValue.setFishes(fishes);
+
                     return deserializedValue;
                 });
     }

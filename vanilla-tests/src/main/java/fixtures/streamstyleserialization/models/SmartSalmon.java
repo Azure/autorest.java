@@ -5,10 +5,13 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,15 +87,15 @@ public final class SmartSalmon extends Salmon {
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
@@ -115,29 +118,58 @@ public final class SmartSalmon extends Salmon {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    SmartSalmon deserializedValue = new SmartSalmon();
+                    boolean lengthFound = false;
+                    float length = 0.0f;
+                    List<Fish> siblings = null;
+                    String species = null;
+                    String location = null;
+                    Boolean iswild = null;
+                    String collegeDegree = null;
+                    Map<String, Object> additionalProperties = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("college_degree".equals(fieldName)) {
-                            deserializedValue.setCollegeDegree(reader.getStringValue());
+                        if ("length".equals(fieldName)) {
+                            length = reader.getFloatValue();
+                            lengthFound = true;
+                        } else if ("siblings".equals(fieldName)) {
+                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("location".equals(fieldName)) {
-                            deserializedValue.setLocation(reader.getStringValue());
+                            location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setIswild(reader.getBooleanValue());
+                                iswild = reader.getBooleanValue();
                             }
-                        } else if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
-                        } else if ("length".equals(fieldName)) {
-                            deserializedValue.setLength(reader.getFloatValue());
-                        } else if ("siblings".equals(fieldName)) {
-                            List<Fish> value = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
-                            deserializedValue.setSiblings(value);
+                        } else if ("college_degree".equals(fieldName)) {
+                            collegeDegree = reader.getStringValue();
                         } else {
+                            if (additionalProperties == null) {
+                                additionalProperties = new LinkedHashMap<>();
+                            }
+
+                            additionalProperties.put(fieldName, JsonUtils.readUntypedField(reader));
                         }
                     }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lengthFound) {
+                        missingProperties.add("length");
+                    }
+
+                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
+                        throw new IllegalStateException(
+                                "Missing required property/properties: " + String.join(", ", missingProperties));
+                    }
+                    SmartSalmon deserializedValue = new SmartSalmon(length);
+                    deserializedValue.setSiblings(siblings);
+                    deserializedValue.setSpecies(species);
+                    deserializedValue.setLocation(location);
+                    deserializedValue.setIswild(iswild);
+                    deserializedValue.setCollegeDegree(collegeDegree);
+                    deserializedValue.setAdditionalProperties(additionalProperties);
+
                     return deserializedValue;
                 });
     }

@@ -75,23 +75,28 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    DateWrapper deserializedValue = new DateWrapper();
+                    LocalDate field = null;
+                    LocalDate leap = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField(LocalDate.parse(reader.getStringValue()));
+                                field = LocalDate.parse(reader.getStringValue());
                             }
                         } else if ("leap".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setLeap(LocalDate.parse(reader.getStringValue()));
+                                leap = LocalDate.parse(reader.getStringValue());
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    DateWrapper deserializedValue = new DateWrapper();
+                    deserializedValue.setField(field);
+                    deserializedValue.setLeap(leap);
+
                     return deserializedValue;
                 });
     }

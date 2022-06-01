@@ -54,19 +54,22 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    ByteWrapper deserializedValue = new ByteWrapper();
+                    byte[] field = new byte[0];
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setField(Base64.getDecoder().decode(reader.getStringValue()));
+                                field = Base64.getDecoder().decode(reader.getStringValue());
                             }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    ByteWrapper deserializedValue = new ByteWrapper();
+                    deserializedValue.setField(field);
+
                     return deserializedValue;
                 });
     }

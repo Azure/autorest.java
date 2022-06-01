@@ -5,11 +5,13 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /** The Cookiecuttershark model. */
@@ -34,15 +36,15 @@ public final class Cookiecuttershark extends Shark {
 
     /** {@inheritDoc} */
     @Override
-    public Cookiecuttershark setSpecies(String species) {
-        super.setSpecies(species);
+    public Cookiecuttershark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Cookiecuttershark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public Cookiecuttershark setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
@@ -65,30 +67,54 @@ public final class Cookiecuttershark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Cookiecuttershark deserializedValue = new Cookiecuttershark();
+                    boolean lengthFound = false;
+                    float length = 0.0f;
+                    boolean birthdayFound = false;
+                    OffsetDateTime birthday = null;
+                    List<Fish> siblings = null;
+                    String species = null;
+                    Integer age = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("age".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setAge(reader.getIntValue());
-                            }
+                        if ("length".equals(fieldName)) {
+                            length = reader.getFloatValue();
+                            lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setBirthday(OffsetDateTime.parse(reader.getStringValue()));
+                                birthday = OffsetDateTime.parse(reader.getStringValue());
+                                birthdayFound = true;
                             }
-                        } else if ("species".equals(fieldName)) {
-                            deserializedValue.setSpecies(reader.getStringValue());
-                        } else if ("length".equals(fieldName)) {
-                            deserializedValue.setLength(reader.getFloatValue());
                         } else if ("siblings".equals(fieldName)) {
-                            List<Fish> value = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
-                            deserializedValue.setSiblings(value);
+                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
+                        } else if ("age".equals(fieldName)) {
+                            if (reader.currentToken() != JsonToken.NULL) {
+                                age = reader.getIntValue();
+                            }
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lengthFound) {
+                        missingProperties.add("length");
+                    }
+                    if (!birthdayFound) {
+                        missingProperties.add("birthday");
+                    }
+
+                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
+                        throw new IllegalStateException(
+                                "Missing required property/properties: " + String.join(", ", missingProperties));
+                    }
+                    Cookiecuttershark deserializedValue = new Cookiecuttershark(length, birthday);
+                    deserializedValue.setSiblings(siblings);
+                    deserializedValue.setSpecies(species);
+                    deserializedValue.setAge(age);
+
                     return deserializedValue;
                 });
     }

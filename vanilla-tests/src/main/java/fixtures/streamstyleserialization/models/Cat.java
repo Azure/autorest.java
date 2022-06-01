@@ -14,29 +14,9 @@ import java.util.List;
 /** The Cat model. */
 @Fluent
 public class Cat extends Pet {
-    private String color;
-
     private List<Dog> hates;
 
-    /**
-     * Get the color property: The color property.
-     *
-     * @return the color value.
-     */
-    public String getColor() {
-        return this.color;
-    }
-
-    /**
-     * Set the color property: The color property.
-     *
-     * @param color the color value to set.
-     * @return the Cat object itself.
-     */
-    public Cat setColor(String color) {
-        this.color = color;
-        return this;
-    }
+    private String color;
 
     /**
      * Get the hates property: The hates property.
@@ -58,10 +38,23 @@ public class Cat extends Pet {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Cat setId(Integer id) {
-        super.setId(id);
+    /**
+     * Get the color property: The color property.
+     *
+     * @return the color value.
+     */
+    public String getColor() {
+        return this.color;
+    }
+
+    /**
+     * Set the color property: The color property.
+     *
+     * @param color the color value to set.
+     * @return the Cat object itself.
+     */
+    public Cat setColor(String color) {
+        this.color = color;
         return this;
     }
 
@@ -69,6 +62,13 @@ public class Cat extends Pet {
     @Override
     public Cat setName(String name) {
         super.setName(name);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cat setId(Integer id) {
+        super.setId(id);
         return this;
     }
 
@@ -94,26 +94,34 @@ public class Cat extends Pet {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Cat deserializedValue = new Cat();
+                    String name = null;
+                    Integer id = null;
+                    List<Dog> hates = null;
+                    String color = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("color".equals(fieldName)) {
-                            deserializedValue.setColor(reader.getStringValue());
-                        } else if ("hates".equals(fieldName)) {
-                            List<Dog> value = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
-                            deserializedValue.setHates(value);
+                        if ("name".equals(fieldName)) {
+                            name = reader.getStringValue();
                         } else if ("id".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setId(reader.getIntValue());
+                                id = reader.getIntValue();
                             }
-                        } else if ("name".equals(fieldName)) {
-                            deserializedValue.setName(reader.getStringValue());
+                        } else if ("hates".equals(fieldName)) {
+                            hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
+                        } else if ("color".equals(fieldName)) {
+                            color = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    Cat deserializedValue = new Cat();
+                    deserializedValue.setName(name);
+                    deserializedValue.setId(id);
+                    deserializedValue.setHates(hates);
+                    deserializedValue.setColor(color);
+
                     return deserializedValue;
                 });
     }

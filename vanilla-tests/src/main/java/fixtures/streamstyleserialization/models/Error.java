@@ -74,21 +74,26 @@ public final class Error implements JsonSerializable<Error> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    Error deserializedValue = new Error();
+                    Integer status = null;
+                    String message = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("status".equals(fieldName)) {
                             if (reader.currentToken() != JsonToken.NULL) {
-                                deserializedValue.setStatus(reader.getIntValue());
+                                status = reader.getIntValue();
                             }
                         } else if ("message".equals(fieldName)) {
-                            deserializedValue.setMessage(reader.getStringValue());
+                            message = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    Error deserializedValue = new Error();
+                    deserializedValue.setStatus(status);
+                    deserializedValue.setMessage(message);
+
                     return deserializedValue;
                 });
     }
