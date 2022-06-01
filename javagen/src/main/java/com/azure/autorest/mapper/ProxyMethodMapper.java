@@ -4,7 +4,6 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.Javagen;
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;

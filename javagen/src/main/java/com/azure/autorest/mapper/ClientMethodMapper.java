@@ -5,7 +5,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
@@ -38,8 +37,8 @@ import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
