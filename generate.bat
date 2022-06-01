@@ -1,12 +1,15 @@
 @echo off
 
-set AUTOREST_CORE_VERSION=3.8.1
+set AUTOREST_CORE_VERSION=3.8.4
 set VANILLA_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
 set AZURE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
 set ARM_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
 set PROTOCOL_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=protocol-tests --data-plane --generate-samples
 set PROTOCOL_RESILIENCE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --data-plane
 set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
+
+rem print java version
+java -version
 
 move /Y vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java vanilla-tests\swagger\CoverageReporter.java
 rmdir /S /Q "vanilla-tests\src\main"
